@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ru.GameSchool.Web", "Ru.GameSchool.Web\Ru.GameSchool.Web.csproj", "{0C3E920C-7C2B-4EF6-B5B3-CDA5AA32582F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ru.GameSchool.BusinessLayer", "Ru.GameSchool.BusinessLayer\Ru.GameSchool.BusinessLayer.csproj", "{6D22540E-E972-4A18-9F07-249CC5055232}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ru.GameSchool.DataLayer", "Ru.GameSchool.DataLayer\Ru.GameSchool.DataLayer.csproj", "{03CF6BA8-B6E5-4153-8FD8-9A0271DFDF6A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0C3E920C-7C2B-4EF6-B5B3-CDA5AA32582F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C3E920C-7C2B-4EF6-B5B3-CDA5AA32582F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C3E920C-7C2B-4EF6-B5B3-CDA5AA32582F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C3E920C-7C2B-4EF6-B5B3-CDA5AA32582F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D22540E-E972-4A18-9F07-249CC5055232}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D22540E-E972-4A18-9F07-249CC5055232}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D22540E-E972-4A18-9F07-249CC5055232}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D22540E-E972-4A18-9F07-249CC5055232}.Release|Any CPU.Build.0 = Release|Any CPU
+		{03CF6BA8-B6E5-4153-8FD8-9A0271DFDF6A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03CF6BA8-B6E5-4153-8FD8-9A0271DFDF6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03CF6BA8-B6E5-4153-8FD8-9A0271DFDF6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03CF6BA8-B6E5-4153-8FD8-9A0271DFDF6A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
