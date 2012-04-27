@@ -5,11 +5,13 @@
         <title>@ViewBag.Title - My ASP.NET MVC Application</title>
         <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
         
-        <link href="@System.Web.Optimization.BundleTable.Bundles.ResolveBundleUrl("~/Content/themes/base/css")" rel="stylesheet" type="text/css" />
-        <script src="@System.Web.Optimization.BundleTable.Bundles.ResolveBundleUrl("~/Scripts/js")"></script>
+        <link href="@Url.Content("~/Content/themes/base/jquery.ui.all.css")" rel="stylesheet" type="text/css" />
+        <script src="@Url.Content("~/Scripts/jquery-1.7.2.min.js")" type="text/javascript"></script>
+        <script src="@Url.Content("~/Scripts/jquery-ui-1.8.11.js")" type="text/javascript"></script>
         <link href="/bootstrap/css/bootstrap.css" rel="Stylesheet" type="text/css" />
         <link href="/bootstrap/css/bootstrap-responsive.css" rel="Stylesheet" type="text/css" />
         <script src="/bootstrap/js/bootstrap.js" type="text/javascript"></script>
+        <script src="/Scripts/common.js" type="text/javascript"></script>
         <meta name="viewport" content="width=device-width" />
     </head>
     <body>
@@ -23,16 +25,32 @@
                         <span class="icon-bar"></span>
                         </a>
                         <a class="brand" href="/">Game School</a>
+                        
                         <div class="btn-group pull-right">
-                        <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-                            <i class="icon-user"></i> Username
-                            <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">Profile</a></li>
-                            <li class="divider"></li>
-                            <li><a href="#">Sign Out</a></li>
-                        </ul>
+                            
+                            <a class="btn btn-info dropdown-toggle" data-toggle="dropdown" href="#">
+                                <i class="icon-user"></i> Erling Guðjohnsen
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/Account/Profile/">Profile</a></li>
+                                <li class="divider"></li>
+                                <li><a href="/Account/Logout/">Hætta</a></li>
+                            </ul>
+                            
+                        </div>
+                        <div class="btn-group pull-right">
+                            
+                            <a class="btn btn-danger dropdown-toggle" data-toggle="dropdown" href="#">
+                                <i class="icon-exclamation-sign icon-white"></i> 6 Tilkynningar
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/Account/Profile/">Ný einkun í Vefforritun fyrir Skilaverkefni 2</a></li>
+                                <li><a href="/Account/Profile/">Bjarna Jóns líkar við álitið þitt</a></li>
+                                <li><a href="/Account/Profile/">Þú fékkst 7 stig í Vefforritun fyrir Skilaverkefni 2</a></li>
+                            </ul>
+                            
                         </div>
                         <div class="nav-collapse">
                         <ul class="nav">
@@ -72,6 +90,6 @@
 
         </div>
 
- 
+        <script src="/bootstrap/js/bootstrap-dropdown.js" type="text/javascript"></script>
     </body>
 </html>
