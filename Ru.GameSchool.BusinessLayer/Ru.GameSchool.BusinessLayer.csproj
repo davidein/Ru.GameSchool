@@ -41,16 +41,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="User.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Ru.GameSchool.DataLayer\Ru.GameSchool.DataLayer.csproj">
       <Project>{03CF6BA8-B6E5-4153-8FD8-9A0271DFDF6A}</Project>
       <Name>Ru.GameSchool.DataLayer</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Test.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
