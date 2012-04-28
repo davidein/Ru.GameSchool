@@ -1,0 +1,1832 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="GameSchoolModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="GameSchoolModelStoreContainer">
+          <EntitySet Name="Comment" EntityType="GameSchoolModel.Store.Comment" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="CommentLike" EntityType="GameSchoolModel.Store.CommentLike" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ContentType" EntityType="GameSchoolModel.Store.ContentType" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Course" EntityType="GameSchoolModel.Store.Course" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="CourseGrade" EntityType="GameSchoolModel.Store.CourseGrade" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Department" EntityType="GameSchoolModel.Store.Department" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Level" EntityType="GameSchoolModel.Store.Level" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="LevelMaterial" EntityType="GameSchoolModel.Store.LevelMaterial" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="LevelProject" EntityType="GameSchoolModel.Store.LevelProject" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="LevelProjectResult" EntityType="GameSchoolModel.Store.LevelProjectResult" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="LevelTest" EntityType="GameSchoolModel.Store.LevelTest" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="LevelTestAnswer" EntityType="GameSchoolModel.Store.LevelTestAnswer" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="LevelTestQuestion" EntityType="GameSchoolModel.Store.LevelTestQuestion" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="LevelTestResult" EntityType="GameSchoolModel.Store.LevelTestResult" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Notification" EntityType="GameSchoolModel.Store.Notification" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Points" EntityType="GameSchoolModel.Store.Points" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Status" EntityType="GameSchoolModel.Store.Status" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="User" EntityType="GameSchoolModel.Store.User" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="UserCourse" EntityType="GameSchoolModel.Store.UserCourse" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="UserLog" EntityType="GameSchoolModel.Store.UserLog" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="UserType" EntityType="GameSchoolModel.Store.UserType" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_Comment_LevelMaterial" Association="GameSchoolModel.Store.FK_Comment_LevelMaterial">
+            <End Role="LevelMaterial" EntitySet="LevelMaterial" />
+            <End Role="Comment" EntitySet="Comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comment_User" Association="GameSchoolModel.Store.FK_Comment_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Comment" EntitySet="Comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CommentLike_Comment" Association="GameSchoolModel.Store.FK_CommentLike_Comment">
+            <End Role="Comment" EntitySet="Comment" />
+            <End Role="CommentLike" EntitySet="CommentLike" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CommentLike_User" Association="GameSchoolModel.Store.FK_CommentLike_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="CommentLike" EntitySet="CommentLike" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Course_Department" Association="GameSchoolModel.Store.FK_Course_Department">
+            <End Role="Department" EntitySet="Department" />
+            <End Role="Course" EntitySet="Course" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CourseGrade_Course" Association="GameSchoolModel.Store.FK_CourseGrade_Course">
+            <End Role="Course" EntitySet="Course" />
+            <End Role="CourseGrade" EntitySet="CourseGrade" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CourseGrade_User" Association="GameSchoolModel.Store.FK_CourseGrade_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="CourseGrade" EntitySet="CourseGrade" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Level_Course" Association="GameSchoolModel.Store.FK_Level_Course">
+            <End Role="Course" EntitySet="Course" />
+            <End Role="Level" EntitySet="Level" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LevelMaterial_ContentType" Association="GameSchoolModel.Store.FK_LevelMaterial_ContentType">
+            <End Role="ContentType" EntitySet="ContentType" />
+            <End Role="LevelMaterial" EntitySet="LevelMaterial" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LevelMaterial_Level" Association="GameSchoolModel.Store.FK_LevelMaterial_Level">
+            <End Role="Level" EntitySet="Level" />
+            <End Role="LevelMaterial" EntitySet="LevelMaterial" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LevelProject_Level" Association="GameSchoolModel.Store.FK_LevelProject_Level">
+            <End Role="Level" EntitySet="Level" />
+            <End Role="LevelProject" EntitySet="LevelProject" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LevelProjectResult_LevelProject" Association="GameSchoolModel.Store.FK_LevelProjectResult_LevelProject">
+            <End Role="LevelProject" EntitySet="LevelProject" />
+            <End Role="LevelProjectResult" EntitySet="LevelProjectResult" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LevelProjectResult_User" Association="GameSchoolModel.Store.FK_LevelProjectResult_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="LevelProjectResult" EntitySet="LevelProjectResult" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LevelTest_Level" Association="GameSchoolModel.Store.FK_LevelTest_Level">
+            <End Role="Level" EntitySet="Level" />
+            <End Role="LevelTest" EntitySet="LevelTest" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LevelTestAnswer_LevelTestQuestion" Association="GameSchoolModel.Store.FK_LevelTestAnswer_LevelTestQuestion">
+            <End Role="LevelTestQuestion" EntitySet="LevelTestQuestion" />
+            <End Role="LevelTestAnswer" EntitySet="LevelTestAnswer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LevelTestQuestion_LevelTest" Association="GameSchoolModel.Store.FK_LevelTestQuestion_LevelTest">
+            <End Role="LevelTest" EntitySet="LevelTest" />
+            <End Role="LevelTestQuestion" EntitySet="LevelTestQuestion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LevelTestResult_LevelTest" Association="GameSchoolModel.Store.FK_LevelTestResult_LevelTest">
+            <End Role="LevelTest" EntitySet="LevelTest" />
+            <End Role="LevelTestResult" EntitySet="LevelTestResult" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LevelTestResult_User" Association="GameSchoolModel.Store.FK_LevelTestResult_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="LevelTestResult" EntitySet="LevelTestResult" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Notification_User" Association="GameSchoolModel.Store.FK_Notification_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Notification" EntitySet="Notification" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Points_Course" Association="GameSchoolModel.Store.FK_Points_Course">
+            <End Role="Course" EntitySet="Course" />
+            <End Role="Points" EntitySet="Points" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Points_Level" Association="GameSchoolModel.Store.FK_Points_Level">
+            <End Role="Level" EntitySet="Level" />
+            <End Role="Points" EntitySet="Points" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Points_User" Association="GameSchoolModel.Store.FK_Points_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Points" EntitySet="Points" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Department" Association="GameSchoolModel.Store.FK_User_Department">
+            <End Role="Department" EntitySet="Department" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Status" Association="GameSchoolModel.Store.FK_User_Status">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_UserType" Association="GameSchoolModel.Store.FK_User_UserType">
+            <End Role="UserType" EntitySet="UserType" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserCourse_Course" Association="GameSchoolModel.Store.FK_UserCourse_Course">
+            <End Role="Course" EntitySet="Course" />
+            <End Role="UserCourse" EntitySet="UserCourse" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserCourse_User" Association="GameSchoolModel.Store.FK_UserCourse_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserCourse" EntitySet="UserCourse" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserLog_User" Association="GameSchoolModel.Store.FK_UserLog_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserLog" EntitySet="UserLog" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Comment">
+          <Key>
+            <PropertyRef Name="CommentId" />
+          </Key>
+          <Property Name="CommentId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="LevelMaterialId" Type="int" Nullable="false" />
+          <Property Name="Comment" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="Deleted" Type="bit" Nullable="false" />
+          <Property Name="DeletedByUser" Type="nvarchar" Nullable="false" MaxLength="255" />
+          <Property Name="CreateDateTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CommentLike">
+          <Key>
+            <PropertyRef Name="CommentLikeId" />
+          </Key>
+          <Property Name="CommentLikeId" Type="int" Nullable="false" />
+          <Property Name="CommentId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ContentType">
+          <Key>
+            <PropertyRef Name="ContentTypeId" />
+          </Key>
+          <Property Name="ContentTypeId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Course">
+          <Key>
+            <PropertyRef Name="CourseId" />
+          </Key>
+          <Property Name="CourseId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Identifier" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Start" Type="datetime" Nullable="false" />
+          <Property Name="Stop" Type="datetime" Nullable="false" />
+          <Property Name="CreditAmount" Type="int" Nullable="false" />
+          <Property Name="CreateDateTime" Type="datetime" Nullable="false" />
+          <Property Name="DepartmentId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CourseGrade">
+          <Key>
+            <PropertyRef Name="CourseId" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="CourseId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="Grade" Type="float" Nullable="false" />
+          <Property Name="Feedback" Type="nvarchar(max)" />
+          <Property Name="CreateDateTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="DepartmentId" />
+          </Key>
+          <Property Name="DepartmentId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="Description" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Level">
+          <Key>
+            <PropertyRef Name="LevelId" />
+          </Key>
+          <Property Name="LevelId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="CourseId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="Start" Type="datetime" Nullable="false" />
+          <Property Name="Stop" Type="datetime" Nullable="false" />
+          <Property Name="CreateDateTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LevelMaterial">
+          <Key>
+            <PropertyRef Name="LevelMaterialId" />
+          </Key>
+          <Property Name="LevelMaterialId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="LevelId" Type="int" Nullable="false" />
+          <Property Name="ContentId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ContentTypeId" Type="int" Nullable="false" />
+          <Property Name="Url" Type="nvarchar" MaxLength="512" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Title" Type="nvarchar" Nullable="false" MaxLength="128" />
+        </EntityType>
+        <EntityType Name="LevelProject">
+          <Key>
+            <PropertyRef Name="LevelProjectId" />
+          </Key>
+          <Property Name="LevelProjectId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="LevelId" Type="int" Nullable="false" />
+          <Property Name="Start" Type="datetime" Nullable="false" />
+          <Property Name="Stop" Type="datetime" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="GradePercentageValue" Type="float" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="LevelProjectResult">
+          <Key>
+            <PropertyRef Name="LevelProjectId" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LevelProjectId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="Feedback" Type="nvarchar(max)" />
+          <Property Name="Grade" Type="float" Nullable="false" />
+          <Property Name="CreateDateTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LevelTest">
+          <Key>
+            <PropertyRef Name="LevelTestId" />
+          </Key>
+          <Property Name="LevelTestId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="LevelId" Type="int" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="GradePercentageValue" Type="float" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="215" />
+          <Property Name="CreateDateTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LevelTestAnswer">
+          <Key>
+            <PropertyRef Name="LevelTestAnswerId" />
+          </Key>
+          <Property Name="LevelTestAnswerId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="LevelTestQuestionId" Type="int" Nullable="false" />
+          <Property Name="Answer" Type="nvarchar" MaxLength="215" />
+          <Property Name="Correct" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LevelTestQuestion">
+          <Key>
+            <PropertyRef Name="LevelTestQuestionId" />
+          </Key>
+          <Property Name="LevelTestQuestionId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="LevelTestId" Type="int" Nullable="false" />
+          <Property Name="Question" Type="nvarchar" Nullable="false" MaxLength="215" />
+        </EntityType>
+        <EntityType Name="LevelTestResult">
+          <Key>
+            <PropertyRef Name="LevelTestId" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LevelTestId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="Grade" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Notification">
+          <Key>
+            <PropertyRef Name="NotificationId" />
+          </Key>
+          <Property Name="NotificationId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Url" Type="nvarchar" MaxLength="512" />
+          <Property Name="IsRead" Type="bit" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="CreateDateTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Points">
+          <Key>
+            <PropertyRef Name="PointsId" />
+          </Key>
+          <Property Name="PointsId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="CourseId" Type="int" Nullable="false" />
+          <Property Name="LevelId" Type="int" Nullable="false" />
+          <Property Name="Points" Type="int" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Status">
+          <Key>
+            <PropertyRef Name="StatusId" />
+          </Key>
+          <Property Name="StatusId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="215" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="nvarchar" Nullable="false" MaxLength="255" />
+          <Property Name="Password" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="Email" Type="nvarchar" Nullable="false" MaxLength="255" />
+          <Property Name="UserTypeId" Type="int" Nullable="false" />
+          <Property Name="Fullname" Type="nvarchar" Nullable="false" MaxLength="255" />
+          <Property Name="DepartmentId" Type="int" Nullable="false" />
+          <Property Name="CreateDateTime" Type="datetime" Nullable="false" />
+          <Property Name="StatusId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserCourse">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="CourseId" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="CourseId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserLog">
+          <Key>
+            <PropertyRef Name="UserLogId" />
+          </Key>
+          <Property Name="UserLogId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="LoginTime" Type="datetime" Nullable="false" />
+          <Property Name="IpAddress" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserType">
+          <Key>
+            <PropertyRef Name="UserTypeID" />
+          </Key>
+          <Property Name="UserTypeID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_Comment_LevelMaterial">
+          <End Role="LevelMaterial" Type="GameSchoolModel.Store.LevelMaterial" Multiplicity="1" />
+          <End Role="Comment" Type="GameSchoolModel.Store.Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LevelMaterial">
+              <PropertyRef Name="LevelMaterialId" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="LevelMaterialId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comment_User">
+          <End Role="User" Type="GameSchoolModel.Store.User" Multiplicity="1" />
+          <End Role="Comment" Type="GameSchoolModel.Store.Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CommentLike_Comment">
+          <End Role="Comment" Type="GameSchoolModel.Store.Comment" Multiplicity="1" />
+          <End Role="CommentLike" Type="GameSchoolModel.Store.CommentLike" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Comment">
+              <PropertyRef Name="CommentId" />
+            </Principal>
+            <Dependent Role="CommentLike">
+              <PropertyRef Name="CommentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CommentLike_User">
+          <End Role="User" Type="GameSchoolModel.Store.User" Multiplicity="1" />
+          <End Role="CommentLike" Type="GameSchoolModel.Store.CommentLike" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="CommentLike">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Course_Department">
+          <End Role="Department" Type="GameSchoolModel.Store.Department" Multiplicity="1" />
+          <End Role="Course" Type="GameSchoolModel.Store.Course" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="DepartmentId" />
+            </Principal>
+            <Dependent Role="Course">
+              <PropertyRef Name="DepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CourseGrade_Course">
+          <End Role="Course" Type="GameSchoolModel.Store.Course" Multiplicity="1" />
+          <End Role="CourseGrade" Type="GameSchoolModel.Store.CourseGrade" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Course">
+              <PropertyRef Name="CourseId" />
+            </Principal>
+            <Dependent Role="CourseGrade">
+              <PropertyRef Name="CourseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CourseGrade_User">
+          <End Role="User" Type="GameSchoolModel.Store.User" Multiplicity="1" />
+          <End Role="CourseGrade" Type="GameSchoolModel.Store.CourseGrade" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="CourseGrade">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Level_Course">
+          <End Role="Course" Type="GameSchoolModel.Store.Course" Multiplicity="1" />
+          <End Role="Level" Type="GameSchoolModel.Store.Level" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Course">
+              <PropertyRef Name="CourseId" />
+            </Principal>
+            <Dependent Role="Level">
+              <PropertyRef Name="CourseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LevelMaterial_ContentType">
+          <End Role="ContentType" Type="GameSchoolModel.Store.ContentType" Multiplicity="1" />
+          <End Role="LevelMaterial" Type="GameSchoolModel.Store.LevelMaterial" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ContentType">
+              <PropertyRef Name="ContentTypeId" />
+            </Principal>
+            <Dependent Role="LevelMaterial">
+              <PropertyRef Name="ContentTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LevelMaterial_Level">
+          <End Role="Level" Type="GameSchoolModel.Store.Level" Multiplicity="1" />
+          <End Role="LevelMaterial" Type="GameSchoolModel.Store.LevelMaterial" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Level">
+              <PropertyRef Name="LevelId" />
+            </Principal>
+            <Dependent Role="LevelMaterial">
+              <PropertyRef Name="LevelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LevelProject_Level">
+          <End Role="Level" Type="GameSchoolModel.Store.Level" Multiplicity="1" />
+          <End Role="LevelProject" Type="GameSchoolModel.Store.LevelProject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Level">
+              <PropertyRef Name="LevelId" />
+            </Principal>
+            <Dependent Role="LevelProject">
+              <PropertyRef Name="LevelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LevelProjectResult_LevelProject">
+          <End Role="LevelProject" Type="GameSchoolModel.Store.LevelProject" Multiplicity="1" />
+          <End Role="LevelProjectResult" Type="GameSchoolModel.Store.LevelProjectResult" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LevelProject">
+              <PropertyRef Name="LevelProjectId" />
+            </Principal>
+            <Dependent Role="LevelProjectResult">
+              <PropertyRef Name="LevelProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LevelProjectResult_User">
+          <End Role="User" Type="GameSchoolModel.Store.User" Multiplicity="1" />
+          <End Role="LevelProjectResult" Type="GameSchoolModel.Store.LevelProjectResult" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="LevelProjectResult">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LevelTest_Level">
+          <End Role="Level" Type="GameSchoolModel.Store.Level" Multiplicity="1" />
+          <End Role="LevelTest" Type="GameSchoolModel.Store.LevelTest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Level">
+              <PropertyRef Name="LevelId" />
+            </Principal>
+            <Dependent Role="LevelTest">
+              <PropertyRef Name="LevelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LevelTestAnswer_LevelTestQuestion">
+          <End Role="LevelTestQuestion" Type="GameSchoolModel.Store.LevelTestQuestion" Multiplicity="1" />
+          <End Role="LevelTestAnswer" Type="GameSchoolModel.Store.LevelTestAnswer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LevelTestQuestion">
+              <PropertyRef Name="LevelTestQuestionId" />
+            </Principal>
+            <Dependent Role="LevelTestAnswer">
+              <PropertyRef Name="LevelTestQuestionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LevelTestQuestion_LevelTest">
+          <End Role="LevelTest" Type="GameSchoolModel.Store.LevelTest" Multiplicity="1" />
+          <End Role="LevelTestQuestion" Type="GameSchoolModel.Store.LevelTestQuestion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LevelTest">
+              <PropertyRef Name="LevelTestId" />
+            </Principal>
+            <Dependent Role="LevelTestQuestion">
+              <PropertyRef Name="LevelTestId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LevelTestResult_LevelTest">
+          <End Role="LevelTest" Type="GameSchoolModel.Store.LevelTest" Multiplicity="1" />
+          <End Role="LevelTestResult" Type="GameSchoolModel.Store.LevelTestResult" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LevelTest">
+              <PropertyRef Name="LevelTestId" />
+            </Principal>
+            <Dependent Role="LevelTestResult">
+              <PropertyRef Name="LevelTestId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LevelTestResult_User">
+          <End Role="User" Type="GameSchoolModel.Store.User" Multiplicity="1" />
+          <End Role="LevelTestResult" Type="GameSchoolModel.Store.LevelTestResult" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="LevelTestResult">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Notification_User">
+          <End Role="User" Type="GameSchoolModel.Store.User" Multiplicity="1" />
+          <End Role="Notification" Type="GameSchoolModel.Store.Notification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Notification">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Points_Course">
+          <End Role="Course" Type="GameSchoolModel.Store.Course" Multiplicity="1" />
+          <End Role="Points" Type="GameSchoolModel.Store.Points" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Course">
+              <PropertyRef Name="CourseId" />
+            </Principal>
+            <Dependent Role="Points">
+              <PropertyRef Name="CourseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Points_Level">
+          <End Role="Level" Type="GameSchoolModel.Store.Level" Multiplicity="1" />
+          <End Role="Points" Type="GameSchoolModel.Store.Points" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Level">
+              <PropertyRef Name="LevelId" />
+            </Principal>
+            <Dependent Role="Points">
+              <PropertyRef Name="LevelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Points_User">
+          <End Role="User" Type="GameSchoolModel.Store.User" Multiplicity="1" />
+          <End Role="Points" Type="GameSchoolModel.Store.Points" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Points">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Department">
+          <End Role="Department" Type="GameSchoolModel.Store.Department" Multiplicity="1" />
+          <End Role="User" Type="GameSchoolModel.Store.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="DepartmentId" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="DepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Status">
+          <End Role="Status" Type="GameSchoolModel.Store.Status" Multiplicity="1" />
+          <End Role="User" Type="GameSchoolModel.Store.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="StatusId" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="StatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_UserType">
+          <End Role="UserType" Type="GameSchoolModel.Store.UserType" Multiplicity="1" />
+          <End Role="User" Type="GameSchoolModel.Store.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserType">
+              <PropertyRef Name="UserTypeID" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="UserTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserCourse_Course">
+          <End Role="Course" Type="GameSchoolModel.Store.Course" Multiplicity="1" />
+          <End Role="UserCourse" Type="GameSchoolModel.Store.UserCourse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Course">
+              <PropertyRef Name="CourseId" />
+            </Principal>
+            <Dependent Role="UserCourse">
+              <PropertyRef Name="CourseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserCourse_User">
+          <End Role="User" Type="GameSchoolModel.Store.User" Multiplicity="1" />
+          <End Role="UserCourse" Type="GameSchoolModel.Store.UserCourse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="UserCourse">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserLog_User">
+          <End Role="User" Type="GameSchoolModel.Store.User" Multiplicity="1" />
+          <End Role="UserLog" Type="GameSchoolModel.Store.UserLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="UserLog">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="GameSchoolModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="GameSchoolEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Comments" EntityType="GameSchoolModel.Comment" />
+          <EntitySet Name="CommentLikes" EntityType="GameSchoolModel.CommentLike" />
+          <EntitySet Name="ContentTypes" EntityType="GameSchoolModel.ContentType" />
+          <EntitySet Name="Courses" EntityType="GameSchoolModel.Course" />
+          <EntitySet Name="CourseGrades" EntityType="GameSchoolModel.CourseGrade" />
+          <EntitySet Name="Departments" EntityType="GameSchoolModel.Department" />
+          <EntitySet Name="Levels" EntityType="GameSchoolModel.Level" />
+          <EntitySet Name="LevelMaterials" EntityType="GameSchoolModel.LevelMaterial" />
+          <EntitySet Name="LevelProjects" EntityType="GameSchoolModel.LevelProject" />
+          <EntitySet Name="LevelProjectResults" EntityType="GameSchoolModel.LevelProjectResult" />
+          <EntitySet Name="LevelTests" EntityType="GameSchoolModel.LevelTest" />
+          <EntitySet Name="LevelTestAnswers" EntityType="GameSchoolModel.LevelTestAnswer" />
+          <EntitySet Name="LevelTestQuestions" EntityType="GameSchoolModel.LevelTestQuestion" />
+          <EntitySet Name="LevelTestResults" EntityType="GameSchoolModel.LevelTestResult" />
+          <EntitySet Name="Notifications" EntityType="GameSchoolModel.Notification" />
+          <EntitySet Name="Points" EntityType="GameSchoolModel.Point" />
+          <EntitySet Name="Status" EntityType="GameSchoolModel.Status" />
+          <EntitySet Name="Users" EntityType="GameSchoolModel.User" />
+          <EntitySet Name="UserLogs" EntityType="GameSchoolModel.UserLog" />
+          <EntitySet Name="UserTypes" EntityType="GameSchoolModel.UserType" />
+          <AssociationSet Name="FK_Comment_LevelMaterial" Association="GameSchoolModel.FK_Comment_LevelMaterial">
+            <End Role="LevelMaterial" EntitySet="LevelMaterials" />
+            <End Role="Comment" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comment_User" Association="GameSchoolModel.FK_Comment_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Comment" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CommentLike_Comment" Association="GameSchoolModel.FK_CommentLike_Comment">
+            <End Role="Comment" EntitySet="Comments" />
+            <End Role="CommentLike" EntitySet="CommentLikes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CommentLike_User" Association="GameSchoolModel.FK_CommentLike_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="CommentLike" EntitySet="CommentLikes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LevelMaterial_ContentType" Association="GameSchoolModel.FK_LevelMaterial_ContentType">
+            <End Role="ContentType" EntitySet="ContentTypes" />
+            <End Role="LevelMaterial" EntitySet="LevelMaterials" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Course_Department" Association="GameSchoolModel.FK_Course_Department">
+            <End Role="Department" EntitySet="Departments" />
+            <End Role="Course" EntitySet="Courses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CourseGrade_Course" Association="GameSchoolModel.FK_CourseGrade_Course">
+            <End Role="Course" EntitySet="Courses" />
+            <End Role="CourseGrade" EntitySet="CourseGrades" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Level_Course" Association="GameSchoolModel.FK_Level_Course">
+            <End Role="Course" EntitySet="Courses" />
+            <End Role="Level" EntitySet="Levels" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Points_Course" Association="GameSchoolModel.FK_Points_Course">
+            <End Role="Course" EntitySet="Courses" />
+            <End Role="Points" EntitySet="Points" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CourseGrade_User" Association="GameSchoolModel.FK_CourseGrade_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="CourseGrade" EntitySet="CourseGrades" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Department" Association="GameSchoolModel.FK_User_Department">
+            <End Role="Department" EntitySet="Departments" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LevelMaterial_Level" Association="GameSchoolModel.FK_LevelMaterial_Level">
+            <End Role="Level" EntitySet="Levels" />
+            <End Role="LevelMaterial" EntitySet="LevelMaterials" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LevelProject_Level" Association="GameSchoolModel.FK_LevelProject_Level">
+            <End Role="Level" EntitySet="Levels" />
+            <End Role="LevelProject" EntitySet="LevelProjects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LevelTest_Level" Association="GameSchoolModel.FK_LevelTest_Level">
+            <End Role="Level" EntitySet="Levels" />
+            <End Role="LevelTest" EntitySet="LevelTests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Points_Level" Association="GameSchoolModel.FK_Points_Level">
+            <End Role="Level" EntitySet="Levels" />
+            <End Role="Points" EntitySet="Points" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LevelProjectResult_LevelProject" Association="GameSchoolModel.FK_LevelProjectResult_LevelProject">
+            <End Role="LevelProject" EntitySet="LevelProjects" />
+            <End Role="LevelProjectResult" EntitySet="LevelProjectResults" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LevelProjectResult_User" Association="GameSchoolModel.FK_LevelProjectResult_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="LevelProjectResult" EntitySet="LevelProjectResults" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LevelTestQuestion_LevelTest" Association="GameSchoolModel.FK_LevelTestQuestion_LevelTest">
+            <End Role="LevelTest" EntitySet="LevelTests" />
+            <End Role="LevelTestQuestion" EntitySet="LevelTestQuestions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LevelTestResult_LevelTest" Association="GameSchoolModel.FK_LevelTestResult_LevelTest">
+            <End Role="LevelTest" EntitySet="LevelTests" />
+            <End Role="LevelTestResult" EntitySet="LevelTestResults" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LevelTestAnswer_LevelTestQuestion" Association="GameSchoolModel.FK_LevelTestAnswer_LevelTestQuestion">
+            <End Role="LevelTestQuestion" EntitySet="LevelTestQuestions" />
+            <End Role="LevelTestAnswer" EntitySet="LevelTestAnswers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LevelTestResult_User" Association="GameSchoolModel.FK_LevelTestResult_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="LevelTestResult" EntitySet="LevelTestResults" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Notification_User" Association="GameSchoolModel.FK_Notification_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Notification" EntitySet="Notifications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Points_User" Association="GameSchoolModel.FK_Points_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Points" EntitySet="Points" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Status" Association="GameSchoolModel.FK_User_Status">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_UserType" Association="GameSchoolModel.FK_User_UserType">
+            <End Role="UserType" EntitySet="UserTypes" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserLog_User" Association="GameSchoolModel.FK_UserLog_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="UserLog" EntitySet="UserLogs" />
+          </AssociationSet>
+          <AssociationSet Name="UserCourse" Association="GameSchoolModel.UserCourse">
+            <End Role="Course" EntitySet="Courses" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Comment">
+          <Key>
+            <PropertyRef Name="CommentId" />
+          </Key>
+          <Property Name="CommentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LevelMaterialId" Type="Int32" Nullable="false" />
+          <Property Name="Comment1" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="Deleted" Type="Boolean" Nullable="false" />
+          <Property Name="DeletedByUser" Type="String" Nullable="false" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="CreateDateTime" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="LevelMaterial" Relationship="GameSchoolModel.FK_Comment_LevelMaterial" FromRole="Comment" ToRole="LevelMaterial" />
+          <NavigationProperty Name="User" Relationship="GameSchoolModel.FK_Comment_User" FromRole="Comment" ToRole="User" />
+          <NavigationProperty Name="CommentLikes" Relationship="GameSchoolModel.FK_CommentLike_Comment" FromRole="Comment" ToRole="CommentLike" />
+        </EntityType>
+        <EntityType Name="CommentLike">
+          <Key>
+            <PropertyRef Name="CommentLikeId" />
+          </Key>
+          <Property Name="CommentLikeId" Type="Int32" Nullable="false" />
+          <Property Name="CommentId" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Comment" Relationship="GameSchoolModel.FK_CommentLike_Comment" FromRole="CommentLike" ToRole="Comment" />
+          <NavigationProperty Name="User" Relationship="GameSchoolModel.FK_CommentLike_User" FromRole="CommentLike" ToRole="User" />
+        </EntityType>
+        <EntityType Name="ContentType">
+          <Key>
+            <PropertyRef Name="ContentTypeId" />
+          </Key>
+          <Property Name="ContentTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="LevelMaterials" Relationship="GameSchoolModel.FK_LevelMaterial_ContentType" FromRole="ContentType" ToRole="LevelMaterial" />
+        </EntityType>
+        <EntityType Name="Course">
+          <Key>
+            <PropertyRef Name="CourseId" />
+          </Key>
+          <Property Name="CourseId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Identifier" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Start" Type="DateTime" Nullable="false" />
+          <Property Name="Stop" Type="DateTime" Nullable="false" />
+          <Property Name="CreditAmount" Type="Int32" Nullable="false" />
+          <Property Name="CreateDateTime" Type="DateTime" Nullable="false" />
+          <Property Name="DepartmentId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Department" Relationship="GameSchoolModel.FK_Course_Department" FromRole="Course" ToRole="Department" />
+          <NavigationProperty Name="CourseGrades" Relationship="GameSchoolModel.FK_CourseGrade_Course" FromRole="Course" ToRole="CourseGrade" />
+          <NavigationProperty Name="Levels" Relationship="GameSchoolModel.FK_Level_Course" FromRole="Course" ToRole="Level" />
+          <NavigationProperty Name="Points" Relationship="GameSchoolModel.FK_Points_Course" FromRole="Course" ToRole="Points" />
+          <NavigationProperty Name="Users" Relationship="GameSchoolModel.UserCourse" FromRole="Course" ToRole="User" />
+        </EntityType>
+        <EntityType Name="CourseGrade">
+          <Key>
+            <PropertyRef Name="CourseId" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="CourseId" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="Grade" Type="Double" Nullable="false" />
+          <Property Name="Feedback" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="CreateDateTime" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="Course" Relationship="GameSchoolModel.FK_CourseGrade_Course" FromRole="CourseGrade" ToRole="Course" />
+          <NavigationProperty Name="User" Relationship="GameSchoolModel.FK_CourseGrade_User" FromRole="CourseGrade" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="DepartmentId" />
+          </Key>
+          <Property Name="DepartmentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Courses" Relationship="GameSchoolModel.FK_Course_Department" FromRole="Department" ToRole="Course" />
+          <NavigationProperty Name="Users" Relationship="GameSchoolModel.FK_User_Department" FromRole="Department" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Level">
+          <Key>
+            <PropertyRef Name="LevelId" />
+          </Key>
+          <Property Name="LevelId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CourseId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
+          <Property Name="Start" Type="DateTime" Nullable="false" />
+          <Property Name="Stop" Type="DateTime" Nullable="false" />
+          <Property Name="CreateDateTime" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="Course" Relationship="GameSchoolModel.FK_Level_Course" FromRole="Level" ToRole="Course" />
+          <NavigationProperty Name="LevelMaterials" Relationship="GameSchoolModel.FK_LevelMaterial_Level" FromRole="Level" ToRole="LevelMaterial" />
+          <NavigationProperty Name="LevelProjects" Relationship="GameSchoolModel.FK_LevelProject_Level" FromRole="Level" ToRole="LevelProject" />
+          <NavigationProperty Name="LevelTests" Relationship="GameSchoolModel.FK_LevelTest_Level" FromRole="Level" ToRole="LevelTest" />
+          <NavigationProperty Name="Points" Relationship="GameSchoolModel.FK_Points_Level" FromRole="Level" ToRole="Points" />
+        </EntityType>
+        <EntityType Name="LevelMaterial">
+          <Key>
+            <PropertyRef Name="LevelMaterialId" />
+          </Key>
+          <Property Name="LevelMaterialId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LevelId" Type="Int32" Nullable="false" />
+          <Property Name="ContentId" Type="Guid" Nullable="false" />
+          <Property Name="ContentTypeId" Type="Int32" Nullable="false" />
+          <Property Name="Url" Type="String" MaxLength="512" Unicode="true" FixedLength="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Comments" Relationship="GameSchoolModel.FK_Comment_LevelMaterial" FromRole="LevelMaterial" ToRole="Comment" />
+          <NavigationProperty Name="ContentType" Relationship="GameSchoolModel.FK_LevelMaterial_ContentType" FromRole="LevelMaterial" ToRole="ContentType" />
+          <NavigationProperty Name="Level" Relationship="GameSchoolModel.FK_LevelMaterial_Level" FromRole="LevelMaterial" ToRole="Level" />
+        </EntityType>
+        <EntityType Name="LevelProject">
+          <Key>
+            <PropertyRef Name="LevelProjectId" />
+          </Key>
+          <Property Name="LevelProjectId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LevelId" Type="Int32" Nullable="false" />
+          <Property Name="Start" Type="DateTime" Nullable="false" />
+          <Property Name="Stop" Type="DateTime" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="GradePercentageValue" Type="Double" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="255" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Level" Relationship="GameSchoolModel.FK_LevelProject_Level" FromRole="LevelProject" ToRole="Level" />
+          <NavigationProperty Name="LevelProjectResults" Relationship="GameSchoolModel.FK_LevelProjectResult_LevelProject" FromRole="LevelProject" ToRole="LevelProjectResult" />
+        </EntityType>
+        <EntityType Name="LevelProjectResult">
+          <Key>
+            <PropertyRef Name="LevelProjectId" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LevelProjectId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="Feedback" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Grade" Type="Double" Nullable="false" />
+          <Property Name="CreateDateTime" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="LevelProject" Relationship="GameSchoolModel.FK_LevelProjectResult_LevelProject" FromRole="LevelProjectResult" ToRole="LevelProject" />
+          <NavigationProperty Name="User" Relationship="GameSchoolModel.FK_LevelProjectResult_User" FromRole="LevelProjectResult" ToRole="User" />
+        </EntityType>
+        <EntityType Name="LevelTest">
+          <Key>
+            <PropertyRef Name="LevelTestId" />
+          </Key>
+          <Property Name="LevelTestId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LevelId" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="GradePercentageValue" Type="Double" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="215" Unicode="true" FixedLength="false" />
+          <Property Name="CreateDateTime" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="Level" Relationship="GameSchoolModel.FK_LevelTest_Level" FromRole="LevelTest" ToRole="Level" />
+          <NavigationProperty Name="LevelTestQuestions" Relationship="GameSchoolModel.FK_LevelTestQuestion_LevelTest" FromRole="LevelTest" ToRole="LevelTestQuestion" />
+          <NavigationProperty Name="LevelTestResults" Relationship="GameSchoolModel.FK_LevelTestResult_LevelTest" FromRole="LevelTest" ToRole="LevelTestResult" />
+        </EntityType>
+        <EntityType Name="LevelTestAnswer">
+          <Key>
+            <PropertyRef Name="LevelTestAnswerId" />
+          </Key>
+          <Property Name="LevelTestAnswerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LevelTestQuestionId" Type="Int32" Nullable="false" />
+          <Property Name="Answer" Type="String" MaxLength="215" Unicode="true" FixedLength="false" />
+          <Property Name="Correct" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="LevelTestQuestion" Relationship="GameSchoolModel.FK_LevelTestAnswer_LevelTestQuestion" FromRole="LevelTestAnswer" ToRole="LevelTestQuestion" />
+        </EntityType>
+        <EntityType Name="LevelTestQuestion">
+          <Key>
+            <PropertyRef Name="LevelTestQuestionId" />
+          </Key>
+          <Property Name="LevelTestQuestionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LevelTestId" Type="Int32" Nullable="false" />
+          <Property Name="Question" Type="String" Nullable="false" MaxLength="215" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="LevelTest" Relationship="GameSchoolModel.FK_LevelTestQuestion_LevelTest" FromRole="LevelTestQuestion" ToRole="LevelTest" />
+          <NavigationProperty Name="LevelTestAnswers" Relationship="GameSchoolModel.FK_LevelTestAnswer_LevelTestQuestion" FromRole="LevelTestQuestion" ToRole="LevelTestAnswer" />
+        </EntityType>
+        <EntityType Name="LevelTestResult">
+          <Key>
+            <PropertyRef Name="LevelTestId" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LevelTestId" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="Grade" Type="Double" Nullable="false" />
+          <NavigationProperty Name="LevelTest" Relationship="GameSchoolModel.FK_LevelTestResult_LevelTest" FromRole="LevelTestResult" ToRole="LevelTest" />
+          <NavigationProperty Name="User" Relationship="GameSchoolModel.FK_LevelTestResult_User" FromRole="LevelTestResult" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Notification">
+          <Key>
+            <PropertyRef Name="NotificationId" />
+          </Key>
+          <Property Name="NotificationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Url" Type="String" MaxLength="512" Unicode="true" FixedLength="false" />
+          <Property Name="IsRead" Type="Boolean" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="CreateDateTime" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="GameSchoolModel.FK_Notification_User" FromRole="Notification" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Point">
+          <Key>
+            <PropertyRef Name="PointsId" />
+          </Key>
+          <Property Name="PointsId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="CourseId" Type="Int32" Nullable="false" />
+          <Property Name="LevelId" Type="Int32" Nullable="false" />
+          <Property Name="Points" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Course" Relationship="GameSchoolModel.FK_Points_Course" FromRole="Points" ToRole="Course" />
+          <NavigationProperty Name="Level" Relationship="GameSchoolModel.FK_Points_Level" FromRole="Points" ToRole="Level" />
+          <NavigationProperty Name="User" Relationship="GameSchoolModel.FK_Points_User" FromRole="Points" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Status">
+          <Key>
+            <PropertyRef Name="StatusId" />
+          </Key>
+          <Property Name="StatusId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="215" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Users" Relationship="GameSchoolModel.FK_User_Status" FromRole="Status" ToRole="User" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" Nullable="false" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="UserTypeId" Type="Int32" Nullable="false" />
+          <Property Name="Fullname" Type="String" Nullable="false" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="DepartmentId" Type="Int32" Nullable="false" />
+          <Property Name="CreateDateTime" Type="DateTime" Nullable="false" />
+          <Property Name="StatusId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Comments" Relationship="GameSchoolModel.FK_Comment_User" FromRole="User" ToRole="Comment" />
+          <NavigationProperty Name="CommentLikes" Relationship="GameSchoolModel.FK_CommentLike_User" FromRole="User" ToRole="CommentLike" />
+          <NavigationProperty Name="CourseGrades" Relationship="GameSchoolModel.FK_CourseGrade_User" FromRole="User" ToRole="CourseGrade" />
+          <NavigationProperty Name="Department" Relationship="GameSchoolModel.FK_User_Department" FromRole="User" ToRole="Department" />
+          <NavigationProperty Name="LevelProjectResults" Relationship="GameSchoolModel.FK_LevelProjectResult_User" FromRole="User" ToRole="LevelProjectResult" />
+          <NavigationProperty Name="LevelTestResults" Relationship="GameSchoolModel.FK_LevelTestResult_User" FromRole="User" ToRole="LevelTestResult" />
+          <NavigationProperty Name="Notifications" Relationship="GameSchoolModel.FK_Notification_User" FromRole="User" ToRole="Notification" />
+          <NavigationProperty Name="Points" Relationship="GameSchoolModel.FK_Points_User" FromRole="User" ToRole="Points" />
+          <NavigationProperty Name="Status" Relationship="GameSchoolModel.FK_User_Status" FromRole="User" ToRole="Status" />
+          <NavigationProperty Name="UserType" Relationship="GameSchoolModel.FK_User_UserType" FromRole="User" ToRole="UserType" />
+          <NavigationProperty Name="UserLogs" Relationship="GameSchoolModel.FK_UserLog_User" FromRole="User" ToRole="UserLog" />
+          <NavigationProperty Name="Courses" Relationship="GameSchoolModel.UserCourse" FromRole="User" ToRole="Course" />
+        </EntityType>
+        <EntityType Name="UserLog">
+          <Key>
+            <PropertyRef Name="UserLogId" />
+          </Key>
+          <Property Name="UserLogId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LoginTime" Type="DateTime" Nullable="false" />
+          <Property Name="IpAddress" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="GameSchoolModel.FK_UserLog_User" FromRole="UserLog" ToRole="User" />
+        </EntityType>
+        <EntityType Name="UserType">
+          <Key>
+            <PropertyRef Name="UserTypeID" />
+          </Key>
+          <Property Name="UserTypeID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Users" Relationship="GameSchoolModel.FK_User_UserType" FromRole="UserType" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_Comment_LevelMaterial">
+          <End Role="LevelMaterial" Type="GameSchoolModel.LevelMaterial" Multiplicity="1" />
+          <End Role="Comment" Type="GameSchoolModel.Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LevelMaterial">
+              <PropertyRef Name="LevelMaterialId" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="LevelMaterialId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comment_User">
+          <End Role="User" Type="GameSchoolModel.User" Multiplicity="1" />
+          <End Role="Comment" Type="GameSchoolModel.Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CommentLike_Comment">
+          <End Role="Comment" Type="GameSchoolModel.Comment" Multiplicity="1" />
+          <End Role="CommentLike" Type="GameSchoolModel.CommentLike" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Comment">
+              <PropertyRef Name="CommentId" />
+            </Principal>
+            <Dependent Role="CommentLike">
+              <PropertyRef Name="CommentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CommentLike_User">
+          <End Role="User" Type="GameSchoolModel.User" Multiplicity="1" />
+          <End Role="CommentLike" Type="GameSchoolModel.CommentLike" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="CommentLike">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LevelMaterial_ContentType">
+          <End Role="ContentType" Type="GameSchoolModel.ContentType" Multiplicity="1" />
+          <End Role="LevelMaterial" Type="GameSchoolModel.LevelMaterial" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ContentType">
+              <PropertyRef Name="ContentTypeId" />
+            </Principal>
+            <Dependent Role="LevelMaterial">
+              <PropertyRef Name="ContentTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Course_Department">
+          <End Role="Department" Type="GameSchoolModel.Department" Multiplicity="1" />
+          <End Role="Course" Type="GameSchoolModel.Course" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="DepartmentId" />
+            </Principal>
+            <Dependent Role="Course">
+              <PropertyRef Name="DepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CourseGrade_Course">
+          <End Role="Course" Type="GameSchoolModel.Course" Multiplicity="1" />
+          <End Role="CourseGrade" Type="GameSchoolModel.CourseGrade" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Course">
+              <PropertyRef Name="CourseId" />
+            </Principal>
+            <Dependent Role="CourseGrade">
+              <PropertyRef Name="CourseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Level_Course">
+          <End Role="Course" Type="GameSchoolModel.Course" Multiplicity="1" />
+          <End Role="Level" Type="GameSchoolModel.Level" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Course">
+              <PropertyRef Name="CourseId" />
+            </Principal>
+            <Dependent Role="Level">
+              <PropertyRef Name="CourseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Points_Course">
+          <End Role="Course" Type="GameSchoolModel.Course" Multiplicity="1" />
+          <End Role="Points" Type="GameSchoolModel.Point" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Course">
+              <PropertyRef Name="CourseId" />
+            </Principal>
+            <Dependent Role="Points">
+              <PropertyRef Name="CourseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CourseGrade_User">
+          <End Role="User" Type="GameSchoolModel.User" Multiplicity="1" />
+          <End Role="CourseGrade" Type="GameSchoolModel.CourseGrade" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="CourseGrade">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Department">
+          <End Role="Department" Type="GameSchoolModel.Department" Multiplicity="1" />
+          <End Role="User" Type="GameSchoolModel.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="DepartmentId" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="DepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LevelMaterial_Level">
+          <End Role="Level" Type="GameSchoolModel.Level" Multiplicity="1" />
+          <End Role="LevelMaterial" Type="GameSchoolModel.LevelMaterial" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Level">
+              <PropertyRef Name="LevelId" />
+            </Principal>
+            <Dependent Role="LevelMaterial">
+              <PropertyRef Name="LevelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LevelProject_Level">
+          <End Role="Level" Type="GameSchoolModel.Level" Multiplicity="1" />
+          <End Role="LevelProject" Type="GameSchoolModel.LevelProject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Level">
+              <PropertyRef Name="LevelId" />
+            </Principal>
+            <Dependent Role="LevelProject">
+              <PropertyRef Name="LevelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LevelTest_Level">
+          <End Role="Level" Type="GameSchoolModel.Level" Multiplicity="1" />
+          <End Role="LevelTest" Type="GameSchoolModel.LevelTest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Level">
+              <PropertyRef Name="LevelId" />
+            </Principal>
+            <Dependent Role="LevelTest">
+              <PropertyRef Name="LevelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Points_Level">
+          <End Role="Level" Type="GameSchoolModel.Level" Multiplicity="1" />
+          <End Role="Points" Type="GameSchoolModel.Point" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Level">
+              <PropertyRef Name="LevelId" />
+            </Principal>
+            <Dependent Role="Points">
+              <PropertyRef Name="LevelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LevelProjectResult_LevelProject">
+          <End Role="LevelProject" Type="GameSchoolModel.LevelProject" Multiplicity="1" />
+          <End Role="LevelProjectResult" Type="GameSchoolModel.LevelProjectResult" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LevelProject">
+              <PropertyRef Name="LevelProjectId" />
+            </Principal>
+            <Dependent Role="LevelProjectResult">
+              <PropertyRef Name="LevelProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LevelProjectResult_User">
+          <End Role="User" Type="GameSchoolModel.User" Multiplicity="1" />
+          <End Role="LevelProjectResult" Type="GameSchoolModel.LevelProjectResult" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="LevelProjectResult">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LevelTestQuestion_LevelTest">
+          <End Role="LevelTest" Type="GameSchoolModel.LevelTest" Multiplicity="1" />
+          <End Role="LevelTestQuestion" Type="GameSchoolModel.LevelTestQuestion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LevelTest">
+              <PropertyRef Name="LevelTestId" />
+            </Principal>
+            <Dependent Role="LevelTestQuestion">
+              <PropertyRef Name="LevelTestId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LevelTestResult_LevelTest">
+          <End Role="LevelTest" Type="GameSchoolModel.LevelTest" Multiplicity="1" />
+          <End Role="LevelTestResult" Type="GameSchoolModel.LevelTestResult" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LevelTest">
+              <PropertyRef Name="LevelTestId" />
+            </Principal>
+            <Dependent Role="LevelTestResult">
+              <PropertyRef Name="LevelTestId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LevelTestAnswer_LevelTestQuestion">
+          <End Role="LevelTestQuestion" Type="GameSchoolModel.LevelTestQuestion" Multiplicity="1" />
+          <End Role="LevelTestAnswer" Type="GameSchoolModel.LevelTestAnswer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LevelTestQuestion">
+              <PropertyRef Name="LevelTestQuestionId" />
+            </Principal>
+            <Dependent Role="LevelTestAnswer">
+              <PropertyRef Name="LevelTestQuestionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LevelTestResult_User">
+          <End Role="User" Type="GameSchoolModel.User" Multiplicity="1" />
+          <End Role="LevelTestResult" Type="GameSchoolModel.LevelTestResult" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="LevelTestResult">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Notification_User">
+          <End Role="User" Type="GameSchoolModel.User" Multiplicity="1" />
+          <End Role="Notification" Type="GameSchoolModel.Notification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Notification">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Points_User">
+          <End Role="User" Type="GameSchoolModel.User" Multiplicity="1" />
+          <End Role="Points" Type="GameSchoolModel.Point" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Points">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Status">
+          <End Role="Status" Type="GameSchoolModel.Status" Multiplicity="1" />
+          <End Role="User" Type="GameSchoolModel.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="StatusId" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="StatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_UserType">
+          <End Role="UserType" Type="GameSchoolModel.UserType" Multiplicity="1" />
+          <End Role="User" Type="GameSchoolModel.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserType">
+              <PropertyRef Name="UserTypeID" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="UserTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserLog_User">
+          <End Role="User" Type="GameSchoolModel.User" Multiplicity="1" />
+          <End Role="UserLog" Type="GameSchoolModel.UserLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="UserLog">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserCourse">
+          <End Role="Course" Type="GameSchoolModel.Course" Multiplicity="*" />
+          <End Role="User" Type="GameSchoolModel.User" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="GameSchoolModelStoreContainer" CdmEntityContainer="GameSchoolEntities">
+          <EntitySetMapping Name="Comments">
+            <EntityTypeMapping TypeName="GameSchoolModel.Comment">
+              <MappingFragment StoreEntitySet="Comment">
+                <ScalarProperty Name="CommentId" ColumnName="CommentId" />
+                <ScalarProperty Name="LevelMaterialId" ColumnName="LevelMaterialId" />
+                <ScalarProperty Name="Comment1" ColumnName="Comment" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+                <ScalarProperty Name="DeletedByUser" ColumnName="DeletedByUser" />
+                <ScalarProperty Name="CreateDateTime" ColumnName="CreateDateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CommentLikes">
+            <EntityTypeMapping TypeName="GameSchoolModel.CommentLike">
+              <MappingFragment StoreEntitySet="CommentLike">
+                <ScalarProperty Name="CommentLikeId" ColumnName="CommentLikeId" />
+                <ScalarProperty Name="CommentId" ColumnName="CommentId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ContentTypes">
+            <EntityTypeMapping TypeName="GameSchoolModel.ContentType">
+              <MappingFragment StoreEntitySet="ContentType">
+                <ScalarProperty Name="ContentTypeId" ColumnName="ContentTypeId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Courses">
+            <EntityTypeMapping TypeName="GameSchoolModel.Course">
+              <MappingFragment StoreEntitySet="Course">
+                <ScalarProperty Name="CourseId" ColumnName="CourseId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Identifier" ColumnName="Identifier" />
+                <ScalarProperty Name="Start" ColumnName="Start" />
+                <ScalarProperty Name="Stop" ColumnName="Stop" />
+                <ScalarProperty Name="CreditAmount" ColumnName="CreditAmount" />
+                <ScalarProperty Name="CreateDateTime" ColumnName="CreateDateTime" />
+                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CourseGrades">
+            <EntityTypeMapping TypeName="GameSchoolModel.CourseGrade">
+              <MappingFragment StoreEntitySet="CourseGrade">
+                <ScalarProperty Name="CourseId" ColumnName="CourseId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Grade" ColumnName="Grade" />
+                <ScalarProperty Name="Feedback" ColumnName="Feedback" />
+                <ScalarProperty Name="CreateDateTime" ColumnName="CreateDateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Departments">
+            <EntityTypeMapping TypeName="GameSchoolModel.Department">
+              <MappingFragment StoreEntitySet="Department">
+                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Levels">
+            <EntityTypeMapping TypeName="GameSchoolModel.Level">
+              <MappingFragment StoreEntitySet="Level">
+                <ScalarProperty Name="LevelId" ColumnName="LevelId" />
+                <ScalarProperty Name="CourseId" ColumnName="CourseId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Start" ColumnName="Start" />
+                <ScalarProperty Name="Stop" ColumnName="Stop" />
+                <ScalarProperty Name="CreateDateTime" ColumnName="CreateDateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LevelMaterials">
+            <EntityTypeMapping TypeName="GameSchoolModel.LevelMaterial">
+              <MappingFragment StoreEntitySet="LevelMaterial">
+                <ScalarProperty Name="LevelMaterialId" ColumnName="LevelMaterialId" />
+                <ScalarProperty Name="LevelId" ColumnName="LevelId" />
+                <ScalarProperty Name="ContentId" ColumnName="ContentId" />
+                <ScalarProperty Name="ContentTypeId" ColumnName="ContentTypeId" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LevelProjects">
+            <EntityTypeMapping TypeName="GameSchoolModel.LevelProject">
+              <MappingFragment StoreEntitySet="LevelProject">
+                <ScalarProperty Name="LevelProjectId" ColumnName="LevelProjectId" />
+                <ScalarProperty Name="LevelId" ColumnName="LevelId" />
+                <ScalarProperty Name="Start" ColumnName="Start" />
+                <ScalarProperty Name="Stop" ColumnName="Stop" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="GradePercentageValue" ColumnName="GradePercentageValue" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LevelProjectResults">
+            <EntityTypeMapping TypeName="GameSchoolModel.LevelProjectResult">
+              <MappingFragment StoreEntitySet="LevelProjectResult">
+                <ScalarProperty Name="LevelProjectId" ColumnName="LevelProjectId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Feedback" ColumnName="Feedback" />
+                <ScalarProperty Name="Grade" ColumnName="Grade" />
+                <ScalarProperty Name="CreateDateTime" ColumnName="CreateDateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LevelTests">
+            <EntityTypeMapping TypeName="GameSchoolModel.LevelTest">
+              <MappingFragment StoreEntitySet="LevelTest">
+                <ScalarProperty Name="LevelTestId" ColumnName="LevelTestId" />
+                <ScalarProperty Name="LevelId" ColumnName="LevelId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="GradePercentageValue" ColumnName="GradePercentageValue" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CreateDateTime" ColumnName="CreateDateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LevelTestAnswers">
+            <EntityTypeMapping TypeName="GameSchoolModel.LevelTestAnswer">
+              <MappingFragment StoreEntitySet="LevelTestAnswer">
+                <ScalarProperty Name="LevelTestAnswerId" ColumnName="LevelTestAnswerId" />
+                <ScalarProperty Name="LevelTestQuestionId" ColumnName="LevelTestQuestionId" />
+                <ScalarProperty Name="Answer" ColumnName="Answer" />
+                <ScalarProperty Name="Correct" ColumnName="Correct" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LevelTestQuestions">
+            <EntityTypeMapping TypeName="GameSchoolModel.LevelTestQuestion">
+              <MappingFragment StoreEntitySet="LevelTestQuestion">
+                <ScalarProperty Name="LevelTestQuestionId" ColumnName="LevelTestQuestionId" />
+                <ScalarProperty Name="LevelTestId" ColumnName="LevelTestId" />
+                <ScalarProperty Name="Question" ColumnName="Question" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LevelTestResults">
+            <EntityTypeMapping TypeName="GameSchoolModel.LevelTestResult">
+              <MappingFragment StoreEntitySet="LevelTestResult">
+                <ScalarProperty Name="LevelTestId" ColumnName="LevelTestId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Grade" ColumnName="Grade" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Notifications">
+            <EntityTypeMapping TypeName="GameSchoolModel.Notification">
+              <MappingFragment StoreEntitySet="Notification">
+                <ScalarProperty Name="NotificationId" ColumnName="NotificationId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="IsRead" ColumnName="IsRead" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="CreateDateTime" ColumnName="CreateDateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Points">
+            <EntityTypeMapping TypeName="GameSchoolModel.Point">
+              <MappingFragment StoreEntitySet="Points">
+                <ScalarProperty Name="PointsId" ColumnName="PointsId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="CourseId" ColumnName="CourseId" />
+                <ScalarProperty Name="LevelId" ColumnName="LevelId" />
+                <ScalarProperty Name="Points" ColumnName="Points" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Status">
+            <EntityTypeMapping TypeName="GameSchoolModel.Status">
+              <MappingFragment StoreEntitySet="Status">
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="GameSchoolModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="UserTypeId" ColumnName="UserTypeId" />
+                <ScalarProperty Name="Fullname" ColumnName="Fullname" />
+                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+                <ScalarProperty Name="CreateDateTime" ColumnName="CreateDateTime" />
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserLogs">
+            <EntityTypeMapping TypeName="GameSchoolModel.UserLog">
+              <MappingFragment StoreEntitySet="UserLog">
+                <ScalarProperty Name="UserLogId" ColumnName="UserLogId" />
+                <ScalarProperty Name="LoginTime" ColumnName="LoginTime" />
+                <ScalarProperty Name="IpAddress" ColumnName="IpAddress" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserTypes">
+            <EntityTypeMapping TypeName="GameSchoolModel.UserType">
+              <MappingFragment StoreEntitySet="UserType">
+                <ScalarProperty Name="UserTypeID" ColumnName="UserTypeID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="UserCourse" TypeName="GameSchoolModel.UserCourse" StoreEntitySet="UserCourse">
+            <EndProperty Name="Course">
+              <ScalarProperty Name="CourseId" ColumnName="CourseId" />
+            </EndProperty>
+            <EndProperty Name="User">
+              <ScalarProperty Name="UserId" ColumnName="UserId" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="Model1">
+        <EntityTypeShape EntityType="GameSchoolModel.Comment" Width="1.5" PointX="13.5" PointY="10.75" Height="2.9417936197916674" IsExpanded="true" />
+        <EntityTypeShape EntityType="GameSchoolModel.CommentLike" Width="1.5" PointX="15.75" PointY="9.75" Height="1.9802864583333317" IsExpanded="true" />
+        <EntityTypeShape EntityType="GameSchoolModel.ContentType" Width="1.5" PointX="5.25" PointY="20.5" Height="1.595683593749996" IsExpanded="true" />
+        <EntityTypeShape EntityType="GameSchoolModel.Course" Width="1.5" PointX="3" PointY="12.375" Height="3.7109993489583317" IsExpanded="true" />
+        <EntityTypeShape EntityType="GameSchoolModel.CourseGrade" Width="1.5" PointX="5.25" PointY="12" Height="2.3648893229166674" IsExpanded="true" />
+        <EntityTypeShape EntityType="GameSchoolModel.Department" Width="1.5" PointX="0.75" PointY="13.25" Height="1.9802864583333317" IsExpanded="true" />
+        <EntityTypeShape EntityType="GameSchoolModel.Level" Width="1.5" PointX="5.25" PointY="15.75" Height="3.1340950520833317" IsExpanded="true" />
+        <EntityTypeShape EntityType="GameSchoolModel.LevelMaterial" Width="1.5" PointX="7.5" PointY="13.875" Height="2.9417936197916674" IsExpanded="true" />
+        <EntityTypeShape EntityType="GameSchoolModel.LevelProject" Width="1.5" PointX="7.5" PointY="17.875" Height="2.749492187499996" IsExpanded="true" />
+        <EntityTypeShape EntityType="GameSchoolModel.LevelProjectResult" Width="1.5" PointX="9.75" PointY="18.125" Height="2.3648893229166674" IsExpanded="true" />
+        <EntityTypeShape EntityType="GameSchoolModel.LevelTest" Width="1.5" PointX="7.5" PointY="21.375" Height="2.7494921875000031" IsExpanded="true" />
+        <EntityTypeShape EntityType="GameSchoolModel.LevelTestAnswer" Width="1.5" PointX="12" PointY="21.75" Height="1.9802864583333317" IsExpanded="true" />
+        <EntityTypeShape EntityType="GameSchoolModel.LevelTestQuestion" Width="1.5" PointX="9.75" PointY="21.75" Height="1.9802864583333388" IsExpanded="true" />
+        <EntityTypeShape EntityType="GameSchoolModel.LevelTestResult" Width="1.5" PointX="9.75" PointY="24.75" Height="1.9802864583333388" IsExpanded="true" />
+        <EntityTypeShape EntityType="GameSchoolModel.Notification" Width="1.5" PointX="10.5" PointY="7.625" Height="2.3648893229166674" IsExpanded="true" />
+        <EntityTypeShape EntityType="GameSchoolModel.Point" Width="1.5" PointX="10.5" PointY="14.25" Height="2.7494921875000049" IsExpanded="true" />
+        <EntityTypeShape EntityType="GameSchoolModel.Status" Width="1.5" PointX="6" PointY="8.25" Height="1.5956835937500031" IsExpanded="true" />
+        <EntityTypeShape EntityType="GameSchoolModel.User" Width="1.5" PointX="8.25" PointY="7.75" Height="5.0571093750000031" IsExpanded="true" />
+        <EntityTypeShape EntityType="GameSchoolModel.UserLog" Width="1.5" PointX="10.5" PointY="10.75" Height="1.9802864583333388" IsExpanded="true" />
+        <EntityTypeShape EntityType="GameSchoolModel.UserType" Width="1.5" PointX="6" PointY="5.625" Height="1.5956835937500031" IsExpanded="true" />
+        <AssociationConnector Association="GameSchoolModel.FK_Comment_LevelMaterial" ManuallyRouted="false">
+          <ConnectorPoint PointX="9" PointY="14.03125" />
+          <ConnectorPoint PointX="9.2916666666666661" PointY="14.03125" />
+          <ConnectorPoint PointX="9.4583333333333339" PointY="14.03125" />
+          <ConnectorPoint PointX="9.5104191666666669" PointY="14.03125" />
+          <ConnectorPoint PointX="9.6770858333333347" PointY="14.03125" />
+          <ConnectorPoint PointX="10.041666666666666" PointY="14.03125" />
+          <ConnectorPoint PointX="10.208333333333334" PointY="14.03125" />
+          <ConnectorPoint PointX="11.166666666666666" PointY="14.03125" />
+          <ConnectorPoint PointX="11.333333333333334" PointY="14.03125" />
+          <ConnectorPoint PointX="14.25" PointY="14.03125" />
+          <ConnectorPoint PointX="14.25" PointY="13.691793619791667" />
+        </AssociationConnector>
+        <AssociationConnector Association="GameSchoolModel.FK_Comment_User" ManuallyRouted="false">
+          <ConnectorPoint PointX="9.75" PointY="10.401194161458335" />
+          <ConnectorPoint PointX="14.25" PointY="10.401194161458335" />
+          <ConnectorPoint PointX="14.25" PointY="10.75" />
+        </AssociationConnector>
+        <AssociationConnector Association="GameSchoolModel.FK_CommentLike_Comment" ManuallyRouted="false">
+          <ConnectorPoint PointX="15" PointY="11.240143229166666" />
+          <ConnectorPoint PointX="15.75" PointY="11.240143229166666" />
+        </AssociationConnector>
+        <AssociationConnector Association="GameSchoolModel.FK_CommentLike_User" ManuallyRouted="false">
+          <ConnectorPoint PointX="9.75" PointY="10.164291742187501" />
+          <ConnectorPoint PointX="15.75" PointY="10.164291742187501" />
+        </AssociationConnector>
+        <AssociationConnector Association="GameSchoolModel.FK_LevelMaterial_ContentType" ManuallyRouted="false">
+          <ConnectorPoint PointX="6.75" PointY="20.501152846153843" />
+          <ConnectorPoint PointX="7.125" PointY="20.126152846153843" />
+          <ConnectorPoint PointX="7.125" PointY="15.345896809895834" />
+          <ConnectorPoint PointX="7.5" PointY="15.345896809895834" />
+        </AssociationConnector>
+        <AssociationConnector Association="GameSchoolModel.FK_Course_Department" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="14.240143229166666" />
+          <ConnectorPoint PointX="3" PointY="14.240143229166666" />
+        </AssociationConnector>
+        <AssociationConnector Association="GameSchoolModel.FK_CourseGrade_Course" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.5" PointY="13.369944661458334" />
+          <ConnectorPoint PointX="5.25" PointY="13.369944661458334" />
+        </AssociationConnector>
+        <AssociationConnector Association="GameSchoolModel.FK_Level_Course" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.5" PointY="15.917999674479166" />
+          <ConnectorPoint PointX="5.25" PointY="15.917999674479166" />
+        </AssociationConnector>
+        <AssociationConnector Association="GameSchoolModel.FK_Points_Course" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.5" PointY="14.64397216796875" />
+          <ConnectorPoint PointX="5" PointY="14.64397216796875" />
+          <ConnectorPoint PointX="5" PointY="14.614889322916667" />
+          <ConnectorPoint PointX="7.25" PointY="14.614889322916667" />
+          <ConnectorPoint PointX="7.25" PointY="13.625" />
+          <ConnectorPoint PointX="9.2916666666666661" PointY="13.625" />
+          <ConnectorPoint PointX="9.4583333333333339" PointY="13.625" />
+          <ConnectorPoint PointX="9.5104191666666669" PointY="13.625" />
+          <ConnectorPoint PointX="9.6770858333333347" PointY="13.625" />
+          <ConnectorPoint PointX="10.041666666666666" PointY="13.625" />
+          <ConnectorPoint PointX="10.208333333333334" PointY="13.625" />
+          <ConnectorPoint PointX="11.25" PointY="13.625" />
+          <ConnectorPoint PointX="11.25" PointY="14.25" />
+        </AssociationConnector>
+        <AssociationConnector Association="GameSchoolModel.FK_CourseGrade_User" ManuallyRouted="false">
+          <ConnectorPoint PointX="8.25" PointY="12.403554687500002" />
+          <ConnectorPoint PointX="6.75" PointY="12.403554687500002" />
+        </AssociationConnector>
+        <AssociationConnector Association="GameSchoolModel.FK_User_Department" ManuallyRouted="false">
+          <ConnectorPoint PointX="1.5" PointY="13.25" />
+          <ConnectorPoint PointX="1.5" PointY="10.922841796875002" />
+          <ConnectorPoint PointX="8.25" PointY="10.922841796875002" />
+        </AssociationConnector>
+        <AssociationConnector Association="GameSchoolModel.FK_LevelMaterial_Level" ManuallyRouted="false">
+          <ConnectorPoint PointX="6.75" PointY="16.283396809895834" />
+          <ConnectorPoint PointX="7.041666666666667" PointY="16.283396809895834" />
+          <ConnectorPoint PointX="7.208333333333333" PointY="16.283396809895834" />
+          <ConnectorPoint PointX="7.5" PointY="16.283396809895834" />
+        </AssociationConnector>
+        <AssociationConnector Association="GameSchoolModel.FK_LevelProject_Level" ManuallyRouted="false">
+          <ConnectorPoint PointX="6.75" PointY="18.379547526041666" />
+          <ConnectorPoint PointX="7.041666666666667" PointY="18.379547526041666" />
+          <ConnectorPoint PointX="7.208333333333333" PointY="18.379547526041666" />
+          <ConnectorPoint PointX="7.5" PointY="18.379547526041666" />
+        </AssociationConnector>
+        <AssociationConnector Association="GameSchoolModel.FK_LevelTest_Level" ManuallyRouted="false">
+          <ConnectorPoint PointX="6.75" PointY="18.82178635977564" />
+          <ConnectorPoint PointX="7.0660744349011217" PointY="19.137860794676762" />
+          <ConnectorPoint PointX="7.1839255650988791" PointY="19.255711924874518" />
+          <ConnectorPoint PointX="7.3125" PointY="19.38428635977564" />
+          <ConnectorPoint PointX="7.3125" PointY="22.74974609375" />
+          <ConnectorPoint PointX="7.5" PointY="22.74974609375" />
+        </AssociationConnector>
+        <AssociationConnector Association="GameSchoolModel.FK_Points_Level" ManuallyRouted="false">
+          <ConnectorPoint PointX="6.75" PointY="16.939392903645835" />
+          <ConnectorPoint PointX="7.041666666666667" PointY="16.939392903645835" />
+          <ConnectorPoint PointX="7.208333333333333" PointY="16.939392903645835" />
+          <ConnectorPoint PointX="9.2916666666666661" PointY="16.939392903645835" />
+          <ConnectorPoint PointX="9.4583333333333339" PointY="16.939392903645835" />
+          <ConnectorPoint PointX="10.041666666666666" PointY="16.939392903645835" />
+          <ConnectorPoint PointX="10.208333333333334" PointY="16.939392903645835" />
+          <ConnectorPoint PointX="10.5" PointY="16.939392903645835" />
+        </AssociationConnector>
+        <AssociationConnector Association="GameSchoolModel.FK_LevelProjectResult_LevelProject" ManuallyRouted="false">
+          <ConnectorPoint PointX="9" PointY="19.307444661458334" />
+          <ConnectorPoint PointX="9.2916666666666661" PointY="19.307444661458334" />
+          <ConnectorPoint PointX="9.4583333333333339" PointY="19.307444661458334" />
+          <ConnectorPoint PointX="9.75" PointY="19.307444661458334" />
+        </AssociationConnector>
+        <AssociationConnector Association="GameSchoolModel.FK_LevelProjectResult_User" ManuallyRouted="false">
+          <ConnectorPoint PointX="9.75" PointY="10.575599580729161" />
+          <ConnectorPoint PointX="10.125" PointY="10.575599580729161" />
+          <ConnectorPoint PointX="10.125" PointY="18.125" />
+        </AssociationConnector>
+        <AssociationConnector Association="GameSchoolModel.FK_LevelTestQuestion_LevelTest" ManuallyRouted="false">
+          <ConnectorPoint PointX="9" PointY="22.740143229166669" />
+          <ConnectorPoint PointX="9.2916666666666661" PointY="22.740143229166669" />
+          <ConnectorPoint PointX="9.4583333333333339" PointY="22.740143229166669" />
+          <ConnectorPoint PointX="9.75" PointY="22.740143229166669" />
+        </AssociationConnector>
+        <AssociationConnector Association="GameSchoolModel.FK_LevelTestResult_LevelTest" ManuallyRouted="false">
+          <ConnectorPoint PointX="8.25" PointY="24.124492187500003" />
+          <ConnectorPoint PointX="8.25" PointY="25.740143229166669" />
+          <ConnectorPoint PointX="9.75" PointY="25.740143229166669" />
+        </AssociationConnector>
+        <AssociationConnector Association="GameSchoolModel.FK_LevelTestAnswer_LevelTestQuestion" ManuallyRouted="false">
+          <ConnectorPoint PointX="11.25" PointY="22.740143229166666" />
+          <ConnectorPoint PointX="12" PointY="22.740143229166666" />
+        </AssociationConnector>
+        <AssociationConnector Association="GameSchoolModel.FK_LevelTestResult_User" ManuallyRouted="false">
+          <ConnectorPoint PointX="9.375" PointY="12.807109375000003" />
+          <ConnectorPoint PointX="9.375" PointY="25.213819114583334" />
+          <ConnectorPoint PointX="9.75" PointY="25.213819114583334" />
+        </AssociationConnector>
+        <AssociationConnector Association="GameSchoolModel.FK_Notification_User" ManuallyRouted="false">
+          <ConnectorPoint PointX="9.75" PointY="8.8699446614583337" />
+          <ConnectorPoint PointX="10.5" PointY="8.8699446614583337" />
+        </AssociationConnector>
+        <AssociationConnector Association="GameSchoolModel.FK_Points_User" ManuallyRouted="false">
+          <ConnectorPoint PointX="9.5937525" PointY="12.807109375000003" />
+          <ConnectorPoint PointX="9.5937525" PointY="16.909343261718753" />
+          <ConnectorPoint PointX="10.041666666666666" PointY="16.909343261718753" />
+          <ConnectorPoint PointX="10.208333333333334" PointY="16.909343261718753" />
+          <ConnectorPoint PointX="10.5" PointY="16.909343261718753" />
+        </AssociationConnector>
+        <AssociationConnector Association="GameSchoolModel.FK_User_Status" ManuallyRouted="false">
+          <ConnectorPoint PointX="7.5" PointY="9.0478417968750016" />
+          <ConnectorPoint PointX="8.25" PointY="9.0478417968750016" />
+        </AssociationConnector>
+        <AssociationConnector Association="GameSchoolModel.FK_User_UserType" ManuallyRouted="false">
+          <ConnectorPoint PointX="7.5" PointY="6.4228417968750016" />
+          <ConnectorPoint PointX="9" PointY="6.4228417968750016" />
+          <ConnectorPoint PointX="9" PointY="7.75" />
+        </AssociationConnector>
+        <AssociationConnector Association="GameSchoolModel.FK_UserLog_User" ManuallyRouted="false">
+          <ConnectorPoint PointX="9.75" PointY="11.740143229166669" />
+          <ConnectorPoint PointX="10.041666666666666" PointY="11.740143229166669" />
+          <ConnectorPoint PointX="10.208333333333334" PointY="11.740143229166669" />
+          <ConnectorPoint PointX="10.5" PointY="11.740143229166669" />
+        </AssociationConnector>
+        <AssociationConnector Association="GameSchoolModel.UserCourse" ManuallyRouted="false">
+          <ConnectorPoint PointX="3.75" PointY="12.375" />
+          <ConnectorPoint PointX="3.75" PointY="11.461423398437495" />
+          <ConnectorPoint PointX="8.25" PointY="11.461423398437495" />
+        </AssociationConnector>
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>
