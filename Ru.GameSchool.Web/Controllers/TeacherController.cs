@@ -16,37 +16,33 @@ namespace Ru.GameSchool.Web.Controllers
             return View();
         }
 
-        public ActionResult Level()
+        public ActionResult EditLevel()
         {
             return View();
         }
 
-        public ActionResult Message()
+        public ActionResult EditMessage()
         {
             return View();
         }
 
-        public ActionResult Messages()
-        {
-            return View();
-        }
 
          public ActionResult CommentList()
         {
             return View();
         }
         
-        public ActionResult Project()
+        public ActionResult EditProject()
         {
             return View();
         }
         
-        public ActionResult Test()
+        public ActionResult EditTest()
         {
             return View();
         }
         
-        public ActionResult Lecture()
+        public ActionResult EditMaterial()
         {
             return View();
         }
@@ -56,9 +52,5 @@ namespace Ru.GameSchool.Web.Controllers
             return View();
         }
         
-        public ActionResult CourseFront()
-        {
-            return View();
-        }
     }
 }
