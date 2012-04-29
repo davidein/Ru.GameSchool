@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{03CF6BA8-B6E5-4153-8FD8-9A0271DFDF6A}</ProjectGuid>
+    <ProjectGuid>{C6528D5D-B276-42D0-8ED4-EC7DA9A8EA8F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Ru.GameSchool.DataLayer</RootNamespace>
-    <AssemblyName>Ru.GameSchool.DataLayer</AssemblyName>
+    <RootNamespace>Ru.GameSchool.Utilities</RootNamespace>
+    <AssemblyName>Ru.GameSchool.Utilities</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -31,15 +31,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework">
-      <HintPath>..\packages\EntityFramework.4.3.1\lib\net40\EntityFramework.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Data.Entity" />
-    <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -47,31 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GameSchool.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>GameSchool.edmx</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-    <EntityDeploy Include="GameSchool.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>GameSchool.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <None Include="Diagrams\GameSchool.sequencediagram" />
-    <None Include="packages.config" />
-    <None Include="Properties\DataSources\GameSchoolEntities.datasource" />
-    <None Include="Diagrams\GameSchool.cd" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Diagrams\GameSchool.sequencediagram.layout">
-      <DependentUpon>GameSchool.sequencediagram</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="SQL\schema.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
