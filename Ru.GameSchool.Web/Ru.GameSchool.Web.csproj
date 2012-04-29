@@ -259,13 +259,7 @@
     <Content Include="Views\Admin\CourseRegisterStudent.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Teacher\Index.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\Teacher\CommentList.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Teacher\CourseFront.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Home\_HomeSideBar.cshtml" />
@@ -277,22 +271,51 @@
     <Content Include="Views\Admin\_AdminSideBar.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Teacher\Message.cshtml" />
+    <Content Include="Views\Home\Message.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Teacher\Messages.cshtml" />
+    <Content Include="Views\Home\Messages.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Teacher\Tests.cshtml" />
+    <Content Include="Views\Home\Test.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Teacher\Project.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Teacher\Lecture.cshtml" />
+    <Content Include="Views\Home\Project.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Teacher\ProjectReturned.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\Projects.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Teacher\EditLevel.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\Material.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\Home\MaterialList.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Teacher\EditMaterial.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Teacher\EditProject.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Teacher\EditTest.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Teacher\EditMessage.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\Level.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\Tests.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

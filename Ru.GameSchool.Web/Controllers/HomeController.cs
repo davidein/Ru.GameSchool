@@ -17,7 +17,6 @@ namespace Ru.GameSchool.Web.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your quintessential app description page.";
 
             return View();
         }
@@ -28,5 +27,53 @@ namespace Ru.GameSchool.Web.Controllers
 
             return View();
         }
+
+
+        public ActionResult Level()
+        {
+            return View();
+        }
+
+        public ActionResult Message()
+        {
+            return View();
+        }
+
+        public ActionResult Messages()
+        {
+            return View();
+        }
+
+
+        public ActionResult Project()
+        {
+            return View();
+        }
+
+        public ActionResult Projects()
+        {
+            return View();
+        }
+
+        public ActionResult Test()
+        {
+            return View();
+        }
+
+        public ActionResult Tests()
+        {
+            return View();
+        }
+
+        public ActionResult Material()
+        {
+            return View();
+        }
+
+        public ActionResult MaterialList()
+        {
+            return View();
+        }
+
     }
 }
