@@ -9,3 +9,84 @@
 @Html.Partial("_AdminSideBar")
 
 }
+
+
+<form class="form-horizontal" id="registerHere" method='post' action=''>
+<fieldset>
+
+<legend>Skrá nýtt</legend>
+
+<div class="control-group">
+            <label class="control-label" for="select01">Grunn námskeið</label>
+            <div class="controls">
+              <select id="select01">
+                <option selected="selected">T-216-GHoH</option>
+                <option>T-213-VEFF</option>
+                <option>T-205-VERKr</option>
+              </select>
+            </div>
+</div>
+
+<div class="control-group">
+<label class="control-label">Nafn</label>
+<div class="controls">
+<input type="text" class="input-xlarge" id="name" name="name" rel="popover" data-content="Settu inn nafn." data-original-title="Nafn námskeiðs">
+</div>
+</div>
+
+
+<div class="control-group">
+            <label class="control-label" for="textarea">Lýsing</label>
+            <div class="controls">
+              <textarea class="input-xlarge" id="lysing" rows="3" rel="popover" data-content="Settu inn lýsingu á námskeiði." data-original-title="Lýsing"></textarea>
+            </div>
+ </div>
+
+
+
+<div class="control-group">
+            <label class="control-label" for="select01">Deild</label>
+            <div class="controls">
+              <select id="select02">
+                <option>Tölvunarfræði</option>
+                <option>Verkfræði</option>
+                <option>Viðskiptafræði</option>
+                <option>Lögfræði</option>
+              </select>
+            </div>
+</div>
+
+<div class="control-group">
+            <label class="control-label" for="select01">Einingar</label>
+            <div class="controls">
+              <select id="select03">
+                <option>3</option>
+                <option>6</option>
+                <option>9</option>
+              </select>
+            </div>
+</div>
+
+<div class="control-group">
+<label class="control-label">Byrjar</label>
+<div class="controls">
+<input type="text" class="input-xlarge" id="user_name" name="user_name" rel="popover" data-content="Settu inn hvenær námskeið heftst." data-original-title="Upphafs dagsetning">
+</div>
+</div>
+
+<div class="control-group">
+<label class="control-label">Endar</label>
+<div class="controls">
+<input type="text" class="input-xlarge" id="user_name" name="user_name" rel="popover" data-content="Settu inn hvenær námskeiði lýkur." data-original-title="Enda dagsetning">
+</div>
+</div>
+
+<div class="control-group">
+<label class="control-label"></label>
+<div class="controls">
+<button type="submit" class="btn btn-success" >Búa til nemanda</button>
+</div>
+</div>
+
+</fieldset>
+</form>

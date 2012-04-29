@@ -169,6 +169,7 @@
     <Content Include="Content\themes\base\jquery.ui.theme.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\common.js" />
     <Content Include="Scripts\jquery-1.6.2-vsdoc.js" />
     <Content Include="Scripts\jquery-1.6.2.js" />
     <Content Include="Scripts\jquery-1.6.2.min.js" />
@@ -238,25 +239,16 @@
     <Content Include="Views\Admin\CourseList.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Admin\TeacherList.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Admin\StudentList.cshtml" />
+    <Content Include="Views\Admin\UserList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Admin\Course.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Admin\Student.cshtml" />
+    <Content Include="Views\Admin\User.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Admin\Teacher.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Admin\CourseRegisterTeacher.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Admin\CourseRegisterStudent.cshtml" />
+    <Content Include="Views\Admin\CourseRegisterUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Teacher\CommentList.cshtml" />
