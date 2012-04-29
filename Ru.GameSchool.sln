@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ru.GameSchool.BusinessLayer
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ru.GameSchool.DataLayer", "Ru.GameSchool.DataLayer\Ru.GameSchool.DataLayer.csproj", "{03CF6BA8-B6E5-4153-8FD8-9A0271DFDF6A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ru.GameSchool.Utilities", "Ru.GameSchool.Utilities\Ru.GameSchool.Utilities.csproj", "{C6528D5D-B276-42D0-8ED4-EC7DA9A8EA8F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +27,10 @@ Global
 		{03CF6BA8-B6E5-4153-8FD8-9A0271DFDF6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{03CF6BA8-B6E5-4153-8FD8-9A0271DFDF6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{03CF6BA8-B6E5-4153-8FD8-9A0271DFDF6A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C6528D5D-B276-42D0-8ED4-EC7DA9A8EA8F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6528D5D-B276-42D0-8ED4-EC7DA9A8EA8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6528D5D-B276-42D0-8ED4-EC7DA9A8EA8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6528D5D-B276-42D0-8ED4-EC7DA9A8EA8F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
