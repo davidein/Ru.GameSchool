@@ -31,10 +31,6 @@ namespace Ru.GameSchool.BusinessLayer.Services
         {
             return null;
         }
-        public void DeleteUser(int userId)
-        {
-            Save();
-        }
       
         public void UpdateUser(UserInfo u)
         {
