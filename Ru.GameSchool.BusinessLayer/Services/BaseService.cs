@@ -7,7 +7,7 @@ namespace Ru.GameSchool.BusinessLayer.Services
     /// </summary> 
     public abstract class BaseService
     {
-        private GameSchoolEntities _gameSchoolEntities = null;
+        private GameSchoolEntities _gameSchoolEntities;
 
         public GameSchoolEntities GameSchoolEntities
         {
