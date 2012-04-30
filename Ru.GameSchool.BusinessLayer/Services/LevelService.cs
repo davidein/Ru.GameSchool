@@ -7,7 +7,7 @@ namespace Ru.GameSchool.BusinessLayer.Services
     public class GameService : BaseService
     {
 
-        public void AddPointsToLevel(int userId, int levelId)
+        public void AddPointsToLevel(int userId, int levelId, int points)
         {
             throw new System.NotImplementedException();
         }
@@ -22,10 +22,6 @@ namespace Ru.GameSchool.BusinessLayer.Services
             throw new System.NotImplementedException();
         }
 
-        public void GetLeaderboard()
-        {
-            throw new System.NotImplementedException();
-        }
 
         public void GetPointsComparedToUsers(int userId, int courseId)
         {
@@ -37,7 +33,7 @@ namespace Ru.GameSchool.BusinessLayer.Services
         /// </summary>
         /// <param name="courseId"></param>
         /// <returns>List of Tuple first item is the rank then the user object.</returns>
-        public IEnumerable<Tuple<int,User>> GetTopTenList( int courseId)
+        public IEnumerable<Tuple<int,UserInfo>> GetTopTenList( int courseId)
         {
             throw new System.NotImplementedException();
         }

@@ -20,32 +20,32 @@ using System.Xml.Serialization;
 #region EDM Relationship Metadata
 
 [assembly: EdmRelationshipAttribute("GameSchoolModel", "FK_Comment_LevelMaterial", "LevelMaterial", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Ru.GameSchool.DataLayer.LevelMaterial), "Comment", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Ru.GameSchool.DataLayer.Comment), true)]
-[assembly: EdmRelationshipAttribute("GameSchoolModel", "FK_Comment_User", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Ru.GameSchool.DataLayer.User), "Comment", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Ru.GameSchool.DataLayer.Comment), true)]
+[assembly: EdmRelationshipAttribute("GameSchoolModel", "FK_Comment_UserInfo1", "UserInfo", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Ru.GameSchool.DataLayer.UserInfo), "Comment", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Ru.GameSchool.DataLayer.Comment), true)]
 [assembly: EdmRelationshipAttribute("GameSchoolModel", "FK_CommentLike_Comment", "Comment", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Ru.GameSchool.DataLayer.Comment), "CommentLike", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Ru.GameSchool.DataLayer.CommentLike), true)]
-[assembly: EdmRelationshipAttribute("GameSchoolModel", "FK_CommentLike_User", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Ru.GameSchool.DataLayer.User), "CommentLike", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Ru.GameSchool.DataLayer.CommentLike), true)]
+[assembly: EdmRelationshipAttribute("GameSchoolModel", "FK_CommentLike_UserInfo1", "UserInfo", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Ru.GameSchool.DataLayer.UserInfo), "CommentLike", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Ru.GameSchool.DataLayer.CommentLike), true)]
 [assembly: EdmRelationshipAttribute("GameSchoolModel", "FK_LevelMaterial_ContentType", "ContentType", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Ru.GameSchool.DataLayer.ContentType), "LevelMaterial", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Ru.GameSchool.DataLayer.LevelMaterial), true)]
 [assembly: EdmRelationshipAttribute("GameSchoolModel", "FK_Course_Department", "Department", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Ru.GameSchool.DataLayer.Department), "Course", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Ru.GameSchool.DataLayer.Course), true)]
 [assembly: EdmRelationshipAttribute("GameSchoolModel", "FK_CourseGrade_Course", "Course", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Ru.GameSchool.DataLayer.Course), "CourseGrade", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Ru.GameSchool.DataLayer.CourseGrade), true)]
 [assembly: EdmRelationshipAttribute("GameSchoolModel", "FK_Level_Course", "Course", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Ru.GameSchool.DataLayer.Course), "Level", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Ru.GameSchool.DataLayer.Level), true)]
-[assembly: EdmRelationshipAttribute("GameSchoolModel", "FK_Points_Course", "Course", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Ru.GameSchool.DataLayer.Course), "Points", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Ru.GameSchool.DataLayer.Point), true)]
-[assembly: EdmRelationshipAttribute("GameSchoolModel", "FK_CourseGrade_User", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Ru.GameSchool.DataLayer.User), "CourseGrade", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Ru.GameSchool.DataLayer.CourseGrade), true)]
-[assembly: EdmRelationshipAttribute("GameSchoolModel", "FK_User_Department", "Department", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Ru.GameSchool.DataLayer.Department), "User", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Ru.GameSchool.DataLayer.User), true)]
+[assembly: EdmRelationshipAttribute("GameSchoolModel", "FK_Points_Course", "Course", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Ru.GameSchool.DataLayer.Course), "Point", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Ru.GameSchool.DataLayer.Point), true)]
+[assembly: EdmRelationshipAttribute("GameSchoolModel", "FK_CourseGrade_UserInfo1", "UserInfo", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Ru.GameSchool.DataLayer.UserInfo), "CourseGrade", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Ru.GameSchool.DataLayer.CourseGrade), true)]
+[assembly: EdmRelationshipAttribute("GameSchoolModel", "FK_User_Department", "Department", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Ru.GameSchool.DataLayer.Department), "UserInfo", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Ru.GameSchool.DataLayer.UserInfo), true)]
+[assembly: EdmRelationshipAttribute("GameSchoolModel", "FK_LevelExam_Level", "Level", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Ru.GameSchool.DataLayer.Level), "LevelExam", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Ru.GameSchool.DataLayer.LevelExam), true)]
 [assembly: EdmRelationshipAttribute("GameSchoolModel", "FK_LevelMaterial_Level", "Level", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Ru.GameSchool.DataLayer.Level), "LevelMaterial", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Ru.GameSchool.DataLayer.LevelMaterial), true)]
 [assembly: EdmRelationshipAttribute("GameSchoolModel", "FK_LevelProject_Level", "Level", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Ru.GameSchool.DataLayer.Level), "LevelProject", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Ru.GameSchool.DataLayer.LevelProject), true)]
-[assembly: EdmRelationshipAttribute("GameSchoolModel", "FK_LevelTest_Level", "Level", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Ru.GameSchool.DataLayer.Level), "LevelTest", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Ru.GameSchool.DataLayer.LevelTest), true)]
-[assembly: EdmRelationshipAttribute("GameSchoolModel", "FK_Points_Level", "Level", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Ru.GameSchool.DataLayer.Level), "Points", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Ru.GameSchool.DataLayer.Point), true)]
+[assembly: EdmRelationshipAttribute("GameSchoolModel", "FK_Points_Level", "Level", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Ru.GameSchool.DataLayer.Level), "Point", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Ru.GameSchool.DataLayer.Point), true)]
+[assembly: EdmRelationshipAttribute("GameSchoolModel", "FK_LevelExamQuestion_LevelExam", "LevelExam", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Ru.GameSchool.DataLayer.LevelExam), "LevelExamQuestion", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Ru.GameSchool.DataLayer.LevelExamQuestion), true)]
+[assembly: EdmRelationshipAttribute("GameSchoolModel", "FK_LevelExamResult_LevelExam", "LevelExam", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Ru.GameSchool.DataLayer.LevelExam), "LevelExamResult", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Ru.GameSchool.DataLayer.LevelExamResult), true)]
+[assembly: EdmRelationshipAttribute("GameSchoolModel", "FK_LevelExamAnswer_LevelExamQuestion", "LevelExamQuestion", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Ru.GameSchool.DataLayer.LevelExamQuestion), "LevelExamAnswer", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Ru.GameSchool.DataLayer.LevelExamAnswer), true)]
+[assembly: EdmRelationshipAttribute("GameSchoolModel", "FK_LevelExamResult_UserInfo1", "UserInfo", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Ru.GameSchool.DataLayer.UserInfo), "LevelExamResult", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Ru.GameSchool.DataLayer.LevelExamResult), true)]
 [assembly: EdmRelationshipAttribute("GameSchoolModel", "FK_LevelProjectResult_LevelProject", "LevelProject", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Ru.GameSchool.DataLayer.LevelProject), "LevelProjectResult", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Ru.GameSchool.DataLayer.LevelProjectResult), true)]
-[assembly: EdmRelationshipAttribute("GameSchoolModel", "FK_LevelProjectResult_User", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Ru.GameSchool.DataLayer.User), "LevelProjectResult", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Ru.GameSchool.DataLayer.LevelProjectResult), true)]
-[assembly: EdmRelationshipAttribute("GameSchoolModel", "FK_LevelTestQuestion_LevelTest", "LevelTest", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Ru.GameSchool.DataLayer.LevelTest), "LevelTestQuestion", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Ru.GameSchool.DataLayer.LevelTestQuestion), true)]
-[assembly: EdmRelationshipAttribute("GameSchoolModel", "FK_LevelTestResult_LevelTest", "LevelTest", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Ru.GameSchool.DataLayer.LevelTest), "LevelTestResult", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Ru.GameSchool.DataLayer.LevelTestResult), true)]
-[assembly: EdmRelationshipAttribute("GameSchoolModel", "FK_LevelTestAnswer_LevelTestQuestion", "LevelTestQuestion", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Ru.GameSchool.DataLayer.LevelTestQuestion), "LevelTestAnswer", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Ru.GameSchool.DataLayer.LevelTestAnswer), true)]
-[assembly: EdmRelationshipAttribute("GameSchoolModel", "FK_LevelTestResult_User", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Ru.GameSchool.DataLayer.User), "LevelTestResult", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Ru.GameSchool.DataLayer.LevelTestResult), true)]
-[assembly: EdmRelationshipAttribute("GameSchoolModel", "FK_Notification_User", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Ru.GameSchool.DataLayer.User), "Notification", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Ru.GameSchool.DataLayer.Notification), true)]
-[assembly: EdmRelationshipAttribute("GameSchoolModel", "FK_Points_User", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Ru.GameSchool.DataLayer.User), "Points", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Ru.GameSchool.DataLayer.Point), true)]
-[assembly: EdmRelationshipAttribute("GameSchoolModel", "FK_User_Status", "Status", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Ru.GameSchool.DataLayer.Status), "User", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Ru.GameSchool.DataLayer.User), true)]
-[assembly: EdmRelationshipAttribute("GameSchoolModel", "FK_User_UserType", "UserType", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Ru.GameSchool.DataLayer.UserType), "User", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Ru.GameSchool.DataLayer.User), true)]
-[assembly: EdmRelationshipAttribute("GameSchoolModel", "FK_UserLog_User", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Ru.GameSchool.DataLayer.User), "UserLog", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Ru.GameSchool.DataLayer.UserLog), true)]
-[assembly: EdmRelationshipAttribute("GameSchoolModel", "UserCourse", "Course", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Ru.GameSchool.DataLayer.Course), "User", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Ru.GameSchool.DataLayer.User))]
+[assembly: EdmRelationshipAttribute("GameSchoolModel", "FK_LevelProjectResult_UserInfo1", "UserInfo", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Ru.GameSchool.DataLayer.UserInfo), "LevelProjectResult", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Ru.GameSchool.DataLayer.LevelProjectResult), true)]
+[assembly: EdmRelationshipAttribute("GameSchoolModel", "FK_Notification_UserInfo1", "UserInfo", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Ru.GameSchool.DataLayer.UserInfo), "Notification", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Ru.GameSchool.DataLayer.Notification), true)]
+[assembly: EdmRelationshipAttribute("GameSchoolModel", "FK_Points_UserInfo1", "UserInfo", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Ru.GameSchool.DataLayer.UserInfo), "Point", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Ru.GameSchool.DataLayer.Point), true)]
+[assembly: EdmRelationshipAttribute("GameSchoolModel", "FK_User_Status", "Status", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Ru.GameSchool.DataLayer.Status), "UserInfo", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Ru.GameSchool.DataLayer.UserInfo), true)]
+[assembly: EdmRelationshipAttribute("GameSchoolModel", "FK_User_UserType", "UserType", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Ru.GameSchool.DataLayer.UserType), "UserInfo", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Ru.GameSchool.DataLayer.UserInfo), true)]
+[assembly: EdmRelationshipAttribute("GameSchoolModel", "FK_UserInfo_UserLog", "UserLog", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Ru.GameSchool.DataLayer.UserLog), "UserInfo", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Ru.GameSchool.DataLayer.UserInfo), true)]
+[assembly: EdmRelationshipAttribute("GameSchoolModel", "UserCourse", "Course", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Ru.GameSchool.DataLayer.Course), "UserInfo", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Ru.GameSchool.DataLayer.UserInfo))]
 
 #endregion
 
@@ -212,6 +212,70 @@ namespace Ru.GameSchool.DataLayer
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
+        public ObjectSet<LevelExam> LevelExams
+        {
+            get
+            {
+                if ((_LevelExams == null))
+                {
+                    _LevelExams = base.CreateObjectSet<LevelExam>("LevelExams");
+                }
+                return _LevelExams;
+            }
+        }
+        private ObjectSet<LevelExam> _LevelExams;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<LevelExamAnswer> LevelExamAnswers
+        {
+            get
+            {
+                if ((_LevelExamAnswers == null))
+                {
+                    _LevelExamAnswers = base.CreateObjectSet<LevelExamAnswer>("LevelExamAnswers");
+                }
+                return _LevelExamAnswers;
+            }
+        }
+        private ObjectSet<LevelExamAnswer> _LevelExamAnswers;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<LevelExamQuestion> LevelExamQuestions
+        {
+            get
+            {
+                if ((_LevelExamQuestions == null))
+                {
+                    _LevelExamQuestions = base.CreateObjectSet<LevelExamQuestion>("LevelExamQuestions");
+                }
+                return _LevelExamQuestions;
+            }
+        }
+        private ObjectSet<LevelExamQuestion> _LevelExamQuestions;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<LevelExamResult> LevelExamResults
+        {
+            get
+            {
+                if ((_LevelExamResults == null))
+                {
+                    _LevelExamResults = base.CreateObjectSet<LevelExamResult>("LevelExamResults");
+                }
+                return _LevelExamResults;
+            }
+        }
+        private ObjectSet<LevelExamResult> _LevelExamResults;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
         public ObjectSet<LevelMaterial> LevelMaterials
         {
             get
@@ -256,70 +320,6 @@ namespace Ru.GameSchool.DataLayer
             }
         }
         private ObjectSet<LevelProjectResult> _LevelProjectResults;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<LevelTest> LevelTests
-        {
-            get
-            {
-                if ((_LevelTests == null))
-                {
-                    _LevelTests = base.CreateObjectSet<LevelTest>("LevelTests");
-                }
-                return _LevelTests;
-            }
-        }
-        private ObjectSet<LevelTest> _LevelTests;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<LevelTestAnswer> LevelTestAnswers
-        {
-            get
-            {
-                if ((_LevelTestAnswers == null))
-                {
-                    _LevelTestAnswers = base.CreateObjectSet<LevelTestAnswer>("LevelTestAnswers");
-                }
-                return _LevelTestAnswers;
-            }
-        }
-        private ObjectSet<LevelTestAnswer> _LevelTestAnswers;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<LevelTestQuestion> LevelTestQuestions
-        {
-            get
-            {
-                if ((_LevelTestQuestions == null))
-                {
-                    _LevelTestQuestions = base.CreateObjectSet<LevelTestQuestion>("LevelTestQuestions");
-                }
-                return _LevelTestQuestions;
-            }
-        }
-        private ObjectSet<LevelTestQuestion> _LevelTestQuestions;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<LevelTestResult> LevelTestResults
-        {
-            get
-            {
-                if ((_LevelTestResults == null))
-                {
-                    _LevelTestResults = base.CreateObjectSet<LevelTestResult>("LevelTestResults");
-                }
-                return _LevelTestResults;
-            }
-        }
-        private ObjectSet<LevelTestResult> _LevelTestResults;
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -372,18 +372,18 @@ namespace Ru.GameSchool.DataLayer
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<User> Users
+        public ObjectSet<UserInfo> UserInfoes
         {
             get
             {
-                if ((_Users == null))
+                if ((_UserInfoes == null))
                 {
-                    _Users = base.CreateObjectSet<User>("Users");
+                    _UserInfoes = base.CreateObjectSet<UserInfo>("UserInfoes");
                 }
-                return _Users;
+                return _UserInfoes;
             }
         }
-        private ObjectSet<User> _Users;
+        private ObjectSet<UserInfo> _UserInfoes;
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -478,6 +478,38 @@ namespace Ru.GameSchool.DataLayer
         }
     
         /// <summary>
+        /// Deprecated Method for adding a new object to the LevelExams EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToLevelExams(LevelExam levelExam)
+        {
+            base.AddObject("LevelExams", levelExam);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the LevelExamAnswers EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToLevelExamAnswers(LevelExamAnswer levelExamAnswer)
+        {
+            base.AddObject("LevelExamAnswers", levelExamAnswer);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the LevelExamQuestions EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToLevelExamQuestions(LevelExamQuestion levelExamQuestion)
+        {
+            base.AddObject("LevelExamQuestions", levelExamQuestion);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the LevelExamResults EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToLevelExamResults(LevelExamResult levelExamResult)
+        {
+            base.AddObject("LevelExamResults", levelExamResult);
+        }
+    
+        /// <summary>
         /// Deprecated Method for adding a new object to the LevelMaterials EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
         public void AddToLevelMaterials(LevelMaterial levelMaterial)
@@ -499,38 +531,6 @@ namespace Ru.GameSchool.DataLayer
         public void AddToLevelProjectResults(LevelProjectResult levelProjectResult)
         {
             base.AddObject("LevelProjectResults", levelProjectResult);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the LevelTests EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToLevelTests(LevelTest levelTest)
-        {
-            base.AddObject("LevelTests", levelTest);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the LevelTestAnswers EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToLevelTestAnswers(LevelTestAnswer levelTestAnswer)
-        {
-            base.AddObject("LevelTestAnswers", levelTestAnswer);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the LevelTestQuestions EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToLevelTestQuestions(LevelTestQuestion levelTestQuestion)
-        {
-            base.AddObject("LevelTestQuestions", levelTestQuestion);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the LevelTestResults EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToLevelTestResults(LevelTestResult levelTestResult)
-        {
-            base.AddObject("LevelTestResults", levelTestResult);
         }
     
         /// <summary>
@@ -558,11 +558,11 @@ namespace Ru.GameSchool.DataLayer
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the Users EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// Deprecated Method for adding a new object to the UserInfoes EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
-        public void AddToUsers(User user)
+        public void AddToUserInfoes(UserInfo userInfo)
         {
-            base.AddObject("Users", user);
+            base.AddObject("UserInfoes", userInfo);
         }
     
         /// <summary>
@@ -605,17 +605,17 @@ namespace Ru.GameSchool.DataLayer
         /// <param name="commentId">Initial value of the CommentId property.</param>
         /// <param name="levelMaterialId">Initial value of the LevelMaterialId property.</param>
         /// <param name="comment1">Initial value of the Comment1 property.</param>
-        /// <param name="userId">Initial value of the UserId property.</param>
+        /// <param name="userInfoId">Initial value of the UserInfoId property.</param>
         /// <param name="deleted">Initial value of the Deleted property.</param>
         /// <param name="deletedByUser">Initial value of the DeletedByUser property.</param>
         /// <param name="createDateTime">Initial value of the CreateDateTime property.</param>
-        public static Comment CreateComment(global::System.Int32 commentId, global::System.Int32 levelMaterialId, global::System.String comment1, global::System.Int32 userId, global::System.Boolean deleted, global::System.String deletedByUser, global::System.DateTime createDateTime)
+        public static Comment CreateComment(global::System.Int32 commentId, global::System.Int32 levelMaterialId, global::System.String comment1, global::System.Int32 userInfoId, global::System.Boolean deleted, global::System.String deletedByUser, global::System.DateTime createDateTime)
         {
             Comment comment = new Comment();
             comment.CommentId = commentId;
             comment.LevelMaterialId = levelMaterialId;
             comment.Comment1 = comment1;
-            comment.UserId = userId;
+            comment.UserInfoId = userInfoId;
             comment.Deleted = deleted;
             comment.DeletedByUser = deletedByUser;
             comment.CreateDateTime = createDateTime;
@@ -706,24 +706,24 @@ namespace Ru.GameSchool.DataLayer
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Int32 UserId
+        public global::System.Int32 UserInfoId
         {
             get
             {
-                return _UserId;
+                return _UserInfoId;
             }
             set
             {
-                OnUserIdChanging(value);
-                ReportPropertyChanging("UserId");
-                _UserId = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("UserId");
-                OnUserIdChanged();
+                OnUserInfoIdChanging(value);
+                ReportPropertyChanging("UserInfoId");
+                _UserInfoId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("UserInfoId");
+                OnUserInfoIdChanged();
             }
         }
-        private global::System.Int32 _UserId;
-        partial void OnUserIdChanging(global::System.Int32 value);
-        partial void OnUserIdChanged();
+        private global::System.Int32 _UserInfoId;
+        partial void OnUserInfoIdChanging(global::System.Int32 value);
+        partial void OnUserInfoIdChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -846,16 +846,16 @@ namespace Ru.GameSchool.DataLayer
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("GameSchoolModel", "FK_Comment_User", "User")]
-        public User User
+        [EdmRelationshipNavigationPropertyAttribute("GameSchoolModel", "FK_Comment_UserInfo1", "UserInfo")]
+        public UserInfo UserInfo
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("GameSchoolModel.FK_Comment_User", "User").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UserInfo>("GameSchoolModel.FK_Comment_UserInfo1", "UserInfo").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("GameSchoolModel.FK_Comment_User", "User").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UserInfo>("GameSchoolModel.FK_Comment_UserInfo1", "UserInfo").Value = value;
             }
         }
         /// <summary>
@@ -863,17 +863,17 @@ namespace Ru.GameSchool.DataLayer
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<User> UserReference
+        public EntityReference<UserInfo> UserInfoReference
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("GameSchoolModel.FK_Comment_User", "User");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UserInfo>("GameSchoolModel.FK_Comment_UserInfo1", "UserInfo");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<User>("GameSchoolModel.FK_Comment_User", "User", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<UserInfo>("GameSchoolModel.FK_Comment_UserInfo1", "UserInfo", value);
                 }
             }
         }
@@ -919,13 +919,13 @@ namespace Ru.GameSchool.DataLayer
         /// </summary>
         /// <param name="commentLikeId">Initial value of the CommentLikeId property.</param>
         /// <param name="commentId">Initial value of the CommentId property.</param>
-        /// <param name="userId">Initial value of the UserId property.</param>
-        public static CommentLike CreateCommentLike(global::System.Int32 commentLikeId, global::System.Int32 commentId, global::System.Int32 userId)
+        /// <param name="userInfoId">Initial value of the UserInfoId property.</param>
+        public static CommentLike CreateCommentLike(global::System.Int32 commentLikeId, global::System.Int32 commentId, global::System.Int32 userInfoId)
         {
             CommentLike commentLike = new CommentLike();
             commentLike.CommentLikeId = commentLikeId;
             commentLike.CommentId = commentId;
-            commentLike.UserId = userId;
+            commentLike.UserInfoId = userInfoId;
             return commentLike;
         }
 
@@ -989,24 +989,24 @@ namespace Ru.GameSchool.DataLayer
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Int32 UserId
+        public global::System.Int32 UserInfoId
         {
             get
             {
-                return _UserId;
+                return _UserInfoId;
             }
             set
             {
-                OnUserIdChanging(value);
-                ReportPropertyChanging("UserId");
-                _UserId = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("UserId");
-                OnUserIdChanged();
+                OnUserInfoIdChanging(value);
+                ReportPropertyChanging("UserInfoId");
+                _UserInfoId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("UserInfoId");
+                OnUserInfoIdChanged();
             }
         }
-        private global::System.Int32 _UserId;
-        partial void OnUserIdChanging(global::System.Int32 value);
-        partial void OnUserIdChanged();
+        private global::System.Int32 _UserInfoId;
+        partial void OnUserInfoIdChanging(global::System.Int32 value);
+        partial void OnUserInfoIdChanged();
 
         #endregion
 
@@ -1057,16 +1057,16 @@ namespace Ru.GameSchool.DataLayer
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("GameSchoolModel", "FK_CommentLike_User", "User")]
-        public User User
+        [EdmRelationshipNavigationPropertyAttribute("GameSchoolModel", "FK_CommentLike_UserInfo1", "UserInfo")]
+        public UserInfo UserInfo
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("GameSchoolModel.FK_CommentLike_User", "User").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UserInfo>("GameSchoolModel.FK_CommentLike_UserInfo1", "UserInfo").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("GameSchoolModel.FK_CommentLike_User", "User").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UserInfo>("GameSchoolModel.FK_CommentLike_UserInfo1", "UserInfo").Value = value;
             }
         }
         /// <summary>
@@ -1074,17 +1074,17 @@ namespace Ru.GameSchool.DataLayer
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<User> UserReference
+        public EntityReference<UserInfo> UserInfoReference
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("GameSchoolModel.FK_CommentLike_User", "User");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UserInfo>("GameSchoolModel.FK_CommentLike_UserInfo1", "UserInfo");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<User>("GameSchoolModel.FK_CommentLike_User", "User", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<UserInfo>("GameSchoolModel.FK_CommentLike_UserInfo1", "UserInfo", value);
                 }
             }
         }
@@ -1555,18 +1555,18 @@ namespace Ru.GameSchool.DataLayer
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("GameSchoolModel", "FK_Points_Course", "Points")]
+        [EdmRelationshipNavigationPropertyAttribute("GameSchoolModel", "FK_Points_Course", "Point")]
         public EntityCollection<Point> Points
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Point>("GameSchoolModel.FK_Points_Course", "Points");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Point>("GameSchoolModel.FK_Points_Course", "Point");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Point>("GameSchoolModel.FK_Points_Course", "Points", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Point>("GameSchoolModel.FK_Points_Course", "Point", value);
                 }
             }
         }
@@ -1577,18 +1577,18 @@ namespace Ru.GameSchool.DataLayer
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("GameSchoolModel", "UserCourse", "User")]
-        public EntityCollection<User> Users
+        [EdmRelationshipNavigationPropertyAttribute("GameSchoolModel", "UserCourse", "UserInfo")]
+        public EntityCollection<UserInfo> UserInfoes
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<User>("GameSchoolModel.UserCourse", "User");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<UserInfo>("GameSchoolModel.UserCourse", "UserInfo");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<User>("GameSchoolModel.UserCourse", "User", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<UserInfo>("GameSchoolModel.UserCourse", "UserInfo", value);
                 }
             }
         }
@@ -1611,14 +1611,14 @@ namespace Ru.GameSchool.DataLayer
         /// Create a new CourseGrade object.
         /// </summary>
         /// <param name="courseId">Initial value of the CourseId property.</param>
-        /// <param name="userId">Initial value of the UserId property.</param>
+        /// <param name="userInfoId">Initial value of the UserInfoId property.</param>
         /// <param name="grade">Initial value of the Grade property.</param>
         /// <param name="createDateTime">Initial value of the CreateDateTime property.</param>
-        public static CourseGrade CreateCourseGrade(global::System.Int32 courseId, global::System.Int32 userId, global::System.Double grade, global::System.DateTime createDateTime)
+        public static CourseGrade CreateCourseGrade(global::System.Int32 courseId, global::System.Int32 userInfoId, global::System.Double grade, global::System.DateTime createDateTime)
         {
             CourseGrade courseGrade = new CourseGrade();
             courseGrade.CourseId = courseId;
-            courseGrade.UserId = userId;
+            courseGrade.UserInfoId = userInfoId;
             courseGrade.Grade = grade;
             courseGrade.CreateDateTime = createDateTime;
             return courseGrade;
@@ -1660,27 +1660,27 @@ namespace Ru.GameSchool.DataLayer
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Int32 UserId
+        public global::System.Int32 UserInfoId
         {
             get
             {
-                return _UserId;
+                return _UserInfoId;
             }
             set
             {
-                if (_UserId != value)
+                if (_UserInfoId != value)
                 {
-                    OnUserIdChanging(value);
-                    ReportPropertyChanging("UserId");
-                    _UserId = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("UserId");
-                    OnUserIdChanged();
+                    OnUserInfoIdChanging(value);
+                    ReportPropertyChanging("UserInfoId");
+                    _UserInfoId = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("UserInfoId");
+                    OnUserInfoIdChanged();
                 }
             }
         }
-        private global::System.Int32 _UserId;
-        partial void OnUserIdChanging(global::System.Int32 value);
-        partial void OnUserIdChanged();
+        private global::System.Int32 _UserInfoId;
+        partial void OnUserInfoIdChanging(global::System.Int32 value);
+        partial void OnUserInfoIdChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -1803,16 +1803,16 @@ namespace Ru.GameSchool.DataLayer
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("GameSchoolModel", "FK_CourseGrade_User", "User")]
-        public User User
+        [EdmRelationshipNavigationPropertyAttribute("GameSchoolModel", "FK_CourseGrade_UserInfo1", "UserInfo")]
+        public UserInfo UserInfo
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("GameSchoolModel.FK_CourseGrade_User", "User").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UserInfo>("GameSchoolModel.FK_CourseGrade_UserInfo1", "UserInfo").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("GameSchoolModel.FK_CourseGrade_User", "User").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UserInfo>("GameSchoolModel.FK_CourseGrade_UserInfo1", "UserInfo").Value = value;
             }
         }
         /// <summary>
@@ -1820,17 +1820,17 @@ namespace Ru.GameSchool.DataLayer
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<User> UserReference
+        public EntityReference<UserInfo> UserInfoReference
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("GameSchoolModel.FK_CourseGrade_User", "User");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UserInfo>("GameSchoolModel.FK_CourseGrade_UserInfo1", "UserInfo");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<User>("GameSchoolModel.FK_CourseGrade_User", "User", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<UserInfo>("GameSchoolModel.FK_CourseGrade_UserInfo1", "UserInfo", value);
                 }
             }
         }
@@ -1974,18 +1974,18 @@ namespace Ru.GameSchool.DataLayer
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("GameSchoolModel", "FK_User_Department", "User")]
-        public EntityCollection<User> Users
+        [EdmRelationshipNavigationPropertyAttribute("GameSchoolModel", "FK_User_Department", "UserInfo")]
+        public EntityCollection<UserInfo> UserInfoes
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<User>("GameSchoolModel.FK_User_Department", "User");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<UserInfo>("GameSchoolModel.FK_User_Department", "UserInfo");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<User>("GameSchoolModel.FK_User_Department", "User", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<UserInfo>("GameSchoolModel.FK_User_Department", "UserInfo", value);
                 }
             }
         }
@@ -2225,6 +2225,28 @@ namespace Ru.GameSchool.DataLayer
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("GameSchoolModel", "FK_LevelExam_Level", "LevelExam")]
+        public EntityCollection<LevelExam> LevelExams
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<LevelExam>("GameSchoolModel.FK_LevelExam_Level", "LevelExam");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<LevelExam>("GameSchoolModel.FK_LevelExam_Level", "LevelExam", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("GameSchoolModel", "FK_LevelMaterial_Level", "LevelMaterial")]
         public EntityCollection<LevelMaterial> LevelMaterials
         {
@@ -2269,18 +2291,245 @@ namespace Ru.GameSchool.DataLayer
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("GameSchoolModel", "FK_LevelTest_Level", "LevelTest")]
-        public EntityCollection<LevelTest> LevelTests
+        [EdmRelationshipNavigationPropertyAttribute("GameSchoolModel", "FK_Points_Level", "Point")]
+        public EntityCollection<Point> Points
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<LevelTest>("GameSchoolModel.FK_LevelTest_Level", "LevelTest");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Point>("GameSchoolModel.FK_Points_Level", "Point");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<LevelTest>("GameSchoolModel.FK_LevelTest_Level", "LevelTest", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Point>("GameSchoolModel.FK_Points_Level", "Point", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="GameSchoolModel", Name="LevelExam")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class LevelExam : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new LevelExam object.
+        /// </summary>
+        /// <param name="levelExamId">Initial value of the LevelExamId property.</param>
+        /// <param name="levelId">Initial value of the LevelId property.</param>
+        /// <param name="gradePercentageValue">Initial value of the GradePercentageValue property.</param>
+        /// <param name="name">Initial value of the Name property.</param>
+        /// <param name="createDateTime">Initial value of the CreateDateTime property.</param>
+        public static LevelExam CreateLevelExam(global::System.Int32 levelExamId, global::System.Int32 levelId, global::System.Double gradePercentageValue, global::System.String name, global::System.DateTime createDateTime)
+        {
+            LevelExam levelExam = new LevelExam();
+            levelExam.LevelExamId = levelExamId;
+            levelExam.LevelId = levelId;
+            levelExam.GradePercentageValue = gradePercentageValue;
+            levelExam.Name = name;
+            levelExam.CreateDateTime = createDateTime;
+            return levelExam;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 LevelExamId
+        {
+            get
+            {
+                return _LevelExamId;
+            }
+            set
+            {
+                if (_LevelExamId != value)
+                {
+                    OnLevelExamIdChanging(value);
+                    ReportPropertyChanging("LevelExamId");
+                    _LevelExamId = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("LevelExamId");
+                    OnLevelExamIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _LevelExamId;
+        partial void OnLevelExamIdChanging(global::System.Int32 value);
+        partial void OnLevelExamIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 LevelId
+        {
+            get
+            {
+                return _LevelId;
+            }
+            set
+            {
+                OnLevelIdChanging(value);
+                ReportPropertyChanging("LevelId");
+                _LevelId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("LevelId");
+                OnLevelIdChanged();
+            }
+        }
+        private global::System.Int32 _LevelId;
+        partial void OnLevelIdChanging(global::System.Int32 value);
+        partial void OnLevelIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Description
+        {
+            get
+            {
+                return _Description;
+            }
+            set
+            {
+                OnDescriptionChanging(value);
+                ReportPropertyChanging("Description");
+                _Description = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Description");
+                OnDescriptionChanged();
+            }
+        }
+        private global::System.String _Description;
+        partial void OnDescriptionChanging(global::System.String value);
+        partial void OnDescriptionChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Double GradePercentageValue
+        {
+            get
+            {
+                return _GradePercentageValue;
+            }
+            set
+            {
+                OnGradePercentageValueChanging(value);
+                ReportPropertyChanging("GradePercentageValue");
+                _GradePercentageValue = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("GradePercentageValue");
+                OnGradePercentageValueChanged();
+            }
+        }
+        private global::System.Double _GradePercentageValue;
+        partial void OnGradePercentageValueChanging(global::System.Double value);
+        partial void OnGradePercentageValueChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Name
+        {
+            get
+            {
+                return _Name;
+            }
+            set
+            {
+                OnNameChanging(value);
+                ReportPropertyChanging("Name");
+                _Name = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Name");
+                OnNameChanged();
+            }
+        }
+        private global::System.String _Name;
+        partial void OnNameChanging(global::System.String value);
+        partial void OnNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime CreateDateTime
+        {
+            get
+            {
+                return _CreateDateTime;
+            }
+            set
+            {
+                OnCreateDateTimeChanging(value);
+                ReportPropertyChanging("CreateDateTime");
+                _CreateDateTime = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("CreateDateTime");
+                OnCreateDateTimeChanged();
+            }
+        }
+        private global::System.DateTime _CreateDateTime;
+        partial void OnCreateDateTimeChanging(global::System.DateTime value);
+        partial void OnCreateDateTimeChanged();
+
+        #endregion
+
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("GameSchoolModel", "FK_LevelExam_Level", "Level")]
+        public Level Level
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Level>("GameSchoolModel.FK_LevelExam_Level", "Level").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Level>("GameSchoolModel.FK_LevelExam_Level", "Level").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Level> LevelReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Level>("GameSchoolModel.FK_LevelExam_Level", "Level");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Level>("GameSchoolModel.FK_LevelExam_Level", "Level", value);
                 }
             }
         }
@@ -2291,18 +2540,580 @@ namespace Ru.GameSchool.DataLayer
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("GameSchoolModel", "FK_Points_Level", "Points")]
-        public EntityCollection<Point> Points
+        [EdmRelationshipNavigationPropertyAttribute("GameSchoolModel", "FK_LevelExamQuestion_LevelExam", "LevelExamQuestion")]
+        public EntityCollection<LevelExamQuestion> LevelExamQuestions
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Point>("GameSchoolModel.FK_Points_Level", "Points");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<LevelExamQuestion>("GameSchoolModel.FK_LevelExamQuestion_LevelExam", "LevelExamQuestion");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Point>("GameSchoolModel.FK_Points_Level", "Points", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<LevelExamQuestion>("GameSchoolModel.FK_LevelExamQuestion_LevelExam", "LevelExamQuestion", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("GameSchoolModel", "FK_LevelExamResult_LevelExam", "LevelExamResult")]
+        public EntityCollection<LevelExamResult> LevelExamResults
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<LevelExamResult>("GameSchoolModel.FK_LevelExamResult_LevelExam", "LevelExamResult");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<LevelExamResult>("GameSchoolModel.FK_LevelExamResult_LevelExam", "LevelExamResult", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="GameSchoolModel", Name="LevelExamAnswer")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class LevelExamAnswer : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new LevelExamAnswer object.
+        /// </summary>
+        /// <param name="levelExamAnswerId">Initial value of the LevelExamAnswerId property.</param>
+        /// <param name="levelExamQuestionId">Initial value of the LevelExamQuestionId property.</param>
+        /// <param name="correct">Initial value of the Correct property.</param>
+        public static LevelExamAnswer CreateLevelExamAnswer(global::System.Int32 levelExamAnswerId, global::System.Int32 levelExamQuestionId, global::System.Boolean correct)
+        {
+            LevelExamAnswer levelExamAnswer = new LevelExamAnswer();
+            levelExamAnswer.LevelExamAnswerId = levelExamAnswerId;
+            levelExamAnswer.LevelExamQuestionId = levelExamQuestionId;
+            levelExamAnswer.Correct = correct;
+            return levelExamAnswer;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 LevelExamAnswerId
+        {
+            get
+            {
+                return _LevelExamAnswerId;
+            }
+            set
+            {
+                if (_LevelExamAnswerId != value)
+                {
+                    OnLevelExamAnswerIdChanging(value);
+                    ReportPropertyChanging("LevelExamAnswerId");
+                    _LevelExamAnswerId = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("LevelExamAnswerId");
+                    OnLevelExamAnswerIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _LevelExamAnswerId;
+        partial void OnLevelExamAnswerIdChanging(global::System.Int32 value);
+        partial void OnLevelExamAnswerIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 LevelExamQuestionId
+        {
+            get
+            {
+                return _LevelExamQuestionId;
+            }
+            set
+            {
+                OnLevelExamQuestionIdChanging(value);
+                ReportPropertyChanging("LevelExamQuestionId");
+                _LevelExamQuestionId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("LevelExamQuestionId");
+                OnLevelExamQuestionIdChanged();
+            }
+        }
+        private global::System.Int32 _LevelExamQuestionId;
+        partial void OnLevelExamQuestionIdChanging(global::System.Int32 value);
+        partial void OnLevelExamQuestionIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Answer
+        {
+            get
+            {
+                return _Answer;
+            }
+            set
+            {
+                OnAnswerChanging(value);
+                ReportPropertyChanging("Answer");
+                _Answer = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Answer");
+                OnAnswerChanged();
+            }
+        }
+        private global::System.String _Answer;
+        partial void OnAnswerChanging(global::System.String value);
+        partial void OnAnswerChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean Correct
+        {
+            get
+            {
+                return _Correct;
+            }
+            set
+            {
+                OnCorrectChanging(value);
+                ReportPropertyChanging("Correct");
+                _Correct = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Correct");
+                OnCorrectChanged();
+            }
+        }
+        private global::System.Boolean _Correct;
+        partial void OnCorrectChanging(global::System.Boolean value);
+        partial void OnCorrectChanged();
+
+        #endregion
+
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("GameSchoolModel", "FK_LevelExamAnswer_LevelExamQuestion", "LevelExamQuestion")]
+        public LevelExamQuestion LevelExamQuestion
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<LevelExamQuestion>("GameSchoolModel.FK_LevelExamAnswer_LevelExamQuestion", "LevelExamQuestion").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<LevelExamQuestion>("GameSchoolModel.FK_LevelExamAnswer_LevelExamQuestion", "LevelExamQuestion").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<LevelExamQuestion> LevelExamQuestionReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<LevelExamQuestion>("GameSchoolModel.FK_LevelExamAnswer_LevelExamQuestion", "LevelExamQuestion");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<LevelExamQuestion>("GameSchoolModel.FK_LevelExamAnswer_LevelExamQuestion", "LevelExamQuestion", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="GameSchoolModel", Name="LevelExamQuestion")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class LevelExamQuestion : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new LevelExamQuestion object.
+        /// </summary>
+        /// <param name="levelExamQuestionId">Initial value of the LevelExamQuestionId property.</param>
+        /// <param name="levelExamId">Initial value of the LevelExamId property.</param>
+        /// <param name="question">Initial value of the Question property.</param>
+        public static LevelExamQuestion CreateLevelExamQuestion(global::System.Int32 levelExamQuestionId, global::System.Int32 levelExamId, global::System.String question)
+        {
+            LevelExamQuestion levelExamQuestion = new LevelExamQuestion();
+            levelExamQuestion.LevelExamQuestionId = levelExamQuestionId;
+            levelExamQuestion.LevelExamId = levelExamId;
+            levelExamQuestion.Question = question;
+            return levelExamQuestion;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 LevelExamQuestionId
+        {
+            get
+            {
+                return _LevelExamQuestionId;
+            }
+            set
+            {
+                if (_LevelExamQuestionId != value)
+                {
+                    OnLevelExamQuestionIdChanging(value);
+                    ReportPropertyChanging("LevelExamQuestionId");
+                    _LevelExamQuestionId = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("LevelExamQuestionId");
+                    OnLevelExamQuestionIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _LevelExamQuestionId;
+        partial void OnLevelExamQuestionIdChanging(global::System.Int32 value);
+        partial void OnLevelExamQuestionIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 LevelExamId
+        {
+            get
+            {
+                return _LevelExamId;
+            }
+            set
+            {
+                OnLevelExamIdChanging(value);
+                ReportPropertyChanging("LevelExamId");
+                _LevelExamId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("LevelExamId");
+                OnLevelExamIdChanged();
+            }
+        }
+        private global::System.Int32 _LevelExamId;
+        partial void OnLevelExamIdChanging(global::System.Int32 value);
+        partial void OnLevelExamIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Question
+        {
+            get
+            {
+                return _Question;
+            }
+            set
+            {
+                OnQuestionChanging(value);
+                ReportPropertyChanging("Question");
+                _Question = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Question");
+                OnQuestionChanged();
+            }
+        }
+        private global::System.String _Question;
+        partial void OnQuestionChanging(global::System.String value);
+        partial void OnQuestionChanged();
+
+        #endregion
+
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("GameSchoolModel", "FK_LevelExamQuestion_LevelExam", "LevelExam")]
+        public LevelExam LevelExam
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<LevelExam>("GameSchoolModel.FK_LevelExamQuestion_LevelExam", "LevelExam").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<LevelExam>("GameSchoolModel.FK_LevelExamQuestion_LevelExam", "LevelExam").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<LevelExam> LevelExamReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<LevelExam>("GameSchoolModel.FK_LevelExamQuestion_LevelExam", "LevelExam");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<LevelExam>("GameSchoolModel.FK_LevelExamQuestion_LevelExam", "LevelExam", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("GameSchoolModel", "FK_LevelExamAnswer_LevelExamQuestion", "LevelExamAnswer")]
+        public EntityCollection<LevelExamAnswer> LevelExamAnswers
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<LevelExamAnswer>("GameSchoolModel.FK_LevelExamAnswer_LevelExamQuestion", "LevelExamAnswer");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<LevelExamAnswer>("GameSchoolModel.FK_LevelExamAnswer_LevelExamQuestion", "LevelExamAnswer", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="GameSchoolModel", Name="LevelExamResult")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class LevelExamResult : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new LevelExamResult object.
+        /// </summary>
+        /// <param name="levelExamId">Initial value of the LevelExamId property.</param>
+        /// <param name="userInfoId">Initial value of the UserInfoId property.</param>
+        /// <param name="grade">Initial value of the Grade property.</param>
+        public static LevelExamResult CreateLevelExamResult(global::System.Int32 levelExamId, global::System.Int32 userInfoId, global::System.Double grade)
+        {
+            LevelExamResult levelExamResult = new LevelExamResult();
+            levelExamResult.LevelExamId = levelExamId;
+            levelExamResult.UserInfoId = userInfoId;
+            levelExamResult.Grade = grade;
+            return levelExamResult;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 LevelExamId
+        {
+            get
+            {
+                return _LevelExamId;
+            }
+            set
+            {
+                if (_LevelExamId != value)
+                {
+                    OnLevelExamIdChanging(value);
+                    ReportPropertyChanging("LevelExamId");
+                    _LevelExamId = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("LevelExamId");
+                    OnLevelExamIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _LevelExamId;
+        partial void OnLevelExamIdChanging(global::System.Int32 value);
+        partial void OnLevelExamIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 UserInfoId
+        {
+            get
+            {
+                return _UserInfoId;
+            }
+            set
+            {
+                if (_UserInfoId != value)
+                {
+                    OnUserInfoIdChanging(value);
+                    ReportPropertyChanging("UserInfoId");
+                    _UserInfoId = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("UserInfoId");
+                    OnUserInfoIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _UserInfoId;
+        partial void OnUserInfoIdChanging(global::System.Int32 value);
+        partial void OnUserInfoIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Double Grade
+        {
+            get
+            {
+                return _Grade;
+            }
+            set
+            {
+                OnGradeChanging(value);
+                ReportPropertyChanging("Grade");
+                _Grade = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Grade");
+                OnGradeChanged();
+            }
+        }
+        private global::System.Double _Grade;
+        partial void OnGradeChanging(global::System.Double value);
+        partial void OnGradeChanged();
+
+        #endregion
+
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("GameSchoolModel", "FK_LevelExamResult_LevelExam", "LevelExam")]
+        public LevelExam LevelExam
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<LevelExam>("GameSchoolModel.FK_LevelExamResult_LevelExam", "LevelExam").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<LevelExam>("GameSchoolModel.FK_LevelExamResult_LevelExam", "LevelExam").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<LevelExam> LevelExamReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<LevelExam>("GameSchoolModel.FK_LevelExamResult_LevelExam", "LevelExam");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<LevelExam>("GameSchoolModel.FK_LevelExamResult_LevelExam", "LevelExam", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("GameSchoolModel", "FK_LevelExamResult_UserInfo1", "UserInfo")]
+        public UserInfo UserInfo
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UserInfo>("GameSchoolModel.FK_LevelExamResult_UserInfo1", "UserInfo").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UserInfo>("GameSchoolModel.FK_LevelExamResult_UserInfo1", "UserInfo").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<UserInfo> UserInfoReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UserInfo>("GameSchoolModel.FK_LevelExamResult_UserInfo1", "UserInfo");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<UserInfo>("GameSchoolModel.FK_LevelExamResult_UserInfo1", "UserInfo", value);
                 }
             }
         }
@@ -2911,14 +3722,14 @@ namespace Ru.GameSchool.DataLayer
         /// Create a new LevelProjectResult object.
         /// </summary>
         /// <param name="levelProjectId">Initial value of the LevelProjectId property.</param>
-        /// <param name="userId">Initial value of the UserId property.</param>
+        /// <param name="userInfoId">Initial value of the UserInfoId property.</param>
         /// <param name="grade">Initial value of the Grade property.</param>
         /// <param name="createDateTime">Initial value of the CreateDateTime property.</param>
-        public static LevelProjectResult CreateLevelProjectResult(global::System.Int32 levelProjectId, global::System.Int32 userId, global::System.Double grade, global::System.DateTime createDateTime)
+        public static LevelProjectResult CreateLevelProjectResult(global::System.Int32 levelProjectId, global::System.Int32 userInfoId, global::System.Double grade, global::System.DateTime createDateTime)
         {
             LevelProjectResult levelProjectResult = new LevelProjectResult();
             levelProjectResult.LevelProjectId = levelProjectId;
-            levelProjectResult.UserId = userId;
+            levelProjectResult.UserInfoId = userInfoId;
             levelProjectResult.Grade = grade;
             levelProjectResult.CreateDateTime = createDateTime;
             return levelProjectResult;
@@ -2960,27 +3771,27 @@ namespace Ru.GameSchool.DataLayer
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Int32 UserId
+        public global::System.Int32 UserInfoId
         {
             get
             {
-                return _UserId;
+                return _UserInfoId;
             }
             set
             {
-                if (_UserId != value)
+                if (_UserInfoId != value)
                 {
-                    OnUserIdChanging(value);
-                    ReportPropertyChanging("UserId");
-                    _UserId = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("UserId");
-                    OnUserIdChanged();
+                    OnUserInfoIdChanging(value);
+                    ReportPropertyChanging("UserInfoId");
+                    _UserInfoId = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("UserInfoId");
+                    OnUserInfoIdChanged();
                 }
             }
         }
-        private global::System.Int32 _UserId;
-        partial void OnUserIdChanging(global::System.Int32 value);
-        partial void OnUserIdChanged();
+        private global::System.Int32 _UserInfoId;
+        partial void OnUserInfoIdChanging(global::System.Int32 value);
+        partial void OnUserInfoIdChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -3103,16 +3914,16 @@ namespace Ru.GameSchool.DataLayer
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("GameSchoolModel", "FK_LevelProjectResult_User", "User")]
-        public User User
+        [EdmRelationshipNavigationPropertyAttribute("GameSchoolModel", "FK_LevelProjectResult_UserInfo1", "UserInfo")]
+        public UserInfo UserInfo
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("GameSchoolModel.FK_LevelProjectResult_User", "User").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UserInfo>("GameSchoolModel.FK_LevelProjectResult_UserInfo1", "UserInfo").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("GameSchoolModel.FK_LevelProjectResult_User", "User").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UserInfo>("GameSchoolModel.FK_LevelProjectResult_UserInfo1", "UserInfo").Value = value;
             }
         }
         /// <summary>
@@ -3120,828 +3931,17 @@ namespace Ru.GameSchool.DataLayer
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<User> UserReference
+        public EntityReference<UserInfo> UserInfoReference
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("GameSchoolModel.FK_LevelProjectResult_User", "User");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UserInfo>("GameSchoolModel.FK_LevelProjectResult_UserInfo1", "UserInfo");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<User>("GameSchoolModel.FK_LevelProjectResult_User", "User", value);
-                }
-            }
-        }
-
-        #endregion
-
-    }
-    
-    /// <summary>
-    /// No Metadata Documentation available.
-    /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="GameSchoolModel", Name="LevelTest")]
-    [Serializable()]
-    [DataContractAttribute(IsReference=true)]
-    public partial class LevelTest : EntityObject
-    {
-        #region Factory Method
-    
-        /// <summary>
-        /// Create a new LevelTest object.
-        /// </summary>
-        /// <param name="levelTestId">Initial value of the LevelTestId property.</param>
-        /// <param name="levelId">Initial value of the LevelId property.</param>
-        /// <param name="gradePercentageValue">Initial value of the GradePercentageValue property.</param>
-        /// <param name="name">Initial value of the Name property.</param>
-        /// <param name="createDateTime">Initial value of the CreateDateTime property.</param>
-        public static LevelTest CreateLevelTest(global::System.Int32 levelTestId, global::System.Int32 levelId, global::System.Double gradePercentageValue, global::System.String name, global::System.DateTime createDateTime)
-        {
-            LevelTest levelTest = new LevelTest();
-            levelTest.LevelTestId = levelTestId;
-            levelTest.LevelId = levelId;
-            levelTest.GradePercentageValue = gradePercentageValue;
-            levelTest.Name = name;
-            levelTest.CreateDateTime = createDateTime;
-            return levelTest;
-        }
-
-        #endregion
-
-        #region Primitive Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 LevelTestId
-        {
-            get
-            {
-                return _LevelTestId;
-            }
-            set
-            {
-                if (_LevelTestId != value)
-                {
-                    OnLevelTestIdChanging(value);
-                    ReportPropertyChanging("LevelTestId");
-                    _LevelTestId = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("LevelTestId");
-                    OnLevelTestIdChanged();
-                }
-            }
-        }
-        private global::System.Int32 _LevelTestId;
-        partial void OnLevelTestIdChanging(global::System.Int32 value);
-        partial void OnLevelTestIdChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 LevelId
-        {
-            get
-            {
-                return _LevelId;
-            }
-            set
-            {
-                OnLevelIdChanging(value);
-                ReportPropertyChanging("LevelId");
-                _LevelId = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("LevelId");
-                OnLevelIdChanged();
-            }
-        }
-        private global::System.Int32 _LevelId;
-        partial void OnLevelIdChanging(global::System.Int32 value);
-        partial void OnLevelIdChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String Description
-        {
-            get
-            {
-                return _Description;
-            }
-            set
-            {
-                OnDescriptionChanging(value);
-                ReportPropertyChanging("Description");
-                _Description = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("Description");
-                OnDescriptionChanged();
-            }
-        }
-        private global::System.String _Description;
-        partial void OnDescriptionChanging(global::System.String value);
-        partial void OnDescriptionChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Double GradePercentageValue
-        {
-            get
-            {
-                return _GradePercentageValue;
-            }
-            set
-            {
-                OnGradePercentageValueChanging(value);
-                ReportPropertyChanging("GradePercentageValue");
-                _GradePercentageValue = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("GradePercentageValue");
-                OnGradePercentageValueChanged();
-            }
-        }
-        private global::System.Double _GradePercentageValue;
-        partial void OnGradePercentageValueChanging(global::System.Double value);
-        partial void OnGradePercentageValueChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String Name
-        {
-            get
-            {
-                return _Name;
-            }
-            set
-            {
-                OnNameChanging(value);
-                ReportPropertyChanging("Name");
-                _Name = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("Name");
-                OnNameChanged();
-            }
-        }
-        private global::System.String _Name;
-        partial void OnNameChanging(global::System.String value);
-        partial void OnNameChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.DateTime CreateDateTime
-        {
-            get
-            {
-                return _CreateDateTime;
-            }
-            set
-            {
-                OnCreateDateTimeChanging(value);
-                ReportPropertyChanging("CreateDateTime");
-                _CreateDateTime = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("CreateDateTime");
-                OnCreateDateTimeChanged();
-            }
-        }
-        private global::System.DateTime _CreateDateTime;
-        partial void OnCreateDateTimeChanging(global::System.DateTime value);
-        partial void OnCreateDateTimeChanged();
-
-        #endregion
-
-    
-        #region Navigation Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("GameSchoolModel", "FK_LevelTest_Level", "Level")]
-        public Level Level
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Level>("GameSchoolModel.FK_LevelTest_Level", "Level").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Level>("GameSchoolModel.FK_LevelTest_Level", "Level").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<Level> LevelReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Level>("GameSchoolModel.FK_LevelTest_Level", "Level");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Level>("GameSchoolModel.FK_LevelTest_Level", "Level", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("GameSchoolModel", "FK_LevelTestQuestion_LevelTest", "LevelTestQuestion")]
-        public EntityCollection<LevelTestQuestion> LevelTestQuestions
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<LevelTestQuestion>("GameSchoolModel.FK_LevelTestQuestion_LevelTest", "LevelTestQuestion");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<LevelTestQuestion>("GameSchoolModel.FK_LevelTestQuestion_LevelTest", "LevelTestQuestion", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("GameSchoolModel", "FK_LevelTestResult_LevelTest", "LevelTestResult")]
-        public EntityCollection<LevelTestResult> LevelTestResults
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<LevelTestResult>("GameSchoolModel.FK_LevelTestResult_LevelTest", "LevelTestResult");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<LevelTestResult>("GameSchoolModel.FK_LevelTestResult_LevelTest", "LevelTestResult", value);
-                }
-            }
-        }
-
-        #endregion
-
-    }
-    
-    /// <summary>
-    /// No Metadata Documentation available.
-    /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="GameSchoolModel", Name="LevelTestAnswer")]
-    [Serializable()]
-    [DataContractAttribute(IsReference=true)]
-    public partial class LevelTestAnswer : EntityObject
-    {
-        #region Factory Method
-    
-        /// <summary>
-        /// Create a new LevelTestAnswer object.
-        /// </summary>
-        /// <param name="levelTestAnswerId">Initial value of the LevelTestAnswerId property.</param>
-        /// <param name="levelTestQuestionId">Initial value of the LevelTestQuestionId property.</param>
-        /// <param name="correct">Initial value of the Correct property.</param>
-        public static LevelTestAnswer CreateLevelTestAnswer(global::System.Int32 levelTestAnswerId, global::System.Int32 levelTestQuestionId, global::System.Boolean correct)
-        {
-            LevelTestAnswer levelTestAnswer = new LevelTestAnswer();
-            levelTestAnswer.LevelTestAnswerId = levelTestAnswerId;
-            levelTestAnswer.LevelTestQuestionId = levelTestQuestionId;
-            levelTestAnswer.Correct = correct;
-            return levelTestAnswer;
-        }
-
-        #endregion
-
-        #region Primitive Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 LevelTestAnswerId
-        {
-            get
-            {
-                return _LevelTestAnswerId;
-            }
-            set
-            {
-                if (_LevelTestAnswerId != value)
-                {
-                    OnLevelTestAnswerIdChanging(value);
-                    ReportPropertyChanging("LevelTestAnswerId");
-                    _LevelTestAnswerId = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("LevelTestAnswerId");
-                    OnLevelTestAnswerIdChanged();
-                }
-            }
-        }
-        private global::System.Int32 _LevelTestAnswerId;
-        partial void OnLevelTestAnswerIdChanging(global::System.Int32 value);
-        partial void OnLevelTestAnswerIdChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 LevelTestQuestionId
-        {
-            get
-            {
-                return _LevelTestQuestionId;
-            }
-            set
-            {
-                OnLevelTestQuestionIdChanging(value);
-                ReportPropertyChanging("LevelTestQuestionId");
-                _LevelTestQuestionId = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("LevelTestQuestionId");
-                OnLevelTestQuestionIdChanged();
-            }
-        }
-        private global::System.Int32 _LevelTestQuestionId;
-        partial void OnLevelTestQuestionIdChanging(global::System.Int32 value);
-        partial void OnLevelTestQuestionIdChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String Answer
-        {
-            get
-            {
-                return _Answer;
-            }
-            set
-            {
-                OnAnswerChanging(value);
-                ReportPropertyChanging("Answer");
-                _Answer = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("Answer");
-                OnAnswerChanged();
-            }
-        }
-        private global::System.String _Answer;
-        partial void OnAnswerChanging(global::System.String value);
-        partial void OnAnswerChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Boolean Correct
-        {
-            get
-            {
-                return _Correct;
-            }
-            set
-            {
-                OnCorrectChanging(value);
-                ReportPropertyChanging("Correct");
-                _Correct = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("Correct");
-                OnCorrectChanged();
-            }
-        }
-        private global::System.Boolean _Correct;
-        partial void OnCorrectChanging(global::System.Boolean value);
-        partial void OnCorrectChanged();
-
-        #endregion
-
-    
-        #region Navigation Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("GameSchoolModel", "FK_LevelTestAnswer_LevelTestQuestion", "LevelTestQuestion")]
-        public LevelTestQuestion LevelTestQuestion
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<LevelTestQuestion>("GameSchoolModel.FK_LevelTestAnswer_LevelTestQuestion", "LevelTestQuestion").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<LevelTestQuestion>("GameSchoolModel.FK_LevelTestAnswer_LevelTestQuestion", "LevelTestQuestion").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<LevelTestQuestion> LevelTestQuestionReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<LevelTestQuestion>("GameSchoolModel.FK_LevelTestAnswer_LevelTestQuestion", "LevelTestQuestion");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<LevelTestQuestion>("GameSchoolModel.FK_LevelTestAnswer_LevelTestQuestion", "LevelTestQuestion", value);
-                }
-            }
-        }
-
-        #endregion
-
-    }
-    
-    /// <summary>
-    /// No Metadata Documentation available.
-    /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="GameSchoolModel", Name="LevelTestQuestion")]
-    [Serializable()]
-    [DataContractAttribute(IsReference=true)]
-    public partial class LevelTestQuestion : EntityObject
-    {
-        #region Factory Method
-    
-        /// <summary>
-        /// Create a new LevelTestQuestion object.
-        /// </summary>
-        /// <param name="levelTestQuestionId">Initial value of the LevelTestQuestionId property.</param>
-        /// <param name="levelTestId">Initial value of the LevelTestId property.</param>
-        /// <param name="question">Initial value of the Question property.</param>
-        public static LevelTestQuestion CreateLevelTestQuestion(global::System.Int32 levelTestQuestionId, global::System.Int32 levelTestId, global::System.String question)
-        {
-            LevelTestQuestion levelTestQuestion = new LevelTestQuestion();
-            levelTestQuestion.LevelTestQuestionId = levelTestQuestionId;
-            levelTestQuestion.LevelTestId = levelTestId;
-            levelTestQuestion.Question = question;
-            return levelTestQuestion;
-        }
-
-        #endregion
-
-        #region Primitive Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 LevelTestQuestionId
-        {
-            get
-            {
-                return _LevelTestQuestionId;
-            }
-            set
-            {
-                if (_LevelTestQuestionId != value)
-                {
-                    OnLevelTestQuestionIdChanging(value);
-                    ReportPropertyChanging("LevelTestQuestionId");
-                    _LevelTestQuestionId = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("LevelTestQuestionId");
-                    OnLevelTestQuestionIdChanged();
-                }
-            }
-        }
-        private global::System.Int32 _LevelTestQuestionId;
-        partial void OnLevelTestQuestionIdChanging(global::System.Int32 value);
-        partial void OnLevelTestQuestionIdChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 LevelTestId
-        {
-            get
-            {
-                return _LevelTestId;
-            }
-            set
-            {
-                OnLevelTestIdChanging(value);
-                ReportPropertyChanging("LevelTestId");
-                _LevelTestId = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("LevelTestId");
-                OnLevelTestIdChanged();
-            }
-        }
-        private global::System.Int32 _LevelTestId;
-        partial void OnLevelTestIdChanging(global::System.Int32 value);
-        partial void OnLevelTestIdChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String Question
-        {
-            get
-            {
-                return _Question;
-            }
-            set
-            {
-                OnQuestionChanging(value);
-                ReportPropertyChanging("Question");
-                _Question = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("Question");
-                OnQuestionChanged();
-            }
-        }
-        private global::System.String _Question;
-        partial void OnQuestionChanging(global::System.String value);
-        partial void OnQuestionChanged();
-
-        #endregion
-
-    
-        #region Navigation Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("GameSchoolModel", "FK_LevelTestQuestion_LevelTest", "LevelTest")]
-        public LevelTest LevelTest
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<LevelTest>("GameSchoolModel.FK_LevelTestQuestion_LevelTest", "LevelTest").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<LevelTest>("GameSchoolModel.FK_LevelTestQuestion_LevelTest", "LevelTest").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<LevelTest> LevelTestReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<LevelTest>("GameSchoolModel.FK_LevelTestQuestion_LevelTest", "LevelTest");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<LevelTest>("GameSchoolModel.FK_LevelTestQuestion_LevelTest", "LevelTest", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("GameSchoolModel", "FK_LevelTestAnswer_LevelTestQuestion", "LevelTestAnswer")]
-        public EntityCollection<LevelTestAnswer> LevelTestAnswers
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<LevelTestAnswer>("GameSchoolModel.FK_LevelTestAnswer_LevelTestQuestion", "LevelTestAnswer");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<LevelTestAnswer>("GameSchoolModel.FK_LevelTestAnswer_LevelTestQuestion", "LevelTestAnswer", value);
-                }
-            }
-        }
-
-        #endregion
-
-    }
-    
-    /// <summary>
-    /// No Metadata Documentation available.
-    /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="GameSchoolModel", Name="LevelTestResult")]
-    [Serializable()]
-    [DataContractAttribute(IsReference=true)]
-    public partial class LevelTestResult : EntityObject
-    {
-        #region Factory Method
-    
-        /// <summary>
-        /// Create a new LevelTestResult object.
-        /// </summary>
-        /// <param name="levelTestId">Initial value of the LevelTestId property.</param>
-        /// <param name="userId">Initial value of the UserId property.</param>
-        /// <param name="grade">Initial value of the Grade property.</param>
-        public static LevelTestResult CreateLevelTestResult(global::System.Int32 levelTestId, global::System.Int32 userId, global::System.Double grade)
-        {
-            LevelTestResult levelTestResult = new LevelTestResult();
-            levelTestResult.LevelTestId = levelTestId;
-            levelTestResult.UserId = userId;
-            levelTestResult.Grade = grade;
-            return levelTestResult;
-        }
-
-        #endregion
-
-        #region Primitive Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 LevelTestId
-        {
-            get
-            {
-                return _LevelTestId;
-            }
-            set
-            {
-                if (_LevelTestId != value)
-                {
-                    OnLevelTestIdChanging(value);
-                    ReportPropertyChanging("LevelTestId");
-                    _LevelTestId = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("LevelTestId");
-                    OnLevelTestIdChanged();
-                }
-            }
-        }
-        private global::System.Int32 _LevelTestId;
-        partial void OnLevelTestIdChanging(global::System.Int32 value);
-        partial void OnLevelTestIdChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 UserId
-        {
-            get
-            {
-                return _UserId;
-            }
-            set
-            {
-                if (_UserId != value)
-                {
-                    OnUserIdChanging(value);
-                    ReportPropertyChanging("UserId");
-                    _UserId = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("UserId");
-                    OnUserIdChanged();
-                }
-            }
-        }
-        private global::System.Int32 _UserId;
-        partial void OnUserIdChanging(global::System.Int32 value);
-        partial void OnUserIdChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Double Grade
-        {
-            get
-            {
-                return _Grade;
-            }
-            set
-            {
-                OnGradeChanging(value);
-                ReportPropertyChanging("Grade");
-                _Grade = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("Grade");
-                OnGradeChanged();
-            }
-        }
-        private global::System.Double _Grade;
-        partial void OnGradeChanging(global::System.Double value);
-        partial void OnGradeChanged();
-
-        #endregion
-
-    
-        #region Navigation Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("GameSchoolModel", "FK_LevelTestResult_LevelTest", "LevelTest")]
-        public LevelTest LevelTest
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<LevelTest>("GameSchoolModel.FK_LevelTestResult_LevelTest", "LevelTest").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<LevelTest>("GameSchoolModel.FK_LevelTestResult_LevelTest", "LevelTest").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<LevelTest> LevelTestReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<LevelTest>("GameSchoolModel.FK_LevelTestResult_LevelTest", "LevelTest");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<LevelTest>("GameSchoolModel.FK_LevelTestResult_LevelTest", "LevelTest", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("GameSchoolModel", "FK_LevelTestResult_User", "User")]
-        public User User
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("GameSchoolModel.FK_LevelTestResult_User", "User").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("GameSchoolModel.FK_LevelTestResult_User", "User").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<User> UserReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("GameSchoolModel.FK_LevelTestResult_User", "User");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<User>("GameSchoolModel.FK_LevelTestResult_User", "User", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<UserInfo>("GameSchoolModel.FK_LevelProjectResult_UserInfo1", "UserInfo", value);
                 }
             }
         }
@@ -3965,14 +3965,14 @@ namespace Ru.GameSchool.DataLayer
         /// </summary>
         /// <param name="notificationId">Initial value of the NotificationId property.</param>
         /// <param name="isRead">Initial value of the IsRead property.</param>
-        /// <param name="userId">Initial value of the UserId property.</param>
+        /// <param name="userInfoId">Initial value of the UserInfoId property.</param>
         /// <param name="createDateTime">Initial value of the CreateDateTime property.</param>
-        public static Notification CreateNotification(global::System.Int32 notificationId, global::System.Boolean isRead, global::System.Int32 userId, global::System.DateTime createDateTime)
+        public static Notification CreateNotification(global::System.Int32 notificationId, global::System.Boolean isRead, global::System.Int32 userInfoId, global::System.DateTime createDateTime)
         {
             Notification notification = new Notification();
             notification.NotificationId = notificationId;
             notification.IsRead = isRead;
-            notification.UserId = userId;
+            notification.UserInfoId = userInfoId;
             notification.CreateDateTime = createDateTime;
             return notification;
         }
@@ -4085,24 +4085,24 @@ namespace Ru.GameSchool.DataLayer
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Int32 UserId
+        public global::System.Int32 UserInfoId
         {
             get
             {
-                return _UserId;
+                return _UserInfoId;
             }
             set
             {
-                OnUserIdChanging(value);
-                ReportPropertyChanging("UserId");
-                _UserId = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("UserId");
-                OnUserIdChanged();
+                OnUserInfoIdChanging(value);
+                ReportPropertyChanging("UserInfoId");
+                _UserInfoId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("UserInfoId");
+                OnUserInfoIdChanged();
             }
         }
-        private global::System.Int32 _UserId;
-        partial void OnUserIdChanging(global::System.Int32 value);
-        partial void OnUserIdChanged();
+        private global::System.Int32 _UserInfoId;
+        partial void OnUserInfoIdChanging(global::System.Int32 value);
+        partial void OnUserInfoIdChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -4139,16 +4139,16 @@ namespace Ru.GameSchool.DataLayer
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("GameSchoolModel", "FK_Notification_User", "User")]
-        public User User
+        [EdmRelationshipNavigationPropertyAttribute("GameSchoolModel", "FK_Notification_UserInfo1", "UserInfo")]
+        public UserInfo UserInfo
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("GameSchoolModel.FK_Notification_User", "User").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UserInfo>("GameSchoolModel.FK_Notification_UserInfo1", "UserInfo").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("GameSchoolModel.FK_Notification_User", "User").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UserInfo>("GameSchoolModel.FK_Notification_UserInfo1", "UserInfo").Value = value;
             }
         }
         /// <summary>
@@ -4156,17 +4156,17 @@ namespace Ru.GameSchool.DataLayer
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<User> UserReference
+        public EntityReference<UserInfo> UserInfoReference
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("GameSchoolModel.FK_Notification_User", "User");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UserInfo>("GameSchoolModel.FK_Notification_UserInfo1", "UserInfo");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<User>("GameSchoolModel.FK_Notification_User", "User", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<UserInfo>("GameSchoolModel.FK_Notification_UserInfo1", "UserInfo", value);
                 }
             }
         }
@@ -4189,15 +4189,15 @@ namespace Ru.GameSchool.DataLayer
         /// Create a new Point object.
         /// </summary>
         /// <param name="pointsId">Initial value of the PointsId property.</param>
-        /// <param name="userId">Initial value of the UserId property.</param>
+        /// <param name="userInfoId">Initial value of the UserInfoId property.</param>
         /// <param name="courseId">Initial value of the CourseId property.</param>
         /// <param name="levelId">Initial value of the LevelId property.</param>
         /// <param name="points">Initial value of the Points property.</param>
-        public static Point CreatePoint(global::System.Int32 pointsId, global::System.Int32 userId, global::System.Int32 courseId, global::System.Int32 levelId, global::System.Int32 points)
+        public static Point CreatePoint(global::System.Int32 pointsId, global::System.Int32 userInfoId, global::System.Int32 courseId, global::System.Int32 levelId, global::System.Int32 points)
         {
             Point point = new Point();
             point.PointsId = pointsId;
-            point.UserId = userId;
+            point.UserInfoId = userInfoId;
             point.CourseId = courseId;
             point.LevelId = levelId;
             point.Points = points;
@@ -4240,24 +4240,24 @@ namespace Ru.GameSchool.DataLayer
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Int32 UserId
+        public global::System.Int32 UserInfoId
         {
             get
             {
-                return _UserId;
+                return _UserInfoId;
             }
             set
             {
-                OnUserIdChanging(value);
-                ReportPropertyChanging("UserId");
-                _UserId = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("UserId");
-                OnUserIdChanged();
+                OnUserInfoIdChanging(value);
+                ReportPropertyChanging("UserInfoId");
+                _UserInfoId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("UserInfoId");
+                OnUserInfoIdChanged();
             }
         }
-        private global::System.Int32 _UserId;
-        partial void OnUserIdChanging(global::System.Int32 value);
-        partial void OnUserIdChanged();
+        private global::System.Int32 _UserInfoId;
+        partial void OnUserInfoIdChanging(global::System.Int32 value);
+        partial void OnUserInfoIdChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -4442,16 +4442,16 @@ namespace Ru.GameSchool.DataLayer
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("GameSchoolModel", "FK_Points_User", "User")]
-        public User User
+        [EdmRelationshipNavigationPropertyAttribute("GameSchoolModel", "FK_Points_UserInfo1", "UserInfo")]
+        public UserInfo UserInfo
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("GameSchoolModel.FK_Points_User", "User").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UserInfo>("GameSchoolModel.FK_Points_UserInfo1", "UserInfo").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("GameSchoolModel.FK_Points_User", "User").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UserInfo>("GameSchoolModel.FK_Points_UserInfo1", "UserInfo").Value = value;
             }
         }
         /// <summary>
@@ -4459,17 +4459,17 @@ namespace Ru.GameSchool.DataLayer
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<User> UserReference
+        public EntityReference<UserInfo> UserInfoReference
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("GameSchoolModel.FK_Points_User", "User");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UserInfo>("GameSchoolModel.FK_Points_UserInfo1", "UserInfo");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<User>("GameSchoolModel.FK_Points_User", "User", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<UserInfo>("GameSchoolModel.FK_Points_UserInfo1", "UserInfo", value);
                 }
             }
         }
@@ -4567,18 +4567,18 @@ namespace Ru.GameSchool.DataLayer
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("GameSchoolModel", "FK_User_Status", "User")]
-        public EntityCollection<User> Users
+        [EdmRelationshipNavigationPropertyAttribute("GameSchoolModel", "FK_User_Status", "UserInfo")]
+        public EntityCollection<UserInfo> UserInfoes
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<User>("GameSchoolModel.FK_User_Status", "User");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<UserInfo>("GameSchoolModel.FK_User_Status", "UserInfo");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<User>("GameSchoolModel.FK_User_Status", "User", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<UserInfo>("GameSchoolModel.FK_User_Status", "UserInfo", value);
                 }
             }
         }
@@ -4590,17 +4590,17 @@ namespace Ru.GameSchool.DataLayer
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="GameSchoolModel", Name="User")]
+    [EdmEntityTypeAttribute(NamespaceName="GameSchoolModel", Name="UserInfo")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
-    public partial class User : EntityObject
+    public partial class UserInfo : EntityObject
     {
         #region Factory Method
     
         /// <summary>
-        /// Create a new User object.
+        /// Create a new UserInfo object.
         /// </summary>
-        /// <param name="userId">Initial value of the UserId property.</param>
+        /// <param name="userInfoId">Initial value of the UserInfoId property.</param>
         /// <param name="username">Initial value of the Username property.</param>
         /// <param name="password">Initial value of the Password property.</param>
         /// <param name="email">Initial value of the Email property.</param>
@@ -4609,19 +4609,19 @@ namespace Ru.GameSchool.DataLayer
         /// <param name="departmentId">Initial value of the DepartmentId property.</param>
         /// <param name="createDateTime">Initial value of the CreateDateTime property.</param>
         /// <param name="statusId">Initial value of the StatusId property.</param>
-        public static User CreateUser(global::System.Int32 userId, global::System.String username, global::System.String password, global::System.String email, global::System.Int32 userTypeId, global::System.String fullname, global::System.Int32 departmentId, global::System.DateTime createDateTime, global::System.Int32 statusId)
+        public static UserInfo CreateUserInfo(global::System.Int32 userInfoId, global::System.String username, global::System.String password, global::System.String email, global::System.Int32 userTypeId, global::System.String fullname, global::System.Int32 departmentId, global::System.DateTime createDateTime, global::System.Int32 statusId)
         {
-            User user = new User();
-            user.UserId = userId;
-            user.Username = username;
-            user.Password = password;
-            user.Email = email;
-            user.UserTypeId = userTypeId;
-            user.Fullname = fullname;
-            user.DepartmentId = departmentId;
-            user.CreateDateTime = createDateTime;
-            user.StatusId = statusId;
-            return user;
+            UserInfo userInfo = new UserInfo();
+            userInfo.UserInfoId = userInfoId;
+            userInfo.Username = username;
+            userInfo.Password = password;
+            userInfo.Email = email;
+            userInfo.UserTypeId = userTypeId;
+            userInfo.Fullname = fullname;
+            userInfo.DepartmentId = departmentId;
+            userInfo.CreateDateTime = createDateTime;
+            userInfo.StatusId = statusId;
+            return userInfo;
         }
 
         #endregion
@@ -4633,27 +4633,27 @@ namespace Ru.GameSchool.DataLayer
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Int32 UserId
+        public global::System.Int32 UserInfoId
         {
             get
             {
-                return _UserId;
+                return _UserInfoId;
             }
             set
             {
-                if (_UserId != value)
+                if (_UserInfoId != value)
                 {
-                    OnUserIdChanging(value);
-                    ReportPropertyChanging("UserId");
-                    _UserId = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("UserId");
-                    OnUserIdChanged();
+                    OnUserInfoIdChanging(value);
+                    ReportPropertyChanging("UserInfoId");
+                    _UserInfoId = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("UserInfoId");
+                    OnUserInfoIdChanged();
                 }
             }
         }
-        private global::System.Int32 _UserId;
-        partial void OnUserIdChanging(global::System.Int32 value);
-        partial void OnUserIdChanged();
+        private global::System.Int32 _UserInfoId;
+        partial void OnUserInfoIdChanging(global::System.Int32 value);
+        partial void OnUserInfoIdChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -4858,18 +4858,18 @@ namespace Ru.GameSchool.DataLayer
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("GameSchoolModel", "FK_Comment_User", "Comment")]
+        [EdmRelationshipNavigationPropertyAttribute("GameSchoolModel", "FK_Comment_UserInfo1", "Comment")]
         public EntityCollection<Comment> Comments
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Comment>("GameSchoolModel.FK_Comment_User", "Comment");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Comment>("GameSchoolModel.FK_Comment_UserInfo1", "Comment");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Comment>("GameSchoolModel.FK_Comment_User", "Comment", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Comment>("GameSchoolModel.FK_Comment_UserInfo1", "Comment", value);
                 }
             }
         }
@@ -4880,18 +4880,18 @@ namespace Ru.GameSchool.DataLayer
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("GameSchoolModel", "FK_CommentLike_User", "CommentLike")]
+        [EdmRelationshipNavigationPropertyAttribute("GameSchoolModel", "FK_CommentLike_UserInfo1", "CommentLike")]
         public EntityCollection<CommentLike> CommentLikes
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<CommentLike>("GameSchoolModel.FK_CommentLike_User", "CommentLike");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<CommentLike>("GameSchoolModel.FK_CommentLike_UserInfo1", "CommentLike");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<CommentLike>("GameSchoolModel.FK_CommentLike_User", "CommentLike", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<CommentLike>("GameSchoolModel.FK_CommentLike_UserInfo1", "CommentLike", value);
                 }
             }
         }
@@ -4902,18 +4902,18 @@ namespace Ru.GameSchool.DataLayer
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("GameSchoolModel", "FK_CourseGrade_User", "CourseGrade")]
+        [EdmRelationshipNavigationPropertyAttribute("GameSchoolModel", "FK_CourseGrade_UserInfo1", "CourseGrade")]
         public EntityCollection<CourseGrade> CourseGrades
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<CourseGrade>("GameSchoolModel.FK_CourseGrade_User", "CourseGrade");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<CourseGrade>("GameSchoolModel.FK_CourseGrade_UserInfo1", "CourseGrade");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<CourseGrade>("GameSchoolModel.FK_CourseGrade_User", "CourseGrade", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<CourseGrade>("GameSchoolModel.FK_CourseGrade_UserInfo1", "CourseGrade", value);
                 }
             }
         }
@@ -4962,18 +4962,40 @@ namespace Ru.GameSchool.DataLayer
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("GameSchoolModel", "FK_LevelProjectResult_User", "LevelProjectResult")]
+        [EdmRelationshipNavigationPropertyAttribute("GameSchoolModel", "FK_LevelExamResult_UserInfo1", "LevelExamResult")]
+        public EntityCollection<LevelExamResult> LevelExamResults
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<LevelExamResult>("GameSchoolModel.FK_LevelExamResult_UserInfo1", "LevelExamResult");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<LevelExamResult>("GameSchoolModel.FK_LevelExamResult_UserInfo1", "LevelExamResult", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("GameSchoolModel", "FK_LevelProjectResult_UserInfo1", "LevelProjectResult")]
         public EntityCollection<LevelProjectResult> LevelProjectResults
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<LevelProjectResult>("GameSchoolModel.FK_LevelProjectResult_User", "LevelProjectResult");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<LevelProjectResult>("GameSchoolModel.FK_LevelProjectResult_UserInfo1", "LevelProjectResult");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<LevelProjectResult>("GameSchoolModel.FK_LevelProjectResult_User", "LevelProjectResult", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<LevelProjectResult>("GameSchoolModel.FK_LevelProjectResult_UserInfo1", "LevelProjectResult", value);
                 }
             }
         }
@@ -4984,40 +5006,18 @@ namespace Ru.GameSchool.DataLayer
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("GameSchoolModel", "FK_LevelTestResult_User", "LevelTestResult")]
-        public EntityCollection<LevelTestResult> LevelTestResults
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<LevelTestResult>("GameSchoolModel.FK_LevelTestResult_User", "LevelTestResult");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<LevelTestResult>("GameSchoolModel.FK_LevelTestResult_User", "LevelTestResult", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("GameSchoolModel", "FK_Notification_User", "Notification")]
+        [EdmRelationshipNavigationPropertyAttribute("GameSchoolModel", "FK_Notification_UserInfo1", "Notification")]
         public EntityCollection<Notification> Notifications
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Notification>("GameSchoolModel.FK_Notification_User", "Notification");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Notification>("GameSchoolModel.FK_Notification_UserInfo1", "Notification");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Notification>("GameSchoolModel.FK_Notification_User", "Notification", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Notification>("GameSchoolModel.FK_Notification_UserInfo1", "Notification", value);
                 }
             }
         }
@@ -5028,18 +5028,18 @@ namespace Ru.GameSchool.DataLayer
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("GameSchoolModel", "FK_Points_User", "Points")]
+        [EdmRelationshipNavigationPropertyAttribute("GameSchoolModel", "FK_Points_UserInfo1", "Point")]
         public EntityCollection<Point> Points
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Point>("GameSchoolModel.FK_Points_User", "Points");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Point>("GameSchoolModel.FK_Points_UserInfo1", "Point");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Point>("GameSchoolModel.FK_Points_User", "Points", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Point>("GameSchoolModel.FK_Points_UserInfo1", "Point", value);
                 }
             }
         }
@@ -5126,18 +5126,34 @@ namespace Ru.GameSchool.DataLayer
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("GameSchoolModel", "FK_UserLog_User", "UserLog")]
-        public EntityCollection<UserLog> UserLogs
+        [EdmRelationshipNavigationPropertyAttribute("GameSchoolModel", "FK_UserInfo_UserLog", "UserLog")]
+        public UserLog UserLog
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<UserLog>("GameSchoolModel.FK_UserLog_User", "UserLog");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UserLog>("GameSchoolModel.FK_UserInfo_UserLog", "UserLog").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UserLog>("GameSchoolModel.FK_UserInfo_UserLog", "UserLog").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<UserLog> UserLogReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UserLog>("GameSchoolModel.FK_UserInfo_UserLog", "UserLog");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<UserLog>("GameSchoolModel.FK_UserLog_User", "UserLog", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<UserLog>("GameSchoolModel.FK_UserInfo_UserLog", "UserLog", value);
                 }
             }
         }
@@ -5184,14 +5200,14 @@ namespace Ru.GameSchool.DataLayer
         /// <param name="userLogId">Initial value of the UserLogId property.</param>
         /// <param name="loginTime">Initial value of the LoginTime property.</param>
         /// <param name="ipAddress">Initial value of the IpAddress property.</param>
-        /// <param name="userId">Initial value of the UserId property.</param>
-        public static UserLog CreateUserLog(global::System.Int32 userLogId, global::System.DateTime loginTime, global::System.String ipAddress, global::System.Int32 userId)
+        /// <param name="userInfoId">Initial value of the UserInfoId property.</param>
+        public static UserLog CreateUserLog(global::System.Int32 userLogId, global::System.DateTime loginTime, global::System.String ipAddress, global::System.Int32 userInfoId)
         {
             UserLog userLog = new UserLog();
             userLog.UserLogId = userLogId;
             userLog.LoginTime = loginTime;
             userLog.IpAddress = ipAddress;
-            userLog.UserId = userId;
+            userLog.UserInfoId = userInfoId;
             return userLog;
         }
 
@@ -5279,24 +5295,24 @@ namespace Ru.GameSchool.DataLayer
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Int32 UserId
+        public global::System.Int32 UserInfoId
         {
             get
             {
-                return _UserId;
+                return _UserInfoId;
             }
             set
             {
-                OnUserIdChanging(value);
-                ReportPropertyChanging("UserId");
-                _UserId = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("UserId");
-                OnUserIdChanged();
+                OnUserInfoIdChanging(value);
+                ReportPropertyChanging("UserInfoId");
+                _UserInfoId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("UserInfoId");
+                OnUserInfoIdChanged();
             }
         }
-        private global::System.Int32 _UserId;
-        partial void OnUserIdChanging(global::System.Int32 value);
-        partial void OnUserIdChanged();
+        private global::System.Int32 _UserInfoId;
+        partial void OnUserInfoIdChanging(global::System.Int32 value);
+        partial void OnUserInfoIdChanged();
 
         #endregion
 
@@ -5309,16 +5325,16 @@ namespace Ru.GameSchool.DataLayer
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("GameSchoolModel", "FK_UserLog_User", "User")]
-        public User User
+        [EdmRelationshipNavigationPropertyAttribute("GameSchoolModel", "FK_UserInfo_UserLog", "UserInfo")]
+        public UserInfo UserInfo
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("GameSchoolModel.FK_UserLog_User", "User").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UserInfo>("GameSchoolModel.FK_UserInfo_UserLog", "UserInfo").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("GameSchoolModel.FK_UserLog_User", "User").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UserInfo>("GameSchoolModel.FK_UserInfo_UserLog", "UserInfo").Value = value;
             }
         }
         /// <summary>
@@ -5326,17 +5342,17 @@ namespace Ru.GameSchool.DataLayer
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<User> UserReference
+        public EntityReference<UserInfo> UserInfoReference
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("GameSchoolModel.FK_UserLog_User", "User");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UserInfo>("GameSchoolModel.FK_UserInfo_UserLog", "UserInfo");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<User>("GameSchoolModel.FK_UserLog_User", "User", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<UserInfo>("GameSchoolModel.FK_UserInfo_UserLog", "UserInfo", value);
                 }
             }
         }
@@ -5434,18 +5450,18 @@ namespace Ru.GameSchool.DataLayer
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("GameSchoolModel", "FK_User_UserType", "User")]
-        public EntityCollection<User> Users
+        [EdmRelationshipNavigationPropertyAttribute("GameSchoolModel", "FK_User_UserType", "UserInfo")]
+        public EntityCollection<UserInfo> UserInfoes
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<User>("GameSchoolModel.FK_User_UserType", "User");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<UserInfo>("GameSchoolModel.FK_User_UserType", "UserInfo");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<User>("GameSchoolModel.FK_User_UserType", "User", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<UserInfo>("GameSchoolModel.FK_User_UserType", "UserInfo", value);
                 }
             }
         }

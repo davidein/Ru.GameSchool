@@ -3,6 +3,9 @@ using Ru.GameSchool.DataLayer;
 
 namespace Ru.GameSchool.BusinessLayer.Services
 {
+    /// <summary>
+    /// Service class that abstracts the interraction around the comment entity with the data layer.
+    /// </summary> 
     public class SocialService : BaseService
     {
         public void CreateLike(CommentLike commentLike)
