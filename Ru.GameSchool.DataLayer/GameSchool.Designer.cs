@@ -8,13 +8,12 @@
 //------------------------------------------------------------------------------
 
 using System;
-using System.ComponentModel;
-using System.Data.EntityClient;
 using System.Data.Objects;
 using System.Data.Objects.DataClasses;
-using System.Linq;
-using System.Runtime.Serialization;
+using System.Data.EntityClient;
+using System.ComponentModel;
 using System.Xml.Serialization;
+using System.Runtime.Serialization;
 
 [assembly: EdmSchemaAttribute()]
 #region EDM Relationship Metadata
@@ -418,7 +417,6 @@ namespace Ru.GameSchool.DataLayer
         private ObjectSet<UserType> _UserTypes;
 
         #endregion
-
         #region AddTo Methods
     
         /// <summary>
@@ -582,11 +580,11 @@ namespace Ru.GameSchool.DataLayer
         }
 
         #endregion
-
     }
+    
 
     #endregion
-
+    
     #region Entities
     
     /// <summary>
@@ -623,7 +621,6 @@ namespace Ru.GameSchool.DataLayer
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -798,7 +795,6 @@ namespace Ru.GameSchool.DataLayer
         partial void OnCreateDateTimeChanged();
 
         #endregion
-
     
         #region Navigation Properties
     
@@ -901,7 +897,6 @@ namespace Ru.GameSchool.DataLayer
         }
 
         #endregion
-
     }
     
     /// <summary>
@@ -930,7 +925,6 @@ namespace Ru.GameSchool.DataLayer
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -1009,7 +1003,6 @@ namespace Ru.GameSchool.DataLayer
         partial void OnUserInfoIdChanged();
 
         #endregion
-
     
         #region Navigation Properties
     
@@ -1090,7 +1083,6 @@ namespace Ru.GameSchool.DataLayer
         }
 
         #endregion
-
     }
     
     /// <summary>
@@ -1117,7 +1109,6 @@ namespace Ru.GameSchool.DataLayer
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -1172,7 +1163,6 @@ namespace Ru.GameSchool.DataLayer
         partial void OnNameChanged();
 
         #endregion
-
     
         #region Navigation Properties
     
@@ -1199,7 +1189,6 @@ namespace Ru.GameSchool.DataLayer
         }
 
         #endregion
-
     }
     
     /// <summary>
@@ -1240,7 +1229,6 @@ namespace Ru.GameSchool.DataLayer
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -1463,7 +1451,6 @@ namespace Ru.GameSchool.DataLayer
         partial void OnDepartmentIdChanged();
 
         #endregion
-
     
         #region Navigation Properties
     
@@ -1594,7 +1581,6 @@ namespace Ru.GameSchool.DataLayer
         }
 
         #endregion
-
     }
     
     /// <summary>
@@ -1625,7 +1611,6 @@ namespace Ru.GameSchool.DataLayer
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -1755,7 +1740,6 @@ namespace Ru.GameSchool.DataLayer
         partial void OnCreateDateTimeChanged();
 
         #endregion
-
     
         #region Navigation Properties
     
@@ -1836,7 +1820,6 @@ namespace Ru.GameSchool.DataLayer
         }
 
         #endregion
-
     }
     
     /// <summary>
@@ -1863,7 +1846,6 @@ namespace Ru.GameSchool.DataLayer
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -1942,7 +1924,6 @@ namespace Ru.GameSchool.DataLayer
         partial void OnDescriptionChanged();
 
         #endregion
-
     
         #region Navigation Properties
     
@@ -1991,7 +1972,6 @@ namespace Ru.GameSchool.DataLayer
         }
 
         #endregion
-
     }
     
     /// <summary>
@@ -2026,7 +2006,6 @@ namespace Ru.GameSchool.DataLayer
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -2177,7 +2156,6 @@ namespace Ru.GameSchool.DataLayer
         partial void OnCreateDateTimeChanged();
 
         #endregion
-
     
         #region Navigation Properties
     
@@ -2308,7 +2286,6 @@ namespace Ru.GameSchool.DataLayer
         }
 
         #endregion
-
     }
     
     /// <summary>
@@ -2341,7 +2318,6 @@ namespace Ru.GameSchool.DataLayer
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -2492,7 +2468,6 @@ namespace Ru.GameSchool.DataLayer
         partial void OnCreateDateTimeChanged();
 
         #endregion
-
     
         #region Navigation Properties
     
@@ -2579,7 +2554,6 @@ namespace Ru.GameSchool.DataLayer
         }
 
         #endregion
-
     }
     
     /// <summary>
@@ -2608,7 +2582,6 @@ namespace Ru.GameSchool.DataLayer
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -2711,7 +2684,6 @@ namespace Ru.GameSchool.DataLayer
         partial void OnCorrectChanged();
 
         #endregion
-
     
         #region Navigation Properties
     
@@ -2754,7 +2726,6 @@ namespace Ru.GameSchool.DataLayer
         }
 
         #endregion
-
     }
     
     /// <summary>
@@ -2783,7 +2754,6 @@ namespace Ru.GameSchool.DataLayer
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -2862,7 +2832,6 @@ namespace Ru.GameSchool.DataLayer
         partial void OnQuestionChanged();
 
         #endregion
-
     
         #region Navigation Properties
     
@@ -2927,7 +2896,6 @@ namespace Ru.GameSchool.DataLayer
         }
 
         #endregion
-
     }
     
     /// <summary>
@@ -2956,7 +2924,6 @@ namespace Ru.GameSchool.DataLayer
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -3038,7 +3005,6 @@ namespace Ru.GameSchool.DataLayer
         partial void OnGradeChanged();
 
         #endregion
-
     
         #region Navigation Properties
     
@@ -3119,7 +3085,6 @@ namespace Ru.GameSchool.DataLayer
         }
 
         #endregion
-
     }
     
     /// <summary>
@@ -3152,7 +3117,6 @@ namespace Ru.GameSchool.DataLayer
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -3327,7 +3291,6 @@ namespace Ru.GameSchool.DataLayer
         partial void OnTitleChanged();
 
         #endregion
-
     
         #region Navigation Properties
     
@@ -3430,7 +3393,6 @@ namespace Ru.GameSchool.DataLayer
         }
 
         #endregion
-
     }
     
     /// <summary>
@@ -3465,7 +3427,6 @@ namespace Ru.GameSchool.DataLayer
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -3640,7 +3601,6 @@ namespace Ru.GameSchool.DataLayer
         partial void OnNameChanged();
 
         #endregion
-
     
         #region Navigation Properties
     
@@ -3705,7 +3665,6 @@ namespace Ru.GameSchool.DataLayer
         }
 
         #endregion
-
     }
     
     /// <summary>
@@ -3736,7 +3695,6 @@ namespace Ru.GameSchool.DataLayer
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -3866,7 +3824,6 @@ namespace Ru.GameSchool.DataLayer
         partial void OnCreateDateTimeChanged();
 
         #endregion
-
     
         #region Navigation Properties
     
@@ -3947,7 +3904,6 @@ namespace Ru.GameSchool.DataLayer
         }
 
         #endregion
-
     }
     
     /// <summary>
@@ -3978,7 +3934,6 @@ namespace Ru.GameSchool.DataLayer
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -4129,7 +4084,6 @@ namespace Ru.GameSchool.DataLayer
         partial void OnCreateDateTimeChanged();
 
         #endregion
-
     
         #region Navigation Properties
     
@@ -4172,7 +4126,6 @@ namespace Ru.GameSchool.DataLayer
         }
 
         #endregion
-
     }
     
     /// <summary>
@@ -4205,7 +4158,6 @@ namespace Ru.GameSchool.DataLayer
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -4356,7 +4308,6 @@ namespace Ru.GameSchool.DataLayer
         partial void OnDescriptionChanged();
 
         #endregion
-
     
         #region Navigation Properties
     
@@ -4475,7 +4426,6 @@ namespace Ru.GameSchool.DataLayer
         }
 
         #endregion
-
     }
     
     /// <summary>
@@ -4502,7 +4452,6 @@ namespace Ru.GameSchool.DataLayer
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -4557,7 +4506,6 @@ namespace Ru.GameSchool.DataLayer
         partial void OnNameChanged();
 
         #endregion
-
     
         #region Navigation Properties
     
@@ -4584,7 +4532,6 @@ namespace Ru.GameSchool.DataLayer
         }
 
         #endregion
-
     }
     
     /// <summary>
@@ -4625,7 +4572,6 @@ namespace Ru.GameSchool.DataLayer
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -4848,7 +4794,6 @@ namespace Ru.GameSchool.DataLayer
         partial void OnStatusIdChanged();
 
         #endregion
-
     
         #region Navigation Properties
     
@@ -5181,7 +5126,6 @@ namespace Ru.GameSchool.DataLayer
         }
 
         #endregion
-
     }
     
     /// <summary>
@@ -5212,7 +5156,6 @@ namespace Ru.GameSchool.DataLayer
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -5315,7 +5258,6 @@ namespace Ru.GameSchool.DataLayer
         partial void OnUserInfoIdChanged();
 
         #endregion
-
     
         #region Navigation Properties
     
@@ -5358,7 +5300,6 @@ namespace Ru.GameSchool.DataLayer
         }
 
         #endregion
-
     }
     
     /// <summary>
@@ -5385,7 +5326,6 @@ namespace Ru.GameSchool.DataLayer
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -5440,7 +5380,6 @@ namespace Ru.GameSchool.DataLayer
         partial void OnNameChanged();
 
         #endregion
-
     
         #region Navigation Properties
     
@@ -5467,10 +5406,8 @@ namespace Ru.GameSchool.DataLayer
         }
 
         #endregion
-
     }
 
     #endregion
-
     
 }
