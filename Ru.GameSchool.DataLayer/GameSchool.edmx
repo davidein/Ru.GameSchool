@@ -1645,183 +1645,218 @@
     </Options>
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
-      <Diagram Name="Model1">
-        <EntityTypeShape EntityType="GameSchoolModel.Comment" Width="1.5" PointX="12.75" PointY="10.75" Height="2.9417936197916674" />
-        <EntityTypeShape EntityType="GameSchoolModel.CommentLike" Width="1.5" PointX="15" PointY="8.75" Height="1.9802864583333388" />
-        <EntityTypeShape EntityType="GameSchoolModel.ContentType" Width="1.5" PointX="8.25" PointY="18.5" Height="1.595683593749996" />
+      <Diagram Name="Model1" ZoomLevel="77" ShowGrid="true">
+        <EntityTypeShape EntityType="GameSchoolModel.Comment" Width="1.5" PointX="12.75" PointY="16.625" Height="2.9417936197916674" />
+        <EntityTypeShape EntityType="GameSchoolModel.CommentLike" Width="1.5" PointX="15" PointY="14.625" Height="1.9802864583333388" />
+        <EntityTypeShape EntityType="GameSchoolModel.ContentType" Width="1.5" PointX="8.25" PointY="34.375" Height="1.595683593749996" />
         <EntityTypeShape EntityType="GameSchoolModel.Course" Width="1.5" PointX="3" PointY="12.375" Height="3.7109993489583371" />
-        <EntityTypeShape EntityType="GameSchoolModel.CourseGrade" Width="1.5" PointX="5.25" PointY="12" Height="2.3648893229166674" />
+        <EntityTypeShape EntityType="GameSchoolModel.CourseGrade" Width="1.5" PointX="7.5" PointY="13" Height="2.3648893229166674" />
         <EntityTypeShape EntityType="GameSchoolModel.Department" Width="1.5" PointX="0.75" PointY="13.25" Height="1.9802864583333388" />
-        <EntityTypeShape EntityType="GameSchoolModel.Level" Width="1.5" PointX="5.25" PointY="15.75" Height="3.1340950520833388" />
-        <EntityTypeShape EntityType="GameSchoolModel.LevelExam" Width="1.5" PointX="7.5" PointY="14.25" Height="2.7494921875000102" />
-        <EntityTypeShape EntityType="GameSchoolModel.LevelExamAnswer" Width="1.5" PointX="12" PointY="14.625" Height="1.9802864583333246" />
-        <EntityTypeShape EntityType="GameSchoolModel.LevelExamQuestion" Width="1.5" PointX="9.75" PointY="14.625" Height="1.9802864583333388" />
-        <EntityTypeShape EntityType="GameSchoolModel.LevelExamResult" Width="1.5" PointX="9.75" PointY="11.625" Height="1.9802864583333388" />
-        <EntityTypeShape EntityType="GameSchoolModel.LevelMaterial" Width="1.5" PointX="10.5" PointY="17.875" Height="2.9417936197916674" />
-        <EntityTypeShape EntityType="GameSchoolModel.LevelProject" Width="1.5" PointX="7.5" PointY="21.375" Height="2.7494921875000102" />
-        <EntityTypeShape EntityType="GameSchoolModel.LevelProjectResult" Width="1.5" PointX="9.75" PointY="21.625" Height="2.3648893229166674" />
-        <EntityTypeShape EntityType="GameSchoolModel.Notification" Width="1.5" PointX="7.5" PointY="7" Height="2.3648893229166674" />
-        <EntityTypeShape EntityType="GameSchoolModel.Point" Width="1.5" PointX="7.5" PointY="10.25" Height="2.7494921875000102" />
-        <EntityTypeShape EntityType="GameSchoolModel.Status" Width="1.5" PointX="3" PointY="4.875" Height="1.595683593749996" />
-        <EntityTypeShape EntityType="GameSchoolModel.UserInfo" Width="1.5" PointX="5.25" PointY="5.625" Height="5.05710937500001" />
-        <EntityTypeShape EntityType="GameSchoolModel.UserLog" Width="1.5" PointX="3" PointY="7.25" Height="1.9802864583333246" />
-        <EntityTypeShape EntityType="GameSchoolModel.UserType" Width="1.5" PointX="3" PointY="10" Height="1.5956835937499818" />
+        <EntityTypeShape EntityType="GameSchoolModel.Level" Width="1.5" PointX="5.25" PointY="21.5" Height="3.1340950520833388" />
+        <EntityTypeShape EntityType="GameSchoolModel.LevelExam" Width="1.5" PointX="7.5" PointY="23.5" Height="2.7494921875000102" />
+        <EntityTypeShape EntityType="GameSchoolModel.LevelExamAnswer" Width="1.5" PointX="12" PointY="26.625" Height="1.9802864583333246" />
+        <EntityTypeShape EntityType="GameSchoolModel.LevelExamQuestion" Width="1.5" PointX="9.75" PointY="26.625" Height="1.9802864583333388" />
+        <EntityTypeShape EntityType="GameSchoolModel.LevelExamResult" Width="1.5" PointX="9.75" PointY="18" Height="1.9802864583333388" />
+        <EntityTypeShape EntityType="GameSchoolModel.LevelMaterial" Width="1.5" PointX="10.5" PointY="21.625" Height="2.9417936197916674" />
+        <EntityTypeShape EntityType="GameSchoolModel.LevelProject" Width="1.5" PointX="7.5" PointY="30.75" Height="2.7494921875000102" />
+        <EntityTypeShape EntityType="GameSchoolModel.LevelProjectResult" Width="1.5" PointX="12.75" PointY="21.375" Height="2.3648893229166674" />
+        <EntityTypeShape EntityType="GameSchoolModel.Notification" Width="1.5" PointX="7.5" PointY="9" Height="2.3648893229166674" />
+        <EntityTypeShape EntityType="GameSchoolModel.Point" Width="1.5" PointX="7.5" PointY="16.75" Height="2.7494921875000102" />
+        <EntityTypeShape EntityType="GameSchoolModel.Status" Width="1.5" PointX="3" PointY="9.875" Height="1.595683593749996" />
+        <EntityTypeShape EntityType="GameSchoolModel.UserInfo" Width="1.5" PointX="5.25" PointY="11.625" Height="5.05710937500001" />
+        <EntityTypeShape EntityType="GameSchoolModel.UserLog" Width="1.5" PointX="3" PointY="17.25" Height="1.9802864583333246" />
+        <EntityTypeShape EntityType="GameSchoolModel.UserType" Width="1.5" PointX="3" PointY="20" Height="1.5956835937499818" />
         <AssociationConnector Association="GameSchoolModel.FK_Comment_LevelMaterial" >
-          <ConnectorPoint PointX="11.625" PointY="17.875" />
-          <ConnectorPoint PointX="11.625" PointY="11.15625" />
-          <ConnectorPoint PointX="12.75" PointY="11.15625" />
+          <ConnectorPoint PointX="11.65625" PointY="21.625" />
+          <ConnectorPoint PointX="11.65625" PointY="17.28125" />
+          <ConnectorPoint PointX="12.75" PointY="17.28125" />
         </AssociationConnector>
         <AssociationConnector Association="GameSchoolModel.FK_Comment_UserInfo1" >
-          <ConnectorPoint PointX="6.75" PointY="6.28125" />
-          <ConnectorPoint PointX="13.5" PointY="6.28125" />
-          <ConnectorPoint PointX="13.5" PointY="10.75" />
+          <ConnectorPoint PointX="6.75" PointY="12.28125" />
+          <ConnectorPoint PointX="13.5" PointY="12.28125" />
+          <ConnectorPoint PointX="13.5" PointY="16.625" />
         </AssociationConnector>
         <AssociationConnector Association="GameSchoolModel.FK_CommentLike_Comment" >
-          <ConnectorPoint PointX="14.25" PointY="12.220896809895834" />
-          <ConnectorPoint PointX="15.75" PointY="12.220896809895834" />
-          <ConnectorPoint PointX="15.75" PointY="10.730286458333339" />
+          <ConnectorPoint PointX="14.25" PointY="18.095896809895834" />
+          <ConnectorPoint PointX="15.75" PointY="18.095896809895834" />
+          <ConnectorPoint PointX="15.75" PointY="16.605286458333339" />
         </AssociationConnector>
         <AssociationConnector Association="GameSchoolModel.FK_CommentLike_UserInfo1" >
-          <ConnectorPoint PointX="6.75" PointY="9.8074446614583337" />
-          <ConnectorPoint PointX="7.166666666666667" PointY="9.8074446614583337" />
-          <ConnectorPoint PointX="7.333333333333333" PointY="9.8074446614583337" />
-          <ConnectorPoint PointX="10.416666666666666" PointY="9.8074446614583337" />
-          <ConnectorPoint PointX="10.583333333333334" PointY="9.8074446614583337" />
-          <ConnectorPoint PointX="13.416666666666666" PointY="9.8074446614583337" />
-          <ConnectorPoint PointX="13.583333333333334" PointY="9.8074446614583337" />
-          <ConnectorPoint PointX="15" PointY="9.8074446614583337" />
+          <ConnectorPoint PointX="6.75" PointY="16.016337890625003" />
+          <ConnectorPoint PointX="7.041666666666667" PointY="16.016337890625003" />
+          <ConnectorPoint PointX="7.208333333333333" PointY="16.016337890625003" />
+          <ConnectorPoint PointX="13.416666666666666" PointY="16.016337890625003" />
+          <ConnectorPoint PointX="13.583333333333334" PointY="16.016337890625003" />
+          <ConnectorPoint PointX="15" PointY="16.016337890625003" />
         </AssociationConnector>
         <AssociationConnector Association="GameSchoolModel.FK_LevelMaterial_ContentType" >
-          <ConnectorPoint PointX="9.75" PointY="19.297841796874998" />
-          <ConnectorPoint PointX="9.9166666666666661" PointY="19.297841796874998" />
-          <ConnectorPoint PointX="10.083333333333334" PointY="19.297841796874998" />
-          <ConnectorPoint PointX="10.5" PointY="19.297841796874998" />
+          <ConnectorPoint PointX="9.375" PointY="34.375" />
+          <ConnectorPoint PointX="9.375" PointY="22.53125" />
+          <ConnectorPoint PointX="9.8385416666666661" PointY="22.53125" />
+          <ConnectorPoint PointX="10.005208333333334" PointY="22.53125" />
+          <ConnectorPoint PointX="10.5" PointY="22.53125" />
         </AssociationConnector>
         <AssociationConnector Association="GameSchoolModel.FK_Course_Department" >
           <ConnectorPoint PointX="2.25" PointY="14.240143229166669" />
           <ConnectorPoint PointX="3" PointY="14.240143229166669" />
         </AssociationConnector>
         <AssociationConnector Association="GameSchoolModel.FK_CourseGrade_Course" >
-          <ConnectorPoint PointX="4.5" PointY="13.369944661458334" />
-          <ConnectorPoint PointX="4.791666666666667" PointY="13.369944661458334" />
-          <ConnectorPoint PointX="4.958333333333333" PointY="13.369944661458334" />
-          <ConnectorPoint PointX="5.25" PointY="13.369944661458334" />
+          <ConnectorPoint PointX="3.75" PointY="16.085999348958339" />
+          <ConnectorPoint PointX="3.75" PointY="16.93210937500001" />
+          <ConnectorPoint PointX="4.791666666666667" PointY="16.93210937500001" />
+          <ConnectorPoint PointX="5.020833333333333" PointY="16.93210937500001" />
+          <ConnectorPoint PointX="5.3229141666666671" PointY="16.93210937500001" />
+          <ConnectorPoint PointX="5.4895808333333331" PointY="16.93210937500001" />
+          <ConnectorPoint PointX="5.541666666666667" PointY="16.93210937500001" />
+          <ConnectorPoint PointX="5.708333333333333" PointY="16.93210937500001" />
+          <ConnectorPoint PointX="6.291666666666667" PointY="16.93210937500001" />
+          <ConnectorPoint PointX="6.458333333333333" PointY="16.93210937500001" />
+          <ConnectorPoint PointX="7.125" PointY="16.93210937500001" />
+          <ConnectorPoint PointX="7.125" PointY="14.182444661458334" />
+          <ConnectorPoint PointX="7.5" PointY="14.182444661458334" />
         </AssociationConnector>
         <AssociationConnector Association="GameSchoolModel.FK_Level_Course" >
-          <ConnectorPoint PointX="4.5" PointY="15.917999674479169" />
-          <ConnectorPoint PointX="5.25" PointY="15.917999674479169" />
+          <ConnectorPoint PointX="4.4999999999130775" PointY="16.085999348958339" />
+          <ConnectorPoint PointX="4.875" PointY="16.46099934904526" />
+          <ConnectorPoint PointX="4.875" PointY="23.067047526041669" />
+          <ConnectorPoint PointX="5.25" PointY="23.067047526041669" />
         </AssociationConnector>
         <AssociationConnector Association="GameSchoolModel.FK_Points_Course" >
-          <ConnectorPoint PointX="4.5" PointY="14.643972167968752" />
-          <ConnectorPoint PointX="4.875" PointY="14.643972167968752" />
-          <ConnectorPoint PointX="4.875" PointY="11.341054687500005" />
-          <ConnectorPoint PointX="4.979166666666667" PointY="11.341054687500005" />
-          <ConnectorPoint PointX="5.145833333333333" PointY="11.341054687500005" />
-          <ConnectorPoint PointX="5.916666666666667" PointY="11.341054687500005" />
-          <ConnectorPoint PointX="6.083333333333333" PointY="11.341054687500005" />
-          <ConnectorPoint PointX="7.166666666666667" PointY="11.341054687500005" />
-          <ConnectorPoint PointX="7.333333333333333" PointY="11.341054687500005" />
-          <ConnectorPoint PointX="7.5" PointY="11.341054687500005" />
+          <ConnectorPoint PointX="3.343748" PointY="16.085999348958339" />
+          <ConnectorPoint PointX="3.343748" PointY="17.125" />
+          <ConnectorPoint PointX="4.75" PointY="17.125" />
+          <ConnectorPoint PointX="4.75" PointY="18.215800281250011" />
+          <ConnectorPoint PointX="4.791666666666667" PointY="18.215800281250011" />
+          <ConnectorPoint PointX="5.020833333333333" PointY="18.215800281250011" />
+          <ConnectorPoint PointX="6.291666666666667" PointY="18.215800281250011" />
+          <ConnectorPoint PointX="6.458333333333333" PointY="18.215800281250011" />
+          <ConnectorPoint PointX="7.229166666666667" PointY="18.215800281250011" />
+          <ConnectorPoint PointX="7.395833333333333" PointY="18.215800281250011" />
+          <ConnectorPoint PointX="7.5" PointY="18.215800281250011" />
         </AssociationConnector>
         <AssociationConnector Association="GameSchoolModel.FK_CourseGrade_UserInfo1" >
-          <ConnectorPoint PointX="6" PointY="10.68210937500001" />
-          <ConnectorPoint PointX="6" PointY="12" />
+          <ConnectorPoint PointX="6.75" PointY="13.528722330729167" />
+          <ConnectorPoint PointX="7.5" PointY="13.528722330729167" />
         </AssociationConnector>
         <AssociationConnector Association="GameSchoolModel.FK_User_Department" >
-          <ConnectorPoint PointX="1.5" PointY="13.25" />
-          <ConnectorPoint PointX="1.5" PointY="6.860341796874998" />
-          <ConnectorPoint PointX="5.25" PointY="6.860341796874998" />
+          <ConnectorPoint PointX="1.5" PointY="15.230286458333339" />
+          <ConnectorPoint PointX="1.5" PointY="16.415304362022635" />
+          <ConnectorPoint PointX="3.2604146666666667" PointY="16.415304362022635" />
+          <ConnectorPoint PointX="3.4270813333333336" PointY="16.415304362022635" />
+          <ConnectorPoint PointX="3.6666666666666665" PointY="16.415304362022635" />
+          <ConnectorPoint PointX="3.8333333333333335" PointY="16.415304362022635" />
+          <ConnectorPoint PointX="4.854166666666667" PointY="16.415304362022635" />
+          <ConnectorPoint PointX="5.020833333333333" PointY="16.415304362022635" />
+          <ConnectorPoint PointX="5.25" PointY="16.415304362022635" />
         </AssociationConnector>
         <AssociationConnector Association="GameSchoolModel.FK_LevelExam_Level" >
-          <ConnectorPoint PointX="6.75" PointY="16.374746093750005" />
-          <ConnectorPoint PointX="7.166666666666667" PointY="16.374746093750005" />
-          <ConnectorPoint PointX="7.333333333333333" PointY="16.374746093750005" />
-          <ConnectorPoint PointX="7.5" PointY="16.374746093750005" />
+          <ConnectorPoint PointX="6.75" PointY="24.067047526041669" />
+          <ConnectorPoint PointX="7.5" PointY="24.067047526041669" />
         </AssociationConnector>
         <AssociationConnector Association="GameSchoolModel.FK_LevelMaterial_Level" >
-          <ConnectorPoint PointX="6.75" PointY="18.15625" />
-          <ConnectorPoint PointX="7.166666666666667" PointY="18.15625" />
-          <ConnectorPoint PointX="7.333333333333333" PointY="18.15625" />
-          <ConnectorPoint PointX="10.5" PointY="18.15625" />
+          <ConnectorPoint PointX="6.75" PointY="23.046875" />
+          <ConnectorPoint PointX="9.2916666666666661" PointY="23.046875" />
+          <ConnectorPoint PointX="9.4583333333333339" PointY="23.046875" />
+          <ConnectorPoint PointX="9.8385416666666661" PointY="23.046875" />
+          <ConnectorPoint PointX="10.005208333333334" PointY="23.046875" />
+          <ConnectorPoint PointX="10.5" PointY="23.046875" />
         </AssociationConnector>
         <AssociationConnector Association="GameSchoolModel.FK_LevelProject_Level" >
-          <ConnectorPoint PointX="6" PointY="18.884095052083339" />
-          <ConnectorPoint PointX="6" PointY="22.749746093750005" />
-          <ConnectorPoint PointX="7.5" PointY="22.749746093750005" />
+          <ConnectorPoint PointX="6" PointY="24.634095052083339" />
+          <ConnectorPoint PointX="6" PointY="32.124746093750005" />
+          <ConnectorPoint PointX="7.5" PointY="32.124746093750005" />
         </AssociationConnector>
         <AssociationConnector Association="GameSchoolModel.FK_Points_Level" >
-          <ConnectorPoint PointX="6.75" PointY="15.751152846153847" />
-          <ConnectorPoint PointX="7.125" PointY="15.376152846153847" />
-          <ConnectorPoint PointX="7.125" PointY="12.201525437500003" />
-          <ConnectorPoint PointX="7.166666666666667" PointY="12.201525437500003" />
-          <ConnectorPoint PointX="7.333333333333333" PointY="12.201525437500003" />
-          <ConnectorPoint PointX="7.5" PointY="12.201525437500003" />
+          <ConnectorPoint PointX="6" PointY="21.5" />
+          <ConnectorPoint PointX="6" PointY="18.888898734375005" />
+          <ConnectorPoint PointX="6.291666666666667" PointY="18.888898734375005" />
+          <ConnectorPoint PointX="6.458333333333333" PointY="18.888898734375005" />
+          <ConnectorPoint PointX="7.229166666666667" PointY="18.888898734375005" />
+          <ConnectorPoint PointX="7.395833333333333" PointY="18.888898734375005" />
+          <ConnectorPoint PointX="7.5" PointY="18.888898734375005" />
         </AssociationConnector>
         <AssociationConnector Association="GameSchoolModel.FK_LevelExamQuestion_LevelExam" >
-          <ConnectorPoint PointX="9" PointY="15.615143229166669" />
-          <ConnectorPoint PointX="9.75" PointY="15.615143229166669" />
+          <ConnectorPoint PointX="9" PointY="25.439392903645839" />
+          <ConnectorPoint PointX="9.2916666666666661" PointY="25.439392903645839" />
+          <ConnectorPoint PointX="9.4583333333333339" PointY="25.439392903645839" />
+          <ConnectorPoint PointX="10.09375" PointY="25.439392903645839" />
+          <ConnectorPoint PointX="10.09375" PointY="26.625" />
         </AssociationConnector>
         <AssociationConnector Association="GameSchoolModel.FK_LevelExamResult_LevelExam" >
-          <ConnectorPoint PointX="9" PointY="14.25" />
-          <ConnectorPoint PointX="9.375" PointY="13.875" />
-          <ConnectorPoint PointX="9.375" PointY="13.980286458333339" />
-          <ConnectorPoint PointX="9.75" PointY="13.605286458333339" />
+          <ConnectorPoint PointX="9" PointY="25.003090761718752" />
+          <ConnectorPoint PointX="9.2916666666666661" PointY="25.003090761718752" />
+          <ConnectorPoint PointX="9.4583333333333339" PointY="25.003090761718752" />
+          <ConnectorPoint PointX="9.921875" PointY="25.003090761718752" />
+          <ConnectorPoint PointX="9.921875" PointY="19.980286458333339" />
         </AssociationConnector>
         <AssociationConnector Association="GameSchoolModel.FK_LevelExamAnswer_LevelExamQuestion" >
-          <ConnectorPoint PointX="11.25" PointY="15.615143229166662" />
-          <ConnectorPoint PointX="11.541666666666666" PointY="15.615143229166662" />
-          <ConnectorPoint PointX="11.708333333333334" PointY="15.615143229166662" />
-          <ConnectorPoint PointX="12" PointY="15.615143229166662" />
+          <ConnectorPoint PointX="11.25" PointY="27.615143229166662" />
+          <ConnectorPoint PointX="12" PointY="27.615143229166662" />
         </AssociationConnector>
         <AssociationConnector Association="GameSchoolModel.FK_LevelExamResult_UserInfo1" >
-          <ConnectorPoint PointX="6.75" PointY="6.6406274999999937" />
-          <ConnectorPoint PointX="10.5" PointY="6.6406274999999937" />
-          <ConnectorPoint PointX="10.5" PointY="11.625" />
+          <ConnectorPoint PointX="6.375" PointY="16.68210937500001" />
+          <ConnectorPoint PointX="6.375" PointY="19.771139322916675" />
+          <ConnectorPoint PointX="7.229166666666667" PointY="19.771139322916675" />
+          <ConnectorPoint PointX="7.395833333333333" PointY="19.771139322916675" />
+          <ConnectorPoint PointX="9.75" PointY="19.771139322916675" />
         </AssociationConnector>
         <AssociationConnector Association="GameSchoolModel.FK_LevelProjectResult_LevelProject" >
-          <ConnectorPoint PointX="9" PointY="22.807444661458334" />
-          <ConnectorPoint PointX="9.75" PointY="22.807444661458334" />
+          <ConnectorPoint PointX="9" PointY="32.124746093750005" />
+          <ConnectorPoint PointX="9.2916666666666661" PointY="32.124746093750005" />
+          <ConnectorPoint PointX="9.4583333333333339" PointY="32.124746093750005" />
+          <ConnectorPoint PointX="13.90625" PointY="32.124746093750005" />
+          <ConnectorPoint PointX="13.90625" PointY="23.739889322916667" />
         </AssociationConnector>
         <AssociationConnector Association="GameSchoolModel.FK_LevelProjectResult_UserInfo1" >
-          <ConnectorPoint PointX="6.75" PointY="8.2240360807291637" />
-          <ConnectorPoint PointX="7.25" PointY="8.2240360807291637" />
-          <ConnectorPoint PointX="7.25" PointY="18.375" />
-          <ConnectorPoint PointX="10" PointY="18.375" />
-          <ConnectorPoint PointX="10" PointY="21.25" />
-          <ConnectorPoint PointX="10.5" PointY="21.25" />
-          <ConnectorPoint PointX="10.5" PointY="21.625" />
+          <ConnectorPoint PointX="6.75" PointY="16.619800682692318" />
+          <ConnectorPoint PointX="7.3125" PointY="17.182300682692318" />
+          <ConnectorPoint PointX="7.3125" PointY="21" />
+          <ConnectorPoint PointX="9.8385416666666661" PointY="21" />
+          <ConnectorPoint PointX="10.005208333333334" PointY="21" />
+          <ConnectorPoint PointX="11.572916666666666" PointY="21" />
+          <ConnectorPoint PointX="11.739583333333334" PointY="21" />
+          <ConnectorPoint PointX="12.375" PointY="21" />
+          <ConnectorPoint PointX="12.75" PointY="21.375" />
         </AssociationConnector>
         <AssociationConnector Association="GameSchoolModel.FK_Notification_UserInfo1" >
-          <ConnectorPoint PointX="6.75" PointY="7.5495180403645818" />
-          <ConnectorPoint PointX="7.5" PointY="7.5495180403645818" />
+          <ConnectorPoint PointX="6" PointY="11.625" />
+          <ConnectorPoint PointX="6" PointY="10.182444661458334" />
+          <ConnectorPoint PointX="7.5" PointY="10.182444661458334" />
         </AssociationConnector>
         <AssociationConnector Association="GameSchoolModel.FK_Points_UserInfo1" >
-          <ConnectorPoint PointX="6.75" PointY="10.466054687500005" />
-          <ConnectorPoint PointX="7.166666666666667" PointY="10.466054687500005" />
-          <ConnectorPoint PointX="7.333333333333333" PointY="10.466054687500005" />
-          <ConnectorPoint PointX="7.5" PointY="10.466054687500005" />
+          <ConnectorPoint PointX="5.625" PointY="16.68210937500001" />
+          <ConnectorPoint PointX="5.625" PointY="17.542702328125017" />
+          <ConnectorPoint PointX="6.291666666666667" PointY="17.542702328125017" />
+          <ConnectorPoint PointX="6.458333333333333" PointY="17.542702328125017" />
+          <ConnectorPoint PointX="7.229166666666667" PointY="17.542702328125017" />
+          <ConnectorPoint PointX="7.395833333333333" PointY="17.542702328125017" />
+          <ConnectorPoint PointX="7.5" PointY="17.542702328125017" />
         </AssociationConnector>
         <AssociationConnector Association="GameSchoolModel.FK_User_Status" >
-          <ConnectorPoint PointX="4.5" PointY="6.047841796874998" />
-          <ConnectorPoint PointX="5.25" PointY="6.047841796874998" />
+          <ConnectorPoint PointX="4.5" PointY="10.826564127604165" />
+          <ConnectorPoint PointX="5.5937475" PointY="10.826564127604165" />
+          <ConnectorPoint PointX="5.5937475" PointY="11.625" />
         </AssociationConnector>
         <AssociationConnector Association="GameSchoolModel.FK_User_UserType" >
-          <ConnectorPoint PointX="4.5" PointY="10.341054687500005" />
-          <ConnectorPoint PointX="4.979166666666667" PointY="10.341054687500005" />
-          <ConnectorPoint PointX="5.145833333333333" PointY="10.341054687500005" />
-          <ConnectorPoint PointX="5.25" PointY="10.341054687500005" />
+          <ConnectorPoint PointX="4.5" PointY="20.063460538461534" />
+          <ConnectorPoint PointX="4.8160744349011209" PointY="19.747386103560412" />
+          <ConnectorPoint PointX="4.9339255650988791" PointY="19.629534973362656" />
+          <ConnectorPoint PointX="4.9375" PointY="19.625960538461534" />
+          <ConnectorPoint PointX="4.9375" PointY="13.988900181011324" />
+          <ConnectorPoint PointX="5.25" PointY="13.988900181011324" />
         </AssociationConnector>
         <AssociationConnector Association="GameSchoolModel.FK_UserInfo_UserLog" >
-          <ConnectorPoint PointX="4.5" PointY="8.2401432291666623" />
-          <ConnectorPoint PointX="5.25" PointY="8.2401432291666623" />
+          <ConnectorPoint PointX="4.5" PointY="17.879251304687514" />
+          <ConnectorPoint PointX="4.666666666666667" PointY="17.879251304687514" />
+          <ConnectorPoint PointX="5.020833333333333" PointY="17.879251304687514" />
+          <ConnectorPoint PointX="5.4062475" PointY="17.879251304687514" />
+          <ConnectorPoint PointX="5.4062475" PointY="16.68210937500001" />
         </AssociationConnector>
         <AssociationConnector Association="GameSchoolModel.UserCourse" >
-          <ConnectorPoint PointX="4.5" PointY="12.438460538461539" />
-          <ConnectorPoint PointX="4.8160744349011209" PointY="12.12238610356042" />
-          <ConnectorPoint PointX="4.9339255650988791" PointY="12.004534973362663" />
-          <ConnectorPoint PointX="5.0625" PointY="11.875960538461541" />
-          <ConnectorPoint PointX="5.0625" PointY="9.2905989583333337" />
-          <ConnectorPoint PointX="5.25" PointY="9.2905989583333337" />
+          <ConnectorPoint PointX="4.5" PointY="15.068697264984831" />
+          <ConnectorPoint PointX="4.854166666666667" PointY="15.068697264984831" />
+          <ConnectorPoint PointX="5.020833333333333" PointY="15.068697264984831" />
+          <ConnectorPoint PointX="5.25" PointY="15.068697264984831" />
         </AssociationConnector>
       </Diagram>
     </Diagrams>

@@ -12,15 +12,23 @@ namespace Ru.GameSchool.Web.Controllers
 {
     public class BaseController : Controller
     {
-
         private UserService _userService;
-        internal UserService UserService { get { _userService = LoadService(_userService, HttpContext); return _userService; } }
+
+        internal UserService UserService 
+        { 
+            get 
+            { 
+                _userService = LoadService(_userService, HttpContext); 
+                return _userService; 
+            } 
+        }
 
         private static T LoadService<T>(T service, HttpContextBase contextBase) where T : new()
         {
             if (Equals(service, null))
+            { 
                 service = new T();
-
+            }
             return service;
         }
     }
