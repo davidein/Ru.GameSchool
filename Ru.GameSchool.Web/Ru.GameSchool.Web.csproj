@@ -301,7 +301,7 @@
     <Content Include="Views\Teacher\EditProject.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Teacher\EditTest.cshtml" />
+    <Content Include="Views\Teacher\EditExam.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Teacher\EditMessage.cshtml" />

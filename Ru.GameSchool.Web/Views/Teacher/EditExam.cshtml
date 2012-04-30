@@ -1,0 +1,128 @@
+﻿@{
+    ViewBag.Title = "Búa til eða breyta prófi";
+}
+
+<h2>Búa til eða breyta prófi</h2>
+
+@section sidebar {
+
+@Html.Partial("_TeacherSideBar")
+
+}
+
+<form class="form-horizontal" id="registerHere" method='post' action=''>
+<fieldset>
+
+<legend>Nýtt próf</legend>
+
+<div class="control-group">
+<label class="control-label">Skilafrestur</label>
+<div class="controls">
+<input type="text" class="input-xlarge" id="user_name" name="user_name" rel="popover" data-content="Settu inn hvenær ekki er lengur hægt að skila inn svari." data-original-title="Enda dagsetning"  data-datepicker="datepicker">
+</div>
+</div>
+
+
+<div class="control-group">
+<label class="control-label"></label>
+<div class="controls">
+<button type="submit" class="btn btn-success" >Ný spurning</button>
+</div>
+</div>
+
+<div class="control-group">
+<label class="control-label">Spurning 1</label>
+<div class="controls">
+<input type="text" class="input-xlarge" id="name" name="name" rel="popover" data-content="Settu inn nafn." data-original-title="Skrifaðu spurningu">
+</div>
+</div>
+
+<div class="control-group">
+<label class="control-label"></label>
+<div class="controls">
+<button type="submit" class="btn btn-success" >Nýtt svar</button>
+</div>
+</div>
+
+    <div class="control-group">
+     <label class="control-label">Svarmöguleikar:</label>
+        <div class="controls">
+            <label class="radio">
+                <input type="radio" name="optionsRadios1" id="optionsRadios1" value="option1" checked="checked">
+                Já
+            </label>
+            <label class="radio">
+                <input type="radio" name="optionsRadios1" id="optionsRadios2" value="option2">
+                Nei
+            </label>
+        </div>
+    </div>
+
+
+    <div class="control-group">
+<label class="control-label">Spurning 2</label>
+<div class="controls">
+<input type="text" class="input-xlarge" id="name" name="name" rel="popover" data-content="Settu inn nafn." data-original-title="Skrifaðu spurningu">
+</div>
+</div>
+
+
+
+    <div class="control-group">
+       <label class="control-label">Svarmöguleikar:</label>
+        <div class="controls">
+            <label class="radio">
+                <input type="radio" name="optionsRadios2" id="optionsRadios1" value="option1" checked="checked">
+                Góð spurning
+            </label>
+            <label class="radio">
+                <input type="radio" name="optionsRadios2" id="optionsRadios2" value="option2">
+                Vond spurning
+            </label>
+            <label class="radio">
+                <input type="radio" name="optionsRadios2" id="optionsRadios3" value="option2">
+                Tja, það er nú það
+            </label>
+        </div>
+    </div>
+
+
+<div class="control-group">
+<label class="control-label">Spurning 3</label>
+<div class="controls">
+<input type="text" class="input-xlarge" id="name" name="name" rel="popover" data-content="Settu inn nafn." data-original-title="Skrifaðu spurningu">
+</div>
+</div>
+
+
+
+    <div class="control-group">
+        <label class="control-label">Svarmöguleikar:</label>
+        <div class="controls">
+            <label class="radio">
+                <input type="radio" name="optionsRadio3s" id="optionsRadios1" value="option1" checked="checked">
+                Já
+            </label>
+            <label class="radio">
+                <input type="radio" name="optionsRadios3" id="optionsRadios2" value="option2">
+                Nei
+            </label>
+            <label class="radio">
+                <input type="radio" name="optionsRadios3" id="optionsRadios3" value="option2" checked="checked">
+                Rétt svar
+            </label>
+        </div>
+    </div>
+
+
+
+
+<div class="control-group">
+<label class="control-label"></label>
+<div class="controls">
+<button type="submit" class="btn btn-success" >Vista próf</button>
+</div>
+</div>
+
+</fieldset>
+</form>
