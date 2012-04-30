@@ -7,7 +7,7 @@ namespace Ru.GameSchool.BusinessLayer.Services
     public class GameService : BaseService
     {
 
-        public void AddPointsToLevel(int userId, int levelId)
+        public void AddPointsToLevel(int userId, int levelId, int points)
         {
             throw new System.NotImplementedException();
         }
@@ -22,10 +22,6 @@ namespace Ru.GameSchool.BusinessLayer.Services
             throw new System.NotImplementedException();
         }
 
-        public void GetLeaderboard()
-        {
-            throw new System.NotImplementedException();
-        }
 
         public void GetPointsComparedToUsers(int userId, int courseId)
         {

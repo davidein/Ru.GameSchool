@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace Ru.GameSchool.Web.Controllers
 {
-    public class TeacherController : Controller
+    public class TeacherController : BaseController
     {
         //
         // GET: /Teacher/

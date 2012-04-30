@@ -10,7 +10,7 @@ namespace Ru.GameSchool.Web.Controllers
 {
 
     [Authorize]
-    public class AccountController : Controller
+    public class AccountController : BaseController
     {
 
         //

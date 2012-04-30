@@ -2,6 +2,9 @@
 
 namespace Ru.GameSchool.BusinessLayer.Services
 {
+    /// <summary>
+    /// Abstract base class that all services inherit from.
+    /// </summary> 
     public abstract class BaseService
     {
         private GameSchoolEntities _gameSchoolEntities = null;
@@ -10,9 +13,10 @@ namespace Ru.GameSchool.BusinessLayer.Services
         {
             get
             {
-                if (_gameSchoolEntities== null)
+                if (_gameSchoolEntities == null)
+                { 
                     _gameSchoolEntities = new GameSchoolEntities();
-
+                }
                 return _gameSchoolEntities;
             }
         }

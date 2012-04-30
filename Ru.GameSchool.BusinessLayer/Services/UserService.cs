@@ -5,15 +5,15 @@ using System.Collections.Generic;
 namespace Ru.GameSchool.BusinessLayer.Services
 {
     /// <summary>
-    /// Dummy class for testing the database
-    /// </summary>
+    /// Service class that abstracts the interraction around the user entity with the data layer.
+    /// </summary> 
     public class UserService : BaseService
     {
         /// <summary>
         /// Gets a user by userId
         /// </summary>
-        /// <param name="userId"></param>
-        /// <returns></returns>
+        /// <param name="userId">Id of the user to get.</param>
+        /// <returns>A new user instance.</returns>
         public UserInfo GetUser(int userId)
         {
             var user = from x in GameSchoolEntities.UserInfoes
