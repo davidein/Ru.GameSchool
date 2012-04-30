@@ -1,4 +1,5 @@
 ﻿$(document).ready(function () {
+
     $('.dropdown-toggle').dropdown()
 
     // Popover 
@@ -32,4 +33,5 @@ $.extend($.fn.datepicker.defaults, {
         }
         return dom + "/" + month + "/" + date.getFullYear();
     }
+
 });
