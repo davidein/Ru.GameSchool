@@ -37,7 +37,7 @@ namespace Ru.GameSchool.Web.Controllers
             return View();
         }
         
-        public ActionResult EditTest()
+        public ActionResult EditExam()
         {
             return View();
         }

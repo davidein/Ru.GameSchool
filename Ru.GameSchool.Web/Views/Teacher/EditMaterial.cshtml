@@ -9,3 +9,69 @@
 @Html.Partial("_TeacherSideBar")
 
 }
+
+<form class="form-horizontal" id="registerHere" method='post' action=''>
+<fieldset>
+
+<legend>Skrá nýtt kennslugagn</legend>
+
+
+<div class="control-group">
+<label class="control-label">Nafn</label>
+<div class="controls">
+<input type="text" class="input-xlarge" id="name" name="name" rel="popover" data-content="Settu inn nafn." data-original-title="Nafn námskeiðs">
+</div>
+</div>
+
+
+
+
+<div class="control-group">
+            <label class="control-label" for="select01">Borð</label>
+            <div class="controls">
+              <select id="select02">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+              </select>
+            </div>
+</div>
+
+<div class="control-group">
+            <label class="control-label" for="select01">Tegund kennsluefnis</label>
+            <div class="controls">
+              <select id="select02">
+                <option>Myndband</option>
+                <option>Glæra</option>
+                <option>Rit</option>
+
+              </select>
+            </div>
+</div>
+
+
+
+<div class="control-group">
+<label class="control-label">Skrá</label>
+<div class="controls">
+<input type="file" class="input-xlarge" id="user_name" name="user_name" rel="popover" data-content="Settu inn hvenær námskeiði lýkur." data-original-title="Enda dagsetning"  data-datepicker="datepicker">
+</div>
+</div>
+
+<div class="control-group">
+            <label class="control-label" for="textarea">Lýsing</label>
+            <div class="controls">
+              <textarea class="input-xlarge" id="lysing" rows="3" rel="popover" data-content="Settu inn lýsingu á námskeiði." data-original-title="Lýsing"></textarea>
+            </div>
+ </div>
+
+<div class="control-group">
+<label class="control-label"></label>
+<div class="controls">
+<button type="submit" class="btn btn-success" >Bæta við kennslugagni</button>
+</div>
+</div>
+
+</fieldset>
+</form>
