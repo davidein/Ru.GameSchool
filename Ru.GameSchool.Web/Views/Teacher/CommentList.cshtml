@@ -1,5 +1,198 @@
 ﻿@{
-    ViewBag.Title = "CommentList";
+    ViewBag.Title = "Umræðuþræðir í gangi";
 }
 
-<h2>CommentList</h2>
+<h2>Umræðuþræðir</h2>
+
+@section sidebar {
+
+@Html.Partial("_TeacherSideBar")
+
+}
+
+<h3>Fyrirlestu 3 : Um samstæðustjórnun </h3>
+<ul id="commentList" class="commentList">
+    <div id="jsonWrapper">
+        <li><a href="http://www.ru.is">
+            <img alt="Notandi" src="/Images/User.png"></a>
+            <div class="commentBody">
+                <a href="http://www.ru.is">Jónína</a> <span>Algjör klassík</span>
+                <div>
+                    <abbr title="/Date(1298477100000)/">
+                        23.feb 16:5</abbr>
+                    <a cid="2" jid="sendLike">Líkar þetta</a> <span id="l_2"></span>
+                </div>
+            </div>
+        </li>
+        <li><a href="http://www.ru.is">
+            <img alt="Notandi" src="/Images/User.png"></a>
+            <div class="commentBody">
+                <a href="http://www.ru.is">Daníel</a> <span>Þetta eru nú meiri jólasveinarnir.</span>
+                <div>
+                    <abbr title="/Date(1298481720000)/">
+                        23.feb 17:22</abbr>
+                    <a cid="1" jid="sendLike">Líkar þetta</a> <span id="l_1">
+                        <img class="like_icon" alt="Líkar þetta" title="0df3e ,1af35 ,341f6 ,425bc , líkar þetta"
+                            src="/Images/blank.gif">
+                        0df3e , 1af35 , 341f6 , og 1 öðrum líkar þetta. </span>
+                </div>
+            </div>
+        </li>
+        <li><a href="http://www.ru.is">
+            <img alt="Notandi" src="/Images/User.png"></a>
+            <div class="commentBody">
+                <a href="http://www.ru.is">ek</a> <span>Standa alltaf fyrir sínu</span>
+                <div>
+                    <abbr title="/Date(1332689400000)/">
+                        25.mar 15:30</abbr>
+                    <a cid="33" jid="sendLike">Líkar þetta</a> <span id="l_33">
+                        <img class="like_icon" alt="Líkar þetta" title="admin , líkar þetta" src="/Images/blank.gif">
+                        admin , líkar þetta. </span>
+                </div>
+            </div>
+        </li>
+        <li><a href="http://www.ru.is">
+            <img alt="Notandi" src="/Images/User.png"></a>
+            <div class="commentBody">
+                <a href="http://www.ru.is">eyfi</a> <span>Alltaf gaman að commenta.</span>
+                <div>
+                    <abbr title="/Date(1332972000000)/">
+                        28.mar 22:0</abbr>
+                    <a cid="38" jid="sendLike">Líkar þetta</a> <span id="l_38"></span>
+                </div>
+            </div>
+        </li>
+    </div>
+    <li class="commentAdd">
+        <textarea cols="20" rows="3" name="CommentText" id="CommentText"></textarea>
+        <label>
+            <input type="button" value="Senda inn athugasemd" id="saveBtn">
+        </label>
+    </li>
+</ul>
+
+
+
+<h3>Fyrirlestu 2 : Um hönnun og högun kerfisins</h3>
+<ul id="commentList" class="commentList">
+    <div id="jsonWrapper">
+        <li><a href="http://www.ru.is">
+            <img alt="Notandi" src="/Images/User.png"></a>
+            <div class="commentBody">
+                <a href="http://www.ru.is">Jónína</a> <span>Algjör klassík</span>
+                <div>
+                    <abbr title="/Date(1298477100000)/">
+                        23.feb 16:5</abbr>
+                    <a cid="2" jid="sendLike">Líkar þetta</a> <span id="l_2"></span>
+                </div>
+            </div>
+        </li>
+        <li><a href="http://www.ru.is">
+            <img alt="Notandi" src="/Images/User.png"></a>
+            <div class="commentBody">
+                <a href="http://www.ru.is">Daníel</a> <span>Þetta eru nú meiri jólasveinarnir.</span>
+                <div>
+                    <abbr title="/Date(1298481720000)/">
+                        23.feb 17:22</abbr>
+                    <a cid="1" jid="sendLike">Líkar þetta</a> <span id="l_1">
+                        <img class="like_icon" alt="Líkar þetta" title="0df3e ,1af35 ,341f6 ,425bc , líkar þetta"
+                            src="/Images/blank.gif">
+                        0df3e , 1af35 , 341f6 , og 1 öðrum líkar þetta. </span>
+                </div>
+            </div>
+        </li>
+        <li><a href="http://www.ru.is">
+            <img alt="Notandi" src="/Images/User.png"></a>
+            <div class="commentBody">
+                <a href="http://www.ru.is">ek</a> <span>Standa alltaf fyrir sínu</span>
+                <div>
+                    <abbr title="/Date(1332689400000)/">
+                        25.mar 15:30</abbr>
+                    <a cid="33" jid="sendLike">Líkar þetta</a> <span id="l_33">
+                        <img class="like_icon" alt="Líkar þetta" title="admin , líkar þetta" src="/Images/blank.gif">
+                        admin , líkar þetta. </span>
+                </div>
+            </div>
+        </li>
+        <li><a href="http://www.ru.is">
+            <img alt="Notandi" src="/Images/User.png"></a>
+            <div class="commentBody">
+                <a href="http://www.ru.is">eyfi</a> <span>Alltaf gaman að commenta.</span>
+                <div>
+                    <abbr title="/Date(1332972000000)/">
+                        28.mar 22:0</abbr>
+                    <a cid="38" jid="sendLike">Líkar þetta</a> <span id="l_38"></span>
+                </div>
+            </div>
+        </li>
+    </div>
+    <li class="commentAdd">
+        <textarea cols="20" rows="3" name="CommentText" id="CommentText"></textarea>
+        <label>
+            <input type="button" value="Senda inn athugasemd" id="saveBtn">
+        </label>
+    </li>
+</ul>
+
+
+
+<h3>Fyrirlestur 1 : Um fyrirkomulag námskeiðssins</h3>
+<ul id="commentList" class="commentList">
+    <div id="jsonWrapper">
+        <li><a href="http://www.ru.is">
+            <img alt="Notandi" src="/Images/User.png"></a>
+            <div class="commentBody">
+                <a href="http://www.ru.is">Jónína</a> <span>Algjör klassík</span>
+                <div>
+                    <abbr title="/Date(1298477100000)/">
+                        23.feb 16:5</abbr>
+                    <a cid="2" jid="sendLike">Líkar þetta</a> <span id="l_2"></span>
+                </div>
+            </div>
+        </li>
+        <li><a href="http://www.ru.is">
+            <img alt="Notandi" src="/Images/User.png"></a>
+            <div class="commentBody">
+                <a href="http://www.ru.is">Daníel</a> <span>Þetta eru nú meiri jólasveinarnir.</span>
+                <div>
+                    <abbr title="/Date(1298481720000)/">
+                        23.feb 17:22</abbr>
+                    <a cid="1" jid="sendLike">Líkar þetta</a> <span id="l_1">
+                        <img class="like_icon" alt="Líkar þetta" title="0df3e ,1af35 ,341f6 ,425bc , líkar þetta"
+                            src="/Images/blank.gif">
+                        0df3e , 1af35 , 341f6 , og 1 öðrum líkar þetta. </span>
+                </div>
+            </div>
+        </li>
+        <li><a href="http://www.ru.is">
+            <img alt="Notandi" src="/Images/User.png"></a>
+            <div class="commentBody">
+                <a href="http://www.ru.is">ek</a> <span>Standa alltaf fyrir sínu</span>
+                <div>
+                    <abbr title="/Date(1332689400000)/">
+                        25.mar 15:30</abbr>
+                    <a cid="33" jid="sendLike">Líkar þetta</a> <span id="l_33">
+                        <img class="like_icon" alt="Líkar þetta" title="admin , líkar þetta" src="/Images/blank.gif">
+                        admin , líkar þetta. </span>
+                </div>
+            </div>
+        </li>
+        <li><a href="http://www.ru.is">
+            <img alt="Notandi" src="/Images/User.png"></a>
+            <div class="commentBody">
+                <a href="http://www.ru.is">eyfi</a> <span>Alltaf gaman að commenta.</span>
+                <div>
+                    <abbr title="/Date(1332972000000)/">
+                        28.mar 22:0</abbr>
+                    <a cid="38" jid="sendLike">Líkar þetta</a> <span id="l_38"></span>
+                </div>
+            </div>
+        </li>
+    </div>
+    <li class="commentAdd">
+        <textarea cols="20" rows="3" name="CommentText" id="CommentText"></textarea>
+        <label>
+            <input type="button" value="Senda inn athugasemd" id="saveBtn">
+        </label>
+    </li>
+</ul>

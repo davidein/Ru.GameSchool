@@ -246,7 +246,7 @@
     <Content Include="Views\Admin\Course.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Admin\User.cshtml" />
+    <Content Include="Views\Admin\EditUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Admin\CourseRegisterUser.cshtml" />
@@ -309,6 +309,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Home\Tests.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Admin\_AdminSearchForm.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

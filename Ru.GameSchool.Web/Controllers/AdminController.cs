@@ -16,7 +16,7 @@ namespace Ru.GameSchool.Web.Controllers
             return View();
         }
 
-                public ActionResult User()
+                public ActionResult EditUser()
         {
             return View();
         }
