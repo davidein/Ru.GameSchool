@@ -37,7 +37,7 @@ namespace Ru.GameSchool.BusinessLayer.Services
         /// </summary>
         /// <param name="courseId"></param>
         /// <returns>List of Tuple first item is the rank then the user object.</returns>
-        public IEnumerable<Tuple<int,User>> GetTopTenList( int courseId)
+        public IEnumerable<Tuple<int,UserInfo>> GetTopTenList( int courseId)
         {
             throw new System.NotImplementedException();
         }

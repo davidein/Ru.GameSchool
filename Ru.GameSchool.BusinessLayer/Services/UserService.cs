@@ -14,20 +14,20 @@ namespace Ru.GameSchool.BusinessLayer.Services
         /// </summary>
         /// <param name="userId"></param>
         /// <returns></returns>
-        public User GetUser(int userId)
+        public UserInfo GetUser(int userId)
         {
-            var user = from x in GameSchoolEntities.Users
-                       where x.UserId == userId
+            var user = from x in GameSchoolEntities.UserInfoes
+                       where x.UserInfoId == userId
                        select x;
             
             return user.FirstOrDefault();
         }
 
-        public IEnumerable<User> GetUsers()
+        public IEnumerable<UserInfo> GetUsers()
         {
             throw new System.NotImplementedException();
         }
-        public User Login(string userName, string password)
+        public UserInfo Login(string userName, string password)
         {
             return null;
         }
@@ -36,7 +36,7 @@ namespace Ru.GameSchool.BusinessLayer.Services
             Save();
         }
       
-        public void UpdateUser(User u)
+        public void UpdateUser(UserInfo u)
         {
             throw new System.NotImplementedException();
         }
