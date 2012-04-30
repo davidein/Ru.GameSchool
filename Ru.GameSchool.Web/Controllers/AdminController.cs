@@ -15,12 +15,8 @@ namespace Ru.GameSchool.Web.Controllers
         {
             return View();
         }
-        public ActionResult Teacher()
-        {
-            return View();
-        }
 
-                public ActionResult Student()
+                public ActionResult EditUser()
         {
             return View();
         }
@@ -30,12 +26,8 @@ namespace Ru.GameSchool.Web.Controllers
             return View();
         }
 
-                public ActionResult TeacherList()
-        {
-            return View();
-        }
 
-                public ActionResult StudentList()
+                public ActionResult UserList()
         {
             return View();
         }
@@ -45,14 +37,11 @@ namespace Ru.GameSchool.Web.Controllers
             return View();
         }
 
-                public ActionResult CourseRegisterTeacher()
+                public ActionResult CourseRegisterUser()
         {
             return View();
         }
 
-                public ActionResult CourseRegisterStudent()
-        {
-            return View();
-        }
+
     }
 }
