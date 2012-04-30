@@ -6,6 +6,7 @@ using System.Web.Http;
 using System.Web.Mvc;
 using Ru.GameSchool.BusinessLayer;
 using System.Web;
+using Ru.GameSchool.BusinessLayer.Services;
 
 namespace Ru.GameSchool.Web.Controllers
 {

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Ru.GameSchool.BusinessLayer
+﻿namespace Ru.GameSchool.BusinessLayer.Services
 {
     public class CourseService : BaseService
     {

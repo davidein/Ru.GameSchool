@@ -1,9 +1,8 @@
 ﻿using System.Linq;
 using Ru.GameSchool.DataLayer;
-using System;
 using System.Collections.Generic;
 
-namespace Ru.GameSchool.BusinessLayer
+namespace Ru.GameSchool.BusinessLayer.Services
 {
     /// <summary>
     /// Dummy class for testing the database
@@ -15,9 +14,9 @@ namespace Ru.GameSchool.BusinessLayer
         /// </summary>
         /// <param name="userId"></param>
         /// <returns></returns>
-        public User GetUserByUserId(int userId)
+        public User GetUser(int userId)
         {
-            var user = from x in _gameSchoolEntities.Users
+            var user = from x in GameSchoolEntities.Users
                        where x.UserId == userId
                        select x;
             

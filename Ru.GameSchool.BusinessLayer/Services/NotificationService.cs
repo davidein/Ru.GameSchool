@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using Ru.GameSchool.DataLayer;
 
-namespace Ru.GameSchool.BusinessLayer
+namespace Ru.GameSchool.BusinessLayer.Services
 {
     public class NotificationService : BaseService
     {
@@ -18,7 +15,7 @@ namespace Ru.GameSchool.BusinessLayer
             throw new System.NotImplementedException();
         }
 
-        public IEnumerable<Notification> GetNotifications()
+        public IEnumerable<Notification> GetNotifications(int userId)
         {
             throw new System.NotImplementedException();
         }
