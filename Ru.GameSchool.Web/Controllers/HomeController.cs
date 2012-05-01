@@ -55,12 +55,12 @@ namespace Ru.GameSchool.Web.Controllers
             return View();
         }
 
-        public ActionResult Test()
+        public ActionResult Exam()
         {
             return View();
         }
 
-        public ActionResult Tests()
+        public ActionResult Exams()
         {
             return View();
         }

@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using Ru.GameSchool.DataLayer;
 using System.Collections.Generic;
+using Ru.GameSchool.DataLayer.Repository;
 
 namespace Ru.GameSchool.BusinessLayer.Services
 {
@@ -39,6 +40,8 @@ namespace Ru.GameSchool.BusinessLayer.Services
         /// <returns>A new user instance.</returns>
         public UserInfo Login(string userName, string password)
         {
+            
+
             var userQuery = from x in GameSchoolEntities.UserInfoes
                        where x.Username == userName
                        select x;
@@ -63,7 +66,7 @@ namespace Ru.GameSchool.BusinessLayer.Services
       
         public void UpdateUser(UserInfo userInfo)
         {
-            /*var items = GameSchoolEntities.UserInfoes.Where(u => u.UserInfoId == userInfo.UserInfoId);
+/*            var items = GameSchoolEntities.UserInfoes.Where(u => u.UserInfoId == userInfo.UserInfoId);
 
             var item = items.FirstOrDefault();
 

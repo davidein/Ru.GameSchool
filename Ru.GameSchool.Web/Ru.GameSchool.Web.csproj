@@ -239,19 +239,10 @@
     <Content Include="Views\Admin\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Admin\CourseList.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Admin\UserList.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\Admin\Course.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Admin\EditUser.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Admin\CourseRegisterUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Teacher\CommentList.cshtml" />
@@ -272,7 +263,7 @@
     <Content Include="Views\Home\Messages.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Home\Test.cshtml" />
+    <Content Include="Views\Home\Exam.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Home\Project.cshtml" />
@@ -310,7 +301,7 @@
     <Content Include="Views\Home\Level.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Home\Tests.cshtml" />
+    <Content Include="Views\Home\Exams.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Admin\_AdminSearchForm.cshtml" />

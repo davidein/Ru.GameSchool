@@ -2,9 +2,16 @@
     ViewBag.Title = "Um GameSchool";
 }
 
-<hgroup class="title">
-    <h1>@ViewBag.Title.</h1>
-</hgroup>
+
+    <h2>@ViewBag.Title.</h1>
+
+
+
+@section sidebar {
+
+@Html.Partial("_HomeSideBar")
+
+}
 
 <article>
     <p>

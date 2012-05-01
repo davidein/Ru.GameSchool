@@ -1,6 +1,11 @@
 
 .label-width-auto label{width:auto !important;margin-right:4px;font-weight:bold}
 .form-horizontal fieldset{padding-top:5px; margin:10px 0; border-top:solid 2px #ddd}
+.gray {color:#ccc}
+.control-group.pull-left{margin-right:20px}
+
+
+
 
 /*datepicker*/
 .datepicker {
@@ -135,10 +140,10 @@
 }
 
 
-//Comment stuff
+/*Comment stuff*/
 
 .commentList {
-    float: left;
+
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -213,7 +218,7 @@
     -moz-border-left-colors: none;
     -moz-border-right-colors: none;
     -moz-border-top-colors: none;
-    background: url("../Images/Background.png") repeat scroll 0 -48px #EEEEEE;
+    background: url("/Images/Background.png") repeat scroll 0 -48px #EEEEEE;
     border-color: #29447E #29447E #1A356E;
     border-style: solid;
     border-width: 1px;
@@ -245,7 +250,7 @@
     white-space: nowrap;
 }
 .like_icon {
-    background-image: url("../Images/sprite.png");
+    background-image: url("/Images/sprite.png");
     background-position: -87px -511px;
     background-repeat: no-repeat;
     height: 9px;
