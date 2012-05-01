@@ -118,14 +118,39 @@ namespace Ru.GameSchool.BusinessLayerTests
         [TestMethod()]
         public void LoginTest()
         {
-            UserService target = new UserService(); // TODO: Initialize to an appropriate value
-            string userName = string.Empty; // TODO: Initialize to an appropriate value
-            string password = string.Empty; // TODO: Initialize to an appropriate value
-            UserInfo expected = null; // TODO: Initialize to an appropriate value
-            UserInfo actual;
-            actual = target.Login(userName, password);
-            Assert.AreEqual(expected, actual);
-            Assert.Inconclusive("Verify the correctness of this test method.");
+            var mockRepository = MockRepository.GenerateMock<IGameSchoolEntities>();
+            var userService = new UserService();
+            userService.SetDatasource(mockRepository);
+
+            var userData = new FakeObjectSet<UserInfo>();
+
+            UserInfo expected = new UserInfo();
+            expected.Fullname = "Davíð Einarsson";
+            expected.Email = "davide09@ru.is";
+            expected.StatusId = 1;
+            expected.Username = "davidein";
+            expected.UserInfoId = 1;
+            expected.Password = "Wtf";
+
+            userData.AddObject(expected);
+
+            mockRepository.Expect(x => x.UserInfoes).Return(userData);
+
+
+            string userName = "davidein";
+            string password = "wrongpassword"; 
+
+            UserInfo actual= userService.Login(userName, password);
+
+            Assert.IsNull(actual);
+
+            password = expected.Password;
+
+            actual = userService.Login(userName, password);
+
+            Assert.IsNotNull(actual);
+
+            Assert.AreEqual(expected.Username, actual.Username);
         }
 
         /// <summary>
