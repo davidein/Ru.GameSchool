@@ -13,7 +13,7 @@
         url = $(this).attr('href');
         return $(target).load(url);
     });
-    $('#vid-list li a').hover(function () {
+    $('#vid-list li a, .course-box ul li a').hover(function () {
         $(this).tooltip('show')
     });
 });
