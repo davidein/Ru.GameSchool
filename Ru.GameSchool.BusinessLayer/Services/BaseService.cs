@@ -27,6 +27,10 @@ namespace Ru.GameSchool.BusinessLayer.Services
             }
         }
 
+        /// <summary>
+        /// Sets up a new datasource.
+        /// </summary>
+        /// <param name="dataSource">A datasource that implements the IGameSchoolEntities interface.</param>
         public void SetDatasource(IGameSchoolEntities dataSource)
         {
             _gameSchoolEntities = dataSource;
@@ -44,6 +48,9 @@ namespace Ru.GameSchool.BusinessLayer.Services
             set { _notificationService = value; }
         }
 
+        /// <summary>
+        /// Save all changes to the datasource.
+        /// </summary>
         protected void Save()
         {
             GameSchoolEntities.SaveChanges();
