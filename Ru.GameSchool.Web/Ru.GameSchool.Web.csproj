@@ -239,19 +239,10 @@
     <Content Include="Views\Admin\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Admin\CourseList.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Admin\UserList.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\Admin\Course.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Admin\EditUser.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Admin\CourseRegisterUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Teacher\CommentList.cshtml" />
