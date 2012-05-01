@@ -1,4 +1,4 @@
-﻿using Ru.GameSchool.DataLayer;
+﻿using Ru.GameSchool.DataLayer.Repository;
 
 namespace Ru.GameSchool.BusinessLayer.Services
 {
@@ -7,9 +7,12 @@ namespace Ru.GameSchool.BusinessLayer.Services
     /// </summary> 
     public abstract class BaseService
     {
-        private GameSchoolEntities _gameSchoolEntities = null;
+        private IGameSchoolEntities _gameSchoolEntities;
 
-        public GameSchoolEntities GameSchoolEntities
+        /// <summary>
+        /// Gets an instance of the datasource. If no datasource is explicitly set, the default one will be setup.
+        /// </summary>
+        public IGameSchoolEntities GameSchoolEntities
         {
             get
             {
@@ -19,6 +22,11 @@ namespace Ru.GameSchool.BusinessLayer.Services
                 }
                 return _gameSchoolEntities;
             }
+        }
+
+        public void SetDatasource(IGameSchoolEntities dataSource)
+        {
+            _gameSchoolEntities = dataSource;
         }
 
         protected void Save()
