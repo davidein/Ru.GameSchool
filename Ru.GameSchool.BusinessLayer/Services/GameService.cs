@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using Ru.GameSchool.DataLayer;
+using Ru.GameSchool.BusinessLayer.Interfaces;
 using Ru.GameSchool.DataLayer.Repository;
 
 namespace Ru.GameSchool.BusinessLayer.Services
 {
-    public class GameService : BaseService
+    public class GameService : BaseService, IExternalPointContainer
     {
 
         public void AddPointsToLevel(int userId, int levelId, int points)
