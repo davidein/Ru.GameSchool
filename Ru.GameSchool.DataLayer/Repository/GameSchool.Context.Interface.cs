@@ -41,5 +41,6 @@ namespace Ru.GameSchool.DataLayer.Repository
         #endregion
     
     	int SaveChanges();
+    	void AttachTo(string entitySetName ,object entity);
     }
 }
