@@ -1,4 +1,5 @@
 ﻿using Ru.GameSchool.DataLayer;
+using Ru.GameSchool.DataLayer.Repository;
 
 namespace Ru.GameSchool.BusinessLayer.Services
 {
@@ -7,9 +8,9 @@ namespace Ru.GameSchool.BusinessLayer.Services
     /// </summary> 
     public abstract class BaseService
     {
-        private GameSchoolEntities _gameSchoolEntities;
+        private IGameSchoolEntities _gameSchoolEntities;
 
-        public GameSchoolEntities GameSchoolEntities
+        public IGameSchoolEntities GameSchoolEntities
         {
             get
             {

@@ -1,5 +1,6 @@
 ﻿using Ru.GameSchool.DataLayer;
 using System.Collections.Generic;
+using Ru.GameSchool.DataLayer.Repository;
 
 namespace Ru.GameSchool.BusinessLayer.Services
 {

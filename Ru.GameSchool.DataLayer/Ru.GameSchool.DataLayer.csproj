@@ -47,18 +47,93 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GameSchool.Designer.cs">
+    <Compile Include="Repository\Comment.cs">
+      <DependentUpon>GameSchool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Repository\CommentLike.cs">
+      <DependentUpon>GameSchool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Repository\ContentType.cs">
+      <DependentUpon>GameSchool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Repository\GameSchool.Context.Interface.cs">
+      <DependentUpon>GameSchool.Context.Interface.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Repository\Course.cs">
+      <DependentUpon>GameSchool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Repository\CourseGrade.cs">
+      <DependentUpon>GameSchool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Repository\Department.cs">
+      <DependentUpon>GameSchool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Repository\GameSchool.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GameSchool.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Repository\GameSchool.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GameSchool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Repository\GameSchool.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>GameSchool.edmx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\Level.cs">
+      <DependentUpon>GameSchool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Repository\LevelExam.cs">
+      <DependentUpon>GameSchool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Repository\LevelExamAnswer.cs">
+      <DependentUpon>GameSchool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Repository\LevelExamQuestion.cs">
+      <DependentUpon>GameSchool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Repository\LevelExamResult.cs">
+      <DependentUpon>GameSchool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Repository\LevelMaterial.cs">
+      <DependentUpon>GameSchool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Repository\LevelProject.cs">
+      <DependentUpon>GameSchool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Repository\LevelProjectResult.cs">
+      <DependentUpon>GameSchool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Repository\Notification.cs">
+      <DependentUpon>GameSchool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Repository\Point.cs">
+      <DependentUpon>GameSchool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Repository\Status.cs">
+      <DependentUpon>GameSchool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Repository\UserInfo.cs">
+      <DependentUpon>GameSchool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Repository\UserLog.cs">
+      <DependentUpon>GameSchool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Repository\UserType.cs">
+      <DependentUpon>GameSchool.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
-    <EntityDeploy Include="GameSchool.edmx">
+    <EntityDeploy Include="Repository\GameSchool.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>GameSchool.Designer.cs</LastGenOutput>
     </EntityDeploy>
@@ -66,10 +141,25 @@
     <None Include="Properties\DataSources\GameSchoolEntities.datasource" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Repository\GameSchool.Context.Interface.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>GameSchool.Context.Interface.cs</LastGenOutput>
+    </None>
+    <None Include="Repository\GameSchool.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>GameSchool.Context.cs</LastGenOutput>
+    </None>
+    <None Include="Repository\GameSchool.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>GameSchool.cs</LastGenOutput>
+    </None>
     <None Include="SQL\schema.sql" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="SQL\basedata.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
