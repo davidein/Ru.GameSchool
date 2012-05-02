@@ -89,6 +89,7 @@ namespace <#=code.EscapeNamespace(namespaceName)#>
 #>
 
 	int SaveChanges();
+	void AttachTo(string entitySetName ,object entity);
 }
 <#
 if (!String.IsNullOrEmpty(namespaceName))

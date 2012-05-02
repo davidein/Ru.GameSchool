@@ -5,51 +5,123 @@
 
 @section sidebar {
 
-@Html.Partial("_HomeSideBar")
+@Html.Partial("_LeftSideBar")
 
 }
 
 <div class="hero-unit">
-    <h1>Vefforritun II</h1>
-    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-    <p><a class="btn btn-primary btn-large">Meira. . . &raquo;</a></p>
+    <h1>
+        GameSchool</h1>
+    <article>
+        <h3>
+            <span class="gray">18.04.2012 | </span><a data-toggle="modal" href="#myModal">Búið að opna borð 4</a></h3>
+        <p>
+            Lorizzle ipsum dolor fo shizzle mah nizzle fo rizzle, mah home g-dizzle amizzle, fizzle adipiscing elit...
+        </p>
+    </article>
+    <article>
+        <h3>
+            <span class="gray">14.04.2012 | </span><a data-toggle="modal" href="#myModal">Dæmatíminn í dag</a></h3>
+        <p>
+            Check it out brizzle dolor dapibus turpizzle tempizzle gangster. Izzle boom shackalack nibh et turpizzle...
+        </p>
+    </article>
+    <article>
+        <h3>
+            <span class="gray">01.04.2012 | </span><a data-toggle="modal" href="#myModal">Fyrirlestur fluttur vegna mikillar aðsóknar</a></h3>
+        <p>
+             Pot dapibizzle. Curabitur you son of a bizzle fo shizzle, pretizzle da bomb, mattis ac, eleifend vitae, nunc...
+        </p>
+    </article>
+    <p>
+        <a class="btn btn-primary" href="/Home/Messages">Meira... &raquo;</a></p>
 </div>
-<div class="row-fluid">
+<!-- Move to partial view for modal -->
+<div id="myModal" class="modal" style="display: none">
+    <div class="modal-header">
+        <button class="close" data-dismiss="modal">
+            ×</button>
+        <h3>
+            Tilkynning!</h3>
+    </div>
+    <div class="modal-body">
+        <h4>
+            Mögnuð modal tilkynning!</h4>
+        <p>
+            Kæru vinir,</p>
+        <p>
+            Þetta er dæmi um tilkynningu í modal glugga</p>
+    </div>
+    <div class="modal-footer">
+        <a href="#" class="btn" data-dismiss="modal">Loka</a>
+    </div>
+</div>
+<!-- end move -->
+<div class="row-fluid course-box">
     
-    <h2>Námsefni</h2>
+    <h2>Þín námskeið</h2>
     <div class="row-fluid">
-    <div class="span4">
-        <h3>Myndband</h3>
-        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-        <p><a class="btn" href="#">Skoða nánar &raquo;</a></p>
-    </div><!--/span-->
-    <div class="span4">
-        <h2>Heading</h2>
-        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-        <p><a class="btn" href="#">Skoða nánar &raquo;</a></p>
-    </div><!--/span-->
-    <div class="span4">
-        <h2>Heading</h2>
-        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-        <p><a class="btn" href="#">Skoða nánar &raquo;</a></p>
-    </div><!--/span-->
+        <div class="span4 well">
+            <h3>Vefforritun I</h3>
+            <ul>
+                <li><a href="/Home/Material">MVC 4 </a><span class="label label-important">Nýtt</span></li>
+                <li><a href="/Home/Exam">Netpróf 2 </a><span class="label label-important">Nýtt</span></li>
+                <li><a href="/Home/Project">CSS</a></li>
+                <li><a href="/Home/Project">HTML5 glærur</a></li>
+            </ul>
+            <p><a class="btn btn-small" href="#">Skoða nánar &raquo;</a></p>
+        </div><!--/span-->
+        <div class="span4 well">
+            <h3>Vefforritun II</h3>
+            <ul>
+                <li><a href="/Home/Material">MVC 4 </a><span class="label label-important">Nýtt</span></li>
+                <li><a href="/Home/Exam">Netpróf 2 </a><span class="label label-important">Nýtt</span></li>
+                <li><a href="/Home/Project">CSS</a></li>
+                <li><a href="/Home/Project">HTML5 glærur</a></li>
+            </ul>
+            <p><a class="btn btn-small" href="#">Skoða nánar &raquo;</a></p>
+        </div><!--/span-->
+        <div class="span4 well">
+            <h3>Greining og hönnun hugbúnaðar</h3>
+            <ul>
+                <li><a href="/Home/Material">MVC 4 </a><span class="label label-important">Nýtt</span></li>
+                <li><a href="/Home/Exam">Netpróf 2 </a><span class="label label-important">Nýtt</span></li>
+                <li><a href="/Home/Project">CSS</a></li>
+                <li><a href="/Home/Project">HTML5 glærur</a></li>
+            </ul>
+            <p><a class="btn btn-small" href="#">Skoða nánar &raquo;</a></p>
+        </div><!--/span-->
     </div><!--/row-->
-    <h2>Verkefni/Próf</h2>
     <div class="row-fluid">
-    <div class="span4">
-        <h2>Heading</h2>
-        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-        <p><a class="btn" href="#">Skoða nánar &raquo;</a></p>
-    </div><!--/span-->
-    <div class="span4">
-        <h2>Heading</h2>
-        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-        <p><a class="btn" href="#">Skoða nánar &raquo;</a></p>
-    </div><!--/span-->
-    <div class="span4">
-        <h2>Heading</h2>
-        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-        <p><a class="btn" href="#">Skoða nánar &raquo;</a></p>
-    </div><!--/span-->
-</div><!--/row-->
+        <div class="span4 well">
+            <h3>Tölvugrafík</h3>
+            <ul>
+                <li><a href="/Home/Material">MVC 4 </a><span class="label label-important">Nýtt</span></li>
+                <li><a href="/Home/Exam">Netpróf 2 </a><span class="label label-important">Nýtt</span></li>
+                <li><a href="/Home/Project">CSS</a></li>
+                <li><a href="/Home/Project">HTML5 glærur</a></li>
+            </ul>
+            <p><a class="btn btn-small" href="#">Skoða nánar &raquo;</a></p>
+        </div><!--/span-->
+        <div class="span4 well">
+            <h3>Verkefnalausnir</h3>
+            <ul>
+                <li><a href="/Home/Material">MVC 4 </a><span class="label label-important">Nýtt</span></li>
+                <li><a href="/Home/Exam">Netpróf 2 </a><span class="label label-important">Nýtt</span></li>
+                <li><a href="/Home/Project">CSS</a></li>
+                <li><a href="/Home/Project">HTML5 glærur</a></li>
+            </ul>
+            <p><a class="btn btn-small" href="#">Skoða nánar &raquo;</a></p>
+        </div><!--/span-->
+        <div class="span4 well">
+            <h3>Hugbúnaðarfræði</h3>
+            <ul>
+                <li><a href="/Home/Material">MVC 4 </a><span class="label label-important">Nýtt</span></li>
+                <li><a href="/Home/Exam">Netpróf 2 </a><span class="label label-important">Nýtt</span></li>
+                <li><a href="/Home/Project">CSS</a></li>
+                <li><a href="/Home/Project">HTML5 glærur</a></li>
+            </ul>
+            <p><a class="btn btn-small" href="#">Skoða nánar &raquo;</a></p>
+        </div><!--/span-->
+    </div><!--/row-->
 </div>

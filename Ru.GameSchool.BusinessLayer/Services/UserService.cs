@@ -2,6 +2,7 @@
 using Ru.GameSchool.DataLayer;
 using System.Collections.Generic;
 using Ru.GameSchool.DataLayer.Repository;
+using Ru.GameSchool.Utilities;
 
 namespace Ru.GameSchool.BusinessLayer.Services
 {
@@ -20,7 +21,7 @@ namespace Ru.GameSchool.BusinessLayer.Services
             var user = from x in GameSchoolEntities.UserInfoes
                        where x.UserInfoId == userId
                        select x;
-            
+
             return user.FirstOrDefault();
         }
 
@@ -40,14 +41,11 @@ namespace Ru.GameSchool.BusinessLayer.Services
         /// <returns>A new user instance.</returns>
         public UserInfo Login(string userName, string password)
         {
-            if ((string.IsNullOrWhiteSpace(userName)) || (string.IsNullOrWhiteSpace(password)))
-            {
-                return null;
-            }
+
 
             var userQuery = from x in GameSchoolEntities.UserInfoes
-                       where x.Username == userName
-                       select x;
+                            where x.Username == userName
+                            select x;
 
             var userInfo = userQuery.FirstOrDefault();
 
@@ -57,27 +55,62 @@ namespace Ru.GameSchool.BusinessLayer.Services
                 return null;
             }
 
-            //User password is incorrect, return null;
-            if (userInfo.Password != password)
+            // Compare user entered clear text password to hashed value in db
+            if (!PasswordUtilities.VerifyHash(password, userInfo.Password))
             {
-                return null;
+                return null; // Password don't match, return null.
             }
-
 
             return userInfo;
         }
-      
+
+        /// <summary>
+        /// Change 
+        /// </summary>
+        /// <param name="newPassword"></param>
+        /// <param name="userInfoId"></param>
+        public void ChangeUserInfoPassword(string newPassword, int userInfoId)
+        {
+            var query = GameSchoolEntities.UserInfoes.Where(u => u.UserInfoId == userInfoId);
+
+            var user = query.FirstOrDefault();
+            // Hash new user entered password
+            var newHashedPassword = PasswordUtilities.ComputeHash(newPassword);
+            user.Password = newHashedPassword; // Add password to datasource
+            // Persist changes to datasource.
+            Save();
+        }
+
+        /// <summary>
+        /// Gets a userinfo instance through a parameter of this function and if it isn't null persist it to the database.
+        /// </summary>
+        /// <param name="userInfo">Instance of a userinfo</param>
+        public void CreateUser(UserInfo userInfo)
+        {
+            if (userInfo != null)
+            {
+                // Get user entered clear text password and hash it before storing in db
+                var hashedPasswrd = PasswordUtilities.ComputeHash(userInfo.Password);
+                userInfo.Password = hashedPasswrd;
+                GameSchoolEntities.UserInfoes.AddObject(userInfo);
+                Save();
+            }
+        }
+
         public void UpdateUser(UserInfo userInfo)
         {
-/*            var items = GameSchoolEntities.UserInfoes.Where(u => u.UserInfoId == userInfo.UserInfoId);
+            GameSchoolEntities.AttachTo("UserInfo", userInfo);
+            Save();
 
-            var item = items.FirstOrDefault();
+            /*            var items = GameSchoolEntities.UserInfoes.Where(u => u.UserInfoId == userInfo.UserInfoId);
 
-            if (item != null)
-            {
-                item. = userInfo;
-                Save();
-            }*/
+                        var item = items.FirstOrDefault();
+
+                        if (item != null)
+                        {
+                            item. = userInfo;
+                            Save();
+                        }*/
         }
     }
 }

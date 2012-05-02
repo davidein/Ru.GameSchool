@@ -6,7 +6,16 @@
     $('#registerHere input').hover(function () {
         $(this).popover('show')
     });
-
+    // Open bootstrap modal windows with remote content - needs a partial view with bootstrap modal markup
+    $("a[data-toggle=modal]").click(function () {
+        var target, url;
+        target = $(this).attr('data-target');
+        url = $(this).attr('href');
+        return $(target).load(url);
+    });
+    $('#vid-list li a, .course-box ul li a').hover(function () {
+        $(this).tooltip('show')
+    });
 });
 
 
