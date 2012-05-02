@@ -318,7 +318,6 @@
     <Content Include="Views\Admin\_AdminSearchForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="ControllersDiagram.cd" />
     <Content Include="Views\Course\Index.cshtml" />
     <None Include="Diagrams\Controller.cd" />
   </ItemGroup>

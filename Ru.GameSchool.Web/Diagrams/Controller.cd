@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
   <Comment CommentText="CourseController&#xD;&#xA;    Post fyrir Create kallar í CourseService.CreateCourse og skilar RedirectAction með tilvísun í courseId&#xD;&#xA;    Edit kallar í CourseService.GetCourse og skilar Course.&#xD;&#xA;    Post fyrir Edit kallar í CourseService.UpdateCourse&#xD;&#xA;    Index kallar í CourseService.GetCourses og skilar IEnumerable&lt;Course&gt;&#xD;&#xA;   Item kallar í CourseService.GetCourse og skilar Course">
-    <Position X="6.291" Y="6.321" Height="2.573" Width="3.184" />
+    <Position X="9.791" Y="3.071" Height="2.573" Width="3.184" />
   </Comment>
   <Comment CommentText="ProjectController&#xD;&#xA;    Post fyrir Create kallar í LevelService.CreateLevelProject.&#xD;&#xA;    Edit kallar í LevelService.GetLevelProject og skilar LevelProject.&#xD;&#xA;    Post fyrir edit kallar í LevelService.UpdateLevelProject&#xD;&#xA;    Get kallar í LevelService.GetLevelProject og skilar Course&#xD;&#xA;    Return kallar í LevelService.GetLevelProjectReturn og skilar IEnumerable&lt;LevelProjectReturn&gt;.&#xD;&#xA;">
     <Position X="18.711" Y="5.823" Height="2.49" Width="2.273" />
@@ -10,25 +10,25 @@
     <Position X="21.792" Y="5.646" Height="1.583" Width="2.19" />
   </Comment>
   <Comment CommentText="MaterialController&#xD;&#xA;    Post fyrir Create kallar í LevelService.CreateMaterial&#xD;&#xA;    Edit kallar í LevelService.GetMaterial og skilar LevelMaterial&#xD;&#xA;   Post fyrir edit kallar í LevelService.UpdateMaterial&#xD;&#xA;    Get kallar í LevelService.GetMaterial og skilar LevelMaterial.">
-    <Position X="28.279" Y="5.628" Height="2.104" Width="2.221" />
+    <Position X="25.029" Y="2.628" Height="2.104" Width="2.221" />
   </Comment>
   <Comment CommentText="ExamController&#xD;&#xA;    Post fyrir Create kallar í LevelService.CreateLevelExam&#xD;&#xA;    Edit kallar í LevelService.GetLevelExam og skilar LevelExam&#xD;&#xA;   Post fyrir edit kallar í LevelService.UpdateLevelExam&#xD;&#xA;    Get kallar í LevelService.GetLevelExam og skilar LevelExam.">
-    <Position X="31.279" Y="5.805" Height="2.104" Width="2.221" />
+    <Position X="28.029" Y="2.805" Height="2.104" Width="2.221" />
   </Comment>
   <Comment CommentText="JSonController&#xD;&#xA;   CommentMaterial kallar í SocialService.GetComments og skilar IEnumerable&lt;Comment&gt; sem json streng.&#xD;&#xA;    GetNotifications kallar í NotificationService.GetNotifications og skilar IEnumerable&lt;Notification&gt; sem json streng.&#xD;&#xA;    LikeComment kallar í SocialService.CreateLike.&#xD;&#xA;    UnLikeComment kallar í SocialService.DeleteLike.   ">
     <Position X="15.26" Y="5.635" Height="1.865" Width="2.773" />
   </Comment>
   <Comment CommentText="AccountController&#xD;&#xA;    Login kallar í UserService.Login.&#xD;&#xA;    Allt annað er default Microsoft virkni.">
-    <Position X="10.292" Y="6.156" Height="1.354" Width="4.19" />
+    <Position X="10.542" Y="8.656" Height="1.354" Width="4.19" />
   </Comment>
   <Comment CommentText="AdminController&#xD;&#xA;    Post fyrir Course kallar í CourseService.CreateCourse.&#xD;&#xA;   CourseList kallar í CourseService.GetCourses og skilar IEnumerable&lt;Course&gt;.&#xD;&#xA;    CourseRegisterUser kallar í AddUserToCourse&#xD;&#xA;    EditUser kallar í UserService.GetUser og skilar UserInfo&#xD;&#xA;    Post fyrir EditUser kallar UserService.UpdateUser&#xD;&#xA;    Index kallar í UserService.Search og skilar UserInfo eða CourseService.Search og skilar Course.&#xD;&#xA;    UserList kallar í UserService.GetUsers og skilar IEnumerable&lt;UserInfo&gt;.">
-    <Position X="24.802" Y="6.479" Height="2.729" Width="2.721" />
+    <Position X="24.552" Y="7.729" Height="2.729" Width="2.721" />
   </Comment>
   <Comment CommentText="BaseController&#xD;&#xA;    Initialize kallar í UserService.GetUser og skilar UserInfo">
     <Position X="20.792" Y="0.844" Height="2.146" Width="3.69" />
   </Comment>
   <Comment CommentText="HomeController&#xD;&#xA;    ">
-    <Position X="3.292" Y="5.562" Height="1.219" Width="2.221" />
+    <Position X="13.292" Y="2.312" Height="1.219" Width="2.221" />
   </Comment>
   <Class Name="Ru.GameSchool.Web.Controllers.BaseController">
     <Position X="16.5" Y="0.75" Width="4" />
@@ -38,14 +38,14 @@
     </TypeIdentifier>
   </Class>
   <Class Name="Ru.GameSchool.Web.Controllers.CourseController">
-    <Position X="6.25" Y="3.75" Width="3.25" />
+    <Position X="9.75" Y="0.5" Width="3.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAEAAAAAEACAAEAAAgAAAA=</HashCode>
       <FileName>Controllers\CourseController.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Ru.GameSchool.Web.Controllers.HomeController">
-    <Position X="3.25" Y="3.75" Width="2.25" />
+    <Position X="13.25" Y="0.5" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAEACAAAAAAAAAAAAAAAAAEAAAAAAAA=</HashCode>
       <FileName>Controllers\HomeController.cs</FileName>
@@ -59,7 +59,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="Ru.GameSchool.Web.Controllers.AdminController">
-    <Position X="24.75" Y="3.75" Width="2.75" />
+    <Position X="24.5" Y="5" Width="2.75" />
     <TypeIdentifier>
       <HashCode>AACAEAAAAAAAAAAAAIAAAAAAAAAAAAAAAAEAAACAAgA=</HashCode>
       <FileName>Controllers\AdminController.cs</FileName>
@@ -73,7 +73,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="Ru.GameSchool.Web.Controllers.AccountController">
-    <Position X="10.25" Y="3.75" Width="4.25" />
+    <Position X="10.5" Y="6.25" Width="4.25" />
     <TypeIdentifier>
       <HashCode>IAAAAAAAAAAAAAAAAACAAAAAAAAACAAAAAAQAAQAAAA=</HashCode>
       <FileName>Controllers\AccountController.cs</FileName>
@@ -87,14 +87,14 @@
     </TypeIdentifier>
   </Class>
   <Class Name="Ru.GameSchool.Web.Controllers.ExamController">
-    <Position X="31.25" Y="3.75" Width="2.25" />
+    <Position X="28" Y="0.75" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAABAAAAAAAAAAAAAAEACAAAAEAAAAAA=</HashCode>
       <FileName>Controllers\ExamController.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Ru.GameSchool.Web.Controllers.MaterialController">
-    <Position X="28.25" Y="3.75" Width="2.25" />
+    <Position X="25" Y="0.75" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAABAAAAAAAAAAAAAAEACAAAAAAAAAAA=</HashCode>
       <FileName>Controllers\MaterialController.cs</FileName>

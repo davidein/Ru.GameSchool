@@ -1,0 +1,166 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Ru.GameSchool.DataLayer.Repository.GameSchoolEntities" BaseTypeListCollapsed="true">
+    <Position X="13" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>oGAARAAEkAEwgAAAiDAAAASAABIQCQQhCCBRAhBAKiI=</HashCode>
+      <FileName>Repository\GameSchool.Context.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Ru.GameSchool.DataLayer.Repository.Comment">
+    <Position X="0.5" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABgAQAAIAARAAAAIAAAEABAQgAAARUgAQAAAgAAAAA=</HashCode>
+      <FileName>Repository\Comment.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ru.GameSchool.DataLayer.Repository.CommentLike">
+    <Position X="2.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAFAAQAEEAAAAAAAIAAAAAAAgAAAABEgAAAAAAAABAA=</HashCode>
+      <FileName>Repository\CommentLike.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ru.GameSchool.DataLayer.Repository.ContentType">
+    <Position X="4" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQAAAAAAAAAAQAAAAAAAAhAQAAAAAAAAA=</HashCode>
+      <FileName>Repository\ContentType.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ru.GameSchool.DataLayer.Repository.Course">
+    <Position X="4" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAEAAAAACAgwAAQgAAAAAQAUCIACAABKAAoQIAACgI=</HashCode>
+      <FileName>Repository\Course.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ru.GameSchool.DataLayer.Repository.CourseGrade">
+    <Position X="7.75" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABEAQAAAAAAAAAAIIAGAAAAQAAgABEAAAAAAAEAAAQ=</HashCode>
+      <FileName>Repository\CourseGrade.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ru.GameSchool.DataLayer.Repository.Department">
+    <Position X="2.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAAAAggAAAAAAAAAQAACIAAAAAAAAAABAAAAY=</HashCode>
+      <FileName>Repository\Department.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ru.GameSchool.DataLayer.Repository.FixupCollection&lt;T&gt;">
+    <Position X="6" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAABAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Repository\GameSchool.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ru.GameSchool.DataLayer.Repository.Level">
+    <Position X="7.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAEAAABACEQgAAAgIAEAgQAQBAgAQAgIQBgAAAAAAQ=</HashCode>
+      <FileName>Repository\Level.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ru.GameSchool.DataLayer.Repository.LevelExam" Collapsed="true">
+    <Position X="9.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgAABACBQICQQAQBAAgAEBAAAAAAAAACA=</HashCode>
+      <FileName>Repository\LevelExam.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ru.GameSchool.DataLayer.Repository.LevelExamAnswer">
+    <Position X="6" Y="11" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAAAAAAAAAAAAACAAABAAAAAAAAACAAgAIACI=</HashCode>
+      <FileName>Repository\LevelExamAnswer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ru.GameSchool.DataLayer.Repository.LevelExamQuestion">
+    <Position X="9.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAABAAAAAAAAAAQAAQCAAAAACAAEAAAAABAAIAI=</HashCode>
+      <FileName>Repository\LevelExamQuestion.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ru.GameSchool.DataLayer.Repository.LevelExamResult">
+    <Position X="6" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAQABAAAAAAAAIAQAAQAAAAAACBEAAAAAAAEAIAA=</HashCode>
+      <FileName>Repository\LevelExamResult.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ru.GameSchool.DataLayer.Repository.LevelMaterial">
+    <Position X="11.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAMAAgAEAAAAAIAQAAABAAgAABGAAQAECAIBA=</HashCode>
+      <FileName>Repository\LevelMaterial.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ru.GameSchool.DataLayer.Repository.LevelProject">
+    <Position X="11.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAACAgAAAAAAAIDQQAABAAgAABIAABAAAAAAA=</HashCode>
+      <FileName>Repository\LevelProject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ru.GameSchool.DataLayer.Repository.LevelProjectResult">
+    <Position X="4" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IABAAQACAAAAAAAAIAACBgAAQAAAABEQAAAAAAEAAAA=</HashCode>
+      <FileName>Repository\LevelProjectResult.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ru.GameSchool.DataLayer.Repository.Notification">
+    <Position X="2.25" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAQAAAAAgAAAAIAAAEAAAQAAAABGACAAAAAAAAAA=</HashCode>
+      <FileName>Repository\Notification.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ru.GameSchool.DataLayer.Repository.Point">
+    <Position X="6" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABEAQAAAAAggAAAIJAMAQAAABAggBEBAAAAAAAAAAQ=</HashCode>
+      <FileName>Repository\Point.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ru.GameSchool.DataLayer.Repository.Status">
+    <Position X="7.75" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAAAAAAAAAAAAAAQAACIAAAAAAAAAAAAAAAI=</HashCode>
+      <FileName>Repository\Status.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ru.GameSchool.DataLayer.Repository.UserInfo">
+    <Position X="9.5" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AmLAIQAMkCMgwAACiRAAAABQ0BAQCAUCCAApAhEAKgQ=</HashCode>
+      <FileName>Repository\UserInfo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ru.GameSchool.DataLayer.Repository.UserLog">
+    <Position X="0.5" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAAAAAAAAAIACAAAAAABAAABEAAAAAAAAAAAA=</HashCode>
+      <FileName>Repository\UserLog.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ru.GameSchool.DataLayer.Repository.UserType">
+    <Position X="4" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAACAAAAAAQAACIAAAAAAAAAAAAAAAI=</HashCode>
+      <FileName>Repository\UserType.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="Ru.GameSchool.DataLayer.Repository.IGameSchoolEntities">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAAEAAEggAAAADAAAASAABIACQQhCAAQABBAICA=</HashCode>
+      <FileName>Repository\GameSchool.Context.Interface.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
