@@ -27,7 +27,7 @@
   <Comment CommentText="BaseController&#xD;&#xA;    Initialize kallar í UserService.GetUser og skilar UserInfo">
     <Position X="20.792" Y="0.844" Height="2.146" Width="3.69" />
   </Comment>
-  <Comment CommentText="">
+  <Comment CommentText="HomeController&#xD;&#xA;    ">
     <Position X="3.292" Y="5.562" Height="1.219" Width="2.221" />
   </Comment>
   <Class Name="Ru.GameSchool.Web.Controllers.BaseController">
