@@ -48,5 +48,10 @@ namespace Ru.GameSchool.BusinessLayer.Services
         {
             throw new System.NotImplementedException();
         }
+
+        public void GetCourse()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
