@@ -53,5 +53,11 @@ namespace Ru.GameSchool.Web.Controllers
 
             return View();
         }
+
+        public ActionResult LeaderBoard(int id)
+        {
+
+            return View();
+        }
     }
 }
