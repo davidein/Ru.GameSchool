@@ -241,6 +241,10 @@
       <Project>{6D22540E-E972-4A18-9F07-249CC5055232}</Project>
       <Name>Ru.GameSchool.BusinessLayer</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Ru.GameSchool.DataLayer\Ru.GameSchool.DataLayer.csproj">
+      <Project>{03CF6BA8-B6E5-4153-8FD8-9A0271DFDF6A}</Project>
+      <Name>Ru.GameSchool.DataLayer</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Admin\Index.cshtml" />

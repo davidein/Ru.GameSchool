@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Ru.GameSchool.DataLayer;
 using Ru.GameSchool.Web.Models;
 
 namespace Ru.GameSchool.Web.Controllers
