@@ -1,22 +1,24 @@
 @model Ru.GameSchool.Web.Models.LoginModel
 
 @{
-    ViewBag.Title = "Log in";
+    ViewBag.Title = "Innskráning";
 }
 
-<hgroup class="title">
-    <h1>@ViewBag.Title.</h1>
-    <h2>Enter your user name and password below.</h2>
-</hgroup>
+<h2>Innskráning</h2>
+
+@section sidebar {
+
+@Html.Partial("_LeftSideBar")
+
+}
 
 <script src="~/Scripts/jquery.validate.min.js"></script>
 <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
 
 @using (Html.BeginForm((string)ViewBag.FormAction, "Account")) {
-    @Html.ValidationSummary(true, "Log in was unsuccessful. Please correct the errors and try again.")
+    @Html.ValidationSummary(true, "Innskráning heppnaðist ekki. vinsamlegast leiðréttið og reynið aftur.")
 
     <fieldset>
-        <legend>Log in Form</legend>
         <ol>
             <li>
                 @Html.LabelFor(m => m.UserName)
@@ -28,14 +30,16 @@
                 @Html.PasswordFor(m => m.Password)
                 @Html.ValidationMessageFor(m => m.Password)
             </li>
-            <li>
-                @Html.CheckBoxFor(m => m.RememberMe)
-                @Html.LabelFor(m => m.RememberMe, new { @class = "checkbox" })
-            </li>
+
         </ol>
-        <input type="submit" value="Log in" />
+
+    
+        <div class="control-group">
+        <div class="controls">
+        <button type="submit" class="btn btn-success" >Ská mig inn</button>
+        </div>
+        </div>
     </fieldset>
-    <p>
-        @Html.ActionLink("Register", "Register") if you don't have an account.
-    </p>
+
+
 }

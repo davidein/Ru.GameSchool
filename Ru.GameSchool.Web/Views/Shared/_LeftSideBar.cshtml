@@ -12,6 +12,15 @@
                     <li><a href="/Home/Projects">Verkefni</a></li>
                     <li><a href="/Home/Exams">Próf</a></li>
                     <li><a href="/Home/MaterialList">Kennsluefni</a></li>
+
+                    @if (Request["teacher"] == "1")
+                    {
+                    <hr/>
+                    <li><a href="/Home/Messages">Tilkynningar</a></li>
+                    <li><a href="/Home/Projects">Verkefni</a></li>
+                    <li><a href="/Home/Test">Próf</a></li>
+                    <li><a href="/Home/MaterialList">Kennsluefni</a></li>
+                    }    
                 </ul>
             </div>
         </div>
@@ -29,6 +38,14 @@
                     <li><a href="/Home/Projects">Verkefni</a></li>
                     <li><a href="/Home/Exams">Próf</a></li>
                     <li><a href="/Home/MaterialList">Kennsluefni</a></li>
+                    @if (Request["teacher"] == "1")
+                    {
+                    <hr/>
+                    <li><a href="/Home/Messages">Tilkynningar</a></li>
+                    <li><a href="/Home/Projects">Verkefni</a></li>
+                    <li><a href="/Home/Test">Próf</a></li>
+                    <li><a href="/Home/MaterialList">Kennsluefni</a></li>
+                    }  
                 </ul>
             </div>
         </div>
@@ -46,8 +63,17 @@
                     <li><a href="/Home/Projects">Verkefni</a></li>
                     <li><a href="/Home/Exams">Próf</a></li>
                     <li><a href="/Home/MaterialList">Kennsluefni</a></li>
+                    @if (Request["teacher"] == "1")
+                    {
+                    <hr/>
+                    <li><a href="/Home/Messages">Tilkynningar</a></li>
+                    <li><a href="/Home/Projects">Verkefni</a></li>
+                    <li><a href="/Home/Test">Próf</a></li>
+                    <li><a href="/Home/MaterialList">Kennsluefni</a></li>
+                    }  
                 </ul>
             </div>
         </div>
     </div>
 </div>
+

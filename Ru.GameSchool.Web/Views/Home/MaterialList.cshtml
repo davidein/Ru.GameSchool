@@ -6,17 +6,17 @@
 
 @section sidebar {
 
-@Html.Partial("_HomeSideBar")
+@Html.Partial("_LeftSideBar")
 
 }
 
 
 <ul>
-<li><a href="/Home/Material">Fyrirlestu 3 : Um samstæðustjórnun - Myndband</a></li>
-<li><a href="/Home/Material">Fyrirlestu 3 : Um samstæðustjórnun - Glærur</a></li>
-<li><a href="/Home/Material">Fyrirlestu 2 : Um hönnun og högun kerfisins - Myndband</a></li>
-<li><a href="/Home/Material">Fyrirlestu 2 : Um hönnun og högun kerfisins - Glærur</a></li>
-<li><a href="/Home/Material">Fyrirlestur 1 : Um fyrirkomulag námskeiðssins - Myndband</a></li>
-<li><a href="/Home/Material">Fyrirlestur 1 : Um fyrirkomulag námskeiðssins - Glærur</a></li>
+<li><a href="/Home/Material">Fyrirlestu 3 : Um samstæðustjórnun - Myndband</a> @if (Request["teacher"] == "1"){ <a href="/Teacher/EditMaterial" class="label" >Breyta</a>} </li>
+<li><a href="/Home/Material">Fyrirlestu 3 : Um samstæðustjórnun - Glærur</a> @if (Request["teacher"] == "1"){ <a href="/Teacher/EditMaterial" class="label" >Breyta</a>}</li>
+<li><a href="/Home/Material">Fyrirlestu 2 : Um hönnun og högun kerfisins - Myndband</a> @if (Request["teacher"] == "1"){ <a href="/Teacher/EditMaterial" class="label" >Breyta</a>}</li>
+<li><a href="/Home/Material">Fyrirlestu 2 : Um hönnun og högun kerfisins - Glærur</a> @if (Request["teacher"] == "1"){ <a href="/Teacher/EditMaterial" class="label" >Breyta</a>} </li>
+<li><a href="/Home/Material">Fyrirlestur 1 : Um fyrirkomulag námskeiðssins - Myndband</a> @if (Request["teacher"] == "1"){ <a href="/Teacher/EditMaterial" class="label" >Breyta</a>} </li>
+<li><a href="/Home/Material">Fyrirlestur 1 : Um fyrirkomulag námskeiðssins - Glærur</a> @if (Request["teacher"] == "1"){ <a href="/Teacher/EditMaterial" class="label" >Breyta</a>} </li>
 
 </ul>

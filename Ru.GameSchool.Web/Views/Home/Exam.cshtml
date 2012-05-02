@@ -1,0 +1,83 @@
+﻿@{
+    ViewBag.Title = "Próf";
+}
+
+<h2>Próf</h2>
+
+@section sidebar {
+
+@Html.Partial("_LeftSideBar")
+
+}
+
+
+<div class="control-group">
+<label class="control-label">Spurning 1.</label>
+<div class="controls">
+<p>Er þetta góð spurning?</p>
+</div>
+</div>
+
+
+
+    <div class="control-group">
+
+        <div class="controls">
+            <label class="radio">
+                <input type="radio" name="optionsRadios1" id="optionsRadios1" value="option1" checked="checked">
+                Já
+            </label>
+            <label class="radio">
+                <input type="radio" name="optionsRadios1" id="optionsRadios2" value="option2">
+                Nei
+            </label>
+            <label class="radio">
+                <input type="radio" name="optionsRadios1" id="optionsRadios2" value="option2">
+                Veit það ekki
+            </label>
+            <label class="radio">
+                <input type="radio" name="optionsRadios1" id="optionsRadios2" value="option2">
+                Huh?
+            </label>
+        </div>
+    </div>
+
+<div class="control-group">
+<label class="control-label">Spurning 2.</label>
+<div class="controls">
+<p>Hvað eiginlega málið með þessar hönnunarskýrlur?</p>
+</div>
+</div>
+
+    <div class="control-group">
+        <div class="controls">
+            <label class="radio">
+                <input type="radio" name="optionsRadios1" id="optionsRadios1" value="option1" checked="checked">
+                Já
+            </label>
+            <label class="radio">
+                <input type="radio" name="optionsRadios1" id="optionsRadios2" value="option2">
+                Nei
+            </label>
+            <label class="radio">
+                <input type="radio" name="optionsRadios1" id="optionsRadios2" value="option2">
+                Góð spurning
+            </label>
+        </div>
+    </div>
+
+<div class="control-group pull-left">
+<div class="controls btn-group">
+<button type="submit" class="btn btn-success" >Næstu spurningar</button>
+</div>
+</div>
+<div class="control-group pull-left">
+<div class="controls btn-group">
+<button type="submit" class="btn btn-info" >Vista</button>
+</div>
+</div>
+<div class="control-group pull-left">
+<div class="controls btn-group">
+<button type="submit" class="btn btn-danger" >Skila</button>
+</div>
+</div>

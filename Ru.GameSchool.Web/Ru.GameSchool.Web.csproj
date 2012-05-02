@@ -248,7 +248,7 @@
     <Content Include="Views\Teacher\CommentList.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Home\_HomeSideBar.cshtml" />
+    <Content Include="Views\Shared\_HomeSideBar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Teacher\_TeacherSideBar.cshtml" />

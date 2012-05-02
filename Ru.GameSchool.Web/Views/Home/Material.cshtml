@@ -6,14 +6,17 @@
 
 @section sidebar {
 
-@Html.Partial("_HomeSideBar")
+@Html.Partial("_LeftSideBar")
 
 }
 
 
+<h3>Fyrirlestu 3 : Um samstæðustjórnun @if (Request["teacher"] == "1"){<a href="/Teacher/EditMaterial" class="btn btn-primary" >Breyta</a> }</h3>
+<br />
+
 <iframe width="480" height="390" frameborder="0" allowfullscreen="" src="http://www.youtube.com/embed/Lq5om-jFJKE" title="YouTube video player"></iframe>
 
-<h3>Fyrirlestu 3 : Um samstæðustjórnun </h3>
+
 <ul id="commentList" class="commentList">
     <div id="jsonWrapper">
         <li><a href="http://www.ru.is">
