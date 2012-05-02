@@ -28,7 +28,7 @@ namespace Ru.GameSchool.Web.Controllers
             return View();
         }
 
-
+        /*
         public ActionResult Level()
         {
             return View();
@@ -73,7 +73,7 @@ namespace Ru.GameSchool.Web.Controllers
         public ActionResult MaterialList()
         {
             return View();
-        }
+        }*/
 
     }
 }
