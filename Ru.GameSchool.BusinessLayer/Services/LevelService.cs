@@ -237,5 +237,45 @@ namespace Ru.GameSchool.BusinessLayer.Services
             throw new System.NotImplementedException();
         }
 
+
+        public IEnumerable<LevelMaterial> GetLevelMaterials()
+        {
+            return GameSchoolEntities.LevelMaterials;
+        }
+
+        public LevelMaterial GetLevelMaterial(int levelMaterialId)
+        {
+            if (0 > levelMaterialId)
+            {
+                return null;
+            }
+            var query = GameSchoolEntities.LevelMaterials.Where(l => l.LevelMaterialId == levelMaterialId);
+
+            var levelMaterial = query.FirstOrDefault();
+
+            if (levelMaterial == null)
+            {
+                return null;
+            }
+
+            return levelMaterial;
+        }
+
+        public void CreateLevelMaterial(LevelMaterial levelMaterial)
+        {
+            if (levelMaterial != null)
+            {
+                GameSchoolEntities.LevelMaterials.AddObject(levelMaterial);
+                Save();
+            }
+        }
+
+        public void UpdateLevelMaterial(LevelMaterial levelMaterial)
+        {
+            if (levelMaterial != null)
+            {
+                
+            }
+        }
     }
 }
