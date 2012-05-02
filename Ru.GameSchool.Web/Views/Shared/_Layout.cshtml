@@ -83,7 +83,8 @@
                     @RenderSection("sidebar", false)
                 </div><!--/span-->
                 <div class="span9">
-                    @RenderBody()
+                @RenderSection("courseheading", false)           
+                @RenderBody()
                 </div><!--/span-->
             </div><!--/row-->
 
