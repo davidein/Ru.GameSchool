@@ -96,6 +96,7 @@ namespace Ru.GameSchool.BusinessLayerTests
             UserInfo actual = userService.GetUser(userId);
             
             Assert.AreEqual(expected.Username, actual.Username);
+            
         
             mockRepository.VerifyAllExpectations(); // Make sure everything was correctly called.
         }
