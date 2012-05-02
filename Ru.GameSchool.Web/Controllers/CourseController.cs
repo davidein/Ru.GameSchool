@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http;
-using System.Web.Http;
 using System.Web;
 using System.Web.Mvc;
+using Ru.GameSchool.Web.Models;
 
 namespace Ru.GameSchool.Web.Controllers
 {
@@ -31,11 +30,25 @@ namespace Ru.GameSchool.Web.Controllers
             return View();
         }
 
+        [HttpPost]
+        public ActionResult Create(CourseModel model)
+        {
+
+            return View(model);
+        }
+
         //TODO: Create Post ActionResult
 
 
         //TODO: Impliment Role Authentication
         public ActionResult Edit(int id)
+        {
+
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Edit(CourseModel model, int id)
         {
 
             return View();
