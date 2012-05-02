@@ -18,6 +18,10 @@ namespace Ru.GameSchool.Web.Controllers
 
         public ActionResult Item(int id)
         {
+            var course = CourseService.GetCourse(id);
+            ViewBag.Course = course;
+
+            ViewBag.Title = course.Name;
 
             return View();
         }

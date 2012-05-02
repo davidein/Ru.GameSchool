@@ -1,6 +1,9 @@
-﻿using Ru.GameSchool.DataLayer;
+﻿using System.Linq;
+using Ru.GameSchool.DataLayer;
 using System.Collections.Generic;
 using Ru.GameSchool.DataLayer.Repository;
+using Ru.GameSchool.Utilities;
+
 
 namespace Ru.GameSchool.BusinessLayer.Services
 {
@@ -51,7 +54,11 @@ namespace Ru.GameSchool.BusinessLayer.Services
 
         public Course GetCourse(int courseId)
         {
-            throw new System.NotImplementedException();
+            var course = from x in GameSchoolEntities.Courses
+                         where x.CourseId == courseId
+                       select x;
+
+            return course.FirstOrDefault();
         }
     }
 }
