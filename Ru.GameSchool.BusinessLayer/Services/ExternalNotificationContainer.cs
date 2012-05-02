@@ -10,6 +10,10 @@ namespace Ru.GameSchool.BusinessLayer.Services
     /// </summary> 
     public class NotificationService : BaseService, IExternalNotificationContainer
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="notification"></param>
         public void AddNotification(Notification notification)
         {
             if (notification != null)
@@ -19,6 +23,10 @@ namespace Ru.GameSchool.BusinessLayer.Services
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="notification"></param>
         public void UpdateNotification(Notification notification)
         {
             if (notification != null)

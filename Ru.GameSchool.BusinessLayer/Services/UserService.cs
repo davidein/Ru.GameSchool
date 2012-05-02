@@ -25,6 +25,10 @@ namespace Ru.GameSchool.BusinessLayer.Services
             return user.FirstOrDefault();
         }
 
+        /// <summary>
+        /// Returns a collection of userinfo instances.
+        /// </summary>
+        /// <returns>IEnumerable of userinfo instances.</returns>
         public IEnumerable<UserInfo> GetUsers()
         {
             var userInfoList = from x in GameSchoolEntities.UserInfoes
@@ -68,10 +72,10 @@ namespace Ru.GameSchool.BusinessLayer.Services
         }
 
         /// <summary>
-        /// Change 
+        /// Change the password of a userinfo instance.
         /// </summary>
-        /// <param name="newPassword"></param>
-        /// <param name="userInfoId"></param>
+        /// <param name="newPassword">Clear text password that a user entered.</param>
+        /// <param name="userInfoId">Id of a userinfo object.</param>
         public void ChangeUserInfoPassword(string newPassword, int userInfoId)
         {
             var query = GameSchoolEntities.UserInfoes.Where(u => u.UserInfoId == userInfoId);
