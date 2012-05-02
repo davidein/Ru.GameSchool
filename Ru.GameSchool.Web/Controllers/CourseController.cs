@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Ru.GameSchool.DataLayer;
 using Ru.GameSchool.Web.Models;
 
 namespace Ru.GameSchool.Web.Controllers
@@ -18,6 +19,10 @@ namespace Ru.GameSchool.Web.Controllers
 
         public ActionResult Item(int id)
         {
+            var course = CourseService.GetCourse(id);
+            ViewBag.Course = course;
+
+            ViewBag.Title = course.Name;
 
             return View();
         }

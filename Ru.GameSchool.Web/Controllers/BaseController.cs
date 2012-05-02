@@ -13,6 +13,7 @@ namespace Ru.GameSchool.Web.Controllers
     public class BaseController : Controller
     {
         private UserService _userService;
+        private CourseService _courseService;
 
         internal UserService UserService 
         { 
@@ -21,6 +22,15 @@ namespace Ru.GameSchool.Web.Controllers
                 _userService = LoadService(_userService, HttpContext); 
                 return _userService; 
             } 
+        }
+
+        internal CourseService CourseService
+        {
+            get
+            {
+                _courseService = LoadService(_courseService, HttpContext);
+                return _courseService;
+            }
         }
 
         private static T LoadService<T>(T service, HttpContextBase contextBase) where T : new()
