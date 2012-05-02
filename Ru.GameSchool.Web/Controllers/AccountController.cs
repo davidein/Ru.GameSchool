@@ -89,7 +89,7 @@ namespace Ru.GameSchool.Web.Controllers
 
         //
         // GET: /Account/Register
-
+        /*
         [AllowAnonymous]
         public ActionResult Register()
         {
@@ -203,6 +203,7 @@ namespace Ru.GameSchool.Web.Controllers
         {
             return View();
         }
+        */
 
         private ActionResult ContextDependentView()
         {
@@ -223,7 +224,7 @@ namespace Ru.GameSchool.Web.Controllers
         {
             return ModelState.SelectMany(x => x.Value.Errors.Select(error => error.ErrorMessage));
         }
-
+        /*
         #region Status Codes
         private static string ErrorCodeToString(MembershipCreateStatus createStatus)
         {
@@ -262,6 +263,6 @@ namespace Ru.GameSchool.Web.Controllers
                     return "An unknown error occurred. Please verify your entry and try again. If the problem persists, please contact your system administrator.";
             }
         }
-        #endregion
+        #endregion*/
     }
 }

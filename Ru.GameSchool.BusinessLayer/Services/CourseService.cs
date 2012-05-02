@@ -1,6 +1,5 @@
 ﻿using Ru.GameSchool.DataLayer;
 using System.Collections.Generic;
-using System.Linq;
 using Ru.GameSchool.DataLayer.Repository;
 
 namespace Ru.GameSchool.BusinessLayer.Services
@@ -10,44 +9,29 @@ namespace Ru.GameSchool.BusinessLayer.Services
     /// </summary> 
     public class CourseService : BaseService
     {
-        public void CreateCourse(Course course)
+        public void AddCourse(Course course)
         {
-            if (course != null)
-            {
-                GameSchoolEntities.Courses.AddObject(course);
-                Save();
-            }
+            throw new System.NotImplementedException();
         }
 
         public void UpdateCourse(Course course)
         {
-            if (course != null)
-            {
-
-            }
+            throw new System.NotImplementedException();
         }
 
         public IEnumerable<Course> GetCourses()
         {
-            return GameSchoolEntities.Courses;
+            throw new System.NotImplementedException();
         }
 
-        public void CreateUserToCourse(UserInfo user, Course course)
+        public void AddUserToCourse(UserInfo user, Course course)
         {
-            if (user != null && course != null)
-            {
-                // TODO: Finish initializing
-                Save();
-            }
+            throw new System.NotImplementedException();
         }
 
-        public void CreateCourseGrade(CourseGrade courseGrade)
+        public void AddCourseGrade(CourseGrade courseGrade)
         {
-            if (courseGrade != null)
-            {
-                GameSchoolEntities.CourseGrades.AddObject(courseGrade);
-                Save();
-            }
+            throw new System.NotImplementedException();
         }
 
         public void UpdateCourseGrade(CourseGrade courseGrade)
@@ -57,15 +41,15 @@ namespace Ru.GameSchool.BusinessLayer.Services
 
         public IEnumerable<CourseGrade> GetCourseGrades()
         {
-            return GameSchoolEntities.CourseGrades;
+            throw new System.NotImplementedException();
         }
 
         public void GetCurrentUserLevel()
         {
-            
+            throw new System.NotImplementedException();
         }
 
-        public void GetCourse()
+        public Course GetCourse(int courseId)
         {
             throw new System.NotImplementedException();
         }

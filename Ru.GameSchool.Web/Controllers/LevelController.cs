@@ -26,10 +26,11 @@ namespace Ru.GameSchool.Web.Controllers
             return View();
         }
 
+        /*
         public ActionResult Statistics(int id)
         {
             return View();
-        }
+        }*/
 
     }
 }

@@ -43,9 +43,6 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.4.5.4\lib\net40\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
@@ -129,20 +126,21 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CourseController.cs" />
-    <Compile Include="Controllers\ExamController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
 <<<<<<< HEAD
+    <Compile Include="Controllers\LevelController.cs" />
+=======
     <Compile Include="Controllers\JSonController.cs" />
     <Compile Include="Controllers\LevelController.cs" />
     <Compile Include="Controllers\MaterialController.cs" />
+>>>>>>> 01022de115d31e1beea1c139b85a721094de5361
     <Compile Include="Controllers\ProjectController.cs" />
-=======
->>>>>>> 29b894e2bbccc1d59159425ea606b70f2bf922e1
     <Compile Include="Controllers\TeacherController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\CourseModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -183,7 +181,6 @@
     <Content Include="Content\themes\base\jquery.ui.theme.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
-    <Content Include="Images\User.png" />
     <Content Include="Scripts\common.js" />
     <Content Include="Scripts\jquery-1.6.2-vsdoc.js" />
     <Content Include="Scripts\jquery-1.6.2.js" />
@@ -260,7 +257,7 @@
     <Content Include="Views\Teacher\CommentList.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Home\_HomeSideBar.cshtml" />
+    <Content Include="Views\Shared\_LeftSideBar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Teacher\_TeacherSideBar.cshtml" />
@@ -275,7 +272,7 @@
     <Content Include="Views\Home\Messages.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Home\Test.cshtml" />
+    <Content Include="Views\Home\Exam.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Home\Project.cshtml" />
@@ -313,13 +310,18 @@
     <Content Include="Views\Home\Level.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Home\Tests.cshtml" />
+    <Content Include="Views\Home\Exams.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Admin\_AdminSearchForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ControllersDiagram.cd" />
+    <Content Include="Views\Course\Index.cshtml" />
+<<<<<<< HEAD
+    <None Include="Diagrams\Controller.cd" />
+=======
+>>>>>>> 01022de115d31e1beea1c139b85a721094de5361
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

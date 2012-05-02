@@ -33,7 +33,7 @@ namespace Ru.GameSchool.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult CommentMaterial(int id)
+        public ActionResult UnLikeMaterial(int id)
         {
 
             return Json("", JsonRequestBehavior.AllowGet);

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Ru.GameSchool.Web.Models;
 
 namespace Ru.GameSchool.Web.Controllers
 {
@@ -16,28 +17,33 @@ namespace Ru.GameSchool.Web.Controllers
             return View();
         }
 
-                public ActionResult EditUser()
+        public ActionResult EditUser(int id)
         {
             return View();
         }
 
-                public ActionResult Course()
+        public ActionResult Course()
         {
             return View();
         }
 
-
-                public ActionResult UserList()
+        [HttpPost]
+        public ActionResult Course(CourseModel model)
         {
             return View();
         }
 
-                public ActionResult CourseList()
+        public ActionResult UserList()
         {
             return View();
         }
 
-                public ActionResult CourseRegisterUser()
+        public ActionResult CourseList()
+        {
+            return View();
+        }
+
+        public ActionResult CourseRegisterUser(int id)
         {
             return View();
         }
