@@ -60,12 +60,14 @@ namespace Ru.GameSchool.BusinessLayer.Services
                 return null;
             }
 
-
             return userInfo;
         }
       
         public void UpdateUser(UserInfo userInfo)
         {
+            GameSchoolEntities.AttachTo("UserInfo", userInfo);
+            Save();
+
 /*            var items = GameSchoolEntities.UserInfoes.Where(u => u.UserInfoId == userInfo.UserInfoId);
 
             var item = items.FirstOrDefault();

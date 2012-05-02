@@ -1,4 +1,5 @@
-﻿using Rhino.Mocks;
+﻿using System.Linq;
+using Rhino.Mocks;
 using Ru.GameSchool.BusinessLayer.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
@@ -17,7 +18,7 @@ namespace Ru.GameSchool.BusinessLayerTests
     [TestClass()]
     public class UserServiceTest
     {
-        private TestContext testContextInstance;
+        private TestContext _testContextInstance;
 
         /// <summary>
         ///Gets or sets the test context which provides
@@ -27,11 +28,11 @@ namespace Ru.GameSchool.BusinessLayerTests
         {
             get
             {
-                return testContextInstance;
+                return _testContextInstance;
             }
             set
             {
-                testContextInstance = value;
+                _testContextInstance = value;
             }
         }
 
@@ -79,7 +80,7 @@ namespace Ru.GameSchool.BusinessLayerTests
 
             var userData = new FakeObjectSet<UserInfo>();
 
-            UserInfo expected = new UserInfo();
+            var expected = new UserInfo();
             expected.Fullname = "Davíð Einarsson";
             expected.Email = "davide09@ru.is";
             expected.StatusId = 1;
@@ -90,12 +91,13 @@ namespace Ru.GameSchool.BusinessLayerTests
 
             mockRepository.Expect(x => x.UserInfoes).Return(userData);
 
-            int userId = 1; 
-            
-            UserInfo actual;
-            actual = userService.GetUser(userId);
+            int userId = 1;
+
+            UserInfo actual = userService.GetUser(userId);
             
             Assert.AreEqual(expected.Username, actual.Username);
+        
+            mockRepository.VerifyAllExpectations(); // Make sure everything was correctly called.
         }
 
         /// <summary>
@@ -104,12 +106,29 @@ namespace Ru.GameSchool.BusinessLayerTests
         [TestMethod()]
         public void GetUsersTest()
         {
-            UserService target = new UserService(); // TODO: Initialize to an appropriate value
-            IEnumerable<UserInfo> expected = null; // TODO: Initialize to an appropriate value
-            IEnumerable<UserInfo> actual;
-            actual = target.GetUsers();
-            Assert.AreEqual(expected, actual);
-            Assert.Inconclusive("Verify the correctness of this test method.");
+            var mockRepository = MockRepository.GenerateMock<IGameSchoolEntities>();
+            var userService = new UserService();
+            userService.SetDatasource(mockRepository);
+
+            var userData = new FakeObjectSet<UserInfo>();
+
+            UserInfo expected = new UserInfo();
+            expected.Fullname = "Davíð Einarsson";
+            expected.Email = "davide09@ru.is";
+            expected.StatusId = 1;
+            expected.Username = "davidein";
+            expected.UserInfoId = 1;
+            expected.Password = "Wtf";
+
+            userData.AddObject(expected);
+
+            mockRepository.Expect(x => x.UserInfoes).Return(userData);
+
+            var users = userService.GetUsers();
+
+            Assert.AreEqual(users.Count(), 1);
+
+            mockRepository.VerifyAllExpectations(); // Make sure everything was called correctly.
         }
 
         /// <summary>
@@ -151,6 +170,8 @@ namespace Ru.GameSchool.BusinessLayerTests
             Assert.IsNotNull(actual);
 
             Assert.AreEqual(expected.Username, actual.Username);
+
+            mockRepository.VerifyAllExpectations(); // Make sure everything was called correctly.
         }
 
         /// <summary>
@@ -159,10 +180,24 @@ namespace Ru.GameSchool.BusinessLayerTests
         [TestMethod()]
         public void UpdateUserTest()
         {
-            UserService target = new UserService(); // TODO: Initialize to an appropriate value
-            UserInfo userInfo = null; // TODO: Initialize to an appropriate value
-            target.UpdateUser(userInfo);
-            Assert.Inconclusive("A method that does not return a value cannot be verified.");
+            var mockRepository = MockRepository.GenerateMock<IGameSchoolEntities>();
+            var userService = new UserService();
+            userService.SetDatasource(mockRepository);
+
+            UserInfo userInfo = new UserInfo();
+            userInfo.Fullname = "Davíð Einarsson";
+            userInfo.Email = "davide09@ru.is";
+            userInfo.StatusId = 1;
+            userInfo.Username = "davidein";
+            userInfo.UserInfoId = 1;
+            userInfo.Password = "Wtf";
+
+            mockRepository.Expect(x => x.AttachTo("UserInfo", userInfo));
+            mockRepository.Expect(x => x.SaveChanges()).Return(1);
+                
+            userService.UpdateUser(userInfo);
+
+            mockRepository.VerifyAllExpectations(); // Make sure everything was called correctly.
         }
     }
 }

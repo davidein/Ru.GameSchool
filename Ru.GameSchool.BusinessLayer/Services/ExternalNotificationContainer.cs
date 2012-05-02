@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Ru.GameSchool.DataLayer;
+using Ru.GameSchool.BusinessLayer.Interfaces;
 using Ru.GameSchool.DataLayer.Repository;
 
 namespace Ru.GameSchool.BusinessLayer.Services
@@ -7,7 +7,7 @@ namespace Ru.GameSchool.BusinessLayer.Services
     /// <summary>
     /// Service class that abstracts the interraction around the notifications entity with the data layer.
     /// </summary> 
-    public class NotificationService : BaseService
+    public class NotificationService : BaseService, IExternalNotificationContainer
     {
         public void AddNotification(Notification notification)
         {
