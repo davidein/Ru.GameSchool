@@ -14,7 +14,7 @@ namespace Ru.GameSchool.BusinessLayer.Services
         /// 
         /// </summary>
         /// <param name="notification"></param>
-        public void AddNotification(Notification notification)
+        public void CreateNotification(Notification notification)
         {
             if (notification != null)
             {
