@@ -1,0 +1,57 @@
+<<<<<<< HEAD
+﻿@{
+    ViewBag.Title = "Forsíða  umsjónar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h2>Forsíða umsjónar</h2>
+
+@section sidebar {
+
+@Html.Partial("_AdminSideBar")
+
+}
+
+@Html.Partial("_AdminSearchForm")
+
+<h2>Niðurstöður leitar</h2>
+
+<ul>
+<li><a href="/Admin/EditUser">Davíð Einarsson</a></li>
+<li><a href="/Admin/EditUser">Erling J. Guðjohnsen Sigurðsson </a></li>
+<li><a href="/Admin/EditUser">Eyjólfur Kristjánsson</a></li>
+<li><a href="/Admin/EditUser">Hans Pétur Jónsson</a></li>
+<li><a href="/Admin/EditUser">Ólafur Jóhannsson</a></li>
+<li><a href="/Admin/EditUser">Valur Hrafn Einarsson</a></li>
+</ul>
+
+=======
+﻿@{
+    ViewBag.Title = "Forsíða  umsjónar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h2>Forsíða umsjónar</h2>
+
+@section sidebar {
+
+@Html.Partial("_AdminSideBar")
+
+}
+
+@Html.Partial("_AdminSearchForm")
+
+<h2>Niðurstöður leitar</h2>
+
+<ul>
+<li><a href="/Admin/EditUser">Davíð Einarsson</a></li>
+<li><a href="/Admin/EditUser">Erling J. Guðjohnsen Sigurðsson </a></li>
+<li><a href="/Admin/EditUser">Eyjólfur Kristjánsson</a></li>
+<li><a href="/Admin/EditUser">Hans Pétur Jónsson</a></li>
+<li><a href="/Admin/EditUser">Ólafur Jóhannsson</a></li>
+<li><a href="/Admin/EditUser">Valur Hrafn Einarsson</a></li>
+</ul>
+
+>>>>>>> f68ab16306b927e09139dd6646f2a6cbec6060a5

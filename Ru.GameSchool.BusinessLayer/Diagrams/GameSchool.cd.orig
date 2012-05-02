@@ -1,0 +1,108 @@
+<<<<<<< HEAD
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="Ru.GameSchool.BusinessLayer.Services.UserService">
+    <Position X="0.5" Y="3.25" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAEAAQAAAAAAA=</HashCode>
+      <FileName>Services\UserService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ru.GameSchool.BusinessLayer.Services.GameService">
+    <Position X="4" Y="3.25" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAABAAAAgAAAAQAAAAAAQAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\GameService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ru.GameSchool.BusinessLayer.Services.BaseService">
+    <Position X="6.5" Y="0.5" Width="3" />
+    <TypeIdentifier>
+      <HashCode>ACAAAIABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\BaseService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ru.GameSchool.BusinessLayer.Services.SocialService">
+    <Position X="7" Y="3.25" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAQAAAAAAAAAAAAAABAAQAAAABAAAAAAAAAAAAQAA=</HashCode>
+      <FileName>Services\CommentService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ru.GameSchool.BusinessLayer.Services.CourseService">
+    <Position X="9.75" Y="3.25" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQAAAAAAgJAABAAQAAAAAAABAAAAAAAIAAA=</HashCode>
+      <FileName>Services\CourseService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ru.GameSchool.BusinessLayer.Services.NotificationService">
+    <Position X="15.75" Y="3.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAgAAAAAAAAIA=</HashCode>
+      <FileName>Services\NotificationService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ru.GameSchool.BusinessLayer.Services.LevelService">
+    <Position X="13" Y="3.25" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>CQgAAAACAACAAAwAAAAAAAAABAAAIAAAASQAgAAQAAA=</HashCode>
+      <FileName>Services\LevelService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+=======
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="Ru.GameSchool.BusinessLayer.Services.UserService">
+    <Position X="0.5" Y="3.25" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAEAAQAAAAAAA=</HashCode>
+      <FileName>Services\UserService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ru.GameSchool.BusinessLayer.Services.GameService">
+    <Position X="4" Y="3.25" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAABAAAAgAAAAQAAAAAAQAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\GameService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ru.GameSchool.BusinessLayer.Services.BaseService">
+    <Position X="6.5" Y="0.5" Width="3" />
+    <TypeIdentifier>
+      <HashCode>ACAAAIABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\BaseService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ru.GameSchool.BusinessLayer.Services.SocialService">
+    <Position X="7" Y="3.25" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAQAAAAAAAAAAAAAABAAQAAAABAAAAAAAAAAAAQAA=</HashCode>
+      <FileName>Services\CommentService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ru.GameSchool.BusinessLayer.Services.CourseService">
+    <Position X="9.75" Y="3.25" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQAAAAAAgJAABAAQAAAAAAABAAAAAAAIAAA=</HashCode>
+      <FileName>Services\CourseService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ru.GameSchool.BusinessLayer.Services.NotificationService">
+    <Position X="15.75" Y="3.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAgAAAAAAAAIA=</HashCode>
+      <FileName>Services\NotificationService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ru.GameSchool.BusinessLayer.Services.LevelService">
+    <Position X="13" Y="3.25" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>CQgAAAACAACAAAwAAAAAAAAABAAAIAAAASQAgAAQAAA=</HashCode>
+      <FileName>Services\LevelService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+>>>>>>> f68ab16306b927e09139dd6646f2a6cbec6060a5
+</ClassDiagram>

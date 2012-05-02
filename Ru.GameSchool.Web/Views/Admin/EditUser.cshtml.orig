@@ -1,0 +1,233 @@
+<<<<<<< HEAD
+﻿@{
+    ViewBag.Title = "Notandi";
+}
+
+<h2>Notandi</h2>
+
+@section sidebar {
+
+@Html.Partial("_AdminSideBar")
+
+}
+
+<form class="form-horizontal" id="registerHere" method='post' action=''>
+<fieldset>
+
+<legend>Skrá nýjan</legend>
+
+<div class="control-group">
+            <label class="control-label" for="select01">Tegund notanda</label>
+            <div class="controls">
+              <select id="select01">
+                <option selected="selected">Nemandi</option>
+                <option>Kennari</option>
+                <option>Umsjónarmaður</option>
+              </select>
+            </div>
+</div>
+
+<div class="control-group">
+<label class="control-label">Nafn</label>
+<div class="controls">
+<input type="text" class="input-xlarge" id="name" name="name" rel="popover" data-content="Settu inn nafn." data-original-title="Fullt Nafn">
+</div>
+</div>
+
+<div class="control-group">
+<label class="control-label">Notandanafn</label>
+<div class="controls">
+<input type="text" class="input-xlarge" id="user_name" name="user_name" rel="popover" data-content="Settu inn notendanafnafn." data-original-title="Notendanafn">
+</div>
+</div>
+
+
+<div class="control-group">
+<label class="control-label">Netfang</label>
+<div class="controls">
+<input type="text" class="input-xlarge" id="user_email" name="user_email" rel="popover" data-content="Settu inn netfang" data-original-title="Email">
+</div>
+</div>
+
+<div class="control-group">
+<label class="control-label">Netfang</label>
+<div class="controls">
+<input type="text" class="input-xlarge" id="user_email" name="user_email" rel="popover" data-content="Settu inn netfang" data-original-title="Email">
+</div>
+</div>
+
+<div class="control-group">
+            <label class="control-label" for="select01">Deild</label>
+            <div class="controls">
+              <select id="select02">
+                <option>Tölvunarfræði</option>
+                <option>Verkfræði</option>
+                <option>Viðskiptafræði</option>
+                <option>Lögfræði</option>
+              </select>
+            </div>
+</div>
+
+    <div class="control-group">
+        <label class="control-label">
+            Virkur</label>
+        <div class="controls">
+            <label class="radio">
+                <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="checked">
+                Já
+            </label>
+            <label class="radio">
+                <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+                Nei
+            </label>
+        </div>
+    </div>
+
+
+<h3>Skrá í námskeið:</h3>
+<div class="control-group">
+            <label class="control-label" for="select01">Veldu námskeið</label>
+            <div class="controls">
+              <select id="select02">
+                <option>Greining og hönnun hugbúnaðar</option>
+                <option>Vefforitun I</option>
+                <option>Verklegt námskeið</option>
+                <option>Stýrikerfi</option>
+              </select>
+            </div>
+</div>
+
+<h3>Skráður í námskeið:</h3>
+<ul>
+<li><a href="/Admin/Course">Vefforitun I</a></li>
+<li><a href="/Admin/Course">Vefforitun II</a></li>
+
+</ul>
+
+
+<div class="control-group">
+<label class="control-label"></label>
+<div class="controls">
+<button type="submit" class="btn btn-success" >Búa til nemanda</button>
+</div>
+</div>
+
+</fieldset>
+</form>
+=======
+﻿@{
+    ViewBag.Title = "Notandi";
+}
+
+<h2>Notandi</h2>
+
+@section sidebar {
+
+@Html.Partial("_AdminSideBar")
+
+}
+
+<form class="form-horizontal" id="registerHere" method='post' action=''>
+<fieldset>
+
+<legend>Skrá nýjan</legend>
+
+<div class="control-group">
+            <label class="control-label" for="select01">Tegund notanda</label>
+            <div class="controls">
+              <select id="select01">
+                <option selected="selected">Nemandi</option>
+                <option>Kennari</option>
+                <option>Umsjónarmaður</option>
+              </select>
+            </div>
+</div>
+
+<div class="control-group">
+<label class="control-label">Nafn</label>
+<div class="controls">
+<input type="text" class="input-xlarge" id="name" name="name" rel="popover" data-content="Settu inn nafn." data-original-title="Fullt Nafn">
+</div>
+</div>
+
+<div class="control-group">
+<label class="control-label">Notandanafn</label>
+<div class="controls">
+<input type="text" class="input-xlarge" id="user_name" name="user_name" rel="popover" data-content="Settu inn notendanafnafn." data-original-title="Notendanafn">
+</div>
+</div>
+
+
+<div class="control-group">
+<label class="control-label">Netfang</label>
+<div class="controls">
+<input type="text" class="input-xlarge" id="user_email" name="user_email" rel="popover" data-content="Settu inn netfang" data-original-title="Email">
+</div>
+</div>
+
+<div class="control-group">
+<label class="control-label">Netfang</label>
+<div class="controls">
+<input type="text" class="input-xlarge" id="user_email" name="user_email" rel="popover" data-content="Settu inn netfang" data-original-title="Email">
+</div>
+</div>
+
+<div class="control-group">
+            <label class="control-label" for="select01">Deild</label>
+            <div class="controls">
+              <select id="select02">
+                <option>Tölvunarfræði</option>
+                <option>Verkfræði</option>
+                <option>Viðskiptafræði</option>
+                <option>Lögfræði</option>
+              </select>
+            </div>
+</div>
+
+    <div class="control-group">
+        <label class="control-label">
+            Virkur</label>
+        <div class="controls">
+            <label class="radio">
+                <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="checked">
+                Já
+            </label>
+            <label class="radio">
+                <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+                Nei
+            </label>
+        </div>
+    </div>
+
+
+<h3>Skrá í námskeið:</h3>
+<div class="control-group">
+            <label class="control-label" for="select01">Veldu námskeið</label>
+            <div class="controls">
+              <select id="select02">
+                <option>Greining og hönnun hugbúnaðar</option>
+                <option>Vefforitun I</option>
+                <option>Verklegt námskeið</option>
+                <option>Stýrikerfi</option>
+              </select>
+            </div>
+</div>
+
+<h3>Skráður í námskeið:</h3>
+<ul>
+<li><a href="/Admin/Course">Vefforitun I</a></li>
+<li><a href="/Admin/Course">Vefforitun II</a></li>
+
+</ul>
+
+
+<div class="control-group">
+<label class="control-label"></label>
+<div class="controls">
+<button type="submit" class="btn btn-success" >Búa til nemanda</button>
+</div>
+</div>
+
+</fieldset>
+</form>
+>>>>>>> f68ab16306b927e09139dd6646f2a6cbec6060a5

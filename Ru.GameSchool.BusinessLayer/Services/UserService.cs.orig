@@ -41,10 +41,14 @@ namespace Ru.GameSchool.BusinessLayer.Services
         /// <returns>A new user instance.</returns>
         public UserInfo Login(string userName, string password)
         {
+<<<<<<< HEAD
             if ((string.IsNullOrWhiteSpace(userName)) || (string.IsNullOrWhiteSpace(password)))
             {
                 return null;
             }
+=======
+
+>>>>>>> d942d40c4bebbf812effff04cecc9aa6efa7e817
 
             var userQuery = from x in GameSchoolEntities.UserInfoes
                             where x.Username == userName

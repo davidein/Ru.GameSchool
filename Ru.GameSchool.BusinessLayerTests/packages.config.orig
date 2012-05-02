@@ -1,0 +1,10 @@
+<<<<<<< HEAD
+﻿<?xml version="1.0" encoding="utf-8"?>
+<packages>
+  <package id="RhinoMocks" version="3.6.1" />
+=======
+﻿<?xml version="1.0" encoding="utf-8"?>
+<packages>
+  <package id="RhinoMocks" version="3.6.1" />
+>>>>>>> f68ab16306b927e09139dd6646f2a6cbec6060a5
+</packages>

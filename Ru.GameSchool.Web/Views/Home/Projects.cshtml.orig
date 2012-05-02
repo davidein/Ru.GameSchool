@@ -1,0 +1,47 @@
+<<<<<<< HEAD
+﻿@{
+    ViewBag.Title = "Listi yfir verkefni";
+}
+
+<h2>Listi yfir verkefni</h2>
+
+@section sidebar {
+
+@Html.Partial("_HomeSideBar")
+
+}
+
+<ul>
+<li><a href="/Home/Project">Dæmatímaverkefni 3 - Skiladagur: 23.5.2012 23.59</a> </li>
+<li><a href="/Home/Project">Skilaverkefni 2 - Skiladagur: 23.5.2012 23.59</a> </li>
+<li><a href="/Home/Project">Dæmatímaverkefni 3 - Skiladagur: 23.5.2012 23.59</a> </li>
+<li><a href="/Home/Project">Dæmatímaverkefni 2 - Skiladagur: 23.5.2012 23.59</a> </li>
+<li><a href="/Home/Project">Skilaverkefni 1 - Skiladagur: 23.5.2012 23.59</a> </li>
+<li><a href="/Home/Project">Dæmatímaverkefni 1 - Skiladagur: 23.5.2012 23.59</a> </li>
+
+</ul>
+
+=======
+﻿@{
+    ViewBag.Title = "Listi yfir verkefni";
+}
+
+<h2>Listi yfir verkefni</h2>
+
+@section sidebar {
+
+@Html.Partial("_HomeSideBar")
+
+}
+
+<ul>
+<li><a href="/Home/Project">Dæmatímaverkefni 3 - Skiladagur: 23.5.2012 23.59</a> </li>
+<li><a href="/Home/Project">Skilaverkefni 2 - Skiladagur: 23.5.2012 23.59</a> </li>
+<li><a href="/Home/Project">Dæmatímaverkefni 3 - Skiladagur: 23.5.2012 23.59</a> </li>
+<li><a href="/Home/Project">Dæmatímaverkefni 2 - Skiladagur: 23.5.2012 23.59</a> </li>
+<li><a href="/Home/Project">Skilaverkefni 1 - Skiladagur: 23.5.2012 23.59</a> </li>
+<li><a href="/Home/Project">Dæmatímaverkefni 1 - Skiladagur: 23.5.2012 23.59</a> </li>
+
+</ul>
+
+>>>>>>> f68ab16306b927e09139dd6646f2a6cbec6060a5

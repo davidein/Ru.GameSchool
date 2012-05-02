@@ -1,0 +1,54 @@
+<<<<<<< HEAD
+﻿@{
+    ViewBag.Title = "Um GameSchool";
+}
+
+
+    <h2>@ViewBag.Title.</h1>
+
+
+
+@section sidebar {
+
+@Html.Partial("_HomeSideBar")
+
+}
+
+<article>
+    <p>
+        GameSchool er kerfi sem úthlutar og heldur utan um vinnu nemanda við námskeið í skólanum.
+        Markmið GameSchool er að gera þetta á aðgengilegan hátt og til að hvetja nemendur er líka í gangi leikur, þar sem nemendur geta unnið sér inn stig með virkri þáttöku.
+    </p>
+
+</article>
+
+<aside>
+
+=======
+﻿@{
+    ViewBag.Title = "Um GameSchool";
+}
+
+
+    <h2>@ViewBag.Title.</h1>
+
+
+
+@section sidebar {
+
+@Html.Partial("_HomeSideBar")
+
+}
+
+<article>
+    <p>
+        GameSchool er kerfi sem úthlutar og heldur utan um vinnu nemanda við námskeið í skólanum.
+        Markmið GameSchool er að gera þetta á aðgengilegan hátt og til að hvetja nemendur er líka í gangi leikur, þar sem nemendur geta unnið sér inn stig með virkri þáttöku.
+    </p>
+
+</article>
+
+<aside>
+
+>>>>>>> f68ab16306b927e09139dd6646f2a6cbec6060a5
+</aside>

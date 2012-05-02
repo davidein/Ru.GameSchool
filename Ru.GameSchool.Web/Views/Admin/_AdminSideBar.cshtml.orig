@@ -1,0 +1,25 @@
+<<<<<<< HEAD
+﻿
+
+<div class="well sidebar-nav">         
+    <ul class="nav nav-list">
+        <li class="nav-header">Umsjón</li>
+        <li class="active"><a href="/Admin">Leita</a></li>
+        <li><a href="/Admin/Course">Nýtt námskeið</a></li>
+        <li><a href="/Admin/EditUser">Nýr notandi</a></li>
+        <li></li>
+    </ul>
+</div>
+=======
+﻿
+
+<div class="well sidebar-nav">         
+    <ul class="nav nav-list">
+        <li class="nav-header">Umsjón</li>
+        <li class="active"><a href="/Admin">Leita</a></li>
+        <li><a href="/Admin/Course">Nýtt námskeið</a></li>
+        <li><a href="/Admin/EditUser">Nýr notandi</a></li>
+        <li></li>
+    </ul>
+</div>
+>>>>>>> f68ab16306b927e09139dd6646f2a6cbec6060a5

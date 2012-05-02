@@ -1,0 +1,47 @@
+<<<<<<< HEAD
+﻿@{
+    ViewBag.Title = "Listi yfir kennsluefni";
+}
+
+<h2>Listi yfir kennsluefni</h2>
+
+@section sidebar {
+
+@Html.Partial("_HomeSideBar")
+
+}
+
+
+<ul>
+<li><a href="/Home/Material">Fyrirlestu 3 : Um samstæðustjórnun - Myndband</a></li>
+<li><a href="/Home/Material">Fyrirlestu 3 : Um samstæðustjórnun - Glærur</a></li>
+<li><a href="/Home/Material">Fyrirlestu 2 : Um hönnun og högun kerfisins - Myndband</a></li>
+<li><a href="/Home/Material">Fyrirlestu 2 : Um hönnun og högun kerfisins - Glærur</a></li>
+<li><a href="/Home/Material">Fyrirlestur 1 : Um fyrirkomulag námskeiðssins - Myndband</a></li>
+<li><a href="/Home/Material">Fyrirlestur 1 : Um fyrirkomulag námskeiðssins - Glærur</a></li>
+
+</ul>
+=======
+﻿@{
+    ViewBag.Title = "Listi yfir kennsluefni";
+}
+
+<h2>Listi yfir kennsluefni</h2>
+
+@section sidebar {
+
+@Html.Partial("_HomeSideBar")
+
+}
+
+
+<ul>
+<li><a href="/Home/Material">Fyrirlestu 3 : Um samstæðustjórnun - Myndband</a></li>
+<li><a href="/Home/Material">Fyrirlestu 3 : Um samstæðustjórnun - Glærur</a></li>
+<li><a href="/Home/Material">Fyrirlestu 2 : Um hönnun og högun kerfisins - Myndband</a></li>
+<li><a href="/Home/Material">Fyrirlestu 2 : Um hönnun og högun kerfisins - Glærur</a></li>
+<li><a href="/Home/Material">Fyrirlestur 1 : Um fyrirkomulag námskeiðssins - Myndband</a></li>
+<li><a href="/Home/Material">Fyrirlestur 1 : Um fyrirkomulag námskeiðssins - Glærur</a></li>
+
+</ul>
+>>>>>>> f68ab16306b927e09139dd6646f2a6cbec6060a5
