@@ -11,7 +11,19 @@ namespace Ru.GameSchool.Web.Controllers
         //
         // GET: /Material/
 
-        public ActionResult Index()
+        
+
+        public ActionResult Get(int id)
+        {
+            return View();
+        }
+
+        public ActionResult Create(int id)
+        {
+            return View();
+        }
+
+        public ActionResult Edit(int id)
         {
             return View();
         }
