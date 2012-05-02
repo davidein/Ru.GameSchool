@@ -46,7 +46,7 @@
     <Compile Include="Services\LevelService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\BaseService.cs" />
-    <Compile Include="Services\CommentService.cs" />
+    <Compile Include="Services\SocialService.cs" />
     <Compile Include="Services\CourseService.cs" />
     <Compile Include="Services\GameService.cs" />
     <Compile Include="Services\ExternalNotificationContainer.cs" />

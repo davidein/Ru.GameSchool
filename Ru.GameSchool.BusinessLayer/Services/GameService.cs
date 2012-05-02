@@ -43,11 +43,10 @@ namespace Ru.GameSchool.BusinessLayer.Services
             return points;
         }
 
-        public void CalculatePoints()
+        public int CalculatePoints(UserInfo userInfo, Course course)
         {
             throw new System.NotImplementedException();
         }
-
 
         public void GetPointsComparedToUsers(int userId, int courseId)
         {
