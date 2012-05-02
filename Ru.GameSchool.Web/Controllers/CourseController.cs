@@ -25,7 +25,7 @@ namespace Ru.GameSchool.Web.Controllers
 
         
         //TODO: Impliment Role Authentication
-        public ActionResult Create(int id)
+        public ActionResult Create()
         {
 
             return View();
