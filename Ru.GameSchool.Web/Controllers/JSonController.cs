@@ -11,10 +11,32 @@ namespace Ru.GameSchool.Web.Controllers
         //
         // GET: /JSon/
 
-        public ActionResult Index()
+        [HttpPost]
+        public ActionResult GetNotifications(int id)
         {
-            return View();
+
+            return Json("", JsonRequestBehavior.AllowGet);
         }
 
+        [HttpPost]
+        public ActionResult LikeComment(int id)
+        {
+
+            return Json("", JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public ActionResult LikeMaterial(int id)
+        {
+
+            return Json("", JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public ActionResult CommentMaterial(int id)
+        {
+
+            return Json("", JsonRequestBehavior.AllowGet);
+        }
     }
 }
