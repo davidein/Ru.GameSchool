@@ -1,14 +1,16 @@
-﻿using Ru.GameSchool.BusinessLayer.Services;
+﻿using System.ComponentModel;
+using Ru.GameSchool.BusinessLayer.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using Ru.GameSchool.DataLayer.Repository;
 using System.Collections.Generic;
 using Rhino.Mocks;
+using Ru.GameSchool.BusinessLayerTests.Classes;
 
 namespace Ru.GameSchool.BusinessLayerTests
 {
-    
-    
+
+
     /// <summary>
     ///This is a test class for GameServiceTest and is intended
     ///to contain all GameServiceTest Unit Tests
@@ -67,28 +69,14 @@ namespace Ru.GameSchool.BusinessLayerTests
         #endregion
 
 
-        /// <summary>
-        ///A test for GameService Constructor
-        ///</summary>
-        [TestMethod()]
-        public void GameServiceConstructorTest()
-        {
-            GameService target = new GameService();
-            Assert.Inconclusive("TODO: Implement code to verify target");
-        }
 
         /// <summary>
         ///A test for AddPointsToLevel
         ///</summary>
         [TestMethod()]
-        public void AddPointsToLevelTest()
+        public void AddPointsToLevel()
         {
-            GameService target = new GameService(); // TODO: Initialize to an appropriate value
-            int userInfoId = 0; // TODO: Initialize to an appropriate value
-            int levelId = 0; // TODO: Initialize to an appropriate value
-            int points = 0; // TODO: Initialize to an appropriate value
-            target.AddPointsToLevel(userInfoId, levelId, points);
-            Assert.Inconclusive("A method that does not return a value cannot be verified.");
+            
         }
 
         /// <summary>
@@ -97,9 +85,7 @@ namespace Ru.GameSchool.BusinessLayerTests
         [TestMethod()]
         public void CalculatePointsTest()
         {
-            GameService target = new GameService(); // TODO: Initialize to an appropriate value
-            target.CalculatePoints();
-            Assert.Inconclusive("A method that does not return a value cannot be verified.");
+
         }
 
         /// <summary>
@@ -108,14 +94,34 @@ namespace Ru.GameSchool.BusinessLayerTests
         [TestMethod()]
         public void GetPointsTest()
         {
-            GameService target = new GameService(); // TODO: Initialize to an appropriate value
-            int userInfoId = 0; // TODO: Initialize to an appropriate value
-            int levelId = 0; // TODO: Initialize to an appropriate value
-            int expected = 0; // TODO: Initialize to an appropriate value
-            int actual;
-            actual = target.GetPoints(userInfoId, levelId);
-            Assert.AreEqual(expected, actual);
-            Assert.Inconclusive("Verify the correctness of this test method.");
+            var mockRepository = MockRepository.GenerateMock<IGameSchoolEntities>();
+            var gameService = new GameService();
+            gameService.SetDatasource(mockRepository);
+
+            var userData = new FakeObjectSet<Point>();
+            var userInfoId = 1;
+            var levelId = 1;
+            var expected = new Point
+                               {
+                                   CourseId = 1,
+                                   PointsId = 1,
+                                   UserInfoId = userInfoId,
+                                   Description = "Description",
+                                   LevelId = levelId,
+                                   Points = 50
+                               };
+
+            userData.AddObject(expected);
+
+            mockRepository.Expect(x => x.Points).Return(userData);
+
+
+
+            var actual = gameService.GetPoints(userInfoId, levelId);
+
+            Assert.AreEqual(expected,actual);
+
+            mockRepository.VerifyAllExpectations();
         }
 
         /// <summary>
@@ -141,6 +147,9 @@ namespace Ru.GameSchool.BusinessLayerTests
             var mockRepository = MockRepository.GenerateMock<IGameSchoolEntities>();
             var gameService = new GameService();
             gameService.SetDatasource(mockRepository);
+
+
+
 
             GameService target = new GameService(); // TODO: Initialize to an appropriate value
             int courseId = 0; // TODO: Initialize to an appropriate value
