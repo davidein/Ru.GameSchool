@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Ru.GameSchool.BusinessLayer.Interfaces;
 using Ru.GameSchool.DataLayer.Repository;
+using System.Linq;
 
 namespace Ru.GameSchool.BusinessLayer.Services
 {
@@ -11,17 +12,35 @@ namespace Ru.GameSchool.BusinessLayer.Services
     {
         public void AddNotification(Notification notification)
         {
-            throw new System.NotImplementedException();
+            if (notification != null)
+            {
+                GameSchoolEntities.Notifications.AddObject(notification);
+                Save();
+            }
         }
 
         public void UpdateNotification(Notification notification)
         {
-            throw new System.NotImplementedException();
-        }
+            if (notification != null)
+            {
+                var query = GameSchoolEntities.Notifications.Where(n => n.NotificationId == notification.NotificationId);
 
-        public IEnumerable<Notification> GetNotifications(int userId)
+                var notificationToUpdate = query.FirstOrDefault();
+                notificationToUpdate.Description = notification.Description;
+                notificationToUpdate.IsRead = notification.IsRead;
+                notificationToUpdate.Url = notification.Url;
+                // TODO: Confirm update function works
+                Save();
+            }
+        }
+        /// <summary>
+        /// Returns a collection of notification objects that are related to a given userinfo instance id, if the userinfoid is equal to or larger then 1.
+        /// </summary>
+        /// <param name="userInfoId">Integer value to get notifications</param>
+        /// <returns></returns>
+        public IEnumerable<Notification> GetNotifications(int userInfoId)
         {
-            throw new System.NotImplementedException();
+            return userInfoId > 0 ? GameSchoolEntities.Notifications.Where(n => n.UserInfoId == userInfoId) : null;
         }
     }
 }
