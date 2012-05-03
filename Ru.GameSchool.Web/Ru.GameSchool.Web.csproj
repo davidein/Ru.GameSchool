@@ -122,6 +122,12 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\AccountMembershipService.cs" />
+    <Compile Include="Classes\FormsAuthenticationService.cs" />
+    <Compile Include="Classes\GameSchoolMembershipProvider.cs" />
+    <Compile Include="Classes\Interfaces\IFormsAuthenticationService.cs" />
+    <Compile Include="Classes\Interfaces\IMembershipService.cs" />
+    <Compile Include="Classes\GameSchoolMembershipUser.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
