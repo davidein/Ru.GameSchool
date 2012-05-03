@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enums\UserStatus.cs" />
+    <Compile Include="Enums\UserType.cs" />
     <Compile Include="Interfaces\IExternalNotificationContainer.cs" />
     <Compile Include="Interfaces\IExternalPointContainer.cs" />
     <Compile Include="Services\LevelService.cs" />

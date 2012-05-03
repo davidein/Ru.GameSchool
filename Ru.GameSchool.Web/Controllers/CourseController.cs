@@ -1,22 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using Ru.GameSchool.DataLayer;
+﻿using System.Web.Mvc;
 using Ru.GameSchool.Web.Models;
 
 namespace Ru.GameSchool.Web.Controllers
 {
     public class CourseController : BaseController
     {
-
+        [Authorize(Roles = "Student")]
         public ActionResult Index()
         {
-
             return View();
         }
 
+        [Authorize(Roles = "Student")]
         public ActionResult Item(int id)
         {
             var course = CourseService.GetCourse(id);
@@ -27,14 +22,15 @@ namespace Ru.GameSchool.Web.Controllers
             return View();
         }
 
-        
-        //TODO: Impliment Role Authentication
+
+        [Authorize(Roles = "Teacher")]
         public ActionResult Create()
         {
 
             return View();
         }
 
+        [Authorize(Roles = "Teacher")]
         [HttpPost]
         public ActionResult Create(CourseModel model)
         {
@@ -45,13 +41,14 @@ namespace Ru.GameSchool.Web.Controllers
         //TODO: Create Post ActionResult
 
 
-        //TODO: Impliment Role Authentication
+        [Authorize(Roles = "Teacher")]
         public ActionResult Edit(int id)
         {
 
             return View();
         }
 
+        [Authorize(Roles = "Teacher")]
         [HttpPost]
         public ActionResult Edit(CourseModel model, int id)
         {
@@ -59,6 +56,7 @@ namespace Ru.GameSchool.Web.Controllers
             return View();
         }
 
+        [Authorize(Roles = "Student")]
         public ActionResult LeaderBoard(int id)
         {
 
