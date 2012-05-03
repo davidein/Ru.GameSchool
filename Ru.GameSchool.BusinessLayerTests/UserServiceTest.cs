@@ -95,6 +95,8 @@ namespace Ru.GameSchool.BusinessLayerTests
 
             UserInfo actual = userService.GetUser(userId);
             
+            Assert.IsNotNull( actual);
+
             Assert.AreEqual(expected.Username, actual.Username);
             
         
