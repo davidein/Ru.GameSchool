@@ -68,6 +68,13 @@ namespace Ru.GameSchool.BusinessLayer.Services
                 return null; // Password don't match, return null.
             }
 
+
+            //Check if user status is active, If it's inactive we return null
+            if (userInfo.StatusId != 1)
+            {
+                return null;
+            }
+
             return userInfo;
         }
 

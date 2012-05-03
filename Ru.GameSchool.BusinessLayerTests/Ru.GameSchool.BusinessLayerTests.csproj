@@ -55,6 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\FakeObjectSet.cs" />
+    <Compile Include="CourseServiceTest.cs" />
     <Compile Include="GameServiceTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserServiceTest.cs" />
