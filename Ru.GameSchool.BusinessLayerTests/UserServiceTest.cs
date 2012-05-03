@@ -1,11 +1,11 @@
 ﻿using System.Linq;
 using Rhino.Mocks;
+using Ru.GameSchool.BusinessLayer.Enums;
 using Ru.GameSchool.BusinessLayer.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 using Ru.GameSchool.BusinessLayerTests.Classes;
 using Ru.GameSchool.DataLayer.Repository;
-using System.Collections.Generic;
+using Ru.GameSchool.Utilities;
 
 namespace Ru.GameSchool.BusinessLayerTests
 {
@@ -18,23 +18,13 @@ namespace Ru.GameSchool.BusinessLayerTests
     [TestClass()]
     public class UserServiceTest
     {
-        private TestContext _testContextInstance;
+        //private TestContext _testContextInstance;
 
         /// <summary>
         ///Gets or sets the test context which provides
         ///information about and functionality for the current test run.
         ///</summary>
-        public TestContext TestContext
-        {
-            get
-            {
-                return _testContextInstance;
-            }
-            set
-            {
-                _testContextInstance = value;
-            }
-        }
+        public TestContext TestContext { get; set; }
 
         #region Additional test attributes
         // 
@@ -64,20 +54,27 @@ namespace Ru.GameSchool.BusinessLayerTests
         //{
         //}
         //
+
+        private IGameSchoolEntities _mockRepository;
+        private UserService _userService;
+
+        [TestInitialize]
+        public void MyTestInitialize()
+        {
+            _mockRepository = MockRepository.GenerateMock<IGameSchoolEntities>();
+            _userService = new UserService();
+            _userService.SetDatasource(_mockRepository);
+        }
         #endregion
 
 
         /// <summary>
         ///A test for GetUser
         ///</summary>
-        [TestMethod()]
+        [TestMethod]
         public void GetUserTest()
         {
             //Assign
-            var mockRepository = MockRepository.GenerateMock<IGameSchoolEntities>();
-            var userService = new UserService();
-            userService.SetDatasource(mockRepository);
-
             var userData = new FakeObjectSet<UserInfo>();
 
             var expected = new UserInfo();
@@ -89,30 +86,26 @@ namespace Ru.GameSchool.BusinessLayerTests
 
             userData.AddObject(expected);
 
-            mockRepository.Expect(x => x.UserInfoes).Return(userData);
+            _mockRepository.Expect(x => x.UserInfoes).Return(userData);
 
             int userId = 1;
 
-            UserInfo actual = userService.GetUser(userId);
+            UserInfo actual = _userService.GetUser(userId);
             
             Assert.IsNotNull( actual);
 
             Assert.AreEqual(expected.Username, actual.Username);
             
         
-            mockRepository.VerifyAllExpectations(); // Make sure everything was correctly called.
+            _mockRepository.VerifyAllExpectations(); // Make sure everything was correctly called.
         }
 
         /// <summary>
         ///A test for GetUsers
         ///</summary>
-        [TestMethod()]
+        [TestMethod]
         public void GetUsersTest()
         {
-            var mockRepository = MockRepository.GenerateMock<IGameSchoolEntities>();
-            var userService = new UserService();
-            userService.SetDatasource(mockRepository);
-
             var userData = new FakeObjectSet<UserInfo>();
 
             UserInfo expected = new UserInfo();
@@ -125,68 +118,62 @@ namespace Ru.GameSchool.BusinessLayerTests
 
             userData.AddObject(expected);
 
-            mockRepository.Expect(x => x.UserInfoes).Return(userData);
+            _mockRepository.Expect(x => x.UserInfoes).Return(userData);
 
-            var users = userService.GetUsers();
+            var users = _userService.GetUsers();
 
             Assert.AreEqual(users.Count(), 1);
 
-            mockRepository.VerifyAllExpectations(); // Make sure everything was called correctly.
+            _mockRepository.VerifyAllExpectations(); // Make sure everything was called correctly.
         }
 
         /// <summary>
         ///A test for Login
         ///</summary>
-        [TestMethod()]
+        [TestMethod]
         public void LoginTest()
         {
-            var mockRepository = MockRepository.GenerateMock<IGameSchoolEntities>();
-            var userService = new UserService();
-            userService.SetDatasource(mockRepository);
-
             var userData = new FakeObjectSet<UserInfo>();
+
+            string originalPassword = "Wtf";
 
             UserInfo expected = new UserInfo();
             expected.Fullname = "Davíð Einarsson";
             expected.Email = "davide09@ru.is";
-            expected.StatusId = 1;
+            expected.StatusId = (int)UserStatus.Active;
             expected.Username = "davidein";
             expected.UserInfoId = 1;
-            expected.Password = "Wtf";
+            expected.Password = PasswordUtilities.ComputeHash(originalPassword);
 
             userData.AddObject(expected);
 
-            mockRepository.Expect(x => x.UserInfoes).Return(userData);
+            _mockRepository.Expect(x => x.UserInfoes).Return(userData);
 
 
             string userName = "davidein";
             string password = "wrongpassword"; 
 
-            UserInfo actual= userService.Login(userName, password);
+            UserInfo actual= _userService.Login(userName, password);
 
             Assert.IsNull(actual);
 
-            password = expected.Password;
+            password = originalPassword;
 
-            actual = userService.Login(userName, password);
+            actual = _userService.Login(userName, password);
 
             Assert.IsNotNull(actual);
 
             Assert.AreEqual(expected.Username, actual.Username);
 
-            mockRepository.VerifyAllExpectations(); // Make sure everything was called correctly.
+            _mockRepository.VerifyAllExpectations(); // Make sure everything was called correctly.
         }
 
         /// <summary>
         ///A test for UpdateUser
         ///</summary>
-        [TestMethod()]
+        [TestMethod]
         public void UpdateUserTest()
         {
-            var mockRepository = MockRepository.GenerateMock<IGameSchoolEntities>();
-            var userService = new UserService();
-            userService.SetDatasource(mockRepository);
-
             UserInfo userInfo = new UserInfo();
             userInfo.Fullname = "Davíð Einarsson";
             userInfo.Email = "davide09@ru.is";
@@ -195,12 +182,12 @@ namespace Ru.GameSchool.BusinessLayerTests
             userInfo.UserInfoId = 1;
             userInfo.Password = "Wtf";
 
-            mockRepository.Expect(x => x.AttachTo("UserInfo", userInfo));
-            mockRepository.Expect(x => x.SaveChanges()).Return(1);
+            _mockRepository.Expect(x => x.AttachTo("UserInfo", userInfo));
+            _mockRepository.Expect(x => x.SaveChanges()).Return(1);
                 
-            userService.UpdateUser(userInfo);
+            _userService.UpdateUser(userInfo);
 
-            mockRepository.VerifyAllExpectations(); // Make sure everything was called correctly.
+            _mockRepository.VerifyAllExpectations(); // Make sure everything was called correctly.
         }
     }
 }

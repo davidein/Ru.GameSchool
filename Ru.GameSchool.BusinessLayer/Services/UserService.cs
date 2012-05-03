@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using Ru.GameSchool.BusinessLayer.Enums;
 using Ru.GameSchool.DataLayer;
 using System.Collections.Generic;
 using Ru.GameSchool.DataLayer.Repository;
@@ -70,7 +71,7 @@ namespace Ru.GameSchool.BusinessLayer.Services
 
 
             //Check if user status is active, If it's inactive we return null
-            if (userInfo.StatusId != 1)
+            if (userInfo.StatusId != (int)UserStatus.Active)
             {
                 return null;
             }
