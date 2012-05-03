@@ -3,6 +3,7 @@ using Ru.GameSchool.DataLayer;
 using System.Collections.Generic;
 using Ru.GameSchool.DataLayer.Repository;
 using Ru.GameSchool.Utilities;
+using System;
 
 
 namespace Ru.GameSchool.BusinessLayer.Services
@@ -44,8 +45,18 @@ namespace Ru.GameSchool.BusinessLayer.Services
 
         public IEnumerable<Course> GetCoursesByUserInfoId(int userInfoId)
         {
-            //don't know how to implement
-            throw new System.NotImplementedException();
+            if (userInfoId <= 0)
+                return null;
+
+            var courses = (from x in GameSchoolEntities.UserInfoes
+                          where x.UserInfoId == userInfoId
+                          select x).FirstOrDefault().Courses;
+
+            var filteredCourses = from y in courses
+                      where y.Start <= DateTime.Now && y.Stop >= DateTime.Now
+                      select y;
+
+            return filteredCourses;
         }
 
         public void AddUserToCourse(int userInfoId, int courseId)
