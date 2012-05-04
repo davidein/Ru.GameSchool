@@ -44,7 +44,7 @@ namespace Ru.GameSchool.Web.Controllers
                 return _courseService;
             }
         }
-        internal GameService LevelService
+        internal LevelService LevelService
         {
             get
             {
@@ -52,7 +52,7 @@ namespace Ru.GameSchool.Web.Controllers
                 return _levelService;
             }
         }
-        internal GameService SocialService
+        internal SocialService SocialService
         {
             get
             {
@@ -60,7 +60,7 @@ namespace Ru.GameSchool.Web.Controllers
                 return _socialService;
             }
         }
-        internal GameService NotificationService
+        internal NotificationService NotificationService
         {
             get
             {
