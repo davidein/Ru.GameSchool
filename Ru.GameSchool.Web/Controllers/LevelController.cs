@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Ru.GameSchool.DataLayer.Repository;
 
 namespace Ru.GameSchool.Web.Controllers
 {
@@ -24,11 +25,33 @@ namespace Ru.GameSchool.Web.Controllers
         }
 
         [Authorize(Roles = "Teacher")]
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int? id)
         {
+            if (id.HasValue)
+            {
+                var model = LevelService.GetLevel(id.Value);
+                return View(model);
+            }
+
             return View();
         }
 
+        [HttpPost]
+        [Authorize(Roles = "Teacher")]
+        public ActionResult Edit(Level model, int? id)
+        {
+            if (ModelState.IsValid)
+            {
+                var level = LevelService.GetLevel(model.LevelId);
+
+                if (TryUpdateModel(level))
+                {
+                    LevelService.UpdateLevel(level);
+                }
+            }
+
+            return View(model);
+        }
         /*
         public ActionResult Statistics(int id)
         {

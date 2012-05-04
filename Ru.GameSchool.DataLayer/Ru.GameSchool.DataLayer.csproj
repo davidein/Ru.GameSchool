@@ -154,6 +154,7 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>GameSchool.cs</LastGenOutput>
     </None>
+    <Compile Include="Repository\UserInfo.ViewModel.cs" />
     <None Include="SQL\schema.sql" />
   </ItemGroup>
   <ItemGroup>

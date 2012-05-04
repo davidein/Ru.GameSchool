@@ -1,0 +1,18 @@
+﻿@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@model Ru.GameSchool.DataLayer.Repository.Level
+
+@using (Html.BeginForm())
+{
+    @Html.LabelFor(m => m.Name)
+    <br />
+    @Html.ValidateFor(m=>m.Name)                           
+    <br />
+    @Html.TextBoxFor(m => m.Name)
+    
+    <input value="Áfram" type="submit" />
+}
