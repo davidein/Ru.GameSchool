@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Ru.GameSchool.DataLayer.Repository;
+using System.Web.Security;
+using Ru.GameSchool.Web.Classes;
 
 namespace Ru.GameSchool.Web.Controllers
 {
@@ -11,19 +14,28 @@ namespace Ru.GameSchool.Web.Controllers
         //
         // GET: /Exam/
 
+       
+
+        [HttpGet]
         [Authorize(Roles = "Student")]
         public ActionResult Get(int? id)
         {
             if (id.HasValue)
             {
-                
+                var exam = LevelService.GetLevelExam(id.Value);
+                return View(exam);
             }
-            return View("Exam");
+            return View();
         }
 
+        [HttpPost]
         [Authorize(Roles = "Student")]
-        public ActionResult Return(int id)
+        public ActionResult Return(LevelExam levelExam)
         {
+            if (ModelState.IsValid)
+            {
+
+            }
             return View();
         }
 
@@ -36,8 +48,15 @@ namespace Ru.GameSchool.Web.Controllers
 
         [Authorize(Roles = "Teacher")]
         [HttpPost]
-        public ActionResult Create(int id)
+        public ActionResult Create(LevelExam levelExam)
         {
+            if (ModelState.IsValid)
+            {
+                LevelService.CreateLevelExam(levelExam);
+                return View("Index");
+            }
+            var user = Membership.GetUser() as GameSchoolMembershipUser;
+
             return View();
         }
 
@@ -58,21 +77,20 @@ namespace Ru.GameSchool.Web.Controllers
 
         [Authorize(Roles = "Teacher")]
         [HttpPost]
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(LevelExam levelExam)
         {
             if (ModelState.IsValid)
             {
-                if (id.HasValue)
+                var id = levelExam.LevelExamId;
+                var exam = LevelService.GetLevelExam(id);
+                if (TryUpdateModel(exam))
                 {
-                    var exam = LevelService.GetLevelExam(id.Value);
-                    if (TryUpdateModel(exam))
-                    {
-                        LevelService.UpdateLevelExam(exam);
-                    }   
+                    LevelService.UpdateLevelExam(exam);
                 }
             }
             return View("Index");
         }
+
 
         /*
         public ActionResult Statistics(int id)
