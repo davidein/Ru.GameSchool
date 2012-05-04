@@ -51,7 +51,7 @@
     <Compile Include="Services\SocialService.cs" />
     <Compile Include="Services\CourseService.cs" />
     <Compile Include="Services\GameService.cs" />
-    <Compile Include="Services\ExternalNotificationContainer.cs" />
+    <Compile Include="Services\NotificationService.cs" />
     <Compile Include="Services\UserService.cs" />
   </ItemGroup>
   <ItemGroup>

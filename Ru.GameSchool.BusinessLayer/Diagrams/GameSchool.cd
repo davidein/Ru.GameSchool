@@ -32,7 +32,7 @@
   <Class Name="Ru.GameSchool.BusinessLayer.Services.CourseService">
     <Position X="6" Y="7.25" Width="3.75" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAQAAAAAAgJAABAAQAAACAAABAAAAAAAIAAA=</HashCode>
+      <HashCode>EAAAAAAAAQAAAAAAgJAABAAQAAAiAAABAAAAAAAIAAA=</HashCode>
       <FileName>Services\CourseService.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -40,7 +40,7 @@
     <Position X="16.5" Y="5.5" Width="4" />
     <TypeIdentifier>
       <HashCode>AAAAQAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAIA=</HashCode>
-      <FileName>Services\ExternalNotificationContainer.cs</FileName>
+      <FileName>Services\NotificationService.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>

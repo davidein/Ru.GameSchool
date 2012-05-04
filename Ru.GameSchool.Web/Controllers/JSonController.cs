@@ -12,8 +12,12 @@ namespace Ru.GameSchool.Web.Controllers
         // GET: /JSon/
 
         [HttpPost]
-        public ActionResult GetNotifications(int id)
+        public ActionResult GetNotifications(int? id)
         {
+            if (id.HasValue)
+            {
+                var notificationList = NotificationService.GetNotifications(id.Value);
+            }
 
             return Json("", JsonRequestBehavior.AllowGet);
         }
