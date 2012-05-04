@@ -150,17 +150,17 @@ namespace Ru.GameSchool.DataLayer.Repository
         }
         private ObjectSet<UserInfo> _userInfoes;
     
-        public IObjectSet<UserLog> UserLogs
-        {
-            get { return _userLogs  ?? (_userLogs = CreateObjectSet<UserLog>("UserLogs")); }
-        }
-        private ObjectSet<UserLog> _userLogs;
-    
         public IObjectSet<UserType> UserTypes
         {
             get { return _userTypes  ?? (_userTypes = CreateObjectSet<UserType>("UserTypes")); }
         }
         private ObjectSet<UserType> _userTypes;
+    
+        public IObjectSet<UserLog> UserLogs
+        {
+            get { return _userLogs  ?? (_userLogs = CreateObjectSet<UserLog>("UserLogs")); }
+        }
+        private ObjectSet<UserLog> _userLogs;
 
         #endregion
     }

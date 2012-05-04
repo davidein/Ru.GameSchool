@@ -122,6 +122,13 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\AccountMembershipService.cs" />
+    <Compile Include="Classes\FormsAuthenticationService.cs" />
+    <Compile Include="Classes\GameSchoolMembershipProvider.cs" />
+    <Compile Include="Classes\GameSchoolRoleProvider.cs" />
+    <Compile Include="Classes\Interfaces\IFormsAuthenticationService.cs" />
+    <Compile Include="Classes\Interfaces\IMembershipService.cs" />
+    <Compile Include="Classes\GameSchoolMembershipUser.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
@@ -195,7 +202,9 @@
     <Content Include="Scripts\knockout-2.0.0.debug.js" />
     <Content Include="Scripts\knockout-2.0.0.js" />
     <Content Include="Scripts\modernizr-2.0.6-development-only.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -341,7 +350,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>1245</DevelopmentServerPort>
+          <DevelopmentServerPort>61429</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>

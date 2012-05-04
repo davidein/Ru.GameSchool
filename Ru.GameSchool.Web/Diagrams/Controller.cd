@@ -19,7 +19,7 @@
     <Position X="15.26" Y="5.635" Height="1.865" Width="2.773" />
   </Comment>
   <Comment CommentText="AccountController&#xD;&#xA;    Login kallar í UserService.Login.&#xD;&#xA;    Allt annað er default Microsoft virkni.">
-    <Position X="10.542" Y="8.656" Height="1.354" Width="4.19" />
+    <Position X="10.573" Y="9.854" Height="1.354" Width="4.19" />
   </Comment>
   <Comment CommentText="AdminController&#xD;&#xA;    Post fyrir Course kallar í CourseService.CreateCourse.&#xD;&#xA;   CourseList kallar í CourseService.GetCourses og skilar IEnumerable&lt;Course&gt;.&#xD;&#xA;    CourseRegisterUser kallar í AddUserToCourse&#xD;&#xA;    EditUser kallar í UserService.GetUser og skilar UserInfo&#xD;&#xA;    Post fyrir EditUser kallar UserService.UpdateUser&#xD;&#xA;    Index kallar í UserService.Search og skilar UserInfo eða CourseService.Search og skilar Course.&#xD;&#xA;    UserList kallar í UserService.GetUsers og skilar IEnumerable&lt;UserInfo&gt;.">
     <Position X="24.552" Y="7.729" Height="2.729" Width="2.721" />
@@ -33,7 +33,7 @@
   <Class Name="Ru.GameSchool.Web.Controllers.BaseController">
     <Position X="16.5" Y="0.75" Width="4" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAQAAAAAAgAAAAAAAQAAAAAAEAAAAAAA=</HashCode>
+      <HashCode>AAAAAAIAAAAAAQAAAAAAgAAAAAAAQAAAAAAEAAgAAAA=</HashCode>
       <FileName>Controllers\BaseController.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -75,7 +75,7 @@
   <Class Name="Ru.GameSchool.Web.Controllers.AccountController">
     <Position X="10.5" Y="6.25" Width="4.25" />
     <TypeIdentifier>
-      <HashCode>IAAAAAAAAAAAAAAAAACAAAAAAAAACAAAAAAQAAQAAAA=</HashCode>
+      <HashCode>IAAAAIAAAAAABQAAAACAAAAAAAAACAAAAAAQAAQAAAA=</HashCode>
       <FileName>Controllers\AccountController.cs</FileName>
     </TypeIdentifier>
   </Class>

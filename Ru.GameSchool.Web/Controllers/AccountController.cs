@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Routing;
 using System.Web.Security;
+using Ru.GameSchool.Web.Classes;
+using Ru.GameSchool.Web.Classes.Interfaces;
 using Ru.GameSchool.Web.Models;
 
 namespace Ru.GameSchool.Web.Controllers
@@ -12,6 +15,16 @@ namespace Ru.GameSchool.Web.Controllers
     [Authorize]
     public class AccountController : BaseController
     {
+        public IFormsAuthenticationService FormsService { get; set; }
+        public IMembershipService MembershipService { get; set; }
+
+        protected override void Initialize(RequestContext requestContext)
+        {
+            if (FormsService == null) { FormsService = new FormsAuthenticationService(); }
+            if (MembershipService == null) { MembershipService = new AccountMembershipService(); }
+
+            base.Initialize(requestContext);
+        }
 
         //
         // GET: /Account/Login

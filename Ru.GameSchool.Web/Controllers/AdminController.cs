@@ -7,6 +7,7 @@ using Ru.GameSchool.Web.Models;
 
 namespace Ru.GameSchool.Web.Controllers
 {
+    [Authorize(Roles = "Administrator")]
     public class AdminController : BaseController
     {
         //

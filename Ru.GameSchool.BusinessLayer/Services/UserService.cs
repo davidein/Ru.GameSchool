@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using Ru.GameSchool.BusinessLayer.Enums;
 using Ru.GameSchool.DataLayer;
 using System.Collections.Generic;
 using Ru.GameSchool.DataLayer.Repository;
@@ -15,7 +16,7 @@ namespace Ru.GameSchool.BusinessLayer.Services
         /// Gets a user by userId
         /// </summary>
         /// <param name="userId">Id of the user to get.</param>
-        /// <returns>A new user instance.</returns>
+        /// <returns>A user instance.</returns>
         public UserInfo GetUser(int userId)
         {
             var user = from x in GameSchoolEntities.UserInfoes
@@ -23,6 +24,20 @@ namespace Ru.GameSchool.BusinessLayer.Services
                        select x;
 
             return user.FirstOrDefault();
+        }
+
+        /// <summary>
+        /// Gets a user by username
+        /// </summary>
+        /// <param name="username">Username of the user.</param>
+        /// <returns>A user instance.</returns>
+        public UserInfo GetUser(string username)
+        {
+            var user = from x in GameSchoolEntities.UserInfoes
+                       where x.Username == username
+                       select x;
+
+            return user.FirstOrDefault();            
         }
 
         /// <summary>
@@ -70,7 +85,7 @@ namespace Ru.GameSchool.BusinessLayer.Services
 
 
             //Check if user status is active, If it's inactive we return null
-            if (userInfo.StatusId != 1)
+            if (userInfo.StatusId != (int)UserStatus.Active)
             {
                 return null;
             }
