@@ -8,16 +8,25 @@ namespace Ru.GameSchool.BusinessLayer.Services
 {
     public class GameService : BaseService, IExternalPointContainer
     {
-        // TODO: Validate ids and point
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="userInfoId"></param>
+        /// <param name="levelId"></param>
+        /// <param name="points"></param>
         public void AddPointsToLevel(int userInfoId, int levelId, int points)
         {
-            if (userInfoId > 0 && levelId > 0 && points > 0)
+            if ((userInfoId = levelId = points) > 0)
             {
                 var query = GameSchoolEntities.Points.Where(p => p.UserInfoId == userInfoId &&
                                                              p.LevelId == levelId);
                 var entity = query.FirstOrDefault();
-                entity.Points += points;
-                Save();
+
+                if (entity != null)
+                {
+                    entity.Points += points;
+                    Save();
+                }
             }
         }
 
@@ -43,11 +52,22 @@ namespace Ru.GameSchool.BusinessLayer.Services
             return points;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="userInfoId"></param>
+        /// <param name="courseId"></param>
+        /// <returns></returns>
         public int CalculatePoints(int userInfoId, int courseId)
         {
             throw new System.NotImplementedException();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="userInfoId"></param>
+        /// <param name="courseId"></param>
         public void GetPointsComparedToUsers(int userInfoId, int courseId)
         {
             throw new System.NotImplementedException();
@@ -63,7 +83,7 @@ namespace Ru.GameSchool.BusinessLayer.Services
             var query = GameSchoolEntities.Courses.Where(c => c.CourseId == courseId)
                                                   .AsEnumerable();
 
-            var collection = query.Select(x => 
+            var collection = query.Select(x =>
                 Tuple.Create<int, UserInfo>(
                     x.Points.Select(z => z.Points)
                             .FirstOrDefault(),

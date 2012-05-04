@@ -11,8 +11,12 @@ namespace Ru.GameSchool.Web.Controllers
         //
         // GET: /Project/
         [Authorize(Roles = "Student")]
-        public ActionResult Get(int id)
+        public ActionResult Get(int? id)
         {
+            if (id.HasValue)
+            {
+                
+            }
             return View();
         }
 
