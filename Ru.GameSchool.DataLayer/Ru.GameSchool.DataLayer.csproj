@@ -92,6 +92,7 @@
     <Compile Include="Repository\LevelExam.cs">
       <DependentUpon>GameSchool.tt</DependentUpon>
     </Compile>
+    <Compile Include="Repository\LevelExam.ViewModel.cs" />
     <Compile Include="Repository\LevelExamAnswer.cs">
       <DependentUpon>GameSchool.tt</DependentUpon>
     </Compile>
