@@ -181,5 +181,4 @@ namespace Ru.GameSchool.Utilities
             return (hashValue == expectedHashString);
         }
     }
-
 }

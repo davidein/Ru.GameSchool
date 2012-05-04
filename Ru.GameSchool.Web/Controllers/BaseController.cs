@@ -14,6 +14,11 @@ namespace Ru.GameSchool.Web.Controllers
     {
         private UserService _userService;
         private CourseService _courseService;
+        private GameService _gameService;
+        private LevelService _levelService;
+        private SocialService _socialService;
+        private NotificationService _notificationService;
+
 
         internal UserService UserService 
         { 
@@ -23,13 +28,44 @@ namespace Ru.GameSchool.Web.Controllers
                 return _userService; 
             } 
         }
-
+        internal GameService GameService
+        {
+            get 
+            { 
+                _gameService = LoadService(_gameService, HttpContext);
+                return _gameService;
+            }
+        }
         internal CourseService CourseService
         {
             get
             {
                 _courseService = LoadService(_courseService, HttpContext);
                 return _courseService;
+            }
+        }
+        internal GameService LevelService
+        {
+            get
+            {
+                _levelService = LoadService(_levelService, HttpContext);
+                return _levelService;
+            }
+        }
+        internal GameService SocialService
+        {
+            get
+            {
+                _socialService = LoadService(_socialService, HttpContext);
+                return _socialService;
+            }
+        }
+        internal GameService NotificationService
+        {
+            get
+            {
+                _notificationService = LoadService(_notificationService, HttpContext);
+                return _notificationService;
             }
         }
 
