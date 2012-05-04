@@ -39,9 +39,20 @@ namespace Ru.GameSchool.DataLayer.Repository
     
         public virtual int UserInfoId
         {
-            get;
-            set;
+            get { return _userInfoId; }
+            set
+            {
+                if (_userInfoId != value)
+                {
+                    if (UserInfo != null && UserInfo.UserInfoId != value)
+                    {
+                        UserInfo = null;
+                    }
+                    _userInfoId = value;
+                }
+            }
         }
+        private int _userInfoId;
 
         #endregion
         #region Navigation Properties
@@ -66,14 +77,21 @@ namespace Ru.GameSchool.DataLayer.Repository
     
         private void FixupUserInfo(UserInfo previousValue)
         {
-            if (previousValue != null && ReferenceEquals(previousValue.UserLog, this))
+            if (previousValue != null && previousValue.UserLogs.Contains(this))
             {
-                previousValue.UserLog = null;
+                previousValue.UserLogs.Remove(this);
             }
     
             if (UserInfo != null)
             {
-                UserInfo.UserLog = this;
+                if (!UserInfo.UserLogs.Contains(this))
+                {
+                    UserInfo.UserLogs.Add(this);
+                }
+                if (UserInfoId != UserInfo.UserInfoId)
+                {
+                    UserInfoId = UserInfo.UserInfoId;
+                }
             }
         }
 

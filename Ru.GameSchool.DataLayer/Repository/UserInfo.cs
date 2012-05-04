@@ -21,20 +21,9 @@ namespace Ru.GameSchool.DataLayer.Repository
     
         public virtual int UserInfoId
         {
-            get { return _userInfoId; }
-            set
-            {
-                if (_userInfoId != value)
-                {
-                    if (UserLog != null && UserLog.UserLogId != value)
-                    {
-                        UserLog = null;
-                    }
-                    _userInfoId = value;
-                }
-            }
+            get;
+            set;
         }
-        private int _userInfoId;
     
         public virtual string Username
         {
@@ -389,21 +378,6 @@ namespace Ru.GameSchool.DataLayer.Repository
         }
         private UserType _userType;
     
-        public virtual UserLog UserLog
-        {
-            get { return _userLog; }
-            set
-            {
-                if (!ReferenceEquals(_userLog, value))
-                {
-                    var previousValue = _userLog;
-                    _userLog = value;
-                    FixupUserLog(previousValue);
-                }
-            }
-        }
-        private UserLog _userLog;
-    
         public virtual ICollection<Course> Courses
         {
             get
@@ -435,6 +409,38 @@ namespace Ru.GameSchool.DataLayer.Repository
             }
         }
         private ICollection<Course> _courses;
+    
+        public virtual ICollection<UserLog> UserLogs
+        {
+            get
+            {
+                if (_userLogs == null)
+                {
+                    var newCollection = new FixupCollection<UserLog>();
+                    newCollection.CollectionChanged += FixupUserLogs;
+                    _userLogs = newCollection;
+                }
+                return _userLogs;
+            }
+            set
+            {
+                if (!ReferenceEquals(_userLogs, value))
+                {
+                    var previousValue = _userLogs as FixupCollection<UserLog>;
+                    if (previousValue != null)
+                    {
+                        previousValue.CollectionChanged -= FixupUserLogs;
+                    }
+                    _userLogs = value;
+                    var newValue = value as FixupCollection<UserLog>;
+                    if (newValue != null)
+                    {
+                        newValue.CollectionChanged += FixupUserLogs;
+                    }
+                }
+            }
+        }
+        private ICollection<UserLog> _userLogs;
 
         #endregion
         #region Association Fixup
@@ -495,23 +501,6 @@ namespace Ru.GameSchool.DataLayer.Repository
                 if (UserTypeId != UserType.UserTypeID)
                 {
                     UserTypeId = UserType.UserTypeID;
-                }
-            }
-        }
-    
-        private void FixupUserLog(UserLog previousValue)
-        {
-            if (previousValue != null && ReferenceEquals(previousValue.UserInfo, this))
-            {
-                previousValue.UserInfo = null;
-            }
-    
-            if (UserLog != null)
-            {
-                UserLog.UserInfo = this;
-                if (UserInfoId != UserLog.UserLogId)
-                {
-                    UserInfoId = UserLog.UserLogId;
                 }
             }
         }
@@ -690,6 +679,28 @@ namespace Ru.GameSchool.DataLayer.Repository
                     if (item.UserInfoes.Contains(this))
                     {
                         item.UserInfoes.Remove(this);
+                    }
+                }
+            }
+        }
+    
+        private void FixupUserLogs(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            if (e.NewItems != null)
+            {
+                foreach (UserLog item in e.NewItems)
+                {
+                    item.UserInfo = this;
+                }
+            }
+    
+            if (e.OldItems != null)
+            {
+                foreach (UserLog item in e.OldItems)
+                {
+                    if (ReferenceEquals(item.UserInfo, this))
+                    {
+                        item.UserInfo = null;
                     }
                 }
             }

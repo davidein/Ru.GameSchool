@@ -10,19 +10,19 @@ namespace Ru.GameSchool.Web.Controllers
     {
         //
         // GET: /Material/
-
-        
-
+        [Authorize(Roles = "Student")]
         public ActionResult Get(int id)
         {
             return View();
         }
 
+        [Authorize(Roles = "Teacher")]
         public ActionResult Create(int id)
         {
             return View();
         }
 
+        [Authorize(Roles = "Teacher")]
         public ActionResult Edit(int id)
         {
             return View();

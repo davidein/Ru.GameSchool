@@ -35,8 +35,8 @@ namespace Ru.GameSchool.DataLayer.Repository
         IObjectSet<Point> Points { get; }
         IObjectSet<Status> Status { get; }
         IObjectSet<UserInfo> UserInfoes { get; }
-        IObjectSet<UserLog> UserLogs { get; }
         IObjectSet<UserType> UserTypes { get; }
+        IObjectSet<UserLog> UserLogs { get; }
 
         #endregion
     

@@ -8,7 +8,7 @@ namespace Ru.GameSchool.Web.Controllers
 {
     public class HomeController : BaseController
     {
-        [Authorize]
+        [Authorize(Roles = "Student")]
         public ActionResult Index()
         {
             ViewBag.Message = "Test Modify this template to jump-start your ASP.NET MVC application.";
