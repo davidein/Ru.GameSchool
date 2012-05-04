@@ -82,7 +82,9 @@ namespace Ru.GameSchool.BusinessLayerTests
             int userInfoId = 1;
 
             var list = CreateNotificationList(userInfoId, 20);
+
             
+
             mockRepository.Expect(x => x.Notifications).Return(list);
 
             var actualList = notificationService.GetNotifications(userInfoId);
