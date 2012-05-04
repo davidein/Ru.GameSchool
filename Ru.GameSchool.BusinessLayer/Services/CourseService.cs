@@ -61,7 +61,12 @@ namespace Ru.GameSchool.BusinessLayer.Services
 
         public void AddUserToCourse(int userInfoId, int courseId)
         {
-            throw new System.NotImplementedException();
+            if ((userInfoId = courseId) > 0)
+            {
+                var userQuery = GameSchoolEntities.UserInfoes.Where(u => u.UserInfoId == userInfoId);
+                var courseQuery = GameSchoolEntities.Courses.Where(c => c.CourseId == courseId);
+
+            }
         }
 
         /// <summary>
@@ -128,7 +133,7 @@ namespace Ru.GameSchool.BusinessLayer.Services
         {
             var course = from x in GameSchoolEntities.Courses
                          where x.CourseId == courseId
-                       select x;
+                         select x;
 
             return course.FirstOrDefault();
         }

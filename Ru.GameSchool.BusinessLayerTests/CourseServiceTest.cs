@@ -91,7 +91,7 @@ namespace Ru.GameSchool.BusinessLayerTests
 
             userData.AddObject(expected);
 
-            mockRepository.Expect(x => x.UserInfoes).Return(userData);
+            //mockRepository.Expect(x => x.UserInfoes).Return(userData);
 
             //Fake course data
             var courseData = new FakeObjectSet<Course>();
@@ -115,7 +115,8 @@ namespace Ru.GameSchool.BusinessLayerTests
             
             Assert.AreEqual(courseData.FirstOrDefault().CourseId, courses.FirstOrDefault().CourseId);
             Assert.AreEqual(courses.Count(), 1);
-            //Assert.Inconclusive("Verify the correctness of this test method.");
+
+            //mockRepository.VerifyAllExpectations();
         }
 
         /// <summary>
@@ -178,7 +179,8 @@ namespace Ru.GameSchool.BusinessLayerTests
 
             Assert.AreEqual(courseData.FirstOrDefault().CourseId, courses.FirstOrDefault().CourseId);
             Assert.AreEqual(courses.Count(), 1);
-            //Assert.Inconclusive("Verify the correctness of this test method.");
+
+            //mockRepository.VerifyAllExpectations();
         }
 
         /// <summary>

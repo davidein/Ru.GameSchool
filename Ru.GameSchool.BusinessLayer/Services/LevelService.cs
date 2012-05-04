@@ -22,7 +22,11 @@ namespace Ru.GameSchool.BusinessLayer.Services
                 Save();
             }
         }
-
+        /// <summary>
+        /// Gets a instance of Level from the datasource. 
+        /// </summary>
+        /// <param name="levelId">The id of a level object to get.</param>
+        /// <returns>A new level instance or null</returns>
         public Level GetLevel(int levelId)
         {
             if (0 > levelId)
@@ -40,7 +44,10 @@ namespace Ru.GameSchool.BusinessLayer.Services
 
             return level;
         }
-            
+        /// <summary>
+        /// Returns a collection of level instances
+        /// </summary>
+        /// <returns>IEnumerable of level instances.</returns>
         public IEnumerable<Level> GetLevels()
         {
             return GameSchoolEntities.Levels;
