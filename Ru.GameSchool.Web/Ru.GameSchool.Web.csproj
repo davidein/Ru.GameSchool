@@ -332,7 +332,11 @@
     <Content Include="Views\Shared\_NotificationDropDown.cshtml" />
     <Content Include="Views\Shared\_ProfileDropDown.cshtml" />
     <Content Include="Views\Shared\_SpecificFunctions.cshtml" />
+
     <Content Include="Views\Exam\Edit.cshtml" />
+
+    <Content Include="Views\Level\Edit.cshtml" />
+
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
