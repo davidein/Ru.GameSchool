@@ -11,18 +11,42 @@ namespace Ru.GameSchool.CreateUser
     {
         static void Main(string[] args)
         {
-            UserInfo userInfo = new UserInfo();
+            UserService userService = new UserService();
 
-            userInfo.Username = "dabbi";
-            userInfo.Password = "dabbi";
+            UserInfo userInfo = new UserInfo();
+            
+            userInfo.Username = "nemandi";
+            userInfo.Password = "nemandi";
             userInfo.StatusId = 1;
-            userInfo.UserTypeId = 1;
-            userInfo.Fullname = "Dabbi e";
-            userInfo.Email = "davidein@gmail.com";
+            userInfo.UserTypeId = (int)BusinessLayer.Enums.UserType.Student;
+            userInfo.Fullname = "Test nemandi";
+            userInfo.Email = "testnem@g-mai-l.com";
             userInfo.CreateDateTime = DateTime.Now;
             userInfo.DepartmentId = 1;
 
-            UserService userService = new UserService();
+            userService.CreateUser(userInfo);
+            
+            userInfo = new UserInfo();
+            userInfo.Username = "kennari";
+            userInfo.Password = "kennari";
+            userInfo.StatusId = 1;
+            userInfo.UserTypeId = (int)BusinessLayer.Enums.UserType.Teacher;
+            userInfo.Fullname = "Test kennari";
+            userInfo.Email = "testken@g-mai-l.com";
+            userInfo.CreateDateTime = DateTime.Now;
+            userInfo.DepartmentId = 1;
+
+            userService.CreateUser(userInfo);
+
+            userInfo = new UserInfo();
+            userInfo.Username = "admin";
+            userInfo.Password = "admin";
+            userInfo.StatusId = 1;
+            userInfo.UserTypeId = (int)BusinessLayer.Enums.UserType.Admin;
+            userInfo.Fullname = "Test admin";
+            userInfo.Email = "testadmin@g-mai-l.com";
+            userInfo.CreateDateTime = DateTime.Now;
+            userInfo.DepartmentId = 1;
 
             userService.CreateUser(userInfo);
         }

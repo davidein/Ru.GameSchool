@@ -45,8 +45,7 @@ namespace Ru.GameSchool.Web.Controllers
         protected override void Initialize(System.Web.Routing.RequestContext requestContext)
         {
             base.Initialize(requestContext);
-
-            ViewBag.UserInfo = "Dabbi";
+            
         }
     }
 }

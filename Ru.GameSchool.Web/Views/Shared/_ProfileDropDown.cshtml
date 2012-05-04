@@ -1,12 +1,11 @@
 ﻿<div class="btn-group pull-right">
     <a class="btn btn-info dropdown-toggle" data-toggle="dropdown" href="#">
-        <i class="icon-user"></i> Erling Guðjohnsen
+        <i class="icon-user"></i> @User.Identity.Name
         <span class="caret"></span>
     </a>
     <ul class="dropdown-menu">
-        <li><a href="/Account/Profile/">Profile</a></li>
+        <li>@Html.ActionLink("Profile","Profile", "Account")</li>
         <li class="divider"></li>
-        <li><a href="/Account/Logout/">Hætta</a></li>
+        <li>@Html.ActionLink("Hætta","Logout", "Account")</li>
     </ul>
-                            
 </div>
