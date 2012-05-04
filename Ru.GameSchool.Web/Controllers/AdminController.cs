@@ -15,6 +15,8 @@ namespace Ru.GameSchool.Web.Controllers
 
         public ActionResult Index()
         {
+
+
             return View();
         }
 

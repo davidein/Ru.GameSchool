@@ -58,6 +58,7 @@
     <Compile Include="CourseServiceTest.cs" />
     <Compile Include="GameServiceTest.cs" />
     <Compile Include="LevelServiceTest.cs" />
+    <Compile Include="NotificationServiceTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SocialServiceTest.cs" />
     <Compile Include="UserServiceTest.cs" />
