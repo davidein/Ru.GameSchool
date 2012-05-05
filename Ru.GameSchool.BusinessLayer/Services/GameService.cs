@@ -14,19 +14,22 @@ namespace Ru.GameSchool.BusinessLayer.Services
         /// <param name="userInfoId"></param>
         /// <param name="levelId"></param>
         /// <param name="points"></param>
-        public void AddPointsToLevel(int userInfoId, int levelId, int points)
+        /// <param name="description"></param>
+        public void AddPointsToLevel(int userInfoId, int levelId, int points, string description)
         {
-            if ((userInfoId = levelId = points) > 0)
+            if (userInfoId > 0 && levelId > 0 && points > 0)
             {
-                var query = GameSchoolEntities.Points.Where(p => p.UserInfoId == userInfoId &&
-                                                             p.LevelId == levelId);
-                var entity = query.FirstOrDefault();
+                var level = GameSchoolEntities.Levels.Where(x => x.LevelId == levelId).FirstOrDefault();
 
-                if (entity != null)
-                {
-                    entity.Points += points;
-                    Save();
-                }
+                var point = new Point();
+                point.LevelId = levelId;
+                point.UserInfoId = userInfoId;
+                point.Description = description;
+                point.Points = points;
+                if (level != null)
+                    point.CourseId = level.CourseId;
+
+                GameSchoolEntities.Points.AddObject(point);
             }
         }
 
@@ -39,7 +42,7 @@ namespace Ru.GameSchool.BusinessLayer.Services
         public int GetPoints(int userInfoId, int levelId)
         {
             // If userinfoid or levelid is smaller then 0 then return 0
-            if (userInfoId < 0 || levelId < 0)
+            if (userInfoId <= 0 || levelId <= 0)
             {
                 return 0;
             }
@@ -47,8 +50,8 @@ namespace Ru.GameSchool.BusinessLayer.Services
             var query = GameSchoolEntities.Points.Where(p => p.LevelId == levelId &&
                                                              p.UserInfoId == userInfoId);
 
-            var points = query.Select(p => p.Points)
-                              .FirstOrDefault();
+            var points = query.Sum(x => x.Points);
+
             return points;
         }
 
