@@ -73,14 +73,28 @@ namespace Ru.GameSchool.BusinessLayer.Services
                 Save();
             }
         }
+
         public LevelExam GetLevelExam(int levelExamId)
         {
-            return null;
+            if (levelExamId < 0)
+            {
+                return null;
+            }
+            var query = GameSchoolEntities.LevelExams.Where(le => le.LevelExamId == levelExamId);
+
+            var levelExam = query.FirstOrDefault();
+
+            if (levelExam == null)
+            {
+                return null;
+            }
+
+            return levelExam;
         }
 
         public IEnumerable<LevelExam> GetLevelExams()
         {
-            return null;
+            return GameSchoolEntities.LevelExams;
         }
         /// <summary>
         /// 
@@ -88,7 +102,10 @@ namespace Ru.GameSchool.BusinessLayer.Services
         /// <param name="levelExam">Levelexam instance to update.</param>
         public void UpdateLevelExam(LevelExam levelExam)
         {
-            throw new System.NotImplementedException();
+            if (levelExam != null)
+            {
+                
+            }
         }
 
         /// <summary>
@@ -106,12 +123,25 @@ namespace Ru.GameSchool.BusinessLayer.Services
 
         public LevelProject GetLevelProject(int levelProjectId)
         {
-            return null;
+            if (levelProjectId < 0)
+            {
+                return null;
+            }
+
+            var query = GameSchoolEntities.LevelProjects.Where(l => l.LevelProjectId == levelProjectId);
+
+            var levelProject = query.FirstOrDefault();
+
+            if (levelProject == null)
+            {
+                return null;
+            }
+            return levelProject;
         }
 
         public IEnumerable<LevelProject> GetLevelProjects()
         {
-            return null;
+            return GameSchoolEntities.LevelProjects;
         }
 
         /// <summary>
@@ -156,7 +186,10 @@ namespace Ru.GameSchool.BusinessLayer.Services
         /// <param name="levelExamResult"></param>
         public void UpdateLevelExamResult(LevelExamResult levelExamResult)
         {
-            throw new System.NotImplementedException();
+            if (levelExamResult != null)
+            {
+                
+            }
         }
 
         public IEnumerable<LevelExamResult> GetLevelExamResults()
@@ -207,7 +240,10 @@ namespace Ru.GameSchool.BusinessLayer.Services
         /// <param name="levelExamQuestion"></param>
         public void UpdateLevelExamQuestion(LevelExamQuestion levelExamQuestion)
         {
-            throw new System.NotImplementedException();
+            if (levelExamQuestion != null)
+            {
+                
+            }
         }
 
         /// <summary>
@@ -221,7 +257,19 @@ namespace Ru.GameSchool.BusinessLayer.Services
 
         public LevelExamQuestion GetLevelExamQuestion(int levelExamQuestionsId)
         {
-            return null;
+            if (levelExamQuestionsId < 0)
+            {
+                return null;
+            }
+            var query = GameSchoolEntities.LevelExamQuestions.Where(l => l.LevelExamQuestionId == levelExamQuestionsId);
+
+            var levelExamQuestion = query.FirstOrDefault();
+
+            if (levelExamQuestion == null)
+            {
+                return null;
+            }
+            return levelExamQuestion;
         }
 
         /// <summary>
@@ -231,7 +279,11 @@ namespace Ru.GameSchool.BusinessLayer.Services
         /// <param name="user"></param>
         public void CreateUserLevelExamResult(LevelExamResult levelExamResult, UserInfo user)
         {
-            throw new System.NotImplementedException();
+            if (levelExamResult != null && user != null)
+            {
+                user.LevelExamResults.Add(levelExamResult);
+                Save();
+            }
         }
 
         /// <summary>
@@ -241,7 +293,11 @@ namespace Ru.GameSchool.BusinessLayer.Services
         /// <param name="user"></param>
         public void CreateUserLevelProjectResult(LevelProjectResult levelProjectResult, UserInfo user)
         {
-            throw new System.NotImplementedException();
+            if (levelProjectResult != null && user != null)
+            {
+                user.LevelProjectResults.Add(levelProjectResult);
+                Save();
+            }
         }
 
 
