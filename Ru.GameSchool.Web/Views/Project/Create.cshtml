@@ -14,8 +14,8 @@
                 Nafn</label>
             <div class="controls">
                 <div class="input-xlarge" id="name" name="name" rel="popover" data-content="Settu inn nafn."
-                       data-original-title="Nafn námskeiðs">
-                @Html.EditorFor(m => m.Name)
+                    data-original-title="Nafn námskeiðs">
+                    @Html.EditorFor(m => m.Name)
                 </div>
             </div>
         </div>
@@ -38,7 +38,8 @@
             <label class="control-label">
                 Skrá</label>
             <div class="controls">
-                <input type="file" class="input-xlarge" id="user_name" name="user_name" rel="popover">
+                @*<input type="file" class="input-xlarge" id="user_name" name="user_name" rel="popover">*@
+                @Html.TextBoxFor(m => m.ProjectUrl, new { type = "file" })
             </div>
         </div>
         <div class="control-group">

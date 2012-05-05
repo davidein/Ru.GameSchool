@@ -19,8 +19,6 @@ namespace Ru.GameSchool.Web.Controllers
 
             ViewBag.Exams = exams.ToList();
 
-
-
             return View();
         }
         #region Student
@@ -57,6 +55,7 @@ namespace Ru.GameSchool.Web.Controllers
         [HttpGet]
         public ActionResult Create()
         {
+            ViewBag.QuestionsTotal = QuestionsTotal();
             return View();
         }
 
@@ -105,12 +104,22 @@ namespace Ru.GameSchool.Web.Controllers
 
         #endregion
 
+        public IEnumerable<SelectListItem> QuestionsTotal()
+        {
+            for (int j = 1; j <= 25; j++)
+            {
+                yield return new SelectListItem
+                {
+                    Text = j.ToString(),
+                    Value = j.ToString()
+                };
+            }
+        }
 
 
 
 
-
-
+        
 
         /*
         public ActionResult Statistics(int id)
