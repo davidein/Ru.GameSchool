@@ -44,11 +44,16 @@ namespace Ru.GameSchool.Web.Classes
         {
             UserService userService = new UserService();
 
-            var userInfo = userService.Login(username, password);
+            var request = HttpContext.Current.Request.UserHostAddress == "::1"
+                              ? "localhost"
+                              : HttpContext.Current.Request.UserHostAddress ?? string.Empty;
+
+            var userInfo = userService.Login(username, password, request );
 
             if (userInfo != null)
+            { 
                 return true;
-
+            }
             return false;
         }
 

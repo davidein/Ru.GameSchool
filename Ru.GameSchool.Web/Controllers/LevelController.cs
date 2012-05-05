@@ -30,7 +30,7 @@ namespace Ru.GameSchool.Web.Controllers
 
 
         [HttpPost]
-        //[Authorize(Roles = "Teacher")]
+        [Authorize(Roles = "Teacher")]
         public ActionResult Create(Level level)
         {
             if (ModelState.IsValid)
