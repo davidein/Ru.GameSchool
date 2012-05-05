@@ -126,6 +126,15 @@ namespace Ru.GameSchool.BusinessLayer.Services
             }
         }
 
+        public void CreateUserLog(UserLog userLog)
+        {
+            if (userLog != null)
+            {
+                GameSchoolEntities.UserLogs.AddObject(userLog);
+                Save();
+            }
+        }
+
         public void UpdateUser(UserInfo userInfo)
         {
             GameSchoolEntities.AttachTo("UserInfo", userInfo);

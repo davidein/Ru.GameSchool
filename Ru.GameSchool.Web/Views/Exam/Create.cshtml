@@ -1,6 +1,32 @@
 ﻿@{
     ViewBag.Title = "Búa til nýtt próf";
 }
+<script type="text/javascript">
+    
 
-<h2>Búa til nýtt próf</h2>
+</script>
+<h2>
+    Búa til nýtt próf</h2>
+<div class="form-horizontal">
+    @using (Html.BeginForm())
+    {
+        <fieldset>
+            <legend>Nýtt próf</legend>
+            
+            <div class="control-group">
+                <label class="control-label">
+                    Skilafrestur</label>
+                <div class="controls">
+                    <input type="text" class="input-xlarge" id="user_name" name="user_name" rel="popover"
+                           data-content="Settu inn hvenær ekki er lengur hægt að skila inn svari." data-original-title="Enda dagsetning"
+                           data-datepicker="datepicker">
+                </div>
+            </div>
 
+            <button type="button" class="btn btn-success">
+                Bæta við spurningu</button>
+         
+            @Html.Partial("_ExamQuestion")
+        </fieldset>
+    }
+</div>
