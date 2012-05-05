@@ -18,11 +18,22 @@ namespace Ru.GameSchool.Web.Controllers
             return View();
         }
 
+
         [Authorize(Roles = "Teacher")]
         public ActionResult Create(int id)
         {
             return View();
         }
+
+
+        [HttpPost]
+        [Authorize(Roles = "Teacher")]
+        public ActionResult Create(Level level, int id)
+        {
+            return View();
+        }
+
+
 
         [Authorize(Roles = "Teacher")]
         public ActionResult Edit(int? id)
@@ -35,6 +46,7 @@ namespace Ru.GameSchool.Web.Controllers
 
             return View();
         }
+
 
         [HttpPost]
         [Authorize(Roles = "Teacher")]
