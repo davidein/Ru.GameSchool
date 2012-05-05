@@ -153,13 +153,13 @@ namespace Ru.GameSchool.BusinessLayerTests
             string userName = "davidein";
             string password = "wrongpassword"; 
 
-            UserInfo actual= _userService.Login(userName, password);
+            UserInfo actual= _userService.Login(userName, password,"::1");
 
             Assert.IsNull(actual);
 
             password = originalPassword;
 
-            actual = _userService.Login(userName, password);
+            actual = _userService.Login(userName, password,"::1");
 
             Assert.IsNotNull(actual);
 

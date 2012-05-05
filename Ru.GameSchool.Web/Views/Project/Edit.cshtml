@@ -1,5 +1,67 @@
-﻿@{
-    ViewBag.Title = "Edit";
-}
-
-<h2>Edit</h2>
+﻿@model Ru.GameSchool.DataLayer.Repository.LevelProject
+<div @if (Model != null)
+     {
+        @:data-pkey="@Model.LevelProjectId"
+    }>
+    @Html.LabelFor(m => m.Name)
+    @Html.EditorFor(model => model.Name)
+    @Html.ValidationMessageFor(model => model.Name)
+    <div class="control-group">
+        <div class="controls">
+            <div class="input-xlarge" id="level_create_starts" name="level_create_starts" rel="popover"
+                data-content="Settu inn hvenær verkefni byrjar." data-original-title="Byrjun dagsetning"
+                data-datepicker="datepicker">
+                @Html.LabelFor(model => model.Start)
+                @Html.EditorFor(model => model.Start)
+                @Html.ValidationMessageFor(model => model.Start)
+            </div>
+        </div>
+    </div>
+    <div class="control-group">
+        <div class="controls">
+            <div class="input-xlarge" id="level_create_ends" name="level_create_starts" rel="popover"
+                data-content="Settu inn hvenær verkefni byrjar." data-original-title="Byrjun dagsetning"
+                data-datepicker="datepicker">
+                @Html.LabelFor(model => model.Stop)
+                @Html.EditorFor(model => model.Stop)
+                @Html.ValidationMessageFor(model => model.Stop)
+            </div>
+        </div>
+    </div>
+    <div class="control-group">
+        <div class="controls">
+            @Html.LabelFor(model => model.Description)
+            @Html.EditorFor(model => model.Description)
+            @Html.ValidationMessageFor(model => model.Description)
+        </div>
+    </div>
+    <div class="control-group">
+        <div class="controls">
+            @Html.LabelFor(model => model.GradePercentageValue)
+            @Html.EditorFor(model => model.GradePercentageValue)
+            @Html.ValidationMessageFor(model => model.GradePercentageValue)
+        </div>
+    </div>
+    @if (ViewContext.RouteData.Values["Action"].ToString() == "Edit")
+    {
+        <div class="control-group">
+            <div class="controls">
+                <button class="btn">
+                    Save</button>
+                <button class="btn">
+                    Cancel</button>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="control-group">
+            <div class="controls">
+                <button class="btn">
+                    Create</button>
+                <button class="btn">
+                    Cancel</button>
+            </div>
+        </div>
+    }
+</div>

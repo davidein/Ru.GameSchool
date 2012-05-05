@@ -344,10 +344,10 @@
     <Content Include="Views\Exam\Create.cshtml" />
     <Content Include="Views\Project\Get.cshtml" />
     <Content Include="Views\Project\Create.cshtml" />
-    <Content Include="Views\Project\Edit.cshtml" />
     <Content Include="Views\Project\Index.cshtml" />
     <Content Include="Views\Exam\Index.cshtml" />
     <Content Include="Views\Exam\_ExamQuestion.cshtml" />
+    <Content Include="Views\Project\Edit.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
@@ -366,7 +366,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>61429</DevelopmentServerPort>
+          <DevelopmentServerPort>23918</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>

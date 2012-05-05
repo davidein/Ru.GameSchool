@@ -12,21 +12,22 @@ namespace Ru.GameSchool.Web.Controllers
         //[Authorize(Roles = "Student")]
         //[Authorize(Roles = "Teacher")]
         [HttpGet]
-        public ActionResult Index()
+        public ActionResult Index(int? courseId)
         {
-            var user = UserService.GetUser(User.Identity.Name);
-            var projects = LevelService.GetUserLevelProject(user.UserInfoId).ToList();
-
-            ViewBag.Projects = projects;
-
-            ViewBag.CourseName = projects.ElementAt(0).Level.Course.Name;
-
+            if (courseId.HasValue)
+            {
+                var projects = LevelService.GetLevelProjectsByCourseId(courseId.Value);
+                var nameOfCourse = projects.Select(x => x.Level.Course.Name ?? string.Empty).FirstOrDefault();
+                ViewBag.Projects = projects;
+                ViewBag.NameOfCourse = nameOfCourse;
+            }
+            
             return View();
         }
 
 
         #region Student
-     //   [Authorize(Roles = "Student")]
+        //   [Authorize(Roles = "Student")]
         public ActionResult Get(int? LevelProjectId)
         {
             if (LevelProjectId.HasValue)
@@ -40,15 +41,16 @@ namespace Ru.GameSchool.Web.Controllers
 
 
         //    [Authorize(Roles = "Student")]
-        public ActionResult Return(int id)
+        public ActionResult Return(int id, LevelProject levelProject)
         {
+            
             return View();
         }
         #endregion
 
 
         #region Teacher
-      //  [Authorize(Roles = "Teacher")]
+        //  [Authorize(Roles = "Teacher")]
         [HttpPost]
         public ActionResult Create(LevelProject levelProject)
         {
@@ -59,7 +61,7 @@ namespace Ru.GameSchool.Web.Controllers
             return View();
         }
 
-       // [Authorize(Roles = "Teacher")]
+        // [Authorize(Roles = "Teacher")]
         [HttpGet]
         public ActionResult Create()
         {
@@ -71,11 +73,11 @@ namespace Ru.GameSchool.Web.Controllers
 
         //       [Authorize(Roles = "Teacher")]
         [HttpGet]
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(int? LevelProjectId)
         {
-            if (id.HasValue)
+            if (LevelProjectId.HasValue)
             {
-                var project = LevelService.GetLevelProject(id.Value);
+                var project = LevelService.GetLevelProject(LevelProjectId.Value);
                 return View(project);
             }
             return View();
@@ -93,17 +95,16 @@ namespace Ru.GameSchool.Web.Controllers
         }
         #endregion
 
-
+        #region UnsortedHelperMethds
         public IEnumerable<SelectListItem> GetPercentageValue()
         {
             for (int j = 1; j <= 100; j++)
             {
                 yield return new SelectListItem
-                        {
-                            Text = j.ToString() + " %",
-                            Value = j.ToString()
-                        };
-
+                {
+                    Text = j.ToString() + " %",
+                    Value = j.ToString()
+                };
             }
         }
         public IEnumerable<SelectListItem> GetLevelCounts()
@@ -115,7 +116,6 @@ namespace Ru.GameSchool.Web.Controllers
                     Text = j.ToString(),
                     Value = j.ToString()
                 };
-
             }
         }
         private List<string> GetAllowedFileExtensions()
@@ -128,6 +128,8 @@ namespace Ru.GameSchool.Web.Controllers
                            ".rar "
                        }.ToList();
         }
+        #endregion
+        
 
 
 

@@ -16,6 +16,7 @@ namespace Ru.GameSchool.DataLayer.Repository
         [Required(ErrorMessage = "Vantar")]
         [Display(Name = "Verkefni byrjar")]
         [DataType(DataType.DateTime)]
+        
         public DateTime Start { get; set; }
 
         [Required(ErrorMessage = "Vantar")]
