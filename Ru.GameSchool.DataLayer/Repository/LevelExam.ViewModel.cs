@@ -6,11 +6,11 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Ru.GameSchool.DataLayer.Repository
 {
-    [MetadataType(typeof(LevelMetadata))]
+    [MetadataType(typeof(LevelExamMetadata))]
     public partial class LevelExam
     {
     }
-    public class LevelMetadata
+    public class LevelExamMetadata
     {
         [Required]
         [Display(Name = "Lýsing")]
