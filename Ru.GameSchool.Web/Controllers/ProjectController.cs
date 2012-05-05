@@ -9,33 +9,55 @@ namespace Ru.GameSchool.Web.Controllers
 {
     public class ProjectController : BaseController
     {
-
-        //
-        // GET: /Project/
+        #region Student
         [Authorize(Roles = "Student")]
-        public ActionResult Get(int? id)
+        public ActionResult Get(int? LevelProjectId)
         {
-            if (id.HasValue)
+            if (LevelProjectId.HasValue)
             {
-                var project = LevelService.GetLevelProject(id.Value);
-                return View(project);
+                ViewBag.LevelProject = LevelService.GetLevelProject(LevelProjectId.Value);
+                ViewBag.AllowedFileExtensions = GetAllowedFileExtensions();
             }
             return View();
         }
-
         [Authorize(Roles = "Student")]
         [HttpGet]
         public ActionResult Index()
         {
             var projects = LevelService.GetLevelProjects();
-            return View(projects.ToList());
-        }
 
+            ViewBag.Projects = projects.ToList();
+
+            ViewBag.CourseName = "Vefforritun II";
+
+            return View();
+        }
         [Authorize(Roles = "Student")]
         public ActionResult Return(int id)
         {
             return View();
         }
+        #endregion
+
+
+        #region Teacher
+        #endregion
+
+
+
+
+        private List<string> GetAllowedFileExtensions()
+        {
+            return new string[]
+                       {
+                           ".doc ",
+                           ".pdf ",
+                           ".zip ",
+                           ".rar "
+                       }.ToList();
+        }   
+  
+
 
         [Authorize(Roles = "Teacher")]
         [HttpPost]

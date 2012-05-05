@@ -14,6 +14,18 @@ namespace Ru.GameSchool.Web.Controllers
         //
         // GET: /Exam/
 
+        [HttpGet]
+        [Authorize(Roles ="Student")]
+        public ActionResult Index()
+        {
+            var exams = LevelService.GetLevelExams();
+
+            ViewBag.Exams = exams.ToList();
+            
+
+
+            return View();
+        }
        
 
         [HttpGet]

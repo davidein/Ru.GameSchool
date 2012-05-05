@@ -2,4 +2,18 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Create</h2>
+<h2>Skrá nýtt</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>Legend</legend>
+        
+        <div class="input-medium">
+            <label for="name">Nafn</label>
+            <input type="text" id="name" name="name"/>
+        </div>
+    </fieldset>
+}
