@@ -19,18 +19,17 @@ namespace Ru.GameSchool.Web.Controllers
         }
 
 
-        //[Authorize(Roles = "Teacher")]
+        [Authorize(Roles = "Teacher")]
         public ActionResult Create()
         //public ActionResult Create(int CoureId)
         {
-            //ViewBag.categoryId =
             ViewBag.CourseList = new SelectList(CourseService.GetCourses(), "CourseId", "Name"); 
             return View();
         }
 
 
         [HttpPost]
-        [Authorize(Roles = "Teacher")]
+        //[Authorize(Roles = "Teacher")]
         public ActionResult Create(Level level)
         {
             if (ModelState.IsValid)
