@@ -1,4 +1,6 @@
-﻿@{
+﻿@model Ru.GameSchool.DataLayer.Repository.LevelProject
+
+@{
     ViewBag.Title = "Verkefni";
 }
 <h2>Verkefni</h2>
@@ -50,6 +52,11 @@
             <textarea class="input-xlarge" id="lysing" rows="3" rel="popover" data-content="Settu inn lýsingu á námskeiði." data-original-title="Lýsing"></textarea>
         </div>
     </div>
-    
+    if (User.IsInRole("Nemandi"))
+    {
+  
+    }
     <button type="submit" class="btn">Skila verkefni</button>  
+
 }
+    
