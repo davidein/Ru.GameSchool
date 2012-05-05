@@ -14,16 +14,19 @@ namespace Ru.GameSchool.DataLayer.Repository
     public class LevelMetadata
     {
 
-        [Required]
+
+        [Required(ErrorMessage = @"Það verður að gefa borðinu nafn")]
         [Display(Name = "Heiti borðs")]
         public string Name;
 
         [Required(ErrorMessage = @"Vantar opnunartíma")]
         [Display(Name = "Opið frá")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd MMM yyyy}")]
         public DateTime Start;
 
         [Required(ErrorMessage = @"Vantar lokunartíma")]
         [Display(Name = "Lokar")]
+        //[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd MMM yyyy hh:mm}")]
         public DateTime Stop;
 
     

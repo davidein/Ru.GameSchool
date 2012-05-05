@@ -1,18 +1,36 @@
-﻿@{
-    ViewBag.Title = "Edit";
+﻿@model Ru.GameSchool.DataLayer.Repository.Level
+
+@{
+    ViewBag.Title = "Breyta borði";
 }
 
-<h2>Edit</h2>
+<h2>@ViewBag.Title</h2>
 
-@model Ru.GameSchool.DataLayer.Repository.Level
+@section sidebar {
 
-@using (Html.BeginForm())
-{
-    @Html.LabelFor(m => m.Name)
-    <br />
-    @Html.ValidateFor(m=>m.Name)                           
-    <br />
-    @Html.TextBoxFor(m => m.Name)
-    
-    <input value="Áfram" type="submit" />
+@Html.Partial("_TeacherSideBar")
+
+}
+
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")"></script>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        @Html.HiddenFor(model => model.CourseId)
+        @Html.HiddenFor(model => model.LevelId)
+
+
+        @Html.Partial("_LevelForm")
+
+
+            <div class="control-group">
+                <label class="control-label"></label>
+            <div class="controls">
+                <button type="submit" class="btn btn-success" >Vista breytingar á borði</button>
+            </div>
+            </div>
+    </fieldset>
 }

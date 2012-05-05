@@ -271,7 +271,7 @@
     <Content Include="Views\Shared\_LeftSideBar.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Teacher\_TeacherSideBar.cshtml" />
+    <Content Include="Views\Shared\_TeacherSideBar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Admin\_AdminSideBar.cshtml" />
@@ -340,6 +340,9 @@
     <Content Include="Views\Project\Create.cshtml" />
     <Content Include="Views\Project\Edit.cshtml" />
     <Content Include="Views\Project\Index.cshtml" />
+    <Content Include="Views\Level\Edit2.cshtml" />
+    <Content Include="Views\Level\Edit3.cshtml" />
+    <Content Include="Views\Level\_LevelForm.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

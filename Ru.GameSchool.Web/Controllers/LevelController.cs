@@ -19,23 +19,35 @@ namespace Ru.GameSchool.Web.Controllers
         }
 
 
-        [Authorize(Roles = "Teacher")]
-        public ActionResult Create(int id)
+        //[Authorize(Roles = "Teacher")]
+        public ActionResult Create()
+        //public ActionResult Create(int CoureId)
         {
+            //ViewBag.categoryId =
+            ViewBag.CourseList = new SelectList(CourseService.GetCourses(), "CourseId", "Name"); 
             return View();
         }
 
 
         [HttpPost]
-        [Authorize(Roles = "Teacher")]
-        public ActionResult Create(Level level, int id)
+        //[Authorize(Roles = "Teacher")]
+        public ActionResult Create(Level level)
         {
-            return View();
+            if (ModelState.IsValid)
+            {
+
+                level.CreateDateTime = DateTime.Now;
+
+                LevelService.CreateLevel(level);
+                
+            }
+
+            return RedirectToAction("Edit", new { Id = level.LevelId });
         }
 
 
 
-        [Authorize(Roles = "Teacher")]
+        //[Authorize(Roles = "Teacher")]
         public ActionResult Edit(int? id)
         {
             if (id.HasValue)
@@ -49,7 +61,7 @@ namespace Ru.GameSchool.Web.Controllers
 
 
         [HttpPost]
-        [Authorize(Roles = "Teacher")]
+        //[Authorize(Roles = "Teacher")]
         public ActionResult Edit(Level model, int? id)
         {
             if (ModelState.IsValid)
