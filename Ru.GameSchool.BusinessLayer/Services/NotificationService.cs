@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Ru.GameSchool.BusinessLayer.Exceptions;
 using Ru.GameSchool.BusinessLayer.Interfaces;
 using Ru.GameSchool.DataLayer.Repository;
 using System.Linq;
@@ -49,7 +50,15 @@ namespace Ru.GameSchool.BusinessLayer.Services
         /// <returns></returns>
         public IEnumerable<Notification> GetNotifications(int userInfoId)
         {
-            return userInfoId > 0 ? GameSchoolEntities.Notifications.Where(n => n.UserInfoId == userInfoId) : null;
+            if (userInfoId <= 0)
+                return null;
+
+            if (GameSchoolEntities.UserInfoes.Where(x => x.UserInfoId == userInfoId).Count() != 1)
+                throw new GameSchoolException(string.Format("User does not exist. UserInfoId = {0}", userInfoId));
+
+            var list = GameSchoolEntities.Notifications.Where(n => n.UserInfoId == userInfoId);
+
+            return list.OrderByDescending(x=>x.NotificationId);
         }
     }
 }
