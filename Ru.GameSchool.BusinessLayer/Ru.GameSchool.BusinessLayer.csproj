@@ -43,7 +43,6 @@
   <ItemGroup>
     <Compile Include="Enums\UserStatus.cs" />
     <Compile Include="Enums\UserType.cs" />
-    <Compile Include="Exceptions\GameSchoolException.cs" />
     <Compile Include="Interfaces\IExternalNotificationContainer.cs" />
     <Compile Include="Interfaces\IExternalPointContainer.cs" />
     <Compile Include="Services\LevelService.cs" />
@@ -76,6 +75,7 @@
   <ItemGroup>
     <EmbeddedResource Include="Diagrams\AdminCreatesCourse.sequencediagram.layout">
       <DependentUpon>AdminCreatesCourse.sequencediagram</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Diagrams\AdminCreatesUser.sequencediagram.layout">
       <DependentUpon>AdminCreatesUser.sequencediagram</DependentUpon>
