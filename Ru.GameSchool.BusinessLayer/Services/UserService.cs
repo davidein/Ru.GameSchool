@@ -118,6 +118,9 @@ namespace Ru.GameSchool.BusinessLayer.Services
             user.Password = newHashedPassword; // Add password to datasource
             // Persist changes to datasource.
             Save();
+
+            if (ExternalNotificationContainer != null)
+                ExternalNotificationContainer.CreateNotification("Your password has been changed.", "", userInfoId);
         }
 
         /// <summary>

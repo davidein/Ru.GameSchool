@@ -41,7 +41,7 @@
                             <li>@Html.ActionLink("Um GameSchool", "About", "Home")</li>
                             <li>@Html.ActionLink("Hafa samband", "Contact", "Home")</li>
                             
-                            @if (Request.IsAuthenticated)
+                            @if (Request.IsAuthenticated && User.IsInRole("Admin"))
                             {
                                 @Html.Partial("_SpecificFunctions")
                             }

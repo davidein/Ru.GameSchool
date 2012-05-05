@@ -42,7 +42,7 @@ namespace Ru.GameSchool.BusinessLayer.Services
             set { _externalPointContainer = value; }
         }
 
-        public IExternalNotificationContainer NotificationService
+        public IExternalNotificationContainer ExternalNotificationContainer
         {
             get { return _notificationService; }
             set { _notificationService = value; }
