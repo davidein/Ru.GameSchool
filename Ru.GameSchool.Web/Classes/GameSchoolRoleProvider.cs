@@ -30,7 +30,7 @@ namespace Ru.GameSchool.Web.Classes
 
             var user = userService.GetUser(username);
 
-            return new[] {((UserType) user.StatusId).ToString()};
+            return new[] {((UserType) user.UserTypeId).ToString()};
         }
 
         public override void CreateRole(string roleName)
