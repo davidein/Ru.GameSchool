@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using Ru.GameSchool.BusinessLayer.Exceptions;
 using Ru.GameSchool.DataLayer;
 using System.Collections.Generic;
 using Ru.GameSchool.DataLayer.Repository;
@@ -61,11 +62,18 @@ namespace Ru.GameSchool.BusinessLayer.Services
 
         public void AddUserToCourse(int userInfoId, int courseId)
         {
-            if ((userInfoId = courseId) > 0)
+            if (userInfoId > 0 && courseId > 0)
             {
                 var userQuery = GameSchoolEntities.UserInfoes.Where(u => u.UserInfoId == userInfoId);
-                var courseQuery = GameSchoolEntities.Courses.Where(c => c.CourseId == courseId);
+                var courseQuery = GameSchoolEntities.Courses.Where(c => c.CourseId == courseId).FirstOrDefault();
 
+                if (courseQuery == null)
+                    throw new GameSchoolException(string.Format("Course not found. CourseId = {0}", courseId));
+
+                if (ExternalNotificationContainer != null)
+                    ExternalNotificationContainer.CreateNotification(
+                        string.Format("Þú hefur verið skráður í {0}", courseQuery.Name),
+                        string.Format("/Course/Item/{0}", courseQuery.CourseId), userInfoId);
             }
         }
 
