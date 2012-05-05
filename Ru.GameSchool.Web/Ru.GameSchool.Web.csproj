@@ -277,7 +277,7 @@
     <Content Include="Views\Shared\_LeftSideBar.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Teacher\_TeacherSideBar.cshtml" />
+    <Content Include="Views\Shared\_TeacherSideBar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Admin\_AdminSideBar.cshtml" />
@@ -345,6 +345,7 @@
     <Content Include="Views\Project\Get.cshtml" />
     <Content Include="Views\Project\Create.cshtml" />
     <Content Include="Views\Project\Index.cshtml" />
+    <Content Include="Views\Level\_LevelForm.cshtml" />
     <Content Include="Views\Exam\Index.cshtml" />
     <Content Include="Views\Exam\_ExamQuestion.cshtml" />
     <Content Include="Views\Project\Edit.cshtml" />
