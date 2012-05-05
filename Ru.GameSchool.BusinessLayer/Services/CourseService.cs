@@ -17,7 +17,7 @@ namespace Ru.GameSchool.BusinessLayer.Services
         /// Gets a course instance through a parameter of this function and if it isn't null persist it to the database.
         /// </summary>
         /// <param name="userInfo">Instance of a course</param>
-        public void AddCourse(Course course)
+        public void CreateCourse(Course course)
         {
             if (course != null)
             {

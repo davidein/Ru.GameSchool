@@ -1,0 +1,15 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Listi yfir próf</h2>
+
+@foreach (var item in ViewBag.Exams)
+{
+    <ul>
+        <li>@Html.ActionLink((@item.Name + " - Skiladagur: ") as string, "Get", new { LevelExamId = @item.LevelExamId } )</li>
+    </ul>
+}
+
+<input type="button" class="ui-button-text-only" value="Búa til nýtt próf" onclick="location.href='@Url.Action("Create","Exam")'" />
+  

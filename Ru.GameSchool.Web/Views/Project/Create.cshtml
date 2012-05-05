@@ -1,5 +1,85 @@
-﻿@{
-    ViewBag.Title = "Create";
+﻿@model Ru.GameSchool.DataLayer.Repository.LevelProject
+@{
+    ViewBag.Title = "Búa til verkefni";
 }
-
-<h2>Create</h2>
+<h2>
+    Búa til nýtt verkefni</h2>
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>Upplýsingar</legend>
+        <div class="control-group">
+            <label class="control-label">
+                Nafn</label>
+            <div class="controls">
+                <div class="input-xlarge" id="name" name="name" rel="popover" data-content="Settu inn nafn."
+                       data-original-title="Nafn námskeiðs">
+                @Html.EditorFor(m => m.Name)
+                </div>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="select01">
+                Borð</label>
+            <div class="controls">
+                <select name="selectLevel">
+                @Html.DropDownList("LevelCount")
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="select01">
+                Vægi</label>
+            <div class="controls">
+                @Html.DropDownList("GradePercentageValue")
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">
+                Skrá</label>
+            <div class="controls">
+                <input type="file" class="input-xlarge" id="user_name" name="user_name" rel="popover">
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">
+                Byrjar</label>
+            <div class="controls">
+                <div class="input-xlarge" id="level_create_starts" name="level_create_starts" rel="popover"
+                    data-content="Settu inn hvenær verkefni byrjar." data-original-title="Byrjun dagsetning"
+                    data-datepicker="datepicker">
+                    @Html.EditorFor(m => m.Start)
+                </div>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">
+                Endar</label>
+            <div class="controls">
+                <div class="input-xlarge" id="level_create_ends" name="level_create_ends" rel="popover"
+                    data-content="Settu inn hvenær verkefni endar." data-original-title="Enda dagsetning"
+                    data-datepicker="datepicker">
+                    @Html.EditorFor(m => m.Stop)
+                </div>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="textarea">
+                Lýsing</label>
+            <div class="controls">
+                <div class="input-xlarge" id="lysing" rows="3" rel="popover" data-content="Settu inn lýsingu á námskeiði."
+                    data-original-title="Lýsing">
+                    @Html.EditorFor(m => m.Description)
+                </div>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">
+            </label>
+            <div class="controls">
+                <button type="submit" class="btn btn-success">
+                    Búa til verkefni</button>
+            </div>
+        </div>
+    </fieldset>
+}

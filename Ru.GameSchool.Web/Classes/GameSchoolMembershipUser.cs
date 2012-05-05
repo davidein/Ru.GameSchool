@@ -8,12 +8,14 @@ namespace Ru.GameSchool.Web.Classes
 {
     public class GameSchoolMembershipUser : MembershipUser
     {
+        public int UserInfoId { get; set; }
         public string Fullname { get; set; }
 
-        public GameSchoolMembershipUser(string providerName, string name, object providerUserKey, string email, string passwordQuestion, string comment, bool isApproved, bool isLockedOut, DateTime creationDate, DateTime lastLoginDateTime, DateTime lastAcctivityDate, DateTime lastPasswordChangeDate, DateTime lastLockoutDateTime, string fullname, int userRoleId)
+        public GameSchoolMembershipUser(string providerName, string name, object providerUserKey, string email, string passwordQuestion, string comment, bool isApproved, bool isLockedOut, DateTime creationDate, DateTime lastLoginDateTime, DateTime lastAcctivityDate, DateTime lastPasswordChangeDate, DateTime lastLockoutDateTime, string fullname, int userInfoId, int userRoleId)
             : base(providerName, name, providerUserKey, email, passwordQuestion, comment, isApproved, isLockedOut, creationDate, lastLoginDateTime, lastAcctivityDate, lastPasswordChangeDate, lastLockoutDateTime)
         {
             Fullname = fullname;
+            UserInfoId = userInfoId;
         }
     }
 }

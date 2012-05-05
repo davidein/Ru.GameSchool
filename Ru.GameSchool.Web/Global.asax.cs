@@ -45,7 +45,25 @@ namespace Ru.GameSchool.Web
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);
 
-            BundleTable.Bundles.RegisterTemplateBundles();
+            //BundleTable.Bundles.RegisterTemplateBundles();
+
+            #if DEBUG
+            var javascriptLibraries = new Bundle("~/lib");
+            javascriptLibraries.AddDirectory("~/Scripts/lib", "*.js", false);
+            BundleTable.Bundles.Add(javascriptLibraries);
+
+            var javascriptApp = new Bundle("~/app");
+            javascriptApp.AddDirectory("~/Scripts/app", "*.js", false);
+            BundleTable.Bundles.Add(javascriptApp);
+            #else
+            var javascriptLibraries = new Bundle("~/lib", new JsMinify());
+            javascriptLibraries.AddDirectory("~/Scripts/lib", "*.js", false);
+            BundleTable.Bundles.Add(javascriptLibraries);
+
+            var javascriptApp = new Bundle("~/app", new JsMinify());
+            javascriptApp.AddDirectory("~/Scripts/app", "*.js", false);
+            BundleTable.Bundles.Add(javascriptApp);
+            #endif
         }
     }
 }

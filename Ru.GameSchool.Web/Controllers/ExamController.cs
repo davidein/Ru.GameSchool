@@ -11,10 +11,21 @@ namespace Ru.GameSchool.Web.Controllers
 {
     public class ExamController : BaseController
     {
-        //
-        // GET: /Exam/
+        [HttpGet]
+      //  [Authorize(Roles = "Student")]
+        public ActionResult Index()
+        {
+            var exams = LevelService.GetLevelExams();
 
-       
+            ViewBag.Exams = exams.ToList();
+
+
+
+            return View();
+        }
+        #region Student
+
+
 
         [HttpGet]
         [Authorize(Roles = "Student")]
@@ -38,15 +49,18 @@ namespace Ru.GameSchool.Web.Controllers
             }
             return View();
         }
+        #endregion
 
-        [Authorize(Roles = "Teacher")]
+        #region Teacher
+
+       // [Authorize(Roles = "Teacher")]
         [HttpGet]
         public ActionResult Create()
         {
             return View();
         }
 
-        [Authorize(Roles = "Teacher")]
+      //  [Authorize(Roles = "Teacher")]
         [HttpPost]
         public ActionResult Create(LevelExam levelExam)
         {
@@ -60,36 +74,42 @@ namespace Ru.GameSchool.Web.Controllers
             return View();
         }
 
-        [Authorize(Roles = "Teacher")]
+      //  [Authorize(Roles = "Teacher")]
         [HttpGet]
-        public ActionResult Edit(int? id, string temp)
+        public ActionResult Edit(int? id)
         {
             if (ModelState.IsValid)
             {
                 if (id.HasValue)
                 {
                     var exam = LevelService.GetLevelExam(id.Value);
-                    return View(exam);
+                    ViewBag.Exam = exam;
                 }
             }
             return View();
         }
 
-        [Authorize(Roles = "Teacher")]
+       // [Authorize(Roles = "Teacher")]
         [HttpPost]
         public ActionResult Edit(LevelExam levelExam)
         {
             if (ModelState.IsValid)
             {
-                var id = levelExam.LevelExamId;
-                var exam = LevelService.GetLevelExam(id);
-                if (TryUpdateModel(exam))
+                if (TryUpdateModel(levelExam))
                 {
-                    LevelService.UpdateLevelExam(exam);
+                    LevelService.UpdateLevelExam(levelExam);
                 }
             }
-            return View("Index");
+            return View();
         }
+
+        #endregion
+
+
+
+
+
+
 
 
         /*
