@@ -2,16 +2,12 @@
     ViewBag.Title = "Forsíða";
 }
 
-
 @section sidebar {
-
-@Html.Partial("_LeftSideBar")
-
+    @Html.Partial("_LeftSideBar")
 }
 
 <div class="hero-unit">
-    <h1>
-        GameSchool</h1>
+    <h1>GameSchool</h1>
     <article>
         <h3>
             <span class="gray">18.04.2012 | </span><a data-toggle="modal" href="#myModal">Búið að opna borð 4</a></h3>
@@ -36,6 +32,7 @@
     <p>
         <a class="btn btn-primary" href="/Home/Messages">Meira... &raquo;</a></p>
 </div>
+
 <!-- Move to partial view for modal -->
 <div id="myModal" class="modal" style="display: none">
     <div class="modal-header">
@@ -57,71 +54,31 @@
     </div>
 </div>
 <!-- end move -->
+
+@if (ViewBag.CourseList != null && ViewBag.CourseList.Count > 0)
+{
 <div class="row-fluid course-box">
     
     <h2>Þín námskeið</h2>
-    <div class="row-fluid">
-        <div class="span4 well">
-            <h3>Vefforritun I</h3>
-            <ul>
-                <li><a href="/Home/Material">MVC 4 </a><span class="label label-important">Nýtt</span></li>
-                <li><a href="/Home/Exam">Netpróf 2 </a><span class="label label-important">Nýtt</span></li>
-                <li><a href="/Home/Project">CSS</a></li>
-                <li><a href="/Home/Project">HTML5 glærur</a></li>
-            </ul>
-            <p><a class="btn btn-small" href="#">Skoða nánar &raquo;</a></p>
-        </div><!--/span-->
-        <div class="span4 well">
-            <h3>Vefforritun II</h3>
-            <ul>
-                <li><a href="/Home/Material">MVC 4 </a><span class="label label-important">Nýtt</span></li>
-                <li><a href="/Home/Exam">Netpróf 2 </a><span class="label label-important">Nýtt</span></li>
-                <li><a href="/Home/Project">CSS</a></li>
-                <li><a href="/Home/Project">HTML5 glærur</a></li>
-            </ul>
-            <p><a class="btn btn-small" href="#">Skoða nánar &raquo;</a></p>
-        </div><!--/span-->
-        <div class="span4 well">
-            <h3>Greining og hönnun hugbúnaðar</h3>
-            <ul>
-                <li><a href="/Home/Material">MVC 4 </a><span class="label label-important">Nýtt</span></li>
-                <li><a href="/Home/Exam">Netpróf 2 </a><span class="label label-important">Nýtt</span></li>
-                <li><a href="/Home/Project">CSS</a></li>
-                <li><a href="/Home/Project">HTML5 glærur</a></li>
-            </ul>
-            <p><a class="btn btn-small" href="#">Skoða nánar &raquo;</a></p>
-        </div><!--/span-->
-    </div><!--/row-->
-    <div class="row-fluid">
-        <div class="span4 well">
-            <h3>Tölvugrafík</h3>
-            <ul>
-                <li><a href="/Home/Material">MVC 4 </a><span class="label label-important">Nýtt</span></li>
-                <li><a href="/Home/Exam">Netpróf 2 </a><span class="label label-important">Nýtt</span></li>
-                <li><a href="/Home/Project">CSS</a></li>
-                <li><a href="/Home/Project">HTML5 glærur</a></li>
-            </ul>
-            <p><a class="btn btn-small" href="#">Skoða nánar &raquo;</a></p>
-        </div><!--/span-->
-        <div class="span4 well">
-            <h3>Verkefnalausnir</h3>
-            <ul>
-                <li><a href="/Home/Material">MVC 4 </a><span class="label label-important">Nýtt</span></li>
-                <li><a href="/Home/Exam">Netpróf 2 </a><span class="label label-important">Nýtt</span></li>
-                <li><a href="/Home/Project">CSS</a></li>
-                <li><a href="/Home/Project">HTML5 glærur</a></li>
-            </ul>
-            <p><a class="btn btn-small" href="#">Skoða nánar &raquo;</a></p>
-        </div><!--/span-->
-        <div class="span4 well">
-            <h3>Hugbúnaðarfræði</h3>
-            <ul>
-                <li><a href="/Home/Material">MVC 4 </a><span class="label label-important">Nýtt</span></li>
-                <li><a href="/Home/Exam">Netpróf 2 </a><span class="label label-important">Nýtt</span></li>
-                <li><a href="/Home/Project">CSS</a></li>
-                <li><a href="/Home/Project">HTML5 glærur</a></li>
-            </ul>
-            <p><a class="btn btn-small" href="#">Skoða nánar &raquo;</a></p>
-        </div><!--/span-->
-    </div><!--/row-->
+    @foreach (var item in ViewBag.CourseList)
+    {
+        <text>
+        <div class="row-fluid">
+            @foreach (var nesteditem in item)
+            {
+            <div class="span4 well">
+                <h3>@nesteditem.Name</h3>
+                <ul>
+                    <li><a href="/Home/Material">MVC 4 </a><span class="label label-important">Nýtt</span></li>
+                    <li><a href="/Home/Exam">Netpróf 2 </a><span class="label label-important">Nýtt</span></li>
+                    <li><a href="/Home/Project">CSS</a></li>
+                    <li><a href="/Home/Project">HTML5 glærur</a></li>
+                </ul>
+                <p><a class="btn btn-small" href="#">Skoða nánar &raquo;</a></p>
+            </div><!--/span-->
+            }
+        </div><!--/row-->
+        </text>
+    }
 </div>
+}
