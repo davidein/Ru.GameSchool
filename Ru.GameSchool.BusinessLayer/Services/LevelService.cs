@@ -58,7 +58,8 @@ namespace Ru.GameSchool.BusinessLayer.Services
         /// <param name="level">Level instance with updated values.</param>
         public void UpdateLevel(Level level)
         {
-            throw new System.NotImplementedException();
+            Save();
+            //throw new System.NotImplementedException();
         }
 
         /// <summary>

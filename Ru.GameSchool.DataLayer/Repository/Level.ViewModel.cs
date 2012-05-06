@@ -21,12 +21,12 @@ namespace Ru.GameSchool.DataLayer.Repository
 
         [Required(ErrorMessage = @"Vantar opnunartíma")]
         [Display(Name = "Opið frá")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd MMM yyyy}")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd MMM yyyy  hh:mm}")]
         public DateTime Start;
 
         [Required(ErrorMessage = @"Vantar lokunartíma")]
         [Display(Name = "Lokar")]
-        //[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd MMM yyyy hh:mm}")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd MMM yyyy hh:mm}")]
         public DateTime Stop;
 
     
