@@ -15,7 +15,7 @@ namespace Ru.GameSchool.BusinessLayer.Services
         /// <summary>
         /// Gets an instance of the datasource. If no datasource is explicitly set, the default one will be setup.
         /// </summary>
-        public IGameSchoolEntities GameSchoolEntities
+        internal IGameSchoolEntities GameSchoolEntities
         {
             get
             {

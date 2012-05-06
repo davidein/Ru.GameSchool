@@ -1,4 +1,6 @@
-﻿@{
+﻿@model Ru.GameSchool.DataLayer.Repository.Course;
+
+@{
     ViewBag.Title = "Námskeið";
 }
 
@@ -11,82 +13,81 @@
 }
 
 
-<form class="form-horizontal" id="registerHere" method='post' action=''>
-<fieldset>
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")"></script>
 
-<legend>Námskeið</legend>
+@using (Html.BeginForm("Course", "Admin", "POST"))
+{
+    <fieldset>
 
-<div class="control-group">
-            <label class="control-label" for="select01">Grunn námskeið</label>
+        <legend>Námskeið</legend>
+
+        <div class="control-group">
+            @Html.LabelFor(x => x.Name, new { @class = "control-label" })
             <div class="controls">
-              <select id="select01">
-                <option selected="selected">T-216-GHoH</option>
-                <option>T-213-VEFF</option>
-                <option>T-205-VERKr</option>
-              </select>
+                @Html.TextBoxFor(x => x.Name, new { @class = "input-xlarge" })
+                <span class="help-inline">@Html.ValidationMessageFor(x => x.Name)</span>
             </div>
-</div>
+        </div>
 
-<div class="control-group">
-<label class="control-label">Nafn</label>
-<div class="controls">
-<input type="text" class="input-xlarge" id="name" name="name" rel="popover" data-content="Settu inn nafn." data-original-title="Nafn námskeiðs">
-</div>
-</div>
-
-
-<div class="control-group">
-            <label class="control-label" for="textarea">Lýsing</label>
+        <div class="control-group">
+            @Html.LabelFor(x => x.Description, new { @class = "control-label" })
             <div class="controls">
-              <textarea class="input-xlarge" id="lysing" rows="3" rel="popover" data-content="Settu inn lýsingu á námskeiði." data-original-title="Lýsing"></textarea>
+                @Html.TextAreaFor(x => x.Description, new { @class = "input-xlarge" })
+                <span class="help-inline">@Html.ValidationMessageFor(x => x.Description)</span>
             </div>
- </div>
+        </div>
 
-
-
-<div class="control-group">
-            <label class="control-label" for="select01">Deild</label>
+        <div class="control-group">
+            @Html.LabelFor(x => x.Identifier, new { @class = "control-label" })
             <div class="controls">
-              <select id="select02">
-                <option>Tölvunarfræði</option>
-                <option>Verkfræði</option>
-                <option>Viðskiptafræði</option>
-                <option>Lögfræði</option>
-              </select>
+                @Html.TextBoxFor(x => x.Identifier, new { @class = "input-xlarge" })
+                <span class="help-inline">@Html.ValidationMessageFor(x => x.Identifier)</span>
             </div>
-</div>
+        </div>
 
-<div class="control-group">
-            <label class="control-label" for="select01">Fjöldi eininga</label>
+        <div class="control-group">
+            @Html.LabelFor(x => x.CreditAmount, new { @class = "control-label" })
             <div class="controls">
-              <select id="select03">
-                <option>3</option>
-                <option>6</option>
-                <option>9</option>
-              </select>
+                @Html.TextBoxFor(x => x.CreditAmount, new { @class = "input-xlarge" })
+                <span class="help-inline">@Html.ValidationMessageFor(x => x.CreditAmount)</span>
             </div>
-</div>
+        </div>
 
-<div class="control-group">
-<label class="control-label">Byrjar</label>
-<div class="controls">
-<input type="text" class="input-xlarge" id="user_name" name="user_name" rel="popover" data-content="Settu inn hvenær námskeið heftst." data-original-title="Upphafs dagsetning"   data-datepicker="datepicker">
-</div>
-</div>
+        <div class="control-group">
+            @Html.LabelFor(x => x.Start, new { @class = "control-label" })
+            <div class="controls">
+                @Html.TextBoxFor(x => x.Start, new { @class = "input-xlarge", @data_datepicker = "datepicker" })
+                <span class="help-inline">@Html.ValidationMessageFor(x => x.Start)</span>
+            </div>
+        </div>
 
-<div class="control-group">
-<label class="control-label">Endar</label>
-<div class="controls">
-<input type="text" class="input-xlarge" id="user_name" name="user_name" rel="popover" data-content="Settu inn hvenær námskeiði lýkur." data-original-title="Enda dagsetning"  data-datepicker="datepicker">
-</div>
-</div>
+        <div class="control-group">
+            @Html.LabelFor(x => x.Stop, new { @class = "control-label" })
+            <div class="controls">
+                @Html.TextBoxFor(x => x.Stop, new { @class = "input-xlarge", @data_datepicker = "datepicker" })
+                <span class="help-inline">@Html.ValidationMessageFor(x => x.Stop)</span>
+            </div>
+        </div>
 
-<div class="control-group">
-<label class="control-label"></label>
-<div class="controls">
-<button type="submit" class="btn btn-success" >Búa til námskeið</button>
-</div>
-</div>
+        <div class="control-group">
+            @Html.LabelFor(x => x.DepartmentId, new { @class = "control-label" })
+            <div class="controls">
+                @Html.DropDownListFor(x => x.DepartmentId, new SelectList(ViewBag.Departments, "DepartmentId", "Name"))
+                <span class="help-inline">@Html.ValidationMessageFor(x => x.DepartmentId)</span>
+            </div>
+        </div>
 
-</fieldset>
-</form>
+
+        <div class="control-group">
+        
+            <div class="controls">
+            <button type="submit" class="btn btn-success" >
+                <i class="icon-ok"></i>
+                Vista Námskeið
+            </button>
+            </div>
+        </div>
+
+    </fieldset>
+}

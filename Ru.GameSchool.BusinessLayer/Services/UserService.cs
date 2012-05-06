@@ -141,5 +141,22 @@ namespace Ru.GameSchool.BusinessLayer.Services
                             Save();
                         }*/
         }
+
+
+        public IEnumerable<Status> GetUserStatuses()
+        {
+            var userStatus = from x in GameSchoolEntities.Status
+                             select x;
+
+            return userStatus;
+        }
+
+        public IEnumerable<Ru.GameSchool.DataLayer.Repository.UserType> GetUserTypes()
+        {
+            var userTypes = from x in GameSchoolEntities.UserTypes
+                             select x;
+
+            return userTypes;
+        }
     }
 }

@@ -89,9 +89,11 @@
     <Compile Include="Repository\Level.cs">
       <DependentUpon>GameSchool.tt</DependentUpon>
     </Compile>
+    <Compile Include="Repository\Level.ViewModel.cs" />
     <Compile Include="Repository\LevelExam.cs">
       <DependentUpon>GameSchool.tt</DependentUpon>
     </Compile>
+    <Compile Include="Repository\LevelExam.ViewModel.cs" />
     <Compile Include="Repository\LevelExamAnswer.cs">
       <DependentUpon>GameSchool.tt</DependentUpon>
     </Compile>
@@ -154,6 +156,7 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>GameSchool.cs</LastGenOutput>
     </None>
+    <Compile Include="Repository\UserInfo.ViewModel.cs" />
     <None Include="SQL\schema.sql" />
   </ItemGroup>
   <ItemGroup>

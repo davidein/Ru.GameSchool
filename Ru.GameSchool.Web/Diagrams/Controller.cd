@@ -13,7 +13,7 @@
     <Position X="25.029" Y="2.628" Height="2.104" Width="2.221" />
   </Comment>
   <Comment CommentText="ExamController&#xD;&#xA;    Post fyrir Create kallar í LevelService.CreateLevelExam&#xD;&#xA;    Edit kallar í LevelService.GetLevelExam og skilar LevelExam&#xD;&#xA;   Post fyrir edit kallar í LevelService.UpdateLevelExam&#xD;&#xA;    Get kallar í LevelService.GetLevelExam og skilar LevelExam.">
-    <Position X="28.029" Y="2.805" Height="2.104" Width="2.221" />
+    <Position X="28.477" Y="2.857" Height="2.104" Width="2.221" />
   </Comment>
   <Comment CommentText="JSonController&#xD;&#xA;   CommentMaterial kallar í SocialService.GetComments og skilar IEnumerable&lt;Comment&gt; sem json streng.&#xD;&#xA;    GetNotifications kallar í NotificationService.GetNotifications og skilar IEnumerable&lt;Notification&gt; sem json streng.&#xD;&#xA;    LikeComment kallar í SocialService.CreateLike.&#xD;&#xA;    UnLikeComment kallar í SocialService.DeleteLike.   ">
     <Position X="15.26" Y="5.635" Height="1.865" Width="2.773" />
@@ -33,7 +33,7 @@
   <Class Name="Ru.GameSchool.Web.Controllers.BaseController">
     <Position X="16.5" Y="0.75" Width="4" />
     <TypeIdentifier>
-      <HashCode>AAAAAAIAAAAAAQAAAAAAgAAAAAAAQAAAAAAEAAgAAAA=</HashCode>
+      <HashCode>BAAAAAIAEAAAARAAAEAAgAAAAAAAQACAAAIEAAiEAAA=</HashCode>
       <FileName>Controllers\BaseController.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -87,7 +87,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="Ru.GameSchool.Web.Controllers.ExamController">
-    <Position X="28" Y="0.75" Width="2.25" />
+    <Position X="28.25" Y="0.5" Width="4" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAABAAAAAAAAAAAAAAEACAAAAEAAAAAA=</HashCode>
       <FileName>Controllers\ExamController.cs</FileName>

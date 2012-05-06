@@ -99,10 +99,32 @@ namespace Ru.GameSchool.BusinessLayerTests
         [TestMethod()]
         public void CreateLevelTest()
         {
-            LevelService target = new LevelService(); // TODO: Initialize to an appropriate value
-            Level level = null; // TODO: Initialize to an appropriate value
-            target.CreateLevel(level);
-            Assert.Inconclusive("A method that does not return a value cannot be verified.");
+            var levelData = new FakeObjectSet<Level>();
+
+            Level expected = new Level();
+            expected.LevelId = 1;
+            expected.Name = "Borð 1";
+            expected.CourseId = 1;
+            expected.Start = DateTime.Now;
+            expected.Stop = DateTime.Now.AddDays(7);
+
+            
+
+            levelData.AddObject(expected);
+
+            _mockRepository.Expect(x => x.Levels).Return(levelData);
+
+            //_mockRepository.Expect(x => x.AttachTo("Levels",expected));
+            _mockRepository.Expect(x => x.SaveChanges()).Return(1);
+
+            _levelService.CreateLevel(expected);
+
+            var actual = _levelService.GetLevel(1);
+
+            Assert.AreEqual(actual.Name, expected.Name);
+
+
+            _mockRepository.VerifyAllExpectations(); // Make sure everything was called correctly.
         }
 
         /// <summary>

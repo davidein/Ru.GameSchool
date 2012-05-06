@@ -1,6 +1,10 @@
-﻿using Ru.GameSchool.BusinessLayer.Services;
+﻿using System.Data.Objects;
+using Rhino.Mocks;
+using Ru.GameSchool.BusinessLayer.Exceptions;
+using Ru.GameSchool.BusinessLayer.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using Ru.GameSchool.BusinessLayerTests.Classes;
 using Ru.GameSchool.DataLayer.Repository;
 
 namespace Ru.GameSchool.BusinessLayerTests
@@ -14,25 +18,14 @@ namespace Ru.GameSchool.BusinessLayerTests
     [TestClass()]
     public class SocialServiceTest
     {
-
-
-        private TestContext testContextInstance;
+        private IGameSchoolEntities _mockRepository;
+        private SocialService _socialService;
 
         /// <summary>
         ///Gets or sets the test context which provides
         ///information about and functionality for the current test run.
         ///</summary>
-        public TestContext TestContext
-        {
-            get
-            {
-                return testContextInstance;
-            }
-            set
-            {
-                testContextInstance = value;
-            }
-        }
+        public TestContext TestContext { get; set; }
 
         #region Additional test attributes
         // 
@@ -64,6 +57,14 @@ namespace Ru.GameSchool.BusinessLayerTests
         //
         #endregion
 
+        //Use TestInitialize to run code before running each test
+        [TestInitialize()]
+        public void MyTestInitialize()
+        {
+            _mockRepository = MockRepository.GenerateMock<IGameSchoolEntities>();
+            _socialService = new SocialService();
+            _socialService.SetDatasource(_mockRepository);
+        }
 
         /// <summary>
         ///A test for CreateLike
@@ -71,10 +72,101 @@ namespace Ru.GameSchool.BusinessLayerTests
         [TestMethod()]
         public void CreateLikeTest()
         {
-            SocialService target = new SocialService(); // TODO: Initialize to an appropriate value
-            CommentLike commentLike = null; // TODO: Initialize to an appropriate value
-            target.CreateLike(commentLike);
-            Assert.Inconclusive("A method that does not return a value cannot be verified.");
+            var commentData = new FakeObjectSet<Comment>();
+
+            var comment = new Comment();
+            comment.CreateDateTime = DateTime.Now;
+            comment.Deleted = false;
+            comment.CommentId = 1;
+            comment.DeletedByUser = null;
+            comment.LevelMaterialId = 0;
+            comment.UserInfoId = 1;
+
+            commentData.AddObject(comment);
+
+
+            var userData = new FakeObjectSet<UserInfo>();
+
+            UserInfo userInfo = new UserInfo();
+            userInfo.Fullname = "Davíð Einarsson";
+            userInfo.Email = "davide09@ru.is";
+            userInfo.StatusId = 1;
+            userInfo.Username = "davidein";
+            userInfo.UserInfoId = 1;
+            userInfo.Password = "Wtf";
+            userInfo.UserInfoId = 1;
+
+            userData.AddObject(userInfo);
+
+            var commentLikeData = new FakeObjectSet<CommentLike>();
+
+            _mockRepository.Expect(x => x.Comments).Return(commentData);
+            _mockRepository.Expect(x => x.UserInfoes).Return(userData);
+            _mockRepository.Expect(x => x.CommentLikes).Return(commentLikeData);
+            _mockRepository.Expect(x => x.SaveChanges()).Return(1);
+
+            var commentLike = new CommentLike();
+
+            commentLike.UserInfoId = 1;
+            commentLike.CommentId = 1;
+
+            _socialService.CreateLike(commentLike);
+
+            _mockRepository.VerifyAllExpectations();
+        }
+
+        /// <summary>
+        ///A test for CreateLike
+        ///</summary>
+        [TestMethod()]
+        [ExpectedException(typeof(GameSchoolException))]
+        public void CreateLike_CommentDoesNotExist_Test()
+        {
+            _mockRepository.Expect(x => x.Comments).Return(new FakeObjectSet<Comment>());
+            _mockRepository.Expect(x => x.CommentLikes).Return(new FakeObjectSet<CommentLike>());
+         
+            var commentLike = new CommentLike();
+
+            commentLike.UserInfoId = 1;
+            commentLike.CommentId = 1;
+
+            _socialService.CreateLike(commentLike);
+
+            Assert.Fail("The unit test should never get here.");
+        }
+
+
+        /// <summary>
+        ///A test for CreateLike
+        ///</summary>
+        [TestMethod()]
+        [ExpectedException(typeof(GameSchoolException))]
+        public void CreateLike_UserDoesNotExist_Test()
+        {
+            var commentData = new FakeObjectSet<Comment>();
+
+            var comment = new Comment();
+            comment.CreateDateTime = DateTime.Now;
+            comment.Deleted = false;
+            comment.CommentId = 1;
+            comment.DeletedByUser = null;
+            comment.LevelMaterialId = 0;
+            comment.UserInfoId = 1;
+
+            commentData.AddObject(comment);
+
+            _mockRepository.Expect(x => x.Comments).Return(commentData);
+            _mockRepository.Expect(x => x.CommentLikes).Return(new FakeObjectSet<CommentLike>());
+            _mockRepository.Expect(x => x.UserInfoes).Return(new FakeObjectSet<UserInfo>());
+
+            var commentLike = new CommentLike();
+
+            commentLike.UserInfoId = 100;
+            commentLike.CommentId = 1;
+
+            _socialService.CreateLike(commentLike);
+
+            Assert.Fail("The unit test should never get here.");
         }
     }
 }

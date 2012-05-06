@@ -1,0 +1,17 @@
+﻿@{
+    ViewBag.Title = "Verkefni";
+}
+
+
+<h1>ViewBag.CourseName</h1>
+
+<h2>
+    Listi yfir verkefni</h2>
+@foreach (var item in ViewBag.Projects)
+{
+    
+                
+    <ul>
+        <li>@Html.ActionLink((@item.Name + " - Skiladagur: " + @item.Start.ToString("dd.MM.yyyy HH:mm")) as string, "Get", new { LevelProjectId = @item.LevelProjectId })<li>
+    </ul>
+}

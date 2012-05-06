@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using Ru.GameSchool.BusinessLayer.Exceptions;
 using Ru.GameSchool.DataLayer;
 using Ru.GameSchool.DataLayer.Repository;
 using System.Linq;
@@ -14,10 +16,17 @@ namespace Ru.GameSchool.BusinessLayer.Services
         /// Gets an instance of a commentlike object through parameter of the function, if the object isn't null persist it to the datasource.
         /// </summary>
         /// <param name="commentLike">Instance of commentlike object.</param>
+        /// <exception cref="GameSchoolException"></exception>
         public void CreateLike(CommentLike commentLike)
         {
             if (commentLike != null)
             {
+                if (GameSchoolEntities.Comments.Where(x=>x.CommentId == commentLike.CommentId).Count() != 1)
+                    throw new GameSchoolException(string.Format("Comment does not exist. CommentId = {0}",commentLike.CommentId));
+
+                if (GameSchoolEntities.UserInfoes.Where(x => x.UserInfoId == commentLike.UserInfoId).Count() != 1)
+                    throw new GameSchoolException(string.Format("User does not exist. UserInfoId = {0}", commentLike.UserInfoId));
+
                 GameSchoolEntities.CommentLikes.AddObject(commentLike);
                 Save();
             }

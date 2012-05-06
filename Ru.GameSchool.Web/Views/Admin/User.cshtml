@@ -1,0 +1,93 @@
+﻿@model Ru.GameSchool.DataLayer.Repository.UserInfo;
+
+@{
+    ViewBag.Title = "Skráning notenda";
+}
+
+<h2>Skráning notenda</h2>
+
+@section sidebar {
+
+@Html.Partial("_AdminSideBar")
+
+}
+
+
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")"></script>
+
+@using (Html.BeginForm("Course", "Admin", "POST"))
+{
+    <fieldset>
+
+        <legend>Námskeið</legend>
+
+        <div class="control-group">
+            @Html.LabelFor(x => x.Username, new { @class = "control-label" })
+            <div class="controls">
+                @Html.TextBoxFor(x => x.Username, new { @class = "input-xlarge" })
+                <span class="help-inline">@Html.ValidationMessageFor(x => x.Username)</span>
+            </div>
+        </div>
+
+        <div class="control-group">
+            @Html.LabelFor(x => x.Password, new { @class = "control-label" })
+            <div class="controls">
+                @Html.TextBoxFor(x => x.Password, new { @class = "input-xlarge" })
+                <span class="help-inline">@Html.ValidationMessageFor(x => x.Password)</span>
+            </div>
+        </div>
+
+        <div class="control-group">
+            @Html.LabelFor(x => x.Email, new { @class = "control-label" })
+            <div class="controls">
+                @Html.TextBoxFor(x => x.Email, new { @class = "input-xlarge" })
+                <span class="help-inline">@Html.ValidationMessageFor(x => x.Email)</span>
+            </div>
+        </div>
+
+        <div class="control-group">
+            @Html.LabelFor(x => x.Fullname, new { @class = "control-label" })
+            <div class="controls">
+                @Html.TextBoxFor(x => x.Fullname, new { @class = "input-xlarge" })
+                <span class="help-inline">@Html.ValidationMessageFor(x => x.Fullname)</span>
+            </div>
+        </div>
+
+        <div class="control-group">
+            @Html.LabelFor(x => x.DepartmentId, new { @class = "control-label" })
+            <div class="controls">
+                @Html.DropDownListFor(x => x.DepartmentId, new SelectList(ViewBag.Departments, "DepartmentId", "Name"))
+                <span class="help-inline">@Html.ValidationMessageFor(x => x.DepartmentId)</span>
+            </div>
+        </div>
+
+        <div class="control-group">
+            @Html.LabelFor(x => x.UserTypeId, new { @class = "control-label" })
+            <div class="controls">
+                @Html.DropDownListFor(x => x.UserTypeId, new SelectList(ViewBag.UserStatus, "UserTypeId", "Name"))
+                <span class="help-inline">@Html.ValidationMessageFor(x => x.UserTypeId)</span>
+            </div>
+        </div>
+
+        <div class="control-group">
+            @Html.LabelFor(x => x.StatusId, new { @class = "control-label" })
+            <div class="controls">
+                @Html.DropDownListFor(x => x.StatusId, new SelectList(ViewBag.UserTypes, "StatusId", "Name"))
+                <span class="help-inline">@Html.ValidationMessageFor(x => x.StatusId)</span>
+            </div>
+        </div>
+
+
+        <div class="control-group">
+        
+            <div class="controls">
+            <button type="submit" class="btn btn-success" >
+                <i class="icon-ok"></i>
+                Vista Námskeið
+            </button>
+            </div>
+        </div>
+
+    </fieldset>
+}

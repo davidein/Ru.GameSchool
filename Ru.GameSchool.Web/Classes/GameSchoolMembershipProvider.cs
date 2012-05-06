@@ -63,9 +63,9 @@ namespace Ru.GameSchool.Web.Classes
 
             var user = userService.GetUser((int)providerUserKey);
 
-            var membershipUser = new GameSchoolMembershipUser("GameSchoolMembershipUser", user.Username, user.UserInfoId, user.Email, string.Empty,
+            var membershipUser = new GameSchoolMembershipUser("GameSchoolMembershipProvider", user.Username, user.UserInfoId, user.Email, string.Empty,
                                                      string.Empty, true, false, user.CreateDateTime, DateTime.Now,
-                                                     DateTime.Now, DateTime.Now, DateTime.Now, user.Fullname, 1);
+                                                     DateTime.Now, DateTime.Now, DateTime.Now, user.Fullname, user.UserInfoId, user.UserTypeId);
 
             return membershipUser;
         }
