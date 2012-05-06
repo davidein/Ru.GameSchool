@@ -22,6 +22,7 @@ namespace Ru.GameSchool.BusinessLayer.Services
         {
             if (course != null)
             {
+                course.CreateDateTime = DateTime.Now;
                 GameSchoolEntities.Courses.AddObject(course);
                 Save();
             }
@@ -29,7 +30,18 @@ namespace Ru.GameSchool.BusinessLayer.Services
 
         public void UpdateCourse(Course course)
         {
-            throw new System.NotImplementedException();
+            /*var query = GameSchoolEntities.Courses.Where(n => n.CourseId == course.CourseId);
+
+            var courseToUpdate = query.FirstOrDefault();
+            courseToUpdate.Name = course.Name;
+            courseToUpdate.Description = course.Description;
+            courseToUpdate.Identifier = course.Identifier;
+            courseToUpdate.CreditAmount = course.CreditAmount;
+            courseToUpdate.DepartmentId = course.DepartmentId;
+            courseToUpdate.Start = course.Start;
+            courseToUpdate.Stop = course.Stop;*/
+
+            Save();
         }
 
         /// <summary>

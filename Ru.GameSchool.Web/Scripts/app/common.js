@@ -31,9 +31,8 @@ $.extend($.fn.datepicker.defaults, {
         }
     },
     format: function (date) {
-        var 
-            month = (date.getMonth() + 1).toString(),
-            dom = date.getDate().toString();
+        var month = (date.getMonth() + 1).toString();
+        var dom = date.getDate().toString();
         if (month.length === 1) {
             month = "0" + month;
         }
