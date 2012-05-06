@@ -197,8 +197,6 @@ namespace Ru.GameSchool.BusinessLayer.Services
                 levelProjectToUpdate.Name = levelProject.Name;
                 levelProjectToUpdate.Start = levelProject.Start;
                 levelProjectToUpdate.Stop = levelProject.Stop;
-                levelProjectToUpdate.UserComment = levelProject.UserComment;
-                levelProjectToUpdate.HasSubmitted = levelProject.HasSubmitted;
                 levelProjectToUpdate.ProjectUrl = levelProject.ProjectUrl;
 
                 Save();

@@ -41,13 +41,6 @@ namespace Ru.GameSchool.DataLayer.Repository
         [Display(Name = "Borð")]
         public int LevelId { get; set; }
 
-        [DataType(DataType.MultilineText)]
-        [StringLength(1000)]
-        [Display(Name="Athugasemd til kennara")]
-        public string UserComment { get; set; }
-
-        
-        public bool HasSubmitted { get; set; }
 
     }
 }
