@@ -20,8 +20,17 @@
         @Html.DisplayFor(model => model.Stop)
     </div>
 
+    @foreach (var m in ViewBag.Projects)
+    {
+        
+        <div>@m.Name</div>
 
+   }
+
+@if (User.IsInRole("Teacher"))
+{
 <p>
    @Html.ActionLink("Edit", "Edit", new { id=Model.LevelId })
 
 </p>
+}

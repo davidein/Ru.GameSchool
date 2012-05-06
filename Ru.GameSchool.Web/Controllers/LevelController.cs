@@ -23,12 +23,18 @@ namespace Ru.GameSchool.Web.Controllers
                 var model = LevelService.GetLevel(intId);
                 if (model != null)
                 {
+
+
+
+                    ViewBag.Projects = LevelService.GetLevelProjects();
+
+
                     return View(model);
                 }
                 
             }
 
-            return RedirectToAction("NotFound");
+            return RedirectToAction("NotFound","Home");
         }
 
 

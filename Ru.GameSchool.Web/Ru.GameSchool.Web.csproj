@@ -350,6 +350,7 @@
     <Content Include="Views\Exam\_ExamQuestion.cshtml" />
     <Content Include="Views\Project\Edit.cshtml" />
     <Content Include="Views\Level\Get.cshtml" />
+    <Content Include="Views\Home\NotFound.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
