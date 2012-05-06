@@ -4,7 +4,14 @@
 <h2>
     Listi yfir verkefni @ViewBag.NameOfCourse</h2>
 @section sidebar {
-    @Html.Partial("_LeftSideBar")
+    @if (User.IsInRole("Teacher")) 
+    {
+        @Html.Partial("_TeacherSideBar")
+    } 
+    else
+    {
+        @Html.Partial("_LeftSideBar")
+    }
 }
 @section courseheading {
     @Html.Partial("_courseheading")
@@ -13,13 +20,12 @@
 {
     <ul>
         <li>
-            @Html.ActionLink((@item.Name + " - Skiladagur: " + @item.Start.ToString("dd.MM.yyyy HH:mm")) as string, User.IsInRole("Nemandi") ? "Get" : "Edit", new { LevelProjectId = @item.LevelProjectId })
+            @Html.ActionLink((@item.Name + " - Skiladagur: " + @item.Stop.ToString("dd.MM.yyyy HH:mm")) as string, User.IsInRole("Student") ? "Get" : "Edit", new { LevelProjectId = @item.LevelProjectId })
         </li>
     </ul>
 }
 <br />
 @if (User.IsInRole("Teacher"))
 {
-   
+    <input type="button" class="ui-button-text-only" value="Búa til nýtt verkefni" onclick="location.href='@Url.Action("Create", "Project")'" />
 }
- <input type="button" class="ui-button-text-only" value="Búa til nýtt verkefni" onclick="location.href='@Url.Action("Create", "Project")'" />

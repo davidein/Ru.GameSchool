@@ -77,6 +77,18 @@ namespace Ru.GameSchool.DataLayer.Repository
             get;
             set;
         }
+    
+        public virtual Nullable<bool> HasSubmitted
+        {
+            get;
+            set;
+        }
+    
+        public virtual string UserComment
+        {
+            get;
+            set;
+        }
 
         #endregion
         #region Navigation Properties

@@ -23,7 +23,6 @@ namespace Ru.GameSchool.DataLayer.Repository
         [Display(Name = "Rétt svar?")]
         public bool Correct { get; set; }
 
-        [HiddenInput(DisplayValue = false)]
         public int LevelExamQuestionId { get; set; }
     }
 }
