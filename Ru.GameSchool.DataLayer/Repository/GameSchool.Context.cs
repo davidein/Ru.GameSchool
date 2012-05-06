@@ -161,16 +161,10 @@ namespace Ru.GameSchool.DataLayer.Repository
             get { return _userLogs  ?? (_userLogs = CreateObjectSet<UserLog>("UserLogs")); }
         }
         private ObjectSet<UserLog> _userLogs;
-    
-        public IObjectSet<sysdiagram> sysdiagrams
-        {
-            get { return _sysdiagrams  ?? (_sysdiagrams = CreateObjectSet<sysdiagram>("sysdiagrams")); }
-        }
-        private ObjectSet<sysdiagram> _sysdiagrams;
 
         #endregion
         #region Function Imports
-        public ObjectResult<LevelProject> spc_GetAllUsersLevelProjects(Nullable<int> userInfoId)
+        public ObjectResult<LevelProject> GetAllUserLevelProjects(Nullable<int> userInfoId)
         {
     
             ObjectParameter userInfoIdParameter;
@@ -183,7 +177,7 @@ namespace Ru.GameSchool.DataLayer.Repository
             {
                 userInfoIdParameter = new ObjectParameter("userInfoId", typeof(int));
             }
-            return base.ExecuteFunction<LevelProject>("spc_GetAllUsersLevelProjects", userInfoIdParameter);
+            return base.ExecuteFunction<LevelProject>("GetAllUserLevelProjects", userInfoIdParameter);
         }
 
         #endregion
