@@ -4,6 +4,22 @@
     ViewBag.Title = "Námskeið";
 }
 
+<script>
+    $(document).ready(function () {
+
+        jQuery.validator.methods["date"] = function (value, element) {
+            return true;
+        };
+
+        $.datepicker.setDefaults({ validateDate: 'false' });
+        $.datepicker.regional['is-IS']
+        $('.Start').datepicker({ dateFormat: "d.m.yy 00:00:01" });
+        $('.Stop').datepicker({ dateFormat: "d.m.yy 23:59:59" });
+
+
+    });
+</script>
+
 <h2>Námskeið</h2>
 
 @section sidebar {
@@ -12,11 +28,27 @@
 
 }
 
+@if (!string.IsNullOrWhiteSpace(ViewBag.SuccessMessage))
+{
+    <div class="alert alert-success">
+      <button class="close" data-dismiss="alert">×</button>
+      <strong>Tókst!</strong> @ViewBag.SuccessMessage
+    </div>
+}
+
+@if (!string.IsNullOrWhiteSpace(ViewBag.ErrorMessage))
+{
+    <div class="alert alert-error">
+      <button class="close" data-dismiss="alert">×</button>
+      <strong>Villa!</strong> @ViewBag.ErrorMessage
+    </div>
+}
+
 
 <script src="@Url.Content("~/Scripts/jquery.validate.min.js")"></script>
 <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")"></script>
 
-@using (Html.BeginForm("Course", "Admin", "POST"))
+@using (Html.BeginForm("Course", "Admin", FormMethod.Post))
 {
     <fieldset>
 
@@ -83,7 +115,7 @@
         
             <div class="controls">
             <button type="submit" class="btn btn-success" >
-                <i class="icon-ok"></i>
+                <i class="icon-ok icon-white"></i>
                 Vista Námskeið
             </button>
             </div>

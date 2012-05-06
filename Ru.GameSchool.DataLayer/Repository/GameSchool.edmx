@@ -171,7 +171,7 @@
           <Key>
             <PropertyRef Name="CourseId" />
           </Key>
-          <Property Name="CourseId" Type="int" Nullable="false" />
+          <Property Name="CourseId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="128" />
           <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Identifier" Type="nvarchar" Nullable="false" MaxLength="50" />

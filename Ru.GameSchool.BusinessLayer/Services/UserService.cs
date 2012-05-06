@@ -134,6 +134,7 @@ namespace Ru.GameSchool.BusinessLayer.Services
                 // Get user entered clear text password and hash it before storing in db
                 var hashedPasswrd = PasswordUtilities.ComputeHash(userInfo.Password);
                 userInfo.Password = hashedPasswrd;
+                userInfo.CreateDateTime = DateTime.Now;
                 GameSchoolEntities.UserInfoes.AddObject(userInfo);
                 Save();
             }

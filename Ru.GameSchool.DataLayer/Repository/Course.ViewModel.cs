@@ -28,10 +28,12 @@ namespace Ru.GameSchool.DataLayer.Repository
         public string Identifier;
 
         [Required(ErrorMessage = @"Vantar")]
+        [DataType(DataType.Date, ErrorMessage = "Ógild dagsetning.")]
         [Display(Name = @"Námskeið hefst")]
         public DateTime Start;
 
         [Required(ErrorMessage = @"Vantar")]
+        [DataType(DataType.Date, ErrorMessage = "Ógild dagsetning.")]
         [Display(Name = @"Námskeiði lýkur")]
         public DateTime Stop;
 
