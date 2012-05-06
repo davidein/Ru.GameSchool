@@ -28,18 +28,79 @@ namespace Ru.GameSchool.Web.Controllers
             return View();
         }
 
-        public ActionResult User(int? id)
+        public ActionResult UserEdit(int? id)
         {
             ViewBag.Departments = CourseService.GetDepartments();
             ViewBag.UserStatus = UserService.GetUserStatuses();
             ViewBag.UserTypes = UserService.GetUserTypes();
 
+            if (id.HasValue)
+            {
+                var user = UserService.GetUser((int)id);
+                if (user != null)
+                {
+                    var model = new Ru.GameSchool.DataLayer.Repository.UserInfo();
+                    model.Username = user.Username;
+                    model.Password = "#######";
+                    model.Email = user.Email;
+                    model.Fullname = user.Fullname;
+                    model.DepartmentId = user.DepartmentId;
+                    model.StatusId = user.StatusId;
+                    model.UserTypeId = user.UserTypeId;
+
+                    return View(model);
+                }
+            }
+
             return View();
         }
 
-        public ActionResult User(UserInfo model, int? id)
+        [HttpPost]
+        public ActionResult UserEdit(UserInfo model, int? id)
         {
-            return View();
+            ViewBag.Departments = CourseService.GetDepartments();
+            ViewBag.UserStatus = UserService.GetUserStatuses();
+            ViewBag.UserTypes = UserService.GetUserTypes();
+
+            if (ModelState.IsValid)
+            {
+                //Update existing user
+                if (id.HasValue)
+                {
+                    var user = UserService.GetUser((int)id);
+                    user.Username = model.Username;
+                    user.Email = model.Email;
+                    user.Fullname = model.Fullname;
+                    user.DepartmentId = model.DepartmentId;
+                    user.StatusId = model.StatusId;
+                    user.UserTypeId = model.UserTypeId;
+
+                    UserService.UpdateUser(user);
+                    ViewBag.SuccessMessage = "Upplýsingar um notenda hafa verið uppfærðar";
+                }
+                else //Insert new user
+                {
+                    var user = new UserInfo();
+
+                    user.Username = model.Username;
+                    user.Password = model.Password;
+                    user.Email = model.Email;
+                    user.Fullname = model.Fullname;
+                    user.DepartmentId = model.DepartmentId;
+                    user.StatusId = model.StatusId;
+                    user.UserTypeId = model.UserTypeId;
+                    user.CreateDateTime = DateTime.Now;
+
+                    UserService.CreateUser(user);
+                    ViewBag.SuccessMessage = "Nýr notandi hefur verið skráður í kerfið. Mundu að skrá notendann í námskeið.";
+                }
+            }
+            else
+            {
+                ViewBag.ErrorMessage = "Náði ekki að skrá/uppfæra upplýsingar! Lagfærðu villur og reyndur aftur.";
+            }
+
+            return View(model);
         }
 
         public ActionResult Courses()
@@ -80,11 +141,52 @@ namespace Ru.GameSchool.Web.Controllers
         {
             ViewBag.Departments = CourseService.GetDepartments();
 
-            return View();
+            if (ModelState.IsValid)
+            {
+                if (id.HasValue) //Update existing Course
+                {
+                    var course = CourseService.GetCourse(id.Value);
+                    if (course != null)
+                    {
+                        if (TryUpdateModel(course))
+                        {
+                            CourseService.UpdateCourse(course);
+                            ViewBag.SuccessMessage = "Upplýsingar um námskeið uppfærðar.";
+                            return View(model);
+                        }
+                    }
+
+                    ViewBag.ErrorMessage = "Ekki tókst að uppfæra námskeið!";
+                }
+                else //Insert new Course
+                {
+                    var course = new Ru.GameSchool.DataLayer.Repository.Course();
+                    course.Name = model.Name;
+                    course.Description = model.Description;
+                    course.Identifier = model.Identifier;
+                    course.CreditAmount = model.CreditAmount;
+                    course.Start = model.Start;
+                    course.Stop = model.Stop;
+                    course.DepartmentId = model.DepartmentId;
+                    course.CreateDateTime = DateTime.Now;
+                    
+
+                    CourseService.CreateCourse(course);
+                    ViewBag.SuccessMessage = "Nýtt námskeið skráð! Mundu að skrá nemendur og kennara á námskeið.";
+                }
+
+            }
+            else
+            {
+                ViewBag.ErrorMessage = "Náði ekki að skrá/uppfæra upplýsingar! Lagfærðu villur og reyndur aftur.";
+            }
+
+            return View(model);
         }
 
-        public ActionResult CourseRegisterUser(int id)
+        public ActionResult UserCourse()
         {
+
             return View();
         }
 

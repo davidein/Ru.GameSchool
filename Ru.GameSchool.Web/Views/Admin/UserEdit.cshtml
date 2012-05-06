@@ -12,15 +12,31 @@
 
 }
 
+@if (!string.IsNullOrWhiteSpace(ViewBag.SuccessMessage))
+{
+    <div class="alert alert-success">
+      <button class="close" data-dismiss="alert">×</button>
+      <strong>Tókst!</strong> @ViewBag.SuccessMessage
+    </div>
+}
+
+@if (!string.IsNullOrWhiteSpace(ViewBag.ErrorMessage))
+{
+    <div class="alert alert-error">
+      <button class="close" data-dismiss="alert">×</button>
+      <strong>Villa!</strong> @ViewBag.ErrorMessage
+    </div>
+}
+
 
 <script src="@Url.Content("~/Scripts/jquery.validate.min.js")"></script>
 <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")"></script>
 
-@using (Html.BeginForm("Course", "Admin", "POST"))
+@using (Html.BeginForm("UserEdit", "Admin", FormMethod.Post))
 {
     <fieldset>
 
-        <legend>Námskeið</legend>
+        <legend>Notandi</legend>
 
         <div class="control-group">
             @Html.LabelFor(x => x.Username, new { @class = "control-label" })
@@ -65,7 +81,7 @@
         <div class="control-group">
             @Html.LabelFor(x => x.UserTypeId, new { @class = "control-label" })
             <div class="controls">
-                @Html.DropDownListFor(x => x.UserTypeId, new SelectList(ViewBag.UserStatus, "UserTypeId", "Name"))
+                @Html.DropDownListFor(x => x.UserTypeId, new SelectList(ViewBag.UserTypes, "UserTypeID", "Name"))
                 <span class="help-inline">@Html.ValidationMessageFor(x => x.UserTypeId)</span>
             </div>
         </div>
@@ -73,7 +89,7 @@
         <div class="control-group">
             @Html.LabelFor(x => x.StatusId, new { @class = "control-label" })
             <div class="controls">
-                @Html.DropDownListFor(x => x.StatusId, new SelectList(ViewBag.UserTypes, "StatusId", "Name"))
+                @Html.DropDownListFor(x => x.StatusId, new SelectList(ViewBag.UserStatus, "StatusId", "Name"))
                 <span class="help-inline">@Html.ValidationMessageFor(x => x.StatusId)</span>
             </div>
         </div>
@@ -83,8 +99,8 @@
         
             <div class="controls">
             <button type="submit" class="btn btn-success" >
-                <i class="icon-ok"></i>
-                Vista Námskeið
+                <i class="icon-ok icon-white"></i>
+                Vista Notanda
             </button>
             </div>
         </div>
