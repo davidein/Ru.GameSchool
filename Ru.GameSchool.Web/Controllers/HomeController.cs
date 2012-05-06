@@ -42,6 +42,11 @@ namespace Ru.GameSchool.Web.Controllers
             return View();
         }
 
+        public ActionResult NotFound()
+        {
+            return View();
+        }
+
         // Temp - left in so as to view prototype
         public ActionResult Level()
         {

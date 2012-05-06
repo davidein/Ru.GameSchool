@@ -55,8 +55,6 @@ namespace Ru.GameSchool.Web.Controllers
 
                 if (levelProj != null)
                 {
-                    levelProj.HasSubmitted = true;
-                    levelProj.UserComment = levelProject.UserComment;
                     levelProj.ProjectUrl = levelProject.ProjectUrl;
                     LevelService.UpdateLevelProject(levelProj);
                 }
@@ -106,14 +104,14 @@ namespace Ru.GameSchool.Web.Controllers
 
         [Authorize(Roles = "Teacher")]
         [HttpGet]
-        public ActionResult Edit(int? LevelProjectId)
+        public ActionResult Edit(int? levelProjectId)
         {
             ViewBag.LevelCount = GetLevelCounts();
             ViewBag.GradePercentageValue = GetPercentageValue();
 
-            if (LevelProjectId.HasValue)
+            if (levelProjectId.HasValue)
             {
-                var project = LevelService.GetLevelProject(LevelProjectId.Value);
+                var project = LevelService.GetLevelProject(levelProjectId.Value);
                 project.Start = Convert.ToDateTime(project.Start.ToString("u"));
                 project.Stop = Convert.ToDateTime(project.Stop.ToString("u"));
                 ViewBag.NameOfProject = project.Name;
@@ -157,6 +155,7 @@ namespace Ru.GameSchool.Web.Controllers
                 };
             }
         }
+       
         public IEnumerable<SelectListItem> GetLevelCounts()
         {
             for (int j = 0; j <= LevelService.GetLevels().Count(); j++)

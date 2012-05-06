@@ -353,6 +353,7 @@
     <Content Include="Views\Material\Create.cshtml" />
     <Content Include="Views\Material\Edit.cshtml" />
     <Content Include="Views\Level\Get.cshtml" />
+    <Content Include="Views\Home\NotFound.cshtml" />
     <Content Include="Views\Admin\UserCourse.cshtml" />
     <Content Include="Views\Material\Get.cshtml" />
     <Content Include="Views\Material\Index.cshtml" />

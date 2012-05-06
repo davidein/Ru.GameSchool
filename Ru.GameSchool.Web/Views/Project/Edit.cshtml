@@ -48,7 +48,7 @@
         <div class="control-group">
             @Html.LabelFor(model => model.GradePercentageValue, new { @class = "control-label" })
             <div class="controls">
-                @Html.DropDownListFor(m => m.GradePercentageValue, new SelectList(ViewBag.GradePercentageValue, "Value", "Text"))
+                @Html.DropDownList("GradePercentageValue")
                 <span class="help-inline">@Html.ValidationMessageFor(model => model.GradePercentageValue)</span>
             </div>
         </div>@*Vægi*@
