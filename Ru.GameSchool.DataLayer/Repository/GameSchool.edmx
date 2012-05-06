@@ -23,6 +23,7 @@
           <EntitySet Name="Notification" EntityType="GameSchoolModel.Store.Notification" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Points" EntityType="GameSchoolModel.Store.Points" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Status" EntityType="GameSchoolModel.Store.Status" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="sysdiagrams" EntityType="GameSchoolModel.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="UserCourse" EntityType="GameSchoolModel.Store.UserCourse" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="UserInfo" EntityType="GameSchoolModel.Store.UserInfo" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="UserLog" EntityType="GameSchoolModel.Store.UserLog" store:Type="Tables" Schema="dbo" />
@@ -271,6 +272,7 @@
           <Property Name="Description" Type="nvarchar(max)" />
           <Property Name="GradePercentageValue" Type="float" Nullable="false" />
           <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="255" />
+          <Property Name="ProjectUrl" Type="nvarchar" MaxLength="1024" />
         </EntityType>
         <EntityType Name="LevelProjectResult">
           <Key>
@@ -311,6 +313,16 @@
           </Key>
           <Property Name="StatusId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="215" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="UserCourse">
           <Key>
@@ -686,6 +698,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="spc_GetAllUsersLevelProjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userInfoId" Type="int" Mode="In" />
+        </Function>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -819,6 +834,10 @@
             <End Role="UserInfo" EntitySet="UserInfoes" />
             <End Role="UserLog" EntitySet="UserLogs" />
           </AssociationSet>
+          <FunctionImport Name="spc_GetAllUsersLevelProjects" EntitySet="LevelProjects" ReturnType="Collection(GameSchoolModel.LevelProject)">
+          <Parameter Name="userInfoId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="sysdiagrams" EntityType="GameSchoolModel.sysdiagram" />
         </EntityContainer>
         <EntityType Name="Comment">
           <Key>
@@ -984,6 +1003,7 @@
           <Property Type="String" Name="Name" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Level" Relationship="GameSchoolModel.FK_LevelProject_Level" FromRole="LevelProject" ToRole="Level" />
           <NavigationProperty Name="LevelProjectResults" Relationship="GameSchoolModel.FK_LevelProjectResult_LevelProject" FromRole="LevelProject" ToRole="LevelProjectResult" />
+          <Property Type="String" Name="ProjectUrl" MaxLength="1024" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="LevelProjectResult">
           <Key>
@@ -1392,6 +1412,16 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Type="String" Name="name" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="principal_id" Nullable="false" />
+          <Property Type="Int32" Name="diagram_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="version" />
+          <Property Type="Binary" Name="definition" MaxLength="Max" FixedLength="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1531,6 +1561,7 @@
           <EntitySetMapping Name="LevelProjects">
             <EntityTypeMapping TypeName="GameSchoolModel.LevelProject">
               <MappingFragment StoreEntitySet="LevelProject">
+                <ScalarProperty Name="ProjectUrl" ColumnName="ProjectUrl" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="GradePercentageValue" ColumnName="GradePercentageValue" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
@@ -1622,6 +1653,18 @@
                 <ScalarProperty Name="IpAddress" ColumnName="IpAddress" />
                 <ScalarProperty Name="LoginTime" ColumnName="LoginTime" />
                 <ScalarProperty Name="UserLogId" ColumnName="UserLogId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="spc_GetAllUsersLevelProjects" FunctionName="GameSchoolModel.Store.spc_GetAllUsersLevelProjects" />
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="GameSchoolModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1725,8 +1768,8 @@
           <ConnectorPoint PointX="5" PointY="17.057109375000003" />
           <ConnectorPoint PointX="5.916666666666667" PointY="17.057109375000003" />
           <ConnectorPoint PointX="6.083333333333333" PointY="17.057109375000003" />
-          <ConnectorPoint PointX="6.8924358974358988" PointY="17.057109375000003" />
-          <ConnectorPoint PointX="7.10871894871795" PointY="17.057109375000003" />
+          <ConnectorPoint PointX="6.8984853353035174" PointY="17.057109375000003" />
+          <ConnectorPoint PointX="7.1087189487179518" PointY="17.057109375000003" />
           <ConnectorPoint PointX="7.25" PointY="17.057109375000003" />
           <ConnectorPoint PointX="7.25" PointY="15.864889323314031" />
           <ConnectorPoint PointX="8.25" PointY="15.864889323314031" />
@@ -1754,14 +1797,14 @@
         </AssociationConnector>
         <AssociationConnector Association="GameSchoolModel.FK_LevelMaterial_Level" >
           <ConnectorPoint PointX="6.75" PointY="22.422948404947917" />
-          <ConnectorPoint PointX="7.041666666666667" PointY="22.422948404947917" />
-          <ConnectorPoint PointX="7.333333333333333" PointY="22.422948404947917" />
+          <ConnectorPoint PointX="7.0833333333333339" PointY="22.422948404947917" />
+          <ConnectorPoint PointX="7.3333333333333339" PointY="22.422948404947917" />
           <ConnectorPoint PointX="7.5" PointY="22.422948404947917" />
         </AssociationConnector>
         <AssociationConnector Association="GameSchoolModel.FK_LevelProject_Level" >
           <ConnectorPoint PointX="6.4062525" PointY="24.759095052083339" />
-          <ConnectorPoint PointX="6.4062525" PointY="32.124746093750005" />
-          <ConnectorPoint PointX="7.5" PointY="32.124746093750005" />
+          <ConnectorPoint PointX="6.4062525" PointY="32.220896809895834" />
+          <ConnectorPoint PointX="7.5" PointY="32.220896809895834" />
         </AssociationConnector>
         <AssociationConnector Association="GameSchoolModel.FK_Points_Level" >
           <ConnectorPoint PointX="6.75" PointY="21.688460538461534" />
@@ -1801,8 +1844,8 @@
           <ConnectorPoint PointX="9.75" PointY="20.338819614583336" />
         </AssociationConnector>
         <AssociationConnector Association="GameSchoolModel.FK_LevelProjectResult_LevelProject" >
-          <ConnectorPoint PointX="9.0000000002235225" PointY="30.75" />
-          <ConnectorPoint PointX="9.375" PointY="30.375000000223523" />
+          <ConnectorPoint PointX="9" PointY="30.75" />
+          <ConnectorPoint PointX="9.375" PointY="30.375" />
           <ConnectorPoint PointX="9.375" PointY="24.557444661458334" />
           <ConnectorPoint PointX="9.4791666666666661" PointY="24.557444661458334" />
           <ConnectorPoint PointX="9.6458333333333339" PointY="24.557444661458334" />
@@ -1810,16 +1853,16 @@
         </AssociationConnector>
         <AssociationConnector Association="GameSchoolModel.FK_LevelProjectResult_UserInfo1" >
           <ConnectorPoint PointX="6" PointY="16.807109375000003" />
-          <ConnectorPoint PointX="6" PointY="18.125" />
-          <ConnectorPoint PointX="7.072916666666667" PointY="18.125" />
-          <ConnectorPoint PointX="7.239583333333333" PointY="18.125" />
-          <ConnectorPoint PointX="7.25" PointY="18.125" />
+          <ConnectorPoint PointX="6" PointY="17.875" />
+          <ConnectorPoint PointX="7.25" PointY="17.875" />
           <ConnectorPoint PointX="7.25" PointY="24.941793619791667" />
-          <ConnectorPoint PointX="9.4375" PointY="24.941793619791667" />
-          <ConnectorPoint PointX="9.4375" PointY="23.934970330729165" />
-          <ConnectorPoint PointX="9.4791666666666661" PointY="23.934970330729165" />
-          <ConnectorPoint PointX="9.6458333333333339" PointY="23.934970330729165" />
-          <ConnectorPoint PointX="9.75" PointY="23.934970330729165" />
+          <ConnectorPoint PointX="9.2916666666666661" PointY="24.941793619791667" />
+          <ConnectorPoint PointX="9.4583333333333339" PointY="24.941793619791667" />
+          <ConnectorPoint PointX="9.4791666666666661" PointY="24.941793619791667" />
+          <ConnectorPoint PointX="9.4791666666666661" PointY="24.557444661458334" />
+          <ConnectorPoint PointX="9.4791666666666661" PointY="24.557444661458334" />
+          <ConnectorPoint PointX="9.6458333333333339" PointY="24.557444661458334" />
+          <ConnectorPoint PointX="9.75" PointY="24.557444661458334" />
         </AssociationConnector>
         <AssociationConnector Association="GameSchoolModel.FK_Notification_UserInfo1" >
           <ConnectorPoint PointX="6" PointY="11.75" />
@@ -1857,6 +1900,7 @@
           <ConnectorPoint PointX="6.4062525" PointY="10.773920898437499" />
           <ConnectorPoint PointX="7.5" PointY="10.773920898437499" />
         </AssociationConnector>
+        <EntityTypeShape EntityType="GameSchoolModel.sysdiagram" Width="1.5" PointX="0.75" PointY="0.75" Height="1.9802864583333388" />
       </Diagram>
     </Diagrams>
   </Designer>

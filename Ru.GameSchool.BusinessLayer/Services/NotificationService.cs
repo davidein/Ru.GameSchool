@@ -13,13 +13,23 @@ namespace Ru.GameSchool.BusinessLayer.Services
     public class NotificationService : BaseService, IExternalNotificationContainer
     {
         /// <summary>
-        /// 
+        /// Create a new user notification.
         /// </summary>
-        /// <param name="notification"></param>
-        public void CreateNotification(Notification notification)
+        /// <param name="text"></param>
+        /// <param name="url"></param>
+        /// <param name="userInfoId"></param>
+        public void CreateNotification(string text, string url, int userInfoId)
         {
-            if (notification != null)
+            if (!string.IsNullOrEmpty(text) && userInfoId > 0)
             {
+                var notification = new Notification();
+
+                notification.Description = text;
+                notification.IsRead = false;
+                notification.UserInfoId = userInfoId;
+                notification.Url = url;
+                notification.CreateDateTime = DateTime.Now;
+
                 GameSchoolEntities.Notifications.AddObject(notification);
                 Save();
             }

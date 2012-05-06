@@ -1,4 +1,5 @@
 ﻿using Rhino.Mocks;
+using Ru.GameSchool.BusinessLayer.Exceptions;
 using Ru.GameSchool.BusinessLayer.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
@@ -18,25 +19,11 @@ namespace Ru.GameSchool.BusinessLayerTests
     [TestClass()]
     public class NotificationServiceTest
     {
-
-
-        private TestContext _testContextInstance;
-
         /// <summary>
         ///Gets or sets the test context which provides
         ///information about and functionality for the current test run.
         ///</summary>
-        public TestContext TestContext
-        {
-            get
-            {
-                return _testContextInstance;
-            }
-            set
-            {
-                _testContextInstance = value;
-            }
-        }
+        public TestContext TestContext { get; set; }
 
         #region Additional test attributes
         // 
@@ -83,8 +70,19 @@ namespace Ru.GameSchool.BusinessLayerTests
 
             var list = CreateNotificationList(userInfoId, 20);
 
-            
+            var userData = new FakeObjectSet<UserInfo>();
 
+            var userInfo = new UserInfo();
+            userInfo.Fullname = "Davíð Einarsson";
+            userInfo.Email = "davide09@ru.is";
+            userInfo.StatusId = 1;
+            userInfo.Username = "davidein";
+            userInfo.UserInfoId = userInfoId;
+            userInfo.Password = "Wtf";
+
+            userData.AddObject(userInfo);
+
+            mockRepository.Expect(x => x.UserInfoes).Return(userData);
             mockRepository.Expect(x => x.Notifications).Return(list);
 
             var actualList = notificationService.GetNotifications(userInfoId);
@@ -92,6 +90,31 @@ namespace Ru.GameSchool.BusinessLayerTests
             Assert.AreEqual(list.Count(), actualList.Count());
 
             mockRepository.VerifyAllExpectations();
+        }
+
+        /// <summary>
+        ///A test for GetNotifications
+        ///</summary>
+        [TestMethod()]
+        [ExpectedException(typeof(GameSchoolException))]
+        public void GetNotifications_NotValidUser_Test()
+        {
+            var mockRepository = MockRepository.GenerateMock<IGameSchoolEntities>();
+            var notificationService = new NotificationService();
+            notificationService.SetDatasource(mockRepository);
+
+            int userInfoId = 1;
+
+            var list = CreateNotificationList(userInfoId, 20);
+
+            mockRepository.Expect(x => x.UserInfoes).Return(new FakeObjectSet<UserInfo>());
+            mockRepository.Expect(x => x.Notifications).Return(list);
+
+            notificationService.GetNotifications(userInfoId);
+
+            mockRepository.VerifyAllExpectations();
+
+            Assert.Fail("The unit test should never get here.");
         }
 
         private FakeObjectSet<Notification> CreateNotificationList(int userId, int amount)

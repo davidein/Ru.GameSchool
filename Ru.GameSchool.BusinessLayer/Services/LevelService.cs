@@ -58,7 +58,8 @@ namespace Ru.GameSchool.BusinessLayer.Services
         /// <param name="level">Level instance with updated values.</param>
         public void UpdateLevel(Level level)
         {
-            throw new System.NotImplementedException();
+            Save();
+            //throw new System.NotImplementedException();
         }
 
         /// <summary>
@@ -104,7 +105,7 @@ namespace Ru.GameSchool.BusinessLayer.Services
         {
             if (levelExam != null)
             {
-                
+
             }
         }
 
@@ -139,9 +140,43 @@ namespace Ru.GameSchool.BusinessLayer.Services
             return levelProject;
         }
 
+        public IEnumerable<LevelProject> GetUserLevelProject(int? userInfoId)
+        {
+            return userInfoId > 0 ? GameSchoolEntities.spc_GetAllUsersLevelProjects(userInfoId.Value) : null;
+        }
+
         public IEnumerable<LevelProject> GetLevelProjects()
         {
             return GameSchoolEntities.LevelProjects;
+        }
+
+        public IEnumerable<LevelProject> GetLevelProjectsByCourseId(int courseId)
+        {
+            if (0 > courseId)
+            {
+                return null;
+            }
+            var query = GameSchoolEntities.Levels.Where(c => c.CourseId == courseId);
+
+            var levelProjects = query.SelectMany(x => x.LevelProjects)
+                                     .AsEnumerable();
+
+            if (levelProjects == null)
+            {
+                return null;
+            }
+
+            return levelProjects;
+        }
+
+        public bool HasAccess(int levelId, int userInfoId)
+        {
+            if ((levelId = userInfoId) > 0)
+            {
+                var levelQuery = GameSchoolEntities.Levels.Where(l => l.LevelId == levelId);
+                //var userQuery = GameSchoolEntities
+            }
+            return false;
         }
 
         /// <summary>
@@ -188,7 +223,7 @@ namespace Ru.GameSchool.BusinessLayer.Services
         {
             if (levelExamResult != null)
             {
-                
+
             }
         }
 
@@ -242,7 +277,7 @@ namespace Ru.GameSchool.BusinessLayer.Services
         {
             if (levelExamQuestion != null)
             {
-                
+
             }
         }
 
@@ -337,7 +372,7 @@ namespace Ru.GameSchool.BusinessLayer.Services
         {
             if (levelMaterial != null)
             {
-                
+
             }
         }
     }

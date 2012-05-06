@@ -1,17 +1,25 @@
 ﻿@{
-    ViewBag.Title = "Verkefni";
+    ViewBag.Title = "Listi yfir verkefni";
 }
-
-
-<h1>ViewBag.CourseName</h1>
-
 <h2>
-    Listi yfir verkefni</h2>
+    Listi yfir verkefni @ViewBag.NameOfCourse</h2>
+@section sidebar {
+    @Html.Partial("_LeftSideBar")
+}
+@section courseheading {
+    @Html.Partial("_courseheading")
+}
 @foreach (var item in ViewBag.Projects)
 {
-    
-                
     <ul>
-        <li>@Html.ActionLink((@item.Name + " - Skiladagur: " + @item.Start.ToString("dd.MM.yyyy HH:mm")) as string, "Get", new { LevelProjectId = @item.LevelProjectId })<li>
+        <li>
+            @Html.ActionLink((@item.Name + " - Skiladagur: " + @item.Start.ToString("dd.MM.yyyy HH:mm")) as string, User.IsInRole("Nemandi") ? "Get" : "Edit", new { LevelProjectId = @item.LevelProjectId })
+        </li>
     </ul>
 }
+<br />
+@if (User.IsInRole("Teacher"))
+{
+   
+}
+ <input type="button" class="ui-button-text-only" value="Búa til nýtt verkefni" onclick="location.href='@Url.Action("Create", "Project")'" />

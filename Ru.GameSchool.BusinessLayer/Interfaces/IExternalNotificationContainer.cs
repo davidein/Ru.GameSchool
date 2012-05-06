@@ -4,7 +4,7 @@ namespace Ru.GameSchool.BusinessLayer.Interfaces
 {
     public interface IExternalNotificationContainer
     {
-        void CreateNotification(Notification notification);
-        void UpdateNotification(Notification notification);
+        void CreateNotification(string text, string url, int userInfoId);
+        //void UpdateNotification(Notification notification);
     }
 }

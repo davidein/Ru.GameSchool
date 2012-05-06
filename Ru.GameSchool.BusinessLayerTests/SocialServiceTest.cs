@@ -94,7 +94,6 @@ namespace Ru.GameSchool.BusinessLayerTests
             userInfo.Username = "davidein";
             userInfo.UserInfoId = 1;
             userInfo.Password = "Wtf";
-            userInfo.UserInfoId = 1;
 
             userData.AddObject(userInfo);
 

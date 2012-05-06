@@ -24,7 +24,8 @@ namespace Ru.GameSchool.Web.Controllers
         { 
             get 
             { 
-                _userService = LoadService(_userService, HttpContext); 
+                _userService = LoadService(_userService, HttpContext);
+                SetupConnectedClasses(_userService);
                 return _userService; 
             } 
         }
@@ -41,6 +42,7 @@ namespace Ru.GameSchool.Web.Controllers
             get
             {
                 _courseService = LoadService(_courseService, HttpContext);
+                SetupConnectedClasses(_courseService);
                 return _courseService;
             }
         }
@@ -49,6 +51,7 @@ namespace Ru.GameSchool.Web.Controllers
             get
             {
                 _levelService = LoadService(_levelService, HttpContext);
+                SetupConnectedClasses(_levelService);
                 return _levelService;
             }
         }
@@ -57,6 +60,7 @@ namespace Ru.GameSchool.Web.Controllers
             get
             {
                 _socialService = LoadService(_socialService, HttpContext);
+                SetupConnectedClasses(_socialService);
                 return _socialService;
             }
         }
@@ -76,6 +80,12 @@ namespace Ru.GameSchool.Web.Controllers
                 service = new T();
             }
             return service;
+        }
+
+        private void SetupConnectedClasses(BaseService baseService)
+        {
+            baseService.ExternalPointContainer = GameService;
+            baseService.ExternalNotificationContainer = NotificationService;
         }
 
         protected override void Initialize(System.Web.Routing.RequestContext requestContext)

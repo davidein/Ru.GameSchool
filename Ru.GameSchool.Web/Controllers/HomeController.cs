@@ -29,7 +29,7 @@ namespace Ru.GameSchool.Web.Controllers
             return View();
         }
 
-        /*
+        // Temp - left in so as to view prototype
         public ActionResult Level()
         {
             return View();
@@ -74,7 +74,9 @@ namespace Ru.GameSchool.Web.Controllers
         public ActionResult MaterialList()
         {
             return View();
-        }*/
+        }
+
+        //remove to here.
 
     }
 }

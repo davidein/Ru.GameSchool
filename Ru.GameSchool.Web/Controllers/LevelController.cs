@@ -12,25 +12,46 @@ namespace Ru.GameSchool.Web.Controllers
         //
         // GET: /Level/
 
-        [Authorize(Roles = "Student")]
-        public ActionResult Get(int id)
+        [Authorize(Roles = "Student,Teacher")]
+        public ActionResult Get(int? id)
         {
-            return View();
+            if (id != null)
+            {
+
+                int intId = id.Value;
+
+                var model = LevelService.GetLevel(intId);
+                return View(model);
+                
+            }
+
+            return View("NotFound");
         }
 
 
         [Authorize(Roles = "Teacher")]
-        public ActionResult Create(int id)
+        public ActionResult Create()
+        //public ActionResult Create(int CoureId)
         {
+            ViewBag.CourseList = new SelectList(CourseService.GetCourses(), "CourseId", "Name"); 
             return View();
         }
 
 
         [HttpPost]
         [Authorize(Roles = "Teacher")]
-        public ActionResult Create(Level level, int id)
+        public ActionResult Create(Level level)
         {
-            return View();
+            if (ModelState.IsValid)
+            {
+
+                level.CreateDateTime = DateTime.Now;
+
+                LevelService.CreateLevel(level);
+                
+            }
+
+            return RedirectToAction("Edit", new { Id = level.LevelId });
         }
 
 

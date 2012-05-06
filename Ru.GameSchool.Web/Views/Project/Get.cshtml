@@ -1,19 +1,15 @@
-﻿@{
+﻿@model Ru.GameSchool.DataLayer.Repository.LevelProject
+@{
     ViewBag.Title = "Verkefni";
 }
-<h2>Verkefni</h2>
-
+<h2>
+    Verkefni</h2>
 @section sidebar {
-
-@Html.Partial("_LeftSideBar")
-
+    @Html.Partial("_LeftSideBar")
 }
 @section courseheading {
-
-@Html.Partial("_courseheading")
-
+    @Html.Partial("_courseheading")
 }
-
 <article>
     <h3><span class="gray">@ViewBag.LevelProject.Start | </span>@ViewBag.LevelProject.Name</h3>
     
@@ -33,23 +29,31 @@
              }
          </p></div>
 </article>
-
 @using (Html.BeginForm())
 {
-    <h4>Skila verkefni:</h4>
+    <h4>
+        Skila verkefni:</h4>
     <div class="control-group">
-        <label class="control-label">Skrá</label>
+        <label class="control-label">
+            Skrá</label>
         <div class="controls">
-            <input type="file" class="input-file" id="user_name" name="user_name" rel="popover" >
+            <input type="file" class="input-file" id="user_name" name="user_name" rel="popover">
         </div>
     </div>
     
     <div class="control-group">
-        <label class="control-label" for="textarea">Skilaboð</label>
+        <label class="control-label" for="textarea">
+            Skilaboð</label>
         <div class="controls">
-            <textarea class="input-xlarge" id="lysing" rows="3" rel="popover" data-content="Settu inn lýsingu á námskeiði." data-original-title="Lýsing"></textarea>
+            <textarea class="input-xlarge" id="lysing" rows="3" rel="popover" data-content="Settu inn lýsingu á námskeiði."
+                data-original-title="Lýsing"></textarea>
         </div>
     </div>
-    
-    <button type="submit" class="btn">Skila verkefni</button>  
+    if (User.IsInRole("Nemandi"))
+    {
+
+    }
+    <button type="submit" class="btn" value="return">
+       Skila verkefni</button>  
+
 }

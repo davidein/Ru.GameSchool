@@ -4,6 +4,7 @@ using Ru.GameSchool.DataLayer;
 using System.Collections.Generic;
 using Ru.GameSchool.DataLayer.Repository;
 using Ru.GameSchool.Utilities;
+using System;
 
 namespace Ru.GameSchool.BusinessLayer.Services
 {
@@ -58,7 +59,7 @@ namespace Ru.GameSchool.BusinessLayer.Services
         /// <param name="userName">The username reserved for the user to login to GameSchool.</param>
         /// <param name="password">Password to confirm the user is allowed to log into given username.</param>
         /// <returns>A new user instance.</returns>
-        public UserInfo Login(string userName, string password)
+        public UserInfo Login(string userName, string password, string ipAddress)
         {
             if ((string.IsNullOrWhiteSpace(userName)) || (string.IsNullOrWhiteSpace(password)))
             {
@@ -90,6 +91,15 @@ namespace Ru.GameSchool.BusinessLayer.Services
                 return null;
             }
 
+            var userLog = new UserLog
+                                  {
+                                      IpAddress = ipAddress,
+                                      LoginTime = DateTime.Now,
+                                      UserInfoId = userInfo.UserInfoId
+                                  };
+            
+            this.CreateUserLog(userLog);
+
             return userInfo;
         }
 
@@ -108,6 +118,9 @@ namespace Ru.GameSchool.BusinessLayer.Services
             user.Password = newHashedPassword; // Add password to datasource
             // Persist changes to datasource.
             Save();
+
+            if (ExternalNotificationContainer != null)
+                ExternalNotificationContainer.CreateNotification("Lykilorði þínu hefur verið breytt.", "", userInfoId);
         }
 
         /// <summary>
@@ -123,6 +136,18 @@ namespace Ru.GameSchool.BusinessLayer.Services
                 userInfo.Password = hashedPasswrd;
                 GameSchoolEntities.UserInfoes.AddObject(userInfo);
                 Save();
+            }
+        }
+
+        public void CreateUserLog(UserLog userLog)
+        {
+            if (userLog != null)
+            {
+                if (userLog.IpAddress != "::1")
+                {
+                    GameSchoolEntities.UserLogs.AddObject(userLog);
+                    Save();
+                }
             }
         }
 

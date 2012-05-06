@@ -107,9 +107,11 @@
     <Compile Include="Repository\LevelMaterial.cs">
       <DependentUpon>GameSchool.tt</DependentUpon>
     </Compile>
+    <Compile Include="Repository\LevelMaterial.ViewModel.cs" />
     <Compile Include="Repository\LevelProject.cs">
       <DependentUpon>GameSchool.tt</DependentUpon>
     </Compile>
+    <Compile Include="Repository\LevelProject.ViewModel.cs" />
     <Compile Include="Repository\LevelProjectResult.cs">
       <DependentUpon>GameSchool.tt</DependentUpon>
     </Compile>
@@ -120,6 +122,9 @@
       <DependentUpon>GameSchool.tt</DependentUpon>
     </Compile>
     <Compile Include="Repository\Status.cs">
+      <DependentUpon>GameSchool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Repository\sysdiagram.cs">
       <DependentUpon>GameSchool.tt</DependentUpon>
     </Compile>
     <Compile Include="Repository\UserInfo.cs">

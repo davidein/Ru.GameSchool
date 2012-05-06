@@ -17,6 +17,8 @@
                     $('#notify .count').text(counter);
                     $.tmpl(markup, data).appendTo('.notificationdropdown');
                 }
+                else
+                    $('#notify').removeClass('btn-danger');
                 timer();
             }
         });
@@ -36,7 +38,10 @@
     };
 
     jQuery.fn.NotificationRunner = function () {
-        get();
+        var data = $('body').data('user');
+        if (data.auth == 'true') {
+            get();
+        }
     };
 });
 
