@@ -134,6 +134,7 @@ namespace Ru.GameSchool.BusinessLayer.Services
                 // Get user entered clear text password and hash it before storing in db
                 var hashedPasswrd = PasswordUtilities.ComputeHash(userInfo.Password);
                 userInfo.Password = hashedPasswrd;
+                userInfo.CreateDateTime = DateTime.Now;
                 GameSchoolEntities.UserInfoes.AddObject(userInfo);
                 Save();
             }
@@ -165,6 +166,23 @@ namespace Ru.GameSchool.BusinessLayer.Services
                             item. = userInfo;
                             Save();
                         }*/
+        }
+
+
+        public IEnumerable<Status> GetUserStatuses()
+        {
+            var userStatus = from x in GameSchoolEntities.Status
+                             select x;
+
+            return userStatus;
+        }
+
+        public IEnumerable<Ru.GameSchool.DataLayer.Repository.UserType> GetUserTypes()
+        {
+            var userTypes = from x in GameSchoolEntities.UserTypes
+                             select x;
+
+            return userTypes;
         }
     }
 }

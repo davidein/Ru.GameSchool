@@ -5,7 +5,7 @@ using System.Web;
 
 namespace Ru.GameSchool.Web.Models
 {
-    public class UserModel
+    /*public class UserModel
     {
-    }
+    }*/
 }
