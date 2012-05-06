@@ -22,6 +22,7 @@ namespace Ru.GameSchool.BusinessLayer.Services
         {
             if (course != null)
             {
+                course.CreateDateTime = DateTime.Now;
                 GameSchoolEntities.Courses.AddObject(course);
                 Save();
             }

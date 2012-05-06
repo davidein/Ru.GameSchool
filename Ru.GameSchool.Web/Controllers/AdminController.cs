@@ -80,18 +80,8 @@ namespace Ru.GameSchool.Web.Controllers
                 }
                 else //Insert new user
                 {
-                    var user = new UserInfo();
-
-                    user.Username = model.Username;
-                    user.Password = model.Password;
-                    user.Email = model.Email;
-                    user.Fullname = model.Fullname;
-                    user.DepartmentId = model.DepartmentId;
-                    user.StatusId = model.StatusId;
-                    user.UserTypeId = model.UserTypeId;
-                    user.CreateDateTime = DateTime.Now;
-
-                    UserService.CreateUser(user);
+                    
+                    UserService.CreateUser(model);
                     ViewBag.SuccessMessage = "Nýr notandi hefur verið skráður í kerfið. Mundu að skrá notendann í námskeið.";
                 }
             }
@@ -160,18 +150,8 @@ namespace Ru.GameSchool.Web.Controllers
                 }
                 else //Insert new Course
                 {
-                    var course = new Ru.GameSchool.DataLayer.Repository.Course();
-                    course.Name = model.Name;
-                    course.Description = model.Description;
-                    course.Identifier = model.Identifier;
-                    course.CreditAmount = model.CreditAmount;
-                    course.Start = model.Start;
-                    course.Stop = model.Stop;
-                    course.DepartmentId = model.DepartmentId;
-                    course.CreateDateTime = DateTime.Now;
-                    
 
-                    CourseService.CreateCourse(course);
+                    CourseService.CreateCourse(model);
                     ViewBag.SuccessMessage = "Nýtt námskeið skráð! Mundu að skrá nemendur og kennara á námskeið.";
                 }
 
