@@ -274,8 +274,6 @@
           <Property Name="GradePercentageValue" Type="float" Nullable="false" />
           <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="255" />
           <Property Name="ProjectUrl" Type="nvarchar" MaxLength="1024" />
-          <Property Name="HasSubmitted" Type="bit" />
-          <Property Name="UserComment" Type="nvarchar" MaxLength="1024" />
         </EntityType>
         <EntityType Name="LevelProjectResult">
           <Key>
@@ -1008,8 +1006,6 @@
           <NavigationProperty Name="Level" Relationship="GameSchoolModel.FK_LevelProject_Level" FromRole="LevelProject" ToRole="Level" />
           <NavigationProperty Name="LevelProjectResults" Relationship="GameSchoolModel.FK_LevelProjectResult_LevelProject" FromRole="LevelProject" ToRole="LevelProjectResult" />
           <Property Type="String" Name="ProjectUrl" MaxLength="1024" FixedLength="false" Unicode="true" />
-          <Property Type="Boolean" Name="HasSubmitted" />
-          <Property Type="String" Name="UserComment" MaxLength="1024" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="LevelProjectResult">
           <Key>
@@ -1568,8 +1564,6 @@
           <EntitySetMapping Name="LevelProjects">
             <EntityTypeMapping TypeName="GameSchoolModel.LevelProject">
               <MappingFragment StoreEntitySet="LevelProject">
-                <ScalarProperty Name="UserComment" ColumnName="UserComment" />
-                <ScalarProperty Name="HasSubmitted" ColumnName="HasSubmitted" />
                 <ScalarProperty Name="ProjectUrl" ColumnName="ProjectUrl" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="GradePercentageValue" ColumnName="GradePercentageValue" />
@@ -1711,7 +1705,7 @@
         <EntityTypeShape EntityType="GameSchoolModel.LevelExamQuestion" Width="1.5" PointX="9.75" PointY="30.375" Height="1.9802864583333388" />
         <EntityTypeShape EntityType="GameSchoolModel.LevelExamResult" Width="1.5" PointX="9.75" PointY="19.875" Height="1.9802864583333388" />
         <EntityTypeShape EntityType="GameSchoolModel.LevelMaterial" Width="1.5" PointX="7.5" PointY="21.75" Height="2.9417936197916674" />
-        <EntityTypeShape EntityType="GameSchoolModel.LevelProject" Width="1.5" PointX="7.5" PointY="30.75" Height="2.7494921875000102" />
+        <EntityTypeShape EntityType="GameSchoolModel.LevelProject" Width="1.5" PointX="7.5" PointY="30.75" Height="2.9417936197916674" />
         <EntityTypeShape EntityType="GameSchoolModel.LevelProjectResult" Width="1.5" PointX="9.75" PointY="23.375" Height="2.3648893229166674" />
         <EntityTypeShape EntityType="GameSchoolModel.Notification" Width="1.5" PointX="7.5" PointY="6.375" Height="2.3648893229166674" />
         <EntityTypeShape EntityType="GameSchoolModel.Point" Width="1.5" PointX="7.5" PointY="16.875" Height="2.7494921875000102" />
@@ -1798,10 +1792,10 @@
           <ConnectorPoint PointX="5.25" PointY="16.477804362022631" />
         </AssociationConnector>
         <AssociationConnector Association="GameSchoolModel.FK_LevelExam_Level" >
-          <ConnectorPoint PointX="6" PointY="24.759095052083339" />
-          <ConnectorPoint PointX="6" PointY="28.624746093750005" />
-          <ConnectorPoint PointX="6.3229191666666669" PointY="28.624746093750005" />
-          <ConnectorPoint PointX="6.4895858333333329" PointY="28.624746093750005" />
+          <ConnectorPoint PointX="5.82812625" PointY="24.951396484375" />
+          <ConnectorPoint PointX="5.82812625" PointY="28.624746093750005" />
+          <ConnectorPoint PointX="6.2369822916666671" PointY="28.624746093750005" />
+          <ConnectorPoint PointX="6.4036489583333331" PointY="28.624746093750005" />
           <ConnectorPoint PointX="7.5" PointY="28.624746093750005" />
         </AssociationConnector>
         <AssociationConnector Association="GameSchoolModel.FK_LevelMaterial_Level" >
@@ -1811,8 +1805,8 @@
           <ConnectorPoint PointX="7.5" PointY="22.422948404947917" />
         </AssociationConnector>
         <AssociationConnector Association="GameSchoolModel.FK_LevelProject_Level" >
-          <ConnectorPoint PointX="6.4062525" PointY="24.759095052083339" />
-          <ConnectorPoint PointX="6.4062525" PointY="32.220896809895834" />
+          <ConnectorPoint PointX="6.320315625" PointY="24.951396484375" />
+          <ConnectorPoint PointX="6.320315625" PointY="32.220896809895834" />
           <ConnectorPoint PointX="7.5" PointY="32.220896809895834" />
         </AssociationConnector>
         <AssociationConnector Association="GameSchoolModel.FK_Points_Level" >
@@ -1855,10 +1849,10 @@
         <AssociationConnector Association="GameSchoolModel.FK_LevelProjectResult_LevelProject" >
           <ConnectorPoint PointX="9" PointY="30.75" />
           <ConnectorPoint PointX="9.375" PointY="30.375" />
-          <ConnectorPoint PointX="9.375" PointY="24.557444661458334" />
-          <ConnectorPoint PointX="9.4791666666666661" PointY="24.557444661458334" />
-          <ConnectorPoint PointX="9.6458333333333339" PointY="24.557444661458334" />
-          <ConnectorPoint PointX="9.75" PointY="24.557444661458334" />
+          <ConnectorPoint PointX="9.375" PointY="24.868681826822915" />
+          <ConnectorPoint PointX="9.4791666666666661" PointY="24.868681826822915" />
+          <ConnectorPoint PointX="9.6458333333333339" PointY="24.868681826822915" />
+          <ConnectorPoint PointX="9.75" PointY="24.868681826822915" />
         </AssociationConnector>
         <AssociationConnector Association="GameSchoolModel.FK_LevelProjectResult_UserInfo1" >
           <ConnectorPoint PointX="6" PointY="16.807109375000003" />
