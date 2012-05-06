@@ -58,7 +58,8 @@ namespace Ru.GameSchool.BusinessLayer.Services
         /// <param name="level">Level instance with updated values.</param>
         public void UpdateLevel(Level level)
         {
-            throw new System.NotImplementedException();
+            Save();
+            //throw new System.NotImplementedException();
         }
 
         /// <summary>
@@ -141,7 +142,7 @@ namespace Ru.GameSchool.BusinessLayer.Services
 
         public IEnumerable<LevelProject> GetUserLevelProject(int? userInfoId)
         {
-            return userInfoId > 0 ? GameSchoolEntities.spc_GetAllUsersLevelProjects(userInfoId.Value) : null;
+            return (userInfoId.HasValue && userInfoId.Value > 0) ? GameSchoolEntities.GetAllUserLevelProjects(userInfoId.Value) : null;
         }
 
         public IEnumerable<LevelProject> GetLevelProjects()

@@ -60,6 +60,19 @@ namespace Ru.GameSchool.BusinessLayer.Services
             return filteredCourses;
         }
 
+
+        /// <summary>
+        /// Gets all registered Departments
+        /// </summary>
+        /// <returns>A list of all Departments.</returns>
+        public IEnumerable<Department> GetDepartments()
+        {
+            var departments = from x in GameSchoolEntities.Departments
+                          select x;
+
+            return departments;
+        }
+
         public void AddUserToCourse(int userInfoId, int courseId)
         {
             if (userInfoId > 0 && courseId > 0)

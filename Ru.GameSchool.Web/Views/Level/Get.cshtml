@@ -1,0 +1,27 @@
+﻿@model Ru.GameSchool.DataLayer.Repository.Level
+
+@{
+    ViewBag.Title = "Borð";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@section sidebar {
+
+@Html.Partial("_TeacherSideBar")
+
+}
+
+    <div class="display-label">
+        @Html.DisplayFor(model => model.Name) -
+        @Html.DisplayNameFor(model => model.Start) -
+        @Html.DisplayFor(model => model.Start) - 
+        @Html.DisplayNameFor(model => model.Stop) -
+        @Html.DisplayFor(model => model.Stop)
+    </div>
+
+
+<p>
+   @Html.ActionLink("Edit", "Edit", new { id=Model.LevelId })
+
+</p>

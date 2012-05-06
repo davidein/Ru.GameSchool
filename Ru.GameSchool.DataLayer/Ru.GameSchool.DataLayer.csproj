@@ -56,6 +56,7 @@
     <Compile Include="Repository\ContentType.cs">
       <DependentUpon>GameSchool.tt</DependentUpon>
     </Compile>
+    <Compile Include="Repository\Course.ViewModel.cs" />
     <Compile Include="Repository\GameSchool.Context.Interface.cs">
       <DependentUpon>GameSchool.Context.Interface.tt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -121,9 +122,6 @@
       <DependentUpon>GameSchool.tt</DependentUpon>
     </Compile>
     <Compile Include="Repository\Status.cs">
-      <DependentUpon>GameSchool.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Repository\sysdiagram.cs">
       <DependentUpon>GameSchool.tt</DependentUpon>
     </Compile>
     <Compile Include="Repository\UserInfo.cs">
