@@ -163,5 +163,23 @@ namespace Ru.GameSchool.DataLayer.Repository
         private ObjectSet<UserLog> _userLogs;
 
         #endregion
+        #region Function Imports
+        public ObjectResult<LevelProject> GetAllUserLevelProjects(Nullable<int> userInfoId)
+        {
+    
+            ObjectParameter userInfoIdParameter;
+    
+            if (userInfoId.HasValue)
+            {
+                userInfoIdParameter = new ObjectParameter("userInfoId", userInfoId);
+            }
+            else
+            {
+                userInfoIdParameter = new ObjectParameter("userInfoId", typeof(int));
+            }
+            return base.ExecuteFunction<LevelProject>("GetAllUserLevelProjects", userInfoIdParameter);
+        }
+
+        #endregion
     }
 }

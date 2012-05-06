@@ -688,6 +688,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="spc_GetAllUsersLevelProjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userInfoId" Type="int" Mode="In" />
+        </Function>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -821,6 +824,9 @@
             <End Role="UserInfo" EntitySet="UserInfoes" />
             <End Role="UserLog" EntitySet="UserLogs" />
           </AssociationSet>
+          <FunctionImport Name="GetAllUserLevelProjects" EntitySet="LevelProjects" ReturnType="Collection(GameSchoolModel.LevelProject)">
+          <Parameter Name="userInfoId" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="Comment">
           <Key>
@@ -1631,6 +1637,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetAllUserLevelProjects" FunctionName="GameSchoolModel.Store.spc_GetAllUsersLevelProjects" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

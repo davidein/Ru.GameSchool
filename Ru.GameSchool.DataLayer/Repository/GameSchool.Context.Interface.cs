@@ -39,6 +39,10 @@ namespace Ru.GameSchool.DataLayer.Repository
         IObjectSet<UserLog> UserLogs { get; }
 
         #endregion
+        #region Function Imports
+        ObjectResult<LevelProject> GetAllUserLevelProjects(Nullable<int> userInfoId);
+
+        #endregion
     
     	int SaveChanges();
     	void AttachTo(string entitySetName ,object entity);

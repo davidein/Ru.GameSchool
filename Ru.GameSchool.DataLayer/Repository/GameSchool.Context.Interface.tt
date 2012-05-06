@@ -80,7 +80,7 @@ namespace <#=code.EscapeNamespace(namespaceName)#>
             string returnTypeElement = code.Escape(ef.GetElementType(edmFunction.ReturnParameter.TypeUsage));
 
 #>
-    ObjectResult<<#=returnTypeElement#>> <#=code.Escape(edmFunction)#>(<#=paramList#>)
+    ObjectResult<<#=returnTypeElement#>> <#=code.Escape(edmFunction)#>(<#=paramList#>);
 <#
         }
 
