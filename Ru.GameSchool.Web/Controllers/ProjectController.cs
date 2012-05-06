@@ -14,20 +14,26 @@ namespace Ru.GameSchool.Web.Controllers
         [HttpGet]
         public ActionResult Index(int? courseId)
         {
+            IEnumerable<LevelProject> projects = null;
             if (courseId.HasValue)
             {
-                var projects = LevelService.GetLevelProjectsByCourseId(courseId.Value);
+                projects = LevelService.GetLevelProjectsByCourseId(courseId.Value);
                 var nameOfCourse = projects.Select(x => x.Level.Course.Name ?? string.Empty).FirstOrDefault();
-                ViewBag.Projects = projects;
+
                 ViewBag.NameOfCourse = nameOfCourse;
             }
-            
+            else
+            {
+                projects = LevelService.GetLevelProjects();
+            }
+            ViewBag.Projects = projects;
             return View();
         }
 
 
         #region Student
         //   [Authorize(Roles = "Student")]
+        [HttpGet]
         public ActionResult Get(int? LevelProjectId)
         {
             if (LevelProjectId.HasValue)
@@ -38,12 +44,27 @@ namespace Ru.GameSchool.Web.Controllers
             return View();
         }
 
+        //   [Authorize(Roles = "Student")]
+        [HttpPost]
+        public ActionResult Get(LevelProject levelProject)
+        {
+            if (TryUpdateModel(levelProject))
+            {
+                LevelService.CreateLevelProject(levelProject);
+            }
+            return View();
+        }
 
 
         //    [Authorize(Roles = "Student")]
-        public ActionResult Return(int id, LevelProject levelProject)
+        [HttpPost]
+        public ActionResult Return(LevelProject levelProject)
         {
-            
+            if (TryUpdateModel(levelProject))
+            {
+                LevelService.CreateLevelProject(levelProject);
+            }
+
             return View();
         }
         #endregion
@@ -54,6 +75,8 @@ namespace Ru.GameSchool.Web.Controllers
         [HttpPost]
         public ActionResult Create(LevelProject levelProject)
         {
+            levelProject.ProjectUrl = Request.Form["user_name"];
+
             if (ModelState.IsValid)
             {
                 LevelService.CreateLevelProject(levelProject);
@@ -71,7 +94,7 @@ namespace Ru.GameSchool.Web.Controllers
         }
 
 
-        //       [Authorize(Roles = "Teacher")]
+        // [Authorize(Roles = "Kennari")]
         [HttpGet]
         public ActionResult Edit(int? LevelProjectId)
         {
@@ -83,7 +106,7 @@ namespace Ru.GameSchool.Web.Controllers
             return View();
         }
 
-        //        [Authorize(Roles = "Teacher")]
+        //[Authorize(Roles = "Kennari")]
         [HttpPost]
         public ActionResult Edit(LevelProject levelProject)
         {
@@ -129,7 +152,7 @@ namespace Ru.GameSchool.Web.Controllers
                        }.ToList();
         }
         #endregion
-        
+
 
 
 
@@ -139,5 +162,8 @@ namespace Ru.GameSchool.Web.Controllers
         {
             return View();
         }*/
+
+
+
     }
 }

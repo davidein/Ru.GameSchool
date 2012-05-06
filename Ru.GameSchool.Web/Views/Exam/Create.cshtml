@@ -14,6 +14,11 @@
             <legend>Nýtt próf</legend>
             
             <div class="control-group">
+            <label class="control-label">
+            @Html.DropDownList("QuestionsTotal")
+            </label>
+            </div>
+            <div class="control-group">
                 <label class="control-label">
                     Skilafrestur</label>
                 <div class="controls">
@@ -25,8 +30,12 @@
 
             <button type="button" class="btn btn-success">
                 Bæta við spurningu</button>
-         
-            @Html.Partial("_ExamQuestion")
+
+         @for (int j = 1; j <= Html.DropDownList("QuestionsTotal").ToString().Count(); j++)
+         {
+             @Html.Partial("_ExamQuestion")
+         }
+            
         </fieldset>
     }
 </div>

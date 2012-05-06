@@ -120,7 +120,7 @@ namespace Ru.GameSchool.BusinessLayer.Services
             Save();
 
             if (ExternalNotificationContainer != null)
-                ExternalNotificationContainer.CreateNotification("Your password has been changed.", "", userInfoId);
+                ExternalNotificationContainer.CreateNotification("Lykilorði þínu hefur verið breytt.", "", userInfoId);
         }
 
         /// <summary>
