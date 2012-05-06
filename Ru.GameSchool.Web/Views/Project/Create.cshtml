@@ -19,51 +19,37 @@
                 </div>
             </div>
         </div>
-        <div class="control-group">
-            <label class="control-label" for="select01">
-                Borð</label>
-            <div class="controls">
-                <select name="selectLevel">
-                @Html.DropDownList("LevelCount")
-            </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.LevelId)
+        </div>
+        <div class="editor-field">
+            @Html.DropDownListFor(model => model.LevelId, new SelectList(ViewBag.LevelCount, "Value", "Text"))
+            @Html.ValidationMessageFor(model => model.LevelId)
         </div>
         <div class="control-group">
             <label class="control-label" for="select01">
                 Vægi</label>
             <div class="controls">
-                @Html.DropDownList("GradePercentageValue")
+                @Html.DropDownListFor(m => m.GradePercentageValue,new SelectList(ViewBag.GradePercentageValue,"Value","Text"))
             </div>
         </div>
         <div class="control-group">
             <label class="control-label">
                 Skrá</label>
             <div class="controls">
-                @*<input type="file" class="input-xlarge" id="user_name" name="user_name" rel="popover">*@
                 @Html.TextBoxFor(m => m.ProjectUrl, new { type = "file" })
             </div>
         </div>
-        <div class="control-group">
-            <label class="control-label">
-                Byrjar</label>
-            <div class="controls">
-                <div class="input-xlarge" id="level_create_starts" name="level_create_starts" rel="popover"
-                    data-content="Settu inn hvenær verkefni byrjar." data-original-title="Byrjun dagsetning"
-                    data-datepicker="datepicker">
-                    @Html.EditorFor(m => m.Start)
-                </div>
-            </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Start)
         </div>
-        <div class="control-group">
-            <label class="control-label">
-                Endar</label>
-            <div class="controls">
-                <div class="input-xlarge" id="level_create_ends" name="level_create_ends" rel="popover"
-                    data-content="Settu inn hvenær verkefni endar." data-original-title="Enda dagsetning"
-                    data-datepicker="datepicker">
-                    @Html.EditorFor(m => m.Stop)
-                </div>
-            </div>
+        @Html.TextBoxFor(model => model.Start, new { data_datepicker = "datepicker" })
+        @Html.ValidationMessageFor(model => model.Start)
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Stop)
         </div>
+        @Html.TextBoxFor(model => model.Stop, new { data_datepicker = "datepicker" })
+        @Html.ValidationMessageFor(model => model.Stop)
         <div class="control-group">
             <label class="control-label" for="textarea">
                 Lýsing</label>

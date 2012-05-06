@@ -1,0 +1,37 @@
+﻿@using Ru.GameSchool.DataLayer.Repository
+@model LevelExamAnswer
+
+
+<div class="control-group">
+    <label class="control-label">
+        Svar 1</label>
+    <div class="controls">
+        @Html.EditorFor(m => m.Answer)
+        @Html.RadioButtonFor(m => m.Correct, "Correct1")
+    </div>
+</div>
+<div class="control-group">
+    <label class="control-label">
+        Svar 2</label>
+    <div class="controls">
+        @Html.EditorFor(m => m.Answer)
+        @Html.RadioButtonFor(m => m.Correct, "Correct2")
+    </div>
+</div>
+<div class="control-group">
+    <label class="control-label">
+        Svar 3</label>
+    <div class="controls">
+        @Html.EditorFor(m => m.Answer)
+        @Html.RadioButtonFor(m => m.Correct, "Correct3")
+    </div>
+</div>
+<div class="control-group">
+    <label class="control-label">
+        Svar 4</label>
+    <div class="controls">
+        @Html.EditorFor(m => m.Answer)
+        @Html.RadioButtonFor(m => m.Correct, "Correct4")
+    </div>
+</div>
+

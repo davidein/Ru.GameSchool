@@ -15,17 +15,26 @@ namespace Ru.GameSchool.Web.Controllers
         [Authorize(Roles = "Student,Teacher")]
         public ActionResult Get(int? id)
         {
-            if (id != null)
+            if (id.HasValue)
             {
 
                 int intId = id.Value;
 
                 var model = LevelService.GetLevel(intId);
-                return View(model);
+                if (model != null)
+                {
+
+
+
+                    ViewBag.Projects = LevelService.GetLevelProjects();
+
+
+                    return View(model);
+                }
                 
             }
 
-            return View("NotFound");
+            return RedirectToAction("NotFound","Home");
         }
 
 

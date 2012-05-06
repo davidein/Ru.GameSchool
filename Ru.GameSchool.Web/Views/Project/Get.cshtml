@@ -2,8 +2,8 @@
 @{
     ViewBag.Title = "Verkefni";
 }
-<h2>
-    Verkefni</h2>
+<h2>@ViewBag.LevelProject.Name<br/>
+    </h2>
 @section sidebar {
     @Html.Partial("_LeftSideBar")
 }
@@ -11,7 +11,7 @@
     @Html.Partial("_courseheading")
 }
 <article>
-    <h3><span class="gray">@ViewBag.LevelProject.Start | </span>@ViewBag.LevelProject.Name</h3>
+    <h3><span class="gray">@ViewBag.LevelProject.Start | Vægi verkefnis - @ViewBag.LevelProject.GradePercentageValue%</span></h3>
     
     
     @ViewBag.LevelProject.Description
@@ -25,7 +25,6 @@
              @foreach (var item in ViewBag.AllowedFileExtensions)
              {
                  @item  
-
              }
          </p></div>
 </article>
@@ -37,23 +36,30 @@
         <label class="control-label">
             Skrá</label>
         <div class="controls">
-            <input type="file" class="input-file" id="user_name" name="user_name" rel="popover">
+            @Html.TextBoxFor(m => m.ProjectUrl, new { type = "file", @class = "input-file", rel = "popover" })
         </div>
     </div>
     
     <div class="control-group">
         <label class="control-label" for="textarea">
-            Skilaboð</label>
+            Skilaboð til kennara</label>
         <div class="controls">
-            <textarea class="input-xlarge" id="lysing" rows="3" rel="popover" data-content="Settu inn lýsingu á námskeiði."
-                data-original-title="Lýsing"></textarea>
+            @Html.EditorFor(m => m.UserComment, new { rows = "3" })
         </div>
     </div>
-    if (User.IsInRole("Nemandi"))
+    if (User.IsInRole("Student"))
     {
-
-    }
+        if (ViewBag.LevelProject.HasSubmitted != null)
+        {
+    <h4>
+        Búið að skila verkefni!</h4> 
+        }
+        else
+        {
     <button type="submit" class="btn" value="return">
-       Skila verkefni</button>  
+        Skila verkefni</button>       
+        }
+    }
+
 
 }

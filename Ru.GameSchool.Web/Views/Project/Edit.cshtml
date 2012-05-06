@@ -1,65 +1,96 @@
 ﻿@model Ru.GameSchool.DataLayer.Repository.LevelProject
-<div @if (Model != null)
-     {
-        @:data-pkey="@Model.LevelProjectId"
-    }>
-    @Html.LabelFor(m => m.Name)
-    @Html.EditorFor(model => model.Name)
-    @Html.ValidationMessageFor(model => model.Name)
-    <div class="control-group">
-        <div class="controls">
-            <input class="input-xlarge" id="level_create_starts" name="level_create_starts" rel="popover"
-                data-content="Settu inn hvenær verkefni byrjar." data-original-title="Byrjun dagsetning"
-                data-datepicker="datepicker">
-                @Html.LabelFor(model => model.Start)
-                @Html.EditorFor(model => model.Start)
-                @Html.ValidationMessageFor(model => model.Start)
-            </input>
-        </div>
+@{
+    ViewBag.Title = "Breyta verkefni";
+}
+<h2>
+    Breyta verkefni</h2>
+@if (!string.IsNullOrWhiteSpace(ViewBag.SuccessMessage))
+{
+    <div class="alert alert-success">
+        <button class="close" data-dismiss="alert">
+            ×</button>
+        <strong>Tókst!</strong> @ViewBag.SuccessMessage
     </div>
-    <div class="control-group">
-        <div class="controls">
-            <div class="input-xlarge" id="level_create_ends" name="level_create_starts" rel="popover"
-                data-content="Settu inn hvenær verkefni byrjar." data-original-title="Byrjun dagsetning"
-                data-datepicker="datepicker">
-                @Html.LabelFor(model => model.Stop)
-                @Html.EditorFor(model => model.Stop)
-                @Html.ValidationMessageFor(model => model.Stop)
-            </div>
-        </div>
+}
+@if (!string.IsNullOrWhiteSpace(ViewBag.ErrorMessage))
+{
+    <div class="alert alert-error">
+        <button class="close" data-dismiss="alert">
+            ×</button>
+        <strong>Villa!</strong> @ViewBag.ErrorMessage
     </div>
-    <div class="control-group">
-        <div class="controls">
-            @Html.LabelFor(model => model.Description)
-            @Html.EditorFor(model => model.Description)
-            @Html.ValidationMessageFor(model => model.Description)
-        </div>
-    </div>
-    <div class="control-group">
-        <div class="controls">
-            @Html.LabelFor(model => model.GradePercentageValue)
-            @Html.EditorFor(model => model.GradePercentageValue)
-            @Html.ValidationMessageFor(model => model.GradePercentageValue)
-        </div>
-    </div>
-    @if (ViewContext.RouteData.Values["Action"].ToString() == "Edit")
-    {
+}
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")"></script>
+@using (Html.BeginForm("Edit", "Project", FormMethod.Post))
+{
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>@ViewBag.NameOfProject</legend>
+        @Html.HiddenFor(model => model.LevelProjectId)
         <div class="control-group">
+            @Html.LabelFor(model => model.Name, new { @class = "control-label" })
             <div class="controls">
-                <input type="button" id="btnSave" name="btnSave" value="Save" class="btn" />
-                <button class="btn">
-                    Cancel</button>
+                @Html.EditorFor(model => model.Name, new { @class = "input-xlarge" })
+                <span class="help-inline">@Html.ValidationMessageFor(model => model.Name)</span>
             </div>
         </div>
-    }
-    else
-    {
+        @*nafn*@
         <div class="control-group">
+            @Html.LabelFor(model => model.ProjectUrl, new { @class = "control-label" })
             <div class="controls">
-                <input type="button" id="btnCreate" name="btnCreate" value="Create" class="btn" />
-                <button class="btn">
-                    Cancel</button>
+                @Html.EditorFor(model => model.ProjectUrl, new { @class = "input-xlarge", type = "file" })
+                <span class="help-inline">@Html.ValidationMessageFor(model => model.ProjectUrl)</span>
             </div>
         </div>
-    }
+        @*project url*@
+        <div class="control-group">
+            @Html.LabelFor(model => model.GradePercentageValue, new { @class = "control-label" })
+            <div class="controls">
+                @Html.DropDownList("GradePercentageValue")
+                <span class="help-inline">@Html.ValidationMessageFor(model => model.GradePercentageValue)</span>
+            </div>
+        </div>@*Vægi*@
+        <div class="control-group">
+            @Html.LabelFor(model => model.LevelId, new { @class = "control-label" })
+            <div class="controls">
+                @Html.DropDownListFor(model => model.LevelId, new SelectList(ViewBag.LevelCount, "Value", "Text"))
+                <span class="help-inline">@Html.ValidationMessageFor(x => x.LevelId)</span>
+            </div>
+        </div>
+        <div class="control-group">
+            @Html.LabelFor(model => model.Start, new { @class = "control-label" })
+            <div class="controls">
+                @Html.TextBoxFor(model => model.Start, new { data_datepicker = "datepicker", @class = "input-xlarge" })
+                <span class="help-inline">@Html.ValidationMessageFor(model => model.Start)</span>
+            </div>
+        </div>
+        <div class="control-group">
+            @Html.LabelFor(model => model.Stop, new { @class = "control-label" })
+            <div class="controls">
+                @Html.TextBoxFor(model => model.Stop, new { data_datepicker = "datepicker", @class = "input-xlarge" })
+                <span class="help-inline">@Html.ValidationMessageFor(model => model.Stop)</span>
+            </div>
+        </div>
+        <div class="control-group">
+            @Html.LabelFor(model => model.Description, new { @class = "control-label" })
+            <div class="controls">
+                @Html.TextAreaFor(model => model.Description, new { @class = "input-xlarge", rows = "10", cols = "30" })
+                <span class="help-inline">@Html.ValidationMessageFor(model => model.Description)</span>
+            </div>
+        </div>
+        <p>
+            <div class="control-group">
+                <div class="controls">
+                    <button type="submit" class="btn btn-success">
+                        <i class="icon-ok icon-white"></i>Breyta verkefni
+                    </button>
+                </div>
+            </div>
+        </p>
+    </fieldset>
+}
+<div>
+    @Html.ActionLink("Aftur á forsíðu verkefna", "Index")
 </div>
