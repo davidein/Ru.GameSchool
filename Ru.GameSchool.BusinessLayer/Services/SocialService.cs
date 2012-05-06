@@ -80,6 +80,9 @@ namespace Ru.GameSchool.BusinessLayer.Services
 
                 var like = query.FirstOrDefault();
 
+                if (like == null)
+                    throw new GameSchoolException(string.Format("Like not found. CommentLikeId = {0}", commentLikeId));
+
                 GameSchoolEntities.CommentLikes.DeleteObject(like);
                 Save();
             }
@@ -91,9 +94,16 @@ namespace Ru.GameSchool.BusinessLayer.Services
         /// <returns>Collection of comment objects.</returns>
         public IEnumerable<Comment> GetComments(int levelMaterialId)
         {
-            return levelMaterialId > 0
-                       ? GameSchoolEntities.Comments.Where(x => x.LevelMaterialId == levelMaterialId)
-                       : null;
+            if (levelMaterialId > 0)
+            {
+                var list = GameSchoolEntities.Comments.Where(x => x.LevelMaterialId == levelMaterialId);
+
+                list = list.OrderBy(x => x.CommentId);
+
+                return list;
+            }
+
+            return null;
         }
 
         /// <summary>
