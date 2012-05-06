@@ -1,14 +1,6 @@
 ﻿<div class="btn-group pull-right">
     <a class="btn btn-info dropdown-toggle" data-toggle="dropdown" href="#">
         <i class="icon-user"></i> @User.Identity.Name
-        @if (User.IsInRole("Admin"))
-        {
-            <text>Y</text>
-        }
-        else
-        {
-            <text>N</text>
-        }
         <span class="caret"></span>
     </a>
     <ul class="dropdown-menu">
