@@ -375,5 +375,13 @@ namespace Ru.GameSchool.BusinessLayer.Services
 
             }
         }
+
+        public IEnumerable<Ru.GameSchool.DataLayer.Repository.ContentType> GetContentTypes()
+        {
+            var contentTypes = from x in GameSchoolEntities.ContentTypes
+                               select x;
+            
+            return contentTypes;
+        }
     }
 }
