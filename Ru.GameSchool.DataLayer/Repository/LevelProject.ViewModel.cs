@@ -16,7 +16,6 @@ namespace Ru.GameSchool.DataLayer.Repository
         [Required(ErrorMessage = "Vantar")]
         [Display(Name = "Verkefni byrjar")]
         [DataType(DataType.DateTime)]
-        
         public DateTime Start { get; set; }
 
         [Required(ErrorMessage = "Vantar")]
@@ -41,6 +40,14 @@ namespace Ru.GameSchool.DataLayer.Repository
         [Required]
         [Display(Name = "Borð")]
         public int LevelId { get; set; }
+
+        [DataType(DataType.MultilineText)]
+        [StringLength(1000)]
+        [Display(Name="Athugasemd til kennara")]
+        public string UserComment { get; set; }
+
+        
+        public bool HasSubmitted { get; set; }
 
     }
 }

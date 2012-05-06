@@ -142,8 +142,7 @@ namespace Ru.GameSchool.BusinessLayer.Services
 
         public IEnumerable<LevelProject> GetUserLevelProject(int? userInfoId)
         {
-            return null;
-            //return userInfoId > 0 ? GameSchoolEntities.spc_GetAllUsersLevelProjects(userInfoId.Value) : null;
+            return (userInfoId.HasValue && userInfoId.Value > 0) ? GameSchoolEntities.GetAllUserLevelProjects(userInfoId.Value) : null;
         }
 
         public IEnumerable<LevelProject> GetLevelProjects()
@@ -198,6 +197,9 @@ namespace Ru.GameSchool.BusinessLayer.Services
                 levelProjectToUpdate.Name = levelProject.Name;
                 levelProjectToUpdate.Start = levelProject.Start;
                 levelProjectToUpdate.Stop = levelProject.Stop;
+                levelProjectToUpdate.UserComment = levelProject.UserComment;
+                levelProjectToUpdate.HasSubmitted = levelProject.HasSubmitted;
+                levelProjectToUpdate.ProjectUrl = levelProject.ProjectUrl;
 
                 Save();
             }

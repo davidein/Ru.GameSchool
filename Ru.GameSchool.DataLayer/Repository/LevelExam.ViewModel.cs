@@ -15,18 +15,27 @@ namespace Ru.GameSchool.DataLayer.Repository
         [Required]
         [Display(Name = "Lýsing")]
         [DataType(DataType.Text)]
+        [StringLength(200)]
         public string Description { get; set; }
 
         [Required]
-        [Display(Name ="Nafn")]
+        [Display(Name = "Nafn")]
         [DataType(DataType.Text)]
+        [StringLength(200)]
         public string Name { get; set; }
-        
+
         [Display(Name = "Hlutfall prósentu")]
         [DataType(DataType.Text)]
-        public double GradePercentageLevel { get; set; }
+        public double GradePercentageValue { get; set; }
 
-        [DataType(DataType.DateTime)]
-        public DateTime DateTest { get; set; }
+        [Display(Name = "Borð")]
+        [Required]
+        [MaxLength(8)]
+        public int LevelId { get; set; }
+
+        //[Required]
+        //[DataType(DataType.Custom)]
+        //[Display(Name = "Spurning")]
+        //public ICollection<LevelExamQuestion> Questions { get; set; }
     }
 }
