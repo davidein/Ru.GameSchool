@@ -31,29 +31,35 @@
                     @Html.DisplayNameFor(model => model.Description)
                 </th>
             </tr>
-            @foreach (var item in Model)
+            @foreach (var i in items.Levels)
             {
+                foreach (var j in i.LevelProjects)
+                {
                 <tr>
                     <td>
-                        @Html.ActionLink((@item.Name + " - Skiladagur: " + @item.Stop.ToString("dd.MM.yyyy HH:mm")) as string, User.IsInRole("Student") ? "Get" : "Edit", new { LevelProjectId = @item.LevelProjectId })
+                        @Html.ActionLink((@j.Name + " - Skiladagur: " + @j.Stop.ToString("dd.MM.yyyy HH:mm")) as string, User.IsInRole("Student") ? "Get" : "Edit", new { LevelProjectId = @j.LevelProjectId })
                     </td>
                     <td>
-                        @if (Math.Abs(item.LevelProjectResults.Select(x => x.Grade).FirstOrDefault()) > 0)
+                        @foreach (var x in j.LevelProjectResults)
                         {
-                            @item.LevelProjectResults.Select(x => x.Grade).FirstOrDefault()
-                        }
-                        else
-                        {
-                            <i>Enginn einkunn kominn</i>          
+                            if (Math.Abs(@x.Grade) > 0)
+                            {
+                                @x.Grade
+                            }
+                            else
+                            {
+                            <i>Enginn einkunn</i>          
+                            }
                         }
                     </td>
                     <td>
-                        Vægi: @Html.DisplayFor(modelItem => item.GradePercentageValue)%
+                        Vægi: @j.GradePercentageValue%
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Description)
+                        @j.Description
                     </td>
                 </tr>
+                }
             }
         </tbody>
     </table>
