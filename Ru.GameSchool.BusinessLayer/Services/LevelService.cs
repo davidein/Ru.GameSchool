@@ -212,7 +212,7 @@ namespace Ru.GameSchool.BusinessLayer.Services
                 levelProjectToUpdate.Name = levelProject.Name;
                 levelProjectToUpdate.Start = levelProject.Start;
                 levelProjectToUpdate.Stop = levelProject.Stop;
-                levelProjectToUpdate.ProjectUrl = levelProject.ProjectUrl;
+                //levelProjectToUpdate.ProjectUrl = levelProject.ProjectUrl;
 
                 Save();
             }

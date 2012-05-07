@@ -5,10 +5,10 @@
 <h2>@ViewBag.LevelProject.Name<br />
 </h2>
 @section sidebar {
-    @*@Html.Partial("_LeftSideBar")*@
+    @Html.Partial("_LeftSideBar")
 }
 @section courseheading {
-    @*@Html.Partial("_courseheading")*@
+    @Html.Partial("_courseheading")
 }
 <article>
     <h3><span class="gray">@ViewBag.LevelProject.Start | Vægi verkefnis - @ViewBag.LevelProject.GradePercentageValue%</span></h3>
@@ -66,4 +66,33 @@
 <div>
     @Html.ActionLink("Aftur á forsíðu verkefna", "Index")
 </div>
-
+@if (User.IsInRole("Teacher"))
+{
+    foreach (var user in Model.LevelProjectResults.Select(x => x.UserInfo))
+    {
+    <table class="table table-striped table-bordered table-condensed">
+        <caption>
+            Nemendur sem eru búnir að skila þessu verkefni.</caption>
+        <tbody>
+            <tr>
+                <th>
+                    Nafn nemanda
+                </th>
+                <th>
+                    Búinn að skila verkefni
+                </th>
+            </tr>
+            <tr>
+                <td>@user.Username
+                </td>
+                <td>
+                    @{
+                        string s = user.LevelProjectResults == null ? "Já" : "Nei";
+                    }
+                    @s
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    }
+}

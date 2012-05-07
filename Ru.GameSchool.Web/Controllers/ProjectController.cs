@@ -13,14 +13,15 @@ namespace Ru.GameSchool.Web.Controllers
         [HttpGet]
         public ActionResult Index(int? id)
         {
-            IEnumerable<LevelProject> projects = null;
             var userInfoId = UserService.GetUser(User.Identity.Name).UserInfoId;
 
-            ViewBag.Courses = id.HasValue
+            var courses = id.HasValue
                                   ? CourseService.GetCoursesByUserInfoIdAndCourseId(userInfoId, id.Value)
                                   : CourseService.GetCoursesByUserInfoId(userInfoId);
 
-            projects = id.HasValue
+            ViewBag.Courses = courses;
+
+            var projects = id.HasValue
                 ? LevelService.GetLevelProjectsByCourseIdAndUserInfoId(userInfoId, id.Value)
                 : LevelService.GetLevelProjectsByUserId(userInfoId);
 
@@ -28,17 +29,19 @@ namespace Ru.GameSchool.Web.Controllers
         }
 
         #region Student
-        [Authorize(Roles = "Student")]
+        [Authorize(Roles = "Student, Teacher")]
         [HttpGet]
         public ActionResult Get(int? levelProjectId)
         {
+            ViewBag.AllowedFileExtensions = GetAllowedFileExtensions();
+            
             if (levelProjectId.HasValue)
             {
                 var levelProject = LevelService.GetLevelProject(levelProjectId.Value);
                 ViewBag.LevelProject = levelProject;
-                ViewBag.AllowedFileExtensions = GetAllowedFileExtensions();
                 return View(levelProject);
             }
+
             return View();
         }
 
@@ -52,11 +55,10 @@ namespace Ru.GameSchool.Web.Controllers
 
                 if (levelProj != null)
                 {
-                    levelProj.ProjectUrl = levelProject.ProjectUrl;
+                   // levelProj.ProjectUrl = levelProject.ProjectUrl;
                     LevelService.UpdateLevelProject(levelProj);
                 }
             }
-
             return View("Index");
         }
 
