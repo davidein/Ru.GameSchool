@@ -18,8 +18,8 @@ namespace Ru.GameSchool.Web.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            var materials = LevelService.GetLevelMaterials();
-            ViewBag.Material = materials.ToList();
+            IEnumerable<LevelMaterial> materials = LevelService.GetLevelMaterials(); ;
+            ViewBag.Materials = materials;
 
             return View();
         }
@@ -41,6 +41,8 @@ namespace Ru.GameSchool.Web.Controllers
         public ActionResult Create()
         {
             ViewBag.LevelCount = GetLevelCounts();
+            ViewBag.ContentTypes = LevelService.GetContentTypes();
+
             return View();
         }
 
@@ -50,7 +52,10 @@ namespace Ru.GameSchool.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                ViewBag.LevelCount = GetLevelCounts();
+                ViewBag.ContentTypes = LevelService.GetContentTypes();
                 LevelService.CreateLevelMaterial(levelMaterial);
+                //ViewBag.ContentTypes = LevelService.GetContentTypes();
             }
 
             return View();
@@ -58,15 +63,15 @@ namespace Ru.GameSchool.Web.Controllers
 
         [HttpGet]
         [Authorize(Roles = "Teacher")]
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(int? levelMaterialId)
         {
-            if (ModelState.IsValid)
+            ViewBag.LevelCount = GetLevelCounts();
+            ViewBag.ContentTypes = LevelService.GetContentTypes();
+
+            if (levelMaterialId.HasValue)
             {
-                if (id.HasValue)
-                {
-                    var material = LevelService.GetLevelMaterial(id.Value);
-                    ViewBag.Material = material;
-                }
+                var material = LevelService.GetLevelMaterial(levelMaterialId.Value);
+                return View(material);
             }
             return View();
         }
@@ -74,28 +79,36 @@ namespace Ru.GameSchool.Web.Controllers
 
         [HttpPost]
         [Authorize(Roles = "Teacher")]
-        public ActionResult Edit(LevelMaterial levelMaterial)
+        public ActionResult Edit(int? levelMaterialId, LevelMaterial levelMaterial)
         {
             if (ModelState.IsValid)
             {
                 if (TryUpdateModel(levelMaterial))
                 {
                     LevelService.UpdateLevelMaterial(levelMaterial);
+                    ViewBag.SuccessMessage = "Kennslugagn hefur verið uppfært";
+                    return View(levelMaterial);
                 }
+            }
+            else
+            {
+                ViewBag.ErrorMessage = "Gat ekki uppfært kennslugagn! Lagfærðu villur og reyndur aftur.";
+                if (levelMaterialId != null) return View(LevelService.GetLevelMaterial(levelMaterialId.Value));
             }
             return View();
         }
 
         public IEnumerable<SelectListItem> GetLevelCounts()
         {
-            for (int j = 1; j <= LevelService.GetLevels().Count(); j++)
+            for (int j = 0; j <= LevelService.GetLevels().Count(); j++)
             {
-                yield return new SelectListItem
-                {
-                    Text = j.ToString(),
-                    Value = j.ToString()
-                };
-
+                var elementAtOrDefault = LevelService.GetLevels().ElementAtOrDefault(j);
+                if (elementAtOrDefault != null)
+                    yield return new SelectListItem
+                    {
+                        Text = elementAtOrDefault.Name,
+                        Value = elementAtOrDefault.LevelId.ToString()
+                    };
             }
         }
     }
