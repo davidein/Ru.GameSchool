@@ -2,12 +2,16 @@
 @{
     ViewBag.Title = "Listi yfir próf";
 }
+@section sidebar {
+    @Html.Partial("_LeftSideBar")
+}
+
 <h2>
-    Listi yfir þín próf</h2>
+    Próf: @ViewBag.Course.Name </h2>
 @if (User.IsInRole("Teacher"))
 {
     <p>
-        @Html.ActionLink("Búa til nýtt próf", "Create")
+        @Html.ActionLink("Búa til nýtt próf", "Create", new { id = ViewBag.Course.CourseId })
     </p>
 }
 <table class="table table-striped table-bordered table-condensed">
@@ -44,7 +48,7 @@
                 @Html.DisplayFor(modelItem => item.Level.Course.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.LevelId)
+                @Html.ActionLink(@item.Name, "Get", "Level", new { id = item.LevelId }, null)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Description)

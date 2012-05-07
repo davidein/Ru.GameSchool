@@ -38,9 +38,11 @@ namespace Ru.GameSchool.Web.Controllers
 
         [HttpGet]
         [Authorize(Roles = "Teacher")]
-        public ActionResult Create()
+        public ActionResult Create(int courseId)
         {
-            ViewBag.LevelCount = GetLevelCounts();
+
+            ViewBag.LevelCount = GetLevelCounts(0);
+
             ViewBag.ContentTypes = LevelService.GetContentTypes();
 
             return View();
@@ -48,11 +50,11 @@ namespace Ru.GameSchool.Web.Controllers
 
         [HttpPost]
         [Authorize(Roles = "Teacher")]
-        public ActionResult Create(LevelMaterial levelMaterial)
+        public ActionResult Create(LevelMaterial levelMaterial, int courseId)
         {
             if (ModelState.IsValid)
             {
-                ViewBag.LevelCount = GetLevelCounts();
+                ViewBag.LevelCount = GetLevelCounts(0);
                 ViewBag.ContentTypes = LevelService.GetContentTypes();
                 LevelService.CreateLevelMaterial(levelMaterial);
                 //ViewBag.ContentTypes = LevelService.GetContentTypes();
@@ -63,9 +65,10 @@ namespace Ru.GameSchool.Web.Controllers
 
         [HttpGet]
         [Authorize(Roles = "Teacher")]
-        public ActionResult Edit(int? levelMaterialId)
+        public ActionResult Edit(int? levelMaterialId, int courseId)
         {
-            ViewBag.LevelCount = GetLevelCounts();
+            ViewBag.LevelCount = GetLevelCounts(courseId);
+            ViewBag.LevelCount = GetLevelCounts(0);
             ViewBag.ContentTypes = LevelService.GetContentTypes();
 
             if (levelMaterialId.HasValue)
@@ -79,11 +82,12 @@ namespace Ru.GameSchool.Web.Controllers
 
         [HttpPost]
         [Authorize(Roles = "Teacher")]
-        public ActionResult Edit(int? levelMaterialId, LevelMaterial levelMaterial)
+        public ActionResult Edit(int? levelMaterialId, LevelMaterial levelMaterial, int courseId)
         {
             if (ModelState.IsValid)
             {
-                ViewBag.LevelCount = GetLevelCounts();
+
+                ViewBag.LevelCount = GetLevelCounts(0);
                 ViewBag.ContentTypes = LevelService.GetContentTypes();
                 if (TryUpdateModel(levelMaterial))
                 {

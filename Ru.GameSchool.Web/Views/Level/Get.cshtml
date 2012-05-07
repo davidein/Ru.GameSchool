@@ -4,7 +4,6 @@
     ViewBag.Title = "Borð";
 }
 
-<h2>@ViewBag.Title</h2>
 
 @section sidebar {
 
@@ -12,15 +11,29 @@
 
 }
 
-    <div class="display-label">
-        @Html.DisplayFor(model => model.Name) -
-        @Html.DisplayNameFor(model => model.Start) -
-        @Html.DisplayFor(model => model.Start) - 
-        @Html.DisplayNameFor(model => model.Stop) -
-        @Html.DisplayFor(model => model.Stop)       
-        @if (User.IsInRole("Teacher")){
-            <span>@Html.ActionLink("Edit", "Edit", new { id = Model.LevelId })</span>
+<div class="page-header">
+    <h1>@ViewBag.CourseName</h1>
+</div>
+
+<ul class="nav nav-tabs">
+            @foreach (var m in ViewBag.Levels)
+            {
+                  <li @if (m.LevelId == Model.LevelId ) { <text>class="active"</text>}><a href="/Level/Get/@m.LevelId">@m.Name</a></li>
             }
+
+    </ul>
+
+
+    <div class="display-label">
+        <h2>@Html.DisplayFor(model => model.Name)</h2>
+        @Html.DisplayNameFor(model => model.Start):
+        @Html.DisplayFor(model => model.Start) - 
+        @Html.DisplayNameFor(model => model.Stop):
+        @Html.DisplayFor(model => model.Stop)
+        @if (User.IsInRole("Teacher"))
+        {
+            <span>@Html.ActionLink("Edit", "Edit", new { id = Model.LevelId })</span>
+        }
     </div>
 
 
