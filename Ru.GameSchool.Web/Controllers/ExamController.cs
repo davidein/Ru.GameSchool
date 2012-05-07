@@ -54,7 +54,7 @@ namespace Ru.GameSchool.Web.Controllers
         [Authorize(Roles = "Student, Teacher")]
         public ActionResult TakeExam(int? levelExamId)
         {
-            
+
             if (levelExamId.HasValue)
             {
                 var exam = LevelService.GetLevelExam(levelExamId.Value);
@@ -190,11 +190,11 @@ namespace Ru.GameSchool.Web.Controllers
             }
         }
 
-        public IEnumerable<SelectListItem> GetLevelCounts()
+        public IEnumerable<SelectListItem> GetLevelCounts(int CourseId)
         {
-            for (int j = 0; j <= LevelService.GetLevels().Count(); j++)
+            for (int j = 0; j <= LevelService.GetLevels(CourseId).Count(); j++)
             {
-                var elementAtOrDefault = LevelService.GetLevels().ElementAtOrDefault(j);
+                var elementAtOrDefault = LevelService.GetLevels(CourseId).ElementAtOrDefault(j);
                 if (elementAtOrDefault != null)
                     yield return new SelectListItem
                     {

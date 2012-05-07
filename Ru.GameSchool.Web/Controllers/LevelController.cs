@@ -23,12 +23,13 @@ namespace Ru.GameSchool.Web.Controllers
                 var model = LevelService.GetLevel(levelId);
                 if (model != null)
                 {
-
+                    int courseId = model.CourseId;
+                    ViewBag.Levels = LevelService.GetLevels(courseId);
                     ViewBag.Projects = LevelService.GetLevelProjects();
-                    ViewBag.MaterialsVideo = LevelService.GetLevelMaterials(levelId);
-                    ViewBag.MaterialsSlides = LevelService.GetLevelMaterials(levelId);
+                    ViewBag.MaterialsVideo = LevelService.GetLevelMaterials(levelId,1);
+                    ViewBag.MaterialsSlides = LevelService.GetLevelMaterials(levelId,2);
                     ViewBag.MaterialsMessages = LevelService.GetLevelMaterials(levelId);
-                    ViewBag.MaterialsDocs = LevelService.GetLevelMaterials(levelId);
+                    ViewBag.MaterialsDocs = LevelService.GetLevelMaterials(levelId,3);
                     //ViewBag.Exams = LevelService.GetLevelExams();
 
                     return View(model);

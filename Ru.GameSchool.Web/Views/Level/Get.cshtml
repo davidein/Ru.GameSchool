@@ -8,7 +8,7 @@
 
 @section sidebar {
 
-@Html.Partial("_TeacherSideBar")
+@Html.Partial("_LeftSideBar")
 
 }
 
@@ -32,33 +32,33 @@
             <ul>
             @foreach (var m in ViewBag.MaterialsVideo)
             {
-                  <li><a href="/Project/Get/@m.LevelMaterialId">@m.Title</a></li>
+                  <li><a href="/Material/Get/@m.LevelMaterialId">@m.Title</a></li>
             }
             </ul>
             <p>
-            <a class="btn" href="/Project/">Öll myndbönd &raquo;</a></p>
+            <a class="btn" href="/Material/1">Öll myndbönd &raquo;</a></p>
         </div>
         <div class="span4 well">
             <h2>Glærur</h2>
             <ul>
-            @foreach (var m in ViewBag.Projects)
+            @foreach (var m in ViewBag.MaterialsSlides)
             {
-                  <li><a href="/Project/Get/@m.LevelId">@m.Name</a></li>
+                  <li><a href="/Material/Get/@m.LevelMaterialId">@m.Title</a></li>
             }
             </ul>
             <p>
-            <a class="btn" href="/Project/">Allar glærur  &raquo;</a></p>
+            <a class="btn" href="/Material/2">Allar glærur  &raquo;</a></p>
         </div>
         <div class="span4 well">
             <h2>Tilkynningar</h2>
             <ul>
-            @foreach (var m in ViewBag.Projects)
+            @foreach (var m in ViewBag.MaterialsMessages)
             {
-                  <li><a href="/Project/Get/@m.LevelId">@m.Name</a></li>
+                  <li><a href="/Material/Get/@m.LevelMaterialId">@m.Title</a></li>
             }
             </ul>
             <p>
-            <a class="btn" href="/Project/">Allar tilkynnignar &raquo;</a></p>
+            <a class="btn" href="/Material/">Allar tilkynningar &raquo;</a></p>
         </div>
         </div>
                 <!--/row-->
@@ -77,24 +77,24 @@
         <div class="span4 well">
             <h2>Netpróf</h2>
             <ul>
-            @foreach (var m in ViewBag.Projects)
+            @foreach (var m in ViewBag.Exams)
             {
-                  <li><a href="/Project/Get/@m.LevelId">@m.Name</a></li>
+                  <li><a href="/Exam/Get/@m.LevelId">@m.Name</a></li>
             }
             </ul>
             <p>
-            <a class="btn" href="/Project/">Öll próf &raquo;</a></p>
+            <a class="btn" href="/Eams/">Öll próf &raquo;</a></p>
         </div>
         <div class="span4 well">
             <h2>Skjöl</h2>
             <ul>
-            @foreach (var m in ViewBag.Projects)
+            @foreach (var m in ViewBag.MaterialsDocs)
             {
-                  <li><a href="/Project/Get/@m.LevelId">@m.Name</a></li>
+                  <li><a href="/Material/Get/@m.LevelMaterialId">@m.Title</a></li>
             }
             </ul>
             <p>
-            <a class="btn" href="/Project/">Öll próf &raquo;</a></p>
+            <a class="btn" href="/Material/3">Öll skjöl &raquo;</a></p>
         </div>
     </div>
 

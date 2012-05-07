@@ -59,17 +59,17 @@ namespace Ru.GameSchool.BusinessLayer.Services
         public IEnumerable<Course> GetCoursesByUserInfoId(int userInfoId)
         {
             if (userInfoId <= 0)
-            { 
+            {
                 return null;
             }
 
             var courses = (from x in GameSchoolEntities.UserInfoes
-                          where x.UserInfoId == userInfoId
-                          select x).FirstOrDefault().Courses;
+                           where x.UserInfoId == userInfoId
+                           select x).FirstOrDefault().Courses;
 
             var filteredCourses = from y in courses
-                      where y.Start <= DateTime.Now && y.Stop >= DateTime.Now
-                      select y;
+                                  where y.Start <= DateTime.Now && y.Stop >= DateTime.Now
+                                  select y;
 
             return filteredCourses;
         }
@@ -82,7 +82,7 @@ namespace Ru.GameSchool.BusinessLayer.Services
         public IEnumerable<Department> GetDepartments()
         {
             var departments = from x in GameSchoolEntities.Departments
-                          select x;
+                              select x;
 
             return departments;
         }
@@ -131,8 +131,8 @@ namespace Ru.GameSchool.BusinessLayer.Services
         public IEnumerable<CourseGrade> GetCourseGrades(int courseId)
         {
             var courseGrades = from x in GameSchoolEntities.CourseGrades
-                         where x.CourseId == courseId
-                         select x;
+                               where x.CourseId == courseId
+                               select x;
 
 
             return courseGrades;
@@ -147,8 +147,8 @@ namespace Ru.GameSchool.BusinessLayer.Services
         public CourseGrade GetCourseGradeByCourseIdAndUserInfoId(int courseId, int userInfoId)
         {
             var courseGrade = from x in GameSchoolEntities.CourseGrades
-                               where x.CourseId == courseId && x.UserInfoId == userInfoId  
-                               select x;
+                              where x.CourseId == courseId && x.UserInfoId == userInfoId
+                              select x;
 
 
             return courseGrade.FirstOrDefault();
@@ -171,6 +171,34 @@ namespace Ru.GameSchool.BusinessLayer.Services
                          select x;
 
             return course.FirstOrDefault();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="userInfoId"></param>
+        /// <param name="courseId"></param>
+        /// <returns></returns>
+        public IEnumerable<Course> GetCoursesByUserInfoIdAndCourseId(int userInfoId, int courseId)
+        {
+            if (0 > userInfoId | 0 > courseId)
+            {
+                return null;
+            }
+
+            var query = GameSchoolEntities.UserInfoes.Join(GameSchoolEntities.Courses,
+                                                           u => u.DepartmentId, c => c.DepartmentId,
+                                                           (u, c) => new
+                                                                         {
+                                                                             u,
+                                                                             c
+                                                                         }).Where(
+                                                                             x =>
+                                                                             x.c.CourseId == courseId &&
+                                                                             x.u.UserInfoId == userInfoId)
+                                                                           .Select(m => m.c);
+
+            return query;
         }
     }
 }

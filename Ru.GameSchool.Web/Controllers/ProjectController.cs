@@ -11,30 +11,37 @@ namespace Ru.GameSchool.Web.Controllers
     {
         [Authorize(Roles = "Teacher, Student")]
         [HttpGet]
-        public ActionResult Index()
+        public ActionResult Index(int? id)
         {
             var userInfoId = UserService.GetUser(User.Identity.Name).UserInfoId;
 
-            ViewBag.Courses = CourseService.GetCoursesByUserInfoId(userInfoId).ToList();
+            var courses = id.HasValue
+                                  ? CourseService.GetCoursesByUserInfoIdAndCourseId(userInfoId, id.Value)
+                                  : CourseService.GetCoursesByUserInfoId(userInfoId);
 
-            var projects = LevelService.GetLevelProjects();
+            ViewBag.Courses = courses;
+
+            var projects = id.HasValue
+                ? LevelService.GetLevelProjectsByCourseIdAndUserInfoId(userInfoId, id.Value)
+                : LevelService.GetLevelProjectsByUserId(userInfoId);
 
             return View(projects);
         }
 
-
         #region Student
-        [Authorize(Roles = "Student")]
+        [Authorize(Roles = "Student, Teacher")]
         [HttpGet]
         public ActionResult Get(int? levelProjectId)
         {
+            ViewBag.AllowedFileExtensions = GetAllowedFileExtensions();
+            
             if (levelProjectId.HasValue)
             {
                 var levelProject = LevelService.GetLevelProject(levelProjectId.Value);
                 ViewBag.LevelProject = levelProject;
-                ViewBag.AllowedFileExtensions = GetAllowedFileExtensions();
                 return View(levelProject);
             }
+
             return View();
         }
 
@@ -48,11 +55,10 @@ namespace Ru.GameSchool.Web.Controllers
 
                 if (levelProj != null)
                 {
-                    levelProj.ProjectUrl = levelProject.ProjectUrl;
+                   // levelProj.ProjectUrl = levelProject.ProjectUrl;
                     LevelService.UpdateLevelProject(levelProj);
                 }
             }
-
             return View("Index");
         }
 
@@ -152,11 +158,11 @@ namespace Ru.GameSchool.Web.Controllers
             }
         }
 
-        public IEnumerable<SelectListItem> GetLevelCounts()
+        public IEnumerable<SelectListItem> GetLevelCounts(int CourseId)
         {
-            for (int j = 0; j <= LevelService.GetLevels().Count(); j++)
+            for (int j = 0; j <= LevelService.GetLevels(CourseId).Count(); j++)
             {
-                var elementAtOrDefault = LevelService.GetLevels().ElementAtOrDefault(j);
+                var elementAtOrDefault = LevelService.GetLevels(CourseId).ElementAtOrDefault(j);
                 if (elementAtOrDefault != null)
                     yield return new SelectListItem
                                      {

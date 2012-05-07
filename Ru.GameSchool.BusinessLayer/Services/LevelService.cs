@@ -45,13 +45,16 @@ namespace Ru.GameSchool.BusinessLayer.Services
 
             return level;
         }
+
+
+
         /// <summary>
         /// Returns a collection of level instances
         /// </summary>
         /// <returns>IEnumerable of level instances.</returns>
-        public IEnumerable<Level> GetLevels()
+        public IEnumerable<Level> GetLevels(int CourseId)
         {
-            return GameSchoolEntities.Levels;
+            return GameSchoolEntities.Levels.Where(x=> x.CourseId == CourseId);
         }
         /// <summary>
         /// Update a level object with new changes and persist it to the datasource.
@@ -62,6 +65,7 @@ namespace Ru.GameSchool.BusinessLayer.Services
             Save();
             //throw new System.NotImplementedException();
         }
+
 
         /// <summary>
         /// Persist a levelexam instance object to the datasource.
@@ -86,12 +90,12 @@ namespace Ru.GameSchool.BusinessLayer.Services
                 GameSchoolEntities.LevelExams.Where(le => le.LevelExamId == levelExamId).Include("LevelExamQuestions");
 
             var levelExam = query.FirstOrDefault();
-            
+
             if (levelExam == null)
             {
                 return null;
             }
-            
+
             return levelExam;
         }
 
@@ -206,7 +210,7 @@ namespace Ru.GameSchool.BusinessLayer.Services
                 levelProjectToUpdate.Name = levelProject.Name;
                 levelProjectToUpdate.Start = levelProject.Start;
                 levelProjectToUpdate.Stop = levelProject.Stop;
-                levelProjectToUpdate.ProjectUrl = levelProject.ProjectUrl;
+                //levelProjectToUpdate.ProjectUrl = levelProject.ProjectUrl;
 
                 Save();
             }
@@ -452,6 +456,38 @@ namespace Ru.GameSchool.BusinessLayer.Services
             {
                 yield return levelProjectResult;
             }
+        }
+
+        public IEnumerable<LevelProject> GetLevelProjectsByCourseIdAndUserInfoId(int userInfoId, int courseId)
+        {
+            if (0 > userInfoId | 0 > courseId)
+            {
+                return null;
+            }
+
+            var query =
+                GameSchoolEntities.Courses.Where(c => c.CourseId == courseId)
+                                          .SelectMany(c => c.UserInfoes
+                                              .Where(d => d.UserInfoId == userInfoId).SelectMany(x => x.Courses
+                                                  .SelectMany(d => d.Levels
+                                                      .SelectMany(g => g.LevelProjects))));
+
+            return query;
+        }
+
+        public IEnumerable<LevelProject> GetLevelProjectsByUserId(int userInfoId)
+        {
+            if (0 > userInfoId)
+            {
+                return null;
+            }
+
+            var query =
+                GameSchoolEntities.LevelProjects.SelectMany(
+                    c =>
+                    c.Level.Course.UserInfoes.Where(x => x.UserInfoId == userInfoId).SelectMany(
+                        d => d.Courses.SelectMany(f => f.Levels.SelectMany(k => k.LevelProjects))));
+            return query;
         }
     }
 }
