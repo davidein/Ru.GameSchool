@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using Ru.GameSchool.BusinessLayer;
 using System.Web;
 using Ru.GameSchool.BusinessLayer.Services;
+using Ru.GameSchool.Web.Classes.Helper;
 
 namespace Ru.GameSchool.Web.Controllers
 {
@@ -91,7 +92,14 @@ namespace Ru.GameSchool.Web.Controllers
         protected override void Initialize(System.Web.Routing.RequestContext requestContext)
         {
             base.Initialize(requestContext);
-            
+
+            if (User.Identity.IsAuthenticated)
+            {
+                var user = MembershipHelper.GetUser();
+                var list = CourseService.GetCoursesByUserInfoId(user.UserInfoId);
+                ViewBag.User = user;
+                ViewBag.UserCourseList = list.NestedList(3);
+            }
         }
     }
 }
