@@ -2,4 +2,31 @@
     ViewBag.Title = "UserCourse";
 }
 
-<h2>UserCourse</h2>
+<h2>Skrá notenda í Námskeið</h2>
+
+@section sidebar {
+
+    @Html.Partial("_AdminSideBar")
+
+}
+
+
+<h3>Notendur</h3>
+<div class="row-fluid">
+    @foreach (var u in ViewBag.Users)
+    {
+    <div class="span4 well userbox" style="cursor: move;">
+        <h3>@u.Fullname</h3>
+        <ul>
+            <li>@u.Email</li>
+            <li>@u.UserType.Name</li>
+            <li>Dragðu notandann í námskeið til að skrá</li>
+        </ul>
+        <p><a class="btn btn-small" href="/Admin/User//">Skoða nánar &raquo;</a></p>
+    </div>
+    }
+</div>
+
+
+<h3>Námskeið</h3>
+<div></div>

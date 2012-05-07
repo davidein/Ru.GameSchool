@@ -166,6 +166,7 @@ namespace Ru.GameSchool.Web.Controllers
 
         public ActionResult UserCourse()
         {
+            ViewBag.Users = UserService.GetUsers();
 
             return View();
         }
