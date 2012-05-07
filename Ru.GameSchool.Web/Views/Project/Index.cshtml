@@ -5,14 +5,7 @@
 <h2>
     Verkefnin mín</h2>
 @section sidebar {
-    @if (User.IsInRole("Teacher"))
-    {
-        @Html.Partial("_TeacherSideBar")
-    }
-    else
-    {
-        @Html.Partial("_LeftSideBar")
-    }
+    @Html.Partial("_LeftSideBar")
 }
 @foreach (var items in ViewBag.Courses)
 {
@@ -30,6 +23,12 @@
                 <th>
                     @Html.DisplayNameFor(model => model.Description)
                 </th>
+                @if (User.IsInRole("Teacher"))
+                {
+                    <th>
+                        Aðgerðir kennara
+                    </th>
+                }
             </tr>
             @foreach (var i in items.Levels)
             {
@@ -37,7 +36,7 @@
                 {
                 <tr>
                     <td>
-                        @Html.ActionLink((@j.Name + " - Skiladagur: " + @j.Stop.ToString("dd.MM.yyyy HH:mm")) as string, User.IsInRole("Student") ? "Get" : "Edit", new { LevelProjectId = @j.LevelProjectId })
+                        @Html.ActionLink((@j.Name + " - Skiladagur: " + @j.Stop.ToString("dd.MM.yyyy HH:mm")) as string, "Get", new { levelProjectId = @j.LevelProjectId })
                     </td>
                     <td>
                         @foreach (var x in j.LevelProjectResults)
@@ -58,6 +57,13 @@
                     <td>
                         @j.Description
                     </td>
+                    @if (User.IsInRole("Teacher"))
+                    {
+                        <td>
+                            @Html.ActionLink("Breyta", "Edit", new { levelProjectId = j.LevelProjectId }) |
+                            @Html.ActionLink("Eyða", "Delete", new { levelProjectId = j.LevelProjectId })
+                        </td>   
+                    }
                 </tr>
                 }
             }

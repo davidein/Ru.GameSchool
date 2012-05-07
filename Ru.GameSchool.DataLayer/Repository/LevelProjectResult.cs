@@ -53,12 +53,6 @@ namespace Ru.GameSchool.DataLayer.Repository
         }
         private int _userInfoId;
     
-        public virtual string Feedback
-        {
-            get;
-            set;
-        }
-    
         public virtual double Grade
         {
             get;
@@ -66,6 +60,30 @@ namespace Ru.GameSchool.DataLayer.Repository
         }
     
         public virtual System.DateTime CreateDateTime
+        {
+            get;
+            set;
+        }
+    
+        public virtual string TeacherFeedback
+        {
+            get;
+            set;
+        }
+    
+        public virtual string UserFeedback
+        {
+            get;
+            set;
+        }
+    
+        public virtual Nullable<System.DateTime> GradeDate
+        {
+            get;
+            set;
+        }
+    
+        public virtual string ContentID
         {
             get;
             set;
