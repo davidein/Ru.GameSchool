@@ -95,9 +95,14 @@ namespace Ru.GameSchool.BusinessLayer.Services
             return levelExam;
         }
 
-        public IEnumerable<LevelExam> GetLevelExams()
+        public IEnumerable<LevelExam> GetLevelExams(int courseId, int userInfoId)
         {
-            return GameSchoolEntities.LevelExams;
+            var list = GameSchoolEntities.LevelExams.Where(x => x.Level.CourseId == courseId);
+            var exams = list.Where(x=>x.Level.Course.UserInfoes.Where(y=>y.UserInfoId == userInfoId).Count()>0);
+
+
+
+            return exams;
         }
         /// <summary>
         /// 
@@ -290,9 +295,9 @@ namespace Ru.GameSchool.BusinessLayer.Services
         /// Method that returns a collection of leveexamquestion objects.
         /// </summary>
         /// <returns>IEnumerable collection of levelexamquestions.</returns>
-        public IEnumerable<LevelExamQuestion> GetLevelExamQuestions()
+        public IEnumerable<LevelExamQuestion> GetLevelExamQuestions(int levelExamId)
         {
-            return GameSchoolEntities.LevelExamQuestions;
+            return GameSchoolEntities.LevelExamQuestions.Where(x=>x.LevelExamId == levelExamId);
         }
 
         public LevelExamQuestion GetLevelExamQuestion(int levelExamQuestionsId)

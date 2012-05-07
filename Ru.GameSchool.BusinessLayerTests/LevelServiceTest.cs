@@ -259,20 +259,6 @@ namespace Ru.GameSchool.BusinessLayerTests
         }
 
         /// <summary>
-        ///A test for GetLevelExamQuestions
-        ///</summary>
-        [TestMethod()]
-        public void GetLevelExamQuestionsTest()
-        {
-            LevelService target = new LevelService(); // TODO: Initialize to an appropriate value
-            IEnumerable<LevelExamQuestion> expected = null; // TODO: Initialize to an appropriate value
-            IEnumerable<LevelExamQuestion> actual;
-            actual = target.GetLevelExamQuestions();
-            Assert.AreEqual(expected, actual);
-            Assert.Inconclusive("Verify the correctness of this test method.");
-        }
-
-        /// <summary>
         ///A test for GetLevelExamResults
         ///</summary>
         [TestMethod()]
@@ -310,7 +296,7 @@ namespace Ru.GameSchool.BusinessLayerTests
             LevelService target = new LevelService(); // TODO: Initialize to an appropriate value
             IEnumerable<LevelExam> expected = null; // TODO: Initialize to an appropriate value
             IEnumerable<LevelExam> actual;
-            actual = target.GetLevelExams();
+            actual = target.GetLevelExams(1,1);
             Assert.AreEqual(expected, actual);
             Assert.Inconclusive("Verify the correctness of this test method.");
         }

@@ -29,7 +29,7 @@ namespace Ru.GameSchool.Web.Controllers
                     ViewBag.MaterialsSlides = LevelService.GetLevelMaterials(levelId);
                     ViewBag.MaterialsMessages = LevelService.GetLevelMaterials(levelId);
                     ViewBag.MaterialsDocs = LevelService.GetLevelMaterials(levelId);
-                    ViewBag.Exams = LevelService.GetLevelExams();
+                    //ViewBag.Exams = LevelService.GetLevelExams();
 
                     return View(model);
                 }

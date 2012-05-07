@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using Ru.GameSchool.DataLayer.Repository;
 using System.Web.Security;
 using Ru.GameSchool.Web.Classes;
+using Ru.GameSchool.Web.Classes.Helper;
 
 namespace Ru.GameSchool.Web.Controllers
 {
@@ -14,41 +15,56 @@ namespace Ru.GameSchool.Web.Controllers
     {
         [HttpGet]
         [Authorize(Roles = "Student, Teacher")]
-        public ActionResult Index()
+        public ActionResult Index(int? id)
         {
-            var exams = LevelService.GetLevelExams();
+            var user = MembershipHelper.GetUser();
 
-            return View(exams);
+            if (id.HasValue)
+            {
+                //var level =  LevelService.GetLevel(id.Value);
+
+                //level.Course.Levels
+
+                var course = CourseService.GetCourse(id.Value);
+
+                var exams = LevelService.GetLevelExams(id.Value, user.UserInfoId);
+
+                ViewBag.Course = course;
+
+                return View(exams);
+            }
+            return View();
         }
+
         #region Student
 
         [HttpGet]
-        [Authorize(Roles = "Student")]
-        public ActionResult Get(int? LevelExamId)
+        [Authorize(Roles = "Student, Teacher")]
+        public ActionResult Get(int? levelExamId)
         {
-            if (LevelExamId.HasValue)
+            if (levelExamId.HasValue)
             {
-                var exam = LevelService.GetLevelExam(LevelExamId.Value);
+                var exam = LevelService.GetLevelExam(levelExamId.Value);
                 return View(exam);
             }
             return View();
         }
 
         [HttpGet]
-        [Authorize(Roles = "Student")]
-        public ActionResult TakeExam(int? LevelExamId)
+        [Authorize(Roles = "Student, Teacher")]
+        public ActionResult TakeExam(int? levelExamId)
         {
             
-            if (LevelExamId.HasValue)
+            if (levelExamId.HasValue)
             {
-                var exam = LevelService.GetLevelExam(LevelExamId.Value);
+                var exam = LevelService.GetLevelExam(levelExamId.Value);
                 return View(exam);
             }
             return View();
         }
 
         [HttpPost]
-        [Authorize(Roles = "Student")]
+        [Authorize(Roles = "Student, Teacher")]
         public ActionResult TakeExam(LevelExam levelExam)
         {
             if (ModelState.IsValid)
@@ -63,11 +79,16 @@ namespace Ru.GameSchool.Web.Controllers
 
         [Authorize(Roles = "Teacher")]
         [HttpGet]
-        public ActionResult Create()
+        public ActionResult Create(int? id)
         {
-            ViewBag.GradePercentageValues = GradePercentageValue();
-            ViewBag.MapCount = MapCount();
-            return View();
+            if (id.HasValue)
+            {
+                ViewBag.GradePercentageValues = GradePercentageValue();
+                ViewBag.MapCount = MapCount(id.Value);
+                return View();
+            }
+
+            return RedirectToAction("NotFound", "Home");
         }
 
         [Authorize(Roles = "Teacher")]
@@ -77,7 +98,20 @@ namespace Ru.GameSchool.Web.Controllers
             return View();
         }
 
-        
+        [Authorize(Roles = "Teacher")]
+        public ActionResult ExamQuestions(int? id)
+        {
+            if (id.HasValue)
+            {
+                var exam = LevelService.GetLevelExam(id.Value);
+                //var examQuestions = LevelService.GetLevelExamQuestions(id.Value);
+
+                ViewBag.Exam = exam;
+                ViewBag.QuestionList = exam.LevelExamQuestions;
+            }
+
+            return View();
+        }
 
         [Authorize(Roles = "Teacher")]
         [HttpGet]
@@ -122,14 +156,14 @@ namespace Ru.GameSchool.Web.Controllers
 
         #region helper methods
 
-        public IEnumerable<SelectListItem> MapCount()
+        public IEnumerable<SelectListItem> MapCount(int courseId)
         {
-            for (int j = 1; j <= LevelService.GetLevels().Count(); j++)
+            foreach ( var level in LevelService.GetLevels())
             {
                 yield return new SelectListItem
                 {
-                    Text = j.ToString(),
-                    Value = j.ToString()
+                    Text = level.Name,
+                    Value = level.LevelId.ToString()
                 };
             }
         }
@@ -139,7 +173,7 @@ namespace Ru.GameSchool.Web.Controllers
             {
                 yield return new SelectListItem
                 {
-                    Text = j.ToString() + "%",
+                    Text = string.Format("{0}%", j),
                     Value = j.ToString()
                 };
             }
@@ -150,7 +184,7 @@ namespace Ru.GameSchool.Web.Controllers
             {
                 yield return new SelectListItem
                 {
-                    Text = j.ToString() + " %",
+                    Text = string.Format("{0} %", j),
                     Value = j.ToString()
                 };
             }
