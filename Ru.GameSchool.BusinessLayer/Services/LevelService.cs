@@ -45,13 +45,16 @@ namespace Ru.GameSchool.BusinessLayer.Services
 
             return level;
         }
+
+
+
         /// <summary>
         /// Returns a collection of level instances
         /// </summary>
         /// <returns>IEnumerable of level instances.</returns>
-        public IEnumerable<Level> GetLevels()
+        public IEnumerable<Level> GetLevels(int CourseId)
         {
-            return GameSchoolEntities.Levels;
+            return GameSchoolEntities.Levels.Where(x=> x.CourseId == CourseId);
         }
         /// <summary>
         /// Update a level object with new changes and persist it to the datasource.
@@ -62,6 +65,7 @@ namespace Ru.GameSchool.BusinessLayer.Services
             Save();
             //throw new System.NotImplementedException();
         }
+
 
         /// <summary>
         /// Persist a levelexam instance object to the datasource.
