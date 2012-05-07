@@ -83,6 +83,8 @@ namespace Ru.GameSchool.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                ViewBag.LevelCount = GetLevelCounts();
+                ViewBag.ContentTypes = LevelService.GetContentTypes();
                 if (TryUpdateModel(levelMaterial))
                 {
                     LevelService.UpdateLevelMaterial(levelMaterial);

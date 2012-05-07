@@ -395,6 +395,19 @@ namespace Ru.GameSchool.BusinessLayer.Services
         {
             if (levelMaterial != null)
             {
+                var query = GameSchoolEntities.LevelMaterials
+                    .Where(l => l.LevelMaterialId == levelMaterial.LevelMaterialId);
+
+                var levelMaterialToUpdate = query.FirstOrDefault();
+                if (levelMaterialToUpdate != null)
+                {
+                    levelMaterialToUpdate.ContentId = levelMaterial.ContentId;
+                    levelMaterialToUpdate.ContentTypeId = levelMaterial.ContentTypeId;
+                    levelMaterialToUpdate.Url = levelMaterial.Url;
+                    levelMaterialToUpdate.Description = levelMaterial.Description;
+                    levelMaterialToUpdate.Title = levelMaterial.Title;
+                }
+                Save();
 
             }
         }

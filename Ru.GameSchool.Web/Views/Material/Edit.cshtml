@@ -24,6 +24,8 @@
         <strong>Villa!</strong> @ViewBag.ErrorMessage
     </div>
 }
+
+@* TODO: CHECK SYNTAX @using (Html.BeginForm("Edit", "Material", arg, FormMethod.Post, new { @class = "form-horizontal" }))*@
 @using (Html.BeginForm())
 {
     @Html.ValidationSummary(true)
