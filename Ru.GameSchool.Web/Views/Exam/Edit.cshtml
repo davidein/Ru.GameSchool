@@ -60,13 +60,32 @@
                 <div class="control-group">
                     <div class="controls">
                         <button type="submit" value="Save" class="btn btn-success">
-                            <i class="icon-ok icon-white"></i>Breyta verkefni
+                            <i class="icon-ok icon-white"></i>Breyta prófi
                         </button>
                     </div>
                 </div>
             </p>
     </fieldset>
 }
+
+@Html.ActionLink("Spurningar", "ExamQuestions", new { id = Model.LevelExamId }, null)
+
+@using (Html.BeginForm("CreateQuestion", "Exam", FormMethod.Post))
+{
+    <fieldset>
+        <legend>Ný spurning</legend>
+        @Html.HiddenFor(model => model.LevelExamId)
+        <div class="control-group">
+            <label for="" class="control-label"></label>
+            <div class="controls">
+                @Html.TextBox("examQuestion", "", new { @class = "input-xlarge" });
+                @Html.TextAreaFor(model => model.Name, new { @class = "input-xlarge" })
+                <span class="help-inline">@Html.ValidationMessageFor(model => model.Name)</span>
+            </div>
+        </div>
+    </fieldset>    
+}
+
 <div>
     @Html.ActionLink("Aftur á forsíðu prófa", "Index")
 </div>

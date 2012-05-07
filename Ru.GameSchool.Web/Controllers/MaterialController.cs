@@ -40,7 +40,9 @@ namespace Ru.GameSchool.Web.Controllers
         [Authorize(Roles = "Teacher")]
         public ActionResult Create(int courseId)
         {
-            ViewBag.LevelCount = GetLevelCounts(courseId);
+
+            ViewBag.LevelCount = GetLevelCounts(0);
+
             ViewBag.ContentTypes = LevelService.GetContentTypes();
 
             return View();
@@ -52,7 +54,7 @@ namespace Ru.GameSchool.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                ViewBag.LevelCount = GetLevelCounts(courseId);
+                ViewBag.LevelCount = GetLevelCounts(0);
                 ViewBag.ContentTypes = LevelService.GetContentTypes();
                 LevelService.CreateLevelMaterial(levelMaterial);
                 //ViewBag.ContentTypes = LevelService.GetContentTypes();
@@ -66,6 +68,7 @@ namespace Ru.GameSchool.Web.Controllers
         public ActionResult Edit(int? levelMaterialId, int courseId)
         {
             ViewBag.LevelCount = GetLevelCounts(courseId);
+            ViewBag.LevelCount = GetLevelCounts(0);
             ViewBag.ContentTypes = LevelService.GetContentTypes();
 
             if (levelMaterialId.HasValue)
@@ -83,7 +86,8 @@ namespace Ru.GameSchool.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                ViewBag.LevelCount = GetLevelCounts(courseId);
+
+                ViewBag.LevelCount = GetLevelCounts(0);
                 ViewBag.ContentTypes = LevelService.GetContentTypes();
                 if (TryUpdateModel(levelMaterial))
                 {

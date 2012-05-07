@@ -82,7 +82,8 @@ namespace Ru.GameSchool.Web.Controllers
         [HttpPost]
         public ActionResult Create(LevelProject levelProject, int courseId)
         {
-            ViewBag.LevelCount = GetLevelCounts(courseId);
+
+            ViewBag.LevelCount = GetLevelCounts(0);
             ViewBag.GradePercentageValue = GetPercentageValue();
 
             if (ModelState.IsValid)
@@ -97,7 +98,8 @@ namespace Ru.GameSchool.Web.Controllers
         [HttpGet]
         public ActionResult Create(int courseId)
         {
-            ViewBag.LevelCount = GetLevelCounts(courseId);
+
+            ViewBag.LevelCount = GetLevelCounts(0);
             ViewBag.GradePercentageValue = GetPercentageValue();
 
             return View();
@@ -108,7 +110,8 @@ namespace Ru.GameSchool.Web.Controllers
         [HttpGet]
         public ActionResult Edit(int? levelProjectId, int courseId)
         {
-            ViewBag.LevelCount = GetLevelCounts(courseId);
+
+            ViewBag.LevelCount = GetLevelCounts(0);
             ViewBag.GradePercentageValue = GetPercentageValue();
 
             if (levelProjectId.HasValue)
@@ -127,7 +130,8 @@ namespace Ru.GameSchool.Web.Controllers
         [HttpPost]
         public ActionResult Edit(int? levelProjectId, LevelProject levelProject, int courseId)
         {
-            ViewBag.LevelCount = GetLevelCounts(courseId);
+
+            ViewBag.LevelCount = GetLevelCounts(0);
             ViewBag.GradePercentageValue = GetPercentageValue();
 
             if (ModelState.IsValid)

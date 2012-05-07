@@ -360,6 +360,7 @@
     <Content Include="Views\Exam\TakeExam.cshtml" />
     <Content Include="Views\Exam\Get.cshtml" />
     <Content Include="Views\Exam\Create.cshtml" />
+    <Content Include="Views\Exam\ExamQuestions.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
