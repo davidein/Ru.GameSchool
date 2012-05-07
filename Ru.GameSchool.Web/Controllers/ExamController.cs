@@ -38,7 +38,7 @@ namespace Ru.GameSchool.Web.Controllers
         [Authorize(Roles = "Student")]
         public ActionResult TakeExam(int? LevelExamId)
         {
-            
+
             if (LevelExamId.HasValue)
             {
                 var exam = LevelService.GetLevelExam(LevelExamId.Value);
@@ -77,7 +77,7 @@ namespace Ru.GameSchool.Web.Controllers
             return View();
         }
 
-        
+
 
         [Authorize(Roles = "Teacher")]
         [HttpGet]

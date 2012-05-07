@@ -11,17 +11,21 @@ namespace Ru.GameSchool.Web.Controllers
     {
         [Authorize(Roles = "Teacher, Student")]
         [HttpGet]
-        public ActionResult Index()
+        public ActionResult Index(int? id)
         {
+            IEnumerable<LevelProject> projects = null;
             var userInfoId = UserService.GetUser(User.Identity.Name).UserInfoId;
 
-            ViewBag.Courses = CourseService.GetCoursesByUserInfoId(userInfoId).ToList();
+            ViewBag.Courses = id.HasValue
+                                  ? CourseService.GetCoursesByUserInfoIdAndCourseId(userInfoId, id.Value)
+                                  : CourseService.GetCoursesByUserInfoId(userInfoId);
 
-            var projects = LevelService.GetLevelProjects();
+            projects = id.HasValue
+                ? LevelService.GetLevelProjectsByCourseIdAndUserInfoId(userInfoId, id.Value)
+                : LevelService.GetLevelProjectsByUserId(userInfoId);
 
             return View(projects);
         }
-
 
         #region Student
         [Authorize(Roles = "Student")]

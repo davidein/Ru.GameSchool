@@ -11,7 +11,7 @@
     }
     else
     {
-@*@Html.Partial("_LeftSideBar")*@
+        @Html.Partial("_LeftSideBar")
     }
 }
 @foreach (var items in ViewBag.Courses)
@@ -44,7 +44,7 @@
                         {
                             if (Math.Abs(@x.Grade) > 0)
                             {
-                                @x.Grade
+                            @x.Grade
                             }
                             else
                             {

@@ -172,5 +172,19 @@ namespace Ru.GameSchool.BusinessLayer.Services
 
             return course.FirstOrDefault();
         }
+
+        public IEnumerable<Course> GetCoursesByUserInfoIdAndCourseId(int userInfoId, int courseId)
+        {
+            if (0 > userInfoId | 0 > courseId)
+            {
+                return null;
+            }
+
+            var query = GameSchoolEntities.Courses.Where(c => c.CourseId == courseId);
+
+            var courses = query.SelectMany(d => d.UserInfoes.Where(k => k.UserInfoId == userInfoId));
+
+            return courses.SelectMany(c => c.Courses);
+        }
     }
 }
