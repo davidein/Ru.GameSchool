@@ -47,6 +47,13 @@ namespace Ru.GameSchool.BusinessLayer.Services
         }
 
 
+        ////Delete?
+
+        public IEnumerable<Level> GetLevels()
+        {
+            return GameSchoolEntities.Levels;
+        }
+
 
         /// <summary>
         /// Returns a collection of level instances

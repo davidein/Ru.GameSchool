@@ -78,9 +78,9 @@ namespace Ru.GameSchool.Web.Controllers
         #region Teacher
         [Authorize(Roles = "Teacher")]
         [HttpPost]
-        public ActionResult Create(LevelProject levelProject)
+        public ActionResult Create(LevelProject levelProject, int courseId)
         {
-            ViewBag.LevelCount = GetLevelCounts();
+            ViewBag.LevelCount = GetLevelCounts(courseId);
             ViewBag.GradePercentageValue = GetPercentageValue();
 
             if (ModelState.IsValid)
@@ -93,9 +93,9 @@ namespace Ru.GameSchool.Web.Controllers
 
         [Authorize(Roles = "Teacher")]
         [HttpGet]
-        public ActionResult Create()
+        public ActionResult Create(int courseId)
         {
-            ViewBag.LevelCount = GetLevelCounts();
+            ViewBag.LevelCount = GetLevelCounts(courseId);
             ViewBag.GradePercentageValue = GetPercentageValue();
 
             return View();
@@ -104,9 +104,9 @@ namespace Ru.GameSchool.Web.Controllers
 
         [Authorize(Roles = "Teacher")]
         [HttpGet]
-        public ActionResult Edit(int? levelProjectId)
+        public ActionResult Edit(int? levelProjectId, int courseId)
         {
-            ViewBag.LevelCount = GetLevelCounts();
+            ViewBag.LevelCount = GetLevelCounts(courseId);
             ViewBag.GradePercentageValue = GetPercentageValue();
 
             if (levelProjectId.HasValue)
@@ -123,9 +123,9 @@ namespace Ru.GameSchool.Web.Controllers
 
         [Authorize(Roles = "Teacher")]
         [HttpPost]
-        public ActionResult Edit(int? levelProjectId, LevelProject levelProject)
+        public ActionResult Edit(int? levelProjectId, LevelProject levelProject, int courseId)
         {
-            ViewBag.LevelCount = GetLevelCounts();
+            ViewBag.LevelCount = GetLevelCounts(courseId);
             ViewBag.GradePercentageValue = GetPercentageValue();
 
             if (ModelState.IsValid)

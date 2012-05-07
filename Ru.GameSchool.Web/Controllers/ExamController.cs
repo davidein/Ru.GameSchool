@@ -63,10 +63,10 @@ namespace Ru.GameSchool.Web.Controllers
 
         [Authorize(Roles = "Teacher")]
         [HttpGet]
-        public ActionResult Create()
+        public ActionResult Create(int courseId)
         {
             ViewBag.GradePercentageValues = GradePercentageValue();
-            ViewBag.MapCount = MapCount();
+            ViewBag.MapCount = MapCount(courseId);
             return View();
         }
 
@@ -81,9 +81,9 @@ namespace Ru.GameSchool.Web.Controllers
 
         [Authorize(Roles = "Teacher")]
         [HttpGet]
-        public ActionResult Edit(int? LevelExamId)
+        public ActionResult Edit(int? LevelExamId, int courseId)
         {
-            ViewBag.LevelCount = GetLevelCounts();
+            ViewBag.LevelCount = GetLevelCounts(courseId);
             ViewBag.GradePercentageValue = GetPercentageValue();
 
             if (ModelState.IsValid)
