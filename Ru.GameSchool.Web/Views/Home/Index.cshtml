@@ -55,12 +55,12 @@
 </div>
 <!-- end move -->
 
-@if (ViewBag.CourseList != null && ViewBag.CourseList.Count > 0)
-{
 <div class="row-fluid course-box">
     
     <h2>Þín námskeið</h2>
-    @foreach (var item in ViewBag.CourseList)
+@if (ViewBag.UserCourseList != null && ViewBag.UserCourseList.Count > 0)
+{
+    foreach (var item in ViewBag.UserCourseList)
     {
         <text>
         <div class="row-fluid">
@@ -74,11 +74,15 @@
                     <li><a href="/Home/Project">CSS</a></li>
                     <li><a href="/Home/Project">HTML5 glærur</a></li>
                 </ul>
-                <p><a class="btn btn-small" href="#">Skoða nánar &raquo;</a></p>
+                <p>@Html.ActionLink("Fara í námskeið", "Item", "Course", new { id = @nesteditem.CourseId }, new { @class = "btn btn-small" })</p>
             </div><!--/span-->
             }
         </div><!--/row-->
         </text>
     }
-</div>
 }
+else
+{
+    <p>Notandi er ekki skráður í námskeið</p>
+}
+</div>
