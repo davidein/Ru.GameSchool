@@ -161,6 +161,12 @@ namespace Ru.GameSchool.DataLayer.Repository
             get { return _userLogs  ?? (_userLogs = CreateObjectSet<UserLog>("UserLogs")); }
         }
         private ObjectSet<UserLog> _userLogs;
+    
+        public IObjectSet<sysdiagram> sysdiagrams
+        {
+            get { return _sysdiagrams  ?? (_sysdiagrams = CreateObjectSet<sysdiagram>("sysdiagrams")); }
+        }
+        private ObjectSet<sysdiagram> _sysdiagrams;
 
         #endregion
         #region Function Imports

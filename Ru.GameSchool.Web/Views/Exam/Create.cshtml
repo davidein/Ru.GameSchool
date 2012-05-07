@@ -1,41 +1,76 @@
-﻿@{
+﻿@model Ru.GameSchool.DataLayer.Repository.LevelExam
+@{
     ViewBag.Title = "Búa til nýtt próf";
 }
-<script type="text/javascript">
-    
-
-</script>
 <h2>
     Búa til nýtt próf</h2>
-<div class="form-horizontal">
-    @using (Html.BeginForm())
-    {
-        <fieldset>
-            <legend>Nýtt próf</legend>
-            
-            <div class="control-group">
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")"></script>
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Próf</legend>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Name)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Name)
+            @Html.ValidationMessageFor(model => model.Name)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Description)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Description)
+            @Html.ValidationMessageFor(model => model.Description)
+        </div>
+        <div class="control-group">
             <label class="control-label">
-            @Html.DropDownList("QuestionsTotal")
-            </label>
+                Hlutfall prósentu</label>
+            <div class="controls">
+                @Html.DropDownListFor(m => m.GradePercentageValue, ViewBag.GradePercentageValues as IEnumerable<SelectListItem>)
             </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">
+                Borð númer</label>
+            <div class="controls">
+                @Html.DropDownListFor(m => m.LevelId, ViewBag.MapCount as IEnumerable<SelectListItem>)
+            </div>
+        </div>
+        @for (int i = 1; i <= 10; i++)
+        {
             <div class="control-group">
                 <label class="control-label">
-                    Skilafrestur</label>
+                    Spurning nr.@i
+                </label>
                 <div class="controls">
-                    <input type="text" class="input-xlarge" id="user_name" name="user_name" rel="popover"
-                           data-content="Settu inn hvenær ekki er lengur hægt að skila inn svari." data-original-title="Enda dagsetning"
-                           data-datepicker="datepicker">
+                    @Html.EditorFor(m => m.LevelExamQuestions.ElementAtOrDefault(i).Question)
                 </div>
             </div>
-
-            <button type="button" class="btn btn-success">
-                Bæta við spurningu</button>
-
-         @for (int j = 1; j <= Html.DropDownList("QuestionsTotal").ToString().Count(); j++)
-         {
-             @Html.Partial("_ExamQuestion")
-         }
-            
-        </fieldset>
-    }
+            for (int j = 1; j <= 4; j++)
+            { 
+                <div class="control-group">
+                <label class="control-label">
+              &nbsp;&nbsp;&nbsp;      Svar nr.@j við spurningu nr.@i
+                </label>
+                <div class="controls"> 
+               &nbsp;&nbsp;&nbsp;     @Html.EditorFor(m => m.LevelExamQuestions.ElementAtOrDefault(j).LevelExamAnswers.ElementAtOrDefault(j).Answer)
+                </div>
+            </div>
+            }
+        }
+        <div class="control-group">
+            <div class="controls">
+                <button type="submit" value="Save" class="btn btn-success">
+                    <i class="icon-ok icon-white"></i>Búa til próf
+                </button>
+            </div>
+        </div>
+    </fieldset>
+}
+<div>
+    @Html.ActionLink("Back to List", "Index")
 </div>

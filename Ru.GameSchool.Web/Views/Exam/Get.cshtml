@@ -1,0 +1,38 @@
+﻿@model Ru.GameSchool.DataLayer.Repository.LevelExam
+@{
+    ViewBag.Title = "Skoða próf";
+}
+<h2>
+    Upplýsingar um próf</h2>
+<fieldset>
+    <legend>Próf</legend>
+        <div class="display-label">
+        @Html.DisplayNameFor(model => model.Name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Name)
+    </div>
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.LevelId)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.LevelId)
+    </div>
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.Description)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Description)
+    </div>
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.GradePercentageValue)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.GradePercentageValue)
+    </div>
+
+</fieldset>
+<p>
+    @Html.ActionLink("Aftur á lista yfir verkefni", "Index") |
+    @Html.ActionLink("Taka próf", "TakeExam", new { LevelExamId = Model.LevelExamId })
+</p>

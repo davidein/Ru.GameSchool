@@ -1,13 +1,15 @@
 ﻿using System.Web.Mvc;
 using Ru.GameSchool.Web.Models;
 
+
 namespace Ru.GameSchool.Web.Controllers
 {
     public class CourseController : BaseController
     {
-        [Authorize(Roles = "Student")]
+        [Authorize(Roles = "Student, Teacher")]
         public ActionResult Index()
         {
+            ViewBag.Courses = CourseService.GetCourses();
             return View();
         }
 

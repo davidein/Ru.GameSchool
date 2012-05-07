@@ -26,8 +26,12 @@ namespace Ru.GameSchool.DataLayer.Repository
 
         [Required(ErrorMessage = @"Vantar lokunartíma")]
         [Display(Name = "Lokar")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd MMM yyyy hh:mm}")]
+<<<<<<< HEAD
+        //[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd MMM yyyy hh:mm}")]
         [DataType(DataType.DateTime)]
+=======
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd MMM yyyy hh:mm}")]
+>>>>>>> 3de72e78aa4d3efc08415202564211619a3ec24e
         public DateTime Stop;
 
     

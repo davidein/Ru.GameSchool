@@ -1,25 +1,74 @@
-﻿@{
+﻿@model IEnumerable<Ru.GameSchool.DataLayer.Repository.LevelProject>
+@{
     ViewBag.Title = "Listi yfir verkefni";
 }
 <h2>
-    Listi yfir verkefni @ViewBag.NameOfCourse</h2>
+    Verkefnin mín</h2>
 @section sidebar {
-    @Html.Partial("_LeftSideBar")
+    @if (User.IsInRole("Teacher"))
+    {
+        @Html.Partial("_TeacherSideBar")
+    }
+    else
+    {
+        @Html.Partial("_LeftSideBar")
+    }
 }
-@section courseheading {
-    @Html.Partial("_courseheading")
-}
-@foreach (var item in ViewBag.Projects)
+@foreach (var items in ViewBag.Courses)
 {
-    <ul>
-        <li>
-            @Html.ActionLink((@item.Name + " - Skiladagur: " + @item.Start.ToString("dd.MM.yyyy HH:mm")) as string, User.IsInRole("Nemandi") ? "Get" : "Edit", new { LevelProjectId = @item.LevelProjectId })
-        </li>
-    </ul>
+    <table class="table table-striped table-bordered table-condensed">
+        <tbody>
+            <tr>
+                <th>@items.Identifier @items.Name
+                </th>
+                <th>
+                    Einkunn
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.GradePercentageValue)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Description)
+                </th>
+            </tr>
+            @foreach (var i in items.Levels)
+            {
+                foreach (var j in i.LevelProjects)
+                {
+                <tr>
+                    <td>
+                        @Html.ActionLink((@j.Name + " - Skiladagur: " + @j.Stop.ToString("dd.MM.yyyy HH:mm")) as string, User.IsInRole("Student") ? "Get" : "Edit", new { LevelProjectId = @j.LevelProjectId })
+                    </td>
+                    <td>
+                        @foreach (var x in j.LevelProjectResults)
+                        {
+                            if (Math.Abs(@x.Grade) > 0)
+                            {
+                            @x.Grade
+                            }
+                            else
+                            {
+                            <i>Enginn einkunn</i>          
+                            }
+                        }
+                    </td>
+                    <td>
+                        Vægi: @j.GradePercentageValue%
+                    </td>
+                    <td>
+                        @j.Description
+                    </td>
+                </tr>
+                }
+            }
+        </tbody>
+    </table>
+
 }
-<br />
 @if (User.IsInRole("Teacher"))
 {
-   
+    <p>
+        <button name="button" class="btn btn-success" value="Create" onclick="location.href='@Url.Action("Create", "Project")'">
+            Búa til nýtt verkefni</button>
+    </p>
 }
- <input type="button" class="ui-button-text-only" value="Búa til nýtt verkefni" onclick="location.href='@Url.Action("Create", "Project")'" />

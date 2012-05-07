@@ -59,7 +59,9 @@ namespace Ru.GameSchool.BusinessLayer.Services
         public IEnumerable<Course> GetCoursesByUserInfoId(int userInfoId)
         {
             if (userInfoId <= 0)
+            { 
                 return null;
+            }
 
             var courses = (from x in GameSchoolEntities.UserInfoes
                           where x.UserInfoId == userInfoId
@@ -169,6 +171,20 @@ namespace Ru.GameSchool.BusinessLayer.Services
                          select x;
 
             return course.FirstOrDefault();
+        }
+
+        public IEnumerable<Course> GetCoursesByUserInfoIdAndCourseId(int userInfoId, int courseId)
+        {
+            if (0 > userInfoId | 0 > courseId)
+            {
+                return null;
+            }
+
+            var query = GameSchoolEntities.Courses.Where(c => c.CourseId == courseId);
+
+            var courses = query.SelectMany(d => d.UserInfoes.Where(k => k.UserInfoId == userInfoId));
+
+            return courses.SelectMany(c => c.Courses);
         }
     }
 }
