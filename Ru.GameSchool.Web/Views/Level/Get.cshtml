@@ -17,20 +17,89 @@
         @Html.DisplayNameFor(model => model.Start) -
         @Html.DisplayFor(model => model.Start) - 
         @Html.DisplayNameFor(model => model.Stop) -
-        @Html.DisplayFor(model => model.Stop)
+        @Html.DisplayFor(model => model.Stop)       
+        @if (User.IsInRole("Teacher")){
+            <span>@Html.ActionLink("Edit", "Edit", new { id = Model.LevelId })</span>
+            }
     </div>
 
-    @foreach (var m in ViewBag.Projects)
-    {
+
         
-        <div>@m.Name</div>
 
-   }
+    <div class="row-fluid">  
+        <div class="span4 well">
+            <h2>Myndbönd</h2>
+            <ul>
+            @foreach (var m in ViewBag.MaterialsVideo)
+            {
+                  <li><a href="/Project/Get/@m.LevelMaterialId">@m.Title</a></li>
+            }
+            </ul>
+            <p>
+            <a class="btn" href="/Project/">Öll myndbönd &raquo;</a></p>
+        </div>
+        <div class="span4 well">
+            <h2>Glærur</h2>
+            <ul>
+            @foreach (var m in ViewBag.Projects)
+            {
+                  <li><a href="/Project/Get/@m.LevelId">@m.Name</a></li>
+            }
+            </ul>
+            <p>
+            <a class="btn" href="/Project/">Allar glærur  &raquo;</a></p>
+        </div>
+        <div class="span4 well">
+            <h2>Tilkynningar</h2>
+            <ul>
+            @foreach (var m in ViewBag.Projects)
+            {
+                  <li><a href="/Project/Get/@m.LevelId">@m.Name</a></li>
+            }
+            </ul>
+            <p>
+            <a class="btn" href="/Project/">Allar tilkynnignar &raquo;</a></p>
+        </div>
+        </div>
+                <!--/row-->
+                <div class="row-fluid">
+                <div class="span4 well">
+            <h2>Verkefni</h2>
+            <ul>
+            @foreach (var m in ViewBag.Projects)
+            {
+                  <li><a href="/Project/Get/@m.LevelId">@m.Name</a></li>
+            }
+            </ul>
+            <p>
+            <a class="btn" href="/Project/">Öll verkefni &raquo;</a></p>
+        </div>
+        <div class="span4 well">
+            <h2>Netpróf</h2>
+            <ul>
+            @foreach (var m in ViewBag.Projects)
+            {
+                  <li><a href="/Project/Get/@m.LevelId">@m.Name</a></li>
+            }
+            </ul>
+            <p>
+            <a class="btn" href="/Project/">Öll próf &raquo;</a></p>
+        </div>
+        <div class="span4 well">
+            <h2>Skjöl</h2>
+            <ul>
+            @foreach (var m in ViewBag.Projects)
+            {
+                  <li><a href="/Project/Get/@m.LevelId">@m.Name</a></li>
+            }
+            </ul>
+            <p>
+            <a class="btn" href="/Project/">Öll próf &raquo;</a></p>
+        </div>
+    </div>
 
-@if (User.IsInRole("Teacher"))
-{
-<p>
-   @Html.ActionLink("Edit", "Edit", new { id=Model.LevelId })
+      
 
-</p>
-}
+
+
+

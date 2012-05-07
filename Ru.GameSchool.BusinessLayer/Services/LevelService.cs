@@ -337,10 +337,32 @@ namespace Ru.GameSchool.BusinessLayer.Services
         }
 
 
+        public IEnumerable<LevelMaterial> GetCourseMaterials(int CourseId)
+        {
+            //return GameSchoolEntities.LevelMaterials.Where(l=> l.LevelId in );
+            var returnList = (from x in GameSchoolEntities.LevelMaterials
+                              join y in GameSchoolEntities.Levels on x.LevelId equals y.LevelId
+                              where y.CourseId == CourseId
+                              select x);
+            return returnList;
+        }
+
+
         public IEnumerable<LevelMaterial> GetLevelMaterials()
         {
             return GameSchoolEntities.LevelMaterials;
         }
+        public IEnumerable<LevelMaterial> GetLevelMaterials(int levelId)
+        {
+            return GameSchoolEntities.LevelMaterials.Where(l => l.LevelId == levelId);
+        }
+
+        public IEnumerable<LevelMaterial> GetLevelMaterials(int levelId, int contentTypeId)
+        {
+            return GameSchoolEntities.LevelMaterials.Where(l => l.LevelId == levelId && l.ContentTypeId == contentTypeId);
+        }
+
+
 
         public LevelMaterial GetLevelMaterial(int levelMaterialId)
         {
