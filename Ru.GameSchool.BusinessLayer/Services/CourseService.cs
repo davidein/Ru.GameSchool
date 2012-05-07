@@ -59,7 +59,9 @@ namespace Ru.GameSchool.BusinessLayer.Services
         public IEnumerable<Course> GetCoursesByUserInfoId(int userInfoId)
         {
             if (userInfoId <= 0)
+            { 
                 return null;
+            }
 
             var courses = (from x in GameSchoolEntities.UserInfoes
                           where x.UserInfoId == userInfoId

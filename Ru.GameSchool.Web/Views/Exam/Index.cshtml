@@ -1,15 +1,65 @@
-﻿@{
-    ViewBag.Title = "Index";
+﻿@model IEnumerable<Ru.GameSchool.DataLayer.Repository.LevelExam>
+@{
+    ViewBag.Title = "Listi yfir próf";
 }
-
-<h2>Listi yfir próf</h2>
-
-@foreach (var item in ViewBag.Exams)
+<h2>
+    Listi yfir þín próf</h2>
+@if (User.IsInRole("Teacher"))
 {
-    <ul>
-        <li>@Html.ActionLink((@item.Name + " - Skiladagur: ") as string, "Get", new { LevelExamId = @item.LevelExamId } )</li>
-    </ul>
+    <p>
+        @Html.ActionLink("Búa til nýtt próf", "Create")
+    </p>
 }
-
-<input type="button" class="ui-button-text-only" value="Búa til nýtt próf" onclick="location.href='@Url.Action("Create","Exam")'" />
-  
+<table class="table table-striped table-bordered table-condensed">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Level.Course.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LevelId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GradePercentageValue)
+        </th>
+        @if (User.IsInRole("Teacher"))
+        {
+            <th>
+                Aðgerðir kennara
+            </th>
+        }
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink((@item.Name + " - Skiladagur: " + @item.Level.Stop.ToString("dd.MM.yyyy HH:mm")) as string, User.IsInRole("Student") ? "Get" : "Edit", new { LevelExamId = @item.LevelExamId })
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Level.Course.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LevelId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GradePercentageValue)
+            </td>
+            @if (User.IsInRole("Teacher"))
+            {
+                <td>
+                    @Html.ActionLink("Breyta", "Edit", new { id = item.LevelExamId }) |
+                    @Html.ActionLink("Upplýsingar", "Details", new { id = item.LevelExamId }) |
+                    @Html.ActionLink("Eyða", "Delete", new { id = item.LevelExamId })
+                </td>   
+            }
+        </tr>
+    }
+</table>

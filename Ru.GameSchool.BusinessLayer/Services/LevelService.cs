@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using Ru.GameSchool.DataLayer;
 using Ru.GameSchool.DataLayer.Repository;
@@ -81,15 +82,16 @@ namespace Ru.GameSchool.BusinessLayer.Services
             {
                 return null;
             }
-            var query = GameSchoolEntities.LevelExams.Where(le => le.LevelExamId == levelExamId);
+            var query =
+                GameSchoolEntities.LevelExams.Where(le => le.LevelExamId == levelExamId).Include("LevelExamQuestions");
 
             var levelExam = query.FirstOrDefault();
-
+            
             if (levelExam == null)
             {
                 return null;
             }
-
+            
             return levelExam;
         }
 
@@ -416,8 +418,33 @@ namespace Ru.GameSchool.BusinessLayer.Services
         {
             var contentTypes = from x in GameSchoolEntities.ContentTypes
                                select x;
-            
+
             return contentTypes;
+        }
+
+        /// <summary>
+        /// Get a collection of levelprojectresult instances by userinfoid
+        /// </summary>
+        /// <param name="userInfoId">Id of a userInfo instance.</param>
+        /// <returns>Collection of levelprojectresult objects.</returns>
+        public IEnumerable<LevelProjectResult> GetLevelProjectResultsByUserId(int userInfoId)
+        {
+            if (0 > userInfoId)
+            {
+                yield break;
+            }
+
+            var query = GameSchoolEntities.LevelProjectResults.Where(u => u.UserInfoId == userInfoId)
+                                                              .AsEnumerable();
+            if (query == null)
+            {
+                yield break;
+            }
+
+            foreach (var levelProjectResult in query)
+            {
+                yield return levelProjectResult;
+            }
         }
     }
 }

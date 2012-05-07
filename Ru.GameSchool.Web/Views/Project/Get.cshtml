@@ -2,13 +2,13 @@
 @{
     ViewBag.Title = "Verkefni";
 }
-<h2>@ViewBag.LevelProject.Name<br/>
-    </h2>
+<h2>@ViewBag.LevelProject.Name<br />
+</h2>
 @section sidebar {
-    @Html.Partial("_LeftSideBar")
+    @*@Html.Partial("_LeftSideBar")*@
 }
 @section courseheading {
-    @Html.Partial("_courseheading")
+    @*@Html.Partial("_courseheading")*@
 }
 <article>
     <h3><span class="gray">@ViewBag.LevelProject.Start | Vægi verkefnis - @ViewBag.LevelProject.GradePercentageValue%</span></h3>
@@ -44,12 +44,12 @@
         <label class="control-label" for="textarea">
             Skilaboð til kennara</label>
         <div class="controls">
-            @Html.EditorFor(m => m.UserComment, new { rows = "3" })
+            vantar
         </div>
     </div>
     if (User.IsInRole("Student"))
     {
-        if (ViewBag.LevelProject.HasSubmitted != null)
+        if (ViewBag.LevelProject.LevelProjectResults != null)
         {
     <h4>
         Búið að skila verkefni!</h4> 
@@ -63,3 +63,7 @@
 
 
 }
+<div>
+    @Html.ActionLink("Aftur á forsíðu verkefna", "Index")
+</div>
+

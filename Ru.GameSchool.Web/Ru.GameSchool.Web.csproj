@@ -339,15 +339,11 @@
     <Content Include="Views\Shared\_SpecificFunctions.cshtml" />
     <Content Include="Views\Admin\Courses.cshtml" />
     <Content Include="Views\Admin\Users.cshtml" />
-    <Content Include="Views\Exam\Edit.cshtml" />
     <Content Include="Views\Level\Edit.cshtml" />
     <Content Include="Views\Level\Create.cshtml" />
     <Content Include="Views\Exam\Createasd.cshtml" />
     <Content Include="Views\Project\Get.cshtml" />
-    <Content Include="Views\Project\Create.cshtml" />
-    <Content Include="Views\Project\Index.cshtml" />
     <Content Include="Views\Level\_LevelForm.cshtml" />
-    <Content Include="Views\Exam\Index.cshtml" />
     <Content Include="Views\Admin\UserEdit.cshtml" />
     <Content Include="Views\Exam\_ExamQuestion.cshtml" />
     <Content Include="Views\Material\Create.cshtml" />
@@ -359,7 +355,13 @@
     <Content Include="Views\Material\Index.cshtml" />
     <Content Include="Views\Exam\_ExamAnswers.cshtml" />
     <Content Include="Views\Exam\Create.cshtml" />
+    <Content Include="Views\Project\Index.cshtml" />
+    <Content Include="Views\Project\Create.cshtml" />
     <Content Include="Views\Project\Edit.cshtml" />
+    <Content Include="Views\Exam\Index.cshtml" />
+    <Content Include="Views\Exam\Edit.cshtml" />
+    <Content Include="Views\Exam\TakeExam.cshtml" />
+    <Content Include="Views\Exam\Get.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
@@ -378,7 +380,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>23918</DevelopmentServerPort>
+          <DevelopmentServerPort>16751</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>

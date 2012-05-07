@@ -1,15 +1,20 @@
 ﻿@model Ru.GameSchool.DataLayer.Repository.LevelProject
+
 @{
     ViewBag.Title = "Búa til verkefni";
 }
-<h2>
-    Búa til nýtt verkefni</h2>
+
+<h2>Búa til nýtt verkefni</h2>
+
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")"></script>
+
 @using (Html.BeginForm())
 {
     @Html.ValidationSummary(true)
-    <fieldset>
+        <fieldset>
         <legend>Upplýsingar</legend>
-        <div class="control-group">
+     <div class="control-group">
             <label class="control-label">
                 Nafn</label>
             <div class="controls">
@@ -30,7 +35,7 @@
             <label class="control-label" for="select01">
                 Vægi</label>
             <div class="controls">
-                @Html.DropDownListFor(m => m.GradePercentageValue,new SelectList(ViewBag.GradePercentageValue,"Value","Text"))
+                @Html.DropDownListFor(m => m.GradePercentageValue, new SelectList(ViewBag.GradePercentageValue, "Value", "Text"))
             </div>
         </div>
         <div class="control-group">
@@ -56,7 +61,7 @@
             <div class="controls">
                 <div class="input-xlarge" id="lysing" rows="3" rel="popover" data-content="Settu inn lýsingu á námskeiði."
                     data-original-title="Lýsing">
-                    @Html.EditorFor(m => m.Description)
+                    @Html.EditorFor(m => m.Description )
                 </div>
             </div>
         </div>
@@ -70,3 +75,7 @@
         </div>
     </fieldset>
 }
+
+<div>
+    @Html.ActionLink("Aftur á forsíðu verkefna", "Index")
+</div>

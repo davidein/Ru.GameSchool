@@ -10,10 +10,6 @@ namespace Ru.GameSchool.DataLayer.Repository
     [MetadataType(typeof(LevelExamQuestionMetadata))]
     public partial class LevelExamQuestion
     {
-        public LevelExamQuestion()
-        {
-            this.LevelExamAnswers = new Collection<LevelExamAnswer>();
-        }
     }
     public class LevelExamQuestionMetadata
     {
