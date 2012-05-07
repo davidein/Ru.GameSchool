@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
+using Ru.GameSchool.Web.Classes;
+using Ru.GameSchool.Web.Classes.Helper;
 
 namespace Ru.GameSchool.Web.Controllers
 {
@@ -13,6 +16,16 @@ namespace Ru.GameSchool.Web.Controllers
         {
             ViewBag.Message = "Test Modify this template to jump-start your ASP.NET MVC application.";
 
+            var user = Membership.GetUser() as GameSchoolMembershipUser;
+            if (user != null)
+            {
+                //var list = CourseService.GetCourses();
+                var list = CourseService.GetCoursesByUserInfoId(user.UserInfoId);
+                //list.
+                //ViewBag.ItemCounter = list.NestedList(3);
+                ViewBag.CourseList = list.NestedList(3);
+                //ViewBag.CourseList = CourseService.GetCoursesByUserInfoId(user.UserInfoId);
+            }
             return View();
         }
 

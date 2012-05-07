@@ -73,12 +73,30 @@
 </div>
 <!--END -->
 <div id="accordion2" class="accordion">
+    @foreach (var item in ViewBag.CourseList)
+    {
+        foreach (var nesteditem in item)
+        {
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                <a href="#@nesteditem.CourseId" data-parent="#accordion2" data-toggle="collapse" class="accordion-toggle ">@nesteditem.Name</a>
+            </div>
+            <div class="accordion-body collapse" id="@nesteditem.CourseId" >
+                <div class="accordion-inner">
+                    <ul class="nav nav-list">
+                        <li>@Html.ActionLink("Núverandi borð","Index","Course")</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        }
+    }
     <div class="accordion-group">
         <div class="accordion-heading">
             <a href="#collapseOne" data-parent="#accordion2" data-toggle="collapse" class="accordion-toggle ">
                 Vefforritun I </a>
         </div>
-        <div class="accordion-body collapse in" id="collapseOne" >
+        <div class="accordion-body collapse" id="collapseOne" >
             <div class="accordion-inner">
                 <ul class="nav nav-list">
                     <li><a href="/Home/Level">Forsíða</a></li>
