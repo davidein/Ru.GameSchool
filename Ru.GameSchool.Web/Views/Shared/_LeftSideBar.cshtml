@@ -1,8 +1,9 @@
 ﻿<div class="well">
-    <h2>Velkomin/n á GameSchool</h2>
-    <p>Einhver hjalpartexti!</p>
+    <h2>
+        Velkomin/n á GameSchool</h2>
+    <p>
+        Einhver hjalpartexti!</p>
 </div>
-
 <!--
 <div class="well">
     <h2>199 stig</h2>
@@ -13,66 +14,112 @@
 </div>
 -->
 <!--TEMP HTML FOR MODAL WINDOW-->
-<div id="leaderBoard" class="modal" style="display:none">
+<div id="leaderBoard" class="modal" style="display: none">
     <div class="modal-header">
         <button class="close" data-dismiss="modal">
             ×</button>
-        <h3>Topp 10!</h3>
+        <h3>
+            Topp 10!</h3>
     </div>
     <div class="modal-body">
-        <h4>Topplistinn!</h4> 
+        <h4>
+            Topplistinn!</h4>
         <table class="table table-striped table-bordered table-condensed">
             <thead>
                 <tr>
-                    <th>#</th>
-                    <th>Stig</th>
+                    <th>
+                        #
+                    </th>
+                    <th>
+                        Stig
+                    </th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                 </tr>
                 <tr>
-                    <td>1</td>
-                    <td>256</td>
+                    <td>
+                        1
+                    </td>
+                    <td>
+                        256
+                    </td>
                 </tr>
                 <tr>
-                    <td>2</td>
-                    <td>200</td>
+                    <td>
+                        2
+                    </td>
+                    <td>
+                        200
+                    </td>
                 </tr>
                 <tr>
-                    <td>3</td>
-                    <td>199</td>
+                    <td>
+                        3
+                    </td>
+                    <td>
+                        199
+                    </td>
                 </tr>
                 <tr>
-                    <td>4</td>
-                    <td>184</td>
+                    <td>
+                        4
+                    </td>
+                    <td>
+                        184
+                    </td>
                 </tr>
                 <tr>
-                    <td>5</td>
-                    <td>178</td>
+                    <td>
+                        5
+                    </td>
+                    <td>
+                        178
+                    </td>
                 </tr>
                 <tr>
-                    <td>6</td>
-                    <td>175</td>
+                    <td>
+                        6
+                    </td>
+                    <td>
+                        175
+                    </td>
                 </tr>
                 <tr>
-                    <td>7</td>
-                    <td>150</td>
+                    <td>
+                        7
+                    </td>
+                    <td>
+                        150
+                    </td>
                 </tr>
                 <tr>
-                    <td>8</td>
-                    <td>144</td>
+                    <td>
+                        8
+                    </td>
+                    <td>
+                        144
+                    </td>
                 </tr>
                 <tr>
-                    <td>9</td>
-                    <td>137</td>
+                    <td>
+                        9
+                    </td>
+                    <td>
+                        137
+                    </td>
                 </tr>
                 <tr>
-                    <td>10</td>
-                    <td>126</td>
+                    <td>
+                        10
+                    </td>
+                    <td>
+                        126
+                    </td>
                 </tr>
             </tbody>
-        </table>                         
+        </table>
     </div>
     <div class="modal-footer">
         <a href="#" class="btn" data-dismiss="modal">Loka</a>
@@ -91,6 +138,11 @@
             <div class="accordion-body collapse" id="@nesteditem.CourseId" >
                 <div class="accordion-inner">
                     <ul class="nav nav-list">
+                        <li>@Html.ActionLink("Forsíða", "Index", "Home")</li>
+                        <li>@Html.ActionLink("Tilkynningar", "", "")</li>
+                        <li>@Html.ActionLink("Verkefni", "Index", "Project", new { id = @nesteditem.CourseId }, null)</li>
+                        <li>@Html.ActionLink("Próf", "Index", "Exam")</li>
+                        <li>@Html.ActionLink("Kennsluefni", "Index", "Level")</li>
                         <li>@Html.ActionLink("Núverandi borð", "Item", "Course", new { id = @nesteditem.CourseId }, null)</li>
                     </ul>
                 </div>
