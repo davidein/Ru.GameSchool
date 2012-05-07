@@ -4,14 +4,7 @@
 }
 
 @section sidebar {
-    @if (User.IsInRole("Teacher")) 
-    {
-        @Html.Partial("_TeacherSideBar")
-    } 
-    else
-    {
-        @Html.Partial("_LeftSideBar")
-    }
+    @Html.Partial("_TeacherSideBar")
 }
 
 <h2>@ViewBag.Title</h2>
