@@ -360,20 +360,6 @@ namespace Ru.GameSchool.BusinessLayerTests
         }
 
         /// <summary>
-        ///A test for GetLevels
-        ///</summary>
-        [TestMethod()]
-        public void GetLevelsTest()
-        {
-            LevelService target = new LevelService(); // TODO: Initialize to an appropriate value
-            IEnumerable<Level> expected = null; // TODO: Initialize to an appropriate value
-            IEnumerable<Level> actual;
-            actual = target.GetLevels();
-            Assert.AreEqual(expected, actual);
-            Assert.Inconclusive("Verify the correctness of this test method.");
-        }
-
-        /// <summary>
         ///A test for UpdateLevel
         ///</summary>
         [TestMethod()]

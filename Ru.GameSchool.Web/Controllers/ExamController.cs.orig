@@ -54,8 +54,13 @@ namespace Ru.GameSchool.Web.Controllers
         [Authorize(Roles = "Student, Teacher")]
         public ActionResult TakeExam(int? levelExamId)
         {
-
+<<<<<<< HEAD
+            
             if (levelExamId.HasValue)
+=======
+
+            if (LevelExamId.HasValue)
+>>>>>>> 14ee2a74e0c168a3e554975f9bf55e971ac0c6c8
             {
                 var exam = LevelService.GetLevelExam(levelExamId.Value);
                 return View(exam);
@@ -98,6 +103,7 @@ namespace Ru.GameSchool.Web.Controllers
             return View();
         }
 
+<<<<<<< HEAD
         [Authorize(Roles = "Teacher")]
         public ActionResult ExamQuestions(int? id)
         {
@@ -112,12 +118,15 @@ namespace Ru.GameSchool.Web.Controllers
 
             return View();
         }
+=======
+
+>>>>>>> 14ee2a74e0c168a3e554975f9bf55e971ac0c6c8
 
         [Authorize(Roles = "Teacher")]
         [HttpGet]
         public ActionResult Edit(int? LevelExamId)
         {
-            ViewBag.LevelCount = GetLevelCounts(0);
+            ViewBag.LevelCount = GetLevelCounts();
             ViewBag.GradePercentageValue = GetPercentageValue();
 
             if (ModelState.IsValid)
@@ -156,9 +165,15 @@ namespace Ru.GameSchool.Web.Controllers
 
         #region helper methods
 
+<<<<<<< HEAD
         public IEnumerable<SelectListItem> MapCount(int courseId)
         {
-            foreach ( var level in LevelService.GetLevels(courseId))
+            foreach ( var level in LevelService.GetLevels())
+=======
+        public IEnumerable<SelectListItem> MapCount(int CourseId)
+        {
+            for (int j = 1; j <= LevelService.GetLevels(CourseId).Count(); j++)
+>>>>>>> 14ee2a74e0c168a3e554975f9bf55e971ac0c6c8
             {
                 yield return new SelectListItem
                 {
