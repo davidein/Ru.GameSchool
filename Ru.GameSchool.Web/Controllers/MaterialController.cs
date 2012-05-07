@@ -100,11 +100,11 @@ namespace Ru.GameSchool.Web.Controllers
             return View();
         }
 
-        public IEnumerable<SelectListItem> GetLevelCounts()
+        public IEnumerable<SelectListItem> GetLevelCounts(int courseId)
         {
-            for (int j = 0; j <= LevelService.GetLevels().Count(); j++)
+            for (int j = 0; j <= LevelService.GetLevels(courseId).Count(); j++)
             {
-                var elementAtOrDefault = LevelService.GetLevels().ElementAtOrDefault(j);
+                var elementAtOrDefault = LevelService.GetLevels(courseId).ElementAtOrDefault(j);
                 if (elementAtOrDefault != null)
                     yield return new SelectListItem
                     {
