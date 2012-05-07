@@ -3,7 +3,7 @@
     ViewBag.Title = "Búa til nýtt próf";
 }
 <h2>
-    Búa til</h2>
+    Búa til nýtt próf</h2>
 <script src="@Url.Content("~/Scripts/jquery.validate.min.js")"></script>
 <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")"></script>
 @using (Html.BeginForm())
@@ -11,7 +11,14 @@
     @Html.ValidationSummary(true)
 
     <fieldset>
-        <legend>Nýtt próf</legend>
+        <legend>Próf</legend>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Name)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Name)
+            @Html.ValidationMessageFor(model => model.Name)
+        </div>
         <div class="editor-label">
             @Html.LabelFor(model => model.Description)
         </div>
@@ -26,404 +33,42 @@
                 @Html.DropDownListFor(m => m.GradePercentageValue, ViewBag.GradePercentageValues as IEnumerable<SelectListItem>)
             </div>
         </div>
-                <div class="control-group">
+        <div class="control-group">
             <label class="control-label">
                 Borð númer</label>
             <div class="controls">
                 @Html.DropDownListFor(m => m.LevelId, ViewBag.MapCount as IEnumerable<SelectListItem>)
             </div>
         </div>
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Name)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Name)
-            @Html.ValidationMessageFor(model => model.Name)
-        </div>
-        <div class="control-group">
-            <label class="control-label">
-                Spurning 1</label>
-            <div class="controls">
-                <input type="text" class="input-xlarge" id="question1" name="question1" rel="popover"
-                    data-content="Settu inn nafn." data-original-title="Skrifaðu spurningu">
-            </div>
-        </div>
-        <div class="control-group">
-            <div class="controls">
-                <div class="control-group">
-                    <label class="control-label">
-                        Svar 1</label>
-                    <div class="controls">
-                        <input type="text" id="answer1_1" name="answer1_1">
-                        <input type="checkbox" id="check1_1" name="check1_1" value="option2">
-                    </div>
-                    <label class="control-label">
-                        Svar 2</label>
-                    <div class="controls">
-                        <input type="text" id="answer1_2" name="answer1_2">
-                        <input type="checkbox" id="check1_2" name="check1_2" value="option2">
-                    </div>
-                    <label class="control-label">
-                        Svar 3</label>
-                    <div class="controls">
-                        <input type="text" id="answer1_3" name="answer1_3">
-                        <input type="checkbox" id="check1_3" name="check1_3" value="option2">
-                    </div>
-                    <label class="control-label">
-                        Svar 4</label>
-                    <div class="controls">
-                        <input type="text" id="answer1_4" name="answer1_4">
-                        <input type="checkbox" id="check1_4" name="check1_4" value="option2">
-                    </div>
+        @for (int i = 1; i <= 10; i++)
+        {
+            <div class="control-group">
+                <label class="control-label">
+                    Spurning nr.@i
+                </label>
+                <div class="controls">
+                    @Html.EditorFor(m => m.LevelExamQuestions.ElementAtOrDefault(i).Question)
                 </div>
             </div>
-        </div>
-        <div class="control-group">
-            <label class="control-label">
-                Spurning 2</label>
-            <div class="controls">
-                <input type="text" class="input-xlarge" id="question2" name="question2" rel="popover"
-                    data-content="Settu inn nafn." data-original-title="Skrifaðu spurningu">
-            </div>
-        </div>
-        <div class="control-group">
-            <div class="controls">
+            for (int j = 1; j <= 4; j++)
+            { 
                 <div class="control-group">
-                    <label class="control-label">
-                        Svar 1</label>
-                    <div class="controls">
-                        <input type="text" id="answer2_1" name="answer2_1">
-                        <input type="checkbox" id="check2_1" name="check2_1" value="option2">
-                    </div>
-                    <label class="control-label">
-                        Svar 2</label>
-                    <div class="controls">
-                        <input type="text" id="answer2_2" name="answer2_2">
-                        <input type="checkbox" id="check2_2" id="check2_2" value="option2">
-                    </div>
-                    <label class="control-label">
-                        Svar 3</label>
-                    <div class="controls">
-                        <input type="text" id="answer2_3" name="answer2_3">
-                        <input type="checkbox" id="check2_3" name="check2_3" value="option2">
-                    </div>
-                    <label class="control-label">
-                        Svar 4</label>
-                    <div class="controls">
-                        <input type="text" id="answer2_4" name="answer2_4">
-                        <input type="checkbox" id="check2_4" name="check2_4" value="option2">
-                    </div>
+                <label class="control-label">
+              &nbsp;&nbsp;&nbsp;      Svar nr.@j við spurningu nr.@i
+                </label>
+                <div class="controls"> 
+               &nbsp;&nbsp;&nbsp;     @Html.EditorFor(m => m.LevelExamQuestions.ElementAtOrDefault(j).LevelExamAnswers.ElementAtOrDefault(j).Answer)
                 </div>
             </div>
-        </div>
-        <div class="control-group">
-            <label class="control-label">
-                Spurning 3</label>
-            <div class="controls">
-                <input type="text" class="input-xlarge" id="question3" name="question3" rel="popover"
-                    data-content="Settu inn nafn." data-original-title="Skrifaðu spurningu">
-            </div>
-        </div>
+            }
+        }
         <div class="control-group">
             <div class="controls">
-                <div class="control-group">
-                    <label class="control-label">
-                        Svar 1</label>
-                    <div class="controls">
-                        <input type="text" id="answer3_1" name="answer3_1">
-                        <input type="checkbox" id="check3_1" name="check3_1" value="option2">
-                    </div>
-                    <label class="control-label">
-                        Svar 2</label>
-                    <div class="controls">
-                        <input type="text" id="answer3_2" name="answer3_2">
-                        <input type="checkbox" id="check3_2" name="check3_2" value="option2">
-                    </div>
-                    <label class="control-label">
-                        Svar 3</label>
-                    <div class="controls">
-                        <input type="text" id="answer3_3" name="answer3_3">
-                        <input type="checkbox" id="check3_3" name="check3_3" value="option2">
-                    </div>
-                    <label class="control-label">
-                        Svar 4</label>
-                    <div class="controls">
-                        <input type="text" id="answer3_4" name="answer3_4">
-                        <input type="checkbox" id="check3_4" name="check3_4" value="option2">
-                    </div>
-                </div>
+                <button type="submit" value="Save" class="btn btn-success">
+                    <i class="icon-ok icon-white"></i>Búa til próf
+                </button>
             </div>
         </div>
-        <div class="control-group">
-            <label class="control-label">
-                Spurning 4</label>
-            <div class="controls">
-                <input type="text" class="input-xlarge" id="question4" name="question4" rel="popover"
-                    data-content="Settu inn nafn." data-original-title="Skrifaðu spurningu">
-            </div>
-        </div>
-        <div class="control-group">
-            <div class="controls">
-                <div class="control-group">
-                    <label class="control-label">
-                        Svar 1</label>
-                    <div class="controls">
-                        <input type="text" id="answer4_1" name="answer4_1">
-                        <input type="checkbox" id="check4_1" name="check4_1" value="option2">
-                    </div>
-                    <label class="control-label">
-                        Svar 2</label>
-                    <div class="controls">
-                        <input type="text" id="answer4_2" name="answer4_2">
-                        <input type="checkbox" id="check4_2" name="check4_2" value="option2">
-                    </div>
-                    <label class="control-label">
-                        Svar 3</label>
-                    <div class="controls">
-                        <input type="text" id="answer4_3" name="answer4_3">
-                        <input type="checkbox" id="check4_3" name="check4_3" value="option2">
-                    </div>
-                    <label class="control-label">
-                        Svar 4</label>
-                    <div class="controls">
-                        <input type="text" id="answer4_4" name="answer4_4">
-                        <input type="checkbox" id="check4_4" name="check4_4" value="option2">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="control-group">
-            <label class="control-label">
-                Spurning 5</label>
-            <div class="controls">
-                <input type="text" class="input-xlarge" id="question5" name="question5" rel="popover"
-                    data-content="Settu inn nafn." data-original-title="Skrifaðu spurningu">
-            </div>
-        </div>
-        <div class="control-group">
-            <div class="controls">
-                <div class="control-group">
-                    <label class="control-label">
-                        Svar 1</label>
-                    <div class="controls">
-                        <input type="text" id="answer5_1" name="answer5_1">
-                        <input type="checkbox" id="check5_1" name="check5_1" value="option2">
-                    </div>
-                    <label class="control-label">
-                        Svar 2</label>
-                    <div class="controls">
-                        <input type="text" id="answer5_2" name="answer5_2">
-                        <input type="checkbox" id="check5_2" name="check5_2" value="option2">
-                    </div>
-                    <label class="control-label">
-                        Svar 3</label>
-                    <div class="controls">
-                        <input type="text" id="answer5_3" name="answer5_3">
-                        <input type="checkbox" id="check5_3" name="check5_3" value="option2">
-                    </div>
-                    <label class="control-label">
-                        Svar 4</label>
-                    <div class="controls">
-                        <input type="text" id="answer5_4" id="answer5_4">
-                        <input type="checkbox" id="check5_4" id="check5_4" value="option2">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="control-group">
-            <label class="control-label">
-                Spurning 6
-            </label>
-            <div class="controls">
-                <input type="text" class="input-xlarge" id="question6" name="question6" rel="popover"
-                    data-content="Settu inn nafn." data-original-title="Skrifaðu spurningu">
-            </div>
-        </div>
-        <div class="control-group">
-            <div class="controls">
-                <div class="control-group">
-                    <label class="control-label">
-                        Svar 1</label>
-                    <div class="controls">
-                        <input type="text" id="answer6_1" name="answer6_1">
-                        <input type="checkbox" id="check6_1" name="check6_1" value="option2">
-                    </div>
-                    <label class="control-label">
-                        Svar 2</label>
-                    <div class="controls">
-                        <input type="text" id="answer6_2" name="answer6_2">
-                        <input type="checkbox" id="check6_2" name="check6_2" value="option2">
-                    </div>
-                    <label class="control-label">
-                        Svar 3</label>
-                    <div class="controls">
-                        <input type="text" id="answer6_3" name="answer6_3">
-                        <input type="checkbox" id="check6_3" name="check6_3" value="option2">
-                    </div>
-                    <label class="control-label">
-                        Svar 4</label>
-                    <div class="controls">
-                        <input type="text" id="answer6_4" name="answer6_4">
-                        <input type="checkbox" id="check6_4" name="check6_4" value="option2">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="control-group">
-            <label class="control-label">
-                Spurning 7</label>
-            <div class="controls">
-                <input type="text" class="input-xlarge" id="question7" name="question7" rel="popover"
-                    data-content="Settu inn nafn." data-original-title="Skrifaðu spurningu">
-            </div>
-        </div>
-        <div class="control-group">
-            <div class="controls">
-                <div class="control-group">
-                    <label class="control-label">
-                        Svar 1</label>
-                    <div class="controls">
-                        <input type="text" id="answer7_1" name="answer7_1">
-                        <input type="checkbox" id="check7_1" name="check7_1" value="option2">
-                    </div>
-                    <label class="control-label">
-                        Svar 2</label>
-                    <div class="controls">
-                        <input type="text" id="answer7_2" name="answer7_2">
-                        <input type="checkbox" id="check7_2" name="check7_2" value="option2">
-                    </div>
-                    <label class="control-label">
-                        Svar 3</label>
-                    <div class="controls">
-                        <input type="text" id="answer7_3" name="answer7_3">
-                        <input type="checkbox" id="check7_3" name="check7_3" value="option2">
-                    </div>
-                    <label class="control-label">
-                        Svar 4</label>
-                    <div class="controls">
-                        <input type="text" id="answer7_4" name="answer7_4">
-                        <input type="checkbox" id="check7_4" name="check7_4" value="option2">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="control-group">
-            <label class="control-label">
-                Spurning 8</label>
-            <div class="controls">
-                <input type="text" class="input-xlarge" id="question8" name="question8" rel="popover"
-                    data-content="Settu inn nafn." data-original-title="Skrifaðu spurningu">
-            </div>
-        </div>
-        <div class="control-group">
-            <div class="controls">
-                <div class="control-group">
-                    <label class="control-label">
-                        Svar 1</label>
-                    <div class="controls">
-                        <input type="text" id="answer8_1" name="answer8_1">
-                        <input type="checkbox" id="check8_1" name="check8_1" value="option2">
-                    </div>
-                    <label class="control-label">
-                        Svar 2</label>
-                    <div class="controls">
-                        <input type="text" id="answer8_2" name="answer8_2">
-                        <input type="checkbox" id="check8_2" name="check8_2" value="option2">
-                    </div>
-                    <label class="control-label">
-                        Svar 3</label>
-                    <div class="controls">
-                        <input type="text" id="answer8_3" name="answer8_3">
-                        <input type="checkbox" id="check8_3" name="check8_3" value="option2">
-                    </div>
-                    <label class="control-label">
-                        Svar 4</label>
-                    <div class="controls">
-                        <input type="text" id="answer8_4" id="answer8_4">
-                        <input type="checkbox" id="check8_4" id="check8_4" value="option2">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="control-group">
-            <label class="control-label">
-                Spurning 9</label>
-            <div class="controls">
-                <input type="text" class="input-xlarge" id="question9" name="question9" rel="popover"
-                    data-content="Settu inn nafn." data-original-title="Skrifaðu spurningu">
-            </div>
-        </div>
-        <div class="control-group">
-            <div class="controls">
-                <div class="control-group">
-                    <label class="control-label">
-                        Svar 1</label>
-                    <div class="controls">
-                        <input type="text" id="answer9_1" name="answer9_1">
-                        <input type="checkbox" id="check9_1" name="check9_1" value="option2">
-                    </div>
-                    <label class="control-label">
-                        Svar 2</label>
-                    <div class="controls">
-                        <input type="text" id="answer9_2" name="answer9_2">
-                        <input type="checkbox" id="check9_2" name="check9_2" value="option2">
-                    </div>
-                    <label class="control-label">
-                        Svar 3</label>
-                    <div class="controls">
-                        <input type="text" id="answer9_3" name="answer9_3">
-                        <input type="checkbox" id="check9_3" name="check9_3" value="option2">
-                    </div>
-                    <label class="control-label">
-                        Svar 4</label>
-                    <div class="controls">
-                        <input type="text" id="answer9_4" name="answer9_4">
-                        <input type="checkbox" id="check9_4" name="check9_4" value="option2">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="control-group">
-            <label class="control-label">
-                Spurning 10</label>
-            <div class="controls">
-                <input type="text" class="input-xlarge" id="question10" name="question10" rel="popover"
-                    data-content="Settu inn nafn." data-original-title="Skrifaðu spurningu">
-            </div>
-        </div>
-        <div class="control-group">
-            <div class="controls">
-                <div class="control-group">
-                    <label class="control-label">
-                        Svar 1</label>
-                    <div class="controls">
-                        <input type="text" id="answer10_1" name="answer10_1">
-                        <input type="checkbox" id="check10_1" name="check10_1" value="option2">
-                    </div>
-                    <label class="control-label">
-                        Svar 2</label>
-                    <div class="controls">
-                        <input type="text" id="answer10_2" name="answer10_2">
-                        <input type="checkbox" id="check10_2" name="check10_2" value="option2">
-                    </div>
-                    <label class="control-label">
-                        Svar 3</label>
-                    <div class="controls">
-                        <input type="text" id="answer10_3" name="answer10_3">
-                        <input type="checkbox" id="check10_3" name="check10_3" value="option2">
-                    </div>
-                    <label class="control-label">
-                        Svar 4</label>
-                    <div class="controls">
-                        <input type="text" id="answer10_4" name="answer10_4">
-                        <input type="checkbox" id="check10_4" name="check10_4" value="option2">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <p>
-            <input type="submit" value="Vista próf" />
-        </p>
     </fieldset>
 }
 <div>

@@ -55,9 +55,8 @@
             @if (User.IsInRole("Teacher"))
             {
                 <td>
-                    @Html.ActionLink("Breyta", "Edit", new { id = item.LevelExamId }) |
-                    @Html.ActionLink("Upplýsingar", "Details", new { id = item.LevelExamId }) |
-                    @Html.ActionLink("Eyða", "Delete", new { id = item.LevelExamId })
+                    @Html.ActionLink("Breyta", "Edit", new { LevelExamId = item.LevelExamId }) |
+                    @Html.ActionLink("Eyða", "Delete", new { LevelExamId = item.LevelExamId })
                 </td>   
             }
         </tr>
