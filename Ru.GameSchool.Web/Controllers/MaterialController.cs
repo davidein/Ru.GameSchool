@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
+using System.Web.Helpers;
 using System.Web.Mvc;
 using System.Web.Security;
 using Ru.GameSchool.DataLayer.Repository;
@@ -55,11 +57,33 @@ namespace Ru.GameSchool.Web.Controllers
                 ViewBag.LevelCount = GetLevelCounts();
                 ViewBag.ContentTypes = LevelService.GetContentTypes();
                 LevelService.CreateLevelMaterial(levelMaterial);
-                //ViewBag.ContentTypes = LevelService.GetContentTypes();
+                foreach (var file in levelMaterial.File)
+                {
+                    if (file.ContentLength <= 0) continue;
+                    var fileName = Path.GetFileName(file.FileName);
+                    if (fileName == null) continue;
+                    var path = Path.Combine(Server.MapPath("~/App_Data/uploads"), fileName);
+                    file.SaveAs(path);
+                }
             }
 
             return View();
         }
+
+        //[HttpPost]
+        //public ActionResult Create(IEnumerable<HttpPostedFileBase> fileUpload)
+        //{
+        //    foreach (var file in fileUpload)
+        //    {
+        //        if (file.ContentLength > 0)
+        //        {
+        //            var fileName = Path.GetFileName(file.FileName);
+        //            var path = Path.Combine(Server.MapPath("~/App_Data/uploads"), fileName);
+        //            file.SaveAs(path);
+        //        }
+        //    }
+        //    return RedirectToAction("Index");
+        //}
 
         [HttpGet]
         [Authorize(Roles = "Teacher")]
@@ -113,5 +137,7 @@ namespace Ru.GameSchool.Web.Controllers
                     };
             }
         }
+
+        
     }
 }
