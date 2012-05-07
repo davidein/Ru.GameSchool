@@ -16,9 +16,11 @@
 </div>
 
 <ul class="nav nav-tabs">
-        <li class="active"><a data-toggle="tab" href="#tab1">Borð 1</a></li>
-        <li class=""><a data-toggle="tab" href="#tab2">Borð 2</a></li>
-        <li class=""><a data-toggle="tab" href="#tab3">Borð 3</a></li>
+            @foreach (var m in ViewBag.Levels)
+            {
+                  <li @if (m.LevelId == Model.LevelId ) { <text>class="active"</text>}><a href="/Level/Get/@m.LevelId">@m.Name</a></li>
+            }
+
     </ul>
 
 
@@ -28,9 +30,10 @@
         @Html.DisplayFor(model => model.Start) - 
         @Html.DisplayNameFor(model => model.Stop):
         @Html.DisplayFor(model => model.Stop)
-        @if (User.IsInRole("Teacher")){
+        @if (User.IsInRole("Teacher"))
+        {
             <span>@Html.ActionLink("Edit", "Edit", new { id = Model.LevelId })</span>
-            }
+        }
     </div>
 
 
