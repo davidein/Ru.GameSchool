@@ -175,8 +175,10 @@ namespace Ru.GameSchool.BusinessLayer.Services
         {
             if ((levelId = userInfoId) > 0)
             {
-                var levelQuery = GameSchoolEntities.Levels.Where(l => l.LevelId == levelId);
-                //var userQuery = GameSchoolEntities
+                var levelQuery = GameSchoolEntities.Levels.Where(l => l.LevelId == levelId).SingleOrDefault();
+
+                if (levelQuery.Course.UserInfoes.Where(x => x.UserInfoId == userInfoId).Count() > 0)
+                    return true;
             }
             return false;
         }
