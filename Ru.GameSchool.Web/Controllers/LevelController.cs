@@ -18,16 +18,18 @@ namespace Ru.GameSchool.Web.Controllers
             if (id.HasValue)
             {
 
-                int intId = id.Value;
+                int levelId = id.Value;
 
-                var model = LevelService.GetLevel(intId);
+                var model = LevelService.GetLevel(levelId);
                 if (model != null)
                 {
 
-
-
                     ViewBag.Projects = LevelService.GetLevelProjects();
-
+                    ViewBag.MaterialsVideo = LevelService.GetLevelMaterials(levelId);
+                    ViewBag.MaterialsSlides = LevelService.GetLevelMaterials(levelId);
+                    ViewBag.MaterialsMessages = LevelService.GetLevelMaterials(levelId);
+                    ViewBag.MaterialsDocs = LevelService.GetLevelMaterials(levelId);
+                    ViewBag.Exams = LevelService.GetLevelExams();
 
                     return View(model);
                 }
