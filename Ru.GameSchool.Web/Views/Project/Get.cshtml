@@ -2,8 +2,8 @@
 @{
     ViewBag.Title = "Verkefni";
 }
-<h2>@ViewBag.LevelProject.Name<br/>
-    </h2>
+<h2>@ViewBag.LevelProject.Name<br />
+</h2>
 @section sidebar {
     @Html.Partial("_LeftSideBar")
 }
@@ -44,12 +44,12 @@
         <label class="control-label" for="textarea">
             Skilaboð til kennara</label>
         <div class="controls">
-            @Html.EditorFor(m => m.UserComment, new { rows = "3" })
+            vantar
         </div>
     </div>
     if (User.IsInRole("Student"))
     {
-        if (ViewBag.LevelProject.HasSubmitted != null)
+        if (ViewBag.LevelProject.LevelProjectResults != null)
         {
     <h4>
         Búið að skila verkefni!</h4> 
@@ -62,4 +62,37 @@
     }
 
 
+}
+<div>
+    @Html.ActionLink("Aftur á forsíðu verkefna", "Index")
+</div>
+@if (User.IsInRole("Teacher"))
+{
+    foreach (var user in Model.LevelProjectResults.Select(x => x.UserInfo))
+    {
+    <table class="table table-striped table-bordered table-condensed">
+        <caption>
+            Nemendur sem eru búnir að skila þessu verkefni.</caption>
+        <tbody>
+            <tr>
+                <th>
+                    Nafn nemanda
+                </th>
+                <th>
+                    Búinn að skila verkefni
+                </th>
+            </tr>
+            <tr>
+                <td>@user.Username
+                </td>
+                <td>
+                    @{
+                        string s = user.LevelProjectResults == null ? "Já" : "Nei";
+                    }
+                    @s
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    }
 }

@@ -70,5 +70,19 @@ namespace Ru.GameSchool.BusinessLayer.Services
 
             return list.OrderByDescending(x=>x.NotificationId);
         }
+
+        public void ClearNotifications(int userInfoId)
+        {
+            if (userInfoId <= 0)
+                return;
+
+            var list = GameSchoolEntities.Notifications.Where(x => x.UserInfoId == userInfoId && !x.IsRead);
+
+            foreach (var notification in list)
+            {
+                notification.IsRead = true;
+            }
+            Save();
+        }
     }
 }

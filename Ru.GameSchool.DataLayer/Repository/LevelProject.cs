@@ -72,7 +72,7 @@ namespace Ru.GameSchool.DataLayer.Repository
             set;
         }
     
-        public virtual string ProjectUrl
+        public virtual string ContentID
         {
             get;
             set;

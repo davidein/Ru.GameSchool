@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using System.Web.Security;
 using Ru.GameSchool.DataLayer.Repository;
 using Ru.GameSchool.Web.Classes;
+using Ru.GameSchool.Web.Classes.Helper;
 
 namespace Ru.GameSchool.Web.Controllers
 {
@@ -19,7 +20,7 @@ namespace Ru.GameSchool.Web.Controllers
         {
             if (User.Identity.IsAuthenticated)
             {
-                var user = Membership.GetUser() as GameSchoolMembershipUser;
+                var user = MembershipHelper.GetUser();
 
                 if (user != null)
                 {
@@ -30,13 +31,24 @@ namespace Ru.GameSchool.Web.Controllers
                                               x.Description,
                                               x.Url,
                                               x.IsRead,
-                                              x.CreateDateTime
+                                              x.CreateDateTime,
+                                              id = x.NotificationId
                                           };
                     return Json(list, JsonRequestBehavior.AllowGet);
                 }
             }
 
             return Json("", JsonRequestBehavior.AllowGet);
+        }
+
+        [Authorize]
+        public ActionResult ClearNotifications()
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                
+            }
+            return Json(false, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
