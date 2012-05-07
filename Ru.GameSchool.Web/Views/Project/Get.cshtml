@@ -32,19 +32,11 @@
 {
     <h4>
         Skila verkefni:</h4>
-    <div class="control-group">
-        <label class="control-label">
-            Skrá</label>
-        <div class="controls">
-            @Html.TextBoxFor(m => m.ProjectUrl, new { type = "file", @class = "input-file", rel = "popover" })
-        </div>
-    </div>
     
     <div class="control-group">
         <label class="control-label" for="textarea">
             Skilaboð til kennara</label>
         <div class="controls">
-            vantar
         </div>
     </div>
     if (User.IsInRole("Student"))
@@ -81,15 +73,25 @@
                 <th>
                     Búinn að skila verkefni
                 </th>
+                <th>
+                    Einkunn
+                </th>
             </tr>
             <tr>
                 <td>@user.Username
                 </td>
                 <td>
                     @{
-                        string s = user.LevelProjectResults == null ? "Já" : "Nei";
+                        string s = user.LevelProjectResults != null ? "Já" : "Nei";
                     }
                     @s
+                </td>
+                <td>
+                    @if (user.LevelProjectResults != null)
+                    {
+                        @user.LevelProjectResults.Select(x => x.Grade).FirstOrDefault()
+                    }
+
                 </td>
             </tr>
         </tbody>
