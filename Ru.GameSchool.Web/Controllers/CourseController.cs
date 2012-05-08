@@ -9,7 +9,7 @@ namespace Ru.GameSchool.Web.Controllers
         [Authorize(Roles = "Student, Teacher")]
         public ActionResult Index()
         {
-            ViewBag.Courses = CourseService.GetCourses();
+            
             return View();
         }
 
