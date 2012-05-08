@@ -18,30 +18,39 @@
     
 
     <br/>
-    <div><p>Skilafrestur: @ViewBag.LevelProject.Stop</p></div>
+    <div><p><strong>Skilafrestur: @ViewBag.LevelProject.Stop</strong></p></div>
+        @if (User.IsInRole("Student"))
+        {
     
-    
-    <div><p>Leyfilegar skrár:
+    <div class="control-group"><p>Leyfilegar skrár:
              @foreach (var item in ViewBag.AllowedFileExtensions)
              {
                  @item  
              }
          </p></div>
+        }
 </article>
 @using (Html.BeginForm())
 {
+    if (User.IsInRole("Student"))
+    {
     <h4>
         Skila verkefni:</h4>
-    
+    <div class="control-group">
+        <label class="control-label" for="textarea">
+            Viðhengi</label>
+        <div class="controls">
+            <input type="file" class="input-xlarge" id="UserContent" name="UserContent" rel="popover">
+        </div>
+    </div>
     <div class="control-group">
         <label class="control-label" for="textarea">
             Skilaboð til kennara</label>
         <div class="controls">
+            <textarea cols="20" rows="3" name="UserFeedback" id="UserFeedback"></textarea>
         </div>
     </div>
-    if (User.IsInRole("Student"))
-    {
-        if (ViewBag.LevelProject.LevelProjectResults != null)
+        if (ViewBag.LevelProjectResult.Count != 0 && ViewBag.LevelProject.Stop > DateTime.Now)
         {
     <h4>
         Búið að skila verkefni!</h4> 
@@ -52,12 +61,8 @@
         Skila verkefni</button>       
         }
     }
-
-
 }
-<div>
-    @Html.ActionLink("Aftur á forsíðu verkefna", "Index")
-</div>
+
 @if (User.IsInRole("Teacher"))
 {
     foreach (var user in Model.LevelProjectResults.Select(x => x.UserInfo))
@@ -71,6 +76,12 @@
                     Nafn nemanda
                 </th>
                 <th>
+                    Deild
+                </th>
+                <th>
+                    Verkefni
+                </th>
+                <th>
                     Búinn að skila verkefni
                 </th>
                 <th>
@@ -81,20 +92,65 @@
                 <td>@user.Username
                 </td>
                 <td>
+                    @user.Department.Name
+                </td>
+                <td>
+                    @Html.TextBoxFor(m => @Model.ContentID, new { type = "file" })
+                </td>
+                <td>
                     @{
-                        string s = user.LevelProjectResults != null ? "Já" : "Nei";
+        string s = user.LevelProjectResults.Count != 0 ? "Já" : "Nei";
                     }
                     @s
                 </td>
                 <td>
-                    @if (user.LevelProjectResults != null)
+                    @if (user.LevelProjectResults.Count != 0)
                     {
+                        if (user.LevelProjectResults.Select(x => x.Grade).FirstOrDefault() == 0)
+                        {
+                        <a id="giveGrade">Enginn einkunn</a>
+                        <input type="text" id="grade" class="input-mini" style="visibility: hidden;" />
+                        <span id="warning" style="visibility: hidden;">Ekki löglegt gildi</span>
+                        }
+                        else
+                        {
                         @user.LevelProjectResults.Select(x => x.Grade).FirstOrDefault()
+                        }
                     }
-
                 </td>
             </tr>
         </tbody>
     </table>
     }
 }
+<div class="control-group">
+    <label class="control-label">
+    </label>
+    <div class="controls">
+        <button type="submit" id="submitbtn" class="btn btn-success">
+            Vista einkunnir</button>
+    </div>
+</div>
+<div>
+    @Html.ActionLink("Aftur á forsíðu verkefna", "Index")
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#giveGrade").click(function () {
+            $(this).hide();
+            $("#grade").css('visibility', 'visible');
+        });
+        $("#submitbtn").click(function () {
+            if ($("#grade").val() > 10 || $("#grade").val() < 0) {
+                $("#warning").css('visibility', 'visible');
+                return false;
+            }
+            if (!parseInt($("#grade").val())) {
+                $("#warning").css('visibility', 'visible');
+                return false;
+            }
+            $("#warning").css('visibility', 'hidden');
+        }
+        );
+    });
+</script>

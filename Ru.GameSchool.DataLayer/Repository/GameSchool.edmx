@@ -96,7 +96,7 @@
             <End Role="LevelProject" EntitySet="LevelProject" />
             <End Role="LevelProjectResult" EntitySet="LevelProjectResult" />
           </AssociationSet>
-          <AssociationSet Name="FK_LevelProjectResult_UserInfo1" Association="GameSchoolModel.Store.FK_LevelProjectResult_UserInfo1">
+          <AssociationSet Name="FK_LevelProjectResult_UserInfo" Association="GameSchoolModel.Store.FK_LevelProjectResult_UserInfo">
             <End Role="UserInfo" EntitySet="UserInfo" />
             <End Role="LevelProjectResult" EntitySet="LevelProjectResult" />
           </AssociationSet>
@@ -277,10 +277,11 @@
         </EntityType>
         <EntityType Name="LevelProjectResult">
           <Key>
-            <PropertyRef Name="LevelProjectId" />
+            <PropertyRef Name="LevelProjectResultId" />
             <PropertyRef Name="UserInfoId" />
+            <PropertyRef Name="LevelProjectId" />
           </Key>
-          <Property Name="LevelProjectId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="LevelProjectResultId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="UserInfoId" Type="int" Nullable="false" />
           <Property Name="TeacherFeedback" Type="nvarchar(max)" />
           <Property Name="Grade" Type="float" Nullable="false" />
@@ -288,6 +289,7 @@
           <Property Name="UserFeedback" Type="nvarchar(max)" />
           <Property Name="GradeDate" Type="datetime" />
           <Property Name="ContentID" Type="nvarchar(max)" />
+          <Property Name="LevelProjectId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Notification">
           <Key>
@@ -570,7 +572,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_LevelProjectResult_UserInfo1">
+        <Association Name="FK_LevelProjectResult_UserInfo">
           <End Role="UserInfo" Type="GameSchoolModel.Store.UserInfo" Multiplicity="1" />
           <End Role="LevelProjectResult" Type="GameSchoolModel.Store.LevelProjectResult" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1014,8 +1016,9 @@
           <Key>
             <PropertyRef Name="LevelProjectId" />
             <PropertyRef Name="UserInfoId" />
+            <PropertyRef Name="LevelProjectResultId" />
           </Key>
-          <Property Type="Int32" Name="LevelProjectId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="LevelProjectId" Nullable="false" annotation:StoreGeneratedPattern="None" />
           <Property Type="Int32" Name="UserInfoId" Nullable="false" />
           <Property Type="Double" Name="Grade" Nullable="false" />
           <Property Type="DateTime" Name="CreateDateTime" Nullable="false" />
@@ -1025,6 +1028,7 @@
           <Property Type="String" Name="UserFeedback" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Type="DateTime" Name="GradeDate" />
           <Property Type="String" Name="ContentID" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="LevelProjectResultId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
         </EntityType>
         <EntityType Name="Notification">
           <Key>
@@ -1584,6 +1588,7 @@
           <EntitySetMapping Name="LevelProjectResults">
             <EntityTypeMapping TypeName="GameSchoolModel.LevelProjectResult">
               <MappingFragment StoreEntitySet="LevelProjectResult">
+                <ScalarProperty Name="LevelProjectResultId" ColumnName="LevelProjectResultId" />
                 <ScalarProperty Name="ContentID" ColumnName="ContentID" />
                 <ScalarProperty Name="GradeDate" ColumnName="GradeDate" />
                 <ScalarProperty Name="UserFeedback" ColumnName="UserFeedback" />

@@ -212,12 +212,16 @@ namespace Ru.GameSchool.BusinessLayer.Services
 
                 var levelProjectToUpdate = query.FirstOrDefault();
 
-                levelProjectToUpdate.Description = levelProject.Description;
-                levelProjectToUpdate.GradePercentageValue = levelProject.GradePercentageValue;
-                levelProjectToUpdate.Name = levelProject.Name;
-                levelProjectToUpdate.Start = levelProject.Start;
-                levelProjectToUpdate.Stop = levelProject.Stop;
-                //levelProjectToUpdate.ProjectUrl = levelProject.ProjectUrl;
+                if (levelProjectToUpdate != null)
+                {
+                    levelProjectToUpdate.Description = levelProject.Description;
+                    levelProjectToUpdate.GradePercentageValue = levelProject.GradePercentageValue;
+                    levelProjectToUpdate.Name = levelProject.Name;
+                    levelProjectToUpdate.Start = levelProject.Start;
+                    levelProjectToUpdate.Stop = levelProject.Stop;
+                    levelProjectToUpdate.ContentID = levelProject.ContentID;
+                    levelProjectToUpdate.LevelId = levelProject.LevelId;
+                }
 
                 Save();
             }
@@ -495,6 +499,35 @@ namespace Ru.GameSchool.BusinessLayer.Services
                     c.Level.Course.UserInfoes.Where(x => x.UserInfoId == userInfoId).SelectMany(
                         d => d.Courses.SelectMany(f => f.Levels.SelectMany(k => k.LevelProjects))));
             return query;
+        }
+
+        public bool DeleteLevelProject(int levelProjectId)
+        {
+            if (levelProjectId < 0)
+            {
+                return false;
+            }
+            var query = GameSchoolEntities.LevelProjects.Where(l => l.LevelProjectId == levelProjectId);
+
+            var levelProject = query.SingleOrDefault();
+
+            if (levelProject == null)
+            {
+                return false;
+            }
+
+            GameSchoolEntities.LevelProjects.DeleteObject(levelProject);
+            Save();
+            return true;
+        }
+
+        public void CreateLevelProjectResult(LevelProjectResult levelProjectResult)
+        {
+            if (levelProjectResult != null)
+            {
+                GameSchoolEntities.LevelProjectResults.AddObject(levelProjectResult);
+                Save();
+            }
         }
     }
 }

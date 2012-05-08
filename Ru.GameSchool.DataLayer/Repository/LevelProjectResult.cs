@@ -88,6 +88,12 @@ namespace Ru.GameSchool.DataLayer.Repository
             get;
             set;
         }
+    
+        public virtual int LevelProjectResultId
+        {
+            get;
+            set;
+        }
 
         #endregion
         #region Navigation Properties
