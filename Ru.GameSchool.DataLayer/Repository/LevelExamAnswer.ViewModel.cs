@@ -10,6 +10,7 @@ namespace Ru.GameSchool.DataLayer.Repository
     [MetadataType(typeof(LevelExamAnswerMetadata))]
     public partial class LevelExamAnswer
     {
+
     }
     public class LevelExamAnswerMetadata
     {
