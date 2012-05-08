@@ -370,6 +370,64 @@ namespace Ru.GameSchool.BusinessLayerTests
         ///A test for GetLevelProject
         ///</summary>
         [TestMethod()]
+        public void GetLevelProjectByUserIdTest_UserInfoCourseLevelLevelProject_CollectionOfLevelProjects()
+        {
+            var userInfoId = 7;
+
+            var userData = new FakeObjectSet<UserInfo>();
+            var courseData = new FakeObjectSet<Course>();
+            var levelProjectData = new FakeObjectSet<LevelProject>();
+            var levelData = new FakeObjectSet<Level>();
+
+            LevelProject levelProject1 = new LevelProject { Stop = DateTime.Now.AddDays(7), Start = DateTime.Now, Name = "Verkefni", LevelProjectId = 1, ContentID = "Content", Description = "Lýsing", GradePercentageValue = 5, LevelId = 1 };
+            LevelProject levelProject2 = new LevelProject { Stop = DateTime.Now.AddDays(7), Start = DateTime.Now, Name = "Verkefni2", LevelProjectId = 2, ContentID = "Conten2t", Description = "Lýsing2", GradePercentageValue = 1, LevelId = 1 };
+            UserInfo user1 = new UserInfo { Fullname = "Davíð Einarsson", Email = "davide09@ru.is", StatusId = 1, Username = "davidein", UserInfoId = userInfoId, Password = "Wtf" };
+            Course course = new Course { CourseId = 1, Name = "Vefforritun I", CreateDateTime = DateTime.Now, Identifier = "VEFF", Start = DateTime.Now, Stop = DateTime.Now.AddDays(28), DepartmentId = 1, CreditAmount = 6, Description = "Lýsing á veff" };
+            Level lvl = new Level { CourseId = 1, CreateDateTime = DateTime.Now, LevelId = 1, Name = "Level", Start = DateTime.Now, Stop = DateTime.Now.AddDays(7), OrderNum = 5 };
+
+            course.Levels.Add(lvl);
+            user1.Courses.Add(course);
+            lvl.LevelProjects.Add(levelProject1);
+            lvl.LevelProjects.Add(levelProject2);
+
+            userData.AddObject(user1);
+            courseData.AddObject(course);
+            levelProjectData.AddObject(levelProject1);
+            levelProjectData.AddObject(levelProject2);
+            levelData.AddObject(lvl);
+
+            _mockRepository.Expect(x => x.UserInfoes).Return(userData);
+            _mockRepository.Expect(x => x.Courses).Return(courseData);
+            _mockRepository.Expect(x => x.LevelProjects).Return(levelProjectData);
+            _mockRepository.Expect(x => x.Levels).Return(levelData);
+
+            var query = _levelService.GetLevelProjectsByUserId(userInfoId);
+
+            var expectedUser = query.SelectMany(x => x.Level.Course.UserInfoes).FirstOrDefault();
+            var expectedFirstLevelProject = query.Where(s => s.LevelProjectId == 1).FirstOrDefault();
+            var expectedSecondLevelProject = query.Where(s => s.LevelProjectId == 2).FirstOrDefault();
+            var expectedLevel = query.Where(x => x.Level.LevelId == 1).Select(x => x.Level).FirstOrDefault();
+            var expectedCourse =
+                query.Where(x => x.Level.Course.CourseId == 1).Select(x => x.Level.Course).FirstOrDefault();
+
+            Assert.AreEqual(expectedCourse.Description, course.Description);
+            Assert.AreEqual(expectedLevel.Name,lvl.Name);
+            Assert.AreEqual(expectedSecondLevelProject.Name, levelProject2.Name);
+            Assert.AreEqual(expectedFirstLevelProject.Name,levelProject1.Name);
+            Assert.AreEqual(expectedUser.Fullname,user1.Fullname);
+            Assert.AreEqual(expectedUser.Fullname, user1.Fullname);
+            Assert.AreEqual(expectedUser.Fullname, user1.Fullname);
+            Assert.AreEqual(expectedUser.Fullname, user1.Fullname);
+
+            
+        }
+
+
+
+        /// <summary>
+        ///A test for GetLevelProject
+        ///</summary>
+        [TestMethod()]
         public void GetLevelProjectTest()
         {
             LevelService target = new LevelService(); // TODO: Initialize to an appropriate value

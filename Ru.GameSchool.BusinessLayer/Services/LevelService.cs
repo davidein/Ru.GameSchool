@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Data;
 using System.Data.Entity;
+using System.Data.Objects;
 using System.Linq;
 using Ru.GameSchool.DataLayer;
 using Ru.GameSchool.DataLayer.Repository;
@@ -61,7 +63,7 @@ namespace Ru.GameSchool.BusinessLayer.Services
         /// <returns>IEnumerable of level instances.</returns>
         public IEnumerable<Level> GetLevels(int CourseId)
         {
-            return GameSchoolEntities.Levels.Where(x=> x.CourseId == CourseId);
+            return GameSchoolEntities.Levels.Where(x => x.CourseId == CourseId);
         }
         /// <summary>
         /// Update a level object with new changes and persist it to the datasource.
@@ -109,7 +111,7 @@ namespace Ru.GameSchool.BusinessLayer.Services
         public IEnumerable<LevelExam> GetLevelExams(int courseId, int userInfoId)
         {
             var list = GameSchoolEntities.LevelExams.Where(x => x.Level.CourseId == courseId);
-            var exams = list.Where(x=>x.Level.Course.UserInfoes.Where(y=>y.UserInfoId == userInfoId).Count()>0);
+            var exams = list.Where(x => x.Level.Course.UserInfoes.Where(y => y.UserInfoId == userInfoId).Count() > 0);
 
 
 
@@ -207,9 +209,12 @@ namespace Ru.GameSchool.BusinessLayer.Services
         {
             if (levelProject != null)
             {
+                //TODO: Implement
                 Save();
             }
         }
+
+
 
         /// <summary>
         /// 
@@ -296,7 +301,7 @@ namespace Ru.GameSchool.BusinessLayer.Services
         /// <returns>IEnumerable collection of levelexamquestions.</returns>
         public IEnumerable<LevelExamQuestion> GetLevelExamQuestions(int levelExamId)
         {
-            return GameSchoolEntities.LevelExamQuestions.Where(x=>x.LevelExamId == levelExamId);
+            return GameSchoolEntities.LevelExamQuestions.Where(x => x.LevelExamId == levelExamId);
         }
 
         public LevelExamQuestion GetLevelExamQuestion(int levelExamQuestionsId)
@@ -476,13 +481,12 @@ namespace Ru.GameSchool.BusinessLayer.Services
             {
                 return null;
             }
+            // þarf að lagfæra, síar ekki út með id
+            var levelProjectQuery =
+                GameSchoolEntities.LevelProjects.Select(x => x).Include("Level").Include("LevelProjectResults").Include(
+                    "Level.Course");
 
-            var query =
-                GameSchoolEntities.LevelProjects.SelectMany(
-                    c =>
-                    c.Level.Course.UserInfoes.Where(x => x.UserInfoId == userInfoId).SelectMany(
-                        d => d.Courses.SelectMany(f => f.Levels.SelectMany(k => k.LevelProjects))));
-            return query;
+            return levelProjectQuery;
         }
 
         public bool DeleteLevelProject(int levelProjectId)
