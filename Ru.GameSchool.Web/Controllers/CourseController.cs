@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using Ru.GameSchool.Web.Classes.Helper;
 using Ru.GameSchool.Web.Models;
 
 
@@ -9,19 +10,23 @@ namespace Ru.GameSchool.Web.Controllers
         [Authorize(Roles = "Student, Teacher")]
         public ActionResult Index()
         {
-            ViewBag.Courses = CourseService.GetCourses();
+            
             return View();
         }
 
         [Authorize(Roles = "Student")]
-        public ActionResult Item(int id)
+        public ActionResult Item(int? id)
         {
-            var course = CourseService.GetCourse(id);
-            ViewBag.Course = course;
+            if (id.HasValue)
+            {
+                var user = MembershipHelper.GetUser();
 
-            ViewBag.Title = course.Name;
+                var userlevel = CourseService.GetCurrentUserLevel(user.UserInfoId, id.Value);
 
-            return View();
+                return RedirectToAction("Get", "Level", new {id = userlevel});
+            }
+
+            return RedirectToAction("NotFound","Home");
         }
 
 

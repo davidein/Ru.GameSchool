@@ -20,18 +20,20 @@ namespace Ru.GameSchool.Web.Controllers
         public ActionResult About()
         {
 
+            ViewBag.Title = "Um GameSchool";
             return View();
         }
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your quintessential contact page.";
+            ViewBag.Title = "Hafðu samband";
 
             return View();
         }
 
         public ActionResult NotFound()
         {
+            ViewBag.Title = "Hluturinn fannst ekki";
             return View();
         }
 

@@ -195,6 +195,7 @@
     <Content Include="Global.asax" />
     <Content Include="Release Notes - Microsoft.Web.Helpers.txt" />
     <Content Include="Scripts\app\common.js" />
+    <Content Include="Scripts\app\LevelExam.js" />
     <Content Include="Scripts\jquery-1.6.2-vsdoc.js" />
     <Content Include="Scripts\jquery-1.6.2.min.js" />
     <Content Include="Scripts\lib\jquery-1.7.2.js" />
@@ -369,6 +370,7 @@
     <Content Include="Views\Project\Edit.cshtml" />
     <Content Include="Views\Exam\ExamQuestions.cshtml" />
     <Content Include="Views\Material\_MaterialForm.cshtml" />
+    <Content Include="Views\Exam\_ExamAnswer.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

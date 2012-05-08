@@ -1,13 +1,6 @@
 ﻿@model IEnumerable<Ru.GameSchool.DataLayer.Repository.LevelExam>
-@{
-    ViewBag.Title = "Listi yfir próf";
-}
-@section sidebar {
-    @Html.Partial("_LeftSideBar")
-}
 
-<h2>
-    Próf: @ViewBag.Course.Name </h2>
+
 @if (User.IsInRole("Teacher"))
 {
     <p>
@@ -42,7 +35,7 @@
     {
         <tr>
             <td>
-                @Html.ActionLink((@item.Name + " - Skiladagur: " + @item.Level.Stop.ToString("dd.MM.yyyy HH:mm")) as string, User.IsInRole("Student") ? "Get" : "Edit", new { LevelExamId = @item.LevelExamId })
+                @Html.ActionLink((@item.Name + " - Skiladagur: " + @item.Level.Stop.ToString("dd.MM.yyyy HH:mm")) as string, "Get", new { LevelExamId = @item.LevelExamId })
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Level.Course.Name)
@@ -59,8 +52,8 @@
             @if (User.IsInRole("Teacher"))
             {
                 <td>
-                    @Html.ActionLink("Breyta", "Edit", new { LevelExamId = item.LevelExamId }) |
-                    @Html.ActionLink("Eyða", "Delete", new { LevelExamId = item.LevelExamId })
+                    @Html.ActionLink("Breyta", "Edit", new { id = item.LevelExamId }) |
+                    @Html.ActionLink("Eyða", "Delete", new { id = item.LevelExamId })
                 </td>   
             }
         </tr>

@@ -123,6 +123,7 @@
     <Compile Include="Repository\LevelProjectResult.cs">
       <DependentUpon>GameSchool.tt</DependentUpon>
     </Compile>
+    <Compile Include="Repository\LevelProjectResult.ViewModel.cs" />
     <Compile Include="Repository\Notification.cs">
       <DependentUpon>GameSchool.tt</DependentUpon>
     </Compile>

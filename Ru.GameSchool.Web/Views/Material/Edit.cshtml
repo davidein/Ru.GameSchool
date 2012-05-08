@@ -1,13 +1,5 @@
 ﻿@model Ru.GameSchool.DataLayer.Repository.LevelMaterial
-@{
-    ViewBag.Title = "Uppfæra kennslugagn";
-}
 
-@section sidebar {
-    @Html.Partial("_TeacherSideBar")
-}
-
-<h2>@ViewBag.Title</h2>
 @if (!string.IsNullOrWhiteSpace(ViewBag.SuccessMessage))
 {
     <div class="alert alert-success">

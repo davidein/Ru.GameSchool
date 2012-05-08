@@ -1,26 +1,32 @@
-﻿@{
-    ViewBag.Title = "Námskeið";
-}
-<h2>
-    Index</h2>
+﻿
+
+<h2>Þín námskeið</h2>
 <div class="row-fluid course-box">
-    <h2>
-        Þín námskeið</h2>
-    <div class="span4 well">
-        @foreach (var item in ViewBag.Courses)
-        {  
-        
-            <h3>@item.Name</h3>
-            <ul>
-                <li><a href="/Home/Material">MVC 4 </a><span class="label label-important">Nýtt</span></li>
-                <li><a href="/Home/Exam">Netpróf 2 </a><span class="label label-important">Nýtt</span></li>
-                <li><a href="/Home/Project">CSS</a></li>
-                <li><a href="/Home/Project">HTML5 glærur</a></li>
-            </ul>
-            <p>
-                <a class="btn btn-small" href="#">Skoða nánar &raquo;</a></p>
-        
-        }
-    </div>
-    <!--/span-->
+@if (ViewBag.UserCourseList != null && ViewBag.UserCourseList.Count > 0)
+{
+    foreach (var item in ViewBag.UserCourseList)
+    {
+        <text>
+        <div class="row-fluid">
+            @foreach (var nesteditem in item)
+            {
+            <div class="span4 well">
+                <h3>@nesteditem.Name</h3>
+                <ul>
+                    <li><a href="/Home/Material">MVC 4 </a><span class="label label-important">Nýtt</span></li>
+                    <li><a href="/Home/Exam">Netpróf 2 </a><span class="label label-important">Nýtt</span></li>
+                    <li><a href="/Home/Project">CSS</a></li>
+                    <li><a href="/Home/Project">HTML5 glærur</a></li>
+                </ul>
+                <p>@Html.ActionLink("Fara í námskeið", "Item", "Course", new { id = @nesteditem.CourseId }, new { @class = "btn btn-small" })</p>
+            </div><!--/span-->
+            }
+        </div><!--/row-->
+        </text>
+    }
+}
+else
+{
+    <p>Notandi er ekki skráður í námskeið</p>
+}
 </div>

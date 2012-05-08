@@ -18,25 +18,55 @@ namespace Ru.GameSchool.Web.Controllers
         // GET: /Material/
         [Authorize(Roles = "Student, Teacher")]
         [HttpGet]
-        public ActionResult Index()
+        public ActionResult Index(int? id)
         {
-            IEnumerable<LevelMaterial> materials = LevelService.GetLevelMaterials(); ;
-            ViewBag.Materials = materials;
+            if (id.HasValue)
+            {
+                int courseIdValue = id.Value;
+                IEnumerable<LevelMaterial> materials = CourseService.GetCourseMaterials(courseIdValue); ;
+                ViewBag.Materials = materials;
+                ViewBag.CourseName = CourseService.GetCourse(courseIdValue).Name;
+                ViewBag.Courseid = CourseService.GetCourse(courseIdValue).CourseId;
+                ViewBag.Title = "Listi yfir kennsluefni";
+                return View(materials);
+            }
 
-            return View();
+            return RedirectToAction("NotFound","Home");
         }
+
+        public ActionResult Index(int? id, int? contentTypeId)
+        {
+            if (id.HasValue && contentTypeId.HasValue)
+            {
+                int courseIdValue = id.Value;
+                int contentTypeIdValue = contentTypeId.Value;
+                IEnumerable<LevelMaterial> materials = CourseService.GetCourseMaterials(courseIdValue,contentTypeIdValue); ;
+                ViewBag.Materials = materials;
+                ViewBag.CourseName = CourseService.GetCourse(courseIdValue).Name;
+                ViewBag.Courseid = CourseService.GetCourse(courseIdValue).CourseId;
+                ViewBag.Title = "Listi yfir kennsluefni - " + CourseService.GetContentTypeNameById(contentTypeIdValue);
+                return View(materials);
+            }
+
+            return RedirectToAction("NotFound", "Home");
+        }
+
 
         [HttpGet]
         [Authorize(Roles = "Student, Teacher")]
         public ActionResult Get(int? id)
+
         {
             if (id.HasValue)
             {
+                
                 var material = LevelService.GetLevelMaterial(id.Value);
                 ViewBag.File = Settings.ProjectMaterialVirtualFolder + material.ContentId.ToString()+".mp4"; //TODO: Add function to check for file extensions
-                ViewBag.Title = material.Title;
+                ViewBag.CourseName = material.Level.Course.Name;
+                ViewBag.Courseid = material.Level.Course.CourseId;
+                ViewBag.Title = "Listi yfir " + material.ContentType.Name;
                 ViewBag.Description = material.Description;
-                    
+
                 return View(material);
             }
             return View();
@@ -50,6 +80,10 @@ namespace Ru.GameSchool.Web.Controllers
             ViewBag.LevelCount = GetLevelCounts(id.Value);
             ViewBag.ContentTypes = LevelService.GetContentTypes();
             ViewBag.CourseId = id.Value;
+
+            ViewBag.CourseName = CourseService.GetCourse(id.Value).Name;
+            ViewBag.Courseid = CourseService.GetCourse(id.Value).CourseId;
+            ViewBag.Title = "Búa til kennsluefni";
 
             return View();
         }
@@ -73,6 +107,7 @@ namespace Ru.GameSchool.Web.Controllers
                 LevelService.CreateLevelMaterial(levelMaterial);
 
                 return RedirectToAction("Edit", new { id = levelMaterial.LevelMaterialId });
+
             }
             ViewBag.LevelCount = GetLevelCounts(id.Value);
             ViewBag.ContentTypes = LevelService.GetContentTypes();
@@ -85,12 +120,21 @@ namespace Ru.GameSchool.Web.Controllers
         [Authorize(Roles = "Teacher")]
         public ActionResult Edit(int? id)
         {
+            
+
+ 
             if (id.HasValue)
             {
                 var material = LevelService.GetLevelMaterial(id.Value);
-                ViewBag.LevelCount = GetLevelCounts(material.Level.CourseId);
+                var courseId = material.Level.CourseId;
+                ViewBag.LevelCount = GetLevelCounts(courseId);
                 ViewBag.ContentTypes = LevelService.GetContentTypes();
-                ViewBag.CourseId = material.Level.CourseId;
+                //ViewBag.CourseId = material.Level.CourseId;
+
+                ViewBag.CourseName = CourseService.GetCourse(courseId).Name;
+                ViewBag.Courseid = CourseService.GetCourse(courseId).CourseId;
+                ViewBag.Title = "Breyta kennsluefni";
+
                 return View(material);
             }
             return View();

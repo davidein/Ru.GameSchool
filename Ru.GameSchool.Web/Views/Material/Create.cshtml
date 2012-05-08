@@ -1,4 +1,3 @@
-﻿
 @{
     ViewBag.Title = "Skrá nýtt kennslugagn";
 }
@@ -8,6 +7,7 @@
 @section sidebar {
     @Html.Partial("_TeacherSideBar")
 }
+
 
 @using (Html.BeginForm("Create", "Material", new {id=ViewBag.CourseId}, FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal" } ))
 

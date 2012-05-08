@@ -1,19 +1,5 @@
 ﻿@model Ru.GameSchool.DataLayer.Repository.Level
 
-@{
-    ViewBag.Title = "Borð";
-}
-
-
-@section sidebar {
-
-@Html.Partial("_LeftSideBar")
-
-}
-
-<div class="page-header">
-    <h1>@ViewBag.CourseName</h1>
-</div>
 
 <ul class="nav nav-tabs">
             @foreach (var m in ViewBag.Levels)
