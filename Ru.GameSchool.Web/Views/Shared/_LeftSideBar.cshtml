@@ -133,17 +133,27 @@
         {
         <div class="accordion-group">
             <div class="accordion-heading">
-                <a href="#@nesteditem.CourseId" data-parent="#accordion2" data-toggle="collapse" class="accordion-toggle ">@nesteditem.Name</a>
+                <a href="#collapse_@nesteditem.CourseId" data-parent="#accordion2" data-toggle="collapse" class="accordion-toggle ">@nesteditem.Name</a>
             </div>
-            <div class="accordion-body collapse" id="@nesteditem.CourseId" >
+            <div class="accordion-body collapse" id="collapse_@nesteditem.CourseId" >
                 <div class="accordion-inner">
                     <ul class="nav nav-list">
-                        <li>@Html.ActionLink("Forsíða", "Index", "Home")</li>
-                        <li>@Html.ActionLink("Tilkynningar", "", "")</li>
+                        @if (User.IsInRole("Teacher"))
+                        {
+                        <li>@Html.ActionLink("Ummæli", "Comments", "Course", new { id = @nesteditem.CourseId }, null)</li>
+                        <li>@Html.ActionLink("Nýtt borð", "Create", "Level", new { id = @nesteditem.CourseId }, null)</li>
+                        <li>@Html.ActionLink("Ný tilkynning", "Announcement", "Course", new { id = @nesteditem.CourseId }, null)</li>
+                        <li>@Html.ActionLink("Nýtt verkefni", "Project", "Course", new { id = @nesteditem.CourseId }, null)</li>
+                        <li>@Html.ActionLink("Nýtt próf", "Create", "Exam", new { id = @nesteditem.CourseId }, null)</li>
+                        <li>@Html.ActionLink("Nýtt kennslugagn", "Create", "Material", new { id = @nesteditem.CourseId }, null)</li>
+                        <hr/>
+                        }
+                        <li>@Html.ActionLink("Borð", "Item", "Course", new { id = @nesteditem.CourseId }, null)</li>
+                        <li>@Html.ActionLink("Tilkynningar", "", "", new { id = @nesteditem.CourseId }, null)</li>
                         <li>@Html.ActionLink("Verkefni", "Index", "Project", new { id = @nesteditem.CourseId }, null)</li>
-                        <li>@Html.ActionLink("Próf", "Index", "Exam")</li>
-                        <li>@Html.ActionLink("Kennsluefni", "Index", "Level")</li>
-                        <li>@Html.ActionLink("Núverandi borð", "Item", "Course", new { id = @nesteditem.CourseId }, null)</li>
+                        <li>@Html.ActionLink("Próf", "Index", "Exam", new { id = @nesteditem.CourseId }, null)</li>
+                        <li>@Html.ActionLink("Kennsluefni", "Index", "Material", new { id = @nesteditem.CourseId }, null)</li>
+
                     </ul>
                 </div>
             </div>

@@ -24,6 +24,7 @@ namespace Ru.GameSchool.Web.Controllers
                 if (model != null)
                 {
 
+                    int userId = UserService.GetUser(User.Identity.Name).UserInfoId;
                     int courseId = model.CourseId;
                     ViewBag.CourseName = model.Course.Name;
                     ViewBag.Levels = LevelService.GetLevels(courseId);
@@ -32,7 +33,7 @@ namespace Ru.GameSchool.Web.Controllers
                     ViewBag.MaterialsSlides = LevelService.GetLevelMaterials(levelId,2);
                     ViewBag.MaterialsMessages = LevelService.GetLevelMaterials(levelId);
                     ViewBag.MaterialsDocs = LevelService.GetLevelMaterials(levelId,3);
-                    //ViewBag.Exams = LevelService.GetLevelExams();
+                    ViewBag.Exams = LevelService.GetLevelExams(levelId, userId);
 
                     return View(model);
                 }
