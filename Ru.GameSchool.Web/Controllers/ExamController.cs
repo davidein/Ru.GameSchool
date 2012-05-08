@@ -25,11 +25,15 @@ namespace Ru.GameSchool.Web.Controllers
 
                 //level.Course.Levels
 
+                ViewBag.Title = "Listi yfir próf";
+
                 var course = CourseService.GetCourse(id.Value);
 
                 var exams = LevelService.GetLevelExams(id.Value, user.UserInfoId);
 
                 ViewBag.Course = course;
+                ViewBag.CourseName = course.Name;
+                ViewBag.CourseId = course.CourseId;
 
                 return View(exams);
             }
@@ -44,7 +48,9 @@ namespace Ru.GameSchool.Web.Controllers
         {
             if (levelExamId.HasValue)
             {
+                ViewBag.Title = "Skoða próf";              
                 var exam = LevelService.GetLevelExam(levelExamId.Value);
+                ViewBag.CourseId = exam.Level.CourseId;
                 return View(exam);
             }
             return View();
@@ -58,6 +64,9 @@ namespace Ru.GameSchool.Web.Controllers
             if (levelExamId.HasValue)
             {
                 var exam = LevelService.GetLevelExam(levelExamId.Value);
+                ViewBag.CourseId = exam.Level.CourseId;
+                ViewBag.CourseName = exam.Level.Course.Name;
+                ViewBag.Title = "Taka próf";
                 return View(exam);
             }
             return View();
@@ -87,6 +96,9 @@ namespace Ru.GameSchool.Web.Controllers
             {
                 ViewBag.GradePercentageValues = GradePercentageValue();
                 ViewBag.MapCount = MapCount(id.Value);
+                ViewBag.CourseId = id.Value;
+                ViewBag.CourseName = CourseService.GetCourse(id.Value).Name;
+                ViewBag.Title = "Búa til nýtt próf";
                 return View();
             }
 
@@ -110,7 +122,8 @@ namespace Ru.GameSchool.Web.Controllers
             {
                 var exam = LevelService.GetLevelExam(id.Value);
                 //var examQuestions = LevelService.GetLevelExamQuestions(id.Value);
-
+                ViewBag.Title = "Spurningar í prófi";
+                ViewBag.CourseName = exam.Level.Course.Name;
                 ViewBag.Exam = exam;
                 ViewBag.QuestionList = exam.LevelExamQuestions;
             }
@@ -130,6 +143,9 @@ namespace Ru.GameSchool.Web.Controllers
                 if (LevelExamId.HasValue)
                 {
                     var exam = LevelService.GetLevelExam(LevelExamId.Value);
+                    ViewBag.Title = "Breyta prófi";
+                    ViewBag.CourseId = exam.Level.CourseId;
+                    ViewBag.CourseName = exam.Level.Course.Name;
                     return View(exam);
                 }
             }

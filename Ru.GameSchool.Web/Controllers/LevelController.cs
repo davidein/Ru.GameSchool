@@ -26,7 +26,11 @@ namespace Ru.GameSchool.Web.Controllers
                 if (model != null)
                 {
 
+                    int userId = UserService.GetUser(User.Identity.Name).UserInfoId;
                     int courseId = model.CourseId;
+
+                    ViewBag.Title = "Borð";
+                    ViewBag.CourseId = courseId;
                     ViewBag.CourseName = model.Course.Name;
                     ViewBag.Levels = LevelService.GetLevels(courseId);
                     ViewBag.Projects = LevelService.GetLevelProjects();
@@ -34,7 +38,7 @@ namespace Ru.GameSchool.Web.Controllers
                     ViewBag.MaterialsSlides = LevelService.GetLevelMaterials(levelId,2);
                     ViewBag.MaterialsMessages = LevelService.GetLevelMaterials(levelId);
                     ViewBag.MaterialsDocs = LevelService.GetLevelMaterials(levelId,3);
-                    ViewBag.Exams = LevelService.GetLevelExams(courseId, user.UserInfoId);
+                    ViewBag.Exams = LevelService.GetLevelExams(levelId, userId);
 
                     return View(model);
                 }
@@ -49,6 +53,7 @@ namespace Ru.GameSchool.Web.Controllers
         public ActionResult Create()
         //public ActionResult Create(int CoureId)
         {
+            ViewBag.Title = "Búa til  borð";
             ViewBag.CourseList = new SelectList(CourseService.GetCourses(), "CourseId", "Name"); 
             return View();
         }
@@ -77,7 +82,9 @@ namespace Ru.GameSchool.Web.Controllers
         {
             if (id.HasValue)
             {
+                ViewBag.Title = "Breyta borði";
                 var model = LevelService.GetLevel(id.Value);
+                ViewBag.CourseId = model.CourseId;
                 return View(model);
             }
 
