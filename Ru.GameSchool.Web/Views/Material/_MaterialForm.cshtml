@@ -1,39 +1,6 @@
 ﻿@model Ru.GameSchool.DataLayer.Repository.LevelMaterial
-@{
-    ViewBag.Title = "Uppfæra kennslugagn";
-}
 
-@section sidebar {
-    @Html.Partial("_TeacherSideBar")
-}
-
-<h2>@ViewBag.Title</h2>
-@if (!string.IsNullOrWhiteSpace(ViewBag.SuccessMessage))
-{
-    <div class="alert alert-success">
-        <button class="close" data-dismiss="alert">
-            ×</button>
-        <strong>Tókst!</strong> @ViewBag.SuccessMessage
-    </div>
-}
-@if (!string.IsNullOrWhiteSpace(ViewBag.ErrorMessage))
-{
-    <div class="alert alert-error">
-        <button class="close" data-dismiss="alert">
-            ×</button>
-        <strong>Villa!</strong> @ViewBag.ErrorMessage
-    </div>
-}
-
-@* TODO: CHECK SYNTAX @using (Html.BeginForm("Edit", "Material", arg, FormMethod.Post, new { @class = "form-horizontal" }))*@
-@using (Html.BeginForm("Edit", "Material", new {id=ViewBag.CourseId}, FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal" }))
-{
-    @Html.ValidationSummary(true)
-    <fieldset>
-        <legend>Kennslugagn</legend>
-        @Html.HiddenFor(m => m.LevelMaterialId)
-        @Html.Partial("_MaterialForm")
-       @* <div class="control-group">
+        <div class="control-group">
             @Html.LabelFor(m => m.Title, new { @class = "control-label" })
             <div class="controls">
                 @Html.EditorFor(m => m.Title, new { @class="input-xlarge", rel="popover" })
@@ -58,9 +25,9 @@
         </div>
 
         <div class="control-group">
-            @Html.LabelFor(m => m.Url, new { @class = "control-label" })
+            @Html.LabelFor(m => m.File, new { @class = "control-label" })
             <div class="controls">
-                @Html.TextBoxFor(m => m.Url, new { type = "file", @class = "input-file", rel = "popover" })
+                <input type="file" name="File"/>
             </div>
         </div>
 
@@ -69,12 +36,4 @@
             <div class="controls">
                 @Html.EditorFor(m => m.Description, new { @class="input-xlarge", rel="popover", rows="3" })
             </div>
-        </div>*@
-
-        <div class="control-group">
-            <div class="controls">
-                <button type="submit" class="btn btn-success" >Uppfæra kennslugagn</button>
-            </div>
         </div>
-    </fieldset>
-}

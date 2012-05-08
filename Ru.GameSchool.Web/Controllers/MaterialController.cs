@@ -8,15 +8,15 @@ using System.Web.Mvc;
 using System.Web.Security;
 using Ru.GameSchool.DataLayer.Repository;
 using Ru.GameSchool.Web.Classes;
+using Ru.GameSchool.Web.Classes.Helper;
 
 namespace Ru.GameSchool.Web.Controllers
 {
     public class MaterialController : BaseController
     {
-        //
+
         // GET: /Material/
-        //[Authorize(Roles = "Student")
-        //[Authorize(Roles = "Teacher")]
+        [Authorize(Roles = "Student, Teacher")]
         [HttpGet]
         public ActionResult Index()
         {
@@ -25,79 +25,72 @@ namespace Ru.GameSchool.Web.Controllers
 
             return View();
         }
-        //[Authorize(Roles = "Student")]
-        public ActionResult Get(int? LevelMaterialId)
+
+        [HttpGet]
+        [Authorize(Roles = "Student, Teacher")]
+        public ActionResult Get(int? id)
         {
-            if (LevelMaterialId.HasValue)
+            if (id.HasValue)
             {
-                var material = LevelService.GetLevelMaterial(LevelMaterialId.Value);
-
+                var material = LevelService.GetLevelMaterial(id.Value);
+                ViewBag.File = Settings.ProjectMaterialVirtualFolder + material.ContentId.ToString()+".mp4"; //TODO: Add function to check for file extensions
+                ViewBag.Title = material.Title;
+                ViewBag.Description = material.Description;
+                    
                 return View(material);
-
             }
             return View();
         }
 
         [HttpGet]
         [Authorize(Roles = "Teacher")]
-        public ActionResult Create(int courseId)
+        public ActionResult Create(int? id)
         {
 
-            ViewBag.LevelCount = GetLevelCounts(0);
-
+            ViewBag.LevelCount = GetLevelCounts(id.Value);
             ViewBag.ContentTypes = LevelService.GetContentTypes();
+            ViewBag.CourseId = id.Value;
 
             return View();
         }
 
         [HttpPost]
         [Authorize(Roles = "Teacher")]
-        public ActionResult Create(LevelMaterial levelMaterial, int courseId)
+        public ActionResult Create(LevelMaterial levelMaterial, int? id)
         {
+            
             if (ModelState.IsValid)
             {
-                ViewBag.LevelCount = GetLevelCounts(0);
-                ViewBag.ContentTypes = LevelService.GetContentTypes();
-                LevelService.CreateLevelMaterial(levelMaterial);
                 foreach (var file in levelMaterial.File)
                 {
+                    Guid contentId = Guid.NewGuid();
                     if (file.ContentLength <= 0) continue;
-                    var fileName = Path.GetFileName(file.FileName);
-                    if (fileName == null) continue;
-                    var path = Path.Combine(Server.MapPath("~/App_Data/uploads"), fileName);
+                    var path = Path.Combine(Server.MapPath("~/Upload"), contentId.ToString() + ".mp4"); //TODO: Add function to check for file extensions
+                    ViewBag.ContentId = contentId;
                     file.SaveAs(path);
+                    levelMaterial.ContentId = contentId;
                 }
+                LevelService.CreateLevelMaterial(levelMaterial);
+
+                return RedirectToAction("Edit", new { id = levelMaterial.LevelMaterialId });
             }
+            ViewBag.LevelCount = GetLevelCounts(id.Value);
+            ViewBag.ContentTypes = LevelService.GetContentTypes();
+            ViewBag.CourseId = id.Value;
 
             return View();
         }
 
-        //[HttpPost]
-        //public ActionResult Create(IEnumerable<HttpPostedFileBase> fileUpload)
-        //{
-        //    foreach (var file in fileUpload)
-        //    {
-        //        if (file.ContentLength > 0)
-        //        {
-        //            var fileName = Path.GetFileName(file.FileName);
-        //            var path = Path.Combine(Server.MapPath("~/App_Data/uploads"), fileName);
-        //            file.SaveAs(path);
-        //        }
-        //    }
-        //    return RedirectToAction("Index");
-        //}
-
         [HttpGet]
         [Authorize(Roles = "Teacher")]
-        public ActionResult Edit(int? levelMaterialId, int courseId)
+        public ActionResult Edit(int? id)
         {
-            ViewBag.LevelCount = GetLevelCounts(courseId);
-            ViewBag.LevelCount = GetLevelCounts(0);
-            ViewBag.ContentTypes = LevelService.GetContentTypes();
-
-            if (levelMaterialId.HasValue)
+            if (id.HasValue)
             {
-                var material = LevelService.GetLevelMaterial(levelMaterialId.Value);
+                var material = LevelService.GetLevelMaterial(id.Value);
+                ViewBag.LevelCount = GetLevelCounts(material.Level.CourseId);
+                ViewBag.ContentTypes = LevelService.GetContentTypes();
+                ViewBag.CourseId = material.Level.CourseId;
                 return View(material);
             }
             return View();
@@ -106,25 +99,29 @@ namespace Ru.GameSchool.Web.Controllers
 
         [HttpPost]
         [Authorize(Roles = "Teacher")]
-        public ActionResult Edit(int? levelMaterialId, LevelMaterial levelMaterial, int courseId)
+        public ActionResult Edit(LevelMaterial levelMaterial, int? id) //TODO: FIX THIS! DOES NOT RETURN RIGHT MATERIALID IN URL - ALSO SERVER ERROR
         {
             if (ModelState.IsValid)
             {
-
-                ViewBag.LevelCount = GetLevelCounts(0);
+                ViewBag.LevelCount = GetLevelCounts(levelMaterial.Level.CourseId);
                 ViewBag.ContentTypes = LevelService.GetContentTypes();
+                ViewBag.CourseId = levelMaterial.Level.CourseId;
                 if (TryUpdateModel(levelMaterial))
                 {
-                    LevelService.UpdateLevelMaterial(levelMaterial);
                     ViewBag.SuccessMessage = "Kennslugagn hefur verið uppfært";
+                    
+                    LevelService.UpdateLevelMaterial(levelMaterial);
                     return View(levelMaterial);
                 }
+                
             }
             else
             {
                 ViewBag.ErrorMessage = "Gat ekki uppfært kennslugagn! Lagfærðu villur og reyndur aftur.";
-                if (levelMaterialId != null) return View(LevelService.GetLevelMaterial(levelMaterialId.Value));
+                if (id.Value != null) return View(LevelService.GetLevelMaterial(id.Value));
             }
+            ViewBag.LevelCount = GetLevelCounts(levelMaterial.Level.CourseId);
+            ViewBag.ContentTypes = LevelService.GetContentTypes();
             return View();
         }
 
@@ -136,8 +133,8 @@ namespace Ru.GameSchool.Web.Controllers
                 if (elementAtOrDefault != null)
                     yield return new SelectListItem
                     {
-                        Text = elementAtOrDefault.Name,
-                        Value = elementAtOrDefault.LevelId.ToString()
+                        Text = (elementAtOrDefault.Name == null ? "None" : elementAtOrDefault.Name),
+                        Value = (elementAtOrDefault.LevelId.ToString() == "" ? "0" : elementAtOrDefault.LevelId.ToString())
                     };
             }
         }

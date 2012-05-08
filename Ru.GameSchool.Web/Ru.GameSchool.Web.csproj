@@ -132,6 +132,7 @@
     <Compile Include="Classes\GameSchoolRoleProvider.cs" />
     <Compile Include="Classes\Helper\MembershipHelper.cs" />
     <Compile Include="Classes\Helper\ListHelpers.cs" />
+    <Compile Include="Classes\Helper\Settings.cs" />
     <Compile Include="Classes\Interfaces\IFormsAuthenticationService.cs" />
     <Compile Include="Classes\Interfaces\IMembershipService.cs" />
     <Compile Include="Classes\GameSchoolMembershipUser.cs" />
@@ -250,6 +251,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Upload\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -366,6 +368,7 @@
     <Content Include="Views\Exam\Create.cshtml" />
     <Content Include="Views\Project\Edit.cshtml" />
     <Content Include="Views\Exam\ExamQuestions.cshtml" />
+    <Content Include="Views\Material\_MaterialForm.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
@@ -384,7 +387,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>7923</DevelopmentServerPort>
+          <DevelopmentServerPort>27170</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>
