@@ -13,34 +13,37 @@ namespace Ru.GameSchool.DataLayer.Repository
     }
     public class LevelProjectMetadata
     {
-        [Required(ErrorMessage = "Vantar")]
+        [Required(ErrorMessage = "Vantar byrjunardagsetningu.")]
         [Display(Name = "Verkefni byrjar")]
         [DataType(DataType.DateTime)]
         public DateTime Start { get; set; }
 
-        [Required(ErrorMessage = "Vantar")]
+        [Required(ErrorMessage = "Vantar endadagsetningu.")]
         [Display(Name = "Verkefni endar")]
         [DataType(DataType.DateTime)]
         public DateTime Stop { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Vantar lýsingu.")]
         [Display(Name = "Lýsing")]
         [DataType(DataType.MultilineText)]
         public string Description { get; set; }
-        
-        [Required]
+
+        [Required(ErrorMessage = "Verður að velja vægi.")]
         [Display(Name = "Vægi")]
         public double GradePercentageValue { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Vantar nafn.")]
         [Display(Name = "Nafn")]
         [DataType(DataType.Text)]
         public string Name { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Verður að velja borð")]
         [Display(Name = "Borð")]
         public int LevelId { get; set; }
 
+
+        [Display(Name = "Viðhengi")]
+        public string ContentID { get; set; }
 
     }
 }
