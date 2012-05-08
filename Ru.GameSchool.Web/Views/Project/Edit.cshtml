@@ -37,14 +37,7 @@
             </div>
         </div>
         @*nafn*@
-        <div class="control-group">
-            @Html.LabelFor(model => model.ProjectUrl, new { @class = "control-label" })
-            <div class="controls">
-                @Html.EditorFor(model => model.ProjectUrl, new { @class = "input-xlarge", type = "file" })
-                <span class="help-inline">@Html.ValidationMessageFor(model => model.ProjectUrl)</span>
-            </div>
-        </div>
-        @*project url*@
+
         <div class="control-group">
             @Html.LabelFor(model => model.GradePercentageValue, new { @class = "control-label" })
             <div class="controls">

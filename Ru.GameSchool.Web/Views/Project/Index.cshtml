@@ -15,7 +15,14 @@
                 <th>@items.Identifier @items.Name
                 </th>
                 <th>
-                    Einkunn
+                    @if (User.IsInRole("Teacher"))
+                    {
+                        <span>Meðaleinkunn</span>
+                    }
+                    else
+                    {
+                        <span>Einkunn</span>
+                    }
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.GradePercentageValue)
@@ -36,18 +43,21 @@
                 {
                 <tr>
                     <td>
-                        @Html.ActionLink((@j.Name + " - Skiladagur: " + @j.Stop.ToString("dd.MM.yyyy HH:mm")) as string, "Get", new { levelProjectId = @j.LevelProjectId })
+                        @Html.ActionLink((@j.Name + " - Skiladagur: " + @j.Stop.ToString("dd.MM.yyyy HH:mm")) as string, "Get", new { id = @j.LevelProjectId })
                     </td>
                     <td>
                         @foreach (var x in j.LevelProjectResults)
                         {
-                            if (Math.Abs(@x.Grade) > 0)
+                            if (x.UserInfoId == ViewBag.UserInfoId)
                             {
+                                if (Math.Abs(@x.Grade) > 0)
+                                {
                             @x.Grade
-                            }
-                            else
-                            {
+                                }
+                                else
+                                {
                             <i>Enginn einkunn</i>          
+                                }
                             }
                         }
                     </td>

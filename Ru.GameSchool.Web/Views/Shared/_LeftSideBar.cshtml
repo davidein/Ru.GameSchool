@@ -135,7 +135,7 @@
             <div class="accordion-heading">
                 <a href="#collapse_@nesteditem.CourseId" data-parent="#accordion2" data-toggle="collapse" class="accordion-toggle ">@nesteditem.Name</a>
             </div>
-            <div class="accordion-body collapse" id="collapse_@nesteditem.CourseId" >
+            <div class="accordion-body collapseq collapse @if (ViewBag.CourseId == @nesteditem.CourseId ) {<text>in</text>}" id="collapse_@nesteditem.CourseId" >
                 <div class="accordion-inner">
                     <ul class="nav nav-list">
                         @if (User.IsInRole("Teacher"))

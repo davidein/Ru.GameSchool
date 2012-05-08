@@ -17,7 +17,7 @@ namespace Ru.GameSchool.BusinessLayer.Services
         /// <summary>
         /// Gets a course instance through a parameter of this function and if it isn't null persist it to the database.
         /// </summary>
-        /// <param name="userInfo">Instance of a course</param>
+        /// <param name="course">Instance of a course</param>
         public void CreateCourse(Course course)
         {
             if (course != null)
@@ -200,5 +200,33 @@ namespace Ru.GameSchool.BusinessLayer.Services
 
             return query;
         }
+
+        /// <summary>
+        /// Gets current level by UserInfoId and CourseId
+        /// </summary>
+        /// <param name="courseId">Id of the Course to get current level for.</param>
+        /// <param name="userInfoId">Id of the User to get current level for.</param>
+        /// <returns>Current level of the user for the given course.</returns>
+        public int CurrentUserLevel(int userInfoId, int courseId)
+        {
+            var course = (from x in GameSchoolEntities.Courses
+                          where x.CourseId == courseId
+                          select x).SingleOrDefault();
+
+            var levels = course.Levels;
+
+            Level first = null;
+            foreach (Level y in levels)
+            {
+                if (y.Stop > DateTime.Now)
+                {
+                    first = y;
+                    break;
+                }
+            }
+
+            return first.LevelId;
+        }
+
     }
 }
