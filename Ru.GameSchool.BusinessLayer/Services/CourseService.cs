@@ -207,7 +207,7 @@ namespace Ru.GameSchool.BusinessLayer.Services
         /// <param name="courseId">Id of the Course to get current level for.</param>
         /// <param name="userInfoId">Id of the User to get current level for.</param>
         /// <returns>Current level of the user for the given course.</returns>
-        public int CurrentUserLevel(int userInfoId, int courseId)
+        public int GetCurrentUserLevel(int userInfoId, int courseId)
         {
             var course = (from x in GameSchoolEntities.Courses
                           where x.CourseId == courseId
