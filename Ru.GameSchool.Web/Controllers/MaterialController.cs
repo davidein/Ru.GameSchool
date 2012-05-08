@@ -16,33 +16,34 @@ namespace Ru.GameSchool.Web.Controllers
         //[Authorize(Roles = "Student")
         //[Authorize(Roles = "Teacher")]
         [HttpGet]
-        public ActionResult Index(int? courseId)
+        public ActionResult Index(int? id)
         {
-            if (courseId.HasValue){
-                int courseIdValue = courseId.Value;
+            if (id.HasValue)
+            {
+                int courseIdValue = id.Value;
                 IEnumerable<LevelMaterial> materials = CourseService.GetCourseMaterials(courseIdValue); ;
                 ViewBag.Materials = materials;
                 ViewBag.CourseName = CourseService.GetCourse(courseIdValue).Name;
                 ViewBag.Courseid = CourseService.GetCourse(courseIdValue).CourseId;
                 ViewBag.Title = "Listi yfir kennsluefni";
-                return View();
+                return View(materials);
             }
 
             return RedirectToAction("NotFound","Home");
         }
 
-        public ActionResult Index(int? courseId, int? contentTypeId)
+        public ActionResult Index(int? id, int? contentTypeId)
         {
-            if (courseId.HasValue && contentTypeId.HasValue)
+            if (id.HasValue && contentTypeId.HasValue)
             {
-                int courseIdValue = courseId.Value;
+                int courseIdValue = id.Value;
                 int contentTypeIdValue = contentTypeId.Value;
                 IEnumerable<LevelMaterial> materials = CourseService.GetCourseMaterials(courseIdValue,contentTypeIdValue); ;
                 ViewBag.Materials = materials;
-                ViewBag.CourseName = CourseService.GetCourse(courseId.Value).Name;
-                ViewBag.Courseid = CourseService.GetCourse(courseId.Value).CourseId;
+                ViewBag.CourseName = CourseService.GetCourse(courseIdValue).Name;
+                ViewBag.Courseid = CourseService.GetCourse(courseIdValue).CourseId;
                 ViewBag.Title = "Listi yfir kennsluefni - " + CourseService.GetContentTypeNameById(contentTypeIdValue);
-                return View();
+                return View(materials);
             }
 
             return RedirectToAction("NotFound", "Home");
