@@ -25,11 +25,15 @@ namespace Ru.GameSchool.Web.Controllers
 
                 //level.Course.Levels
 
+                ViewBag.Title = "Listi yfir próf";
+
                 var course = CourseService.GetCourse(id.Value);
 
                 var exams = LevelService.GetLevelExams(id.Value, user.UserInfoId);
 
                 ViewBag.Course = course;
+                ViewBag.CourseName = course.Name;
+                ViewBag.CourseId = course.CourseId;
 
                 return View(exams);
             }
@@ -44,7 +48,9 @@ namespace Ru.GameSchool.Web.Controllers
         {
             if (levelExamId.HasValue)
             {
+                ViewBag.Title = "Skoða próf";              
                 var exam = LevelService.GetLevelExam(levelExamId.Value);
+                ViewBag.CourseId = exam.Level.CourseId;
                 return View(exam);
             }
             return View();
@@ -58,6 +64,9 @@ namespace Ru.GameSchool.Web.Controllers
             if (levelExamId.HasValue)
             {
                 var exam = LevelService.GetLevelExam(levelExamId.Value);
+                ViewBag.CourseId = exam.Level.CourseId;
+                ViewBag.CourseName = exam.Level.Course.Name;
+                ViewBag.Title = "Taka próf";
                 return View(exam);
             }
             return View();
@@ -85,6 +94,9 @@ namespace Ru.GameSchool.Web.Controllers
             {
                 ViewBag.GradePercentageValues = GradePercentageValue();
                 ViewBag.Levels = new SelectList(LevelService.GetLevels(id.Value), "LevelId", "Name");
+                ViewBag.CourseId = id.Value;
+                ViewBag.CourseName = CourseService.GetCourse(id.Value).Name;
+                ViewBag.Title = "Búa til nýtt próf";
                 return View();
             }
 
@@ -110,7 +122,6 @@ namespace Ru.GameSchool.Web.Controllers
 
                 model.LevelExamId = id.Value;
             }
-
             return View(model);
         }
 
@@ -185,6 +196,8 @@ namespace Ru.GameSchool.Web.Controllers
                 {
                     var exam = LevelService.GetLevelExam(id.Value);
                     ViewBag.Levels = new SelectList(LevelService.GetLevels(exam.Level.CourseId), "LevelId", "Name");
+                    ViewBag.CourseId = exam.Level.CourseId;
+                    ViewBag.CourseName = exam.Level.Course.Name;
                     return View(exam);
                 }
             }

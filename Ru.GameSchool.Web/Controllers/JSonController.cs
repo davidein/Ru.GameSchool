@@ -85,5 +85,19 @@ namespace Ru.GameSchool.Web.Controllers
 
             return Json("", JsonRequestBehavior.AllowGet);
         }
+
+        [HttpPost]
+        public ActionResult AddUserToCourse(int userId, int courseId)
+        {
+            string userAddedToCourse = "Unknown Failure";
+
+            if(userId > 0 && courseId > 0)
+            {
+                userAddedToCourse = CourseService.AddUserToCourse(userId, courseId);
+            }
+            
+
+            return Json(userAddedToCourse, JsonRequestBehavior.AllowGet);
+        }
     }
 }

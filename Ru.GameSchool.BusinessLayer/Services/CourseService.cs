@@ -87,21 +87,36 @@ namespace Ru.GameSchool.BusinessLayer.Services
             return departments;
         }
 
-        public void AddUserToCourse(int userInfoId, int courseId)
+        public string AddUserToCourse(int userInfoId, int courseId)
         {
             if (userInfoId > 0 && courseId > 0)
             {
                 var userQuery = GameSchoolEntities.UserInfoes.Where(u => u.UserInfoId == userInfoId);
                 var courseQuery = GameSchoolEntities.Courses.Where(c => c.CourseId == courseId).FirstOrDefault();
 
+                if(userQuery == null)
+                    throw new GameSchoolException(string.Format("User not found. UserInfoId = {0}", userInfoId));
+
                 if (courseQuery == null)
                     throw new GameSchoolException(string.Format("Course not found. CourseId = {0}", courseId));
+
+                var isInCourse = GetCoursesByUserInfoIdAndCourseId(userInfoId, courseId);
+
+                if (isInCourse.Count() > 0) //User Already in course
+                    return string.Format("User is already registered in course! Returns {0} results.", isInCourse.Count());
+
+                courseQuery.UserInfoes.Add(userQuery.FirstOrDefault());
+                Save();
 
                 if (ExternalNotificationContainer != null)
                     ExternalNotificationContainer.CreateNotification(
                         string.Format("Þú hefur verið skráður í {0}", courseQuery.Name),
                         string.Format("/Course/Item/{0}", courseQuery.CourseId), userInfoId);
+
+                return "User added to course!";
             }
+
+            return "Invalid userId or CourseId";
         }
 
         /// <summary>
@@ -186,7 +201,15 @@ namespace Ru.GameSchool.BusinessLayer.Services
                 return null;
             }
 
-            var query = GameSchoolEntities.UserInfoes.Join(GameSchoolEntities.Courses,
+            var course = from x in GameSchoolEntities.Courses
+                       where x.CourseId == courseId
+                           select x;
+
+            var userCourse = from x in course
+                       where x.UserInfoes.Where(p => p.UserInfoId == userInfoId).Count() > 0
+                       select x;
+
+            /*var query = GameSchoolEntities.UserInfoes.Join(GameSchoolEntities.Courses,
                                                            u => u.DepartmentId, c => c.DepartmentId,
                                                            (u, c) => new
                                                                          {
@@ -196,9 +219,9 @@ namespace Ru.GameSchool.BusinessLayer.Services
                                                                              x =>
                                                                              x.c.CourseId == courseId &&
                                                                              x.u.UserInfoId == userInfoId)
-                                                                           .Select(m => m.c);
+                                                                           .Select(m => m.c);*/
 
-            return query;
+            return userCourse;
         }
 
         /// <summary>

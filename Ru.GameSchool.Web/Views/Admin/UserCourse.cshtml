@@ -2,4 +2,105 @@
     ViewBag.Title = "UserCourse";
 }
 
-<h2>UserCourse</h2>
+<h2>Skrá notenda í Námskeið</h2>
+
+@section sidebar {
+
+    @Html.Partial("_AdminSideBar")
+
+}
+
+<style>
+.dragHover
+{
+    background-color: Yellow;
+    }
+    
+.dragDrop
+{
+    background-color: Green;
+    }
+</style>
+
+<script>
+    $(document).ready(function () {
+
+        /*$('#draggable').draggable();*/
+        $('.draggable').each(function (i, v) {
+            $(this).draggable({ revert: true, containment: "#drag-container" });
+        });
+
+        $('.droppable').each(function (i, v) {
+            $(this).droppable({
+                accept: ".draggable",
+                activeClass: "dragHover",
+                hoverClass: "dragDrop",
+                drop: function (event, ui) {
+                    //Make shit happen
+                    callAjax(ui.draggable, $(this));
+
+
+                }
+            });
+        });
+
+
+        function callAjax($userItem, $courseItem) {
+            var userId = $userItem.attr('data-UserInfoId');
+            var courseId = $courseItem.attr('data-CourseId');
+            //alert("user:" + userId + " - course:" + courseId);
+
+            $.ajax(
+            {
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                url: "/JSon/AddUserToCourse/" + userId + "/" + courseId + "/",
+                data: "{}",
+                dataType: "json",
+                success: function (data) {
+                    alert("user:" + userId + " - course:" + courseId + "data: " + data);
+                }
+            });
+        }
+
+    });
+</script>
+
+<div id="drag-container">
+    <h3>Notendur</h3>
+
+    @foreach (var item in ViewBag.Users)
+        {
+            <text>
+            <div class="row-fluid">
+                @foreach (var u in item)
+                {
+                <div data-UserInfoId="@u.UserInfoId" class="draggable span2 well userbox" style="cursor: move;">
+                    <h6><a href="/Admin/User/@u.UserInfoId/">@u.Fullname</a></h6>
+                    @u.UserType.Name
+                    
+                </div><!--/span-->
+                }
+            </div><!--/row-->
+            </text>
+        }
+
+
+    <h3>Námskeið</h3>
+    @foreach (var item in ViewBag.Courses)
+        {
+            <text>
+            <div class="row-fluid">
+                @foreach (var c in item)
+                {
+                <div data-CourseId="@c.CourseId" class="droppable span3 well userbox" style="cursor: move;">
+                    <h3><a href="/Admin/Course/@c.CourseId/">@c.Name</a></h3>
+                    <ul>
+                        <li>Dragðu notendur hingað til að skrá</li>
+                    </ul>
+                </div><!--/span-->
+                }
+            </div><!--/row-->
+            </text>
+        }
+</div>
