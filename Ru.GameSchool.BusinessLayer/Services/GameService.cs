@@ -19,17 +19,23 @@ namespace Ru.GameSchool.BusinessLayer.Services
         {
             if (userInfoId > 0 && levelId > 0 && points > 0)
             {
-                var level = GameSchoolEntities.Levels.Where(x => x.LevelId == levelId).FirstOrDefault();
+                var query = GameSchoolEntities.Levels.Where(x => x.LevelId == levelId);
+
+                var level = query.FirstOrDefault();
 
                 var point = new Point();
                 point.LevelId = levelId;
                 point.UserInfoId = userInfoId;
                 point.Description = description;
                 point.Points = points;
+
                 if (level != null)
+                {
                     point.CourseId = level.CourseId;
+                }
 
                 GameSchoolEntities.Points.AddObject(point);
+                Save();
             }
         }
 
@@ -83,22 +89,34 @@ namespace Ru.GameSchool.BusinessLayer.Services
         /// <returns>List of Tuple first item is the rank then the user object.</returns>
         public IEnumerable<Tuple<int, UserInfo>> GetTopTenList(int courseId)
         {
+            if (0 > courseId)
+            {
+                return null;
+            }
+            // Selecta course
             var query = GameSchoolEntities.Courses.Where(c => c.CourseId == courseId)
                                                   .AsEnumerable();
 
-            var collection = query.Select(x =>
-                Tuple.Create<int, UserInfo>(
-                    x.Points.Select(z => z.Points)
-                            .FirstOrDefault(),
-                x.UserInfoes.Select(c => c)
-                            .FirstOrDefault()))
-                            .OrderBy(x => x.Item2.Points)
-                            .Take(10);
+            // Fá collection af points miðað við courseid
+            var queryPoints = query.SelectMany(x => x.Points);
 
-            foreach (var item in collection)
+            // Lista af groupby af ints og userinfo
+            var userQuery = queryPoints.GroupBy(x => x.UserInfo);
+
+            // Búa til lista sem er skilað
+            var list = new List<Tuple<int, UserInfo>>();
+
+            foreach (var item in userQuery)
             {
-                yield return item;
+                var sum = item.Key.Points.Select(c => c.Points).Sum();
+
+                var tuple = new Tuple<int, UserInfo>(sum, item.Select(x => x.UserInfo).FirstOrDefault());
+                list.Add(tuple);
             }
+
+            var usersWithTopTen = list.OrderByDescending(x => x.Item1).Take(10);
+
+            return usersWithTopTen;
         }
     }
 }

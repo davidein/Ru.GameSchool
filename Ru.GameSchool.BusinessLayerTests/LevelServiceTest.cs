@@ -11,8 +11,8 @@ using Ru.GameSchool.Utilities;
 
 namespace Ru.GameSchool.BusinessLayerTests
 {
-    
-    
+
+
     /// <summary>
     ///This is a test class for LevelServiceTest and is intended
     ///to contain all LevelServiceTest Unit Tests
@@ -108,7 +108,7 @@ namespace Ru.GameSchool.BusinessLayerTests
             expected.Start = DateTime.Now;
             expected.Stop = DateTime.Now.AddDays(7);
 
-            
+
 
             levelData.AddObject(expected);
 
@@ -157,10 +157,46 @@ namespace Ru.GameSchool.BusinessLayerTests
         [TestMethod()]
         public void CreateLevelExamResultTest()
         {
-            LevelService target = new LevelService(); // TODO: Initialize to an appropriate value
-            LevelExamResult levelExamResult = null; // TODO: Initialize to an appropriate value
-            target.CreateLevelExamResult(levelExamResult);
-            Assert.Inconclusive("A method that does not return a value cannot be verified.");
+            // ÞARF AÐ LAGFÆRA
+            var service = new LevelService();
+            var levelExamId = 1;
+            var userInfoId = 1;
+            var levelId = 1;
+            var levelExamResult = new LevelExamResult
+                                      {
+                                          Grade = 5,
+                                          LevelExamId = levelExamId,
+                                          UserInfoId = userInfoId,
+                                          LevelExam = new LevelExam
+                                                          {
+                                                              CreateDateTime = DateTime.Now,
+                                                              Description = "Lýsing",
+                                                              Name = "Nafn",
+                                                              GradePercentageValue = 5,
+                                                              LevelExamId = levelExamId,
+                                                              LevelId = levelId
+                                                          },
+                                          UserInfo = new UserInfo
+                                                         {
+                                                             CreateDateTime = DateTime.Now,
+                                                             UserInfoId = userInfoId,
+                                                             Password = "ww",
+                                                             Fullname = "Ólafur",
+                                                             Email = "óli@ru.is",
+                                                             StatusId = 1,
+                                                             Username = "Username"
+                                                         }
+                                      };
+            var levelExamResultData = new FakeObjectSet<LevelExamResult>();
+            levelExamResultData.AddObject(levelExamResult);
+
+
+            _mockRepository.Expect(x => x.LevelExamResults).Return(levelExamResultData);
+            _mockRepository.Expect(x => x.SaveChanges()).Return(1);
+
+            service.CreateLevelExamResult(levelExamResult);
+            _mockRepository.VerifyAllExpectations();
+
         }
 
         /// <summary>
@@ -296,7 +332,7 @@ namespace Ru.GameSchool.BusinessLayerTests
             LevelService target = new LevelService(); // TODO: Initialize to an appropriate value
             IEnumerable<LevelExam> expected = null; // TODO: Initialize to an appropriate value
             IEnumerable<LevelExam> actual;
-            actual = target.GetLevelExams(1,1);
+            actual = target.GetLevelExams(1, 1);
             Assert.AreEqual(expected, actual);
             Assert.Inconclusive("Verify the correctness of this test method.");
         }
