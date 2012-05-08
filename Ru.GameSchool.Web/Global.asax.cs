@@ -36,6 +36,12 @@ namespace Ru.GameSchool.Web
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+
+            routes.MapRoute(
+                "AddUserToCourse", // Route name
+                "JSon/AddUserToCourse/{userId}/{courseId}", // URL with parameters
+                new { controller = "JSon", action = "AddUserToCourse", userId = UrlParameter.Optional, courseId = UrlParameter.Optional } // Parameter defaults
+            );
         }
 
         protected void Application_Start()

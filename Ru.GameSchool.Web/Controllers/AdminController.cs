@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Ru.GameSchool.Web.Models;
 using Ru.GameSchool.DataLayer.Repository;
+using Ru.GameSchool.Web.Classes.Helper;
 
 namespace Ru.GameSchool.Web.Controllers
 {
@@ -166,7 +167,11 @@ namespace Ru.GameSchool.Web.Controllers
 
         public ActionResult UserCourse()
         {
-            ViewBag.Users = UserService.GetUsers();
+            var list = UserService.GetUsers();
+            ViewBag.Users = list.NestedList(6);
+
+            var courses = CourseService.GetCourses();
+            ViewBag.Courses = courses.NestedList(4);
 
             return View();
         }

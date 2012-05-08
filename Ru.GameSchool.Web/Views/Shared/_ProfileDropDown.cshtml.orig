@@ -1,33 +1,15 @@
-<<<<<<< HEAD
 ﻿<div class="btn-group pull-right">
     <a class="btn btn-info dropdown-toggle" data-toggle="dropdown" href="#">
+<<<<<<< HEAD
         <i class="icon-user"></i> @User.Identity.Name
-        @if (User.IsInRole("Admin"))
-        {
-            <text>Y</text>
-        }
-        else
-        {
-            <text>N</text>
-        }
+=======
+        <i class="icon-user"></i> @ViewBag.User.Fullname
+>>>>>>> 4834fb7180295782e8028e04d70f9f494403163b
         <span class="caret"></span>
     </a>
     <ul class="dropdown-menu">
         <li>@Html.ActionLink("Profile", "Profile", "Account")</li>
         <li class="divider"></li>
-        <li>@Html.ActionLink("Hætta","Logout", "Account")</li>
-    </ul>
-</div>
-=======
-﻿<div class="btn-group pull-right">
-    <a class="btn btn-info dropdown-toggle" data-toggle="dropdown" href="#">
-        <i class="icon-user"></i> @User.Identity.Name
-        <span class="caret"></span>
-    </a>
-    <ul class="dropdown-menu">
-        <li>@Html.ActionLink("Profile","Profile", "Account")</li>
-        <li class="divider"></li>
         <li>@Html.ActionLink("Hætta","Logoff", "Account")</li>
     </ul>
 </div>
->>>>>>> 11f3755ac419bbfc759ef38481e184840f6c8e7e
