@@ -23,7 +23,7 @@
                     <li><a href="/Home/Project">CSS</a></li>
                     <li><a href="/Home/Project">HTML5 glærur</a></li>
                 </ul>
-                <p>@Html.ActionLink("Fara í námskeið", "Get", "Level", new { id = 11 }, new { @class = "btn btn-small" })</p>
+                <p>@Html.ActionLink("Fara í námskeið", "Item", "Course", new { id = @nesteditem.CourseId }, new { @class = "btn btn-small" })</p>
             </div><!--/span-->
             }
         </div><!--/row-->

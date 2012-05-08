@@ -154,11 +154,6 @@ namespace Ru.GameSchool.BusinessLayer.Services
             return courseGrade.FirstOrDefault();
         }
 
-        public void GetCurrentUserLevel()
-        {
-            throw new System.NotImplementedException();
-        }
-
         /// <summary>
         /// Gets a Course entity by CourseId
         /// </summary>
@@ -209,23 +204,39 @@ namespace Ru.GameSchool.BusinessLayer.Services
         /// <returns>Current level of the user for the given course.</returns>
         public int GetCurrentUserLevel(int userInfoId, int courseId)
         {
-            var course = (from x in GameSchoolEntities.Courses
-                          where x.CourseId == courseId
-                          select x).SingleOrDefault();
 
-            var levels = course.Levels;
+            var levels = (from x in GameSchoolEntities.Levels
+                          where x.CourseId == courseId && x.Stop > DateTime.Now
+                          select x).OrderByDescending(y => y.LevelId);
 
-            Level first = null;
-            foreach (Level y in levels)
+            int returnLevelId = 0;
+
+            foreach (var level in levels)
             {
-                if (y.Stop > DateTime.Now)
-                {
-                    first = y;
+                returnLevelId = level.LevelId;
+
+                var levelexams = from x in level.LevelExams
+                                 select x;
+
+                var levelproject = from x in level.LevelProjects
+                                   select x;
+
+                var levelexamreturns = from x in level.LevelExams
+                           where x.LevelExamResults.Where(y => y.UserInfoId == userInfoId).Count() > 0
+                           select x;
+
+                var levelprojectreturns = from x in level.LevelProjects
+                                    where x.LevelProjectResults.Where(y => y.UserInfoId == userInfoId).Count() > 0
+                                    select x;
+
+
+                if (levelexams.Count() == levelexamreturns.Count() && levelproject.Count() == levelprojectreturns.Count())
                     break;
-                }
+                
             }
 
-            return first.LevelId;
+            return returnLevelId;
+
         }
 
     }
