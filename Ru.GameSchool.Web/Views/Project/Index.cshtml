@@ -5,14 +5,7 @@
 <h2>
     Verkefnin mín</h2>
 @section sidebar {
-    @if (User.IsInRole("Teacher"))
-    {
-        @Html.Partial("_TeacherSideBar")
-    }
-    else
-    {
-        @Html.Partial("_LeftSideBar")
-    }
+    @Html.Partial("_LeftSideBar")
 }
 @foreach (var items in ViewBag.Courses)
 {
@@ -22,7 +15,14 @@
                 <th>@items.Identifier @items.Name
                 </th>
                 <th>
-                    Einkunn
+                    @if (User.IsInRole("Teacher"))
+                    {
+                        <span>Meðaleinkunn</span>
+                    }
+                    else
+                    {
+                        <span>Einkunn</span>
+                    }
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.GradePercentageValue)
@@ -30,6 +30,12 @@
                 <th>
                     @Html.DisplayNameFor(model => model.Description)
                 </th>
+                @if (User.IsInRole("Teacher"))
+                {
+                    <th>
+                        Aðgerðir kennara
+                    </th>
+                }
             </tr>
             @foreach (var i in items.Levels)
             {
@@ -37,18 +43,21 @@
                 {
                 <tr>
                     <td>
-                        @Html.ActionLink((@j.Name + " - Skiladagur: " + @j.Stop.ToString("dd.MM.yyyy HH:mm")) as string, User.IsInRole("Student") ? "Get" : "Edit", new { LevelProjectId = @j.LevelProjectId })
+                        @Html.ActionLink((@j.Name + " - Skiladagur: " + @j.Stop.ToString("dd.MM.yyyy HH:mm")) as string, "Get", new { id = @j.LevelProjectId })
                     </td>
                     <td>
                         @foreach (var x in j.LevelProjectResults)
                         {
-                            if (Math.Abs(@x.Grade) > 0)
+                            if (x.UserInfoId == ViewBag.UserInfoId)
                             {
+                                if (Math.Abs(@x.Grade) > 0)
+                                {
                             @x.Grade
-                            }
-                            else
-                            {
+                                }
+                                else
+                                {
                             <i>Enginn einkunn</i>          
+                                }
                             }
                         }
                     </td>
@@ -58,6 +67,13 @@
                     <td>
                         @j.Description
                     </td>
+                    @if (User.IsInRole("Teacher"))
+                    {
+                        <td>
+                            @Html.ActionLink("Breyta", "Edit", new { levelProjectId = j.LevelProjectId }) |
+                            @Html.ActionLink("Eyða", "Delete", new { levelProjectId = j.LevelProjectId })
+                        </td>   
+                    }
                 </tr>
                 }
             }

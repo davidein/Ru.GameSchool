@@ -45,13 +45,23 @@ namespace Ru.GameSchool.BusinessLayer.Services
 
             return level;
         }
+
+
+        ////Delete?
+
+        public IEnumerable<Level> GetLevels()
+        {
+            return GameSchoolEntities.Levels;
+        }
+
+
         /// <summary>
         /// Returns a collection of level instances
         /// </summary>
         /// <returns>IEnumerable of level instances.</returns>
-        public IEnumerable<Level> GetLevels()
+        public IEnumerable<Level> GetLevels(int CourseId)
         {
-            return GameSchoolEntities.Levels;
+            return GameSchoolEntities.Levels.Where(x=> x.CourseId == CourseId);
         }
         /// <summary>
         /// Update a level object with new changes and persist it to the datasource.
@@ -62,6 +72,7 @@ namespace Ru.GameSchool.BusinessLayer.Services
             Save();
             //throw new System.NotImplementedException();
         }
+
 
         /// <summary>
         /// Persist a levelexam instance object to the datasource.
@@ -95,9 +106,14 @@ namespace Ru.GameSchool.BusinessLayer.Services
             return levelExam;
         }
 
-        public IEnumerable<LevelExam> GetLevelExams()
+        public IEnumerable<LevelExam> GetLevelExams(int courseId, int userInfoId)
         {
-            return GameSchoolEntities.LevelExams;
+            var list = GameSchoolEntities.LevelExams.Where(x => x.Level.CourseId == courseId);
+            var exams = list.Where(x=>x.Level.Course.UserInfoes.Where(y=>y.UserInfoId == userInfoId).Count()>0);
+
+
+
+            return exams;
         }
         /// <summary>
         /// 
@@ -196,12 +212,16 @@ namespace Ru.GameSchool.BusinessLayer.Services
 
                 var levelProjectToUpdate = query.FirstOrDefault();
 
-                levelProjectToUpdate.Description = levelProject.Description;
-                levelProjectToUpdate.GradePercentageValue = levelProject.GradePercentageValue;
-                levelProjectToUpdate.Name = levelProject.Name;
-                levelProjectToUpdate.Start = levelProject.Start;
-                levelProjectToUpdate.Stop = levelProject.Stop;
-                levelProjectToUpdate.ProjectUrl = levelProject.ProjectUrl;
+                if (levelProjectToUpdate != null)
+                {
+                    levelProjectToUpdate.Description = levelProject.Description;
+                    levelProjectToUpdate.GradePercentageValue = levelProject.GradePercentageValue;
+                    levelProjectToUpdate.Name = levelProject.Name;
+                    levelProjectToUpdate.Start = levelProject.Start;
+                    levelProjectToUpdate.Stop = levelProject.Stop;
+                    levelProjectToUpdate.ContentID = levelProject.ContentID;
+                    levelProjectToUpdate.LevelId = levelProject.LevelId;
+                }
 
                 Save();
             }
@@ -290,9 +310,9 @@ namespace Ru.GameSchool.BusinessLayer.Services
         /// Method that returns a collection of leveexamquestion objects.
         /// </summary>
         /// <returns>IEnumerable collection of levelexamquestions.</returns>
-        public IEnumerable<LevelExamQuestion> GetLevelExamQuestions()
+        public IEnumerable<LevelExamQuestion> GetLevelExamQuestions(int levelExamId)
         {
-            return GameSchoolEntities.LevelExamQuestions;
+            return GameSchoolEntities.LevelExamQuestions.Where(x=>x.LevelExamId == levelExamId);
         }
 
         public LevelExamQuestion GetLevelExamQuestion(int levelExamQuestionsId)
@@ -479,6 +499,35 @@ namespace Ru.GameSchool.BusinessLayer.Services
                     c.Level.Course.UserInfoes.Where(x => x.UserInfoId == userInfoId).SelectMany(
                         d => d.Courses.SelectMany(f => f.Levels.SelectMany(k => k.LevelProjects))));
             return query;
+        }
+
+        public bool DeleteLevelProject(int levelProjectId)
+        {
+            if (levelProjectId < 0)
+            {
+                return false;
+            }
+            var query = GameSchoolEntities.LevelProjects.Where(l => l.LevelProjectId == levelProjectId);
+
+            var levelProject = query.SingleOrDefault();
+
+            if (levelProject == null)
+            {
+                return false;
+            }
+
+            GameSchoolEntities.LevelProjects.DeleteObject(levelProject);
+            Save();
+            return true;
+        }
+
+        public void CreateLevelProjectResult(LevelProjectResult levelProjectResult)
+        {
+            if (levelProjectResult != null)
+            {
+                GameSchoolEntities.LevelProjectResults.AddObject(levelProjectResult);
+                Save();
+            }
         }
     }
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Ru.GameSchool.DataLayer.Repository;
+using Ru.GameSchool.Web.Classes.Helper;
 
 namespace Ru.GameSchool.Web.Controllers
 {
@@ -17,6 +18,7 @@ namespace Ru.GameSchool.Web.Controllers
         {
             if (id.HasValue)
             {
+                var user = MembershipHelper.GetUser();
 
                 int levelId = id.Value;
 
@@ -24,12 +26,15 @@ namespace Ru.GameSchool.Web.Controllers
                 if (model != null)
                 {
 
+                    int courseId = model.CourseId;
+                    ViewBag.CourseName = model.Course.Name;
+                    ViewBag.Levels = LevelService.GetLevels(courseId);
                     ViewBag.Projects = LevelService.GetLevelProjects();
-                    ViewBag.MaterialsVideo = LevelService.GetLevelMaterials(levelId);
-                    ViewBag.MaterialsSlides = LevelService.GetLevelMaterials(levelId);
+                    ViewBag.MaterialsVideo = LevelService.GetLevelMaterials(levelId,1);
+                    ViewBag.MaterialsSlides = LevelService.GetLevelMaterials(levelId,2);
                     ViewBag.MaterialsMessages = LevelService.GetLevelMaterials(levelId);
-                    ViewBag.MaterialsDocs = LevelService.GetLevelMaterials(levelId);
-                    ViewBag.Exams = LevelService.GetLevelExams();
+                    ViewBag.MaterialsDocs = LevelService.GetLevelMaterials(levelId,3);
+                    ViewBag.Exams = LevelService.GetLevelExams(courseId, user.UserInfoId);
 
                     return View(model);
                 }
