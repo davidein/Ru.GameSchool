@@ -409,15 +409,6 @@ namespace Ru.GameSchool.BusinessLayer.Services
         }
 
 
-        public IEnumerable<LevelMaterial> GetCourseMaterials(int CourseId)
-        {
-            //return GameSchoolEntities.LevelMaterials.Where(l=> l.LevelId in );
-            var returnList = (from x in GameSchoolEntities.LevelMaterials
-                              join y in GameSchoolEntities.Levels on x.LevelId equals y.LevelId
-                              where y.CourseId == CourseId
-                              select x);
-            return returnList;
-        }
 
 
         public IEnumerable<LevelMaterial> GetLevelMaterials()

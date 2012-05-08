@@ -262,5 +262,31 @@ namespace Ru.GameSchool.BusinessLayer.Services
 
         }
 
+
+        public IEnumerable<LevelMaterial> GetCourseMaterials(int courseId)
+        {
+            //return GameSchoolEntities.LevelMaterials.Where(l=> l.LevelId in );
+            var returnList = (from x in GameSchoolEntities.LevelMaterials
+                              join y in GameSchoolEntities.Levels on x.LevelId equals y.LevelId
+                              where y.CourseId == courseId
+                              select x);
+            return returnList;
+        }
+
+        public IEnumerable<LevelMaterial> GetCourseMaterials(int courseId, int contentTypeId)
+        {
+            //return GameSchoolEntities.LevelMaterials.Where(l=> l.LevelId in );
+            var returnList = (from x in GameSchoolEntities.LevelMaterials
+                              join y in GameSchoolEntities.Levels on x.LevelId equals y.LevelId
+                              where y.CourseId == courseId && x.ContentTypeId == contentTypeId
+                              select x);
+            return returnList;
+        }
+
+        public string GetContentTypeNameById(int contentTypeId) 
+        {
+             return GameSchoolEntities.ContentTypes.Where(x => x.ContentTypeId == contentTypeId).FirstOrDefault().Name;
+        }
+
     }
 }

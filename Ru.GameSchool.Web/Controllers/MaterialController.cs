@@ -16,19 +16,47 @@ namespace Ru.GameSchool.Web.Controllers
         //[Authorize(Roles = "Student")
         //[Authorize(Roles = "Teacher")]
         [HttpGet]
-        public ActionResult Index()
+        public ActionResult Index(int? courseId)
         {
-            IEnumerable<LevelMaterial> materials = LevelService.GetLevelMaterials(); ;
-            ViewBag.Materials = materials;
+            if (courseId.HasValue){
+                int courseIdValue = courseId.Value;
+                IEnumerable<LevelMaterial> materials = CourseService.GetCourseMaterials(courseIdValue); ;
+                ViewBag.Materials = materials;
+                ViewBag.CourseName = CourseService.GetCourse(courseIdValue).Name;
+                ViewBag.Courseid = CourseService.GetCourse(courseIdValue).CourseId;
+                ViewBag.Title = "Listi yfir kennsluefni";
+                return View();
+            }
 
-            return View();
+            return RedirectToAction("NotFound","Home");
         }
+
+        public ActionResult Index(int? courseId, int? contentTypeId)
+        {
+            if (courseId.HasValue && contentTypeId.HasValue)
+            {
+                int courseIdValue = courseId.Value;
+                int contentTypeIdValue = contentTypeId.Value;
+                IEnumerable<LevelMaterial> materials = CourseService.GetCourseMaterials(courseIdValue,contentTypeIdValue); ;
+                ViewBag.Materials = materials;
+                ViewBag.CourseName = CourseService.GetCourse(courseId.Value).Name;
+                ViewBag.Courseid = CourseService.GetCourse(courseId.Value).CourseId;
+                ViewBag.Title = "Listi yfir kennsluefni - " + CourseService.GetContentTypeNameById(contentTypeIdValue);
+                return View();
+            }
+
+            return RedirectToAction("NotFound", "Home");
+        }
+
         //[Authorize(Roles = "Student")]
         public ActionResult Get(int? LevelMaterialId)
         {
             if (LevelMaterialId.HasValue)
             {
                 var material = LevelService.GetLevelMaterial(LevelMaterialId.Value);
+                ViewBag.CourseName = material.Level.Course.Name;
+                ViewBag.Courseid = material.Level.Course.CourseId;
+                ViewBag.Title = "Listi yfir " + material.ContentType.Name;
 
                 return View(material);
 
@@ -45,6 +73,10 @@ namespace Ru.GameSchool.Web.Controllers
 
             ViewBag.ContentTypes = LevelService.GetContentTypes();
 
+            ViewBag.CourseName = CourseService.GetCourse(courseId).Name;
+            ViewBag.Courseid = CourseService.GetCourse(courseId).CourseId;
+            ViewBag.Title = "Búa til kennsluefni";
+
             return View();
         }
 
@@ -58,6 +90,7 @@ namespace Ru.GameSchool.Web.Controllers
                 ViewBag.ContentTypes = LevelService.GetContentTypes();
                 LevelService.CreateLevelMaterial(levelMaterial);
                 //ViewBag.ContentTypes = LevelService.GetContentTypes();
+
             }
 
             return View();
@@ -67,13 +100,18 @@ namespace Ru.GameSchool.Web.Controllers
         [Authorize(Roles = "Teacher")]
         public ActionResult Edit(int? levelMaterialId, int courseId)
         {
-            ViewBag.LevelCount = GetLevelCounts(courseId);
-            ViewBag.LevelCount = GetLevelCounts(0);
-            ViewBag.ContentTypes = LevelService.GetContentTypes();
-
+ 
             if (levelMaterialId.HasValue)
             {
+                ViewBag.LevelCount = GetLevelCounts(courseId);
+                ViewBag.LevelCount = GetLevelCounts(0);
+                ViewBag.ContentTypes = LevelService.GetContentTypes();
+
                 var material = LevelService.GetLevelMaterial(levelMaterialId.Value);
+                ViewBag.CourseName = CourseService.GetCourse(courseId).Name;
+                ViewBag.Courseid = CourseService.GetCourse(courseId).CourseId;
+                ViewBag.Title = "Breyta kennsluefni";
+
                 return View(material);
             }
             return View();

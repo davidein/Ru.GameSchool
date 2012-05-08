@@ -1,24 +1,4 @@
-﻿@{
-    ViewBag.Title = "Listi yfir kennsluefni";
-}
-
-<h2>Listi yfir kennsluefni</h2>
-
-@section sidebar {
-    @if (User.IsInRole("Teacher")) 
-    {
-        @Html.Partial("_TeacherSideBar")
-    } 
-    else
-    {
-        @Html.Partial("_LeftSideBar")
-    }
-}
-@section courseheading {
-    @Html.Partial("_courseheading")
-}
-
-
+﻿
 <ul>
     @foreach(var item in ViewBag.Materials)
     {
