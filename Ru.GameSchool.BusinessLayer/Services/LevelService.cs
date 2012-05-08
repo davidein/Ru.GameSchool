@@ -297,6 +297,54 @@ namespace Ru.GameSchool.BusinessLayer.Services
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="levelExamAnswer"></param>
+        public void CreateLevelExamAnswer(LevelExamAnswer levelExamAnswer)
+        {
+            if (levelExamAnswer != null)
+            {
+                GameSchoolEntities.LevelExamAnswers.AddObject(levelExamAnswer);
+                Save();
+            }
+        }
+
+        public LevelExamAnswer GetLevelExamAnswer(int levelExamAnswerId)
+        {
+            if (levelExamAnswerId > 0)
+            {
+                var item = (from x in GameSchoolEntities.LevelExamAnswers
+                            where x.LevelExamAnswerId == levelExamAnswerId
+                            select x).SingleOrDefault();
+
+                return item;
+            }
+            return null;
+        }
+
+        public void DeleteLevelExamQuestion(int levelExamQuestionId)
+        {
+            if (levelExamQuestionId > 0)
+            {
+                var item = GetLevelExamQuestion(levelExamQuestionId);
+
+                GameSchoolEntities.LevelExamQuestions.DeleteObject(item);
+                Save();
+            }
+        }
+
+        public void DeleteLevelExamAnswer(int levelExamAnswerId)
+        {
+            if (levelExamAnswerId>0)
+            {
+                var item = GetLevelExamAnswer(levelExamAnswerId);
+
+                GameSchoolEntities.LevelExamAnswers.DeleteObject(item);
+                Save();
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="levelExamQuestion"></param>
         public void UpdateLevelExamQuestion(LevelExamQuestion levelExamQuestion)
         {
