@@ -65,8 +65,7 @@
                         <td>
                             @if (result == null)
                             { 
-                                <i>Ekki búið að skila</i> 
-                                
+                                <i>Ekki búið að skila</i>    
                             }
                             else
                             { 
@@ -74,7 +73,10 @@
                             }
                         </td>
                         <td>
-                            @result.TeacherFeedback
+                            @if (result != null)
+                            {
+                                @result.TeacherFeedback
+                            }
                         </td>
                         }
                     }
@@ -84,15 +86,12 @@
             }
         </tbody>
     </table>
-    
-
             using (Html.BeginForm("Create", "Project", new { id = course.CourseId }, FormMethod.Post))
             {
                 if (User.IsInRole("Teacher"))
                 {
     <p>
-        <button name="button" class="btn btn-success" value="Create">
-            Búa til nýtt verkefni</button>
+        @Html.ActionLink("Búa til nýtt verkefni", "Create", new { id = course.CourseId }, new { @class = "btn btn-success" })
     </p>
                 }
             }

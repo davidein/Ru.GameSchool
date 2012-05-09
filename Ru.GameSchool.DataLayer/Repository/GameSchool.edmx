@@ -24,6 +24,7 @@
           <EntitySet Name="Notification" EntityType="GameSchoolModel.Store.Notification" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Points" EntityType="GameSchoolModel.Store.Points" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Status" EntityType="GameSchoolModel.Store.Status" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="sysdiagrams" EntityType="GameSchoolModel.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="UserCourse" EntityType="GameSchoolModel.Store.UserCourse" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="UserInfo" EntityType="GameSchoolModel.Store.UserInfo" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="UserLog" EntityType="GameSchoolModel.Store.UserLog" store:Type="Tables" Schema="dbo" />
@@ -301,12 +302,12 @@
           <Property Name="LevelProjectResultId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="UserInfoId" Type="int" Nullable="false" />
           <Property Name="TeacherFeedback" Type="nvarchar(max)" />
-          <Property Name="Grade" Type="float" Nullable="false" />
           <Property Name="CreateDateTime" Type="datetime" Nullable="false" />
           <Property Name="UserFeedback" Type="nvarchar(max)" />
           <Property Name="GradeDate" Type="datetime" />
           <Property Name="ContentID" Type="nvarchar(max)" />
           <Property Name="LevelProjectId" Type="int" Nullable="false" />
+          <Property Name="Grade" Type="float" />
         </EntityType>
         <EntityType Name="Notification">
           <Key>
@@ -336,6 +337,16 @@
           </Key>
           <Property Name="StatusId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="215" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="UserCourse">
           <Key>
@@ -878,6 +889,7 @@
             <End Role="LevelExamAnswer" EntitySet="LevelExamAnswers" />
             <End Role="UserInfo" EntitySet="UserInfoes" />
           </AssociationSet>
+          <EntitySet Name="sysdiagrams" EntityType="GameSchoolModel.sysdiagram" />
           </EntityContainer>
         <EntityType Name="Comment">
           <Key>
@@ -1056,7 +1068,7 @@
           </Key>
           <Property Type="Int32" Name="LevelProjectId" Nullable="false" annotation:StoreGeneratedPattern="None" />
           <Property Type="Int32" Name="UserInfoId" Nullable="false" />
-          <Property Type="Double" Name="Grade" Nullable="false" />
+          <Property Type="Double" Name="Grade" Nullable="true" />
           <Property Type="DateTime" Name="CreateDateTime" Nullable="false" />
           <NavigationProperty Name="LevelProject" Relationship="GameSchoolModel.FK_LevelProjectResult_LevelProject" FromRole="LevelProjectResult" ToRole="LevelProject" />
           <NavigationProperty Name="UserInfo" Relationship="GameSchoolModel.FK_LevelProjectResult_UserInfo1" FromRole="LevelProjectResult" ToRole="UserInfo" />
@@ -1465,6 +1477,16 @@
           <End Type="GameSchoolModel.LevelExamAnswer" Role="LevelExamAnswer" Multiplicity="*" />
           <End Type="GameSchoolModel.UserInfo" Role="UserInfo" Multiplicity="*" />
         </Association>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Type="String" Name="name" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="principal_id" Nullable="false" />
+          <Property Type="Int32" Name="diagram_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="version" />
+          <Property Type="Binary" Name="definition" MaxLength="Max" FixedLength="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1714,6 +1736,17 @@
               <ScalarProperty Name="LevelExamAnswerId" ColumnName="LevelExamAnswerId" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="GameSchoolModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -1950,6 +1983,7 @@
           <ConnectorPoint PointX="7.1875" PointY="12.700488279541023" />
           <ConnectorPoint PointX="6.75" PointY="12.700488279541023" />
         </AssociationConnector>
+        <EntityTypeShape EntityType="GameSchoolModel.sysdiagram" Width="1.5" PointX="0.75" PointY="0.75" Height="1.9802864583333388" />
       </Diagram>
     </Diagrams>
   </Designer>

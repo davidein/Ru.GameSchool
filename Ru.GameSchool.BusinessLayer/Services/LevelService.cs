@@ -211,12 +211,13 @@ namespace Ru.GameSchool.BusinessLayer.Services
         {
             if (levelProject != null)
             {
-                var levelProjToUpdate = GetLevelProject(levelProject.LevelProjectId);
+                var levelProjToUpdate =
+                    GameSchoolEntities.LevelProjects.Where(s => s.LevelProjectId == levelProject.LevelProjectId).
+                        FirstOrDefault();
+
                 levelProjToUpdate.ContentID = levelProject.ContentID;
-                levelProjToUpdate.Description = levelProject.ContentID;
+                levelProjToUpdate.Description = levelProject.Description;
                 levelProjToUpdate.GradePercentageValue = levelProject.GradePercentageValue;
-
-
                 levelProjToUpdate.Name = levelProject.Name;
                 levelProjToUpdate.Start = levelProject.Start;
                 levelProjToUpdate.Stop = levelProject.Stop;

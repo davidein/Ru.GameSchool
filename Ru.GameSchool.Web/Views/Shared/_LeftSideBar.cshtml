@@ -2,34 +2,24 @@
 <div class="well">
     <h2>
         Velkomin/n á GameSchool</h2>
-    @if (User.IsInRole("Student"))
-    {
-        <table class="table table-striped table-bordered table-condensed">
-            <caption>
-                Þú ert nr # í leiknum</caption>
-            <thead>
-                <tr>
-                    <th>
-                        #
-                    </th>
-                    <th>
-                        Stig
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>
-                        1
-                    </td>
-                    <td>
-                        1
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    }
 </div>
+@if (User.IsInRole("Student"))
+{
+    <div class="well">
+        <h2>
+            199 stig</h2>
+        <p>
+            Þú ert í <span class="label label-info">3</span> sæti í leiknum!</p>
+        <p>
+            og þarft aðeins <span class="label label-success">2</span> stig til þess að komast
+            einu sæti ofar!</p>
+        <p>
+            Næsti keppandi á eftir þér þarf aðeins <span class="label label-warning">16</span>
+            stig til þess að komast yfir þig!</p>
+        <button class="btn btn-small" data-toggle="modal" data-target="#leaderBoard">
+            Sjá topplistann</button>
+    </div>
+}
 <div id="accordion2" class="accordion">
     @foreach (var item in ViewBag.UserCourseList)
     {

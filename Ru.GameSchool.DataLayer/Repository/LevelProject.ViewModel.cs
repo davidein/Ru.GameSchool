@@ -3,23 +3,25 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
+using System.Web;
 
 namespace Ru.GameSchool.DataLayer.Repository
 {
     [MetadataType(typeof(LevelProjectMetadata))]
     public partial class LevelProject
     {
-
+        [Display(Name = "Skrá")]
+        public IEnumerable<HttpPostedFileBase> File { get; set; }
     }
     public class LevelProjectMetadata
     {
         [Required(ErrorMessage = "Vantar byrjunardagsetningu.")]
-        [Display(Name = "Verkefni byrjar")]
+        [Display(Name = "Byrjunardagsetning")]
         [DataType(DataType.DateTime)]
         public DateTime Start { get; set; }
 
         [Required(ErrorMessage = "Vantar endadagsetningu.")]
-        [Display(Name = "Verkefni endar")]
+        [Display(Name = "Endadagsetning")]
         [DataType(DataType.DateTime)]
         public DateTime Stop { get; set; }
 
@@ -45,7 +47,7 @@ namespace Ru.GameSchool.DataLayer.Repository
         public string UserFeedback { get; set; }
 
         [Display(Name = "Viðhengi")]
-        public string ContentID { get; set; }
+        public Guid ContentID { get; set; }
 
     }
 }
