@@ -127,8 +127,10 @@
     <Compile Include="Classes\FormsAuthenticationService.cs" />
     <Compile Include="Classes\GameSchoolMembershipProvider.cs" />
     <Compile Include="Classes\GameSchoolRoleProvider.cs" />
+    <Compile Include="Classes\Helper\DownloadFile.cs" />
     <Compile Include="Classes\Helper\MembershipHelper.cs" />
     <Compile Include="Classes\Helper\ListHelpers.cs" />
+    <Compile Include="Classes\Helper\Settings.cs" />
     <Compile Include="Classes\Interfaces\IFormsAuthenticationService.cs" />
     <Compile Include="Classes\Interfaces\IMembershipService.cs" />
     <Compile Include="Classes\GameSchoolMembershipUser.cs" />
@@ -190,6 +192,7 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\app\common.js" />
+    <Content Include="Scripts\app\LevelExam.js" />
     <Content Include="Scripts\jquery-1.6.2-vsdoc.js" />
     <Content Include="Scripts\jquery-1.6.2.min.js" />
     <Content Include="Scripts\lib\jquery-1.7.2.js" />
@@ -364,6 +367,7 @@
     <Content Include="Views\Project\Get.cshtml" />
     <Content Include="Views\Project\TeacherGet.cshtml" />
     <Content Include="Views\Project\GradeProject.cshtml" />
+    <Content Include="Views\Material\_MaterialForm.cshtml" />
     <Content Include="Views\Exam\Question.cshtml" />
     <Content Include="Views\Exam\ReturnExam.cshtml" />
     <Content Include="Views\Exam\_ExamAnswer.cshtml" />
@@ -385,7 +389,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>7923</DevelopmentServerPort>
+          <DevelopmentServerPort>32050</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>

@@ -86,6 +86,8 @@ namespace Ru.GameSchool.BusinessLayer.Services
         {
             if (levelExam != null)
             {
+                levelExam.CreateDateTime = DateTime.Now;
+
                 GameSchoolEntities.LevelExams.AddObject(levelExam);
                 Save();
             }
@@ -383,7 +385,7 @@ namespace Ru.GameSchool.BusinessLayer.Services
         {
             if (HasAccessToExam(levelExamId, userInfoId))
             {
-                LevelExamResult levelExamResult = new LevelExamResult();
+                var levelExamResult = new LevelExamResult();
                 levelExamResult.UserInfoId = userInfoId;
                 levelExamResult.LevelExamId = levelExamId;
 
@@ -399,8 +401,12 @@ namespace Ru.GameSchool.BusinessLayer.Services
                 GameSchoolEntities.LevelExamResults.AddObject(levelExamResult);
                 Save();
 
+                int points = 5;
+
                 ExternalNotificationContainer.CreateNotification(string.Format("Þú hefur fengið {0} fyrir prófið \"{1}\"", levelExamResult.Grade, exam.Name), string.Format("/Exam/Index/{0}",exam.Level.CourseId), userInfoId);
-                ExternalPointContainer.AddPointsToLevel(userInfoId, exam.LevelId, 1, "Þú hefur fengið {0} stig fyrir prófið \"{1}\".");
+                ExternalPointContainer.AddPointsToLevel(userInfoId, exam.LevelId, points,
+                                                        string.Format("Þú hefur fengið {0} stig fyrir prófið \"{1}\".",
+                                                                      points, exam.Name));
                     
                 return levelExamResult.Grade;
             }

@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+
+using System.Web.Mvc;
 using Ru.GameSchool.Web.Classes.Helper;
 using Ru.GameSchool.Web.Models;
 
@@ -14,7 +15,7 @@ namespace Ru.GameSchool.Web.Controllers
             return View();
         }
 
-        [Authorize(Roles = "Student,Teacher")]
+        [Authorize(Roles = "Student")]
         public ActionResult Item(int? id)
         {
             if (id.HasValue)

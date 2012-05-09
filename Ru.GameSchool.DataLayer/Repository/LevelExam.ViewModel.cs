@@ -30,7 +30,7 @@ namespace Ru.GameSchool.DataLayer.Repository
 
         [Display(Name = "Borð")]
         [Required]
-        [MaxLength(8)]
+        /*[MaxLength(8)]*/
         public int LevelId { get; set; }
 
         //[Required]

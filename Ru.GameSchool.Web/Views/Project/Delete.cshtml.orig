@@ -1,0 +1,71 @@
+<<<<<<< HEAD
+﻿@using Ru.GameSchool.DataLayer.Repository
+@model LevelProject
+@{
+    ViewBag.Title = "Eyða verkefni";
+}
+<br />
+<h2>
+    Ertu viss um að þú viljir eyða verkefni?</h2>
+<fieldset>
+    <div class="control-group">
+        @Html.LabelFor(model => model.Name, new { @class = "control-label" })
+        <div class="controls">
+            <strong>@Html.DisplayTextFor(model => model.Name)</strong>
+        </div>
+    </div>
+    <div class="control-group">
+        @Html.LabelFor(model => model.Description, new { @class = "control-label" })
+        <div class="controls">
+            <strong>@Html.DisplayTextFor(model => model.Description)</strong>
+        </div>
+    </div>
+</fieldset>
+@using (Html.BeginForm())
+{
+    <p>
+        <div class="control-group">
+            <div class="controls">
+                <button type="submit" class="btn btn-success">
+                    Eyða verkefni</button>
+            </div>
+        </div>
+        @Html.ActionLink("Aftur á forsíðu", "Index")
+    </p>
+}
+=======
+﻿@using Ru.GameSchool.DataLayer.Repository
+@model LevelProject
+@{
+    ViewBag.Title = "Eyða verkefni";
+}
+<br />
+<h2>
+    Ertu viss um að þú viljir eyða verkefni?</h2>
+<fieldset>
+    <div class="control-group">
+        @Html.LabelFor(model => model.Name, new { @class = "control-label" })
+        <div class="controls">
+            <strong>@Html.DisplayTextFor(model => model.Name)</strong>
+        </div>
+    </div>
+    <div class="control-group">
+        @Html.LabelFor(model => model.Description, new { @class = "control-label" })
+        <div class="controls">
+            <strong>@Html.DisplayTextFor(model => model.Description)</strong>
+        </div>
+    </div>
+</fieldset>
+@using (Html.BeginForm())
+{
+    <p>
+        <div class="control-group">
+            <div class="controls">
+                <button type="submit" class="btn btn-success">
+                    Eyða verkefni</button>
+            </div>
+        </div>
+        @Html.ActionLink("Aftur á forsíðu", "Index")
+    </p>
+}
+>>>>>>> 2aa6d6c5f5aba96bba6a60829077459c4ba5c811

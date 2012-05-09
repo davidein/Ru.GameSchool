@@ -58,7 +58,7 @@
                 {
                     
                     <div class="span3">
-                    @if (User.IsInRole("Admin")){
+                        @if (User.IsInRole("Admin") && Request.Url.AbsoluteUri.Contains("Admin")){
                         @Html.Partial("_AdminSideBar")}
                         else {
                         @Html.Partial("_LeftSideBar")
@@ -67,7 +67,7 @@
                 }
                 <div class="span9">
                <div class="page-header"><h1>@ViewBag.CourseName</h1></div> 
-               <h1>@ViewBag.Title</h1>         
+               <h2>@ViewBag.Title</h2>         
                 @RenderBody()
                 </div><!--/span-->
             </div><!--/row-->
