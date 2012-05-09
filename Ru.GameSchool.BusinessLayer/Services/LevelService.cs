@@ -346,7 +346,7 @@ namespace Ru.GameSchool.BusinessLayer.Services
 
         public void DeleteLevelExamAnswer(int levelExamAnswerId)
         {
-            if (levelExamAnswerId>0)
+            if (levelExamAnswerId > 0)
             {
                 var item = GetLevelExamAnswer(levelExamAnswerId);
 
@@ -487,7 +487,7 @@ namespace Ru.GameSchool.BusinessLayer.Services
 
             }
         }
-   
+
         public IEnumerable<ContentType> GetContentTypes()
         {
             var contentTypes = from x in GameSchoolEntities.ContentTypes
@@ -509,7 +509,8 @@ namespace Ru.GameSchool.BusinessLayer.Services
             }
 
             var query = GameSchoolEntities.LevelProjectResults.Where(u => u.UserInfoId == userInfoId)
-                                                              .AsEnumerable();
+                .AsEnumerable();
+
             if (query == null)
             {
                 yield break;
@@ -572,6 +573,7 @@ namespace Ru.GameSchool.BusinessLayer.Services
             return true;
         }
 
+
         public void CreateLevelProjectResult(LevelProjectResult levelProjectResult)
         {
             if (levelProjectResult != null)
@@ -580,6 +582,12 @@ namespace Ru.GameSchool.BusinessLayer.Services
                 Save();
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="levelProjectId"></param>
+        /// <returns></returns>
         public IEnumerable<LevelProjectResult> GetlevelProjectResultsByLevelProjectId(int levelProjectId)
         {
             return levelProjectId > 0
@@ -587,6 +595,11 @@ namespace Ru.GameSchool.BusinessLayer.Services
                        : null;
         }
 
+        /// <summary>
+        /// Returns a instance of levelprojectresult by levelproject id
+        /// </summary>
+        /// <param name="levelProjectId"></param>
+        /// <returns></returns>
         public LevelProjectResult GetlevelProjectResultByLevelProjectId(int levelProjectId)
         {
             if (0 > levelProjectId)
@@ -606,11 +619,10 @@ namespace Ru.GameSchool.BusinessLayer.Services
             return levelProjectResult;
         }
 
-        public void CreateLevelProjectResultFromLevelProject(LevelProject levelProject)
-        {
-            
-        }
-
+        /// <summary>
+        /// Updates a instance of levelproject
+        /// </summary>
+        /// <param name="levelProjectResult"></param>
         public void UpdateLevelProjectResult(LevelProjectResult levelProjectResult)
         {
             if (levelProjectResult != null)
@@ -623,6 +635,11 @@ namespace Ru.GameSchool.BusinessLayer.Services
             }
         }
 
+        /// <summary>
+        /// Returns a instance of levelprojectresult by levelprojectresultid
+        /// </summary>
+        /// <param name="id">Levelprojectresultid</param>
+        /// <returns>LEvelprojectresult instance of null</returns>
         public LevelProjectResult GetlevelProjectResultsByLevelProjectResultId(int id)
         {
             if (0 > id)
@@ -642,18 +659,31 @@ namespace Ru.GameSchool.BusinessLayer.Services
             return levelProjectResult;
         }
 
+        /// <summary>
+        /// Adds a levelproject instance to a level
+        /// </summary>
+        /// <param name="levelproject"></param>
+        /// <param name="courseId"></param>
         public void AddLevelProjectToCourseAndLevel(LevelProject levelproject, int courseId)
         {
             if (levelproject != null && courseId > 0)
             {
-                var level =
-                    GameSchoolEntities.Levels.Where(l => l.LevelId == levelproject.LevelId && l.CourseId == courseId).
-                        FirstOrDefault();
-                level.LevelProjects.Add(levelproject);
+                var level = GameSchoolEntities.Levels.FirstOrDefault(l => l.LevelId == levelproject.LevelId && l.CourseId == courseId);
+
+                if (level != null)
+                {
+                    level.LevelProjects.Add(levelproject);
+                }
+
                 Save();
             }
         }
 
+        /// <summary>
+        /// Returns all level instances by course id
+        /// </summary>
+        /// <param name="courseId">Id of course </param>
+        /// <returns>Collection of levels</returns>
         public IEnumerable<Level> GetLevelsByCourseId(int courseId)
         {
             return courseId > 0 ? GameSchoolEntities.Levels.Where(c => c.CourseId == courseId) : null;

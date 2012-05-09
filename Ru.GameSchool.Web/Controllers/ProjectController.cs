@@ -97,6 +97,7 @@ namespace Ru.GameSchool.Web.Controllers
             var userInfoId = MembershipHelper.GetUser().UserInfoId;
             IEnumerable<Course> levelProjects = null;
             ViewBag.Title = "Verkefnin mín";
+            ViewBag.UserInfoId = userInfoId;
             // Sækja spes course
             if (id.HasValue && id.Value > 0)
             {
@@ -106,7 +107,7 @@ namespace Ru.GameSchool.Web.Controllers
             {
                 levelProjects = CourseService.GetCoursesByUserInfoId(userInfoId);
             }
-
+            
             return levelProjects == null ? View() : View(levelProjects.ToList());
         }
 

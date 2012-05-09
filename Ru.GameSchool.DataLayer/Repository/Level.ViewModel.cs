@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Objects.DataClasses;
 using System.Linq;
 using System.Text;
 using System.ComponentModel.DataAnnotations;
@@ -7,7 +8,7 @@ using System.ComponentModel.DataAnnotations;
 namespace Ru.GameSchool.DataLayer.Repository
 {
     [MetadataType(typeof(LevelMetadata))]
-    public partial class Level
+    public partial class Level 
     {
     }
 

@@ -40,6 +40,7 @@ namespace Ru.GameSchool.DataLayer.Repository
         IObjectSet<sysdiagram> sysdiagrams { get; }
         IObjectSet<LevelExamUserAnswer> LevelExamUserAnswers { get; }
 
+
         #endregion
         #region Function Imports
         ObjectResult<LevelProject> GetAllUserLevelProjects(Nullable<int> userInfoId);
@@ -48,5 +49,6 @@ namespace Ru.GameSchool.DataLayer.Repository
     
     	int SaveChanges();
     	void AttachTo(string entitySetName ,object entity);
+
     }
 }

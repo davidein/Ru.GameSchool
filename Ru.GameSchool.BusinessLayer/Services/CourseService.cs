@@ -205,17 +205,6 @@ namespace Ru.GameSchool.BusinessLayer.Services
                        where x.UserInfoes.Where(p => p.UserInfoId == userInfoId).Count() > 0
                        select x;
 
-            /*var query = GameSchoolEntities.UserInfoes.Join(GameSchoolEntities.Courses,
-                                                           u => u.DepartmentId, c => c.DepartmentId,
-                                                           (u, c) => new
-                                                                         {
-                                                                             u,
-                                                                             c
-                                                                         }).Where(
-                                                                             x =>
-                                                                             x.c.CourseId == courseId &&
-                                                                             x.u.UserInfoId == userInfoId)
-                                                                           .Select(m => m.c);*/
 
             return userCourse;
         }

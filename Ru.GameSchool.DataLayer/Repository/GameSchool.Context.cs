@@ -193,5 +193,11 @@ namespace Ru.GameSchool.DataLayer.Repository
         }
 
         #endregion
+
+        #region IGameSchoolEntities Members
+
+
+
+        #endregion
     }
 }
