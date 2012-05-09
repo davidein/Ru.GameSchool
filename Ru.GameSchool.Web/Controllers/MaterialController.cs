@@ -66,6 +66,7 @@ namespace Ru.GameSchool.Web.Controllers
                 ViewBag.Courseid = material.Level.Course.CourseId;
                 ViewBag.Title = "Listi yfir " + material.ContentType.Name;
                 ViewBag.Description = material.Description;
+                ViewBag.LevelMaterialId = material.LevelMaterialId; 
 
                 return View(material);
             }

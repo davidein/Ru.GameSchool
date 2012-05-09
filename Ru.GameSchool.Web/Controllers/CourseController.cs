@@ -14,7 +14,7 @@ namespace Ru.GameSchool.Web.Controllers
             return View();
         }
 
-        [Authorize(Roles = "Student")]
+        [Authorize(Roles = "Student,Teacher")]
         public ActionResult Item(int? id)
         {
             if (id.HasValue)

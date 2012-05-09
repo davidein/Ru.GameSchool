@@ -51,6 +51,14 @@ namespace Ru.GameSchool.Web.Controllers
             return Json(false, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpGet]
+        public ActionResult GetComments(int id)
+        {
+
+            var model = SocialService.GetComments(id);
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+
         [HttpPost]
         public ActionResult LikeComment(int? id)
         {
@@ -71,6 +79,35 @@ namespace Ru.GameSchool.Web.Controllers
             }
             return Json(false, JsonRequestBehavior.AllowGet);
         }
+
+        [HttpPost]
+        public ActionResult CreateComment(Comment comment, int id)
+        {
+
+            String strComment = comment.Comment1;
+            
+
+            if (!String.IsNullOrEmpty(strComment))
+            {
+                Comment c = new Comment();
+                  var  cUser = MembershipHelper.GetUser();
+                  c.UserInfoId = cUser.UserInfoId;
+                  c.Comment1 = strComment;
+                  c.CreateDateTime = DateTime.Now;
+                  c.LevelMaterialId = id;
+                  c.DeletedByUser = "";
+                  SocialService.CreateComment(c);
+                  return Json(true, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                ModelState.AddModelError("CommentText", "Kjánaprik. Ætlarðu að setja inn tóma athugasemd?");
+                return RedirectToAction("Get","Material");
+            }
+
+            
+        }
+
 
         [HttpPost]
         public ActionResult LikeMaterial(int id)
