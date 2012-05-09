@@ -1,0 +1,189 @@
+<<<<<<< HEAD
+﻿@model IEnumerable<Ru.GameSchool.DataLayer.Repository.LevelExam>
+
+
+@if (User.IsInRole("Teacher"))
+{
+    <p>
+        @Html.ActionLink("Búa til nýtt próf", "Create", new { id = ViewBag.Course.CourseId }, new { @class = "btn btn-success" })
+    </p>
+}
+<table class="table table-striped table-bordered table-condensed">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            Spruningar
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Level.Course.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LevelId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GradePercentageValue)
+        </th>
+        <th>
+            Einkun
+        </th>
+        @if (User.IsInRole("Teacher"))
+        {
+            <th>
+                Aðgerðir kennara
+            </th>
+        }
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @if (item.LevelExamResults.Where(u => u.UserInfoId == ViewBag.UserInfoId).Count() > 0)
+                {
+                    <text>@item.Name</text>
+                }
+                else
+                {
+                    <text>@Html.ActionLink(string.Format("{0} - Skiladagur: {1}", item.Name, item.Level.Stop.ToString("dd.MM.yyyy HH:mm")), "Question", new { id = @item.LevelExamQuestions.FirstOrDefault().LevelExamQuestionId })</text>
+                }
+            </td>
+            <td>
+                @item.LevelExamQuestions.Count()
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Level.Course.Name)
+            </td>
+            <td>
+                @Html.ActionLink(@item.Name, "Get", "Level", new { id = item.LevelId }, null)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GradePercentageValue)%
+            </td>
+            <td>
+                @foreach (var x in item.LevelExamResults)
+                {
+                    if (x.UserInfoId == ViewBag.UserInfoId)
+                    {
+                        if (Math.Abs(@x.Grade) > 0)
+                        {
+                            @x.Grade
+                        }
+                        else
+                        {
+                            <i>Enginn einkunn</i>          
+                        }
+                    }
+                }
+            </td>
+            @if (User.IsInRole("Teacher"))
+            {
+                <td>
+                    @Html.ActionLink("Breyta", "Edit", new { id = item.LevelExamId }) |
+                    @Html.ActionLink("Eyða", "Delete", new { id = item.LevelExamId })
+                </td>   
+            }
+        </tr>
+    }
+</table>
+=======
+﻿@model IEnumerable<Ru.GameSchool.DataLayer.Repository.LevelExam>
+
+
+@if (User.IsInRole("Teacher"))
+{
+    <p>
+        @Html.ActionLink("Búa til nýtt próf", "Create", new { id = ViewBag.Course.CourseId }, new { @class = "btn btn-success" })
+    </p>
+}
+<table class="table table-striped table-bordered table-condensed">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            Spruningar
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Level.Course.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LevelId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GradePercentageValue)
+        </th>
+        <th>
+            Einkun
+        </th>
+        @if (User.IsInRole("Teacher"))
+        {
+            <th>
+                Aðgerðir kennara
+            </th>
+        }
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @if (item.LevelExamResults.Where(u => u.UserInfoId == ViewBag.UserInfoId).Count() > 0)
+                {
+                    <text>@item.Name</text>
+                }
+                else
+                {
+                    <text>@Html.ActionLink(string.Format("{0} - Skiladagur: {1}", item.Name, item.Level.Stop.ToString("dd.MM.yyyy HH:mm")), "Question", new { id = @item.LevelExamQuestions.FirstOrDefault().LevelExamQuestionId })</text>
+                }
+            </td>
+            <td>
+                @item.LevelExamQuestions.Count()
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Level.Course.Name)
+            </td>
+            <td>
+                @Html.ActionLink(@item.Name, "Get", "Level", new { id = item.LevelId }, null)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GradePercentageValue)%
+            </td>
+            <td>
+                @foreach (var x in item.LevelExamResults)
+                {
+                    if (x.UserInfoId == ViewBag.UserInfoId)
+                    {
+                        if (Math.Abs(@x.Grade) > 0)
+                        {
+                            @x.Grade
+                        }
+                        else
+                        {
+                            <i>Enginn einkunn</i>          
+                        }
+                    }
+                }
+            </td>
+            @if (User.IsInRole("Teacher"))
+            {
+                <td>
+                    @Html.ActionLink("Breyta", "Edit", new { id = item.LevelExamId }) |
+                    @Html.ActionLink("Eyða", "Delete", new { id = item.LevelExamId })
+                </td>   
+            }
+        </tr>
+    }
+</table>
+>>>>>>> 2aa6d6c5f5aba96bba6a60829077459c4ba5c811

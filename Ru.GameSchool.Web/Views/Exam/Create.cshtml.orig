@@ -1,0 +1,109 @@
+<<<<<<< HEAD
+﻿@model Ru.GameSchool.DataLayer.Repository.LevelExam
+@{
+    ViewBag.Title = "Búa til nýtt próf";
+}
+
+<h2>Búa til nýtt próf</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Próf</legend>
+        <div class="editor-label">
+            @Html.LabelFor(m => m.Name)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(m => m.Name)
+            @Html.ValidationMessageFor(m => m.Name)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(m => m.Description)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(m => m.Description)
+            @Html.ValidationMessageFor(m => m.Description)
+        </div>
+        <div class="control-group">
+            <label class="control-label">
+                Hlutfall prósentu</label>
+            <div class="controls">
+                @Html.DropDownListFor(m => m.GradePercentageValue, ViewBag.GradePercentageValues as IEnumerable<SelectListItem>)
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">
+                Borð númer</label>
+            <div class="controls">
+                @Html.DropDownListFor(m => m.LevelId, (IEnumerable<SelectListItem>)ViewBag.Levels, "Veldu borð")
+            </div>
+        </div>
+        <div class="control-group">
+            <div class="controls">
+                <button type="submit" value="Save" class="btn btn-success">
+                    <i class="icon-ok icon-white"></i>Búa til próf
+                </button>
+            </div>
+        </div>
+    </fieldset>
+}
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+=======
+﻿@model Ru.GameSchool.DataLayer.Repository.LevelExam
+@{
+    ViewBag.Title = "Búa til nýtt próf";
+}
+
+<h2>Búa til nýtt próf</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Próf</legend>
+        <div class="editor-label">
+            @Html.LabelFor(m => m.Name)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(m => m.Name)
+            @Html.ValidationMessageFor(m => m.Name)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(m => m.Description)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(m => m.Description)
+            @Html.ValidationMessageFor(m => m.Description)
+        </div>
+        <div class="control-group">
+            <label class="control-label">
+                Hlutfall prósentu</label>
+            <div class="controls">
+                @Html.DropDownListFor(m => m.GradePercentageValue, ViewBag.GradePercentageValues as IEnumerable<SelectListItem>)
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">
+                Borð númer</label>
+            <div class="controls">
+                @Html.DropDownListFor(m => m.LevelId, (IEnumerable<SelectListItem>)ViewBag.Levels, "Veldu borð")
+            </div>
+        </div>
+        <div class="control-group">
+            <div class="controls">
+                <button type="submit" value="Save" class="btn btn-success">
+                    <i class="icon-ok icon-white"></i>Búa til próf
+                </button>
+            </div>
+        </div>
+    </fieldset>
+}
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+>>>>>>> 2aa6d6c5f5aba96bba6a60829077459c4ba5c811

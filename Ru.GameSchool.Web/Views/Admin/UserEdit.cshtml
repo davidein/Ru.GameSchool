@@ -4,14 +4,6 @@
     ViewBag.Title = "Skráning notenda";
 }
 
-<h2>Skráning notenda</h2>
-
-@section sidebar {
-
-@Html.Partial("_AdminSideBar")
-
-}
-
 @if (!string.IsNullOrWhiteSpace(ViewBag.SuccessMessage))
 {
     <div class="alert alert-success">

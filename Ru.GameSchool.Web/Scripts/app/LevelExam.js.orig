@@ -1,0 +1,18 @@
+<<<<<<< HEAD
+﻿$(document).ready(function () {
+    var item = $('#LevelExamQuestionId');
+    $('.addexamquestionanswer').click(function () {
+        var questionId = $(this).data('question');
+        //alert(questionId);
+        item.val(questionId);
+    });
+=======
+﻿$(document).ready(function () {
+    var item = $('#LevelExamQuestionId');
+    $('.addexamquestionanswer').click(function () {
+        var questionId = $(this).data('question');
+        //alert(questionId);
+        item.val(questionId);
+    });
+>>>>>>> 2aa6d6c5f5aba96bba6a60829077459c4ba5c811
+});
