@@ -162,6 +162,13 @@ namespace Ru.GameSchool.DataLayer.Repository
         }
         private ObjectSet<UserLog> _userLogs;
 
+    
+        public IObjectSet<LevelExamUserAnswer> LevelExamUserAnswers
+        {
+            get { return _levelExamUserAnswers  ?? (_levelExamUserAnswers = CreateObjectSet<LevelExamUserAnswer>("LevelExamUserAnswers")); }
+        }
+        private ObjectSet<LevelExamUserAnswer> _levelExamUserAnswers;
+
         #endregion
         #region Function Imports
         public ObjectResult<LevelProject> GetAllUserLevelProjects(Nullable<int> userInfoId)

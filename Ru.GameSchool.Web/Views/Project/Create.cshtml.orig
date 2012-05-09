@@ -1,15 +1,23 @@
+<<<<<<< HEAD
 ﻿@using Ru.GameSchool.DataLayer.Repository
 @model LevelProject
-    Breyta verkefni</h2>
+@{
+    ViewBag.Title = "Búa til nýtt verkefni";
+}
+<h2>
+    Verkefni</h2>
+=======
+﻿@model Ru.GameSchool.DataLayer.Repository.LevelProject
+
+>>>>>>> 89a73b72a3e9e68cc98cc620962401ec8d67cdf1
 <script src="@Url.Content("~/Scripts/jquery.validate.min.js")"></script>
 <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")"></script>
-@using (Html.BeginForm("Edit", "Project", FormMethod.Post))
+@using (Html.BeginForm("Create", "Project", FormMethod.Post))
 {
     @Html.ValidationSummary(true)
 
     <fieldset>
         <legend>Upplýsingar</legend>
-        @Html.HiddenFor(model => model.LevelProjectId)
         <div class="control-group">
             @Html.LabelFor(model => model.Name, new { @class = "control-label" })
             <div class="controls">
@@ -24,6 +32,13 @@
                 <span class="help-inline">@Html.ValidationMessageFor(model => model.LevelId)</span>
             </div>
         </div>
+@*                <div class="control-group">
+            @Html.LabelFor(model => model.Level.CourseId, "Levels.Course")
+            <div class="controls">
+                @Html.DropDownList("CourseId", string.Empty)
+                <span class="help-inline">@Html.ValidationMessageFor(model => model.Level.CourseId)</span>
+            </div>
+        </div>*@
         <div class="control-group">
             @Html.LabelFor(model => model.GradePercentageValue)
             <div class="controls">
@@ -61,7 +76,7 @@
         <div class="control-group">
             <div class="controls">
                 <button type="submit" class="btn btn-success">
-                    Breyta verkefni</button>
+                    Bæta við verkefni</button>
             </div>
         </div>
     </fieldset>

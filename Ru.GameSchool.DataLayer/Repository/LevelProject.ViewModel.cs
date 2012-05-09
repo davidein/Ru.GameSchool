@@ -41,6 +41,8 @@ namespace Ru.GameSchool.DataLayer.Repository
         [Display(Name = "Borð")]
         public int LevelId { get; set; }
 
+        [Display(Name = "Athugasemd til kennara")]
+        public string UserFeedback { get; set; }
 
         [Display(Name = "Viðhengi")]
         public string ContentID { get; set; }

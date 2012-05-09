@@ -19,8 +19,9 @@ namespace Ru.GameSchool.BusinessLayer.Enums
         {
             UserType userType;
             if (Enum.TryParse(type, out userType))
+            {
                 return userType;
-
+            }
             return UserType.Anonymous;
         }
     }

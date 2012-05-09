@@ -1,6 +1,31 @@
+<<<<<<< HEAD
 ﻿@using Ru.GameSchool.DataLayer.Repository
 @model LevelProject
-    Breyta verkefni</h2>
+@{
+    ViewBag.Title = "Breyta verkefni";
+}
+<h2>
+    Verkefni</h2>
+=======
+﻿@model Ru.GameSchool.DataLayer.Repository.LevelProject
+
+@if (!string.IsNullOrWhiteSpace(ViewBag.SuccessMessage))
+{
+    <div class="alert alert-success">
+        <button class="close" data-dismiss="alert">
+            ×</button>
+        <strong>Tókst!</strong> @ViewBag.SuccessMessage
+    </div>
+}
+@if (!string.IsNullOrWhiteSpace(ViewBag.ErrorMessage))
+{
+    <div class="alert alert-error">
+        <button class="close" data-dismiss="alert">
+            ×</button>
+        <strong>Villa!</strong> @ViewBag.ErrorMessage
+    </div>
+}
+>>>>>>> 89a73b72a3e9e68cc98cc620962401ec8d67cdf1
 <script src="@Url.Content("~/Scripts/jquery.validate.min.js")"></script>
 <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")"></script>
 @using (Html.BeginForm("Edit", "Project", FormMethod.Post))

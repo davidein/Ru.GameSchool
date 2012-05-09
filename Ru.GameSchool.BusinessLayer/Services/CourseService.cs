@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Data.Entity;
+using System.Linq;
 using Ru.GameSchool.BusinessLayer.Exceptions;
 using Ru.GameSchool.DataLayer;
 using System.Collections.Generic;
@@ -50,8 +51,8 @@ namespace Ru.GameSchool.BusinessLayer.Services
         /// <returns>A list of all courses.</returns>
         public IEnumerable<Course> GetCourses()
         {
-            var courses = from x in GameSchoolEntities.Courses
-                          select x;
+            var courses = (from x in GameSchoolEntities.Courses
+                           select x).Include("Levels");
 
             return courses;
         }
@@ -261,6 +262,34 @@ namespace Ru.GameSchool.BusinessLayer.Services
             return returnLevelId;
 
         }
+
+
+        public IEnumerable<LevelMaterial> GetCourseMaterials(int courseId)
+        {
+            //return GameSchoolEntities.LevelMaterials.Where(l=> l.LevelId in );
+            var returnList = (from x in GameSchoolEntities.LevelMaterials
+                              join y in GameSchoolEntities.Levels on x.LevelId equals y.LevelId
+                              where y.CourseId == courseId
+                              select x);
+            return returnList;
+        }
+
+        public IEnumerable<LevelMaterial> GetCourseMaterials(int courseId, int contentTypeId)
+        {
+            //return GameSchoolEntities.LevelMaterials.Where(l=> l.LevelId in );
+            var returnList = (from x in GameSchoolEntities.LevelMaterials
+                              join y in GameSchoolEntities.Levels on x.LevelId equals y.LevelId
+                              where y.CourseId == courseId && x.ContentTypeId == contentTypeId
+                              select x);
+            return returnList;
+        }
+
+        public string GetContentTypeNameById(int contentTypeId) 
+        {
+             return GameSchoolEntities.ContentTypes.Where(x => x.ContentTypeId == contentTypeId).FirstOrDefault().Name;
+        }
+
+
 
     }
 }
