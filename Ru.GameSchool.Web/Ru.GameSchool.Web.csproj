@@ -40,6 +40,9 @@
       <HintPath>..\packages\EntityFramework.4.3.1\lib\net40\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Web.Helpers">
+      <HintPath>..\packages\microsoft-web-helpers.1.15\lib\Microsoft.Web.Helpers.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
@@ -129,6 +132,7 @@
     <Compile Include="Classes\GameSchoolRoleProvider.cs" />
     <Compile Include="Classes\Helper\MembershipHelper.cs" />
     <Compile Include="Classes\Helper\ListHelpers.cs" />
+    <Compile Include="Classes\Helper\Settings.cs" />
     <Compile Include="Classes\Interfaces\IFormsAuthenticationService.cs" />
     <Compile Include="Classes\Interfaces\IMembershipService.cs" />
     <Compile Include="Classes\GameSchoolMembershipUser.cs" />
@@ -189,6 +193,7 @@
     <Content Include="Content\themes\base\jquery.ui.theme.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Release Notes - Microsoft.Web.Helpers.txt" />
     <Content Include="Scripts\app\common.js" />
     <Content Include="Scripts\app\LevelExam.js" />
     <Content Include="Scripts\jquery-1.6.2-vsdoc.js" />
@@ -247,6 +252,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Upload\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -361,7 +367,9 @@
     <Content Include="Views\Exam\TakeExam.cshtml" />
     <Content Include="Views\Exam\Get.cshtml" />
     <Content Include="Views\Exam\Create.cshtml" />
+    <Content Include="Views\Project\Edit.cshtml" />
     <Content Include="Views\Exam\ExamQuestions.cshtml" />
+    <Content Include="Views\Material\_MaterialForm.cshtml" />
     <Content Include="Views\Exam\_ExamAnswer.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
@@ -381,7 +389,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>7923</DevelopmentServerPort>
+          <DevelopmentServerPort>27170</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>
