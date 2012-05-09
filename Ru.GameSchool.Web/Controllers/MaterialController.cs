@@ -27,6 +27,7 @@ namespace Ru.GameSchool.Web.Controllers
                 ViewBag.Materials = materials;
                 ViewBag.CourseName = CourseService.GetCourse(courseIdValue).Name;
                 ViewBag.Courseid = CourseService.GetCourse(courseIdValue).CourseId;
+
                 ViewBag.Title = "Listi yfir kennsluefni";
                 return View(materials);
             }
@@ -61,10 +62,11 @@ namespace Ru.GameSchool.Web.Controllers
             {
                 
                 var material = LevelService.GetLevelMaterial(id.Value);
-             //   ViewBag.File = Settings.ProjectMaterialVirtualFolder + material.ContentId.ToString()+".mp4"; //TODO: Add function to check for file extensions
+                ViewBag.File = Settings.ProjectMaterialVirtualFolder + material.ContentId.ToString()+".mp4"; //TODO: Add function to check for file extensions
                 ViewBag.CourseName = material.Level.Course.Name;
                 ViewBag.Courseid = material.Level.Course.CourseId;
-                ViewBag.Title = "Listi yfir " + material.ContentType.Name;
+                ViewBag.Title = material.ContentType.Name;
+                ViewBag.Name = material.Title;
                 ViewBag.Description = material.Description;
 
                 return View(material);
@@ -106,7 +108,7 @@ namespace Ru.GameSchool.Web.Controllers
                 }
                 LevelService.CreateLevelMaterial(levelMaterial);
 
-                return RedirectToAction("Edit", new { id = levelMaterial.LevelMaterialId });
+                return RedirectToAction("Get", new { id = levelMaterial.LevelMaterialId });
 
             }
             ViewBag.LevelCount = GetLevelCounts(id.Value);
@@ -121,12 +123,10 @@ namespace Ru.GameSchool.Web.Controllers
         public ActionResult Edit(int? id)
         {
             
-
- 
             if (id.HasValue)
             {
                 var material = LevelService.GetLevelMaterial(id.Value);
-                var courseId = material.Level.CourseId;
+                    var courseId = material.Level.CourseId;
                 ViewBag.LevelCount = GetLevelCounts(courseId);
                 ViewBag.ContentTypes = LevelService.GetContentTypes();
                 //ViewBag.CourseId = material.Level.CourseId;
@@ -147,14 +147,31 @@ namespace Ru.GameSchool.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                ViewBag.LevelCount = GetLevelCounts(levelMaterial.Level.CourseId);
-                ViewBag.ContentTypes = LevelService.GetContentTypes();
-                ViewBag.CourseId = levelMaterial.Level.CourseId;
-                if (TryUpdateModel(levelMaterial))
+                var material = LevelService.GetLevelMaterial(levelMaterial.LevelMaterialId);
+                var courseId = material.Level.CourseId;
+                if (TryUpdateModel(material))
                 {
+                    if (levelMaterial.File.FirstOrDefault() != null)
+                    {
+                        foreach (var file in levelMaterial.File)
+                        {
+                            Guid contentId = Guid.NewGuid();
+                            if (file.ContentLength <= 0) continue;
+                            var path = Path.Combine(Server.MapPath("~/Upload"), contentId.ToString() + ".mp4"); //TODO: Add function to check for file extensions
+                            ViewBag.ContentId = contentId;
+                            file.SaveAs(path);
+                            levelMaterial.ContentId = contentId;
+                        }
+                    }
+                    
+                    ViewBag.CourseName = CourseService.GetCourse(courseId).Name;
+                    ViewBag.Courseid = CourseService.GetCourse(courseId).CourseId;
+                    ViewBag.Title = "Breyta kennsluefni";
+                    ViewBag.LevelCount = GetLevelCounts(courseId);
+                    ViewBag.ContentTypes = LevelService.GetContentTypes();
                     ViewBag.SuccessMessage = "Kennslugagn hefur verið uppfært";
                     
-                    LevelService.UpdateLevelMaterial(levelMaterial);
+                    LevelService.UpdateLevelMaterial(material);
                     return View(levelMaterial);
                 }
                 
@@ -165,6 +182,7 @@ namespace Ru.GameSchool.Web.Controllers
                 if (id.Value != null) return View(LevelService.GetLevelMaterial(id.Value));
             }
             ViewBag.LevelCount = GetLevelCounts(levelMaterial.Level.CourseId);
+            ViewBag.LevelMaterialId = levelMaterial.LevelMaterialId;
             ViewBag.ContentTypes = LevelService.GetContentTypes();
             return View();
         }
