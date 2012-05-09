@@ -6,11 +6,9 @@ using Ru.GameSchool.DataLayer.Repository;
 namespace Ru.GameSchool.BusinessLayer.Services
 
 {
-
     /// <summary>
     /// Abstract base class that all services inherit from.
     /// </summary> 
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "Casing is intentional")]
     public abstract class BaseService
     {
         private IGameSchoolEntities _gameSchoolEntities;
