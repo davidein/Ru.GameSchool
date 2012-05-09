@@ -54,19 +54,20 @@ namespace Ru.GameSchool.Web.Controllers
             return View();
         }
 
-        [HttpGet]
         [Authorize(Roles = "Student, Teacher")]
         public ActionResult TakeExam(int? id)
         {
             if (id.HasValue)
             {
                 var exam = LevelService.GetLevelExam(id.Value);
-                ViewBag.CourseId = exam.Level.CourseId;
-                ViewBag.CourseName = exam.Level.Course.Name;
-                ViewBag.Title = "Taka próf";
-                return View(exam);
+                if (exam != null)
+                {
+                    var question = exam.LevelExamQuestions.OrderBy(x => x.LevelExamQuestionId).FirstOrDefault();
+
+                    return RedirectToAction("Question", "Exam", new {id = question.LevelExamQuestionId});
+                }
             }
-            return View();
+            return RedirectToAction("NotFound", "Home");
         }
 
         [Authorize(Roles = "Student, Teacher")]
@@ -98,7 +99,10 @@ namespace Ru.GameSchool.Web.Controllers
             if (model != null)
             {
                 var user = MembershipHelper.GetUser();
-                LevelService.AnswerLevelExamQuestion(model.LevelExamAnswerId, user.UserInfoId);
+                if (model.LevelExamAnswerId != 0)
+                {
+                    LevelService.AnswerLevelExamQuestion(model.LevelExamAnswerId, user.UserInfoId);                    
+                }
 
                 var nextQuestion = LevelService.GetNextLevelExamQuestion(model.LevelExamQuestionId);
 
@@ -247,26 +251,24 @@ namespace Ru.GameSchool.Web.Controllers
         {
             ViewBag.GradePercentageValue = GetPercentageValue();
 
-            if (ModelState.IsValid)
+            if (id.HasValue)
             {
-                if (id.HasValue)
-                {
-                    var exam = LevelService.GetLevelExam(id.Value);
-                    ViewBag.Levels = new SelectList(LevelService.GetLevels(exam.Level.CourseId), "LevelId", "Name");
-                    ViewBag.CourseId = exam.Level.CourseId;
-                    ViewBag.CourseName = exam.Level.Course.Name;
-                    return View(exam);
-                }
+                var exam = LevelService.GetLevelExam(id.Value);
+                ViewBag.Levels = new SelectList(LevelService.GetLevels(exam.Level.CourseId), "LevelId", "Name");
+                ViewBag.CourseId = exam.Level.CourseId;
+                ViewBag.CourseName = exam.Level.Course.Name;
+                return View(exam);
             }
             return View();
         }
 
         [Authorize(Roles = "Teacher")]
         [HttpPost]
-        public ActionResult Edit(LevelExam levelExam)
+        public ActionResult Edit(LevelExam model)
         {
             if (ModelState.IsValid)
             {
+                var levelExam = LevelService.GetLevelExam(model.LevelExamId);
                 if (TryUpdateModel(levelExam))
                 {
                     LevelService.UpdateLevelExam(levelExam);
@@ -278,7 +280,10 @@ namespace Ru.GameSchool.Web.Controllers
                     ViewBag.ErrorMessage = "Náði ekki að skrá/uppfæra upplýsingar! Lagfærðu villur og reyndur aftur.";
                 }
             }
-            return View();
+            var exam = LevelService.GetLevelExam(model.LevelExamId);
+            ViewBag.Levels = new SelectList(LevelService.GetLevels(exam.Level.CourseId), "LevelId", "Name");
+
+            return View(model);
         }
 
         #endregion
