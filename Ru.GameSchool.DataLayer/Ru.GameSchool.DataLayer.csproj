@@ -112,9 +112,6 @@
     <Compile Include="Repository\LevelExamResult.cs">
       <DependentUpon>GameSchool.tt</DependentUpon>
     </Compile>
-    <Compile Include="Repository\LevelExamUserAnswer.cs">
-      <DependentUpon>GameSchool.tt</DependentUpon>
-    </Compile>
     <Compile Include="Repository\LevelMaterial.cs">
       <DependentUpon>GameSchool.tt</DependentUpon>
     </Compile>
