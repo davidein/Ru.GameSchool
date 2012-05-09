@@ -127,6 +127,7 @@
     <Compile Include="Classes\FormsAuthenticationService.cs" />
     <Compile Include="Classes\GameSchoolMembershipProvider.cs" />
     <Compile Include="Classes\GameSchoolRoleProvider.cs" />
+    <Compile Include="Classes\Helper\DownloadFile.cs" />
     <Compile Include="Classes\Helper\MembershipHelper.cs" />
     <Compile Include="Classes\Helper\ListHelpers.cs" />
     <Compile Include="Classes\Helper\Settings.cs" />

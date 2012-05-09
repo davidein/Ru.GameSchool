@@ -41,13 +41,13 @@
     {
         <tr>
             <td>
-                @if (item.LevelExamResults.Where(u => u.UserInfoId == ViewBag.UserInfoId).Count() > 0)
+                @if ((item.LevelExamResults.Where(u => u.UserInfoId == ViewBag.UserInfoId).Count() > 0) || item.LevelExamQuestions.Count() == 0)
                 {
                     <text>@item.Name</text>
                 }
                 else
                 {
-                    <text>@Html.ActionLink(string.Format("{0} - Skiladagur: {1}", item.Name, item.Level.Stop.ToString("dd.MM.yyyy HH:mm")), "Question", new { id = @item.LevelExamQuestions.FirstOrDefault().LevelExamQuestionId })</text>
+                    <text>@Html.ActionLink(string.Format("{0} - Skiladagur: {1}", item.Name, item.Level.Stop.ToString("dd.MM.yyyy HH:mm")), "Question", new { id = item.LevelExamQuestions.FirstOrDefault().LevelExamQuestionId })</text>
                 }
             </td>
             <td>
@@ -57,7 +57,7 @@
                 @Html.DisplayFor(modelItem => item.Level.Course.Name)
             </td>
             <td>
-                @Html.ActionLink(@item.Name, "Get", "Level", new { id = item.LevelId }, null)
+                @Html.ActionLink(@item.Level.Name, "Get", "Level", new { id = item.LevelId }, null)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Description)

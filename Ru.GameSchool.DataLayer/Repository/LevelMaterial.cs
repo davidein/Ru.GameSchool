@@ -88,6 +88,12 @@ namespace Ru.GameSchool.DataLayer.Repository
             get;
             set;
         }
+    
+        public virtual System.DateTime CreateDateTime
+        {
+            get;
+            set;
+        }
 
         #endregion
         #region Navigation Properties
