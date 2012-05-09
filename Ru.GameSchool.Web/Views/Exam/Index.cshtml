@@ -4,13 +4,16 @@
 @if (User.IsInRole("Teacher"))
 {
     <p>
-        @Html.ActionLink("Búa til nýtt próf", "Create", new { id = ViewBag.Course.CourseId })
+        @Html.ActionLink("Búa til nýtt próf", "Create", new { id = ViewBag.Course.CourseId }, new { @class = "btn btn-success" })
     </p>
 }
 <table class="table table-striped table-bordered table-condensed">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            Spruningar
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Level.Course.Name)
@@ -24,6 +27,9 @@
         <th>
             @Html.DisplayNameFor(model => model.GradePercentageValue)
         </th>
+        <th>
+            Einkun
+        </th>
         @if (User.IsInRole("Teacher"))
         {
             <th>
@@ -35,7 +41,17 @@
     {
         <tr>
             <td>
-                @Html.ActionLink((@item.Name + " - Skiladagur: " + @item.Level.Stop.ToString("dd.MM.yyyy HH:mm")) as string, "Get", new { LevelExamId = @item.LevelExamId })
+                @if (item.LevelExamResults.Where(u => u.UserInfoId == ViewBag.UserInfoId).Count() > 0)
+                {
+                    <text>@item.Name</text>
+                }
+                else
+                {
+                    <text>@Html.ActionLink(string.Format("{0} - Skiladagur: {1}", item.Name, item.Level.Stop.ToString("dd.MM.yyyy HH:mm")), "Question", new { id = @item.LevelExamQuestions.FirstOrDefault().LevelExamQuestionId })</text>
+                }
+            </td>
+            <td>
+                @item.LevelExamQuestions.Count()
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Level.Course.Name)
@@ -47,7 +63,23 @@
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.GradePercentageValue)
+                @Html.DisplayFor(modelItem => item.GradePercentageValue)%
+            </td>
+            <td>
+                @foreach (var x in item.LevelExamResults)
+                {
+                    if (x.UserInfoId == ViewBag.UserInfoId)
+                    {
+                        if (Math.Abs(@x.Grade) > 0)
+                        {
+                            @x.Grade
+                        }
+                        else
+                        {
+                            <i>Enginn einkunn</i>          
+                        }
+                    }
+                }
             </td>
             @if (User.IsInRole("Teacher"))
             {

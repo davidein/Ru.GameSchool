@@ -24,5 +24,6 @@ Thumbs.db
 obj/
 [Rr]elease*/
 _ReSharper*/
+App_Data/
 [Tt]est[Rr]esult*
 App_Data/
