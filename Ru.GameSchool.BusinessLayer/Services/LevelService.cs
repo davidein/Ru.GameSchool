@@ -86,6 +86,8 @@ namespace Ru.GameSchool.BusinessLayer.Services
         {
             if (levelExam != null)
             {
+                levelExam.CreateDateTime = DateTime.Now;
+
                 GameSchoolEntities.LevelExams.AddObject(levelExam);
                 Save();
             }

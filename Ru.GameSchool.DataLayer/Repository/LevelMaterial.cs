@@ -82,6 +82,12 @@ namespace Ru.GameSchool.DataLayer.Repository
             get;
             set;
         }
+    
+        public virtual string Filename
+        {
+            get;
+            set;
+        }
 
         #endregion
         #region Navigation Properties
