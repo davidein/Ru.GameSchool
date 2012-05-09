@@ -1,11 +1,7 @@
 ﻿@{
-    ViewBag.Title = "CreateQuestion";
+    ViewBag.Title = "Spurningar";
 }
 @model Ru.GameSchool.DataLayer.Repository.LevelExamQuestion
-
-@section sidebar {
-    @Html.Partial("_LeftSideBar")
-}
 
 <h2>Spurningar í: @ViewBag.Exam.Name</h2>
 
@@ -16,7 +12,7 @@
     <ol>
         @foreach (var answer in item.LevelExamAnswers)
         {
-            <li>@answer.Answer - @Html.ActionLink("Eyða", "DeleteLevelExamAnswer", "Exam", new { id = answer.LevelExamAnswerId }, null)</li>
+            <li>@if(answer.Correct) {<i class="icon-ok"></i>} @answer.Answer - @Html.ActionLink("Eyða", "DeleteLevelExamAnswer", "Exam", new { id = answer.LevelExamAnswerId }, null)</li>
         }
         <button class="btn addexamquestionanswer" data-toggle="modal" data-target="#examAnswerForm" data-question="@item.LevelExamQuestionId">Búa til svar</button>
     </ol><br />

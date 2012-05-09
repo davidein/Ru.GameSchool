@@ -1,17 +1,10 @@
 ﻿@model Ru.GameSchool.DataLayer.Repository.LevelExam
-<<<<<<< HEAD
 @{
     ViewBag.Title = "Breyta prófi";
-}
-@section sidebar {
-    @Html.Partial("_LeftSideBar")
 }
 
 <h2>
     Breyta prófi</h2>
-=======
-
->>>>>>> 589b1c37cf86ed18003f7ac142ccee5d8b47af35
 @if (!string.IsNullOrWhiteSpace(ViewBag.SuccessMessage))
 {
     <div class="alert alert-success">
@@ -74,4 +67,4 @@
     </fieldset>
 }
 
-@Html.ActionLink("Spurningar", "ExamQuestions", new { id = Model.LevelExamId }, null) - @Html.ActionLink("Aftur á forsíðu prófa", "Index")
+@Html.ActionLink("Spurningar", "ExamQuestions", new { id = Model.LevelExamId }, null) - @Html.ActionLink("Aftur á forsíðu prófa", "Index", new { id  = Model.Level.CourseId }, null)

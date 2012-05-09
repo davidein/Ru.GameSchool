@@ -1,7 +1,10 @@
-﻿using Ru.GameSchool.BusinessLayer.Interfaces;
+﻿using System.Diagnostics.CodeAnalysis;
+using Ru.GameSchool.BusinessLayer.Interfaces;
 using Ru.GameSchool.DataLayer.Repository;
 
+
 namespace Ru.GameSchool.BusinessLayer.Services
+
 {
     /// <summary>
     /// Abstract base class that all services inherit from.

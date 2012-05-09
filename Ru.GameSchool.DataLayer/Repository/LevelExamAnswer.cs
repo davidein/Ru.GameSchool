@@ -72,37 +72,37 @@ namespace Ru.GameSchool.DataLayer.Repository
         }
         private LevelExamQuestion _levelExamQuestion;
     
-        public virtual ICollection<LevelExamUserAnswer> LevelExamUserAnswers
+        public virtual ICollection<UserInfo> UserInfoes
         {
             get
             {
-                if (_levelExamUserAnswers == null)
+                if (_userInfoes == null)
                 {
-                    var newCollection = new FixupCollection<LevelExamUserAnswer>();
-                    newCollection.CollectionChanged += FixupLevelExamUserAnswers;
-                    _levelExamUserAnswers = newCollection;
+                    var newCollection = new FixupCollection<UserInfo>();
+                    newCollection.CollectionChanged += FixupUserInfoes;
+                    _userInfoes = newCollection;
                 }
-                return _levelExamUserAnswers;
+                return _userInfoes;
             }
             set
             {
-                if (!ReferenceEquals(_levelExamUserAnswers, value))
+                if (!ReferenceEquals(_userInfoes, value))
                 {
-                    var previousValue = _levelExamUserAnswers as FixupCollection<LevelExamUserAnswer>;
+                    var previousValue = _userInfoes as FixupCollection<UserInfo>;
                     if (previousValue != null)
                     {
-                        previousValue.CollectionChanged -= FixupLevelExamUserAnswers;
+                        previousValue.CollectionChanged -= FixupUserInfoes;
                     }
-                    _levelExamUserAnswers = value;
-                    var newValue = value as FixupCollection<LevelExamUserAnswer>;
+                    _userInfoes = value;
+                    var newValue = value as FixupCollection<UserInfo>;
                     if (newValue != null)
                     {
-                        newValue.CollectionChanged += FixupLevelExamUserAnswers;
+                        newValue.CollectionChanged += FixupUserInfoes;
                     }
                 }
             }
         }
-        private ICollection<LevelExamUserAnswer> _levelExamUserAnswers;
+        private ICollection<UserInfo> _userInfoes;
 
         #endregion
         #region Association Fixup
@@ -127,23 +127,26 @@ namespace Ru.GameSchool.DataLayer.Repository
             }
         }
     
-        private void FixupLevelExamUserAnswers(object sender, NotifyCollectionChangedEventArgs e)
+        private void FixupUserInfoes(object sender, NotifyCollectionChangedEventArgs e)
         {
             if (e.NewItems != null)
             {
-                foreach (LevelExamUserAnswer item in e.NewItems)
+                foreach (UserInfo item in e.NewItems)
                 {
-                    item.LevelExamAnswer = this;
+                    if (!item.LevelExamAnswers.Contains(this))
+                    {
+                        item.LevelExamAnswers.Add(this);
+                    }
                 }
             }
     
             if (e.OldItems != null)
             {
-                foreach (LevelExamUserAnswer item in e.OldItems)
+                foreach (UserInfo item in e.OldItems)
                 {
-                    if (ReferenceEquals(item.LevelExamAnswer, this))
+                    if (item.LevelExamAnswers.Contains(this))
                     {
-                        item.LevelExamAnswer = null;
+                        item.LevelExamAnswers.Remove(this);
                     }
                 }
             }
