@@ -1,73 +1,74 @@
-﻿@model Ru.GameSchool.DataLayer.Repository.LevelProject
-@{
-    ViewBag.Title = "Búa til verkefni";
-}
-<h2>
-    Búa til nýtt verkefni</h2>
+﻿@using Ru.GameSchool.DataLayer.Repository
+@model LevelProject
+    <h2>
+    Verkefni</h2>
 <script src="@Url.Content("~/Scripts/jquery.validate.min.js")"></script>
 <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")"></script>
-@using (Html.BeginForm())
+@using (Html.BeginForm("Create", "Project", FormMethod.Post))
 {
     @Html.ValidationSummary(true)
+
     <fieldset>
         <legend>Upplýsingar</legend>
         <div class="control-group">
-            <label class="control-label">
-                Nafn</label>
+            @Html.LabelFor(model => model.Name, new { @class = "control-label" })
             <div class="controls">
-                <div class="input-xlarge" id="name" name="name" rel="popover" data-content="Settu inn nafn."
-                    data-original-title="Nafn námskeiðs">
-                    @Html.EditorFor(m => m.Name)
-                </div>
+                @Html.EditorFor(model => model.Name, new { @class = "input-xlarge", rel = "popover" })
+                <span class="help-inline">@Html.ValidationMessageFor(model => model.Name)</span>
             </div>
         </div>
         <div class="control-group">
-            @Html.LabelFor(model => model.LevelId, new { @class = "control-label" })
+            @Html.LabelFor(model => model.LevelId, "Level")
             <div class="controls">
-                @Html.DropDownListFor(model => model.LevelId, new SelectList(ViewBag.LevelCount, "Value", "Text"))
-                @Html.ValidationMessageFor(model => model.LevelId)
+                @Html.DropDownList("LevelId", string.Empty)
+                <span class="help-inline">@Html.ValidationMessageFor(model => model.LevelId)</span>
+            </div>
+        </div>
+@*                <div class="control-group">
+            @Html.LabelFor(model => model.Level.CourseId, "Levels.Course")
+            <div class="controls">
+                @Html.DropDownList("CourseId", string.Empty)
+                <span class="help-inline">@Html.ValidationMessageFor(model => model.Level.CourseId)</span>
+            </div>
+        </div>*@
+        <div class="control-group">
+            @Html.LabelFor(model => model.GradePercentageValue)
+            <div class="controls">
+                @Html.DropDownListFor(m => m.GradePercentageValue, new SelectList(ViewBag.GradePercentageValue, "Value", "Text"))
+            </div>
+        </div>
+        <div class="control-group">
+            @Html.LabelFor(model => model.Start, new { @class = "control-label" })
+            <div class="controls">
+                @Html.TextBoxFor(model => model.Start, new { @data_datepicker = "datepicker", rel = "popover" })
+                <span class="help-inline">@Html.ValidationMessageFor(model => model.Start)</span>
+            </div>
+        </div>
+        <div class="control-group">
+            @Html.LabelFor(model => model.Stop, new { @class = "control-label" })
+            <div class="controls">
+                @Html.TextBoxFor(model => model.Stop, new { @data_datepicker = "datepicker", rel = "popover" })
+                <span class="help-inline">@Html.ValidationMessageFor(model => model.Stop)</span>
+            </div>
+        </div>
+        <div class="control-group">
+            @Html.LabelFor(model => model.Description, new { @class = "control-label" })
+            <div class="controls">
+                @Html.EditorFor(model => model.Description, new { @class = "input-xlarge", rel = "popover", cols = "30", rows = "10" })
+                <span class="help-inline">@Html.ValidationMessageFor(model => model.Description)</span>
             </div>
         </div>
         <div class="control-group">
             @Html.LabelFor(model => model.ContentID, new { @class = "control-label" })
             <div class="controls">
-                @Html.TextBoxFor(model => model.ContentID, new { type = "file", @class="input-xlarge" })
-                @Html.ValidationMessageFor(model => model.ContentID)
+                @Html.TextBoxFor(model => model.ContentID, new { type = "file", @class = "input-file", rel = "popover" })
+                <span class="help-inline">@Html.ValidationMessageFor(model => model.ContentID)</span>
             </div>
         </div>
         <div class="control-group">
-            <label class="control-label" for="select01">
-                Vægi</label>
-            <div class="controls">
-                @Html.DropDownListFor(m => m.GradePercentageValue, new SelectList(ViewBag.GradePercentageValue, "Value", "Text"))
-            </div>
-        </div>
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Start)
-        </div>
-        @Html.TextBoxFor(model => model.Start, new { data_datepicker = "datepicker" })
-        @Html.ValidationMessageFor(model => model.Start)
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Stop)
-        </div>
-        @Html.TextBoxFor(model => model.Stop, new { data_datepicker = "datepicker" })
-        @Html.ValidationMessageFor(model => model.Stop)
-        <div class="control-group">
-            <label class="control-label" for="textarea">
-                Lýsing</label>
-            <div class="controls">
-                <div class="input-xlarge" id="lysing" rows="3" rel="popover" data-content="Settu inn lýsingu á námskeiði."
-                    data-original-title="Lýsing">
-                    @Html.EditorFor(m => m.Description)
-                </div>
-            </div>
-        </div>
-        <div class="control-group">
-            <label class="control-label">
-            </label>
             <div class="controls">
                 <button type="submit" class="btn btn-success">
-                    Búa til verkefni</button>
+                    Bæta við verkefni</button>
             </div>
         </div>
     </fieldset>

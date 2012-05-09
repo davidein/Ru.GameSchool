@@ -1,13 +1,5 @@
 ﻿@model Ru.GameSchool.DataLayer.Repository.LevelMaterial
-@{
-    ViewBag.Title = "Uppfæra kennslugagn";
-}
 
-@section sidebar {
-    @Html.Partial("_TeacherSideBar")
-}
-
-<h2>@ViewBag.Title</h2>
 @if (!string.IsNullOrWhiteSpace(ViewBag.SuccessMessage))
 {
     <div class="alert alert-success">
@@ -25,50 +17,14 @@
     </div>
 }
 
-@* TODO: CHECK SYNTAX @using (Html.BeginForm("Edit", "Material", arg, FormMethod.Post, new { @class = "form-horizontal" }))*@
-@using (Html.BeginForm())
+
+@using (Html.BeginForm("Edit", "Material", new {id=Model.LevelMaterialId}, FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal" }))
 {
     @Html.ValidationSummary(true)
     <fieldset>
         <legend>Kennslugagn</legend>
         @Html.HiddenFor(m => m.LevelMaterialId)
-        <div class="control-group">
-            @Html.LabelFor(m => m.Title, new { @class = "control-label" })
-            <div class="controls">
-                @Html.EditorFor(m => m.Title, new { @class="input-xlarge", rel="popover" })
-                <span class="help-inline">@Html.ValidationMessageFor(m => m.Title)</span>
-            </div>
-        </div>
-
-        <div class="control-group">
-            @Html.LabelFor(m => m.LevelId, new { @class = "control-label" })
-            <div class="controls">
-                @Html.DropDownListFor(m => m.LevelId, new SelectList(ViewBag.LevelCount, "Value", "Text"))
-                <span class="help-inline">@Html.ValidationMessageFor(m => m.LevelId)</span>
-            </div>
-        </div>
-
-        <div class="control-group">
-            @Html.LabelFor(m => m.ContentTypeId, new { @class = "control-label" })
-            <div class="controls">
-                @Html.DropDownListFor(m => m.ContentTypeId, new SelectList(ViewBag.ContentTypes, "ContentTypeId", "Name"))
-                <span class="help-inline">@Html.ValidationMessageFor(m => m.ContentTypeId)</span>
-            </div>
-        </div>
-
-        <div class="control-group">
-            @Html.LabelFor(m => m.Url, new { @class = "control-label" })
-            <div class="controls">
-                @Html.TextBoxFor(m => m.Url, new { type = "file", @class = "input-file", rel = "popover" })
-            </div>
-        </div>
-
-        <div class="control-group">
-            @Html.LabelFor(m => m.Description, new { @class = "control-label", @for="textarea" })
-            <div class="controls">
-                @Html.EditorFor(m => m.Description, new { @class="input-xlarge", rel="popover", rows="3" })
-            </div>
-        </div>
+        @Html.Partial("_MaterialForm")
 
         <div class="control-group">
             <div class="controls">

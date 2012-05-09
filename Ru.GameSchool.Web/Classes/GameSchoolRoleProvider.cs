@@ -19,7 +19,9 @@ namespace Ru.GameSchool.Web.Classes
             if (user != null)
             {
                 if (user.UserTypeId == (int)UserTypeResolver.Get(roleName))
+                { 
                     return true;
+                }
             }
             return false;
         }

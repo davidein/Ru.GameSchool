@@ -1,41 +1,55 @@
 ﻿@{
-    ViewBag.Title = "CreateQuestion";
+    ViewBag.Title = "Spurningar";
 }
 @model Ru.GameSchool.DataLayer.Repository.LevelExamQuestion
-
-@section sidebar {
-    @Html.Partial("_LeftSideBar")
-}
 
 <h2>Spurningar í: @ViewBag.Exam.Name</h2>
 
 <ol>
 @foreach(var item in ViewBag.QuestionList)
 {
-    <li>@item.Question
+    <li>@item.Question - @Html.ActionLink("Eyða", "DeleteLevelExamQuestion", "Exam", new { id = item.LevelExamQuestionId }, null)
     <ol>
         @foreach (var answer in item.LevelExamAnswers)
         {
-            <li>@answer.Answer</li>
+            <li>@if(answer.Correct) {<i class="icon-ok"></i>} @answer.Answer - @Html.ActionLink("Eyða", "DeleteLevelExamAnswer", "Exam", new { id = answer.LevelExamAnswerId }, null)</li>
         }
+        <button class="btn addexamquestionanswer" data-toggle="modal" data-target="#examAnswerForm" data-question="@item.LevelExamQuestionId">Búa til svar</button>
     </ol><br />
     </li>
 }
 </ol>
 
-@using (Html.BeginForm("ExamQuestion", "Exam", FormMethod.Post))
-{
-    <fieldset>
-        <legend>Ný spurning</legend>
-        @Html.HiddenFor(model => model.LevelExamId)
-        <div class="control-group">
-            @Html.LabelFor(m => m.Question)
-            <label for="" class="control-label"></label>
-            <div class="controls">
-                @Html.TextBoxFor(model => model.Question, new { @class = "input-xlarge" })
-                <span class="help-inline">@Html.ValidationMessageFor(model => model.Question)</span>
-            </div>
-        </div>
-        <p><input value="Vista" type="submit" /></p>
-    </fieldset>    
-}
+<button class="btn btn-success" data-toggle="modal" data-target="#examQuestionForm">Búa til spurningu</button>
+
+@Html.Partial("_ExamAnswer", new Ru.GameSchool.DataLayer.Repository.LevelExamAnswer())
+
+<div id="examQuestionForm" class="modal" style="display: none">
+    <div class="modal-header">
+        <button class="close" data-dismiss="modal">×</button>
+        <h3>Búa til spurningu</h3>
+    </div>
+    <div class="modal-body">
+
+        @using (Html.BeginForm("ExamQuestions", "Exam", new { id = Model.LevelExamId }, FormMethod.Post, null))
+        {
+            <fieldset>
+                <legend>Ný spurning</legend>
+                @Html.HiddenFor(m => m.LevelExamId)
+                <div class="control-group">
+                    @Html.LabelFor(m => m.Question)
+                    <label for="" class="control-label"></label>
+                    <div class="controls">
+                        @Html.TextBoxFor(m => m.Question, new { @class = "input-xlarge" })
+                        <span class="help-inline">@Html.ValidationMessageFor(m => m.Question)</span>
+                    </div>
+                </div>
+                <p><input value="Vista" type="submit" /></p>
+            </fieldset>    
+        }
+
+    </div>
+    <div class="modal-footer">
+        <a href="#" class="btn" data-dismiss="modal">Loka</a>
+    </div>
+</div>

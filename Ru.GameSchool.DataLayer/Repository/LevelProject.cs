@@ -77,6 +77,12 @@ namespace Ru.GameSchool.DataLayer.Repository
             get;
             set;
         }
+    
+        public virtual string UserFeedback
+        {
+            get;
+            set;
+        }
 
         #endregion
         #region Navigation Properties

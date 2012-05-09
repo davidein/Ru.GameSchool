@@ -71,6 +71,38 @@ namespace Ru.GameSchool.DataLayer.Repository
             }
         }
         private LevelExamQuestion _levelExamQuestion;
+    
+        public virtual ICollection<UserInfo> UserInfoes
+        {
+            get
+            {
+                if (_userInfoes == null)
+                {
+                    var newCollection = new FixupCollection<UserInfo>();
+                    newCollection.CollectionChanged += FixupUserInfoes;
+                    _userInfoes = newCollection;
+                }
+                return _userInfoes;
+            }
+            set
+            {
+                if (!ReferenceEquals(_userInfoes, value))
+                {
+                    var previousValue = _userInfoes as FixupCollection<UserInfo>;
+                    if (previousValue != null)
+                    {
+                        previousValue.CollectionChanged -= FixupUserInfoes;
+                    }
+                    _userInfoes = value;
+                    var newValue = value as FixupCollection<UserInfo>;
+                    if (newValue != null)
+                    {
+                        newValue.CollectionChanged += FixupUserInfoes;
+                    }
+                }
+            }
+        }
+        private ICollection<UserInfo> _userInfoes;
 
         #endregion
         #region Association Fixup
@@ -91,6 +123,31 @@ namespace Ru.GameSchool.DataLayer.Repository
                 if (LevelExamQuestionId != LevelExamQuestion.LevelExamQuestionId)
                 {
                     LevelExamQuestionId = LevelExamQuestion.LevelExamQuestionId;
+                }
+            }
+        }
+    
+        private void FixupUserInfoes(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            if (e.NewItems != null)
+            {
+                foreach (UserInfo item in e.NewItems)
+                {
+                    if (!item.LevelExamAnswers.Contains(this))
+                    {
+                        item.LevelExamAnswers.Add(this);
+                    }
+                }
+            }
+    
+            if (e.OldItems != null)
+            {
+                foreach (UserInfo item in e.OldItems)
+                {
+                    if (item.LevelExamAnswers.Contains(this))
+                    {
+                        item.LevelExamAnswers.Remove(this);
+                    }
                 }
             }
         }

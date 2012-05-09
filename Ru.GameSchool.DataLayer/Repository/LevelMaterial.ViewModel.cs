@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,7 +11,9 @@ namespace Ru.GameSchool.DataLayer.Repository
     [MetadataType(typeof(LevelMaterialMetadata))]
     public partial class LevelMaterial
     {
-
+        [Required(ErrorMessage = "Það vantar skrá")]
+        [Display(Name = "Skrá")]
+        public IEnumerable<HttpPostedFileBase> File { get; set; }
     }
     public class LevelMaterialMetadata
     {
@@ -20,13 +23,17 @@ namespace Ru.GameSchool.DataLayer.Repository
         [DataType(DataType.Text)]
         public string Title { get; set; }
 
-        [Required(ErrorMessage = @"Þú verður að velja borð")]
+        //[Required(ErrorMessage = @"Þú verður að velja borð")]
         [Display(Name = "Borð")]
         public int LevelId { get; set; }
 
         [Required(ErrorMessage = @"Þú verður að tilgreina tegund")]
         [Display(Name = "Tegund kennsluefnis")]
         public int ContentTypeId { get; set; }
+
+        [Display(Name= "Kennslugagn")]
+        public Guid ContentId { get; set; }
+        //public string Url { get; set; }
 
         //[Required(ErrorMessage = "Það vantar skrá")]
         //[Display(Name = "Skrá")]

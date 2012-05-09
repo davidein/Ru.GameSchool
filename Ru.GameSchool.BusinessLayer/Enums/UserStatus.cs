@@ -5,6 +5,7 @@ using System.Text;
 
 namespace Ru.GameSchool.BusinessLayer.Enums
 {
+
     public enum UserStatus
     {
         Active = 1,

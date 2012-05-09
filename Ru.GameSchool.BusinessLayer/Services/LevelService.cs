@@ -1,6 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
 using System.Data.Entity;
+using System.Data.Objects;
 using System.Linq;
+using Ru.GameSchool.BusinessLayer.Exceptions;
 using Ru.GameSchool.DataLayer;
 using Ru.GameSchool.DataLayer.Repository;
 
@@ -61,7 +65,7 @@ namespace Ru.GameSchool.BusinessLayer.Services
         /// <returns>IEnumerable of level instances.</returns>
         public IEnumerable<Level> GetLevels(int CourseId)
         {
-            return GameSchoolEntities.Levels.Where(x=> x.CourseId == CourseId);
+            return GameSchoolEntities.Levels.Where(x => x.CourseId == CourseId);
         }
         /// <summary>
         /// Update a level object with new changes and persist it to the datasource.
@@ -109,7 +113,7 @@ namespace Ru.GameSchool.BusinessLayer.Services
         public IEnumerable<LevelExam> GetLevelExams(int courseId, int userInfoId)
         {
             var list = GameSchoolEntities.LevelExams.Where(x => x.Level.CourseId == courseId);
-            var exams = list.Where(x=>x.Level.Course.UserInfoes.Where(y=>y.UserInfoId == userInfoId).Count()>0);
+            var exams = list.Where(x => x.Level.Course.UserInfoes.Where(y => y.UserInfoId == userInfoId).Count() > 0);
 
 
 
@@ -207,25 +211,35 @@ namespace Ru.GameSchool.BusinessLayer.Services
         {
             if (levelProject != null)
             {
-                var query = GameSchoolEntities.LevelProjects
-                    .Where(l => l.LevelProjectId == levelProject.LevelProjectId);
+                var levelProjToUpdate = GetLevelProject(levelProject.LevelProjectId);
+                levelProjToUpdate.ContentID = levelProject.ContentID;
+                levelProjToUpdate.Description = levelProject.ContentID;
+                levelProjToUpdate.GradePercentageValue = levelProject.GradePercentageValue;
 
-                var levelProjectToUpdate = query.FirstOrDefault();
 
-                if (levelProjectToUpdate != null)
-                {
-                    levelProjectToUpdate.Description = levelProject.Description;
-                    levelProjectToUpdate.GradePercentageValue = levelProject.GradePercentageValue;
-                    levelProjectToUpdate.Name = levelProject.Name;
-                    levelProjectToUpdate.Start = levelProject.Start;
-                    levelProjectToUpdate.Stop = levelProject.Stop;
-                    levelProjectToUpdate.ContentID = levelProject.ContentID;
-                    levelProjectToUpdate.LevelId = levelProject.LevelId;
-                }
-
+                levelProjToUpdate.Name = levelProject.Name;
+                levelProjToUpdate.Start = levelProject.Start;
+                levelProjToUpdate.Stop = levelProject.Stop;
+                levelProjToUpdate.UserFeedback = levelProject.UserFeedback;
                 Save();
             }
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="levelProject"></param>
+        public void UpdateLevelProjectFromResult(LevelProject levelProject)
+        {
+            if (levelProject != null)
+            {
+                var levelProjToUpdate = GetLevelProject(levelProject.LevelProjectId);
+                levelProjToUpdate.ContentID = levelProject.ContentID;
+                levelProjToUpdate.UserFeedback = levelProject.UserFeedback;
+                levelProjToUpdate.LevelProjectResults.Add(levelProject.LevelProjectResults.ElementAtOrDefault(0));
+                Save();
+            }
+        }
+
 
         /// <summary>
         /// 
@@ -297,6 +311,176 @@ namespace Ru.GameSchool.BusinessLayer.Services
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="levelExamAnswer"></param>
+        public void CreateLevelExamAnswer(LevelExamAnswer levelExamAnswer)
+        {
+            if (levelExamAnswer != null)
+            {
+                GameSchoolEntities.LevelExamAnswers.AddObject(levelExamAnswer);
+                Save();
+            }
+        }
+
+        public void AnswerLevelExamQuestion(int answerId, int userInfoId)
+        {
+            var answer = GameSchoolEntities.LevelExamAnswers.Where(x => x.LevelExamAnswerId == answerId).SingleOrDefault();
+
+            if (answer == null)
+                throw new GameSchoolException(string.Format(
+                    "Answer does not exist. AnswerId = {0}", answerId));
+ 
+            var question =
+                GameSchoolEntities.LevelExamQuestions.Where(x => x.LevelExamQuestionId == answer.LevelExamQuestionId).Single();
+
+            var questionAnswered = question.LevelExamAnswers.Where(p => p.UserInfoes.Where(u => u.UserInfoId == userInfoId).Count() > 0);
+
+            var user = GameSchoolEntities.UserInfoes.Where(u => u.UserInfoId == userInfoId).Single();
+
+            if (questionAnswered.Count() > 0)
+            {
+                foreach (var levelExamAnswer in questionAnswered)
+                {
+                    levelExamAnswer.UserInfoes.Remove(user);
+                }
+            }
+
+            answer.UserInfoes.Add(user);
+
+            Save();
+        }
+
+        public int GetUserQuestionAnswer(int levelExamQuestionId, int userInfoId)
+        {
+            var question = GameSchoolEntities.LevelExamQuestions.Where(x => x.LevelExamQuestionId == levelExamQuestionId).Single();
+
+            if (question == null)
+                throw new GameSchoolException(string.Format(
+                    "Question does not exist. QuestionId = {0}", levelExamQuestionId));
+
+            var questionAnswered = question.LevelExamAnswers.Where(p => p.UserInfoes.Where(u => u.UserInfoId == userInfoId).Count() > 0);
+
+            if (questionAnswered.Count() > 0)
+            {
+                foreach (var levelExamAnswer in questionAnswered)
+                {
+                    return levelExamAnswer.LevelExamAnswerId;
+                }
+            }
+
+            return -1;
+        }
+
+        public LevelExamQuestion GetFirstQuestionByExamId(int levelExamId)
+        {
+            var question = GameSchoolEntities.LevelExamQuestions.Where(x => x.LevelExamId == levelExamId).OrderBy(x=>x.LevelExamQuestionId);
+            if (question.Count() > 0)
+                return question.First();
+
+            return null;
+        }
+
+        public double ReturnExam(int levelExamId, int userInfoId)
+        {
+            if (HasAccessToExam(levelExamId, userInfoId))
+            {
+                LevelExamResult levelExamResult = new LevelExamResult();
+                levelExamResult.UserInfoId = userInfoId;
+                levelExamResult.LevelExamId = levelExamId;
+
+                var exam = GameSchoolEntities.LevelExams.Where(x => x.LevelExamId == levelExamId).Single();
+
+                var correctAnswer = exam.LevelExamQuestions.Where(
+                    x =>
+                    x.LevelExamAnswers.Where(y => y.UserInfoes.Where(z => z.UserInfoId == userInfoId).Count() > 0).Where
+                        (t => t.Correct).Count() > 0);
+
+                levelExamResult.Grade = (exam.LevelExamQuestions.Count()*correctAnswer.Count())/(10*1.0);
+
+                GameSchoolEntities.LevelExamResults.AddObject(levelExamResult);
+                Save();
+
+                ExternalNotificationContainer.CreateNotification(string.Format("Þú hefur fengið {0} fyrir prófið \"{1}\"", levelExamResult.Grade, exam.Name), string.Format("/Exam/Index/{0}",exam.Level.CourseId), userInfoId);
+                ExternalPointContainer.AddPointsToLevel(userInfoId, exam.LevelId, 1, "Þú hefur fengið {0} stig fyrir prófið \"{1}\".");
+                    
+                return levelExamResult.Grade;
+            }
+            return 0;
+        }
+
+        public bool HasAccessToExam(int levelExamId, int userInfoId)
+        {
+            var levelExam = GameSchoolEntities.LevelExams.Where(x => x.LevelExamId == levelExamId).Single();
+
+            var user = GameSchoolEntities.UserInfoes.Where(u => u.UserInfoId == userInfoId).Single();
+
+            if (levelExam.Level.Course.UserInfoes.Where(u => u.UserInfoId == userInfoId).Count() > 0)
+            {
+                if (levelExam.LevelExamResults.Where(x=>x.UserInfoId == userInfoId).Count() == 0)
+                    return true;
+            }
+
+            return false;
+        }
+
+        public LevelExamQuestion GetNextLevelExamQuestion(int levelExamQuestionId)
+        {
+            var question = GameSchoolEntities.LevelExamQuestions.Where(x => x.LevelExamQuestionId == levelExamQuestionId).Single();
+
+            if (question == null)
+                throw new GameSchoolException(string.Format(
+                    "Question does not exist. QuestionId = {0}", levelExamQuestionId));
+
+            bool next = false;
+            foreach (var item in question.LevelExam.LevelExamQuestions.OrderBy(x=>x.LevelExamQuestionId))
+            {
+                if (next)
+                    return item;
+
+                if (item.LevelExamQuestionId == levelExamQuestionId)
+                    next = true;
+            }
+
+            return null;
+        }
+
+        public LevelExamAnswer GetLevelExamAnswer(int levelExamAnswerId)
+        {
+            if (levelExamAnswerId > 0)
+            {
+                var item = (from x in GameSchoolEntities.LevelExamAnswers
+                            where x.LevelExamAnswerId == levelExamAnswerId
+                            select x).SingleOrDefault();
+
+                return item;
+            }
+            return null;
+        }
+
+        public void DeleteLevelExamQuestion(int levelExamQuestionId)
+        {
+            if (levelExamQuestionId > 0)
+            {
+                var item = GetLevelExamQuestion(levelExamQuestionId);
+
+                GameSchoolEntities.LevelExamQuestions.DeleteObject(item);
+                Save();
+            }
+        }
+
+        public void DeleteLevelExamAnswer(int levelExamAnswerId)
+        {
+            if (levelExamAnswerId>0)
+            {
+                var item = GetLevelExamAnswer(levelExamAnswerId);
+
+                GameSchoolEntities.LevelExamAnswers.DeleteObject(item);
+                Save();
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="levelExamQuestion"></param>
         public void UpdateLevelExamQuestion(LevelExamQuestion levelExamQuestion)
         {
@@ -312,7 +496,7 @@ namespace Ru.GameSchool.BusinessLayer.Services
         /// <returns>IEnumerable collection of levelexamquestions.</returns>
         public IEnumerable<LevelExamQuestion> GetLevelExamQuestions(int levelExamId)
         {
-            return GameSchoolEntities.LevelExamQuestions.Where(x=>x.LevelExamId == levelExamId);
+            return GameSchoolEntities.LevelExamQuestions.Where(x => x.LevelExamId == levelExamId);
         }
 
         public LevelExamQuestion GetLevelExamQuestion(int levelExamQuestionsId)
@@ -361,15 +545,6 @@ namespace Ru.GameSchool.BusinessLayer.Services
         }
 
 
-        public IEnumerable<LevelMaterial> GetCourseMaterials(int CourseId)
-        {
-            //return GameSchoolEntities.LevelMaterials.Where(l=> l.LevelId in );
-            var returnList = (from x in GameSchoolEntities.LevelMaterials
-                              join y in GameSchoolEntities.Levels on x.LevelId equals y.LevelId
-                              where y.CourseId == CourseId
-                              select x);
-            return returnList;
-        }
 
 
         public IEnumerable<LevelMaterial> GetLevelMaterials()
@@ -435,8 +610,8 @@ namespace Ru.GameSchool.BusinessLayer.Services
 
             }
         }
-
-        public IEnumerable<Ru.GameSchool.DataLayer.Repository.ContentType> GetContentTypes()
+   
+        public IEnumerable<ContentType> GetContentTypes()
         {
             var contentTypes = from x in GameSchoolEntities.ContentTypes
                                select x;
@@ -492,13 +667,12 @@ namespace Ru.GameSchool.BusinessLayer.Services
             {
                 return null;
             }
+            // þarf að lagfæra, síar ekki út með id
+            var levelProjectQuery =
+                GameSchoolEntities.LevelProjects.Select(x => x).Include("Level").Include("LevelProjectResults").Include(
+                    "Level.Course");
 
-            var query =
-                GameSchoolEntities.LevelProjects.SelectMany(
-                    c =>
-                    c.Level.Course.UserInfoes.Where(x => x.UserInfoId == userInfoId).SelectMany(
-                        d => d.Courses.SelectMany(f => f.Levels.SelectMany(k => k.LevelProjects))));
-            return query;
+            return levelProjectQuery;
         }
 
         public bool DeleteLevelProject(int levelProjectId)
@@ -528,6 +702,84 @@ namespace Ru.GameSchool.BusinessLayer.Services
                 GameSchoolEntities.LevelProjectResults.AddObject(levelProjectResult);
                 Save();
             }
+        }
+        public IEnumerable<LevelProjectResult> GetlevelProjectResultsByLevelProjectId(int levelProjectId)
+        {
+            return levelProjectId > 0
+                       ? GameSchoolEntities.LevelProjectResults.Where(i => i.LevelProjectId == levelProjectId)
+                       : null;
+        }
+
+        public LevelProjectResult GetlevelProjectResultByLevelProjectId(int levelProjectId)
+        {
+            if (0 > levelProjectId)
+            {
+                return null;
+            }
+
+            var query = GameSchoolEntities.LevelProjectResults.Where(l => l.LevelProjectId == levelProjectId);
+
+            var levelProjectResult = query.FirstOrDefault();
+
+            if (levelProjectResult == null)
+            {
+                return null;
+            }
+
+            return levelProjectResult;
+        }
+
+        public void CreateLevelProjectResultFromLevelProject(LevelProject levelProject)
+        {
+            
+        }
+
+        public void UpdateLevelProjectResult(LevelProjectResult levelProjectResult)
+        {
+            if (levelProjectResult != null)
+            {
+                var levelProjectResultToUpdate = GetlevelProjectResultByLevelProjectId(levelProjectResult.LevelProjectId);
+                levelProjectResultToUpdate.Grade = levelProjectResult.Grade;
+                levelProjectResultToUpdate.TeacherFeedback = levelProjectResult.TeacherFeedback;
+                levelProjectResultToUpdate.GradeDate = DateTime.Now;
+                Save();
+            }
+        }
+
+        public LevelProjectResult GetlevelProjectResultsByLevelProjectResultId(int id)
+        {
+            if (0 > id)
+            {
+                return null;
+            }
+
+            var query = GameSchoolEntities.LevelProjectResults.Where(i => i.LevelProjectResultId == id);
+
+            var levelProjectResult = query.FirstOrDefault();
+
+            if (levelProjectResult == null)
+            {
+                return null;
+            }
+
+            return levelProjectResult;
+        }
+
+        public void AddLevelProjectToCourseAndLevel(LevelProject levelproject, int courseId)
+        {
+            if (levelproject != null && courseId > 0)
+            {
+                var level =
+                    GameSchoolEntities.Levels.Where(l => l.LevelId == levelproject.LevelId && l.CourseId == courseId).
+                        FirstOrDefault();
+                level.LevelProjects.Add(levelproject);
+                Save();
+            }
+        }
+
+        public IEnumerable<Level> GetLevelsByCourseId(int courseId)
+        {
+            return courseId > 0 ? GameSchoolEntities.Levels.Where(c => c.CourseId == courseId) : null;
         }
     }
 }
