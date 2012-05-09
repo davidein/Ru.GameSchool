@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Data.Entity;
+using System.Linq;
 using Ru.GameSchool.BusinessLayer.Exceptions;
 using Ru.GameSchool.DataLayer;
 using System.Collections.Generic;
@@ -50,8 +51,8 @@ namespace Ru.GameSchool.BusinessLayer.Services
         /// <returns>A list of all courses.</returns>
         public IEnumerable<Course> GetCourses()
         {
-            var courses = from x in GameSchoolEntities.Courses
-                          select x;
+            var courses = (from x in GameSchoolEntities.Courses
+                           select x).Include("Levels");
 
             return courses;
         }

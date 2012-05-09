@@ -441,6 +441,38 @@ namespace Ru.GameSchool.DataLayer.Repository
             }
         }
         private ICollection<UserLog> _userLogs;
+    
+        public virtual ICollection<LevelExamUserAnswer> LevelExamUserAnswers
+        {
+            get
+            {
+                if (_levelExamUserAnswers == null)
+                {
+                    var newCollection = new FixupCollection<LevelExamUserAnswer>();
+                    newCollection.CollectionChanged += FixupLevelExamUserAnswers;
+                    _levelExamUserAnswers = newCollection;
+                }
+                return _levelExamUserAnswers;
+            }
+            set
+            {
+                if (!ReferenceEquals(_levelExamUserAnswers, value))
+                {
+                    var previousValue = _levelExamUserAnswers as FixupCollection<LevelExamUserAnswer>;
+                    if (previousValue != null)
+                    {
+                        previousValue.CollectionChanged -= FixupLevelExamUserAnswers;
+                    }
+                    _levelExamUserAnswers = value;
+                    var newValue = value as FixupCollection<LevelExamUserAnswer>;
+                    if (newValue != null)
+                    {
+                        newValue.CollectionChanged += FixupLevelExamUserAnswers;
+                    }
+                }
+            }
+        }
+        private ICollection<LevelExamUserAnswer> _levelExamUserAnswers;
 
         #endregion
         #region Association Fixup
@@ -697,6 +729,28 @@ namespace Ru.GameSchool.DataLayer.Repository
             if (e.OldItems != null)
             {
                 foreach (UserLog item in e.OldItems)
+                {
+                    if (ReferenceEquals(item.UserInfo, this))
+                    {
+                        item.UserInfo = null;
+                    }
+                }
+            }
+        }
+    
+        private void FixupLevelExamUserAnswers(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            if (e.NewItems != null)
+            {
+                foreach (LevelExamUserAnswer item in e.NewItems)
+                {
+                    item.UserInfo = this;
+                }
+            }
+    
+            if (e.OldItems != null)
+            {
+                foreach (LevelExamUserAnswer item in e.OldItems)
                 {
                     if (ReferenceEquals(item.UserInfo, this))
                     {

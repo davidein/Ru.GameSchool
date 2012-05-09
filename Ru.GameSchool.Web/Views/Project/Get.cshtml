@@ -1,156 +1,104 @@
-﻿@model Ru.GameSchool.DataLayer.Repository.LevelProject
+﻿@using Ru.GameSchool.DataLayer.Repository
+@model LevelProject
 @{
-    ViewBag.Title = "Verkefni";
+    ViewBag.Title = "Skoða verkefni";
 }
-<h2>@ViewBag.LevelProject.Name<br />
-</h2>
-@section sidebar {
-    @Html.Partial("_LeftSideBar")
-}
-@section courseheading {
-    @Html.Partial("_courseheading")
-}
-<article>
-    <h3><span class="gray">@ViewBag.LevelProject.Start | Vægi verkefnis - @ViewBag.LevelProject.GradePercentageValue%</span></h3>
+@using (Html.BeginForm("ReturnProject", "Project", FormMethod.Post))
+{ 
     
+    @Html.HiddenFor(m => m.LevelProjectId)
     
-    @ViewBag.LevelProject.Description
-    
+    <article>
+    <h3><span class="gray">Skilafrestur @Html.DisplayFor(model => model.Stop) | @Html.DisplayNameFor(model => model.GradePercentageValue) - @Html.DisplayFor(model => model.GradePercentageValue)%</span></h3>
+   
+              <div class="control-group">
+      <h3>  @Html.DisplayNameFor(model => model.Name)</h3>
+    <div class="container-fluid">
+        <div class="controls">
+            @Html.DisplayFor(model => model.Name)
+        </div>
+    </div>
+    </div>
+   
+    <div class="control-group">
+        <h3>  @Html.DisplayNameFor(model => model.LevelId)</h3>
+        <div class="container-fluid">
+            <div class="controls">
+                @Html.DisplayFor(model => model.LevelId)
+            </div>
+        </div>
+    </div>
 
-    <br/>
-    <div><p><strong>Skilafrestur: @ViewBag.LevelProject.Stop</strong></p></div>
-        @if (User.IsInRole("Student"))
-        {
+
+    <div class="control-group">
+        <h3>  @Html.DisplayNameFor(model => model.Description)</h3>
+        <div class="container-fluid">
+            <div class="controls">
+                @Html.DisplayFor(model => model.Description)
+            </div>
+        </div>
+    </div>
+
+    <div class="control-group">
+        <h3>  @Html.DisplayNameFor(model => model.ContentID)</h3>
+        <div class="container-fluid">
+            <div class="controls">
+                @Html.TextBoxFor(m => m.ContentID, new { type = "file", @class = "input-file", rel = "popover" })
+            </div>
+        </div>
+    </div>
     
+        <div class="control-group">
+        <h3>  @Html.DisplayNameFor(model => model.UserFeedback)</h3>
+        <div class="container-fluid">
+            <div class="controls">
+                @Html.TextBoxFor(model => model.UserFeedback, new { @class = "input-xlarge", rel = "popover", cols = "30", rows = "10" })
+            </div>
+        </div>
+    </div>
+
     <div class="control-group"><p>Leyfilegar skrár:
              @foreach (var item in ViewBag.AllowedFileExtensions)
              {
-                 @item  
+               <i>  @item  </i>
              }
          </p></div>
-        }
+    
 </article>
-@using (Html.BeginForm())
-{
-    if (User.IsInRole("Student"))
-    {
-    <h4>
-        Skila verkefni:</h4>
-    <div class="control-group">
-        <label class="control-label" for="textarea">
-            Viðhengi</label>
-        <div class="controls">
-            <input type="file" class="input-xlarge" id="UserContent" name="UserContent" rel="popover">
-        </div>
-    </div>
-    <div class="control-group">
-        <label class="control-label" for="textarea">
-            Skilaboð til kennara</label>
-        <div class="controls">
-            <textarea cols="20" rows="3" name="UserFeedback" id="UserFeedback"></textarea>
-        </div>
-    </div>
-        if (ViewBag.LevelProjectResult.Count != 0 && ViewBag.LevelProject.Stop > DateTime.Now)
-        {
-    <h4>
-        Búið að skila verkefni!</h4> 
-        }
-        else
-        {
-    <button type="submit" class="btn" value="return">
-        Skila verkefni</button>       
-        }
-    }
-}
+             if (User.IsInRole("Student"))
+             {
+                 if (Model.LevelProjectResults.Count == 0)
+                 {
 
-@if (User.IsInRole("Teacher"))
-{
-    foreach (var user in Model.LevelProjectResults.Select(x => x.UserInfo))
-    {
-    <table class="table table-striped table-bordered table-condensed">
-        <caption>
-            Nemendur sem eru búnir að skila þessu verkefni.</caption>
-        <tbody>
-            <tr>
-                <th>
-                    Nafn nemanda
-                </th>
-                <th>
-                    Deild
-                </th>
-                <th>
-                    Verkefni
-                </th>
-                <th>
-                    Búinn að skila verkefni
-                </th>
-                <th>
-                    Einkunn
-                </th>
-            </tr>
-            <tr>
-                <td>@user.Username
-                </td>
-                <td>
-                    @user.Department.Name
-                </td>
-                <td>
-                    @Html.TextBoxFor(m => @Model.ContentID, new { type = "file" })
-                </td>
-                <td>
-                    @{
-        string s = user.LevelProjectResults.Count != 0 ? "Já" : "Nei";
-                    }
-                    @s
-                </td>
-                <td>
-                    @if (user.LevelProjectResults.Count != 0)
-                    {
-                        if (user.LevelProjectResults.Select(x => x.Grade).FirstOrDefault() == 0)
-                        {
-                        <a id="giveGrade">Enginn einkunn</a>
-                        <input type="text" id="grade" class="input-mini" style="visibility: hidden;" />
-                        <span id="warning" style="visibility: hidden;">Ekki löglegt gildi</span>
-                        }
-                        else
-                        {
-                        @user.LevelProjectResults.Select(x => x.Grade).FirstOrDefault()
-                        }
-                    }
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    }
+    <div class="control-group">
+        <label class="control-label">
+        </label>
+        <div class="controls">
+            <button type="submit" id="submitbtn" class="btn btn-success">
+                Skila verkefni</button>
+        </div>
+    </div>   
+                 }
+             }
+             else
+             {
+                 if (User.IsInRole("Student"))
+                 {
+    <strong>Búið að skila verkefni!</strong>  
+                 }
+                 else
+                 {
+    <div class="control-group">
+        <div class="controls">
+            @Html.ActionLink("Skoða nemendur sem eru búnir að skila þessu verkefni", "TeacherGet", new { id = Model.LevelProjectId })
+        </div>
+    </div>
+
+                 }
+             }
 }
 <div class="control-group">
-    <label class="control-label">
-    </label>
     <div class="controls">
-        <button type="submit" id="submitbtn" class="btn btn-success">
-            Vista einkunnir</button>
+        @Html.ActionLink("Aftur á forsíðu verkefna", "Index")
     </div>
 </div>
-<div>
-    @Html.ActionLink("Aftur á forsíðu verkefna", "Index")
-</div>
-<script type="text/javascript">
-    $(document).ready(function () {
-        $("#giveGrade").click(function () {
-            $(this).hide();
-            $("#grade").css('visibility', 'visible');
-        });
-        $("#submitbtn").click(function () {
-            if ($("#grade").val() > 10 || $("#grade").val() < 0) {
-                $("#warning").css('visibility', 'visible');
-                return false;
-            }
-            if (!parseInt($("#grade").val())) {
-                $("#warning").css('visibility', 'visible');
-                return false;
-            }
-            $("#warning").css('visibility', 'hidden');
-        }
-        );
-    });
-</script>

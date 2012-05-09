@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Objects;
@@ -209,11 +210,34 @@ namespace Ru.GameSchool.BusinessLayer.Services
         {
             if (levelProject != null)
             {
-                //TODO: Implement
+                var levelProjToUpdate = GetLevelProject(levelProject.LevelProjectId);
+                levelProjToUpdate.ContentID = levelProject.ContentID;
+                levelProjToUpdate.Description = levelProject.ContentID;
+                levelProjToUpdate.GradePercentageValue = levelProject.GradePercentageValue;
+
+
+                levelProjToUpdate.Name = levelProject.Name;
+                levelProjToUpdate.Start = levelProject.Start;
+                levelProjToUpdate.Stop = levelProject.Stop;
+                levelProjToUpdate.UserFeedback = levelProject.UserFeedback;
                 Save();
             }
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="levelProject"></param>
+        public void UpdateLevelProjectFromResult(LevelProject levelProject)
+        {
+            if (levelProject != null)
+            {
+                var levelProjToUpdate = GetLevelProject(levelProject.LevelProjectId);
+                levelProjToUpdate.ContentID = levelProject.ContentID;
+                levelProjToUpdate.UserFeedback = levelProject.UserFeedback;
+                levelProjToUpdate.LevelProjectResults.Add(levelProject.LevelProjectResults.ElementAtOrDefault(0));
+                Save();
+            }
+        }
 
 
         /// <summary>
@@ -517,6 +541,12 @@ namespace Ru.GameSchool.BusinessLayer.Services
                 Save();
             }
         }
+        public IEnumerable<LevelProjectResult> GetlevelProjectResultsByLevelProjectId(int levelProjectId)
+        {
+            return levelProjectId > 0
+                       ? GameSchoolEntities.LevelProjectResults.Where(i => i.LevelProjectId == levelProjectId)
+                       : null;
+        }
 
         public LevelProjectResult GetlevelProjectResultByLevelProjectId(int levelProjectId)
         {
@@ -526,6 +556,42 @@ namespace Ru.GameSchool.BusinessLayer.Services
             }
 
             var query = GameSchoolEntities.LevelProjectResults.Where(l => l.LevelProjectId == levelProjectId);
+
+            var levelProjectResult = query.FirstOrDefault();
+
+            if (levelProjectResult == null)
+            {
+                return null;
+            }
+
+            return levelProjectResult;
+        }
+
+        public void CreateLevelProjectResultFromLevelProject(LevelProject levelProject)
+        {
+            
+        }
+
+        public void UpdateLevelProjectResult(LevelProjectResult levelProjectResult)
+        {
+            if (levelProjectResult != null)
+            {
+                var levelProjectResultToUpdate = GetlevelProjectResultByLevelProjectId(levelProjectResult.LevelProjectId);
+                levelProjectResultToUpdate.Grade = levelProjectResult.Grade;
+                levelProjectResultToUpdate.TeacherFeedback = levelProjectResult.TeacherFeedback;
+                levelProjectResultToUpdate.GradeDate = DateTime.Now;
+                Save();
+            }
+        }
+
+        public LevelProjectResult GetlevelProjectResultsByLevelProjectResultId(int id)
+        {
+            if (0 > id)
+            {
+                return null;
+            }
+
+            var query = GameSchoolEntities.LevelProjectResults.Where(i => i.LevelProjectResultId == id);
 
             var levelProjectResult = query.FirstOrDefault();
 
