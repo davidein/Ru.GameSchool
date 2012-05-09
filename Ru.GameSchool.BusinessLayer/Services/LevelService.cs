@@ -641,5 +641,22 @@ namespace Ru.GameSchool.BusinessLayer.Services
 
             return levelProjectResult;
         }
+
+        public void AddLevelProjectToCourseAndLevel(LevelProject levelproject, int courseId)
+        {
+            if (levelproject != null && courseId > 0)
+            {
+                var level =
+                    GameSchoolEntities.Levels.Where(l => l.LevelId == levelproject.LevelId && l.CourseId == courseId).
+                        FirstOrDefault();
+                level.LevelProjects.Add(levelproject);
+                Save();
+            }
+        }
+
+        public IEnumerable<Level> GetLevelsByCourseId(int courseId)
+        {
+            return courseId > 0 ? GameSchoolEntities.Levels.Where(c => c.CourseId == courseId) : null;
+        }
     }
 }

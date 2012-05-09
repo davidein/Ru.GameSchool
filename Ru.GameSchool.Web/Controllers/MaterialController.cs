@@ -61,7 +61,7 @@ namespace Ru.GameSchool.Web.Controllers
             {
                 
                 var material = LevelService.GetLevelMaterial(id.Value);
-                ViewBag.File = Settings.ProjectMaterialVirtualFolder + material.ContentId.ToString()+".mp4"; //TODO: Add function to check for file extensions
+             //   ViewBag.File = Settings.ProjectMaterialVirtualFolder + material.ContentId.ToString()+".mp4"; //TODO: Add function to check for file extensions
                 ViewBag.CourseName = material.Level.Course.Name;
                 ViewBag.Courseid = material.Level.Course.CourseId;
                 ViewBag.Title = "Listi yfir " + material.ContentType.Name;

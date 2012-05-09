@@ -1,8 +1,20 @@
+<<<<<<< HEAD
 ﻿@using Ru.GameSchool.DataLayer.Repository
 @model LevelProject
-
+@{
+    ViewBag.Title = "Skoða verkefni";
+}
 @using (Html.BeginForm("ReturnProject", "Project", FormMethod.Post))
 { 
+=======
+﻿@model Ru.GameSchool.DataLayer.Repository.LevelProject
+
+<h2>@ViewBag.LevelProject.Name<br />
+</h2>
+
+<article>
+    <h3><span class="gray">@ViewBag.LevelProject.Start | Vægi verkefnis - @ViewBag.LevelProject.GradePercentageValue%</span></h3>
+>>>>>>> 89a73b72a3e9e68cc98cc620962401ec8d67cdf1
     
     @Html.HiddenFor(m => m.LevelProjectId)
     

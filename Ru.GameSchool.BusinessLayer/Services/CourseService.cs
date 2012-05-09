@@ -289,5 +289,7 @@ namespace Ru.GameSchool.BusinessLayer.Services
              return GameSchoolEntities.ContentTypes.Where(x => x.ContentTypeId == contentTypeId).FirstOrDefault().Name;
         }
 
+
+
     }
 }

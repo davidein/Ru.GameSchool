@@ -1,6 +1,15 @@
+<<<<<<< HEAD
 ﻿@using Ru.GameSchool.DataLayer.Repository
 @model IEnumerable<Course>
+@{
+    ViewBag.Title = "Verkefnin mín";
+}
 @foreach (var course in Model)
+=======
+﻿@model IEnumerable<Ru.GameSchool.DataLayer.Repository.LevelProject>
+
+@foreach (var items in ViewBag.Courses)
+>>>>>>> 89a73b72a3e9e68cc98cc620962401ec8d67cdf1
 {
     <table class="table table-striped table-bordered table-condensed">
         <caption>
@@ -29,7 +38,7 @@
                         Einkunn
                     </th>
                     <th>
-                        Athugasemd kennara
+                        Teacher feedback
                     </th>
                 }
             </tr>
@@ -58,14 +67,14 @@
                     {
                         <td>
                             @{
-                        if (innerInnerItem.LevelProjectResults.Count == 0)
-                        {
-                                <i>Ekki búið að skila</i>
-                        }
-                        else
-                        {
-                                <i>@innerInnerItem.LevelProjectResults.Select(x => x.Grade).FirstOrDefault()</i>
-                        }
+                                if (innerInnerItem.LevelProjectResults.Count == 0)
+                                {
+                                    <i>Ekki búið að skila</i>
+                                }
+                                else
+                                {
+                                    <i>@innerInnerItem.LevelProjectResults.Select(x => x.Grade).FirstOrDefault()</i>
+                                }
                             }
                         </td>
                         <td>
@@ -77,14 +86,11 @@
             }
         </tbody>
     </table>
-            using (Html.BeginForm("Create", "Project", new {id=course.CourseId},FormMethod.Post))
-            {
-                if (User.IsInRole("Teacher"))
-                {
+}
+@if (User.IsInRole("Teacher"))
+{
     <p>
-        <button name="button" class="btn btn-success" value="Create" >
+        <button name="button" class="btn btn-success" value="Create" onclick="location.href='@Url.Action("Create", "Project")'">
             Búa til nýtt verkefni</button>
     </p>
-                }
-            }
 }

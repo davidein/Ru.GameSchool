@@ -1,7 +1,15 @@
+<<<<<<< HEAD
 ﻿@using Ru.GameSchool.DataLayer.Repository
 @model LevelProject
-    <h2>
+@{
+    ViewBag.Title = "Búa til nýtt verkefni";
+}
+<h2>
     Verkefni</h2>
+=======
+﻿@model Ru.GameSchool.DataLayer.Repository.LevelProject
+
+>>>>>>> 89a73b72a3e9e68cc98cc620962401ec8d67cdf1
 <script src="@Url.Content("~/Scripts/jquery.validate.min.js")"></script>
 <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")"></script>
 @using (Html.BeginForm("Create", "Project", FormMethod.Post))
