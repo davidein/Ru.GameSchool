@@ -2,14 +2,6 @@
     ViewBag.Title = "UserCourse";
 }
 
-<h2>Skrá notenda í Námskeið</h2>
-
-@section sidebar {
-
-    @Html.Partial("_AdminSideBar")
-
-}
-
 <style>
 .dragHover
 {
@@ -36,7 +28,8 @@
                 activeClass: "dragHover",
                 hoverClass: "dragDrop",
                 drop: function (event, ui) {
-                    //Make shit happen
+                    
+
                     callAjax(ui.draggable, $(this));
 
 
@@ -58,7 +51,17 @@
                 data: "{}",
                 dataType: "json",
                 success: function (data) {
-                    alert("user:" + userId + " - course:" + courseId + "data: " + data);
+
+                    if (data.status == "2" || data.status == "3") {
+                        $("#ErrorMessage").html(data.message);
+                        $("#SuccessMessage").hide();
+                        $("#ErrorMessage").fadeIn();
+                    }
+                    else {
+                        $("#SuccessMessage").html(data.message);
+                        $("#ErrorMessage").hide();
+                        $("#SuccessMessage").fadeIn();
+                    }
                 }
             });
         }
@@ -66,6 +69,8 @@
     });
 </script>
 
+<div class="alert alert-success" id="SuccessMessage" style="display: none;"></div>
+<div class="alert alert-error" id="ErrorMessage" style="display: none;"></div>
 <div id="drag-container">
     <h3>Notendur</h3>
 

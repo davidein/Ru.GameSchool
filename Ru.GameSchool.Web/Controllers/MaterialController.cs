@@ -62,14 +62,22 @@ namespace Ru.GameSchool.Web.Controllers
             {
                 
                 var material = LevelService.GetLevelMaterial(id.Value);
-                ViewBag.File = Settings.ProjectMaterialVirtualFolder + material.ContentId.ToString()+".mp4"; //TODO: Add function to check for file extensions
-                ViewBag.CourseName = material.Level.Course.Name;
-                ViewBag.Courseid = material.Level.Course.CourseId;
-                ViewBag.Title = material.ContentType.Name;
-                ViewBag.Name = material.Title;
-                ViewBag.Description = material.Description;
-
-                return View(material);
+                var filepath = Settings.ProjectMaterialVirtualFolder + material.ContentId.ToString() + ".mp4";
+                ViewBag.File = filepath; //TODO: Add function to check for file extensions
+                if(material.ContentType.ContentTypeId == 1)
+                {
+                    ViewBag.CourseName = material.Level.Course.Name;
+                    ViewBag.Courseid = material.Level.Course.CourseId;
+                    ViewBag.Title = material.ContentType.Name;
+                    ViewBag.Name = material.Title;
+                    ViewBag.Description = material.Description;
+                    return View(material);
+                }
+                else
+                {
+                    return new DownloadResult { VirtualPath = filepath, FileDownloadName = material.Title + ".ppt" };
+                }
+                
             }
             return View();
         }

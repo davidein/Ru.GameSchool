@@ -1,4 +1,4 @@
-﻿using System.Web.Mvc;
+using System.Web.Mvc;
 using Ru.GameSchool.Web.Classes.Helper;
 using Ru.GameSchool.Web.Models;
 

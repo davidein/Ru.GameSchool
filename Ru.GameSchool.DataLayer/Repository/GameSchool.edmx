@@ -278,6 +278,8 @@
           <Property Name="Url" Type="nvarchar" MaxLength="512" />
           <Property Name="Description" Type="nvarchar(max)" />
           <Property Name="Title" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="Filename" Type="nvarchar" MaxLength="255" />
+          <Property Name="CreateDateTime" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="LevelProject">
           <Key>
@@ -1043,6 +1045,8 @@
           <NavigationProperty Name="Comments" Relationship="GameSchoolModel.FK_Comment_LevelMaterial" FromRole="LevelMaterial" ToRole="Comment" />
           <NavigationProperty Name="ContentType" Relationship="GameSchoolModel.FK_LevelMaterial_ContentType" FromRole="LevelMaterial" ToRole="ContentType" />
           <NavigationProperty Name="Level" Relationship="GameSchoolModel.FK_LevelMaterial_Level" FromRole="LevelMaterial" ToRole="Level" />
+          <Property Type="String" Name="Filename" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="CreateDateTime" Nullable="false" />
         </EntityType>
         <EntityType Name="LevelProject">
           <Key>
@@ -1614,6 +1618,8 @@
           <EntitySetMapping Name="LevelMaterials">
             <EntityTypeMapping TypeName="GameSchoolModel.LevelMaterial">
               <MappingFragment StoreEntitySet="LevelMaterial">
+                <ScalarProperty Name="CreateDateTime" ColumnName="CreateDateTime" />
+                <ScalarProperty Name="Filename" ColumnName="Filename" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Url" ColumnName="Url" />

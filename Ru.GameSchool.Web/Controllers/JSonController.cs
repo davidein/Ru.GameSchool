@@ -7,6 +7,7 @@ using System.Web.Security;
 using Ru.GameSchool.DataLayer.Repository;
 using Ru.GameSchool.Web.Classes;
 using Ru.GameSchool.Web.Classes.Helper;
+using Ru.GameSchool.BusinessLayer.Enums;
 
 namespace Ru.GameSchool.Web.Controllers
 {
@@ -89,15 +90,22 @@ namespace Ru.GameSchool.Web.Controllers
         [HttpPost]
         public ActionResult AddUserToCourse(int userId, int courseId)
         {
-            string userAddedToCourse = "Unknown Failure";
+            string userAddedToCourse = "Villa: Unknown Failure!";
+            ResponseStatus responseStatus = ResponseStatus.Error;
 
             if(userId > 0 && courseId > 0)
             {
-                userAddedToCourse = CourseService.AddUserToCourse(userId, courseId);
+                userAddedToCourse = CourseService.AddUserToCourse(userId, courseId, out responseStatus);
             }
             
+            var userToCourseResponse = new {
+                message = userAddedToCourse,
+                status = responseStatus
+            };
 
-            return Json(userAddedToCourse, JsonRequestBehavior.AllowGet);
+            return Json(userToCourseResponse, JsonRequestBehavior.AllowGet);
         }
     }
+
+    
 }
