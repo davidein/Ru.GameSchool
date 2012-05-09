@@ -62,21 +62,6 @@ namespace Ru.GameSchool.DataLayer.Repository
         #endregion
         #region Navigation Properties
     
-        public virtual LevelExam LevelExam
-        {
-            get { return _levelExam; }
-            set
-            {
-                if (!ReferenceEquals(_levelExam, value))
-                {
-                    var previousValue = _levelExam;
-                    _levelExam = value;
-                    FixupLevelExam(previousValue);
-                }
-            }
-        }
-        private LevelExam _levelExam;
-    
         public virtual UserInfo UserInfo
         {
             get { return _userInfo; }
@@ -91,29 +76,24 @@ namespace Ru.GameSchool.DataLayer.Repository
             }
         }
         private UserInfo _userInfo;
-
-        #endregion
-        #region Association Fixup
     
-        private void FixupLevelExam(LevelExam previousValue)
+        public virtual LevelExam LevelExam
         {
-            if (previousValue != null && previousValue.LevelExamResults.Contains(this))
+            get { return _levelExam; }
+            set
             {
-                previousValue.LevelExamResults.Remove(this);
-            }
-    
-            if (LevelExam != null)
-            {
-                if (!LevelExam.LevelExamResults.Contains(this))
+                if (!ReferenceEquals(_levelExam, value))
                 {
-                    LevelExam.LevelExamResults.Add(this);
-                }
-                if (LevelExamId != LevelExam.LevelExamId)
-                {
-                    LevelExamId = LevelExam.LevelExamId;
+                    var previousValue = _levelExam;
+                    _levelExam = value;
+                    FixupLevelExam(previousValue);
                 }
             }
         }
+        private LevelExam _levelExam;
+
+        #endregion
+        #region Association Fixup
     
         private void FixupUserInfo(UserInfo previousValue)
         {
@@ -131,6 +111,26 @@ namespace Ru.GameSchool.DataLayer.Repository
                 if (UserInfoId != UserInfo.UserInfoId)
                 {
                     UserInfoId = UserInfo.UserInfoId;
+                }
+            }
+        }
+    
+        private void FixupLevelExam(LevelExam previousValue)
+        {
+            if (previousValue != null && previousValue.LevelExamResults.Contains(this))
+            {
+                previousValue.LevelExamResults.Remove(this);
+            }
+    
+            if (LevelExam != null)
+            {
+                if (!LevelExam.LevelExamResults.Contains(this))
+                {
+                    LevelExam.LevelExamResults.Add(this);
+                }
+                if (LevelExamId != LevelExam.LevelExamId)
+                {
+                    LevelExamId = LevelExam.LevelExamId;
                 }
             }
         }

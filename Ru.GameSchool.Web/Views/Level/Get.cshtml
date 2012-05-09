@@ -76,13 +76,13 @@
         <div class="span4 well">
             <h2>Netpróf</h2>
             <ul>
-            @foreach (var m in ViewBag.Exams)
+            @foreach (var exam in ViewBag.Exams)
             {
-                  <li><a href="/Exam/Get/@m.LevelId">@m.Name</a></li>
+                  <li>@Html.ActionLink(exam.Name as string, "Index", "Exam", new { id = ViewBag.CourseId}, null)</li>
             }
             </ul>
             <p>
-            <a class="btn" href="/Eams/">Öll próf &raquo;</a></p>
+             @Html.ActionLink("Öll próf", "Index", "Exam", new { id = ViewBag.CourseId }, new { @class = "btn" })
         </div>
         <div class="span4 well">
             <h2>Skjöl</h2>

@@ -332,7 +332,7 @@ namespace Ru.GameSchool.BusinessLayerTests
             LevelService target = new LevelService(); // TODO: Initialize to an appropriate value
             IEnumerable<LevelExam> expected = null; // TODO: Initialize to an appropriate value
             IEnumerable<LevelExam> actual;
-            actual = target.GetLevelExams(1, 1);
+            actual = target.GetLevelExamsByCourseId(1, 1);
             Assert.AreEqual(expected, actual);
             Assert.Inconclusive("Verify the correctness of this test method.");
         }
