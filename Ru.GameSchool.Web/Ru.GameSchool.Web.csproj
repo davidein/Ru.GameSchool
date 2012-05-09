@@ -363,6 +363,8 @@
     <Content Include="Views\Exam\Create.cshtml" />
     <Content Include="Views\Exam\ExamQuestions.cshtml" />
     <Content Include="Views\Exam\_ExamAnswer.cshtml" />
+    <Content Include="Views\Exam\Question.cshtml" />
+    <Content Include="Views\Exam\ReturnExam.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

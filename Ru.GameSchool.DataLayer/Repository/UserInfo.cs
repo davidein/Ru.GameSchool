@@ -441,6 +441,38 @@ namespace Ru.GameSchool.DataLayer.Repository
             }
         }
         private ICollection<UserLog> _userLogs;
+    
+        public virtual ICollection<LevelExamAnswer> LevelExamAnswers
+        {
+            get
+            {
+                if (_levelExamAnswers == null)
+                {
+                    var newCollection = new FixupCollection<LevelExamAnswer>();
+                    newCollection.CollectionChanged += FixupLevelExamAnswers;
+                    _levelExamAnswers = newCollection;
+                }
+                return _levelExamAnswers;
+            }
+            set
+            {
+                if (!ReferenceEquals(_levelExamAnswers, value))
+                {
+                    var previousValue = _levelExamAnswers as FixupCollection<LevelExamAnswer>;
+                    if (previousValue != null)
+                    {
+                        previousValue.CollectionChanged -= FixupLevelExamAnswers;
+                    }
+                    _levelExamAnswers = value;
+                    var newValue = value as FixupCollection<LevelExamAnswer>;
+                    if (newValue != null)
+                    {
+                        newValue.CollectionChanged += FixupLevelExamAnswers;
+                    }
+                }
+            }
+        }
+        private ICollection<LevelExamAnswer> _levelExamAnswers;
 
         #endregion
         #region Association Fixup
@@ -701,6 +733,31 @@ namespace Ru.GameSchool.DataLayer.Repository
                     if (ReferenceEquals(item.UserInfo, this))
                     {
                         item.UserInfo = null;
+                    }
+                }
+            }
+        }
+    
+        private void FixupLevelExamAnswers(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            if (e.NewItems != null)
+            {
+                foreach (LevelExamAnswer item in e.NewItems)
+                {
+                    if (!item.UserInfoes.Contains(this))
+                    {
+                        item.UserInfoes.Add(this);
+                    }
+                }
+            }
+    
+            if (e.OldItems != null)
+            {
+                foreach (LevelExamAnswer item in e.OldItems)
+                {
+                    if (item.UserInfoes.Contains(this))
+                    {
+                        item.UserInfoes.Remove(this);
                     }
                 }
             }
