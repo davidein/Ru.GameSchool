@@ -145,7 +145,10 @@ namespace Ru.GameSchool.Web.Controllers
                 ViewBag.CourseId = id.Value;
                 ViewBag.CourseName = CourseService.GetCourse(id.Value).Name;
                 ViewBag.Title = "Búa til nýtt próf";
-                return View();
+
+                LevelExam model = new LevelExam();
+
+                return View(model);
             }
 
             return RedirectToAction("NotFound", "Home");
@@ -155,7 +158,12 @@ namespace Ru.GameSchool.Web.Controllers
         [HttpPost]
         public ActionResult Create(LevelExam levelExam)
         {
-            LevelService.CreateLevelExam(levelExam);
+            if (ModelState.IsValid)
+            {
+                LevelService.CreateLevelExam(levelExam);
+
+                return RedirectToAction("Edit", "Exam", new {id = levelExam.LevelExamId});
+            }
             return View(levelExam);
         }
 
