@@ -1,8 +1,7 @@
 ﻿@using Ru.GameSchool.DataLayer.Repository
 @model LevelProject
-@{
     ViewBag.Title = "Skoða verkefni";
-}
+@section sidebar {
 @using (Html.BeginForm("ReturnProject", "Project", FormMethod.Post))
 { 
     

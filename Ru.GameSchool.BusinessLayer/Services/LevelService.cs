@@ -310,6 +310,54 @@ namespace Ru.GameSchool.BusinessLayer.Services
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="levelExamAnswer"></param>
+        public void CreateLevelExamAnswer(LevelExamAnswer levelExamAnswer)
+        {
+            if (levelExamAnswer != null)
+            {
+                GameSchoolEntities.LevelExamAnswers.AddObject(levelExamAnswer);
+                Save();
+            }
+        }
+
+        public LevelExamAnswer GetLevelExamAnswer(int levelExamAnswerId)
+        {
+            if (levelExamAnswerId > 0)
+            {
+                var item = (from x in GameSchoolEntities.LevelExamAnswers
+                            where x.LevelExamAnswerId == levelExamAnswerId
+                            select x).SingleOrDefault();
+
+                return item;
+            }
+            return null;
+        }
+
+        public void DeleteLevelExamQuestion(int levelExamQuestionId)
+        {
+            if (levelExamQuestionId > 0)
+            {
+                var item = GetLevelExamQuestion(levelExamQuestionId);
+
+                GameSchoolEntities.LevelExamQuestions.DeleteObject(item);
+                Save();
+            }
+        }
+
+        public void DeleteLevelExamAnswer(int levelExamAnswerId)
+        {
+            if (levelExamAnswerId>0)
+            {
+                var item = GetLevelExamAnswer(levelExamAnswerId);
+
+                GameSchoolEntities.LevelExamAnswers.DeleteObject(item);
+                Save();
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="levelExamQuestion"></param>
         public void UpdateLevelExamQuestion(LevelExamQuestion levelExamQuestion)
         {
@@ -374,15 +422,6 @@ namespace Ru.GameSchool.BusinessLayer.Services
         }
 
 
-        public IEnumerable<LevelMaterial> GetCourseMaterials(int CourseId)
-        {
-            //return GameSchoolEntities.LevelMaterials.Where(l=> l.LevelId in );
-            var returnList = (from x in GameSchoolEntities.LevelMaterials
-                              join y in GameSchoolEntities.Levels on x.LevelId equals y.LevelId
-                              where y.CourseId == CourseId
-                              select x);
-            return returnList;
-        }
 
 
         public IEnumerable<LevelMaterial> GetLevelMaterials()
@@ -448,8 +487,8 @@ namespace Ru.GameSchool.BusinessLayer.Services
 
             }
         }
-
-        public IEnumerable<Ru.GameSchool.DataLayer.Repository.ContentType> GetContentTypes()
+   
+        public IEnumerable<ContentType> GetContentTypes()
         {
             var contentTypes = from x in GameSchoolEntities.ContentTypes
                                select x;

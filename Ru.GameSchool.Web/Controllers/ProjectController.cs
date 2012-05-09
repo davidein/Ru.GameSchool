@@ -66,6 +66,9 @@ namespace Ru.GameSchool.Web.Controllers
 
             levelProject.LevelProjectResults.Add(CreateLevelProjectResult(levelProject, user));
             LevelService.UpdateLevelProjectFromResult(levelProject);
+                ViewBag.CourseName = levelProject.Level.Course.Name;
+                ViewBag.CourseId = levelProject.Level.CourseId;
+                ViewBag.Title = "Verkefni";
 
             return RedirectToAction("Get");
         }
@@ -108,7 +111,7 @@ namespace Ru.GameSchool.Web.Controllers
         [Authorize(Roles = "Teacher")]
         public ActionResult Create()
         {
-            ViewBag.GradePercentageValue = GetPercentageValue();
+            //ViewBag.GradePercentageValue = GetPercentageValue();
             ViewBag.LevelId = new SelectList(LevelService.GetLevels(), "LevelId", "Name");
        //     ViewBag.CourseId = new SelectList(CourseService.GetCourses(), "CourseId", "Name");
             
@@ -118,10 +121,14 @@ namespace Ru.GameSchool.Web.Controllers
         [HttpPost]
         [Authorize(Roles = "Teacher")]
         public ActionResult Create(LevelProject levelproject)
+        public ActionResult Create(int? courseId)
         {
-            ViewBag.GradePercentageValue = GetPercentageValue();
+            {
+                int courseId = id.Value;
+                ViewBag.LevelCount = GetLevelCounts(courseId);
+                ViewBag.GradePercentageValue = GetPercentageValue();
             ViewBag.LevelId = new SelectList(LevelService.GetLevels(), "LevelId", "Name", levelproject.LevelId);
-
+                ViewBag.CourseId = CourseService.GetCourse(courseId).CourseId;
             if (ModelState.IsValid)
             {
                 LevelService.CreateLevelProject(levelproject);
@@ -129,19 +136,27 @@ namespace Ru.GameSchool.Web.Controllers
             }
 
             return View(levelproject);
+            }
+            return RedirectToAction("NotFound","Home");
         }
 
         [HttpGet]
         [Authorize(Roles = "Teacher")]
         public ActionResult Edit(int? id)
         {
-            ViewBag.GradePercentageValue = GetPercentageValue();
 
             if (id.HasValue && id.Value > 0)
+            if (id.HasValue)
             {
                 var levelProject = LevelService.GetLevelProject(id.Value);
                 ViewBag.LevelId = new SelectList(LevelService.GetLevels(), "LevelId", "Name", levelProject.LevelId);
                 return View(levelProject);
+                ViewBag.LevelCount = GetLevelCounts(courseId);
+                ViewBag.GradePercentageValue = GetPercentageValue();
+                var project = LevelService.GetLevelProject(levelProjectId);
+                ViewBag.CourseName = LevelService.GetLevelProject(levelProjectId).Level.Course.Name;
+                ViewBag.CourseId = courseId;
+                ViewBag.Title = "Breyta verkefni";
             }
             return RedirectToAction("NotFound", "Home");
         }
@@ -150,6 +165,7 @@ namespace Ru.GameSchool.Web.Controllers
         [Authorize(Roles = "Teacher")]
         public ActionResult Edit(LevelProject levelProject)
         {
+            ViewBag.LevelCount = GetLevelCounts(courseId);
             ViewBag.GradePercentageValue = GetPercentageValue();
             if (ModelState.IsValid)
             {
@@ -167,6 +183,10 @@ namespace Ru.GameSchool.Web.Controllers
         public ActionResult Delete(int? id)
         {
             if (id.HasValue && id.Value > 0)
+                ViewBag.CourseName = LevelService.GetLevelProject(levelProjectId.Value).Level.Course.Name;
+                ViewBag.CourseId = LevelService.GetLevelProject(levelProjectId.Value).Level.CourseId;
+                ViewBag.Title = "Eyða verkefni";
+
             {
                 var levelProject = LevelService.GetLevelProject(id.Value);
                 return View(levelProject);

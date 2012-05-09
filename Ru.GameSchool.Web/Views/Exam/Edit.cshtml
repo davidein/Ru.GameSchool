@@ -1,5 +1,17 @@
 ﻿@model Ru.GameSchool.DataLayer.Repository.LevelExam
+<<<<<<< HEAD
+@{
+    ViewBag.Title = "Breyta prófi";
+}
+@section sidebar {
+    @Html.Partial("_LeftSideBar")
+}
 
+<h2>
+    Breyta prófi</h2>
+=======
+
+>>>>>>> 589b1c37cf86ed18003f7ac142ccee5d8b47af35
 @if (!string.IsNullOrWhiteSpace(ViewBag.SuccessMessage))
 {
     <div class="alert alert-success">
@@ -16,8 +28,6 @@
         <strong>Villa!</strong> @ViewBag.ErrorMessage
     </div>
 }
-<script src="@Url.Content("~/Scripts/jquery.validate.min.js")"></script>
-<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")"></script>
 @using (Html.BeginForm("Edit", "Exam", FormMethod.Post))
 {
     @Html.ValidationSummary(true)
@@ -35,7 +45,7 @@
         <div class="control-group">
             @Html.LabelFor(model => model.LevelId, new { @class = "control-label" })
             <div class="controls">
-                @Html.DropDownListFor(model => model.LevelId, new SelectList(ViewBag.LevelCount, "Value", "Text"))
+                @Html.DropDownListFor(m => m.LevelId, (IEnumerable<SelectListItem>)ViewBag.Levels, "Veldu borð")
                 <span class="help-inline">@Html.ValidationMessageFor(x => x.LevelId)</span>
             </div>
         </div>
@@ -56,7 +66,7 @@
                 <div class="control-group">
                     <div class="controls">
                         <button type="submit" value="Save" class="btn btn-success">
-                            <i class="icon-ok icon-white"></i>Breyta prófi
+                            <i class="icon-ok icon-white"></i> Vista breytingar á prófi
                         </button>
                     </div>
                 </div>
@@ -64,24 +74,4 @@
     </fieldset>
 }
 
-@Html.ActionLink("Spurningar", "ExamQuestions", new { id = Model.LevelExamId }, null)
-
-@using (Html.BeginForm("CreateQuestion", "Exam", FormMethod.Post))
-{
-    <fieldset>
-        <legend>Ný spurning</legend>
-        @Html.HiddenFor(model => model.LevelExamId)
-        <div class="control-group">
-            <label for="" class="control-label"></label>
-            <div class="controls">
-                @Html.TextBox("examQuestion", "", new { @class = "input-xlarge" });
-                @Html.TextAreaFor(model => model.Name, new { @class = "input-xlarge" })
-                <span class="help-inline">@Html.ValidationMessageFor(model => model.Name)</span>
-            </div>
-        </div>
-    </fieldset>    
-}
-
-<div>
-    @Html.ActionLink("Aftur á forsíðu prófa", "Index")
-</div>
+@Html.ActionLink("Spurningar", "ExamQuestions", new { id = Model.LevelExamId }, null) - @Html.ActionLink("Aftur á forsíðu prófa", "Index")
