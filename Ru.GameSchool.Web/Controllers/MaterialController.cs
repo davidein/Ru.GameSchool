@@ -62,6 +62,7 @@ namespace Ru.GameSchool.Web.Controllers
             {
                 
                 var material = LevelService.GetLevelMaterial(id.Value);
+
                 var filepath = Settings.ProjectMaterialVirtualFolder + material.ContentId.ToString() + ".mp4";
                 ViewBag.File = filepath; //TODO: Add function to check for file extensions
                 if(material.ContentType.ContentTypeId == 1)
@@ -71,6 +72,7 @@ namespace Ru.GameSchool.Web.Controllers
                     ViewBag.Title = material.ContentType.Name;
                     ViewBag.Name = material.Title;
                     ViewBag.Description = material.Description;
+                    ViewBag.LevelMaterialId = material.LevelMaterialId;
                     return View(material);
                 }
                 else
@@ -78,6 +80,7 @@ namespace Ru.GameSchool.Web.Controllers
                     return new DownloadResult { VirtualPath = filepath, FileDownloadName = material.Title + ".ppt" };
                 }
                 
+
             }
             return View();
         }
@@ -131,6 +134,7 @@ namespace Ru.GameSchool.Web.Controllers
         public ActionResult Edit(int? id)
         {
             
+
             if (id.HasValue)
             {
                 var material = LevelService.GetLevelMaterial(id.Value);
