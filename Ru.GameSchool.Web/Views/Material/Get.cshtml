@@ -64,26 +64,30 @@
         max-height: 394px;
         max-width: 700px;
     }
-</style>
-
-@section sidebar {
-    @if (User.IsInRole("Teacher")) 
-    {
-        @Html.Partial("_TeacherSideBar")
-    } 
-    else
-    {
-        @Html.Partial("_LeftSideBar")
+    .content-wrapper {
+        max-width: 700px;
+        max-height: 394px;
     }
-}
+</style>
+@model Ru.GameSchool.DataLayer.Repository.LevelMaterial
 @* TODO: FIX LOOK*@
 <div class="well">
-    <h2>@ViewBag.Title</h2>
-    <div class="videoWrapper">
-        <video id="gameSchoolVideo" class="video-js vjs-default-skin" controls width="700" height="394" poster="" preload="auto" data-setup="{}">
-            <source type="video/mp4" src="@ViewBag.File">
-        </video>
+    <h3>@ViewBag.Name</h3>
+    <div class="content-wrapper">
+        <div class="videoWrapper">
+            <video id="gameSchoolVideo" class="video-js vjs-default-skin" controls width="700" height="394" poster="" preload="auto" data-setup="{}">
+                <source type="video/mp4" src="@ViewBag.File">
+            </video>
+        </div>
     </div>
+
     <p>@ViewBag.Description</p>
+    @if (User.IsInRole("Teacher"))
+    {
+        <div class="controls">
+            @Html.ActionLink("Uppfæra kennslugagn", "Edit", new {id = @Model.LevelMaterialId}, new {@class = "btn btn-success"})
+        
+        </div>
+    }
 </div>
 

@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.Entity;
 using System.Data.Objects;
 using System.Linq;
+using Ru.GameSchool.BusinessLayer.Exceptions;
 using Ru.GameSchool.DataLayer;
 using Ru.GameSchool.DataLayer.Repository;
 
@@ -318,6 +319,128 @@ namespace Ru.GameSchool.BusinessLayer.Services
                 GameSchoolEntities.LevelExamAnswers.AddObject(levelExamAnswer);
                 Save();
             }
+        }
+
+        public void AnswerLevelExamQuestion(int answerId, int userInfoId)
+        {
+            var answer = GameSchoolEntities.LevelExamAnswers.Where(x => x.LevelExamAnswerId == answerId).SingleOrDefault();
+
+            if (answer == null)
+                throw new GameSchoolException(string.Format(
+                    "Answer does not exist. AnswerId = {0}", answerId));
+ 
+            var question =
+                GameSchoolEntities.LevelExamQuestions.Where(x => x.LevelExamQuestionId == answer.LevelExamQuestionId).Single();
+
+            var questionAnswered = question.LevelExamAnswers.Where(p => p.UserInfoes.Where(u => u.UserInfoId == userInfoId).Count() > 0);
+
+            var user = GameSchoolEntities.UserInfoes.Where(u => u.UserInfoId == userInfoId).Single();
+
+            if (questionAnswered.Count() > 0)
+            {
+                foreach (var levelExamAnswer in questionAnswered)
+                {
+                    levelExamAnswer.UserInfoes.Remove(user);
+                }
+            }
+
+            answer.UserInfoes.Add(user);
+
+            Save();
+        }
+
+        public int GetUserQuestionAnswer(int levelExamQuestionId, int userInfoId)
+        {
+            var question = GameSchoolEntities.LevelExamQuestions.Where(x => x.LevelExamQuestionId == levelExamQuestionId).Single();
+
+            if (question == null)
+                throw new GameSchoolException(string.Format(
+                    "Question does not exist. QuestionId = {0}", levelExamQuestionId));
+
+            var questionAnswered = question.LevelExamAnswers.Where(p => p.UserInfoes.Where(u => u.UserInfoId == userInfoId).Count() > 0);
+
+            if (questionAnswered.Count() > 0)
+            {
+                foreach (var levelExamAnswer in questionAnswered)
+                {
+                    return levelExamAnswer.LevelExamAnswerId;
+                }
+            }
+
+            return -1;
+        }
+
+        public LevelExamQuestion GetFirstQuestionByExamId(int levelExamId)
+        {
+            var question = GameSchoolEntities.LevelExamQuestions.Where(x => x.LevelExamId == levelExamId).OrderBy(x=>x.LevelExamQuestionId);
+            if (question.Count() > 0)
+                return question.First();
+
+            return null;
+        }
+
+        public double ReturnExam(int levelExamId, int userInfoId)
+        {
+            if (HasAccessToExam(levelExamId, userInfoId))
+            {
+                LevelExamResult levelExamResult = new LevelExamResult();
+                levelExamResult.UserInfoId = userInfoId;
+                levelExamResult.LevelExamId = levelExamId;
+
+                var exam = GameSchoolEntities.LevelExams.Where(x => x.LevelExamId == levelExamId).Single();
+
+                var correctAnswer = exam.LevelExamQuestions.Where(
+                    x =>
+                    x.LevelExamAnswers.Where(y => y.UserInfoes.Where(z => z.UserInfoId == userInfoId).Count() > 0).Where
+                        (t => t.Correct).Count() > 0);
+
+                levelExamResult.Grade = (exam.LevelExamQuestions.Count()*correctAnswer.Count())/(10*1.0);
+
+                GameSchoolEntities.LevelExamResults.AddObject(levelExamResult);
+                Save();
+
+                ExternalNotificationContainer.CreateNotification(string.Format("Þú hefur fengið {0} fyrir prófið \"{1}\"", levelExamResult.Grade, exam.Name), string.Format("/Exam/Index/{0}",exam.Level.CourseId), userInfoId);
+                ExternalPointContainer.AddPointsToLevel(userInfoId, exam.LevelId, 1, "Þú hefur fengið {0} stig fyrir prófið \"{1}\".");
+                    
+                return levelExamResult.Grade;
+            }
+            return 0;
+        }
+
+        public bool HasAccessToExam(int levelExamId, int userInfoId)
+        {
+            var levelExam = GameSchoolEntities.LevelExams.Where(x => x.LevelExamId == levelExamId).Single();
+
+            var user = GameSchoolEntities.UserInfoes.Where(u => u.UserInfoId == userInfoId).Single();
+
+            if (levelExam.Level.Course.UserInfoes.Where(u => u.UserInfoId == userInfoId).Count() > 0)
+            {
+                if (levelExam.LevelExamResults.Where(x=>x.UserInfoId == userInfoId).Count() == 0)
+                    return true;
+            }
+
+            return false;
+        }
+
+        public LevelExamQuestion GetNextLevelExamQuestion(int levelExamQuestionId)
+        {
+            var question = GameSchoolEntities.LevelExamQuestions.Where(x => x.LevelExamQuestionId == levelExamQuestionId).Single();
+
+            if (question == null)
+                throw new GameSchoolException(string.Format(
+                    "Question does not exist. QuestionId = {0}", levelExamQuestionId));
+
+            bool next = false;
+            foreach (var item in question.LevelExam.LevelExamQuestions.OrderBy(x=>x.LevelExamQuestionId))
+            {
+                if (next)
+                    return item;
+
+                if (item.LevelExamQuestionId == levelExamQuestionId)
+                    next = true;
+            }
+
+            return null;
         }
 
         public LevelExamAnswer GetLevelExamAnswer(int levelExamAnswerId)

@@ -442,37 +442,37 @@ namespace Ru.GameSchool.DataLayer.Repository
         }
         private ICollection<UserLog> _userLogs;
     
-        public virtual ICollection<LevelExamUserAnswer> LevelExamUserAnswers
+        public virtual ICollection<LevelExamAnswer> LevelExamAnswers
         {
             get
             {
-                if (_levelExamUserAnswers == null)
+                if (_levelExamAnswers == null)
                 {
-                    var newCollection = new FixupCollection<LevelExamUserAnswer>();
-                    newCollection.CollectionChanged += FixupLevelExamUserAnswers;
-                    _levelExamUserAnswers = newCollection;
+                    var newCollection = new FixupCollection<LevelExamAnswer>();
+                    newCollection.CollectionChanged += FixupLevelExamAnswers;
+                    _levelExamAnswers = newCollection;
                 }
-                return _levelExamUserAnswers;
+                return _levelExamAnswers;
             }
             set
             {
-                if (!ReferenceEquals(_levelExamUserAnswers, value))
+                if (!ReferenceEquals(_levelExamAnswers, value))
                 {
-                    var previousValue = _levelExamUserAnswers as FixupCollection<LevelExamUserAnswer>;
+                    var previousValue = _levelExamAnswers as FixupCollection<LevelExamAnswer>;
                     if (previousValue != null)
                     {
-                        previousValue.CollectionChanged -= FixupLevelExamUserAnswers;
+                        previousValue.CollectionChanged -= FixupLevelExamAnswers;
                     }
-                    _levelExamUserAnswers = value;
-                    var newValue = value as FixupCollection<LevelExamUserAnswer>;
+                    _levelExamAnswers = value;
+                    var newValue = value as FixupCollection<LevelExamAnswer>;
                     if (newValue != null)
                     {
-                        newValue.CollectionChanged += FixupLevelExamUserAnswers;
+                        newValue.CollectionChanged += FixupLevelExamAnswers;
                     }
                 }
             }
         }
-        private ICollection<LevelExamUserAnswer> _levelExamUserAnswers;
+        private ICollection<LevelExamAnswer> _levelExamAnswers;
 
         #endregion
         #region Association Fixup
@@ -738,23 +738,26 @@ namespace Ru.GameSchool.DataLayer.Repository
             }
         }
     
-        private void FixupLevelExamUserAnswers(object sender, NotifyCollectionChangedEventArgs e)
+        private void FixupLevelExamAnswers(object sender, NotifyCollectionChangedEventArgs e)
         {
             if (e.NewItems != null)
             {
-                foreach (LevelExamUserAnswer item in e.NewItems)
+                foreach (LevelExamAnswer item in e.NewItems)
                 {
-                    item.UserInfo = this;
+                    if (!item.UserInfoes.Contains(this))
+                    {
+                        item.UserInfoes.Add(this);
+                    }
                 }
             }
     
             if (e.OldItems != null)
             {
-                foreach (LevelExamUserAnswer item in e.OldItems)
+                foreach (LevelExamAnswer item in e.OldItems)
                 {
-                    if (ReferenceEquals(item.UserInfo, this))
+                    if (item.UserInfoes.Contains(this))
                     {
-                        item.UserInfo = null;
+                        item.UserInfoes.Remove(this);
                     }
                 }
             }
