@@ -1,26 +1,48 @@
-﻿<div class="well">
+﻿@using Ru.GameSchool.BusinessLayer.Services
+@model IEnumerable<Tuple<int, Ru.GameSchool.DataLayer.Repository.UserInfo>>
+<div class="well">
     <h2>
         Velkomin/n á GameSchool</h2>
     <p>
         Einhver hjalpartexti!</p>
 </div>
-<!--
-<div class="well">
-    <h2>199 stig</h2>
-    <p>Þú ert í <span class="label label-info">3</span> sæti í leiknum!</p>
-    <p>og þarft aðeins <span class="label label-success">2</span> stig til þess að komast einu sæti ofar!</p>
-    <p>Næsti keppandi á eftir þér þarf aðeins <span class="label label-warning">16</span> stig til þess að komast yfir þig!</p>
-    <button class="btn btn-small" data-toggle="modal" data-target="#leaderBoard">Sjá topplistann</button>
+<div id="accordion2" class="accordion">
+    @foreach (var item in ViewBag.UserCourseList)
+    {
+        foreach (var nesteditem in item)
+        {
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                <a href="#collapse_@nesteditem.CourseId" data-parent="#accordion2" data-toggle="collapse" class="accordion-toggle ">@nesteditem.Name</a>
+            </div>
+            <div class="accordion-body collapseq collapse @if (ViewBag.CourseId == @nesteditem.CourseId)
+                                                          {<text>in</text>}" id="collapse_@nesteditem.CourseId" >
+                <div class="accordion-inner">
+                    <ul class="nav nav-list">
+                        @if (User.IsInRole("Teacher"))
+                        {
+                            <li>@Html.ActionLink("Ummæli", "Comments", "Course", new { id = @nesteditem.CourseId }, null)</li>
+                            <li>@Html.ActionLink("Nýtt borð", "Create", "Level", new { id = @nesteditem.CourseId }, null)</li>
+                            <li>@Html.ActionLink("Ný tilkynning", "Announcement", "Course", new { id = @nesteditem.CourseId }, null)</li>
+                            <li>@Html.ActionLink("Nýtt verkefni", "Project", "Course", new { id = @nesteditem.CourseId }, null)</li>
+                            <li>@Html.ActionLink("Nýtt próf", "Create", "Exam", new { id = @nesteditem.CourseId }, null)</li>
+                            <li>@Html.ActionLink("Nýtt kennslugagn", "Create", "Material", new { id = @nesteditem.CourseId }, null)</li>
+                            <hr />
+                        }
+                        <li>@Html.ActionLink("Borð", "Item", "Course", new { id = @nesteditem.CourseId }, null)</li>
+                        <li>@Html.ActionLink("Tilkynningar", "", "", new { id = @nesteditem.CourseId }, null)</li>
+                        <li>@Html.ActionLink("Verkefni", "Index", "Project", new { id = @nesteditem.CourseId }, null)</li>
+                        <li>@Html.ActionLink("Próf", "Index", "Exam", new { id = @nesteditem.CourseId }, null)</li>
+                        <li>@Html.ActionLink("Kennsluefni", "Index", "Material", new { id = @nesteditem.CourseId }, null)</li>
+                        <li><a data-toggle="modal" href="#myModal">Top tíu listinn!</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        }
+    }
 </div>
--->
-<!--TEMP HTML FOR MODAL WINDOW-->
-<div id="leaderBoard" class="modal" style="display: none">
-    <div class="modal-header">
-        <button class="close" data-dismiss="modal">
-            ×</button>
-        <h3>
-            Topp 10!</h3>
-    </div>
+<div id="myModal" class="modal" style="display: none">
     <div class="modal-body">
         <h4>
             Topplistinn!</h4>
@@ -33,131 +55,27 @@
                     <th>
                         Stig
                     </th>
+                    <th>
+                        Nafn
+                    </th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                </tr>
-                <tr>
-                    <td>
-                        1
-                    </td>
-                    <td>
-                        256
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        2
-                    </td>
-                    <td>
-                        200
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        3
-                    </td>
-                    <td>
-                        199
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        4
-                    </td>
-                    <td>
-                        184
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        5
-                    </td>
-                    <td>
-                        178
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        6
-                    </td>
-                    <td>
-                        175
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        7
-                    </td>
-                    <td>
-                        150
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        8
-                    </td>
-                    <td>
-                        144
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        9
-                    </td>
-                    <td>
-                        137
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        10
-                    </td>
-                    <td>
-                        126
-                    </td>
-                </tr>
+                
+             
+                @foreach (var item in new GameService().GetTopTenList(1))
+                {
+                    <tr>
+                        <td>@item.Item2.Username
+                        </td>
+                        <td>@item.Item1
+                        </td>
+                    </tr>
+                }
             </tbody>
         </table>
     </div>
     <div class="modal-footer">
-        <a href="#" class="btn" data-dismiss="modal">Loka</a>
+        <a href="#" id="close" class="btn" data-dismiss="modal">Loka</a>
     </div>
-</div>
-<!--END -->
-<div id="accordion2" class="accordion">
-    @foreach (var item in ViewBag.UserCourseList)
-    {
-        foreach (var nesteditem in item)
-        {
-        <div class="accordion-group">
-            <div class="accordion-heading">
-                <a href="#collapse_@nesteditem.CourseId" data-parent="#accordion2" data-toggle="collapse" class="accordion-toggle ">@nesteditem.Name</a>
-            </div>
-            <div class="accordion-body collapseq collapse @if (ViewBag.CourseId == @nesteditem.CourseId ) {<text>in</text>}" id="collapse_@nesteditem.CourseId" >
-                <div class="accordion-inner">
-                    <ul class="nav nav-list">
-                        @if (User.IsInRole("Teacher"))
-                        {
-                        <li>@Html.ActionLink("Ummæli", "Comments", "Course", new { id = @nesteditem.CourseId }, null)</li>
-                        <li>@Html.ActionLink("Nýtt borð", "Create", "Level", new { id = @nesteditem.CourseId }, null)</li>
-                        <li>@Html.ActionLink("Ný tilkynning", "Announcement", "Course", new { id = @nesteditem.CourseId }, null)</li>
-                        <li>@Html.ActionLink("Nýtt verkefni", "Project", "Course", new { id = @nesteditem.CourseId }, null)</li>
-                        <li>@Html.ActionLink("Nýtt próf", "Create", "Exam", new { id = @nesteditem.CourseId }, null)</li>
-                        <li>@Html.ActionLink("Nýtt kennslugagn", "Create", "Material", new { id = @nesteditem.CourseId }, null)</li>
-                        <hr/>
-                        }
-                        <li>@Html.ActionLink("Borð", "Item", "Course", new { id = @nesteditem.CourseId }, null)</li>
-                        <li>@Html.ActionLink("Tilkynningar", "", "", new { id = @nesteditem.CourseId }, null)</li>
-                        <li>@Html.ActionLink("Verkefni", "Index", "Project", new { id = @nesteditem.CourseId }, null)</li>
-                        <li>@Html.ActionLink("Próf", "Index", "Exam", new { id = @nesteditem.CourseId }, null)</li>
-                        <li>@Html.ActionLink("Kennsluefni", "Index", "Material", new { id = @nesteditem.CourseId }, null)</li>
-
-                    </ul>
-                </div>
-            </div>
-        </div>
-        }
-    }
 </div>

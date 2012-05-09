@@ -118,5 +118,32 @@ namespace Ru.GameSchool.BusinessLayer.Services
 
             return usersWithTopTen;
         }
+
+        public IEnumerable<Tuple<int, UserInfo>> GetTopTenList()
+        {
+            // Selecta course
+            var query = GameSchoolEntities.Courses;
+
+            // Fá collection af points miðað við courseid
+            var queryPoints = query.SelectMany(x => x.Points);
+
+            // Lista af groupby af ints og userinfo
+            var userQuery = queryPoints.GroupBy(x => x.UserInfo);
+
+            // Búa til lista sem er skilað
+            var list = new List<Tuple<int, UserInfo>>();
+
+            foreach (var item in userQuery)
+            {
+                var sum = item.Key.Points.Select(c => c.Points).Sum();
+
+                var tuple = new Tuple<int, UserInfo>(sum, item.Select(x => x.UserInfo).FirstOrDefault());
+                list.Add(tuple);
+            }
+
+            var usersWithTopTen = list.OrderByDescending(x => x.Item1).Take(10);
+
+            return usersWithTopTen;
+        }
     }
 }
