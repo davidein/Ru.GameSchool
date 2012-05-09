@@ -1,15 +1,8 @@
 ﻿@model Ru.GameSchool.DataLayer.Repository.LevelProject
-@{
-    ViewBag.Title = "Verkefni";
-}
+
 <h2>@ViewBag.LevelProject.Name<br />
 </h2>
-@section sidebar {
-    @Html.Partial("_LeftSideBar")
-}
-@section courseheading {
-    @Html.Partial("_courseheading")
-}
+
 <article>
     <h3><span class="gray">@ViewBag.LevelProject.Start | Vægi verkefnis - @ViewBag.LevelProject.GradePercentageValue%</span></h3>
     
