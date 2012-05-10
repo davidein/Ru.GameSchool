@@ -101,5 +101,6 @@ namespace Ru.GameSchool.Web.Controllers
                 ViewBag.UserCourseList = list.NestedList(3);
             }
         }
+
     }
 }
