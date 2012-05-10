@@ -127,6 +127,10 @@ namespace Ru.GameSchool.BusinessLayer.Services
             var list = GameSchoolEntities.LevelExams.Where(x => x.Level.CourseId == courseId);
             var exams = list.Where(x => x.Level.Course.UserInfoes.Where(y => y.UserInfoId == userInfoId).Count() > 0);
 
+            var user = GameSchoolEntities.UserInfoes.Where(x => x.UserInfoId == userInfoId).Single();
+            if (user.UserTypeId != (int)Enums.UserType.Teacher)
+                exams = exams.Where(x => x.Start <= DateTime.Now);
+
             return exams;
         }
 
@@ -432,11 +436,15 @@ namespace Ru.GameSchool.BusinessLayer.Services
                 if (ExternalPointContainer != null)
                 {
                     const int totalPointsPerGradeUnit = 5;
-                    int points = ExternalPointContainer.CalculatePointsByGrade(levelExamResult.Grade, totalPointsPerGradeUnit);
-                    ExternalPointContainer.AddPointsToLevel(userInfoId, exam.LevelId, points,
-                                                            string.Format(
-                                                                "Þú hefur fengið {0} stig fyrir prófið \"{1}\".",
-                                                                points, exam.Name));
+                    int points = ExternalPointContainer.CalculatePointsByGrade(levelExamResult.Grade,
+                                                                               totalPointsPerGradeUnit);
+                    if (points > 0)
+                    {
+                        ExternalPointContainer.AddPointsToLevel(userInfoId, exam.LevelId, points,
+                                                                string.Format(
+                                                                    "Þú hefur fengið {0} stig fyrir prófið \"{1}\".",
+                                                                    points, exam.Name));
+                    }
                 }
                 return levelExamResult.Grade;
             }
@@ -452,6 +460,9 @@ namespace Ru.GameSchool.BusinessLayer.Services
         public bool HasAccessToExam(int levelExamId, int userInfoId)
         {
             var levelExam = GameSchoolEntities.LevelExams.Where(x => x.LevelExamId == levelExamId).Single();
+
+            if (levelExam.Stop <= DateTime.Now)
+                return false;
 
             if (levelExam.Level.Course.UserInfoes.Where(u => u.UserInfoId == userInfoId).Count() > 0)
             {
@@ -891,6 +902,11 @@ namespace Ru.GameSchool.BusinessLayer.Services
         public IEnumerable<Level> GetLevelsByCourseId(int courseId)
         {
             return courseId > 0 ? GameSchoolEntities.Levels.Where(c => c.CourseId == courseId) : null;
+        }
+
+        public IEnumerable<LevelProject> GetLevelProjectsByLevelId(int levelId)
+        {
+            return levelId > 0 ? GameSchoolEntities.LevelProjects.Where(l => l.LevelId == levelId) : null;
         }
     }
 }

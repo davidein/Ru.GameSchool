@@ -67,7 +67,7 @@
             <ul>
             @foreach (var m in ViewBag.Projects)
             {
-                  <li><a href="/Project/Get/@m.LevelId">@m.Name</a></li>
+                <li>@Html.ActionLink(m.Name as string,User.IsInRole("Student") ? "Get" : "TeacherGet","Project", new { id = m.LevelProjectId},null)</li>
             }
             </ul>
             <p>
