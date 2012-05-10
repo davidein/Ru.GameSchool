@@ -2,25 +2,19 @@
 
 
 <ul class="nav nav-tabs">
-            @foreach (var m in ViewBag.Levels)
-            {
-                 
-            }
 
             @foreach (var l in ViewBag.LevelTabs)
             { 
-                 <li @if (l.levelId == Model.LevelId)
-                     { <text>class="active"</text>}>
-                     @if(l.enabled) {
-                         <a href="/Level/Get/@l.LevelId">
-                         }
+                 <li @if (l.levelId == Model.LevelId) { <text>class="active"</text> } >
+                         <a @if(l.enabled) { <text>href="/Level/Get/@l.levelId"</text> } >
+                            @if(l.levelCompleteness == Ru.GameSchool.BusinessLayer.Enums.LevelCompleteness.Complete)
+                            { <i class="icon-thumbs-up"></i> }
+                            else if (l.levelCompleteness == Ru.GameSchool.BusinessLayer.Enums.LevelCompleteness.Failed)
+                            { <i class="icon-thumbs-down"></i> }
                         @l.levelName
-                     @if(l.enabled) {
                          </a>
-                         }
                  </li>
-            }
-
+            } 
     </ul>
 
 
@@ -81,7 +75,7 @@
             <ul>
             @foreach (var m in ViewBag.Projects)
             {
-                <li>@Html.ActionLink(m.Name as string,User.IsInRole("Student") ? "Get" : "TeacherGet","Project", new { id = m.LevelProjectId},null)</li>
+                <li>@Html.ActionLink(m.Name as string, User.IsInRole("Student") ? "Get" : "TeacherGet", "Project", new { id = m.LevelProjectId }, null)</li>
             }
             </ul>
             <p>
@@ -92,7 +86,7 @@
             <ul>
             @foreach (var exam in ViewBag.Exams)
             {
-                  <li>@Html.ActionLink(exam.Name as string, "Index", "Exam", new { id = ViewBag.CourseId}, null)</li>
+                  <li>@Html.ActionLink(exam.Name as string, "Index", "Exam", new { id = ViewBag.CourseId }, null)</li>
             }
             </ul>
             <p>
