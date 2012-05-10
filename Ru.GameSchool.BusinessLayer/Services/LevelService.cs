@@ -127,7 +127,7 @@ namespace Ru.GameSchool.BusinessLayer.Services
 
             return exams;
         }
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -250,6 +250,24 @@ namespace Ru.GameSchool.BusinessLayer.Services
                     levelProjToUpdate.LevelProjectResults.Add(levelProject.LevelProjectResults.ElementAtOrDefault(0));
 
                     int points = 10;
+
+
+                    var query = GameSchoolEntities.UserInfoes.Where(s => s.UserInfoId == userInfoId).FirstOrDefault();
+                    if (query != null) // sernda notification á kennara
+                    {
+                        var userInCourse =
+                            query.Username;
+                        var teacher =
+                            GameSchoolEntities.Courses.SelectMany(
+                                x => x.UserInfoes.Where(d => d.UserInfoId != userInfoId && d.UserTypeId == 2)).
+                                FirstOrDefault();
+                        ExternalNotificationContainer.CreateNotification(
+                            string.Format("Nemandi {0} hefur skilað verkefni {1} í áfanga {2}",
+                                          userInCourse, levelProjToUpdate.Name, levelProjToUpdate.Level.Course.Name),
+                            string.Format("/Project/Index/{0}", levelProjToUpdate.Level.CourseId),
+                            teacher.UserInfoId);
+                    }
+
 
                     ExternalNotificationContainer.CreateNotification(string.Format("Þú hefur fengið {0} stig fyrir að skila verkefni \"{1}\"",
                         points, levelProjToUpdate.Name), string.Format("/Project/Index/{0}", levelProjToUpdate.Level.CourseId), userInfoId);
@@ -841,6 +859,15 @@ namespace Ru.GameSchool.BusinessLayer.Services
                 if (level != null)
                 {
                     level.LevelProjects.Add(levelproject);
+
+                    var allUsersInThisCourse =
+                        GameSchoolEntities.UserInfoes.SelectMany(s => s.Courses.Where(d => d.CourseId == courseId)).
+                            SelectMany(x => x.UserInfoes);
+                    foreach (var user in allUsersInThisCourse.Where(s => s.UserTypeId == 1).Distinct())
+                    {
+                        ExternalNotificationContainer.CreateNotification(string.Format("Nýtt verkefni er komið í áfangann {0} með nafninu \"{1}\"",
+                            levelproject.Level.Course.Name, levelproject.Name), string.Format("/Project/Index/{0}", levelproject.Level.CourseId), user.UserInfoId);
+                    }
                 }
 
                 Save();
