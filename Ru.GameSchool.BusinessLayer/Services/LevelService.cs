@@ -546,6 +546,32 @@ namespace Ru.GameSchool.BusinessLayer.Services
         }
 
         /// <summary>
+        /// Get the placement of the question in the level exam question list.
+        /// </summary>
+        /// <param name="levelExamQuestionId"></param>
+        /// <returns></returns>
+        public int GetLevelExamQuestionPlacement(int levelExamQuestionId)
+        {
+            var question =
+                GameSchoolEntities.LevelExamQuestions.Where(x => x.LevelExamQuestionId == levelExamQuestionId).
+                    SingleOrDefault();
+
+            if (question==null)
+                throw new GameSchoolException(string.Format("Question not found. QuestionId = {0}",levelExamQuestionId));
+
+            int placement = 0;
+
+            foreach (var levelExamQuestion in question.LevelExam.LevelExamQuestions.OrderBy(x=>x.LevelExamQuestionId))
+            {
+                placement++;
+                if (levelExamQuestion.LevelExamQuestionId == levelExamQuestionId)
+                    return placement;
+            }
+
+            return placement;
+        }
+
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="levelProjectResult"></param>

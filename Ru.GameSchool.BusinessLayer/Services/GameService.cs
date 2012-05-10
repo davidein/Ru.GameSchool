@@ -71,8 +71,9 @@ namespace Ru.GameSchool.BusinessLayer.Services
             // Get a point instance that has a given levelid and userinfoid
             var query = GameSchoolEntities.Points.Where(p => p.CourseId == courseId &&
                                                              p.UserInfoId == userInfoId);
-            int points;
+            int points = 0;
 
+            if (query.Count()>0)
             points = query.Sum(x => x.Points);
 
 
