@@ -44,6 +44,7 @@ namespace Ru.GameSchool.Web.Controllers
         {
             if (id.HasValue && id.Value > 0)
             {
+                ViewBag.CourseId = id.Value;
                 var projectResults = LevelService.GetlevelProjectResultsByLevelProjectId(id.Value).OrderByDescending(x => x.GradeDate);
                 return View(projectResults);
             }
