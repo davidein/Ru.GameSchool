@@ -229,10 +229,11 @@ namespace Ru.GameSchool.BusinessLayer.Services
                           select x).OrderByDescending(y => y.LevelId);
 
             int returnLevelId = 0;
+            int courseCompleteLevelId = 0;
 
             foreach (var level in levels)
             {
-                returnLevelId = level.LevelId;
+                courseCompleteLevelId = level.LevelId;
 
                 var levelexams = from x in level.LevelExams
                                  select x;
@@ -250,13 +251,21 @@ namespace Ru.GameSchool.BusinessLayer.Services
 
 
                 if (levelexams.Count() == levelexamreturns.Count() && levelproject.Count() == levelprojectreturns.Count())
-                    break;
-                
+                    break; //First level found that is complete, we break and last levels LevelId is returned
+
+                returnLevelId = level.LevelId;
+            }
+
+            if (returnLevelId == 0) //Course is complete so Last LevelId in course is returned
+            {
+                returnLevelId = courseCompleteLevelId;
             }
 
             return returnLevelId;
 
         }
+
+        
 
 
         public IEnumerable<LevelMaterial> GetCourseMaterials(int courseId)
