@@ -229,6 +229,38 @@ namespace Ru.GameSchool.DataLayer.Repository
             }
         }
         private ICollection<UserInfo> _userInfoes;
+    
+        public virtual ICollection<Announcement> Announcements
+        {
+            get
+            {
+                if (_announcements == null)
+                {
+                    var newCollection = new FixupCollection<Announcement>();
+                    newCollection.CollectionChanged += FixupAnnouncements;
+                    _announcements = newCollection;
+                }
+                return _announcements;
+            }
+            set
+            {
+                if (!ReferenceEquals(_announcements, value))
+                {
+                    var previousValue = _announcements as FixupCollection<Announcement>;
+                    if (previousValue != null)
+                    {
+                        previousValue.CollectionChanged -= FixupAnnouncements;
+                    }
+                    _announcements = value;
+                    var newValue = value as FixupCollection<Announcement>;
+                    if (newValue != null)
+                    {
+                        newValue.CollectionChanged += FixupAnnouncements;
+                    }
+                }
+            }
+        }
+        private ICollection<Announcement> _announcements;
 
         #endregion
         #region Association Fixup
@@ -339,6 +371,28 @@ namespace Ru.GameSchool.DataLayer.Repository
                     if (item.Courses.Contains(this))
                     {
                         item.Courses.Remove(this);
+                    }
+                }
+            }
+        }
+    
+        private void FixupAnnouncements(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            if (e.NewItems != null)
+            {
+                foreach (Announcement item in e.NewItems)
+                {
+                    item.Course = this;
+                }
+            }
+    
+            if (e.OldItems != null)
+            {
+                foreach (Announcement item in e.OldItems)
+                {
+                    if (ReferenceEquals(item.Course, this))
+                    {
+                        item.Course = null;
                     }
                 }
             }
