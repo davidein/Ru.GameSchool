@@ -619,23 +619,42 @@ namespace Ru.GameSchool.BusinessLayer.Services
 
 
 
-
+        /// <summary>
+        /// Gets level materials
+        /// </summary>
+        /// <returns>Levelmaterials</returns>
         public IEnumerable<LevelMaterial> GetLevelMaterials()
         {
             return GameSchoolEntities.LevelMaterials;
         }
+
+        /// <summary>
+        /// Get level materials for a specified level
+        /// </summary>
+        /// <param name="levelId">Id of level</param>
+        /// <returns>All level materials for specified level</returns>
         public IEnumerable<LevelMaterial> GetLevelMaterials(int levelId)
         {
             return GameSchoolEntities.LevelMaterials.Where(l => l.LevelId == levelId);
         }
 
+        /// <summary>
+        /// Get level materials of a certain contenttype for a specified level
+        /// </summary>
+        /// <param name="levelId">Id of level</param>
+        /// <param name="contentTypeId">Type of levelmaterial</param>
+        /// <returns>Levelmaterials of same type for level</returns>
         public IEnumerable<LevelMaterial> GetLevelMaterials(int levelId, int contentTypeId)
         {
             return GameSchoolEntities.LevelMaterials.Where(l => l.LevelId == levelId && l.ContentTypeId == contentTypeId);
         }
 
 
-
+        /// <summary>
+        /// Get single level material with specific id 
+        /// </summary>
+        /// <param name="levelMaterialId">Id of levelmaterial</param>
+        /// <returns>levelmaterial object</returns>
         public LevelMaterial GetLevelMaterial(int levelMaterialId)
         {
             if (0 > levelMaterialId)
@@ -654,6 +673,11 @@ namespace Ru.GameSchool.BusinessLayer.Services
             return levelMaterial;
         }
 
+        /// <summary>
+        /// Create level material item
+        /// </summary>
+        /// <param name="levelMaterial">levelmaterial object</param>
+        /// <param name="courseId">Id of course</param>
         public void CreateLevelMaterial(LevelMaterial levelMaterial, int? courseId)
         {
             if (levelMaterial != null && courseId > 0)
@@ -677,6 +701,10 @@ namespace Ru.GameSchool.BusinessLayer.Services
             }
         }
 
+        /// <summary>
+        /// Update level material item
+        /// </summary>
+        /// <param name="levelMaterial">Levelmaterial object</param>
         public void UpdateLevelMaterial(LevelMaterial levelMaterial)
         {
             if (levelMaterial != null)
@@ -698,6 +726,10 @@ namespace Ru.GameSchool.BusinessLayer.Services
             }
         }
 
+        /// <summary>
+        /// Get level material content types
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<ContentType> GetContentTypes()
         {
             var contentTypes = from x in GameSchoolEntities.ContentTypes
