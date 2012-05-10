@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Objects;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Rhino.Mocks;
@@ -117,52 +118,6 @@ namespace Ru.GameSchool.BusinessLayerTests
             _mockRepository.VerifyAllExpectations(); // Make sure everything was called correctly.
         }
 
-        /// <summary>
-        ///A test for CreateLevelExamResult
-        ///</summary>
-        [TestMethod()]
-        public void CreateLevelExamResultTest()
-        {
-            // ÞARF AÐ LAGFÆRA
-            var levelExamId = 1;
-            var userInfoId = 1;
-            var levelId = 1;
-            var levelExamResult = new LevelExamResult
-                                      {
-                                          Grade = 5,
-                                          LevelExamId = levelExamId,
-                                          UserInfoId = userInfoId,
-                                          LevelExam = new LevelExam
-                                                          {
-                                                              CreateDateTime = DateTime.Now,
-                                                              Description = "Lýsing",
-                                                              Name = "Nafn",
-                                                              GradePercentageValue = 5,
-                                                              LevelExamId = levelExamId,
-                                                              LevelId = levelId
-                                                          },
-                                          UserInfo = new UserInfo
-                                                         {
-                                                             CreateDateTime = DateTime.Now,
-                                                             UserInfoId = userInfoId,
-                                                             Password = "ww",
-                                                             Fullname = "Ólafur",
-                                                             Email = "óli@ru.is",
-                                                             StatusId = 1,
-                                                             Username = "Username"
-                                                         }
-                                      };
-            var levelExamResultData = new FakeObjectSet<LevelExamResult>();
-            levelExamResultData.AddObject(levelExamResult);
-
-
-            _mockRepository.Expect(x => x.LevelExamResults).Return(levelExamResultData);
-            _mockRepository.Expect(x => x.SaveChanges()).Return(1);
-
-            _levelService.CreateLevelExamResult(levelExamResult);
-            _mockRepository.VerifyAllExpectations();
-
-        }
 
         /// <summary>
         ///A test for GetLevelProject
@@ -299,6 +254,223 @@ namespace Ru.GameSchool.BusinessLayerTests
             /* Test the business logic */
             _levelService.AnswerLevelExamQuestion(1, userInfoId);
             _levelService.AnswerLevelExamQuestion(2,userInfoId);
+
+            /* Verify all the mock calls */
+            _mockRepository.VerifyAllExpectations();
+        }
+
+        /// <summary>
+        ///A test for GetUserQuestionAnswer
+        ///</summary>
+        [TestMethod()]
+        public void GetUserQuestionAnswerTest()
+        {
+            /* Setup user data */
+            int userInfoId = 1;
+
+            var userData = new FakeObjectSet<UserInfo>();
+
+            var user = UserServiceTest.GetUser(userInfoId, UserType.Student);
+
+            userData.AddObject(user);
+
+            /* Setup levelexamanswer data */
+            var answerData = new FakeObjectSet<LevelExamAnswer>();
+
+            var levelExamAnswer = new LevelExamAnswer();
+            levelExamAnswer.LevelExamAnswerId = 1;
+            levelExamAnswer.LevelExamQuestionId = 1;
+            levelExamAnswer.UserInfoes.Add(user);
+
+            var levelExamAnswerNumberTwo = new LevelExamAnswer();
+            levelExamAnswerNumberTwo.LevelExamAnswerId = 2;
+            levelExamAnswerNumberTwo.LevelExamQuestionId = 1;
+
+            answerData.AddObject(levelExamAnswer);
+            answerData.AddObject(levelExamAnswerNumberTwo);
+
+            /* Setup levelexamquestion data*/
+            var questionData = new FakeObjectSet<LevelExamQuestion>();
+
+            var levelExamQuestion = new LevelExamQuestion();
+            levelExamQuestion.LevelExamQuestionId = 1;
+            levelExamQuestion.LevelExamAnswers.Add(levelExamAnswer);
+            levelExamQuestion.LevelExamAnswers.Add(levelExamAnswerNumberTwo);
+
+            questionData.AddObject(levelExamQuestion);
+
+            /* Setup the mock expectations */
+            _mockRepository.Expect(x => x.LevelExamQuestions).Return(questionData);
+
+            /* Test the business logic */
+            var actualOne = _levelService.GetUserQuestionAnswer(1, userInfoId);
+            var actualTwo = _levelService.GetUserQuestionAnswer(1, userInfoId+1);
+
+            /* Assert */
+            Assert.AreEqual(levelExamAnswer.LevelExamAnswerId, actualOne);
+            Assert.AreEqual(-1, actualTwo);
+
+            /* Verify all the mock calls */
+            _mockRepository.VerifyAllExpectations();
+        }
+
+        /// <summary>
+        ///A test for ReturnExam
+        ///</summary>
+        [TestMethod()]
+        public void ReturnExamTest()
+        {
+            /* Setup user data */
+            int userInfoId = 1;
+
+            var user = UserServiceTest.GetUser(userInfoId, UserType.Student);
+
+            /* Setup answer data*/
+            var levelExamAnswer1 = new LevelExamAnswer();
+            levelExamAnswer1.LevelExamAnswerId = 1;
+            levelExamAnswer1.LevelExamQuestionId = 1;
+            levelExamAnswer1.Correct = true;
+            levelExamAnswer1.UserInfoes.Add(user);
+
+            var levelExamAnswer2 = new LevelExamAnswer();
+            levelExamAnswer2.LevelExamAnswerId = 2;
+            levelExamAnswer2.LevelExamQuestionId = 2;
+            levelExamAnswer2.Correct = true;
+            levelExamAnswer2.UserInfoes.Add(user);
+
+            var levelExamAnswer3 = new LevelExamAnswer();
+            levelExamAnswer3.LevelExamAnswerId = 3;
+            levelExamAnswer3.LevelExamQuestionId =3;
+            levelExamAnswer3.Correct = true;
+            levelExamAnswer3.UserInfoes.Add(user);
+
+            var levelExamAnswer4 = new LevelExamAnswer();
+            levelExamAnswer4.LevelExamAnswerId = 4;
+            levelExamAnswer4.LevelExamQuestionId = 4;
+            levelExamAnswer4.Correct = true;
+            levelExamAnswer4.UserInfoes.Add(user);
+
+            var levelExamAnswer5 = new LevelExamAnswer();
+            levelExamAnswer5.LevelExamAnswerId = 5;
+            levelExamAnswer5.LevelExamQuestionId = 5;
+            levelExamAnswer5.Correct = true;
+            levelExamAnswer5.UserInfoes.Add(user);
+
+            /* Setup level exam question data */
+
+            var levelExamQuestion1 = new LevelExamQuestion();
+            levelExamQuestion1.LevelExamQuestionId = 1;
+            levelExamQuestion1.LevelExamAnswers.Add(levelExamAnswer1);
+
+            var levelExamQuestion2 = new LevelExamQuestion();
+            levelExamQuestion2.LevelExamQuestionId = 2;
+            levelExamQuestion2.LevelExamAnswers.Add(levelExamAnswer2);
+
+            var levelExamQuestion3 = new LevelExamQuestion();
+            levelExamQuestion3.LevelExamQuestionId = 3;
+            levelExamQuestion3.LevelExamAnswers.Add(levelExamAnswer3);
+            
+            var levelExamQuestion4 = new LevelExamQuestion();
+            levelExamQuestion4.LevelExamQuestionId = 4;
+            levelExamQuestion4.LevelExamAnswers.Add(levelExamAnswer4);
+            
+            var levelExamQuestion5 = new LevelExamQuestion();
+            levelExamQuestion5.LevelExamQuestionId = 5;
+            levelExamQuestion5.LevelExamAnswers.Add(levelExamAnswer5);
+
+            var levelExamQuestion6 = new LevelExamQuestion();
+            levelExamQuestion6.LevelExamQuestionId = 6;
+
+            var levelExamQuestion7 = new LevelExamQuestion();
+            levelExamQuestion7.LevelExamQuestionId = 7;
+            
+            var levelExamQuestion8 = new LevelExamQuestion();
+            levelExamQuestion8.LevelExamQuestionId = 8;
+            
+            var levelExamQuestion9 = new LevelExamQuestion();
+            levelExamQuestion9.LevelExamQuestionId = 9;
+
+            var levelExamQuestion10 = new LevelExamQuestion();
+            levelExamQuestion10.LevelExamQuestionId = 10;
+
+            /* Setup levelexam data */
+            var levelExamData = new FakeObjectSet<LevelExam>();
+
+            var levelExam = new LevelExam();
+            levelExam.LevelExamId = 1;
+            levelExam.LevelExamQuestions.Add(levelExamQuestion1);
+            levelExam.LevelExamQuestions.Add(levelExamQuestion2);
+            levelExam.LevelExamQuestions.Add(levelExamQuestion3);
+            levelExam.LevelExamQuestions.Add(levelExamQuestion4);
+            levelExam.LevelExamQuestions.Add(levelExamQuestion5);
+            levelExam.LevelExamQuestions.Add(levelExamQuestion6);
+            levelExam.LevelExamQuestions.Add(levelExamQuestion7);
+            levelExam.LevelExamQuestions.Add(levelExamQuestion8);
+            levelExam.LevelExamQuestions.Add(levelExamQuestion9);
+            levelExam.LevelExamQuestions.Add(levelExamQuestion10);
+
+            levelExamData.AddObject(levelExam);
+
+            /* Setup level data */
+            var level = new Level();
+            level.LevelExams.Add(levelExam);
+
+            /* Setup course data */
+            var course = new Course();
+
+            course.UserInfoes.Add(user);
+            course.Levels.Add(level);
+
+            /* Setup the mock expectations */
+            _mockRepository.Expect(x => x.LevelExams).Return(levelExamData);
+            _mockRepository.Expect(x => x.LevelExamResults).Return(new FakeObjectSet<LevelExamResult>());
+
+            /* Test the business logic */
+            var actual = _levelService.ReturnExam(1, 1);
+
+            /* Assert */
+            Assert.AreEqual(5, actual);
+        }
+
+        /// <summary>
+        ///A test for HasAccessToExam
+        ///</summary>
+        [TestMethod()]
+        public void HasAccessToExamTest()
+        {
+            /* Setup user data */
+            int userInfoId = 1;
+
+            var user = UserServiceTest.GetUser(userInfoId, UserType.Student);
+
+            /* Setup levelexam data */
+            var levelExamData = new FakeObjectSet<LevelExam>();
+
+            var levelExam = new LevelExam();
+            levelExam.LevelExamId = 1;
+
+            levelExamData.AddObject(levelExam);
+
+            /* Setup level data */
+            var level = new Level();
+            level.LevelExams.Add(levelExam);
+
+            /* Setup course data */
+            var course = new Course();
+
+            course.UserInfoes.Add(user);
+            course.Levels.Add(level);
+
+            /* Setup the mock expectations */
+            _mockRepository.Expect(x => x.LevelExams).Return(levelExamData);
+
+            /* Test the business logic */
+            var actual = _levelService.HasAccessToExam(levelExam.LevelExamId, userInfoId);
+            var shouldfailactual = _levelService.HasAccessToExam(levelExam.LevelExamId, userInfoId+1);
+
+            /* Assert */
+            Assert.AreEqual(true, actual);
+            Assert.AreEqual(false, shouldfailactual);
 
             /* Verify all the mock calls */
             _mockRepository.VerifyAllExpectations();

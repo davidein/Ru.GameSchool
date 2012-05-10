@@ -263,63 +263,8 @@ namespace Ru.GameSchool.BusinessLayer.Services
             }
         }
 
-
         /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="levelExamResult"></param>
-        public void CreateLevelExamResult(LevelExamResult levelExamResult)
-        {
-            if (levelExamResult != null)
-            {
-                GameSchoolEntities.LevelExamResults.AddObject(levelExamResult);
-                Save();
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="levelExamResult"></param>
-        public void UpdateLevelExamResult(LevelExamResult levelExamResult)
-        {
-            if (levelExamResult != null)
-            {
-
-            }
-        }
-
-        public IEnumerable<LevelExamResult> GetLevelExamResults()
-        {
-            return GameSchoolEntities.LevelExamResults;
-        }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="levelExamId"></param>
-        /// <returns></returns>
-        public LevelExamResult GetLevelExamResults(int levelExamId)
-        {
-            if (levelExamId < 0)
-            {
-                return null;
-            }
-
-            var query = GameSchoolEntities.LevelExamResults
-                .Where(lvr => lvr.LevelExamId == levelExamId);
-
-            var levelExamResult = query.FirstOrDefault();
-
-            if (levelExamResult == null)
-            {
-                return null;
-            }
-
-            return levelExamResult;
-        }
-
-        /// <summary>
-        /// 
+        /// Creates a level exam question.
         /// </summary>
         /// <param name="levelExamQuestion"></param>
         public void CreateLevelExamQuestion(LevelExamQuestion levelExamQuestion)
@@ -332,7 +277,7 @@ namespace Ru.GameSchool.BusinessLayer.Services
         }
 
         /// <summary>
-        /// 
+        /// Creates a LevelExamAnswer
         /// </summary>
         /// <param name="levelExamAnswer"></param>
         public void CreateLevelExamAnswer(LevelExamAnswer levelExamAnswer)
@@ -344,6 +289,11 @@ namespace Ru.GameSchool.BusinessLayer.Services
             }
         }
 
+        /// <summary>
+        /// Creates a user answer for a specific exam question.
+        /// </summary>
+        /// <param name="answerId"></param>
+        /// <param name="userInfoId"></param>
         public void AnswerLevelExamQuestion(int answerId, int userInfoId)
         {
             var answer = GameSchoolEntities.LevelExamAnswers.Where(x => x.LevelExamAnswerId == answerId).SingleOrDefault();
@@ -355,10 +305,12 @@ namespace Ru.GameSchool.BusinessLayer.Services
             var question =
                 GameSchoolEntities.LevelExamQuestions.Where(x => x.LevelExamQuestionId == answer.LevelExamQuestionId).Single();
 
+            /* Get the current users answers to the given question. */
             var questionAnswered = question.LevelExamAnswers.Where(p => p.UserInfoes.Where(u => u.UserInfoId == userInfoId).Count() > 0);
 
             var user = GameSchoolEntities.UserInfoes.Where(u => u.UserInfoId == userInfoId).Single();
 
+            /* Remove all the old answers. (If any) */
             if (questionAnswered.Count() > 0)
             {
                 foreach (var levelExamAnswer in questionAnswered)
@@ -367,11 +319,19 @@ namespace Ru.GameSchool.BusinessLayer.Services
                 }
             }
 
+            /* Add the new answer. */
             answer.UserInfoes.Add(user);
 
             Save();
         }
 
+        /// <summary>
+        /// Gets the users LevelExamAnswerId for an exam question. 
+        /// </summary>
+        /// <param name="levelExamQuestionId"></param>
+        /// <param name="userInfoId"></param>
+        /// <exception cref="GameSchoolException">If the question does not exist.</exception>
+        /// <returns>-1 if no answer is found otherwise a LevelExamAnswerId.</returns>
         public int GetUserQuestionAnswer(int levelExamQuestionId, int userInfoId)
         {
             var question = GameSchoolEntities.LevelExamQuestions.Where(x => x.LevelExamQuestionId == levelExamQuestionId).Single();
@@ -393,6 +353,11 @@ namespace Ru.GameSchool.BusinessLayer.Services
             return -1;
         }
 
+        /// <summary>
+        /// Gets the first question for a given exam.
+        /// </summary>
+        /// <param name="levelExamId"></param>
+        /// <returns></returns>
         public LevelExamQuestion GetFirstQuestionByExamId(int levelExamId)
         {
             var question = GameSchoolEntities.LevelExamQuestions.Where(x => x.LevelExamId == levelExamId).OrderBy(x => x.LevelExamQuestionId);
@@ -402,6 +367,12 @@ namespace Ru.GameSchool.BusinessLayer.Services
             return null;
         }
 
+        /// <summary>
+        /// Closes an exam and gives the user a grade, points and notification.
+        /// </summary>
+        /// <param name="levelExamId"></param>
+        /// <param name="userInfoId"></param>
+        /// <returns></returns>
         public double ReturnExam(int levelExamId, int userInfoId)
         {
             if (HasAccessToExam(levelExamId, userInfoId))
@@ -417,15 +388,17 @@ namespace Ru.GameSchool.BusinessLayer.Services
                     x.LevelExamAnswers.Where(y => y.UserInfoes.Where(z => z.UserInfoId == userInfoId).Count() > 0).Where
                         (t => t.Correct).Count() > 0);
 
-                levelExamResult.Grade = (exam.LevelExamQuestions.Count() * correctAnswer.Count()) / (10 * 1.0);
+                levelExamResult.Grade = ((correctAnswer.Count() * 1.0) / exam.LevelExamQuestions.Count()) * 10;
 
                 GameSchoolEntities.LevelExamResults.AddObject(levelExamResult);
                 Save();
 
                 int points = 5;
 
-                ExternalNotificationContainer.CreateNotification(string.Format("Þú hefur fengið {0} fyrir prófið \"{1}\"", levelExamResult.Grade, exam.Name), string.Format("/Exam/Index/{0}", exam.Level.CourseId), userInfoId);
-                ExternalPointContainer.AddPointsToLevel(userInfoId, exam.LevelId, points,
+                if (ExternalNotificationContainer != null)
+                    ExternalNotificationContainer.CreateNotification(string.Format("Þú hefur fengið {0} fyrir prófið \"{1}\"", levelExamResult.Grade, exam.Name), string.Format("/Exam/Index/{0}", exam.Level.CourseId), userInfoId);
+                if (ExternalPointContainer != null)
+                    ExternalPointContainer.AddPointsToLevel(userInfoId, exam.LevelId, points,
                                                         string.Format("Þú hefur fengið {0} stig fyrir prófið \"{1}\".",
                                                                       points, exam.Name));
 
@@ -434,11 +407,15 @@ namespace Ru.GameSchool.BusinessLayer.Services
             return 0;
         }
 
+        /// <summary>
+        /// Checks if the user has access to an exam.
+        /// </summary>
+        /// <param name="levelExamId"></param>
+        /// <param name="userInfoId"></param>
+        /// <returns></returns>
         public bool HasAccessToExam(int levelExamId, int userInfoId)
         {
             var levelExam = GameSchoolEntities.LevelExams.Where(x => x.LevelExamId == levelExamId).Single();
-
-            var user = GameSchoolEntities.UserInfoes.Where(u => u.UserInfoId == userInfoId).Single();
 
             if (levelExam.Level.Course.UserInfoes.Where(u => u.UserInfoId == userInfoId).Count() > 0)
             {
