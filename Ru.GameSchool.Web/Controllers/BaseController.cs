@@ -19,7 +19,7 @@ namespace Ru.GameSchool.Web.Controllers
         private LevelService _levelService;
         private SocialService _socialService;
         private NotificationService _notificationService;
-
+        
 
         internal UserService UserService 
         { 
@@ -92,13 +92,29 @@ namespace Ru.GameSchool.Web.Controllers
         protected override void Initialize(System.Web.Routing.RequestContext requestContext)
         {
             base.Initialize(requestContext);
-
+            
             if (User.Identity.IsAuthenticated)
             {
                 var user = MembershipHelper.GetUser();
                 var list = CourseService.GetCoursesByUserInfoId(user.UserInfoId);
                 ViewBag.User = user;
                 ViewBag.UserCourseList = list.NestedList(3);
+                
+                
+            }
+        }
+        protected override void OnActionExecuted(ActionExecutedContext filterContext)
+        {
+            base.OnActionExecuted(filterContext);
+
+            if (User.Identity.IsAuthenticated)
+            {
+                var user = MembershipHelper.GetUser();
+                if (ViewBag.CourseId != null)
+                {
+                    ViewBag.CourseValue = CourseService.GetCourse(ViewBag.CourseId).Name;
+                    ViewBag.GetScoreComparedToUsers = GameService.GetScoreComparedToUsers(user.UserInfoId, ViewBag.CourseId);
+                }
             }
         }
 

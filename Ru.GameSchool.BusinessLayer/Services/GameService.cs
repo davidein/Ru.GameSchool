@@ -6,6 +6,11 @@ using System.Linq;
 
 namespace Ru.GameSchool.BusinessLayer.Services
 {
+    public class UserAndPoints
+    {
+        public UserInfo UserInfo { get; set; }
+        public int Points { get; set; }
+    }
     public class GameService : BaseService, IExternalPointContainer
     {
         /// <summary>
@@ -60,7 +65,7 @@ namespace Ru.GameSchool.BusinessLayer.Services
 
             return points;
         }
-        
+
         public int GetPointsByUserInfoIdAndCourseId(int userInfoId, int courseId)
         {
             // If userinfoid or levelid is smaller then 0 then return 0
@@ -73,8 +78,8 @@ namespace Ru.GameSchool.BusinessLayer.Services
                                                              p.UserInfoId == userInfoId);
             int points = 0;
 
-            if (query.Count()>0)
-            points = query.Sum(x => x.Points);
+            if (query.Count() > 0)
+                points = query.Sum(x => x.Points);
 
 
             return points;
@@ -107,54 +112,70 @@ namespace Ru.GameSchool.BusinessLayer.Services
                 return null;
             }
 
-            var userPoints = GetPointsByUserInfoIdAndCourseId(userInfoId, courseId);
-            var userPosition = GetUserPositionInGame(userInfoId, courseId);
-            
-            return Tuple.Create(userPoints, userPosition, 0, 0);
-        }
+            var usersAndTheirPoints = GetPointsByAndNotUserInfoIdCourseId(courseId).OrderByDescending(k => k.Points);
+            var yourScore =
+                usersAndTheirPoints.Where(s => s.UserInfo.UserInfoId == userInfoId).Select(s => s.Points).FirstOrDefault();
 
-
-
-        private int GetUserPositionInGame(int userInfoId, int courseId)
-        {
-            if (0 >= userInfoId | 0 >= courseId)
+            var lowerPosition = -1;
+            var upperPosition = -1;
+            var position = 0;
+            foreach (var usersAndTheirPoint in usersAndTheirPoints)
             {
-                return 0;
-            }
-
-            var totalUsers = GameSchoolEntities.Points.Count(s => s.CourseId == courseId && s.UserInfoId != userInfoId);
-            var allUsersWithPointsInThisCourse = GetPointsByAndNotUserInfoIdCourseId(courseId, userInfoId);
-            int position = 0;
-
-            var userPoints =
-                GameSchoolEntities.Points.Where(p => p.UserInfoId == userInfoId && p.CourseId == courseId).Sum(x => x.Points);
-
-            for (int i = 0; i < totalUsers; i++)
-            {
-                if (userPoints > allUsersWithPointsInThisCourse.ElementAtOrDefault(i))
+                ++position;
+                if (usersAndTheirPoint.UserInfo.UserInfoId == userInfoId)
                 {
-                    position++;
+                    break;
                 }
+                upperPosition = usersAndTheirPoint.Points;
             }
 
-            return (totalUsers - position) + 1;
+            if (usersAndTheirPoints.Count() > position)
+            {
+                lowerPosition = usersAndTheirPoints.ElementAt(position - 1).Points;
+            }
+
+
+            return Tuple.Create(yourScore, position, upperPosition, lowerPosition);
         }
 
-        private List<int> GetPointsByAndNotUserInfoIdCourseId(int courseId, int userInfoId)
+
+
+        //private int GetUserPositionInGame(int userInfoId, int courseId)
+        //{
+        //    if (0 >= userInfoId | 0 >= courseId)
+        //    {
+        //        return 0;
+        //    }
+
+        //    var totalUsers = GameSchoolEntities.Points.Count(s => s.CourseId == courseId && s.UserInfoId != userInfoId);
+        //    var allUsersWithPointsInThisCourse = GetPointsByAndNotUserInfoIdCourseId(courseId, userInfoId);
+        //    int position = 0;
+
+        //    var query = GameSchoolEntities.Points.Where(p => p.UserInfoId == userInfoId && p.CourseId == courseId);
+
+        //    var userPoints = query.Any() ? query.Sum(s => s.Points) : 0;
+
+        //    for (int i = 0; i < totalUsers; i++)
+        //    {
+        //        if (userPoints > allUsersWithPointsInThisCourse.ElementAtOrDefault(i))
+        //        {
+        //            position++;
+        //        }
+        //    }
+
+        //    return (totalUsers - position) + 1;
+        //}
+
+        private IEnumerable<UserAndPoints> GetPointsByAndNotUserInfoIdCourseId(int courseId)
         {
-            if (0>=courseId)
-            {
-                return null;
-            }
-            List<int> points = new List<int>();
-            var total = GameSchoolEntities.Points.Count(s => s.CourseId == courseId && s.UserInfoId != userInfoId);
-            var getPoints = GameSchoolEntities.Points.Where(s => s.CourseId == courseId && s.UserInfoId != userInfoId);
-            for (int i = 0; i < total; i++)
-            {
-                var point = getPoints.Sum(s => s.Points);
-                points.Add(point);
-            }
-            return points;
+            return from x in GameSchoolEntities.Points.Where(s => s.CourseId == courseId)
+                   group x by x.UserInfo
+                       into g
+                       select new UserAndPoints
+                                  {
+                                      UserInfo = g.Key,
+                                      Points = g.Sum(m => m.Points)
+                                  };
         }
 
         /// <summary>
@@ -166,7 +187,7 @@ namespace Ru.GameSchool.BusinessLayer.Services
         public int CalculatePointsByGrade(double grade, int pointPerGrade)
         {
             var result = grade * pointPerGrade;
-            
+
             return (int)result;
         }
 

@@ -18,11 +18,13 @@ namespace Ru.GameSchool.Web.Controllers
         [HttpGet]
         public ActionResult Get(int? id)
         {
+            ViewBag.UserInfoId = MembershipHelper.GetUser().UserInfoId;
             ViewBag.AllowedFileExtensions = GetAllowedFileExtensions();
             if (id.HasValue && id.Value > 0)
             {
                 var levelProject = LevelService.GetLevelProject(id.Value);
-
+                var course = CourseService.GetCourse(levelProject.Level.CourseId);
+                ViewBag.CourseId = course.CourseId;
                 ViewBag.Title = levelProject.Name;
 
                 return View(levelProject);
@@ -36,8 +38,7 @@ namespace Ru.GameSchool.Web.Controllers
         {
             if (id.HasValue && id.Value > 0)
             {
-                var projectResults =
-                    LevelService.GetlevelProjectResultsByLevelProjectId(id.Value).OrderByDescending(x => x.GradeDate);
+                var projectResults = LevelService.GetlevelProjectResultsByLevelProjectId(id.Value).OrderByDescending(x => x.GradeDate);
                 return View(projectResults);
             }
             return RedirectToAction("Index", "Project");
@@ -48,7 +49,6 @@ namespace Ru.GameSchool.Web.Controllers
         [Authorize(Roles = "Teacher")]
         public ActionResult GradeProject(LevelProjectResult result)
         {
-            var userInfoId = MembershipHelper.GetUser().UserInfoId;
             if (result != null)
             {
                 LevelService.UpdateLevelProjectResult(result);
@@ -108,6 +108,8 @@ namespace Ru.GameSchool.Web.Controllers
             // Sækja spes course
             if (id.HasValue && id.Value > 0)
             {
+                var course = CourseService.GetCourse(id.Value);
+                ViewBag.CourseId = course.CourseId;
                 levelProjects =
                     CourseService.GetCoursesByUserInfoIdAndCourseId(userInfoId, id.Value).OrderByDescending(
                         x => x.CreateDateTime);
@@ -146,6 +148,9 @@ namespace Ru.GameSchool.Web.Controllers
 
             if (id.HasValue && id.Value > 0)
             {
+                var course = CourseService.GetCourse(id.Value);
+                ViewBag.CourseId = course.CourseId;
+
                 if (levelproject.File != null)
                 {
                     foreach (var file in levelproject.File)
@@ -173,6 +178,8 @@ namespace Ru.GameSchool.Web.Controllers
             ViewBag.GradePercentageValue = GetPercentageValue();
             if (id.HasValue && id.Value > 0)
             {
+                var course = CourseService.GetCourse(id.Value);
+                ViewBag.CourseId = course.CourseId;
                 var levelProject = LevelService.GetLevelProject(id.Value);
                 ViewBag.LevelId = new SelectList(LevelService.GetLevels(), "LevelId", "Name", levelProject.LevelId);
                 return View(levelProject);

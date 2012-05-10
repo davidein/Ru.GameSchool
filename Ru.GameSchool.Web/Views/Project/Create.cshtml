@@ -50,6 +50,7 @@
                 <span class="help-inline">@Html.ValidationMessageFor(model => model.Description)</span>
             </div>
         </div>
+
         <div class="control-group">
             @Html.LabelFor(model => model.ContentID, new { @class = "control-label" })
             <div class="controls">
@@ -57,6 +58,8 @@
                 <span class="help-inline">@Html.ValidationMessageFor(model => model.ContentID)</span>
             </div>
         </div>
+        
+
         <div class="control-group">
             <div class="controls">
                 <button type="submit" id="submit" class="btn btn-success">
@@ -66,7 +69,7 @@
     </fieldset>
 }
 <div>
-    @Html.ActionLink("Aftur á forsíðu verkefna", "Index")
+    @Html.ActionLink("Aftur á forsíðu verkefna", "Index", null, new { @class = "btn btn-small" })
 </div>
 <script type="text/javascript">
     $(function () {
