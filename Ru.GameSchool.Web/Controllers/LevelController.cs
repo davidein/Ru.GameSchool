@@ -123,9 +123,10 @@ namespace Ru.GameSchool.Web.Controllers
         [Authorize(Roles = "Teacher")]
         public ActionResult Edit(Level model, int? id)
         {
+            var level = LevelService.GetLevel(model.LevelId);
+
             if (ModelState.IsValid)
             {
-                var level = LevelService.GetLevel(model.LevelId);
 
                 if (TryUpdateModel(level))
                 {
@@ -135,7 +136,7 @@ namespace Ru.GameSchool.Web.Controllers
 
             ViewBag.Title = "Breyta borði";
             ViewBag.CourseId = model.CourseId;
-            ViewBag.CourseName = model.Course.Name;
+            ViewBag.CourseName = level.Course.Name;
 
             return View(model);
         }

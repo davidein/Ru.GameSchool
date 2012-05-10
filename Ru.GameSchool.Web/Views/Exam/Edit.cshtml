@@ -3,8 +3,6 @@
     ViewBag.Title = "Breyta prófi";
 }
 
-<h2>
-    Breyta prófi</h2>
 @if (!string.IsNullOrWhiteSpace(ViewBag.SuccessMessage))
 {
     <div class="alert alert-success">
@@ -21,17 +19,17 @@
         <strong>Villa!</strong> @ViewBag.ErrorMessage
     </div>
 }
-@using (Html.BeginForm("Edit", "Exam", FormMethod.Post))
+@using (Html.BeginForm("Edit", "Exam", FormMethod.Post, new { @class = "form-horizontal" }))
 {
     @Html.ValidationSummary(true)
 
     <fieldset>
-        <legend>Próf</legend>
+        <legend>Breyta prófi</legend>
         @Html.HiddenFor(model => model.LevelExamId)
         <div class="control-group">
             @Html.LabelFor(model => model.Name, new { @class = "control-label" })
             <div class="controls">
-                @Html.TextAreaFor(model => model.Name, new { @class = "input-xlarge" })
+                @Html.TextBoxFor(model => model.Name, new { @class = "input-xlarge" })
                 <span class="help-inline">@Html.ValidationMessageFor(model => model.Name)</span>
             </div>
         </div>
@@ -52,20 +50,31 @@
         <div class="control-group">
             @Html.LabelFor(model => model.Description, new { @class = "control-label" })
             <div class="controls">
-                @Html.TextAreaFor(model => model.Description, new { @class = "input-xlarge", type = "multiline", rows = "10", cols = "30" })
+                @Html.TextAreaFor(model => model.Description, new { @class = "input-xlarge", type = "multiline", rows = "6", cols = "20" })
                 <span class="help-inline">@Html.ValidationMessageFor(model => model.Description)</span>
             </div>
         </div>
-        <p>
-            <div class="control-group">
-                <div class="controls">
-                    <button type="submit" value="Save" class="btn btn-success">
-                        <i class="icon-ok icon-white"></i> Vista breytingar á prófi
-                    </button>
-                </div>
+        <div class="control-group">
+            @Html.LabelFor(x => x.Start, new { @class = "control-label" })
+            <div class="controls">
+                @Html.TextBoxFor(x => x.Start, new { @class = "input-xlarge", @data_datepicker = "datepicker" })
+                <span class="help-inline">@Html.ValidationMessageFor(x => x.Start)</span>
             </div>
-        </p>
+        </div>
+        <div class="control-group">
+            @Html.LabelFor(x => x.Stop, new { @class = "control-label" })
+            <div class="controls">
+                @Html.TextBoxFor(x => x.Stop, new { @class = "input-xlarge", @data_datepicker = "datepicker" })
+                <span class="help-inline">@Html.ValidationMessageFor(x => x.Stop)</span>
+            </div>
+        </div>
+            <div class="form-actions">
+                    <button type="submit" value="Save" class="btn btn-primary">
+                        Vista breytingar á prófi
+                    </button>
+                    @Html.ActionLink("Búa til spurningar", "ExamQuestions", new { id = Model.LevelExamId }, new { @class="btn btn-inverse" })
+                    @Html.ActionLink("Fara í lista yfir próf", "Index", new { id = Model.Level.CourseId }, new { @class = " btn" })
+            </div>
     </fieldset>
 }
 
-@Html.ActionLink("Spurningar", "ExamQuestions", new { id = Model.LevelExamId }, null) - @Html.ActionLink("Aftur á forsíðu prófa", "Index", new { id  = Model.Level.CourseId }, null)

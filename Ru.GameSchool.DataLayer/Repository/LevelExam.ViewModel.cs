@@ -24,7 +24,7 @@ namespace Ru.GameSchool.DataLayer.Repository
         [StringLength(200)]
         public string Name { get; set; }
 
-        [Display(Name = "Hlutfall prósentu")]
+        [Display(Name = "Hlutfall")]
         [DataType(DataType.Text)]
         public double GradePercentageValue { get; set; }
 
@@ -32,7 +32,15 @@ namespace Ru.GameSchool.DataLayer.Repository
         [Required]
         /*[MaxLength(8)]*/
         public int LevelId { get; set; }
+   
+        [Required]
+        [Display(Name = "Birtingar dags.")]
+        public DateTime Start { get; set; }
 
+        [Required]
+        [Display(Name = "Skila dags.")]
+        public DateTime Stop { get; set; }
+        
         //[Required]
         //[DataType(DataType.Custom)]
         //[Display(Name = "Spurning")]

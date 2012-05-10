@@ -47,7 +47,9 @@ namespace Ru.GameSchool.Web.Controllers
         {
             if (User.Identity.IsAuthenticated)
             {
-                
+                NotificationService.ClearNotifications(ViewBag.User.UserInfoId);
+
+                return Json(true, JsonRequestBehavior.AllowGet);
             }
             return Json(false, JsonRequestBehavior.AllowGet);
         }

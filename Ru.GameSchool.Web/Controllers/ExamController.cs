@@ -159,6 +159,9 @@ namespace Ru.GameSchool.Web.Controllers
 
                 LevelExam model = new LevelExam();
 
+                model.Start = DateTime.Now;
+                model.Stop = DateTime.Now.AddDays(2);
+
                 return View(model);
             }
 
