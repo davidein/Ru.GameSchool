@@ -31,7 +31,7 @@ namespace Ru.GameSchool.Web.Controllers
 
                 if (levelProject.LevelId > allowedUserLevel)
                 {
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Index", new { id = courseId });
                 }
                 return View(levelProject);
             }
@@ -86,7 +86,7 @@ namespace Ru.GameSchool.Web.Controllers
             levelProject.LevelProjectResults.Add(CreateLevelProjectResult(levelProject, user));
             LevelService.UpdateLevelProjectFromResult(levelProject, user);
 
-            return RedirectToAction("Get");
+            return RedirectToAction("Get", new { id = levelProject.LevelProjectId });
         }
 
         private LevelProjectResult CreateLevelProjectResult(LevelProject levelProject, int id)
@@ -125,10 +125,10 @@ namespace Ru.GameSchool.Web.Controllers
             }
             else // Sækja alla courses sem þessi nemandi er í
             {
-                levelProjects = CourseService.GetCoursesByUserInfoId(userInfoId).OrderByDescending(x => x.CreateDateTime);
+                //levelProjects = CourseService.GetCoursesByUserInfoId(userInfoId).OrderByDescending(x => x.CreateDateTime);
+                return RedirectToAction("NotFound", "Home");
             }
-
-            return levelProjects == null ? View() : View(levelProjects.ToList());
+            return View(levelProjects.ToList());
         }
 
         [HttpGet]
