@@ -84,7 +84,7 @@
     </fieldset>
 }
 <div>
-    @Html.ActionLink("Aftur á forsíðu verkefna", "Index", null, new { @class = "btn btn-small" })
+    @Html.ActionLink("Aftur á forsíðu verkefna", "Index", new { id = ViewBag.CourseId }, new { @class = "btn btn-small"})
 </div>
 <script>
     $(document).ready(function () {

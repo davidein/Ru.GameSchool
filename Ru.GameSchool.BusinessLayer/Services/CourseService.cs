@@ -215,6 +215,23 @@ namespace Ru.GameSchool.BusinessLayer.Services
             return userCourse;
         }
 
+        public IEnumerable<Course> GetCoursesByUserInfId(int userInfoId)
+        {
+            if (0 > userInfoId)
+            {
+                return null;
+            }
+
+            var course = from x in GameSchoolEntities.Courses
+                         select x;
+
+            var userCourse = from x in course
+                             where x.UserInfoes.Where(p => p.UserInfoId == userInfoId).Count() > 0
+                             select x;
+
+            return userCourse;
+        }
+
         /// <summary>
         /// Gets current level by UserInfoId and CourseId
         /// </summary>

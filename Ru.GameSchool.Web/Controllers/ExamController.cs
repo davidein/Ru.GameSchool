@@ -35,7 +35,7 @@ namespace Ru.GameSchool.Web.Controllers
 
                 return View(exams);
             }
-            return View();
+            return RedirectToAction("NotFound", "Home");
         }
 
         #region Student

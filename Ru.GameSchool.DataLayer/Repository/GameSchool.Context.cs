@@ -108,18 +108,6 @@ namespace Ru.GameSchool.DataLayer.Repository
         }
         private ObjectSet<LevelMaterial> _levelMaterials;
     
-        public IObjectSet<LevelProject> LevelProjects
-        {
-            get { return _levelProjects  ?? (_levelProjects = CreateObjectSet<LevelProject>("LevelProjects")); }
-        }
-        private ObjectSet<LevelProject> _levelProjects;
-    
-        public IObjectSet<LevelProjectResult> LevelProjectResults
-        {
-            get { return _levelProjectResults  ?? (_levelProjectResults = CreateObjectSet<LevelProjectResult>("LevelProjectResults")); }
-        }
-        private ObjectSet<LevelProjectResult> _levelProjectResults;
-    
         public IObjectSet<Notification> Notifications
         {
             get { return _notifications  ?? (_notifications = CreateObjectSet<Notification>("Notifications")); }
@@ -161,6 +149,24 @@ namespace Ru.GameSchool.DataLayer.Repository
             get { return _levelExams  ?? (_levelExams = CreateObjectSet<LevelExam>("LevelExams")); }
         }
         private ObjectSet<LevelExam> _levelExams;
+    
+        public IObjectSet<Announcement> Announcements
+        {
+            get { return _announcements  ?? (_announcements = CreateObjectSet<Announcement>("Announcements")); }
+        }
+        private ObjectSet<Announcement> _announcements;
+    
+        public IObjectSet<LevelProject> LevelProjects
+        {
+            get { return _levelProjects  ?? (_levelProjects = CreateObjectSet<LevelProject>("LevelProjects")); }
+        }
+        private ObjectSet<LevelProject> _levelProjects;
+    
+        public IObjectSet<LevelProjectResult> LevelProjectResults
+        {
+            get { return _levelProjectResults  ?? (_levelProjectResults = CreateObjectSet<LevelProjectResult>("LevelProjectResults")); }
+        }
+        private ObjectSet<LevelProjectResult> _levelProjectResults;
 
         #endregion
         #region Function Imports

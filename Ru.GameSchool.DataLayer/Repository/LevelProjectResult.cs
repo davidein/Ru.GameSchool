@@ -19,22 +19,11 @@ namespace Ru.GameSchool.DataLayer.Repository
     {
         #region Primitive Properties
     
-        public virtual int LevelProjectId
+        public virtual int LevelProjectResultId
         {
-            get { return _levelProjectId; }
-            set
-            {
-                if (_levelProjectId != value)
-                {
-                    if (LevelProject != null && LevelProject.LevelProjectId != value)
-                    {
-                        LevelProject = null;
-                    }
-                    _levelProjectId = value;
-                }
-            }
+            get;
+            set;
         }
-        private int _levelProjectId;
     
         public virtual int UserInfoId
         {
@@ -53,19 +42,13 @@ namespace Ru.GameSchool.DataLayer.Repository
         }
         private int _userInfoId;
     
-        public virtual Nullable<double> Grade
+        public virtual string TeacherFeedback
         {
             get;
             set;
         }
     
         public virtual System.DateTime CreateDateTime
-        {
-            get;
-            set;
-        }
-    
-        public virtual string TeacherFeedback
         {
             get;
             set;
@@ -83,13 +66,36 @@ namespace Ru.GameSchool.DataLayer.Repository
             set;
         }
     
-        public virtual string ContentID
+        public virtual Nullable<System.Guid> ContentID
         {
             get;
             set;
         }
     
-        public virtual int LevelProjectResultId
+        public virtual int LevelProjectId
+        {
+            get { return _levelProjectId; }
+            set
+            {
+                if (_levelProjectId != value)
+                {
+                    if (LevelProject != null && LevelProject.LevelProjectId != value)
+                    {
+                        LevelProject = null;
+                    }
+                    _levelProjectId = value;
+                }
+            }
+        }
+        private int _levelProjectId;
+    
+        public virtual Nullable<double> Grade
+        {
+            get;
+            set;
+        }
+    
+        public virtual string Filename
         {
             get;
             set;

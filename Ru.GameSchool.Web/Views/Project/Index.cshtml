@@ -1,12 +1,11 @@
 ﻿@using Ru.GameSchool.DataLayer.Repository
 @model IEnumerable<Course>
-@Html.ActionLink("Sjá allt", "Index", new { id = "" })
 @foreach (var course in Model)
 {
     <table class="table table-striped table-bordered table-condensed">
         <caption>
             <h1>@course.Name</h1>
-            <i>@Html.ActionLink(@course.Identifier, "Index", new { id = course.CourseId })</i></caption>
+            <i>@course.Identifier</i></caption>
         <tbody>
             <tr>
                 <th>
@@ -47,16 +46,16 @@
             {
                 foreach (var innerInnerItem in innerItem.LevelProjects)
                 {
-                    if (!(innerInnerItem.Start > DateTime.Now && User.IsInRole("Student"))) // Ekki sýna verkefni sem eru ekki byrjuð
+                    if (!(innerInnerItem.Start > DateTime.Now && User.IsInRole("Student")) && (ViewBag.AllowedLevelId > innerInnerItem.LevelId)) // Ekki sýna verkefni sem eru ekki byrjuð
                     {     
                 <tr>
                     <td>
                         <!-- -->
                         @if (innerInnerItem.Start < DateTime.Now && User.IsInRole("Student"))
                         {
-                            @Html.ActionLink(@innerInnerItem.Name, "Get", new { id = @innerInnerItem.LevelProjectId })if (innerInnerItem.LevelProjectResults.Where(u => u.UserInfoId == ViewBag.UserInfoId).Count()>0)
+                            @Html.ActionLink(@innerInnerItem.Name, "Get", new { id = @innerInnerItem.LevelProjectId })if (innerInnerItem.LevelProjectResults.Where(u => u.UserInfoId == ViewBag.UserInfoId).Count() > 0)
                                                                                                                       {<span class="label label-success new-material">Skilað</span>}
-                                                                                                                      else if(innerInnerItem.Start.AddHours(23) >= DateTime.Now)
+                                                                                                                      else if (innerInnerItem.Start.AddHours(23) >= DateTime.Now)
                                                                                                                       {<span class="label label-important new-material">Nýtt</span>}
                         }
                         else if (User.IsInRole("Teacher"))
@@ -89,7 +88,7 @@
                         </td>
                         <td>
                             <a name="button" class="btn btn-mini" href="@Url.Action("Edit", new { id = innerInnerItem.LevelProjectId })" >
-                                <i class="icon-edit"></i>Breyta </a> | <a name="button" class="btn btn-mini" href="@Url.Action("Delete", new { id = innerInnerItem.LevelProjectId })" >
+                                <i class="icon-edit"></i>Breyta </a>| <a name="button" class="btn btn-mini" href="@Url.Action("Delete", new { id = innerInnerItem.LevelProjectId })" >
                                     <i class="icon-edit"></i>Eyða </a>
                         </td>
                     }

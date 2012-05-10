@@ -18,15 +18,21 @@ namespace Ru.GameSchool.Web.Controllers
         [HttpGet]
         public ActionResult Get(int? id)
         {
-            ViewBag.UserInfoId = MembershipHelper.GetUser().UserInfoId;
+            var userInfoId = ViewBag.UserInfoId = MembershipHelper.GetUser().UserInfoId;
+
             ViewBag.AllowedFileExtensions = GetAllowedFileExtensions();
             if (id.HasValue && id.Value > 0)
             {
                 var levelProject = LevelService.GetLevelProject(id.Value);
                 var course = CourseService.GetCourse(levelProject.Level.CourseId);
-                ViewBag.CourseId = course.CourseId;
+                var courseId = ViewBag.CourseId = course.CourseId;
                 ViewBag.Title = levelProject.Name;
+                var allowedUserLevel = ViewBag.AllowedLevelId = CourseService.GetCurrentUserLevel(userInfoId, courseId);
 
+                if (levelProject.LevelId > allowedUserLevel)
+                {
+                    return RedirectToAction("Index", new { id = courseId });
+                }
                 return View(levelProject);
             }
             return RedirectToAction("Index");
@@ -38,6 +44,7 @@ namespace Ru.GameSchool.Web.Controllers
         {
             if (id.HasValue && id.Value > 0)
             {
+                ViewBag.CourseId = id.Value;
                 var projectResults = LevelService.GetlevelProjectResultsByLevelProjectId(id.Value).OrderByDescending(x => x.GradeDate);
                 return View(projectResults);
             }
@@ -80,7 +87,7 @@ namespace Ru.GameSchool.Web.Controllers
             levelProject.LevelProjectResults.Add(CreateLevelProjectResult(levelProject, user));
             LevelService.UpdateLevelProjectFromResult(levelProject, user);
 
-            return RedirectToAction("Get");
+            return RedirectToAction("Get", new { id = levelProject.LevelProjectId });
         }
 
         private LevelProjectResult CreateLevelProjectResult(LevelProject levelProject, int id)
@@ -108,6 +115,7 @@ namespace Ru.GameSchool.Web.Controllers
             // Sækja spes course
             if (id.HasValue && id.Value > 0)
             {
+                ViewBag.AllowedLevelId = CourseService.GetCurrentUserLevel(userInfoId, id.Value);
                 var course = CourseService.GetCourse(id.Value);
                 ViewBag.CourseId = course.CourseId;
                 levelProjects =
@@ -118,10 +126,10 @@ namespace Ru.GameSchool.Web.Controllers
             }
             else // Sækja alla courses sem þessi nemandi er í
             {
-                levelProjects = CourseService.GetCoursesByUserInfoId(userInfoId).OrderByDescending(x => x.CreateDateTime);
+                //levelProjects = CourseService.GetCoursesByUserInfoId(userInfoId).OrderByDescending(x => x.CreateDateTime);
+                return RedirectToAction("NotFound", "Home");
             }
-
-            return levelProjects == null ? View() : View(levelProjects.ToList());
+            return View(levelProjects.ToList());
         }
 
         [HttpGet]
@@ -161,7 +169,7 @@ namespace Ru.GameSchool.Web.Controllers
                         var path = Server.MapPath("~/Upload") + contentId.ToString();
                         ViewBag.ContentId = contentId;
                         file.SaveAs(path);
-                        levelproject.ContentID = contentId.ToString();
+                        levelproject.ContentID = contentId;
                     }
                 }
                 ViewBag.LevelCount = GetLevelCounts(id.Value);
@@ -209,7 +217,7 @@ namespace Ru.GameSchool.Web.Controllers
                             var path = Server.MapPath("~/Upload") + contentId.ToString();
                             ViewBag.ContentId = contentId;
                             file.SaveAs(path);
-                            levelProject.ContentID = contentId.ToString();
+                            levelProject.ContentID = contentId;
                         }
                     }
 

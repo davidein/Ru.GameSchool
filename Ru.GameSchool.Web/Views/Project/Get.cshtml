@@ -18,10 +18,10 @@
     </div>
    
     <div class="control-group">
-        <h3>  @Html.DisplayNameFor(model => model.LevelId)</h3>
+        <h3>  @Html.DisplayNameFor(model => model.Level.Name)</h3>
         <div class="container-fluid">
             <div class="controls">
-                @Html.DisplayFor(model => model.LevelId)
+                @Html.DisplayFor(model => model.Level.Name)
             </div>
         </div>
     </div>
@@ -63,10 +63,10 @@
 </article>
            
             
-                 if (!(Model.Stop < DateTime.Now))
+             if (!(Model.Stop < DateTime.Now))
+             {
+                 if (Model.LevelProjectResults.Select(s => s.UserInfoId).FirstOrDefault() != ViewBag.UserInfoId)
                  {
-                     if (Model.LevelProjectResults.Select(s => s.UserInfoId).FirstOrDefault() != ViewBag.UserInfoId)
-                     {
     <div class="control-group">
         <label class="control-label">
         </label>
@@ -75,22 +75,22 @@
                 Skila verkefni</button>
         </div>
     </div>   
-                     }
-                     else
-                     {
-                         <text>Búið að skila verkefni</text>
-                     }
-
                  }
                  else
                  {
-    <strong>Skilafrestur búinn!</strong>  
+    <text>Búið að skila verkefni</text>
                  }
 
-            
+             }
+             else
+             {
+    <strong>Skilafrestur búinn!</strong>  
+             }
+
+
 }
 <div class="control-group">
     <div class="controls">
-        @Html.ActionLink("Aftur á forsíðu verkefna", "Index", null, new { @class = "btn btn-small" })
+        @Html.ActionLink("Aftur á forsíðu verkefna", "Index", new { id = ViewBag.CourseId }, new { @class = "btn btn-small" })
     </div>
 </div>
