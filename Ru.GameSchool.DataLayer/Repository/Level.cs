@@ -217,6 +217,38 @@ namespace Ru.GameSchool.DataLayer.Repository
             }
         }
         private ICollection<LevelExam> _levelExams;
+    
+        public virtual ICollection<Announcement> Announcements
+        {
+            get
+            {
+                if (_announcements == null)
+                {
+                    var newCollection = new FixupCollection<Announcement>();
+                    newCollection.CollectionChanged += FixupAnnouncements;
+                    _announcements = newCollection;
+                }
+                return _announcements;
+            }
+            set
+            {
+                if (!ReferenceEquals(_announcements, value))
+                {
+                    var previousValue = _announcements as FixupCollection<Announcement>;
+                    if (previousValue != null)
+                    {
+                        previousValue.CollectionChanged -= FixupAnnouncements;
+                    }
+                    _announcements = value;
+                    var newValue = value as FixupCollection<Announcement>;
+                    if (newValue != null)
+                    {
+                        newValue.CollectionChanged += FixupAnnouncements;
+                    }
+                }
+            }
+        }
+        private ICollection<Announcement> _announcements;
 
         #endregion
         #region Association Fixup
@@ -320,6 +352,28 @@ namespace Ru.GameSchool.DataLayer.Repository
             if (e.OldItems != null)
             {
                 foreach (LevelExam item in e.OldItems)
+                {
+                    if (ReferenceEquals(item.Level, this))
+                    {
+                        item.Level = null;
+                    }
+                }
+            }
+        }
+    
+        private void FixupAnnouncements(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            if (e.NewItems != null)
+            {
+                foreach (Announcement item in e.NewItems)
+                {
+                    item.Level = this;
+                }
+            }
+    
+            if (e.OldItems != null)
+            {
+                foreach (Announcement item in e.OldItems)
                 {
                     if (ReferenceEquals(item.Level, this))
                     {

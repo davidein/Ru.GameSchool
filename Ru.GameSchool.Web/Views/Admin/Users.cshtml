@@ -1,4 +1,4 @@
-
+﻿
 
 <a class="btn btn-primary" href="/Admin/UserEdit/">
     <i class="icon-plus-sign icon-white"></i>
@@ -10,6 +10,6 @@
 <ul>
     @foreach (var u in ViewBag.Users)
     {
-    <li><a href="/Admin/User/@u.UserInfoId/">@u.Fullname</a></li>
+    <li><a href="/Admin/UserEdit/@u.UserInfoId/">@u.Fullname</a></li>
     }
 </ul>

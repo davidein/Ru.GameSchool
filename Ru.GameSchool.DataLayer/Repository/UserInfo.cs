@@ -473,6 +473,38 @@ namespace Ru.GameSchool.DataLayer.Repository
             }
         }
         private ICollection<LevelExamAnswer> _levelExamAnswers;
+    
+        public virtual ICollection<Announcement> Announcements
+        {
+            get
+            {
+                if (_announcements == null)
+                {
+                    var newCollection = new FixupCollection<Announcement>();
+                    newCollection.CollectionChanged += FixupAnnouncements;
+                    _announcements = newCollection;
+                }
+                return _announcements;
+            }
+            set
+            {
+                if (!ReferenceEquals(_announcements, value))
+                {
+                    var previousValue = _announcements as FixupCollection<Announcement>;
+                    if (previousValue != null)
+                    {
+                        previousValue.CollectionChanged -= FixupAnnouncements;
+                    }
+                    _announcements = value;
+                    var newValue = value as FixupCollection<Announcement>;
+                    if (newValue != null)
+                    {
+                        newValue.CollectionChanged += FixupAnnouncements;
+                    }
+                }
+            }
+        }
+        private ICollection<Announcement> _announcements;
 
         #endregion
         #region Association Fixup
@@ -758,6 +790,28 @@ namespace Ru.GameSchool.DataLayer.Repository
                     if (item.UserInfoes.Contains(this))
                     {
                         item.UserInfoes.Remove(this);
+                    }
+                }
+            }
+        }
+    
+        private void FixupAnnouncements(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            if (e.NewItems != null)
+            {
+                foreach (Announcement item in e.NewItems)
+                {
+                    item.UserInfo = this;
+                }
+            }
+    
+            if (e.OldItems != null)
+            {
+                foreach (Announcement item in e.OldItems)
+                {
+                    if (ReferenceEquals(item.UserInfo, this))
+                    {
+                        item.UserInfo = null;
                     }
                 }
             }
