@@ -47,7 +47,7 @@
                 }
                 else
                 {
-                    <text>@Html.ActionLink(string.Format("{0} - Skiladagur: {1}", item.Name, item.Stop.ToString("dd.MM.yyyy HH:mm")), "Question", new { id = item.LevelExamQuestions.FirstOrDefault().LevelExamQuestionId })</text>
+                    <text>@Html.ActionLink(string.Format("{0} - Skiladagur: {1}", item.Name, item.Stop.ToString("dd.MM.yyyy HH:mm")), "Question", new { id = item.LevelExamQuestions.FirstOrDefault().LevelExamQuestionId }) @if (item.Start.AddHours(23) >= DateTime.Now) {<span class="label label-important">Nýtt</span>}</text> 
                 }
             </td>
             <td>
