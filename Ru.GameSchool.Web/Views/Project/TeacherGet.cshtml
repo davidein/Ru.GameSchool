@@ -3,41 +3,48 @@
 @{
     ViewBag.Title = "Fara yfir einkunnir nemenda";
 }
-<h2>
-    Verkefni</h2>
 
 <table class="table table-striped table-bordered table-condensed">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.LevelProject.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UserInfo.Username)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Grade)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TeacherFeedback)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UserFeedback)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ContentID)
-        </th>
-        <th>@Html.DisplayNameFor(model => model.LevelProject.GradePercentageValue)
-        </th>
-        <th>@Html.DisplayNameFor(model => model.LevelProject.Description)
-        </th>
-    </tr>
-
-    
+    <caption>Verkefni</caption>
+    <thead>
+        <tr>
+            <th>
+                Aðgerð
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LevelProject.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserInfo.Username)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Grade)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TeacherFeedback)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserFeedback)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ContentID)
+            </th>
+            <th>@Html.DisplayNameFor(model => model.LevelProject.GradePercentageValue)
+            </th>
+            <th>@Html.DisplayNameFor(model => model.LevelProject.Description)
+            </th>
+        </tr>
+    </thead>
     @foreach (var item in Model)
     {
+        <tbody >
         <tr>
             <td>
-                 @Html.ActionLink(item.LevelProject.Name,"GradeProject",new { id = item.LevelProjectResultId})
+                <a name="button" class="btn btn-mini" href="@Url.Action("GradeProject", new { id = item.LevelProjectResultId })" >
+                    <i class="icon-edit"></i>Gefa einkunn </a>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LevelProject.Name)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.UserInfo.Username)
@@ -61,6 +68,7 @@
                 @Html.DisplayFor(modelItem => item.LevelProject.Description)
             </td>
         </tr>
+        </tbody>
     }
 </table>
 <div class="control-group">
