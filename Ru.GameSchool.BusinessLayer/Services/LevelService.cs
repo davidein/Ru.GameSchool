@@ -192,11 +192,6 @@ namespace Ru.GameSchool.BusinessLayer.Services
             return levelProject;
         }
 
-        public IEnumerable<LevelProject> GetUserLevelProject(int? userInfoId)
-        {
-            return (userInfoId.HasValue && userInfoId.Value > 0) ? GameSchoolEntities.GetAllUserLevelProjects(userInfoId.Value) : null;
-        }
-
         public IEnumerable<LevelProject> GetLevelProjects()
         {
             return GameSchoolEntities.LevelProjects;

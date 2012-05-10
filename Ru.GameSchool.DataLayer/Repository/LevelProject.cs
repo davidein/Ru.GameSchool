@@ -72,7 +72,7 @@ namespace Ru.GameSchool.DataLayer.Repository
             set;
         }
     
-        public virtual string ContentID
+        public virtual Nullable<System.Guid> ContentID
         {
             get;
             set;

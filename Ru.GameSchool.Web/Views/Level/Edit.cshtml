@@ -1,17 +1,12 @@
 ﻿@model Ru.GameSchool.DataLayer.Repository.Level
 
-
-
-<script src="@Url.Content("~/Scripts/jquery.validate.min.js")"></script>
-<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")"></script>
-
-@using (Html.BeginForm()) {
+@using (Html.BeginForm("Edit", "Exam", FormMethod.Post, new { @class = "form-horizontal" }))
+{
     @Html.ValidationSummary(true)
 
     <fieldset>
         @Html.HiddenFor(model => model.CourseId)
         @Html.HiddenFor(model => model.LevelId)
-
 
         @Html.Partial("_LevelForm")
 

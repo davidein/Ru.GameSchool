@@ -168,7 +168,7 @@ namespace Ru.GameSchool.Web.Controllers
                         var path = Server.MapPath("~/Upload") + contentId.ToString();
                         ViewBag.ContentId = contentId;
                         file.SaveAs(path);
-                        levelproject.ContentID = contentId.ToString();
+                        levelproject.ContentID = contentId;
                     }
                 }
                 ViewBag.LevelCount = GetLevelCounts(id.Value);
@@ -216,7 +216,7 @@ namespace Ru.GameSchool.Web.Controllers
                             var path = Server.MapPath("~/Upload") + contentId.ToString();
                             ViewBag.ContentId = contentId;
                             file.SaveAs(path);
-                            levelProject.ContentID = contentId.ToString();
+                            levelProject.ContentID = contentId;
                         }
                     }
 

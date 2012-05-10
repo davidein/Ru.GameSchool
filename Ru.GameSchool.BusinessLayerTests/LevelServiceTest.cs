@@ -132,8 +132,8 @@ namespace Ru.GameSchool.BusinessLayerTests
             var levelProjectData = new FakeObjectSet<LevelProject>();
             var levelData = new FakeObjectSet<Level>();
 
-            LevelProject levelProject1 = new LevelProject { Stop = DateTime.Now.AddDays(7), Start = DateTime.Now, Name = "Verkefni", LevelProjectId = 1, ContentID = "Content", Description = "Lýsing", GradePercentageValue = 5, LevelId = 1 };
-            LevelProject levelProject2 = new LevelProject { Stop = DateTime.Now.AddDays(7), Start = DateTime.Now, Name = "Verkefni2", LevelProjectId = 2, ContentID = "Conten2t", Description = "Lýsing2", GradePercentageValue = 1, LevelId = 1 };
+            LevelProject levelProject1 = new LevelProject { Stop = DateTime.Now.AddDays(7), Start = DateTime.Now, Name = "Verkefni", LevelProjectId = 1, ContentID = Guid.NewGuid(), Description = "Lýsing", GradePercentageValue = 5, LevelId = 1 };
+            LevelProject levelProject2 = new LevelProject { Stop = DateTime.Now.AddDays(7), Start = DateTime.Now, Name = "Verkefni2", LevelProjectId = 2, ContentID = Guid.NewGuid(), Description = "Lýsing2", GradePercentageValue = 1, LevelId = 1 };
             UserInfo user1 = new UserInfo { Fullname = "Davíð Einarsson", Email = "davide09@ru.is", StatusId = 1, Username = "davidein", UserInfoId = userInfoId, Password = "Wtf" };
             Course course = new Course { CourseId = 1, Name = "Vefforritun I", CreateDateTime = DateTime.Now, Identifier = "VEFF", Start = DateTime.Now, Stop = DateTime.Now.AddDays(28), DepartmentId = 1, CreditAmount = 6, Description = "Lýsing á veff" };
             Level lvl = new Level { CourseId = 1, CreateDateTime = DateTime.Now, LevelId = 1, Name = "Level", Start = DateTime.Now, Stop = DateTime.Now.AddDays(7), OrderNum = 5 };
