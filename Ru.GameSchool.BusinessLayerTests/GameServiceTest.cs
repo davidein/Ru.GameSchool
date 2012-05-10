@@ -22,17 +22,12 @@ namespace Ru.GameSchool.BusinessLayerTests
 
         private IGameSchoolEntities _mockRepository;
         private GameService _gameService;
-        private TestContext testContextInstance;
 
         /// <summary>
         ///Gets or sets the test context which provides
         ///information about and functionality for the current test run.
         ///</summary>
-        public TestContext TestContext
-        {
-            get { return testContextInstance; }
-            set { testContextInstance = value; }
-        }
+        public TestContext TestContext { get; set; }
 
         #region Additional test attributes
 
@@ -98,15 +93,6 @@ namespace Ru.GameSchool.BusinessLayerTests
             Assert.IsNotNull(point);
 
             //TODO: Finish implementation
-        }
-
-        /// <summary>
-        ///A test for CalculatePoints
-        ///</summary>
-        [TestMethod()]
-        public void CalculatePointsTest()
-        {
-
         }
 
         /// <summary>
@@ -371,6 +357,17 @@ namespace Ru.GameSchool.BusinessLayerTests
             Assert.AreEqual(expectedUser1.Username,user1.Username);
             Assert.AreEqual(expectedUser2.Username, user3.Username);
             Assert.AreEqual(expectedUser3.Username, user3.Username);
+        }
+
+        /// <summary>
+        ///A test for CalculatePointsByGrade
+        ///</summary>
+        [TestMethod()]
+        public void CalculatePointsByGradeTest()
+        {
+            var actual = _gameService.CalculatePointsByGrade(5, 5);
+
+            Assert.AreEqual(25, actual);
         }
     }
 }
