@@ -269,7 +269,7 @@ namespace Ru.GameSchool.BusinessLayer.Services
                     levelProjToUpdate.ContentID = levelProject.ContentID;
                     levelProjToUpdate.UserFeedback = levelProject.UserFeedback;
                     levelProjToUpdate.LevelProjectResults.Add(levelProject.LevelProjectResults.ElementAtOrDefault(0));
-
+                    
                     int points = 10;
 
 
