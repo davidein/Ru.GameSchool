@@ -1,8 +1,78 @@
 
+<table class="table table-striped table-bordered table-condensed">
+        <caption>
+            <h1>@ViewBag.Name</h1>
+            <i></i>
+        </caption>
+        <tbody>
+        <tr>
+            <th>Dagsetning</th>
+            <th>Nafn</th>
+            <th>Lýsing</th>
+            @if (User.IsInRole("Teacher"))
+            {
+                <th>Aðgerðir kennara</th>
+            }
+            else
+            {
+                <th>Sækja</th>
+                <th>Horfa</th>
+            }
+        </tr>
+        @foreach (var item in ViewBag.Materials)
+        {
+           <tr>
+                <td>@item.CreateDateTime.Date.ToString("dd/MM/yyyy")</td>
+                <td>@Html.ActionLink((@item.Title) as string, "Get", new { id = @item.LevelMaterialId })@if (@item.CreateDateTime.AddHours(23) >= DateTime.Now){<span class="label label-important new-material">Nýtt</span>}</td>
+                <td>@item.Description</td>
+                @if (User.IsInRole("Teacher"))
+                {
+                    <td>
+                        <button name="button" class="btn btn-mini" href="@Url.Action("Edit", new { id = item.LevelMaterialId } )" >
+                            <i class="icon-edit"></i> Breyta
+                        </button> 
+                        |
+                        <button name="button" class="btn btn-mini" href="@Url.Action("Get", new { id = item.LevelMaterialId } )" >
+                            <i class="icon-download-alt"></i> Sækja
+                        </button> 
+                        |
+                        @if (@item.ContentTypeId == 1)
+                        {
+                            <button name="button" class="btn btn-mini" href="" >
+                                <i class="icon-play"></i> Spila
+                            </button>
+                        }
 
-<ul>
-    @foreach(var item in ViewBag.Materials)
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        <button name="button" class="btn btn-mini" href="" >
+                            <i class="icon-download-alt"></i>
+                        </button>
+                    </td>
+                    <td>
+                        @if (@item.ContentTypeId == 1)
+                        {
+                            <button name="button" class="btn btn-mini btn-success" href="" >
+                                <i class="icon-play icon-white"></i>
+                            </button>
+                        }
+                        
+                    </td>
+                }
+            </tr>
+        }
+        </tbody>
+</table>
+@using (Html.BeginForm("Create", "Material", new { id = ViewBag.LevelId }, FormMethod.Post))
+{
+    if (User.IsInRole("Teacher"))
     {
-        <li>@Html.ActionLink((@item.Title +" - "+@item.ContentType.Name) as string, User.IsInRole("Student") ? "Get" : "Edit", new { id = @item.LevelMaterialId })</li>
+        <p>
+            <button name="button" class="btn btn-success" value="Create" >
+                Skrá nýtt kennslugagn</button>
+        </p>
     }
-</ul>
+}

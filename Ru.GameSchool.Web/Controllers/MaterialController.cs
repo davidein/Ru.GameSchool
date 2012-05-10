@@ -23,7 +23,7 @@ namespace Ru.GameSchool.Web.Controllers
             if (id.HasValue)
             {
                 int courseIdValue = id.Value;
-                IEnumerable<LevelMaterial> materials = CourseService.GetCourseMaterials(courseIdValue); ;
+                IEnumerable<LevelMaterial> materials = CourseService.GetCourseMaterials(courseIdValue).OrderByDescending(m => m.CreateDateTime); ;
                 ViewBag.Materials = materials;
                 ViewBag.CourseName = CourseService.GetCourse(courseIdValue).Name;
                 ViewBag.Courseid = CourseService.GetCourse(courseIdValue).CourseId;
@@ -41,7 +41,7 @@ namespace Ru.GameSchool.Web.Controllers
             {
                 int courseIdValue = id.Value;
                 int contentTypeIdValue = contentTypeId.Value;
-                IEnumerable<LevelMaterial> materials = CourseService.GetCourseMaterials(courseIdValue,contentTypeIdValue); ;
+                IEnumerable<LevelMaterial> materials = CourseService.GetCourseMaterials(courseIdValue,contentTypeIdValue).OrderByDescending(m=>m.CreateDateTime); ;
                 ViewBag.Materials = materials;
                 ViewBag.CourseName = CourseService.GetCourse(courseIdValue).Name;
                 ViewBag.Courseid = CourseService.GetCourse(courseIdValue).CourseId;
@@ -62,10 +62,11 @@ namespace Ru.GameSchool.Web.Controllers
             {
                 
                 var material = LevelService.GetLevelMaterial(id.Value);
-                var filepath = Settings.ProjectMaterialVirtualFolder + material.ContentId.ToString() + ".mp4";
-                ViewBag.File = filepath; //TODO: Add function to check for file extensions
+                var filepath = Settings.ProjectMaterialVirtualFolder + material.ContentId.ToString();
+                 //TODO: Add function to check for file extensions
                 if(material.ContentType.ContentTypeId == 1)
                 {
+                    ViewBag.File = filepath+".mp4";
                     ViewBag.CourseName = material.Level.Course.Name;
                     ViewBag.Courseid = material.Level.Course.CourseId;
                     ViewBag.Title = material.ContentType.Name;
@@ -75,7 +76,7 @@ namespace Ru.GameSchool.Web.Controllers
                 }
                 else
                 {
-                    return new DownloadResult { VirtualPath = filepath, FileDownloadName = material.Title + ".ppt" };
+                    return new DownloadResult { VirtualPath = filepath, FileDownloadName = material.Filename };
                 }
                 
             }
@@ -108,14 +109,18 @@ namespace Ru.GameSchool.Web.Controllers
                 foreach (var file in levelMaterial.File)
                 {
                     Guid contentId = Guid.NewGuid();
-                    if (file.ContentLength <= 0) continue;
-                    var path = Path.Combine(Server.MapPath("~/Upload"), contentId.ToString() + ".mp4"); //TODO: Add function to check for file extensions
-                    ViewBag.ContentId = contentId;
-                    file.SaveAs(path);
-                    levelMaterial.ContentId = contentId;
+                    if (file.ContentLength > 0) 
+                    {
+                        var path = Path.Combine(Server.MapPath("~/Upload"), contentId.ToString());
+                        ViewBag.ContentId = contentId;
+                        file.SaveAs(path);
+                        levelMaterial.ContentId = contentId;
+                        levelMaterial.Filename = file.FileName;
+                    }
                 }
+                levelMaterial.CreateDateTime = DateTime.Now;
                 LevelService.CreateLevelMaterial(levelMaterial);
-
+                
                 return RedirectToAction("Get", new { id = levelMaterial.LevelMaterialId });
 
             }
@@ -134,7 +139,7 @@ namespace Ru.GameSchool.Web.Controllers
             if (id.HasValue)
             {
                 var material = LevelService.GetLevelMaterial(id.Value);
-                    var courseId = material.Level.CourseId;
+                var courseId = material.Level.CourseId;
                 ViewBag.LevelCount = GetLevelCounts(courseId);
                 ViewBag.ContentTypes = LevelService.GetContentTypes();
                 //ViewBag.CourseId = material.Level.CourseId;
@@ -151,7 +156,7 @@ namespace Ru.GameSchool.Web.Controllers
 
         [HttpPost]
         [Authorize(Roles = "Teacher")]
-        public ActionResult Edit(LevelMaterial levelMaterial, int? id) //TODO: FIX THIS! DOES NOT RETURN RIGHT MATERIALID IN URL - ALSO SERVER ERROR
+        public ActionResult Edit(LevelMaterial levelMaterial, int? id) 
         {
             if (ModelState.IsValid)
             {
@@ -164,11 +169,13 @@ namespace Ru.GameSchool.Web.Controllers
                         foreach (var file in levelMaterial.File)
                         {
                             Guid contentId = Guid.NewGuid();
-                            if (file.ContentLength <= 0) continue;
-                            var path = Path.Combine(Server.MapPath("~/Upload"), contentId.ToString() + ".mp4"); //TODO: Add function to check for file extensions
-                            ViewBag.ContentId = contentId;
-                            file.SaveAs(path);
-                            levelMaterial.ContentId = contentId;
+                            if (file.ContentLength > 0) 
+                            {
+                                var path = Path.Combine(Server.MapPath("~/Upload"), contentId.ToString()); //TODO: Add function to check for file extensions
+                                ViewBag.ContentId = contentId;
+                                file.SaveAs(path);
+                                levelMaterial.ContentId = contentId;
+                            }
                         }
                     }
                     

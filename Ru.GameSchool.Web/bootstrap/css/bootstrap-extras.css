@@ -256,3 +256,8 @@
     height: 9px;
     width: 10px;
 }
+
+/* left margin on New alert! */
+.new-material {
+    margin-left: 5px;
+}
