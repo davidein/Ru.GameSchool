@@ -1,9 +1,6 @@
 ﻿@using Ru.GameSchool.DataLayer.Repository
 @model IEnumerable<Course>
-@if (User.IsInRole("Teacher"))
-{
-    @Html.ActionLink("Sjá allt", "Index", new { id = "" })
-}
+@Html.ActionLink("Sjá allt", "Index", new { id = "" })
 @foreach (var course in Model)
 {
     <table class="table table-striped table-bordered table-condensed">
@@ -41,9 +38,11 @@
             {
                 foreach (var innerInnerItem in innerItem.LevelProjects)
                 {
+                     
                 <tr>
                     <td>
-                        @Html.ActionLink(@innerInnerItem.Name, User.IsInRole("Teacher") ? "TeacherGet" : "Get", new { id = @innerInnerItem.LevelProjectId })
+                        @Html.ActionLink(@innerInnerItem.Name, User.IsInRole("Teacher") ? "TeacherGet" : "Get", new { id = @innerInnerItem.LevelProjectId })@if (@innerInnerItem.Start.AddHours(23) >= DateTime.Now)
+                                                                                                                                                            {<span class="label label-important new-material">Nýtt</span>}
                     </td>
                     <td>
                         @innerInnerItem.Stop
@@ -54,8 +53,9 @@
                     @if (User.IsInRole("Teacher"))
                     {
                         <td>
-                            @Html.ActionLink("Breyta", "Edit", new { id = innerInnerItem.LevelProjectId }) |
-                            @Html.ActionLink("Eyða", "Delete", new { id = innerInnerItem.LevelProjectId })
+                            <a name="button" class="btn btn-mini" href="@Url.Action("Edit", new { id = innerInnerItem.LevelProjectId })" >
+                                <i class="icon-edit"></i>Breyta </a> | <a name="button" class="btn btn-mini" href="@Url.Action("Delete", new { id = innerInnerItem.LevelProjectId })" >
+                                    <i class="icon-edit"></i>Eyða </a>
                         </td>
                     }
                     else if (User.IsInRole("Student"))

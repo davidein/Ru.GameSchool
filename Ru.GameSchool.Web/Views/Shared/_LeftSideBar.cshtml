@@ -10,7 +10,7 @@
     <div class="well">
         <h2>
             @{
-                var points = new GameService().GetScoreComparedToUsers(Ru.GameSchool.Web.Classes.Helper.MembershipHelper.GetUser().UserInfoId, 1);
+                var points = new GameService().GetScoreComparedToUsers(Ru.GameSchool.Web.Classes.Helper.MembershipHelper.GetUser().UserInfoId, 1); // hvernig á að sækja course?
                 var totalPoints = points.Item1;
                 var position = points.Item2;
                 var points1 = points.Item3;
@@ -25,12 +25,12 @@
         <p>
             Næsti keppandi á eftir þér þarf aðeins <span class="label label-warning">@points2</span>
             stig til þess að komast yfir þig!</p>
-        <button class="btn btn-small" data-toggle="modal" data-target="#leaderBoard">
+        <button class="btn btn-small" data-toggle="modal" data-target="#myModal">
             Sjá topplistann</button>
     </div>
 }
 <div id="accordion2" class="accordion">
-    @foreach (var item in ViewBag.UserCourseList)
+    @foreach (var item in ViewBag.UserCourseList) 
     {
         foreach (var nesteditem in item)
         {
@@ -57,7 +57,7 @@
                         <li>@Html.ActionLink("Verkefni", "Index", "Project", new { id = @nesteditem.CourseId }, null)</li>
                         <li>@Html.ActionLink("Próf", "Index", "Exam", new { id = @nesteditem.CourseId }, null)</li>
                         <li>@Html.ActionLink("Kennsluefni", "Index", "Material", new { id = @nesteditem.CourseId }, null)</li>
-                        <li><a data-toggle="modal" href="#myModal">Top tíu listinn!</a></li>
+                        <li>@Html.ActionLink("Top tíu listinn", "", null, new { href = "#myModal", id = @nesteditem.CourseId, data_toggle = "modal" })</li>
                     </ul>
                 </div>
             </div>
@@ -78,20 +78,25 @@
                     <th>
                         Stig
                     </th>
-                    <th>
-                        Nafn
-                    </th>
+                    <th>Deild nemanda</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach (var item in new GameService().GetTopTenList(1))
+                @{
+                    var counter = 1;
+                }
+                @foreach (var item in new GameService().GetTopTenList(1)) 
                 {
                     <tr>
-                        <td>@item.Item2.Username
+                        <td>@counter
                         </td>
                         <td>@item.Item1
                         </td>
+                        <td>
+                            @item.Item2.Department.Name
+                        </td>
                     </tr>
+                    counter++;
                 }
             </tbody>
         </table>
