@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Objects.DataClasses;
 using System.Linq;
 using System.Text;
 using System.ComponentModel.DataAnnotations;
@@ -7,7 +8,7 @@ using System.ComponentModel.DataAnnotations;
 namespace Ru.GameSchool.DataLayer.Repository
 {
     [MetadataType(typeof(LevelMetadata))]
-    public partial class Level
+    public partial class Level 
     {
     }
 
@@ -21,7 +22,7 @@ namespace Ru.GameSchool.DataLayer.Repository
 
         [Required(ErrorMessage = @"Vantar opnunartíma")]
         [Display(Name = "Opið frá")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd MMM yyyy  hh:mm}")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd MMM yyyy}")]
         public DateTime Start;
 
         [Required(ErrorMessage = @"Vantar lokunartíma")]

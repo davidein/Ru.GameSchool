@@ -19,7 +19,14 @@
                     <span class="help-inline">@Html.ValidationMessageFor(m => m.Answer)</span>
                 </div>
             </div>
-            <p><input value="Vista" type="submit" /></p>
+            <div class="control-group">
+                @Html.LabelFor(m => m.Correct)
+                <div class="controls">
+                    @Html.CheckBoxFor(m=>m.Correct)
+                    <span class="help-inline">@Html.ValidationMessageFor(m => m.Correct)</span>
+                </div>
+            </div>
+            <p><input value="Vista" type="submit" class="btn-primary" /></p>
         </fieldset>    
     }
 

@@ -1,15 +1,13 @@
 ﻿@using Ru.GameSchool.DataLayer.Repository
 @model LevelProject
-    <h2>
-    Verkefni</h2>
 <script src="@Url.Content("~/Scripts/jquery.validate.min.js")"></script>
 <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")"></script>
-@using (Html.BeginForm("Create", "Project", FormMethod.Post))
+@using (Html.BeginForm("Create", "Project", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal" }))
 {
     @Html.ValidationSummary(true)
 
     <fieldset>
-        <legend>Upplýsingar</legend>
+        <legend>Upplýsingar um verkefni</legend>
         <div class="control-group">
             @Html.LabelFor(model => model.Name, new { @class = "control-label" })
             <div class="controls">
@@ -18,21 +16,14 @@
             </div>
         </div>
         <div class="control-group">
-            @Html.LabelFor(model => model.LevelId, "Level")
+            @Html.LabelFor(m => m.LevelId, new { @class = "control-label" })
             <div class="controls">
-                @Html.DropDownList("LevelId", string.Empty)
-                <span class="help-inline">@Html.ValidationMessageFor(model => model.LevelId)</span>
+                @Html.DropDownListFor(m => m.LevelId, new SelectList(ViewBag.LevelCount, "Value", "Text"))
+                <span class="help-inline">@Html.ValidationMessageFor(m => m.LevelId)</span>
             </div>
         </div>
-@*                <div class="control-group">
-            @Html.LabelFor(model => model.Level.CourseId, "Levels.Course")
-            <div class="controls">
-                @Html.DropDownList("CourseId", string.Empty)
-                <span class="help-inline">@Html.ValidationMessageFor(model => model.Level.CourseId)</span>
-            </div>
-        </div>*@
         <div class="control-group">
-            @Html.LabelFor(model => model.GradePercentageValue)
+            @Html.LabelFor(model => model.GradePercentageValue, new { @class = "control-label" })
             <div class="controls">
                 @Html.DropDownListFor(m => m.GradePercentageValue, new SelectList(ViewBag.GradePercentageValue, "Value", "Text"))
             </div>
@@ -44,13 +35,16 @@
                 <span class="help-inline">@Html.ValidationMessageFor(model => model.Start)</span>
             </div>
         </div>
-        <div class="control-group">
+
+               <div class="control-group">
             @Html.LabelFor(model => model.Stop, new { @class = "control-label" })
             <div class="controls">
                 @Html.TextBoxFor(model => model.Stop, new { @data_datepicker = "datepicker", rel = "popover" })
                 <span class="help-inline">@Html.ValidationMessageFor(model => model.Stop)</span>
             </div>
         </div>
+
+
         <div class="control-group">
             @Html.LabelFor(model => model.Description, new { @class = "control-label" })
             <div class="controls">

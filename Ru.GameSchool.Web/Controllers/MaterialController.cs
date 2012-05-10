@@ -32,7 +32,7 @@ namespace Ru.GameSchool.Web.Controllers
                 return View(materials);
             }
 
-            return RedirectToAction("NotFound","Home");
+            return RedirectToAction("NotFound", "Home");
         }
 
         public ActionResult Index(int? id, int? contentTypeId)
@@ -41,7 +41,7 @@ namespace Ru.GameSchool.Web.Controllers
             {
                 int courseIdValue = id.Value;
                 int contentTypeIdValue = contentTypeId.Value;
-                IEnumerable<LevelMaterial> materials = CourseService.GetCourseMaterials(courseIdValue,contentTypeIdValue).OrderByDescending(m=>m.CreateDateTime); ;
+                IEnumerable<LevelMaterial> materials = CourseService.GetCourseMaterials(courseIdValue, contentTypeIdValue).OrderByDescending(m => m.CreateDateTime); ;
                 ViewBag.Materials = materials;
                 ViewBag.CourseName = CourseService.GetCourse(courseIdValue).Name;
                 ViewBag.Courseid = CourseService.GetCourse(courseIdValue).CourseId;
@@ -56,29 +56,31 @@ namespace Ru.GameSchool.Web.Controllers
         [HttpGet]
         [Authorize(Roles = "Student, Teacher")]
         public ActionResult Get(int? id)
-
         {
             if (id.HasValue)
             {
-                
+
                 var material = LevelService.GetLevelMaterial(id.Value);
+
                 var filepath = Settings.ProjectMaterialVirtualFolder + material.ContentId.ToString();
-                 //TODO: Add function to check for file extensions
-                if(material.ContentType.ContentTypeId == 1)
+                //TODO: Add function to check for file extensions
+                if (material.ContentType.ContentTypeId == 1)
                 {
-                    ViewBag.File = filepath+".mp4";
+                    ViewBag.File = filepath + ".mp4";
                     ViewBag.CourseName = material.Level.Course.Name;
                     ViewBag.Courseid = material.Level.Course.CourseId;
                     ViewBag.Title = material.ContentType.Name;
                     ViewBag.Name = material.Title;
                     ViewBag.Description = material.Description;
+                    ViewBag.LevelMaterialId = material.LevelMaterialId;
                     return View(material);
                 }
                 else
                 {
                     return new DownloadResult { VirtualPath = filepath, FileDownloadName = material.Filename };
                 }
-                
+
+
             }
             return View();
         }
@@ -103,13 +105,13 @@ namespace Ru.GameSchool.Web.Controllers
         [Authorize(Roles = "Teacher")]
         public ActionResult Create(LevelMaterial levelMaterial, int? id)
         {
-            
+
             if (ModelState.IsValid)
             {
                 foreach (var file in levelMaterial.File)
                 {
                     Guid contentId = Guid.NewGuid();
-                    if (file.ContentLength > 0) 
+                    if (file.ContentLength > 0)
                     {
                         var path = Path.Combine(Server.MapPath("~/Upload"), contentId.ToString());
                         ViewBag.ContentId = contentId;
@@ -120,7 +122,8 @@ namespace Ru.GameSchool.Web.Controllers
                 }
                 levelMaterial.CreateDateTime = DateTime.Now;
                 LevelService.CreateLevelMaterial(levelMaterial);
-                
+
+
                 return RedirectToAction("Get", new { id = levelMaterial.LevelMaterialId });
 
             }
@@ -135,7 +138,8 @@ namespace Ru.GameSchool.Web.Controllers
         [Authorize(Roles = "Teacher")]
         public ActionResult Edit(int? id)
         {
-            
+
+
             if (id.HasValue)
             {
                 var material = LevelService.GetLevelMaterial(id.Value);
@@ -156,7 +160,7 @@ namespace Ru.GameSchool.Web.Controllers
 
         [HttpPost]
         [Authorize(Roles = "Teacher")]
-        public ActionResult Edit(LevelMaterial levelMaterial, int? id) 
+        public ActionResult Edit(LevelMaterial levelMaterial, int? id)
         {
             if (ModelState.IsValid)
             {
@@ -169,7 +173,7 @@ namespace Ru.GameSchool.Web.Controllers
                         foreach (var file in levelMaterial.File)
                         {
                             Guid contentId = Guid.NewGuid();
-                            if (file.ContentLength > 0) 
+                            if (file.ContentLength > 0)
                             {
                                 var path = Path.Combine(Server.MapPath("~/Upload"), contentId.ToString()); //TODO: Add function to check for file extensions
                                 ViewBag.ContentId = contentId;
@@ -178,18 +182,18 @@ namespace Ru.GameSchool.Web.Controllers
                             }
                         }
                     }
-                    
+
                     ViewBag.CourseName = CourseService.GetCourse(courseId).Name;
                     ViewBag.Courseid = CourseService.GetCourse(courseId).CourseId;
                     ViewBag.Title = "Breyta kennsluefni";
                     ViewBag.LevelCount = GetLevelCounts(courseId);
                     ViewBag.ContentTypes = LevelService.GetContentTypes();
                     ViewBag.SuccessMessage = "Kennslugagn hefur verið uppfært";
-                    
+
                     LevelService.UpdateLevelMaterial(material);
                     return View(levelMaterial);
                 }
-                
+
             }
             else
             {
@@ -215,7 +219,5 @@ namespace Ru.GameSchool.Web.Controllers
                     };
             }
         }
-
-        
     }
 }

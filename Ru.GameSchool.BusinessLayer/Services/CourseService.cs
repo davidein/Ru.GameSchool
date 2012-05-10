@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using Ru.GameSchool.DataLayer.Repository;
 using Ru.GameSchool.Utilities;
 using System;
+using Ru.GameSchool.BusinessLayer.Enums;
 
 
 namespace Ru.GameSchool.BusinessLayer.Services
@@ -88,7 +89,7 @@ namespace Ru.GameSchool.BusinessLayer.Services
             return departments;
         }
 
-        public string AddUserToCourse(int userInfoId, int courseId)
+        public string AddUserToCourse(int userInfoId, int courseId, out ResponseStatus responseStatus)
         {
             if (userInfoId > 0 && courseId > 0)
             {
@@ -104,7 +105,10 @@ namespace Ru.GameSchool.BusinessLayer.Services
                 var isInCourse = GetCoursesByUserInfoIdAndCourseId(userInfoId, courseId);
 
                 if (isInCourse.Count() > 0) //User Already in course
-                    return string.Format("User is already registered in course! Returns {0} results.", isInCourse.Count());
+                {
+                    responseStatus = ResponseStatus.Failure;
+                    return string.Format("{0} er nú þegar skráður í námskeiðið {1}.", userQuery.FirstOrDefault().Fullname, courseQuery.Name);
+                }
 
                 courseQuery.UserInfoes.Add(userQuery.FirstOrDefault());
                 Save();
@@ -114,10 +118,12 @@ namespace Ru.GameSchool.BusinessLayer.Services
                         string.Format("Þú hefur verið skráður í {0}", courseQuery.Name),
                         string.Format("/Course/Item/{0}", courseQuery.CourseId), userInfoId);
 
-                return "User added to course!";
+                responseStatus = ResponseStatus.Success;
+                return string.Format("Notandinn {0} hefur nú verið skráður í {1}", userQuery.FirstOrDefault().Fullname, courseQuery.Name);
             }
 
-            return "Invalid userId or CourseId";
+            responseStatus = ResponseStatus.Error;
+            return "Villa: Ógild auðkenni!";
         }
 
         /// <summary>
@@ -205,17 +211,6 @@ namespace Ru.GameSchool.BusinessLayer.Services
                        where x.UserInfoes.Where(p => p.UserInfoId == userInfoId).Count() > 0
                        select x;
 
-            /*var query = GameSchoolEntities.UserInfoes.Join(GameSchoolEntities.Courses,
-                                                           u => u.DepartmentId, c => c.DepartmentId,
-                                                           (u, c) => new
-                                                                         {
-                                                                             u,
-                                                                             c
-                                                                         }).Where(
-                                                                             x =>
-                                                                             x.c.CourseId == courseId &&
-                                                                             x.u.UserInfoId == userInfoId)
-                                                                           .Select(m => m.c);*/
 
             return userCourse;
         }

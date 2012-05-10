@@ -1,5 +1,6 @@
 ﻿@using Ru.GameSchool.DataLayer.Repository
 @model LevelProject
+<h2>
     Breyta verkefni</h2>
 <script src="@Url.Content("~/Scripts/jquery.validate.min.js")"></script>
 <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")"></script>
@@ -10,6 +11,22 @@
     <fieldset>
         <legend>Upplýsingar</legend>
         @Html.HiddenFor(model => model.LevelProjectId)
+        @if (!string.IsNullOrWhiteSpace(ViewBag.SuccessMessage))
+        {
+            <div class="alert alert-success">
+                <button class="close" data-dismiss="alert">
+                    ×</button>
+                <strong>Tókst!</strong> @ViewBag.SuccessMessage
+            </div>
+        }
+        @if (!string.IsNullOrWhiteSpace(ViewBag.ErrorMessage))
+        {
+            <div class="alert alert-error">
+                <button class="close" data-dismiss="alert">
+                    ×</button>
+                <strong>Villa!</strong> @ViewBag.ErrorMessage
+            </div>
+        }
         <div class="control-group">
             @Html.LabelFor(model => model.Name, new { @class = "control-label" })
             <div class="controls">
@@ -69,3 +86,18 @@
 <div>
     @Html.ActionLink("Aftur á forsíðu verkefna", "Index")
 </div>
+<script>
+    $(document).ready(function () {
+
+        jQuery.validator.methods["date"] = function (value, element) {
+            return true;
+        };
+
+        $.datepicker.setDefaults({ validateDate: 'false' });
+        $.datepicker.regional['is-IS']
+        $('.Start').datepicker({ dateFormat: "d.m.yy 00:00:01" });
+        $('.Stop').datepicker({ dateFormat: "d.m.yy 23:59:59" });
+
+
+    });
+</script>

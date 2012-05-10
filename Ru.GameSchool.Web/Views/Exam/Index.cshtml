@@ -41,7 +41,7 @@
     {
         <tr>
             <td>
-                @if ((item.LevelExamResults.Where(u => u.UserInfoId == ViewBag.UserInfoId).Count() > 0) || item.LevelExamQuestions.Count() == 0)
+                @if ((item.LevelExamResults.Where(u => u.UserInfoId == ViewBag.UserInfoId).Count() > 0) || (item.LevelExamQuestions.Count() == 0) || item.LevelExamQuestions.Where(x=>x.LevelExamAnswers.Count() == 0).Count() > 0)
                 {
                     <text>@item.Name</text>
                 }

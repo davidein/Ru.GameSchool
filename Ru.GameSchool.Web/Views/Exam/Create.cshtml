@@ -27,9 +27,9 @@
         </div>
         <div class="control-group">
             <label class="control-label">
-                Hlutfall prósentu</label>
+                Hlutfall</label>
             <div class="controls">
-                @Html.DropDownListFor(m => m.GradePercentageValue, ViewBag.GradePercentageValues as IEnumerable<SelectListItem>)
+                @Html.DropDownListFor(m => m.GradePercentageValue, ViewBag.GradePercentageValues as IEnumerable<SelectListItem>, "Veldu prósentu")
             </div>
         </div>
         <div class="control-group">
@@ -49,5 +49,5 @@
     </fieldset>
 }
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to List", "Index", new { id = ViewBag.CourseId })
 </div>

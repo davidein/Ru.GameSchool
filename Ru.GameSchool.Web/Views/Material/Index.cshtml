@@ -28,19 +28,19 @@
                 @if (User.IsInRole("Teacher"))
                 {
                     <td>
-                        <button name="button" class="btn btn-mini" href="@Url.Action("Edit", new { id = item.LevelMaterialId } )" >
+                        <a name="button" class="btn btn-mini" href="@Url.Action("Edit", new { id = item.LevelMaterialId } )" >
                             <i class="icon-edit"></i> Breyta
-                        </button> 
+                        </a> 
                         |
-                        <button name="button" class="btn btn-mini" href="@Url.Action("Get", new { id = item.LevelMaterialId } )" >
+                        <a name="button" class="btn btn-mini" href="@Url.Action("Get", new { id = item.LevelMaterialId } )" >
                             <i class="icon-download-alt"></i> Sækja
-                        </button> 
+                        </a> 
                         |
                         @if (@item.ContentTypeId == 1)
                         {
-                            <button name="button" class="btn btn-mini" href="" >
+                            <a name="button" class="btn btn-mini" href="@Url.Action("Get", new { id = item.LevelMaterialId } )" >
                                 <i class="icon-play"></i> Spila
-                            </button>
+                            </a>
                         }
 
                     </td>

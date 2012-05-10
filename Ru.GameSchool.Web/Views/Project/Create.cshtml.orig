@@ -1,15 +1,81 @@
 <<<<<<< HEAD
 ﻿@using Ru.GameSchool.DataLayer.Repository
 @model LevelProject
-@{
-    ViewBag.Title = "Búa til nýtt verkefni";
-}
-<h2>
-    Verkefni</h2>
-=======
-﻿@model Ru.GameSchool.DataLayer.Repository.LevelProject
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")"></script>
+@using (Html.BeginForm("Create", "Project", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal" }))
+{
+    @Html.ValidationSummary(true)
 
->>>>>>> 89a73b72a3e9e68cc98cc620962401ec8d67cdf1
+    <fieldset>
+        <legend>Upplýsingar um verkefni</legend>
+        <div class="control-group">
+            @Html.LabelFor(model => model.Name, new { @class = "control-label" })
+            <div class="controls">
+                @Html.EditorFor(model => model.Name, new { @class = "input-xlarge", rel = "popover" })
+                <span class="help-inline">@Html.ValidationMessageFor(model => model.Name)</span>
+            </div>
+        </div>
+        <div class="control-group">
+            @Html.LabelFor(m => m.LevelId, new { @class = "control-label" })
+            <div class="controls">
+                @Html.DropDownListFor(m => m.LevelId, new SelectList(ViewBag.LevelCount, "Value", "Text"))
+                <span class="help-inline">@Html.ValidationMessageFor(m => m.LevelId)</span>
+            </div>
+        </div>
+        <div class="control-group">
+            @Html.LabelFor(model => model.GradePercentageValue, new { @class = "control-label" })
+            <div class="controls">
+                @Html.DropDownListFor(m => m.GradePercentageValue, new SelectList(ViewBag.GradePercentageValue, "Value", "Text"))
+            </div>
+        </div>
+        <div class="control-group">
+            @Html.LabelFor(model => model.Start, new { @class = "control-label" })
+            <div class="controls">
+                @Html.TextBoxFor(model => model.Start, new { @data_datepicker = "datepicker", rel = "popover" })
+                <span class="help-inline">@Html.ValidationMessageFor(model => model.Start)</span>
+            </div>
+        </div>
+
+               <div class="control-group">
+            @Html.LabelFor(model => model.Stop, new { @class = "control-label" })
+            <div class="controls">
+                @Html.TextBoxFor(model => model.Stop, new { @data_datepicker = "datepicker", rel = "popover" })
+                <span class="help-inline">@Html.ValidationMessageFor(model => model.Stop)</span>
+            </div>
+        </div>
+
+
+        <div class="control-group">
+            @Html.LabelFor(model => model.Description, new { @class = "control-label" })
+            <div class="controls">
+                @Html.EditorFor(model => model.Description, new { @class = "input-xlarge", rel = "popover", cols = "30", rows = "10" })
+                <span class="help-inline">@Html.ValidationMessageFor(model => model.Description)</span>
+            </div>
+        </div>
+        <div class="control-group">
+            @Html.LabelFor(model => model.ContentID, new { @class = "control-label" })
+            <div class="controls">
+                @Html.TextBoxFor(model => model.ContentID, new { type = "file", @class = "input-file", rel = "popover" })
+                <span class="help-inline">@Html.ValidationMessageFor(model => model.ContentID)</span>
+            </div>
+        </div>
+        <div class="control-group">
+            <div class="controls">
+                <button type="submit" class="btn btn-success">
+                    Bæta við verkefni</button>
+            </div>
+        </div>
+    </fieldset>
+}
+<div>
+    @Html.ActionLink("Aftur á forsíðu verkefna", "Index")
+</div>
+=======
+﻿@using Ru.GameSchool.DataLayer.Repository
+@model LevelProject
+    <h2>
+    Verkefni</h2>
 <script src="@Url.Content("~/Scripts/jquery.validate.min.js")"></script>
 <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")"></script>
 @using (Html.BeginForm("Create", "Project", FormMethod.Post))
@@ -84,3 +150,4 @@
 <div>
     @Html.ActionLink("Aftur á forsíðu verkefna", "Index")
 </div>
+>>>>>>> 5f1500f7525396f2ca81062d9d61f05c2abd517e
