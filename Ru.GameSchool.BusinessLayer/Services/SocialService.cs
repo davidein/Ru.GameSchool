@@ -39,8 +39,26 @@ namespace Ru.GameSchool.BusinessLayer.Services
 
                 else
                 {
+                    Comment likeComment = GameSchoolEntities.Comments.Where(x => x.CommentId == commentLike.CommentId).FirstOrDefault();
+                    UserInfo commentUser = GameSchoolEntities.UserInfoes.Where(x => x.UserInfoId == likeComment.UserInfoId).FirstOrDefault();
+                    UserInfo likeUser = GameSchoolEntities.UserInfoes.Where(x => x.UserInfoId == commentLike.UserInfoId).FirstOrDefault();
+                    LevelMaterial commentLevelMaterial = GameSchoolEntities.LevelMaterials.Where(x => x.LevelMaterialId == likeComment.LevelMaterialId).FirstOrDefault();
+
                     GameSchoolEntities.CommentLikes.AddObject(commentLike);
                     Save();
+
+
+
+                    if (likeUser.UserTypeId == (int)Enums.UserType.Teacher && commentUser.UserTypeId != (int)Enums.UserType.Teacher)
+                    {
+                        int userId = likeComment.UserInfoId;
+                        int levelId = commentLevelMaterial.LevelId;
+                        int points = 5;
+                        string pointtype = "Þú hefur fengið {0} stig fyrir ummælum um {1}";
+
+                        ExternalPointContainer.AddPointsToLevel(userId,levelId,points,pointtype);
+                    
+                    }
                 }
             }
         }
