@@ -120,6 +120,8 @@ namespace Ru.GameSchool.Web.Controllers
                 levelProjects =
                     CourseService.GetCoursesByUserInfoIdAndCourseId(userInfoId, id.Value).OrderByDescending(
                         x => x.CreateDateTime);
+
+                ViewBag.CourseId = id.Value;
             }
             else // Sækja alla courses sem þessi nemandi er í
             {
@@ -174,6 +176,7 @@ namespace Ru.GameSchool.Web.Controllers
                 ViewBag.GradePercentageValue = GetPercentageValue();
 
                 LevelService.AddLevelProjectToCourseAndLevel(levelproject, id.Value);
+                return RedirectToAction("Index", "Project", new { id = id.Value });
             }
             return RedirectToAction("Index");
         }
