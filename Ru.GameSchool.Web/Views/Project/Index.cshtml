@@ -87,8 +87,8 @@
                             @innerInnerItem.LevelProjectResults.Count(x => x.Grade == null)
                         </td>
                         <td>
-                            <a name="button" class="btn btn-mini" href="@Url.Action("Edit", new { id = innerInnerItem.LevelProjectId })" >
-                                <i class="icon-edit"></i>Breyta </a>| <a name="button" class="btn btn-mini" href="@Url.Action("Delete", new { id = innerInnerItem.LevelProjectId })" >
+                            <a name="button" class="btn btn-mini" href="@Url.Action("Edit", new { id = innerInnerItem.LevelProjectId, courseId = ViewBag.CourseId })" >
+                                <i class="icon-edit"></i>Breyta </a>  |  <a name="button" class="btn btn-mini" href="@Url.Action("Delete", new { id = innerInnerItem.LevelProjectId, courseId = ViewBag.CourseId })" >
                                     <i class="icon-edit"></i>Eyða </a>
                         </td>
                     }
