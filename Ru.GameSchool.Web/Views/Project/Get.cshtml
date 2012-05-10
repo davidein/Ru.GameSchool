@@ -65,7 +65,7 @@
            
              if (Model.LevelProjectResults.Count == 0)
              {
-                 if (!(Model.Stop > DateTime.Now))
+                 if (!(Model.Stop < DateTime.Now))
                  {
     <div class="control-group">
         <label class="control-label">
@@ -75,6 +75,10 @@
                 Skila verkefni</button>
         </div>
     </div>   
+                 }
+                 else
+                 {
+                        <strong>Skilafrestur búinn!</strong>  
                  }
 
              }

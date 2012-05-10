@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Objects;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Rhino.Mocks;
@@ -8,6 +9,7 @@ using Ru.GameSchool.DataLayer.Repository;
 using Ru.GameSchool.BusinessLayer.Enums;
 using Ru.GameSchool.BusinessLayerTests.Classes;
 using Ru.GameSchool.Utilities;
+using UserType = Ru.GameSchool.BusinessLayer.Enums.UserType;
 
 namespace Ru.GameSchool.BusinessLayerTests
 {
@@ -82,17 +84,6 @@ namespace Ru.GameSchool.BusinessLayerTests
 
         #endregion
 
-
-        /// <summary>
-        ///A test for LevelService Constructor
-        ///</summary>
-        [TestMethod()]
-        public void LevelServiceConstructorTest()
-        {
-            LevelService target = new LevelService();
-            Assert.Inconclusive("TODO: Implement code to verify target");
-        }
-
         /// <summary>
         ///A test for CreateLevel
         ///</summary>
@@ -127,244 +118,6 @@ namespace Ru.GameSchool.BusinessLayerTests
             _mockRepository.VerifyAllExpectations(); // Make sure everything was called correctly.
         }
 
-        /// <summary>
-        ///A test for CreateLevelExam
-        ///</summary>
-        [TestMethod()]
-        public void CreateLevelExamTest()
-        {
-            LevelService target = new LevelService(); // TODO: Initialize to an appropriate value
-            LevelExam levelExam = null; // TODO: Initialize to an appropriate value
-            target.CreateLevelExam(levelExam);
-            Assert.Inconclusive("A method that does not return a value cannot be verified.");
-        }
-
-        /// <summary>
-        ///A test for CreateLevelExamQuestion
-        ///</summary>
-        [TestMethod()]
-        public void CreateLevelExamQuestionTest()
-        {
-            LevelService target = new LevelService(); // TODO: Initialize to an appropriate value
-            LevelExamQuestion levelExamQuestion = null; // TODO: Initialize to an appropriate value
-            target.CreateLevelExamQuestion(levelExamQuestion);
-            Assert.Inconclusive("A method that does not return a value cannot be verified.");
-        }
-
-        /// <summary>
-        ///A test for CreateLevelExamResult
-        ///</summary>
-        [TestMethod()]
-        public void CreateLevelExamResultTest()
-        {
-            // ÞARF AÐ LAGFÆRA
-            var service = new LevelService();
-            var levelExamId = 1;
-            var userInfoId = 1;
-            var levelId = 1;
-            var levelExamResult = new LevelExamResult
-                                      {
-                                          Grade = 5,
-                                          LevelExamId = levelExamId,
-                                          UserInfoId = userInfoId,
-                                          LevelExam = new LevelExam
-                                                          {
-                                                              CreateDateTime = DateTime.Now,
-                                                              Description = "Lýsing",
-                                                              Name = "Nafn",
-                                                              GradePercentageValue = 5,
-                                                              LevelExamId = levelExamId,
-                                                              LevelId = levelId
-                                                          },
-                                          UserInfo = new UserInfo
-                                                         {
-                                                             CreateDateTime = DateTime.Now,
-                                                             UserInfoId = userInfoId,
-                                                             Password = "ww",
-                                                             Fullname = "Ólafur",
-                                                             Email = "óli@ru.is",
-                                                             StatusId = 1,
-                                                             Username = "Username"
-                                                         }
-                                      };
-            var levelExamResultData = new FakeObjectSet<LevelExamResult>();
-            levelExamResultData.AddObject(levelExamResult);
-
-
-            _mockRepository.Expect(x => x.LevelExamResults).Return(levelExamResultData);
-            _mockRepository.Expect(x => x.SaveChanges()).Return(1);
-
-            service.CreateLevelExamResult(levelExamResult);
-            _mockRepository.VerifyAllExpectations();
-
-        }
-
-        /// <summary>
-        ///A test for CreateLevelMaterial
-        ///</summary>
-        [TestMethod()]
-        public void CreateLevelMaterialTest()
-        {
-            LevelService target = new LevelService(); // TODO: Initialize to an appropriate value
-            LevelMaterial levelMaterial = null; // TODO: Initialize to an appropriate value
-            target.CreateLevelMaterial(levelMaterial);
-            Assert.Inconclusive("A method that does not return a value cannot be verified.");
-        }
-
-        /// <summary>
-        ///A test for CreateLevelProject
-        ///</summary>
-        [TestMethod()]
-        public void CreateLevelProjectTest()
-        {
-            LevelService target = new LevelService(); // TODO: Initialize to an appropriate value
-            LevelProject levelProject = null; // TODO: Initialize to an appropriate value
-            target.CreateLevelProject(levelProject);
-            Assert.Inconclusive("A method that does not return a value cannot be verified.");
-        }
-
-        /// <summary>
-        ///A test for CreateUserLevelExamResult
-        ///</summary>
-        [TestMethod()]
-        public void CreateUserLevelExamResultTest()
-        {
-            LevelService target = new LevelService(); // TODO: Initialize to an appropriate value
-            LevelExamResult levelExamResult = null; // TODO: Initialize to an appropriate value
-            UserInfo user = null; // TODO: Initialize to an appropriate value
-            target.CreateUserLevelExamResult(levelExamResult, user);
-            Assert.Inconclusive("A method that does not return a value cannot be verified.");
-        }
-
-        /// <summary>
-        ///A test for CreateUserLevelProjectResult
-        ///</summary>
-        [TestMethod()]
-        public void CreateUserLevelProjectResultTest()
-        {
-            LevelService target = new LevelService(); // TODO: Initialize to an appropriate value
-            LevelProjectResult levelProjectResult = null; // TODO: Initialize to an appropriate value
-            UserInfo user = null; // TODO: Initialize to an appropriate value
-            target.CreateUserLevelProjectResult(levelProjectResult, user);
-            Assert.Inconclusive("A method that does not return a value cannot be verified.");
-        }
-
-        /// <summary>
-        ///A test for GetLevel
-        ///</summary>
-        [TestMethod()]
-        public void GetLevelTest()
-        {
-            LevelService target = new LevelService(); // TODO: Initialize to an appropriate value
-            int levelId = 0; // TODO: Initialize to an appropriate value
-            Level expected = null; // TODO: Initialize to an appropriate value
-            Level actual;
-            actual = target.GetLevel(levelId);
-            Assert.AreEqual(expected, actual);
-            Assert.Inconclusive("Verify the correctness of this test method.");
-        }
-
-        /// <summary>
-        ///A test for GetLevelExam
-        ///</summary>
-        [TestMethod()]
-        public void GetLevelExamTest()
-        {
-            LevelService target = new LevelService(); // TODO: Initialize to an appropriate value
-            int levelExamId = 0; // TODO: Initialize to an appropriate value
-            LevelExam expected = null; // TODO: Initialize to an appropriate value
-            LevelExam actual;
-            actual = target.GetLevelExam(levelExamId);
-            Assert.AreEqual(expected, actual);
-            Assert.Inconclusive("Verify the correctness of this test method.");
-        }
-
-        /// <summary>
-        ///A test for GetLevelExamQuestion
-        ///</summary>
-        [TestMethod()]
-        public void GetLevelExamQuestionTest()
-        {
-            LevelService target = new LevelService(); // TODO: Initialize to an appropriate value
-            int levelExamQuestionsId = 0; // TODO: Initialize to an appropriate value
-            LevelExamQuestion expected = null; // TODO: Initialize to an appropriate value
-            LevelExamQuestion actual;
-            actual = target.GetLevelExamQuestion(levelExamQuestionsId);
-            Assert.AreEqual(expected, actual);
-            Assert.Inconclusive("Verify the correctness of this test method.");
-        }
-
-        /// <summary>
-        ///A test for GetLevelExamResults
-        ///</summary>
-        [TestMethod()]
-        public void GetLevelExamResultsTest()
-        {
-            LevelService target = new LevelService(); // TODO: Initialize to an appropriate value
-            int levelExamId = 0; // TODO: Initialize to an appropriate value
-            LevelExamResult expected = null; // TODO: Initialize to an appropriate value
-            LevelExamResult actual;
-            actual = target.GetLevelExamResults(levelExamId);
-            Assert.AreEqual(expected, actual);
-            Assert.Inconclusive("Verify the correctness of this test method.");
-        }
-
-        /// <summary>
-        ///A test for GetLevelExamResults
-        ///</summary>
-        [TestMethod()]
-        public void GetLevelExamResultsTest1()
-        {
-            LevelService target = new LevelService(); // TODO: Initialize to an appropriate value
-            IEnumerable<LevelExamResult> expected = null; // TODO: Initialize to an appropriate value
-            IEnumerable<LevelExamResult> actual;
-            actual = target.GetLevelExamResults();
-            Assert.AreEqual(expected, actual);
-            Assert.Inconclusive("Verify the correctness of this test method.");
-        }
-
-        /// <summary>
-        ///A test for GetLevelExams
-        ///</summary>
-        [TestMethod()]
-        public void GetLevelExamsTest()
-        {
-            LevelService target = new LevelService(); // TODO: Initialize to an appropriate value
-            IEnumerable<LevelExam> expected = null; // TODO: Initialize to an appropriate value
-            IEnumerable<LevelExam> actual;
-            actual = target.GetLevelExamsByCourseId(1, 1);
-            Assert.AreEqual(expected, actual);
-            Assert.Inconclusive("Verify the correctness of this test method.");
-        }
-
-        /// <summary>
-        ///A test for GetLevelMaterial
-        ///</summary>
-        [TestMethod()]
-        public void GetLevelMaterialTest()
-        {
-            LevelService target = new LevelService(); // TODO: Initialize to an appropriate value
-            int levelMaterialId = 0; // TODO: Initialize to an appropriate value
-            LevelMaterial expected = null; // TODO: Initialize to an appropriate value
-            LevelMaterial actual;
-            actual = target.GetLevelMaterial(levelMaterialId);
-            Assert.AreEqual(expected, actual);
-            Assert.Inconclusive("Verify the correctness of this test method.");
-        }
-
-        /// <summary>
-        ///A test for GetLevelMaterials
-        ///</summary>
-        [TestMethod()]
-        public void GetLevelMaterialsTest()
-        {
-            LevelService target = new LevelService(); // TODO: Initialize to an appropriate value
-            IEnumerable<LevelMaterial> expected = null; // TODO: Initialize to an appropriate value
-            IEnumerable<LevelMaterial> actual;
-            actual = target.GetLevelMaterials();
-            Assert.AreEqual(expected, actual);
-            Assert.Inconclusive("Verify the correctness of this test method.");
-        }
 
         /// <summary>
         ///A test for GetLevelProject
@@ -425,83 +178,6 @@ namespace Ru.GameSchool.BusinessLayerTests
 
 
         /// <summary>
-        ///A test for GetLevelProject
-        ///</summary>
-        [TestMethod()]
-        public void GetLevelProjectTest()
-        {
-            LevelService target = new LevelService(); // TODO: Initialize to an appropriate value
-            int levelProjectId = 0; // TODO: Initialize to an appropriate value
-            LevelProject expected = null; // TODO: Initialize to an appropriate value
-            LevelProject actual;
-            actual = target.GetLevelProject(levelProjectId);
-            Assert.AreEqual(expected, actual);
-            Assert.Inconclusive("Verify the correctness of this test method.");
-        }
-
-        /// <summary>
-        ///A test for GetLevelProjects
-        ///</summary>
-        [TestMethod()]
-        public void GetLevelProjectsTest()
-        {
-            LevelService target = new LevelService(); // TODO: Initialize to an appropriate value
-            IEnumerable<LevelProject> expected = null; // TODO: Initialize to an appropriate value
-            IEnumerable<LevelProject> actual;
-            actual = target.GetLevelProjects();
-            Assert.AreEqual(expected, actual);
-            Assert.Inconclusive("Verify the correctness of this test method.");
-        }
-
-        /// <summary>
-        ///A test for UpdateLevel
-        ///</summary>
-        [TestMethod()]
-        public void UpdateLevelTest()
-        {
-            LevelService target = new LevelService(); // TODO: Initialize to an appropriate value
-            Level level = null; // TODO: Initialize to an appropriate value
-            target.UpdateLevel(level);
-            Assert.Inconclusive("A method that does not return a value cannot be verified.");
-        }
-
-        /// <summary>
-        ///A test for UpdateLevelExam
-        ///</summary>
-        [TestMethod()]
-        public void UpdateLevelExamTest()
-        {
-            LevelService target = new LevelService(); // TODO: Initialize to an appropriate value
-            LevelExam levelExam = null; // TODO: Initialize to an appropriate value
-            target.UpdateLevelExam(levelExam);
-            Assert.Inconclusive("A method that does not return a value cannot be verified.");
-        }
-
-        /// <summary>
-        ///A test for UpdateLevelExamQuestion
-        ///</summary>
-        [TestMethod()]
-        public void UpdateLevelExamQuestionTest()
-        {
-            LevelService target = new LevelService(); // TODO: Initialize to an appropriate value
-            LevelExamQuestion levelExamQuestion = null; // TODO: Initialize to an appropriate value
-            target.UpdateLevelExamQuestion(levelExamQuestion);
-            Assert.Inconclusive("A method that does not return a value cannot be verified.");
-        }
-
-        /// <summary>
-        ///A test for UpdateLevelExamResult
-        ///</summary>
-        [TestMethod()]
-        public void UpdateLevelExamResultTest()
-        {
-            LevelService target = new LevelService(); // TODO: Initialize to an appropriate value
-            LevelExamResult levelExamResult = null; // TODO: Initialize to an appropriate value
-            target.UpdateLevelExamResult(levelExamResult);
-            Assert.Inconclusive("A method that does not return a value cannot be verified.");
-        }
-
-        /// <summary>
         ///A test for UpdateLevelMaterial
         ///</summary>
         [TestMethod()]
@@ -528,16 +204,276 @@ namespace Ru.GameSchool.BusinessLayerTests
             _mockRepository.VerifyAllExpectations(); // Make sure everything was called correctly.
         }
 
+
         /// <summary>
-        ///A test for UpdateLevelProject
+        ///A test for AnswerLevelExamQuestion
         ///</summary>
         [TestMethod()]
-        public void UpdateLevelProjectTest()
+        public void AnswerLevelExamQuestionTest()
         {
-            LevelService target = new LevelService(); // TODO: Initialize to an appropriate value
-            LevelProject levelProject = null; // TODO: Initialize to an appropriate value
-            target.UpdateLevelProject(levelProject);
-            Assert.Inconclusive("A method that does not return a value cannot be verified.");
+            /* Setup user data */
+            int userInfoId = 1;
+
+            var userData = new FakeObjectSet<UserInfo>();
+
+            var user = UserServiceTest.GetUser(userInfoId, UserType.Student);
+
+            userData.AddObject(user);
+
+            /* Setup levelexamanswer data */
+            var answerData = new FakeObjectSet<LevelExamAnswer>();
+            
+            var levelExamAnswer = new LevelExamAnswer();
+            levelExamAnswer.LevelExamAnswerId = 1;
+            levelExamAnswer.LevelExamQuestionId = 1;
+            levelExamAnswer.UserInfoes.Add(user);
+
+            var levelExamAnswerNumberTwo = new LevelExamAnswer();
+            levelExamAnswerNumberTwo.LevelExamAnswerId = 2;
+            levelExamAnswerNumberTwo.LevelExamQuestionId = 1;
+
+            answerData.AddObject(levelExamAnswer);
+            answerData.AddObject(levelExamAnswerNumberTwo);
+
+            /* Setup levelexamquestion data*/
+            var questionData = new FakeObjectSet<LevelExamQuestion>();
+
+            var levelExamQuestion = new LevelExamQuestion();
+            levelExamQuestion.LevelExamQuestionId = 1;
+            levelExamQuestion.LevelExamAnswers.Add(levelExamAnswer);
+            levelExamQuestion.LevelExamAnswers.Add(levelExamAnswerNumberTwo);
+
+            questionData.AddObject(levelExamQuestion);
+
+            /* Setup the mock expectations */
+            _mockRepository.Expect(x => x.UserInfoes).Return(userData);
+            _mockRepository.Expect(x => x.LevelExamAnswers).Return(answerData);
+            _mockRepository.Expect(x => x.LevelExamQuestions).Return(questionData);
+            _mockRepository.Expect(x => x.SaveChanges()).Return(1);
+
+            /* Test the business logic */
+            _levelService.AnswerLevelExamQuestion(1, userInfoId);
+            _levelService.AnswerLevelExamQuestion(2,userInfoId);
+
+            /* Verify all the mock calls */
+            _mockRepository.VerifyAllExpectations();
+        }
+
+        /// <summary>
+        ///A test for GetUserQuestionAnswer
+        ///</summary>
+        [TestMethod()]
+        public void GetUserQuestionAnswerTest()
+        {
+            /* Setup user data */
+            int userInfoId = 1;
+
+            var userData = new FakeObjectSet<UserInfo>();
+
+            var user = UserServiceTest.GetUser(userInfoId, UserType.Student);
+
+            userData.AddObject(user);
+
+            /* Setup levelexamanswer data */
+            var answerData = new FakeObjectSet<LevelExamAnswer>();
+
+            var levelExamAnswer = new LevelExamAnswer();
+            levelExamAnswer.LevelExamAnswerId = 1;
+            levelExamAnswer.LevelExamQuestionId = 1;
+            levelExamAnswer.UserInfoes.Add(user);
+
+            var levelExamAnswerNumberTwo = new LevelExamAnswer();
+            levelExamAnswerNumberTwo.LevelExamAnswerId = 2;
+            levelExamAnswerNumberTwo.LevelExamQuestionId = 1;
+
+            answerData.AddObject(levelExamAnswer);
+            answerData.AddObject(levelExamAnswerNumberTwo);
+
+            /* Setup levelexamquestion data*/
+            var questionData = new FakeObjectSet<LevelExamQuestion>();
+
+            var levelExamQuestion = new LevelExamQuestion();
+            levelExamQuestion.LevelExamQuestionId = 1;
+            levelExamQuestion.LevelExamAnswers.Add(levelExamAnswer);
+            levelExamQuestion.LevelExamAnswers.Add(levelExamAnswerNumberTwo);
+
+            questionData.AddObject(levelExamQuestion);
+
+            /* Setup the mock expectations */
+            _mockRepository.Expect(x => x.LevelExamQuestions).Return(questionData);
+
+            /* Test the business logic */
+            var actualOne = _levelService.GetUserQuestionAnswer(1, userInfoId);
+            var actualTwo = _levelService.GetUserQuestionAnswer(1, userInfoId+1);
+
+            /* Assert */
+            Assert.AreEqual(levelExamAnswer.LevelExamAnswerId, actualOne);
+            Assert.AreEqual(-1, actualTwo);
+
+            /* Verify all the mock calls */
+            _mockRepository.VerifyAllExpectations();
+        }
+
+        /// <summary>
+        ///A test for ReturnExam
+        ///</summary>
+        [TestMethod()]
+        public void ReturnExamTest()
+        {
+            /* Setup user data */
+            int userInfoId = 1;
+
+            var user = UserServiceTest.GetUser(userInfoId, UserType.Student);
+
+            /* Setup answer data*/
+            var levelExamAnswer1 = new LevelExamAnswer();
+            levelExamAnswer1.LevelExamAnswerId = 1;
+            levelExamAnswer1.LevelExamQuestionId = 1;
+            levelExamAnswer1.Correct = true;
+            levelExamAnswer1.UserInfoes.Add(user);
+
+            var levelExamAnswer2 = new LevelExamAnswer();
+            levelExamAnswer2.LevelExamAnswerId = 2;
+            levelExamAnswer2.LevelExamQuestionId = 2;
+            levelExamAnswer2.Correct = true;
+            levelExamAnswer2.UserInfoes.Add(user);
+
+            var levelExamAnswer3 = new LevelExamAnswer();
+            levelExamAnswer3.LevelExamAnswerId = 3;
+            levelExamAnswer3.LevelExamQuestionId =3;
+            levelExamAnswer3.Correct = true;
+            levelExamAnswer3.UserInfoes.Add(user);
+
+            var levelExamAnswer4 = new LevelExamAnswer();
+            levelExamAnswer4.LevelExamAnswerId = 4;
+            levelExamAnswer4.LevelExamQuestionId = 4;
+            levelExamAnswer4.Correct = true;
+            levelExamAnswer4.UserInfoes.Add(user);
+
+            var levelExamAnswer5 = new LevelExamAnswer();
+            levelExamAnswer5.LevelExamAnswerId = 5;
+            levelExamAnswer5.LevelExamQuestionId = 5;
+            levelExamAnswer5.Correct = true;
+            levelExamAnswer5.UserInfoes.Add(user);
+
+            /* Setup level exam question data */
+
+            var levelExamQuestion1 = new LevelExamQuestion();
+            levelExamQuestion1.LevelExamQuestionId = 1;
+            levelExamQuestion1.LevelExamAnswers.Add(levelExamAnswer1);
+
+            var levelExamQuestion2 = new LevelExamQuestion();
+            levelExamQuestion2.LevelExamQuestionId = 2;
+            levelExamQuestion2.LevelExamAnswers.Add(levelExamAnswer2);
+
+            var levelExamQuestion3 = new LevelExamQuestion();
+            levelExamQuestion3.LevelExamQuestionId = 3;
+            levelExamQuestion3.LevelExamAnswers.Add(levelExamAnswer3);
+            
+            var levelExamQuestion4 = new LevelExamQuestion();
+            levelExamQuestion4.LevelExamQuestionId = 4;
+            levelExamQuestion4.LevelExamAnswers.Add(levelExamAnswer4);
+            
+            var levelExamQuestion5 = new LevelExamQuestion();
+            levelExamQuestion5.LevelExamQuestionId = 5;
+            levelExamQuestion5.LevelExamAnswers.Add(levelExamAnswer5);
+
+            var levelExamQuestion6 = new LevelExamQuestion();
+            levelExamQuestion6.LevelExamQuestionId = 6;
+
+            var levelExamQuestion7 = new LevelExamQuestion();
+            levelExamQuestion7.LevelExamQuestionId = 7;
+            
+            var levelExamQuestion8 = new LevelExamQuestion();
+            levelExamQuestion8.LevelExamQuestionId = 8;
+            
+            var levelExamQuestion9 = new LevelExamQuestion();
+            levelExamQuestion9.LevelExamQuestionId = 9;
+
+            var levelExamQuestion10 = new LevelExamQuestion();
+            levelExamQuestion10.LevelExamQuestionId = 10;
+
+            /* Setup levelexam data */
+            var levelExamData = new FakeObjectSet<LevelExam>();
+
+            var levelExam = new LevelExam();
+            levelExam.LevelExamId = 1;
+            levelExam.LevelExamQuestions.Add(levelExamQuestion1);
+            levelExam.LevelExamQuestions.Add(levelExamQuestion2);
+            levelExam.LevelExamQuestions.Add(levelExamQuestion3);
+            levelExam.LevelExamQuestions.Add(levelExamQuestion4);
+            levelExam.LevelExamQuestions.Add(levelExamQuestion5);
+            levelExam.LevelExamQuestions.Add(levelExamQuestion6);
+            levelExam.LevelExamQuestions.Add(levelExamQuestion7);
+            levelExam.LevelExamQuestions.Add(levelExamQuestion8);
+            levelExam.LevelExamQuestions.Add(levelExamQuestion9);
+            levelExam.LevelExamQuestions.Add(levelExamQuestion10);
+
+            levelExamData.AddObject(levelExam);
+
+            /* Setup level data */
+            var level = new Level();
+            level.LevelExams.Add(levelExam);
+
+            /* Setup course data */
+            var course = new Course();
+
+            course.UserInfoes.Add(user);
+            course.Levels.Add(level);
+
+            /* Setup the mock expectations */
+            _mockRepository.Expect(x => x.LevelExams).Return(levelExamData);
+            _mockRepository.Expect(x => x.LevelExamResults).Return(new FakeObjectSet<LevelExamResult>());
+
+            /* Test the business logic */
+            var actual = _levelService.ReturnExam(1, 1);
+
+            /* Assert */
+            Assert.AreEqual(5, actual);
+        }
+
+        /// <summary>
+        ///A test for HasAccessToExam
+        ///</summary>
+        [TestMethod()]
+        public void HasAccessToExamTest()
+        {
+            /* Setup user data */
+            int userInfoId = 1;
+
+            var user = UserServiceTest.GetUser(userInfoId, UserType.Student);
+
+            /* Setup levelexam data */
+            var levelExamData = new FakeObjectSet<LevelExam>();
+
+            var levelExam = new LevelExam();
+            levelExam.LevelExamId = 1;
+
+            levelExamData.AddObject(levelExam);
+
+            /* Setup level data */
+            var level = new Level();
+            level.LevelExams.Add(levelExam);
+
+            /* Setup course data */
+            var course = new Course();
+
+            course.UserInfoes.Add(user);
+            course.Levels.Add(level);
+
+            /* Setup the mock expectations */
+            _mockRepository.Expect(x => x.LevelExams).Return(levelExamData);
+
+            /* Test the business logic */
+            var actual = _levelService.HasAccessToExam(levelExam.LevelExamId, userInfoId);
+            var shouldfailactual = _levelService.HasAccessToExam(levelExam.LevelExamId, userInfoId+1);
+
+            /* Assert */
+            Assert.AreEqual(true, actual);
+            Assert.AreEqual(false, shouldfailactual);
+
+            /* Verify all the mock calls */
+            _mockRepository.VerifyAllExpectations();
         }
     }
 }

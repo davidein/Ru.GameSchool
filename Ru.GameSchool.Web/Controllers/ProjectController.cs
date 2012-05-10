@@ -36,7 +36,8 @@ namespace Ru.GameSchool.Web.Controllers
         {
             if (id.HasValue && id.Value > 0)
             {
-                var projectResults = LevelService.GetlevelProjectResultsByLevelProjectId(id.Value);
+                var projectResults =
+                    LevelService.GetlevelProjectResultsByLevelProjectId(id.Value).OrderByDescending(x => x.GradeDate);
                 return View(projectResults);
             }
             return RedirectToAction("Index", "Project");
@@ -64,10 +65,10 @@ namespace Ru.GameSchool.Web.Controllers
         {
             if (id.HasValue && id.Value > 0)
             {
-                var project = LevelService.GetlevelProjectResultsByLevelProjectResultId(id.Value);
-                return View(project);
+                var projectResults = LevelService.GetlevelProjectResultsByLevelProjectResultId(id.Value);
+                return View(projectResults);
             }
-            return View();
+            return RedirectToAction("Index", "Project");
         }
 
         [Authorize(Roles = "Student")]
@@ -78,10 +79,6 @@ namespace Ru.GameSchool.Web.Controllers
 
             levelProject.LevelProjectResults.Add(CreateLevelProjectResult(levelProject, user));
             LevelService.UpdateLevelProjectFromResult(levelProject, user);
-            ViewBag.CourseName = levelProject.Level.Course.Name ?? string.Empty;
-            ViewBag.CourseId = levelProject.Level.CourseId;
-            ViewBag.Title = "Verkefni";
-            
 
             return RedirectToAction("Get");
         }
@@ -111,11 +108,13 @@ namespace Ru.GameSchool.Web.Controllers
             // Sækja spes course
             if (id.HasValue && id.Value > 0)
             {
-                levelProjects = CourseService.GetCoursesByUserInfoIdAndCourseId(userInfoId, id.Value);
+                levelProjects =
+                    CourseService.GetCoursesByUserInfoIdAndCourseId(userInfoId, id.Value).OrderByDescending(
+                        x => x.CreateDateTime);
             }
             else // Sækja alla courses sem þessi nemandi er í
             {
-                levelProjects = CourseService.GetCoursesByUserInfoId(userInfoId);
+                levelProjects = CourseService.GetCoursesByUserInfoId(userInfoId).OrderByDescending(x => x.CreateDateTime);
             }
 
             return levelProjects == null ? View() : View(levelProjects.ToList());
@@ -186,7 +185,7 @@ namespace Ru.GameSchool.Web.Controllers
         public ActionResult Edit(LevelProject levelProject, int? id)
         {
             ViewBag.GradePercentageValue = GetPercentageValue();
-            var material = LevelService.GetLevelMaterial(levelProject.LevelProjectId);
+            var material = LevelService.GetLevelProject(levelProject.LevelProjectId);
             var courseId = material.Level.CourseId;
             if (ModelState.IsValid)
             {
@@ -203,7 +202,7 @@ namespace Ru.GameSchool.Web.Controllers
                             levelProject.ContentID = contentId.ToString();
                         }
                     }
-                    
+
                     ViewBag.CourseName = CourseService.GetCourse(courseId).Name;
                     ViewBag.Courseid = CourseService.GetCourse(courseId).CourseId;
                     ViewBag.LevelCount = GetLevelCounts(courseId);
@@ -253,7 +252,7 @@ namespace Ru.GameSchool.Web.Controllers
                 catch (Exception ex)
                 {
                     ViewBag.ErrorMessage = "Ekki er hægt að eyða verkefni, yfirleitt er það útaf því að nemandi er þegar búinn að fá einkunn fyrir þetta verkefni";
-                    Elmah.ErrorSignal.FromCurrentContext().Raise(ex);    
+                    Elmah.ErrorSignal.FromCurrentContext().Raise(ex);
                     var levelProject = LevelService.GetLevelProject(id.Value);
                     return View(levelProject);
                 }

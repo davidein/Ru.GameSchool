@@ -6,6 +6,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Ru.GameSchool.BusinessLayerTests.Classes;
 using Ru.GameSchool.DataLayer.Repository;
 using Ru.GameSchool.Utilities;
+using UserType = Ru.GameSchool.BusinessLayer.Enums.UserType;
 
 namespace Ru.GameSchool.BusinessLayerTests
 {
@@ -189,5 +190,20 @@ namespace Ru.GameSchool.BusinessLayerTests
 
             _mockRepository.VerifyAllExpectations(); // Make sure everything was called correctly.
         }
+
+        #region Helper functions
+        public static UserInfo GetUser(int userInfoId, UserType userType)
+        {
+            UserInfo userInfo = new UserInfo();
+            userInfo.Fullname = "Davíð Einarsson";
+            userInfo.Email = "davide09@ru.is";
+            userInfo.StatusId = (int) userType;
+            userInfo.Username = "davidein";
+            userInfo.UserInfoId = userInfoId;
+            userInfo.Password = "Wtf";
+
+            return userInfo;
+        }
+        #endregion
     }
 }

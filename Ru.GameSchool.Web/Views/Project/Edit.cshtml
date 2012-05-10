@@ -50,14 +50,14 @@
         <div class="control-group">
             @Html.LabelFor(model => model.Start, new { @class = "control-label" })
             <div class="controls">
-                @Html.TextBoxFor(model => model.Start, new { @data_datepicker = "datepicker", rel = "popover" })
+                @Html.TextBoxFor(model => model.Start, new { @data_datepicker = "datepicker", rel = "popover",id = "start" }) <span class="date" style="visibility: hidden;">Byrjunardagsetning má ekki vera stærri en endadagsetning</span>
                 <span class="help-inline">@Html.ValidationMessageFor(model => model.Start)</span>
             </div>
         </div>
         <div class="control-group">
             @Html.LabelFor(model => model.Stop, new { @class = "control-label" })
             <div class="controls">
-                @Html.TextBoxFor(model => model.Stop, new { @data_datepicker = "datepicker", rel = "popover" })
+                @Html.TextBoxFor(model => model.Stop, new { @data_datepicker = "datepicker", rel = "popover",id ="stop" }) <span class="date" style="visibility: hidden; color:yellow;">*</span>
                 <span class="help-inline">@Html.ValidationMessageFor(model => model.Stop)</span>
             </div>
         </div>
@@ -77,7 +77,7 @@
         </div>
         <div class="control-group">
             <div class="controls">
-                <button type="submit" class="btn btn-success">
+                <button type="submit" id="submit" class="btn btn-success">
                     Breyta verkefni</button>
             </div>
         </div>
@@ -98,6 +98,18 @@
         $('.Start').datepicker({ dateFormat: "d.m.yy 00:00:01" });
         $('.Stop').datepicker({ dateFormat: "d.m.yy 23:59:59" });
 
+
+        var start = $("#start");
+        var stop = $("#stop");
+        var submit = $("#submit");
+        var error = $(".date");
+
+        submit.click(function () {
+            if (start.val() > stop.val()) {
+                error.css('visibility', 'visible');
+                return false;
+            }
+        });
 
     });
 </script>

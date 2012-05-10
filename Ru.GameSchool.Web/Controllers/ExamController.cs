@@ -78,6 +78,8 @@ namespace Ru.GameSchool.Web.Controllers
                 var user = MembershipHelper.GetUser();
                 var examQuestion = LevelService.GetLevelExamQuestion(id.Value);
 
+                ViewBag.Placement = LevelService.GetLevelExamQuestionPlacement(id.Value);
+
                 if (!LevelService.HasAccessToExam(examQuestion.LevelExamId, user.UserInfoId))
                     return RedirectToAction("NotFound", "Home");
 
