@@ -1,6 +1,6 @@
 ﻿@model Ru.GameSchool.DataLayer.Repository.LevelExamQuestion
 
-<div class="pull-right">Skil eftir: <strong class="countdown" data-countdown="@Model.LevelExam.Stop.ToString("MM d, yyyy HH:mm:ss")"></strong></div>
+<div class="pull-right">Skil eftir: <strong class="countdown" data-countdown="@Model.LevelExam.Stop.ToString("MM d, yyyy HH:mm:ss")" data-reload="1"></strong></div>
 <h2>Spurning @ViewBag.Placement af @Model.LevelExam.LevelExamQuestions.Count()</h2>
 
 @using (Html.BeginForm("Question", "Exam", FormMethod.Post, new { @class="well" }))

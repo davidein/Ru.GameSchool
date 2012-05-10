@@ -14,7 +14,15 @@ namespace Ru.GameSchool.Web.Controllers
         [Authorize]
         public ActionResult Index()
         {
+            if (User.IsInRole("Admin"))
+            {
+               return RedirectToAction("Index", "Admin");
+            }
+            else
+            {
             return View();
+            }
+
         }
 
         public ActionResult About()
