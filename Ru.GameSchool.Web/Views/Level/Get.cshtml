@@ -6,7 +6,7 @@
             @foreach (var l in ViewBag.LevelTabs)
             { 
                  <li @if (l.levelId == Model.LevelId) { <text>class="active"</text> } >
-                         <a @if(l.enabled) { <text>href="/Level/Get/@l.levelId"</text> } >
+                         <a @if(l.enabled || User.IsInRole("Teacher")) { <text>href="/Level/Get/@l.levelId"</text> } >
                             @if(l.levelCompleteness == Ru.GameSchool.BusinessLayer.Enums.LevelCompleteness.Complete)
                             { <i class="icon-thumbs-up"></i> }
                             else if (l.levelCompleteness == Ru.GameSchool.BusinessLayer.Enums.LevelCompleteness.Failed)
