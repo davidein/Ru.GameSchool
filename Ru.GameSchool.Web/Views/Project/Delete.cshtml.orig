@@ -4,6 +4,14 @@
 @{
     ViewBag.Title = "Eyða verkefni";
 }
+        @if (!string.IsNullOrWhiteSpace(ViewBag.ErrorMessage))
+        {
+            <div class="alert alert-error">
+                <button class="close" data-dismiss="alert">
+                    ×</button>
+                <strong>Villa!</strong> @ViewBag.ErrorMessage
+            </div>
+        }
 <br />
 <h2>
     Ertu viss um að þú viljir eyða verkefni?</h2>
@@ -68,4 +76,4 @@
         @Html.ActionLink("Aftur á forsíðu", "Index")
     </p>
 }
->>>>>>> 2aa6d6c5f5aba96bba6a60829077459c4ba5c811
+>>>>>>> 5f1500f7525396f2ca81062d9d61f05c2abd517e

@@ -90,38 +90,6 @@ namespace Ru.GameSchool.DataLayer.Repository
         }
         private Course _course;
     
-        public virtual ICollection<LevelExam> LevelExams
-        {
-            get
-            {
-                if (_levelExams == null)
-                {
-                    var newCollection = new FixupCollection<LevelExam>();
-                    newCollection.CollectionChanged += FixupLevelExams;
-                    _levelExams = newCollection;
-                }
-                return _levelExams;
-            }
-            set
-            {
-                if (!ReferenceEquals(_levelExams, value))
-                {
-                    var previousValue = _levelExams as FixupCollection<LevelExam>;
-                    if (previousValue != null)
-                    {
-                        previousValue.CollectionChanged -= FixupLevelExams;
-                    }
-                    _levelExams = value;
-                    var newValue = value as FixupCollection<LevelExam>;
-                    if (newValue != null)
-                    {
-                        newValue.CollectionChanged += FixupLevelExams;
-                    }
-                }
-            }
-        }
-        private ICollection<LevelExam> _levelExams;
-    
         public virtual ICollection<LevelMaterial> LevelMaterials
         {
             get
@@ -217,6 +185,38 @@ namespace Ru.GameSchool.DataLayer.Repository
             }
         }
         private ICollection<Point> _points;
+    
+        public virtual ICollection<LevelExam> LevelExams
+        {
+            get
+            {
+                if (_levelExams == null)
+                {
+                    var newCollection = new FixupCollection<LevelExam>();
+                    newCollection.CollectionChanged += FixupLevelExams;
+                    _levelExams = newCollection;
+                }
+                return _levelExams;
+            }
+            set
+            {
+                if (!ReferenceEquals(_levelExams, value))
+                {
+                    var previousValue = _levelExams as FixupCollection<LevelExam>;
+                    if (previousValue != null)
+                    {
+                        previousValue.CollectionChanged -= FixupLevelExams;
+                    }
+                    _levelExams = value;
+                    var newValue = value as FixupCollection<LevelExam>;
+                    if (newValue != null)
+                    {
+                        newValue.CollectionChanged += FixupLevelExams;
+                    }
+                }
+            }
+        }
+        private ICollection<LevelExam> _levelExams;
 
         #endregion
         #region Association Fixup
@@ -237,28 +237,6 @@ namespace Ru.GameSchool.DataLayer.Repository
                 if (CourseId != Course.CourseId)
                 {
                     CourseId = Course.CourseId;
-                }
-            }
-        }
-    
-        private void FixupLevelExams(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            if (e.NewItems != null)
-            {
-                foreach (LevelExam item in e.NewItems)
-                {
-                    item.Level = this;
-                }
-            }
-    
-            if (e.OldItems != null)
-            {
-                foreach (LevelExam item in e.OldItems)
-                {
-                    if (ReferenceEquals(item.Level, this))
-                    {
-                        item.Level = null;
-                    }
                 }
             }
         }
@@ -320,6 +298,28 @@ namespace Ru.GameSchool.DataLayer.Repository
             if (e.OldItems != null)
             {
                 foreach (Point item in e.OldItems)
+                {
+                    if (ReferenceEquals(item.Level, this))
+                    {
+                        item.Level = null;
+                    }
+                }
+            }
+        }
+    
+        private void FixupLevelExams(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            if (e.NewItems != null)
+            {
+                foreach (LevelExam item in e.NewItems)
+                {
+                    item.Level = this;
+                }
+            }
+    
+            if (e.OldItems != null)
+            {
+                foreach (LevelExam item in e.OldItems)
                 {
                     if (ReferenceEquals(item.Level, this))
                     {

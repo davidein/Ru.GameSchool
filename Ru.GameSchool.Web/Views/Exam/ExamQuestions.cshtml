@@ -3,24 +3,25 @@
 }
 @model Ru.GameSchool.DataLayer.Repository.LevelExamQuestion
 
-<h2>Spurningar í: @ViewBag.Exam.Name</h2>
-
+<h2>Próf: @ViewBag.Exam.Name</h2>
+<br />
 <ol>
 @foreach(var item in ViewBag.QuestionList)
 {
-    <li>@item.Question - @Html.ActionLink("Eyða", "DeleteLevelExamQuestion", "Exam", new { id = item.LevelExamQuestionId }, null)
+    <li>@item.Question @Html.ActionLink("Eyða", "DeleteLevelExamQuestion", "Exam", new { id = item.LevelExamQuestionId }, new { @class = "btn btn-mini btn-danger" })
     <ol>
         @foreach (var answer in item.LevelExamAnswers)
         {
-            <li>@if(answer.Correct) {<i class="icon-ok"></i>} @answer.Answer - @Html.ActionLink("Eyða", "DeleteLevelExamAnswer", "Exam", new { id = answer.LevelExamAnswerId }, null)</li>
+            <li>@if(answer.Correct) {<i class="icon-ok"></i>} @answer.Answer @Html.ActionLink("Eyða", "DeleteLevelExamAnswer", "Exam", new { id = answer.LevelExamAnswerId }, new { @class = "btn btn-mini btn-danger" })</li>
         }
-        <button class="btn addexamquestionanswer" data-toggle="modal" data-target="#examAnswerForm" data-question="@item.LevelExamQuestionId">Búa til svar</button>
     </ol><br />
+    <button class="btn btn-primary addexamquestionanswer" data-toggle="modal" data-target="#examAnswerForm" data-question="@item.LevelExamQuestionId"><i class="icon-plus  icon-white"></i> Búa til nýtt svar</button>
+    <br /><br />
     </li>
 }
 </ol>
 
-<button class="btn btn-success" data-toggle="modal" data-target="#examQuestionForm">Búa til spurningu</button>
+<button class="btn btn-success" data-toggle="modal" data-target="#examQuestionForm"><i class="icon-plus  icon-white"></i> Búa til nýja spurningu</button>
 
 @Html.Partial("_ExamAnswer", new Ru.GameSchool.DataLayer.Repository.LevelExamAnswer())
 

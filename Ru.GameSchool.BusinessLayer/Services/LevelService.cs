@@ -112,15 +112,22 @@ namespace Ru.GameSchool.BusinessLayer.Services
             return levelExam;
         }
 
-        public IEnumerable<LevelExam> GetLevelExams(int courseId, int userInfoId)
+        public IEnumerable<LevelExam> GetLevelExamsByCourseId(int courseId, int userInfoId)
         {
             var list = GameSchoolEntities.LevelExams.Where(x => x.Level.CourseId == courseId);
             var exams = list.Where(x => x.Level.Course.UserInfoes.Where(y => y.UserInfoId == userInfoId).Count() > 0);
 
+            return exams;
+        }
 
+        public IEnumerable<LevelExam> GetLevelExamsByLevelId(int levelId, int userInfoId)
+        {
+            var list = GameSchoolEntities.LevelExams.Where(x => x.LevelId == levelId);
+            var exams = list.Where(x => x.Level.Course.UserInfoes.Where(y => y.UserInfoId == userInfoId).Count() > 0);
 
             return exams;
         }
+        
         /// <summary>
         /// 
         /// </summary>
@@ -129,7 +136,7 @@ namespace Ru.GameSchool.BusinessLayer.Services
         {
             if (levelExam != null)
             {
-
+                Save();
             }
         }
 
@@ -213,12 +220,13 @@ namespace Ru.GameSchool.BusinessLayer.Services
         {
             if (levelProject != null)
             {
-                var levelProjToUpdate = GetLevelProject(levelProject.LevelProjectId);
+                var levelProjToUpdate =
+                    GameSchoolEntities.LevelProjects.Where(s => s.LevelProjectId == levelProject.LevelProjectId).
+                        FirstOrDefault();
+
                 levelProjToUpdate.ContentID = levelProject.ContentID;
-                levelProjToUpdate.Description = levelProject.ContentID;
+                levelProjToUpdate.Description = levelProject.Description;
                 levelProjToUpdate.GradePercentageValue = levelProject.GradePercentageValue;
-
-
                 levelProjToUpdate.Name = levelProject.Name;
                 levelProjToUpdate.Start = levelProject.Start;
                 levelProjToUpdate.Stop = levelProject.Stop;
@@ -230,15 +238,28 @@ namespace Ru.GameSchool.BusinessLayer.Services
         /// 
         /// </summary>
         /// <param name="levelProject"></param>
-        public void UpdateLevelProjectFromResult(LevelProject levelProject)
+        public void UpdateLevelProjectFromResult(LevelProject levelProject, int userInfoId)
         {
             if (levelProject != null)
             {
-                var levelProjToUpdate = GetLevelProject(levelProject.LevelProjectId);
-                levelProjToUpdate.ContentID = levelProject.ContentID;
-                levelProjToUpdate.UserFeedback = levelProject.UserFeedback;
-                levelProjToUpdate.LevelProjectResults.Add(levelProject.LevelProjectResults.ElementAtOrDefault(0));
-                Save();
+                if (!(levelProject.Stop > DateTime.Now))
+                {
+                    var levelProjToUpdate = GetLevelProject(levelProject.LevelProjectId);
+                    levelProjToUpdate.ContentID = levelProject.ContentID;
+                    levelProjToUpdate.UserFeedback = levelProject.UserFeedback;
+                    levelProjToUpdate.LevelProjectResults.Add(levelProject.LevelProjectResults.ElementAtOrDefault(0));
+
+                    int points = 10;
+
+                    ExternalNotificationContainer.CreateNotification(string.Format("Þú hefur fengið {0} stig fyrir að skila verkefni \"{1}\"",
+                        points, levelProjToUpdate.Name), string.Format("/Project/Index/{0}", levelProjToUpdate.Level.CourseId), userInfoId);
+
+                    ExternalPointContainer.AddPointsToLevel(userInfoId, levelProjToUpdate.LevelId, points,
+                                                            string.Format("Þú hefur fengið {0} stig fyrir verkefnið \"{1}\".",
+                                                                          points, levelProjToUpdate.Name));
+
+                    Save();
+                }
             }
         }
 
@@ -330,7 +351,7 @@ namespace Ru.GameSchool.BusinessLayer.Services
             if (answer == null)
                 throw new GameSchoolException(string.Format(
                     "Answer does not exist. AnswerId = {0}", answerId));
- 
+
             var question =
                 GameSchoolEntities.LevelExamQuestions.Where(x => x.LevelExamQuestionId == answer.LevelExamQuestionId).Single();
 
@@ -374,7 +395,7 @@ namespace Ru.GameSchool.BusinessLayer.Services
 
         public LevelExamQuestion GetFirstQuestionByExamId(int levelExamId)
         {
-            var question = GameSchoolEntities.LevelExamQuestions.Where(x => x.LevelExamId == levelExamId).OrderBy(x=>x.LevelExamQuestionId);
+            var question = GameSchoolEntities.LevelExamQuestions.Where(x => x.LevelExamId == levelExamId).OrderBy(x => x.LevelExamQuestionId);
             if (question.Count() > 0)
                 return question.First();
 
@@ -396,18 +417,18 @@ namespace Ru.GameSchool.BusinessLayer.Services
                     x.LevelExamAnswers.Where(y => y.UserInfoes.Where(z => z.UserInfoId == userInfoId).Count() > 0).Where
                         (t => t.Correct).Count() > 0);
 
-                levelExamResult.Grade = (exam.LevelExamQuestions.Count()*correctAnswer.Count())/(10*1.0);
+                levelExamResult.Grade = (exam.LevelExamQuestions.Count() * correctAnswer.Count()) / (10 * 1.0);
 
                 GameSchoolEntities.LevelExamResults.AddObject(levelExamResult);
                 Save();
 
                 int points = 5;
 
-                ExternalNotificationContainer.CreateNotification(string.Format("Þú hefur fengið {0} fyrir prófið \"{1}\"", levelExamResult.Grade, exam.Name), string.Format("/Exam/Index/{0}",exam.Level.CourseId), userInfoId);
+                ExternalNotificationContainer.CreateNotification(string.Format("Þú hefur fengið {0} fyrir prófið \"{1}\"", levelExamResult.Grade, exam.Name), string.Format("/Exam/Index/{0}", exam.Level.CourseId), userInfoId);
                 ExternalPointContainer.AddPointsToLevel(userInfoId, exam.LevelId, points,
                                                         string.Format("Þú hefur fengið {0} stig fyrir prófið \"{1}\".",
                                                                       points, exam.Name));
-                    
+
                 return levelExamResult.Grade;
             }
             return 0;
@@ -421,7 +442,7 @@ namespace Ru.GameSchool.BusinessLayer.Services
 
             if (levelExam.Level.Course.UserInfoes.Where(u => u.UserInfoId == userInfoId).Count() > 0)
             {
-                if (levelExam.LevelExamResults.Where(x=>x.UserInfoId == userInfoId).Count() == 0)
+                if (levelExam.LevelExamResults.Where(x => x.UserInfoId == userInfoId).Count() == 0)
                     return true;
             }
 
@@ -437,7 +458,7 @@ namespace Ru.GameSchool.BusinessLayer.Services
                     "Question does not exist. QuestionId = {0}", levelExamQuestionId));
 
             bool next = false;
-            foreach (var item in question.LevelExam.LevelExamQuestions.OrderBy(x=>x.LevelExamQuestionId))
+            foreach (var item in question.LevelExam.LevelExamQuestions.OrderBy(x => x.LevelExamQuestionId))
             {
                 if (next)
                     return item;
@@ -468,6 +489,13 @@ namespace Ru.GameSchool.BusinessLayer.Services
             {
                 var item = GetLevelExamQuestion(levelExamQuestionId);
 
+                var children = item.LevelExamAnswers;
+
+                for (int i = 0; i <= children.Count(); i++)
+                {
+                    GameSchoolEntities.LevelExamAnswers.DeleteObject(children.ElementAt(i));
+                }
+
                 GameSchoolEntities.LevelExamQuestions.DeleteObject(item);
                 Save();
             }
@@ -475,7 +503,7 @@ namespace Ru.GameSchool.BusinessLayer.Services
 
         public void DeleteLevelExamAnswer(int levelExamAnswerId)
         {
-            if (levelExamAnswerId>0)
+            if (levelExamAnswerId > 0)
             {
                 var item = GetLevelExamAnswer(levelExamAnswerId);
 
@@ -616,7 +644,7 @@ namespace Ru.GameSchool.BusinessLayer.Services
 
             }
         }
-   
+
         public IEnumerable<ContentType> GetContentTypes()
         {
             var contentTypes = from x in GameSchoolEntities.ContentTypes
@@ -638,7 +666,8 @@ namespace Ru.GameSchool.BusinessLayer.Services
             }
 
             var query = GameSchoolEntities.LevelProjectResults.Where(u => u.UserInfoId == userInfoId)
-                                                              .AsEnumerable();
+                .AsEnumerable();
+
             if (query == null)
             {
                 yield break;
@@ -701,6 +730,7 @@ namespace Ru.GameSchool.BusinessLayer.Services
             return true;
         }
 
+
         public void CreateLevelProjectResult(LevelProjectResult levelProjectResult)
         {
             if (levelProjectResult != null)
@@ -709,6 +739,12 @@ namespace Ru.GameSchool.BusinessLayer.Services
                 Save();
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="levelProjectId"></param>
+        /// <returns></returns>
         public IEnumerable<LevelProjectResult> GetlevelProjectResultsByLevelProjectId(int levelProjectId)
         {
             return levelProjectId > 0
@@ -716,6 +752,11 @@ namespace Ru.GameSchool.BusinessLayer.Services
                        : null;
         }
 
+        /// <summary>
+        /// Returns a instance of levelprojectresult by levelproject id
+        /// </summary>
+        /// <param name="levelProjectId"></param>
+        /// <returns></returns>
         public LevelProjectResult GetlevelProjectResultByLevelProjectId(int levelProjectId)
         {
             if (0 > levelProjectId)
@@ -735,11 +776,10 @@ namespace Ru.GameSchool.BusinessLayer.Services
             return levelProjectResult;
         }
 
-        public void CreateLevelProjectResultFromLevelProject(LevelProject levelProject)
-        {
-            
-        }
-
+        /// <summary>
+        /// Updates a instance of levelproject
+        /// </summary>
+        /// <param name="levelProjectResult"></param>
         public void UpdateLevelProjectResult(LevelProjectResult levelProjectResult)
         {
             if (levelProjectResult != null)
@@ -748,10 +788,26 @@ namespace Ru.GameSchool.BusinessLayer.Services
                 levelProjectResultToUpdate.Grade = levelProjectResult.Grade;
                 levelProjectResultToUpdate.TeacherFeedback = levelProjectResult.TeacherFeedback;
                 levelProjectResultToUpdate.GradeDate = DateTime.Now;
+
+                var levelProject = GetLevelProject(levelProjectResult.LevelProjectId);
+                int points = 10;
+
+                ExternalNotificationContainer.CreateNotification(string.Format("Þú hefur fengið {0} fyrir verkefnið \"{1}\"",
+                    levelProjectResult.Grade, levelProject.Name), string.Format("/Project/Index/{0}", levelProject.Level.CourseId), levelProjectResult.UserInfoId);
+
+                ExternalPointContainer.AddPointsToLevel(levelProjectResult.UserInfoId, levelProject.LevelId, points,
+                                                        string.Format("Þú hefur fengið {0} stig fyrir verkefnið \"{1}\".",
+                                                                      points, levelProject.Name));
+
                 Save();
             }
         }
 
+        /// <summary>
+        /// Returns a instance of levelprojectresult by levelprojectresultid
+        /// </summary>
+        /// <param name="id">Levelprojectresultid</param>
+        /// <returns>LEvelprojectresult instance of null</returns>
         public LevelProjectResult GetlevelProjectResultsByLevelProjectResultId(int id)
         {
             if (0 > id)
@@ -771,18 +827,31 @@ namespace Ru.GameSchool.BusinessLayer.Services
             return levelProjectResult;
         }
 
+        /// <summary>
+        /// Adds a levelproject instance to a level
+        /// </summary>
+        /// <param name="levelproject"></param>
+        /// <param name="courseId"></param>
         public void AddLevelProjectToCourseAndLevel(LevelProject levelproject, int courseId)
         {
             if (levelproject != null && courseId > 0)
             {
-                var level =
-                    GameSchoolEntities.Levels.Where(l => l.LevelId == levelproject.LevelId && l.CourseId == courseId).
-                        FirstOrDefault();
-                level.LevelProjects.Add(levelproject);
+                var level = GameSchoolEntities.Levels.FirstOrDefault(l => l.LevelId == levelproject.LevelId && l.CourseId == courseId);
+
+                if (level != null)
+                {
+                    level.LevelProjects.Add(levelproject);
+                }
+
                 Save();
             }
         }
 
+        /// <summary>
+        /// Returns all level instances by course id
+        /// </summary>
+        /// <param name="courseId">Id of course </param>
+        /// <returns>Collection of levels</returns>
         public IEnumerable<Level> GetLevelsByCourseId(int courseId)
         {
             return courseId > 0 ? GameSchoolEntities.Levels.Where(c => c.CourseId == courseId) : null;

@@ -84,12 +84,6 @@ namespace Ru.GameSchool.DataLayer.Repository
         }
         private ObjectSet<Level> _levels;
     
-        public IObjectSet<LevelExam> LevelExams
-        {
-            get { return _levelExams  ?? (_levelExams = CreateObjectSet<LevelExam>("LevelExams")); }
-        }
-        private ObjectSet<LevelExam> _levelExams;
-    
         public IObjectSet<LevelExamAnswer> LevelExamAnswers
         {
             get { return _levelExamAnswers  ?? (_levelExamAnswers = CreateObjectSet<LevelExamAnswer>("LevelExamAnswers")); }
@@ -161,6 +155,18 @@ namespace Ru.GameSchool.DataLayer.Repository
             get { return _userLogs  ?? (_userLogs = CreateObjectSet<UserLog>("UserLogs")); }
         }
         private ObjectSet<UserLog> _userLogs;
+    
+        public IObjectSet<LevelExam> LevelExams
+        {
+            get { return _levelExams  ?? (_levelExams = CreateObjectSet<LevelExam>("LevelExams")); }
+        }
+        private ObjectSet<LevelExam> _levelExams;
+    
+        public IObjectSet<sysdiagram> sysdiagrams
+        {
+            get { return _sysdiagrams  ?? (_sysdiagrams = CreateObjectSet<sysdiagram>("sysdiagrams")); }
+        }
+        private ObjectSet<sysdiagram> _sysdiagrams;
 
         #endregion
         #region Function Imports

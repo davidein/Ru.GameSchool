@@ -48,7 +48,7 @@ namespace Ru.GameSchool.DataLayer.Repository
             set;
         }
     
-        public virtual double GradePercentageValue
+        public virtual int GradePercentageValue
         {
             get;
             set;

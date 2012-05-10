@@ -26,7 +26,7 @@ namespace Ru.GameSchool.DataLayer.Repository
 
         [Display(Name = "Einkunn")]
         [DataType(DataType.Text)]
-        public double Grade { get; set; }
+        public double? Grade { get; set; }
        
     }
 }
