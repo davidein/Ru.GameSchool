@@ -57,6 +57,7 @@ namespace Ru.GameSchool.BusinessLayer.Services
                         string pointtype = "Þú hefur fengið {0} stig fyrir ummælum um {1}";
 
                         ExternalPointContainer.AddPointsToLevel(userId,levelId,points,pointtype);
+                        ExternalNotificationContainer.CreateNotification("Þú hefur fengið 5 stig fyrir að kennara hefur líkað við ummæli þin við: "+ commentLevelMaterial.Title,"/Material/Get/" + commentLevelMaterial.LevelMaterialId,userId);
                     
                     }
                 }
