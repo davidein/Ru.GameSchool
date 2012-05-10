@@ -985,7 +985,7 @@ namespace Ru.GameSchool.BusinessLayer.Services
                     previousWasComplete = false;
                     if (levelHasEnded)
                     {
-                        currentLevelTab.enabled = false;
+                        currentLevelTab.enabled = true;
                         currentLevelTab.levelCompleteness = LevelCompleteness.Failed;
                     }
                     else
