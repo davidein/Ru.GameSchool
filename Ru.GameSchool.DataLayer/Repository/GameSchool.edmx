@@ -166,7 +166,7 @@
           <Key>
             <PropertyRef Name="CommentLikeId" />
           </Key>
-          <Property Name="CommentLikeId" Type="int" Nullable="false" />
+          <Property Name="CommentLikeId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="CommentId" Type="int" Nullable="false" />
           <Property Name="UserInfoId" Type="int" Nullable="false" />
         </EntityType>
@@ -232,6 +232,8 @@
           <Property Name="GradePercentageValue" Type="int" Nullable="false" />
           <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="215" />
           <Property Name="CreateDateTime" Type="datetime" Nullable="false" />
+          <Property Name="Start" Type="datetime" Nullable="false" />
+          <Property Name="Stop" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="LevelExamAnswer">
           <Key>
@@ -1444,6 +1446,8 @@
           <NavigationProperty Name="Level" Relationship="GameSchoolModel.FK_LevelExam_Level" FromRole="LevelExam" ToRole="Level" />
           <NavigationProperty Name="LevelExamQuestions" Relationship="GameSchoolModel.FK_LevelExamQuestion_LevelExam" FromRole="LevelExam" ToRole="LevelExamQuestion" />
           <NavigationProperty Name="LevelExamResults" Relationship="GameSchoolModel.FK_LevelExamResult_LevelExam" FromRole="LevelExam" ToRole="LevelExamResult" />
+          <Property Type="DateTime" Name="Start" Nullable="false" />
+          <Property Type="DateTime" Name="Stop" Nullable="false" />
         </EntityType>
         <Association Name="FK_LevelExam_Level">
           <End Type="GameSchoolModel.Level" Role="Level" Multiplicity="1" />
@@ -1723,6 +1727,8 @@
           <EntitySetMapping Name="LevelExams">
             <EntityTypeMapping TypeName="GameSchoolModel.LevelExam">
               <MappingFragment StoreEntitySet="LevelExam">
+                <ScalarProperty Name="Stop" ColumnName="Stop" />
+                <ScalarProperty Name="Start" ColumnName="Start" />
                 <ScalarProperty Name="CreateDateTime" ColumnName="CreateDateTime" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="GradePercentageValue" ColumnName="GradePercentageValue" />

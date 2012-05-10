@@ -2,21 +2,27 @@
     ViewBag.Title = "Próf";
 }
 @model Ru.GameSchool.DataLayer.Repository.LevelExamQuestion
-<h2>Próf spurning @ViewBag.Placement af @Model.LevelExam.LevelExamQuestions.Count()</h2>
+<h2>Spurning @ViewBag.Placement af @Model.LevelExam.LevelExamQuestions.Count()</h2>
 
 @Model.Question<br />
 
 @using (Html.BeginForm("Question", "Exam", FormMethod.Post))
 {
-    <ul>
-    @foreach (var item in Model.LevelExamAnswers)
-    {
-        <li>@Html.RadioButton("LevelExamAnswerId", item.LevelExamAnswerId, (bool)(ViewBag.UserAnswer==item.LevelExamAnswerId)) @item.Answer</li>
-    }
-    </ul>
+    <div class="control-group">
+        <label class="control-label">Radio buttons</label>
+        <div class="controls">
+            @foreach (var item in Model.LevelExamAnswers)
+            {
+              <label class="radio">
+                @Html.RadioButton("LevelExamAnswerId", item.LevelExamAnswerId, (bool)(ViewBag.UserAnswer == item.LevelExamAnswerId))
+                @item.Answer
+              </label>
+            }
+        </div>
+    </div>
     @Html.HiddenFor(m => m.LevelExamQuestionId)
     
-    <input type="submit" value="Áfram" />
+    <input type="submit" value="Áfram" class="" />
 }
 
 @Html.ActionLink("Skila prófi", "ReturnExam", new { id = Model.LevelExamId })

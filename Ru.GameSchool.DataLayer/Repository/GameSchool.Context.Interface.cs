@@ -37,7 +37,6 @@ namespace Ru.GameSchool.DataLayer.Repository
         IObjectSet<UserType> UserTypes { get; }
         IObjectSet<UserLog> UserLogs { get; }
         IObjectSet<LevelExam> LevelExams { get; }
-        IObjectSet<sysdiagram> sysdiagrams { get; }
 
         #endregion
         #region Function Imports
