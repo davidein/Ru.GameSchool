@@ -86,6 +86,11 @@ namespace Ru.GameSchool.Web.Controllers
                 var answer = LevelService.GetUserQuestionAnswer(examQuestion.LevelExamQuestionId,
                                                                 user.UserInfoId);
 
+                ViewBag.CourseId = examQuestion.LevelExam.Level.CourseId;
+                ViewBag.CourseName = examQuestion.LevelExam.Level.Course.Name;
+
+                //ViewBag.Title = "Spurning " + ViewBag.Placement + " af " + examQuestion.LevelExam.LevelExamQuestions.Count();
+
                 if (answer != -1)
                     ViewBag.UserAnswer = answer;
 

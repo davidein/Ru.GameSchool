@@ -193,12 +193,14 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\app\common.js" />
+    <Content Include="Scripts\app\Countdown.js" />
     <Content Include="Scripts\app\LevelExam.js" />
     <Content Include="Scripts\jquery-1.6.2-vsdoc.js" />
     <Content Include="Scripts\jquery-1.6.2.min.js" />
     <Content Include="Scripts\lib\jquery-1.7.2.js" />
     <Content Include="Scripts\lib\jquery-ui-1.8.11.js" />
     <Content Include="Scripts\jquery-ui-1.8.11.min.js" />
+    <Content Include="Scripts\lib\jquery.jcountdown1.3.js" />
     <Content Include="Scripts\lib\jquery.tmpl.js" />
     <Content Include="Scripts\lib\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />

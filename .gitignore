@@ -27,3 +27,5 @@ _ReSharper*/
 App_Data/
 [Tt]est[Rr]esult*
 App_Data/
+Upload/
+*.orig

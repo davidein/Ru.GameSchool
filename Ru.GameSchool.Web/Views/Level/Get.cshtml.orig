@@ -1,0 +1,225 @@
+<<<<<<< HEAD
+﻿@model Ru.GameSchool.DataLayer.Repository.Level
+
+
+<ul class="nav nav-tabs">
+            @foreach (var m in ViewBag.Levels)
+            {
+                 
+            }
+
+            @foreach (var l in ViewBag.LevelTabs)
+            { 
+                 <li @if (l.levelId == Model.LevelId)
+                     { <text>class="active"</text>}>
+                     @if(l.enabled) {
+                         <a href="/Level/Get/@l.LevelId">
+                         }
+                        @l.levelName
+                     @if(l.enabled) {
+                         </a>
+                         }
+                 </li>
+            }
+
+    </ul>
+
+
+    <div class="display-label">
+        <h2>@Html.DisplayFor(model => model.Name)</h2>
+        @Html.DisplayNameFor(model => model.Start):
+        @Html.DisplayFor(model => model.Start) - 
+        @Html.DisplayNameFor(model => model.Stop):
+        @Html.DisplayFor(model => model.Stop)
+        @if (User.IsInRole("Teacher"))
+        {
+            <span>@Html.ActionLink("Edit", "Edit", new { id = Model.LevelId })</span>
+        }
+    </div>
+
+
+        
+
+    <div class="row-fluid">  
+        <div class="span4 well">
+            <h2>Myndbönd</h2>
+            <ul>
+            @foreach (var m in ViewBag.MaterialsVideo)
+            {
+                  <li><a href="/Material/Get/@m.LevelMaterialId">@m.Title</a></li>
+            }
+            </ul>
+            <p>
+            <a class="btn" href="/Material/1">Öll myndbönd &raquo;</a></p>
+        </div>
+        <div class="span4 well">
+            <h2>Glærur</h2>
+            <ul>
+            @foreach (var m in ViewBag.MaterialsSlides)
+            {
+                  <li><a href="/Material/Get/@m.LevelMaterialId">@m.Title</a></li>
+            }
+            </ul>
+            <p>
+            <a class="btn" href="/Material/2">Allar glærur  &raquo;</a></p>
+        </div>
+        <div class="span4 well">
+            <h2>Tilkynningar</h2>
+            <ul>
+            @foreach (var m in ViewBag.MaterialsMessages)
+            {
+                  <li><a href="/Material/Get/@m.LevelMaterialId">@m.Title</a></li>
+            }
+            </ul>
+            <p>
+            <a class="btn" href="/Material/">Allar tilkynningar &raquo;</a></p>
+        </div>
+        </div>
+                <!--/row-->
+                <div class="row-fluid">
+                <div class="span4 well">
+            <h2>Verkefni</h2>
+            <ul>
+            @foreach (var m in ViewBag.Projects)
+            {
+                  <li><a href="/Project/Get/@m.LevelId">@m.Name</a></li>
+            }
+            </ul>
+            <p>
+            <a class="btn" href="/Project/">Öll verkefni &raquo;</a></p>
+        </div>
+        <div class="span4 well">
+            <h2>Netpróf</h2>
+            <ul>
+            @foreach (var m in ViewBag.Exams)
+            {
+                  <li><a href="/Exam/Get/@m.LevelId">@m.Name</a></li>
+            }
+            </ul>
+            <p>
+            <a class="btn" href="/Eams/">Öll próf &raquo;</a></p>
+        </div>
+        <div class="span4 well">
+            <h2>Skjöl</h2>
+            <ul>
+            @foreach (var m in ViewBag.MaterialsDocs)
+            {
+                  <li><a href="/Material/Get/@m.LevelMaterialId">@m.Title</a></li>
+            }
+            </ul>
+            <p>
+            <a class="btn" href="/Material/3">Öll skjöl &raquo;</a></p>
+        </div>
+    </div>
+
+      
+
+
+
+
+=======
+﻿@model Ru.GameSchool.DataLayer.Repository.Level
+
+
+<ul class="nav nav-tabs">
+            @foreach (var m in ViewBag.Levels)
+            {
+                  <li @if (m.LevelId == Model.LevelId ) { <text>class="active"</text>}><a href="/Level/Get/@m.LevelId">@m.Name</a></li>
+            }
+
+    </ul>
+
+
+    <div class="display-label">
+        <h2>@Html.DisplayFor(model => model.Name)</h2>
+        @Html.DisplayNameFor(model => model.Start):
+        @Html.DisplayFor(model => model.Start) - 
+        @Html.DisplayNameFor(model => model.Stop):
+        @Html.DisplayFor(model => model.Stop)
+        @if (User.IsInRole("Teacher"))
+        {
+            <span>@Html.ActionLink("Edit", "Edit", new { id = Model.LevelId })</span>
+        }
+    </div>
+
+
+        
+
+    <div class="row-fluid">  
+        <div class="span4 well">
+            <h2>Myndbönd</h2>
+            <ul>
+            @foreach (var m in ViewBag.MaterialsVideo)
+            {
+                  <li><a href="/Material/Get/@m.LevelMaterialId">@m.Title</a></li>
+            }
+            </ul>
+            <p>
+            <a class="btn" href="/Material/1">Öll myndbönd &raquo;</a></p>
+        </div>
+        <div class="span4 well">
+            <h2>Glærur</h2>
+            <ul>
+            @foreach (var m in ViewBag.MaterialsSlides)
+            {
+                  <li><a href="/Material/Get/@m.LevelMaterialId">@m.Title</a></li>
+            }
+            </ul>
+            <p>
+            <a class="btn" href="/Material/2">Allar glærur  &raquo;</a></p>
+        </div>
+        <div class="span4 well">
+            <h2>Tilkynningar</h2>
+            <ul>
+            @foreach (var m in ViewBag.MaterialsMessages)
+            {
+                  <li><a href="/Material/Get/@m.LevelMaterialId">@m.Title</a></li>
+            }
+            </ul>
+            <p>
+            <a class="btn" href="/Material/">Allar tilkynningar &raquo;</a></p>
+        </div>
+        </div>
+                <!--/row-->
+                <div class="row-fluid">
+                <div class="span4 well">
+            <h2>Verkefni</h2>
+            <ul>
+            @foreach (var m in ViewBag.Projects)
+            {
+                <li>@Html.ActionLink(m.Name as string,User.IsInRole("Student") ? "Get" : "TeacherGet","Project", new { id = m.LevelProjectId},null)</li>
+            }
+            </ul>
+            <p>
+            <a class="btn" href="/Project/">Öll verkefni &raquo;</a></p>
+        </div>
+        <div class="span4 well">
+            <h2>Netpróf</h2>
+            <ul>
+            @foreach (var exam in ViewBag.Exams)
+            {
+                  <li>@Html.ActionLink(exam.Name as string, "Index", "Exam", new { id = ViewBag.CourseId}, null)</li>
+            }
+            </ul>
+            <p>
+             @Html.ActionLink("Öll próf", "Index", "Exam", new { id = ViewBag.CourseId }, new { @class = "btn" })
+        </div>
+        <div class="span4 well">
+            <h2>Skjöl</h2>
+            <ul>
+            @foreach (var m in ViewBag.MaterialsDocs)
+            {
+                  <li><a href="/Material/Get/@m.LevelMaterialId">@m.Title</a></li>
+            }
+            </ul>
+            <p>
+            <a class="btn" href="/Material/3">Öll skjöl &raquo;</a></p>
+        </div>
+    </div>
+
+      
+
+
+
+
+>>>>>>> ce4116ef440fd973e45a0b5c7182eda4fdd2bba3
