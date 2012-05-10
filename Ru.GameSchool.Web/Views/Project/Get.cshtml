@@ -62,10 +62,11 @@
     
 </article>
            
-             if (Model.LevelProjectResults.Count == 0)
-             {
+            
                  if (!(Model.Stop < DateTime.Now))
                  {
+                     if (Model.LevelProjectResults.Select(s => s.UserInfoId).FirstOrDefault() != ViewBag.UserInfoId)
+                     {
     <div class="control-group">
         <label class="control-label">
         </label>
@@ -74,17 +75,19 @@
                 Skila verkefni</button>
         </div>
     </div>   
+                     }
+                     else
+                     {
+                         <text>Búið að skila verkefni</text>
+                     }
+
                  }
                  else
                  {
-                        <strong>Skilafrestur búinn!</strong>  
+    <strong>Skilafrestur búinn!</strong>  
                  }
 
-             }
-             else
-             {
-    <strong>Búið að skila verkefni!</strong>  
-             }
+            
 }
 <div class="control-group">
     <div class="controls">

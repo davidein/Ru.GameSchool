@@ -18,6 +18,7 @@ namespace Ru.GameSchool.Web.Controllers
         [HttpGet]
         public ActionResult Get(int? id)
         {
+            ViewBag.UserInfoId = MembershipHelper.GetUser().UserInfoId;
             ViewBag.AllowedFileExtensions = GetAllowedFileExtensions();
             if (id.HasValue && id.Value > 0)
             {
@@ -37,8 +38,6 @@ namespace Ru.GameSchool.Web.Controllers
         {
             if (id.HasValue && id.Value > 0)
             {
-                var course = CourseService.GetCourse(id.Value);
-                ViewBag.CourseId = course.CourseId;
                 var projectResults = LevelService.GetlevelProjectResultsByLevelProjectId(id.Value).OrderByDescending(x => x.GradeDate);
                 return View(projectResults);
             }

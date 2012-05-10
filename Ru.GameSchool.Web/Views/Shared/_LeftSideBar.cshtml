@@ -18,12 +18,19 @@
         <h2>  @totalPoints stig</h2>
         <p>
             Þú ert í <span class="label label-info">@position</span> sæti í leiknum!</p>
-        <p>
-            og þarft aðeins <span class="label label-success">@points1</span> stig til þess
-            að komast einu sæti ofar!</p>
-        <p>
-            Næsti keppandi á eftir þér þarf aðeins <span class="label label-warning">@points2</span>
-            stig til þess að komast yfir þig!</p>
+        
+        @if (points1 != -1)
+        {
+            <p>
+            Keppandinn á undan þér er með <span class="label label-success">@points1</span> stig!</p>
+        }
+
+        @if (points2 != -1)
+        {
+            <p>
+            Næsti keppandi á eftir þér er með <span class="label label-warning">@points2</span>
+            stig!</p>
+        }
         <button class="btn btn-small" data-toggle="modal" data-target="#myModal">
             Sjá topplistann</button>
     </div>

@@ -87,13 +87,13 @@
                         </td>
                         <td>
                             <a name="button" class="btn btn-mini" href="@Url.Action("Edit", new { id = innerInnerItem.LevelProjectId })" >
-                                <i class="icon-edit"></i>Breyta </a>| <a name="button" class="btn btn-mini" href="@Url.Action("Delete", new { id = innerInnerItem.LevelProjectId })" >
+                                <i class="icon-edit"></i>Breyta </a> | <a name="button" class="btn btn-mini" href="@Url.Action("Delete", new { id = innerInnerItem.LevelProjectId })" >
                                     <i class="icon-edit"></i>Eyða </a>
                         </td>
                     }
                     else if (User.IsInRole("Student"))
                     {
-                        if (innerInnerItem.LevelProjectResults.Any(x => x.Grade == null))
+                        if (innerInnerItem.LevelProjectResults.Where(u => u.UserInfoId == ViewBag.UserInfoId).Any(x => x.Grade == null))
                         {
                         <td>
                             <i>Enginn einkunn kominn!</i>
@@ -101,7 +101,7 @@
                         <td>
                         </td>
                         }
-                        else if (innerInnerItem.LevelProjectResults.Count == 0)
+                        else if (innerInnerItem.LevelProjectResults.Select(x => x.UserInfoId).FirstOrDefault() != ViewBag.UserInfoId)
                         {
                         <td>
                             <i>Ekki búið að skila verkefni!</i>
