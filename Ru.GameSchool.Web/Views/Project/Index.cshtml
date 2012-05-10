@@ -6,7 +6,7 @@
     <table class="table table-striped table-bordered table-condensed">
         <caption>
             <h1>@course.Name</h1>
-            <i>@course.Identifier</i></caption>
+            <i>@Html.ActionLink(@course.Identifier, "Index", new { id = course.CourseId })</i></caption>
         <tbody>
             <tr>
                 <th>
@@ -25,14 +25,12 @@
                 {
                     <th>
                         Fjöldi búinn að skila
-                        
                     </th>
                     <th>
                         Fjöldi óyfirfarna verkefna
                     </th>
                     <th>
                         Aðgerðir kennara
-                        
                     </th>
                 }
                 else
@@ -75,9 +73,9 @@
                     <td>
                         @innerInnerItem.Description
                     </td>
-                                <td>
-                @Html.ActionLink(@innerInnerItem.Level.Name, "Get", "Level", new { id = innerInnerItem.LevelId }, null)
-            </td>
+                    <td>
+                        @Html.ActionLink(@innerInnerItem.Level.Name, "Get", "Level", new { id = innerInnerItem.LevelId }, null)
+                    </td>
                     @if (User.IsInRole("Teacher"))
                     {
 

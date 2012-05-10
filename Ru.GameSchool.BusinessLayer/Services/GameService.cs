@@ -60,7 +60,7 @@ namespace Ru.GameSchool.BusinessLayer.Services
 
             return points;
         }
-        
+
         public int GetPointsByUserInfoIdAndCourseId(int userInfoId, int courseId)
         {
             // If userinfoid or levelid is smaller then 0 then return 0
@@ -73,8 +73,8 @@ namespace Ru.GameSchool.BusinessLayer.Services
                                                              p.UserInfoId == userInfoId);
             int points = 0;
 
-            if (query.Count()>0)
-            points = query.Sum(x => x.Points);
+            if (query.Count() > 0)
+                points = query.Sum(x => x.Points);
 
 
             return points;
@@ -109,7 +109,7 @@ namespace Ru.GameSchool.BusinessLayer.Services
 
             var userPoints = GetPointsByUserInfoIdAndCourseId(userInfoId, courseId);
             var userPosition = GetUserPositionInGame(userInfoId, courseId);
-            
+
             return Tuple.Create(userPoints, userPosition, 0, 0);
         }
 
@@ -126,8 +126,9 @@ namespace Ru.GameSchool.BusinessLayer.Services
             var allUsersWithPointsInThisCourse = GetPointsByAndNotUserInfoIdCourseId(courseId, userInfoId);
             int position = 0;
 
-            var userPoints =
-                GameSchoolEntities.Points.Where(p => p.UserInfoId == userInfoId && p.CourseId == courseId).Sum(x => x.Points);
+            var query = GameSchoolEntities.Points.Where(p => p.UserInfoId == userInfoId && p.CourseId == courseId);
+
+            var userPoints = query.Any() ? query.Sum(s => s.Points) : 0;
 
             for (int i = 0; i < totalUsers; i++)
             {
@@ -142,7 +143,7 @@ namespace Ru.GameSchool.BusinessLayer.Services
 
         private List<int> GetPointsByAndNotUserInfoIdCourseId(int courseId, int userInfoId)
         {
-            if (0>=courseId)
+            if (0 >= courseId)
             {
                 return null;
             }
@@ -166,7 +167,7 @@ namespace Ru.GameSchool.BusinessLayer.Services
         public int CalculatePointsByGrade(double grade, int pointPerGrade)
         {
             var result = grade * pointPerGrade;
-            
+
             return (int)result;
         }
 
