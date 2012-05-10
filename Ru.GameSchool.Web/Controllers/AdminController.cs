@@ -110,7 +110,7 @@ namespace Ru.GameSchool.Web.Controllers
         public ActionResult Course(int? id)
         {
             ViewBag.Departments = CourseService.GetDepartments();
-            ViewBag.Title = "Námskeið";
+            
 
 
             if (id.HasValue)
@@ -118,6 +118,7 @@ namespace Ru.GameSchool.Web.Controllers
                 var course = CourseService.GetCourse((int)id);
                 if (course != null)
                 {
+                    ViewBag.Title = "Breyta námskeiði";
                     var model = new Course();
                     model.Name = course.Name;
                     model.Description = course.Description;
@@ -130,7 +131,7 @@ namespace Ru.GameSchool.Web.Controllers
                     return View(model);
                 }
             }
-
+            ViewBag.Title = "Nýtt námskeið";
             return View();
         }
 
@@ -138,12 +139,13 @@ namespace Ru.GameSchool.Web.Controllers
         public ActionResult Course(Course model, int? id)
         {
             ViewBag.Departments = CourseService.GetDepartments();
-            ViewBag.Title = "Námskeið";
+  
 
             if (ModelState.IsValid)
             {
                 if (id.HasValue) //Update existing Course
                 {
+                    ViewBag.Title = "Breyta námskeiði";
                     var course = CourseService.GetCourse(id.Value);
                     if (course != null)
                     {
@@ -159,7 +161,7 @@ namespace Ru.GameSchool.Web.Controllers
                 }
                 else //Insert new Course
                 {
-
+                    ViewBag.Title = "Nýtt námskeið";
                     CourseService.CreateCourse(model);
                     ViewBag.SuccessMessage = "Nýtt námskeið skráð! Mundu að skrá nemendur og kennara á námskeið.";
                 }
