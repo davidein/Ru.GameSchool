@@ -59,11 +59,9 @@ namespace Ru.GameSchool.Web.Controllers
         {
             if (id.HasValue)
             {
-
                 var material = LevelService.GetLevelMaterial(id.Value);
-
                 var filepath = Settings.ProjectMaterialVirtualFolder + material.ContentId.ToString();
-                //TODO: Add function to check for file extensions
+        
                 if (material.ContentType.ContentTypeId == 1)
                 {
                     ViewBag.File = filepath + ".mp4";
@@ -93,7 +91,6 @@ namespace Ru.GameSchool.Web.Controllers
             ViewBag.LevelCount = GetLevelCounts(id.Value);
             ViewBag.ContentTypes = LevelService.GetContentTypes();
             ViewBag.CourseId = id.Value;
-
             ViewBag.CourseName = CourseService.GetCourse(id.Value).Name;
             ViewBag.Courseid = CourseService.GetCourse(id.Value).CourseId;
             ViewBag.Title = "Búa til kennsluefni";
