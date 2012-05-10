@@ -28,8 +28,6 @@ namespace Ru.GameSchool.DataLayer.Repository
         IObjectSet<LevelExamQuestion> LevelExamQuestions { get; }
         IObjectSet<LevelExamResult> LevelExamResults { get; }
         IObjectSet<LevelMaterial> LevelMaterials { get; }
-        IObjectSet<LevelProject> LevelProjects { get; }
-        IObjectSet<LevelProjectResult> LevelProjectResults { get; }
         IObjectSet<Notification> Notifications { get; }
         IObjectSet<Point> Points { get; }
         IObjectSet<Status> Status { get; }
@@ -38,6 +36,8 @@ namespace Ru.GameSchool.DataLayer.Repository
         IObjectSet<UserLog> UserLogs { get; }
         IObjectSet<LevelExam> LevelExams { get; }
         IObjectSet<Announcement> Announcements { get; }
+        IObjectSet<LevelProject> LevelProjects { get; }
+        IObjectSet<LevelProjectResult> LevelProjectResults { get; }
 
         #endregion
         #region Function Imports

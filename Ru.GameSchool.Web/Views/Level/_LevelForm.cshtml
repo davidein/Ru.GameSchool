@@ -1,38 +1,29 @@
-﻿
+﻿@model Ru.GameSchool.DataLayer.Repository.Level
 
+<div class="control-group">
+    @Html.LabelFor(model => model.Name, new { @class = "control-label" })
+    <div class="controls">
+        @Html.TextBoxFor(model => model.Name, new { rel="popover", @class="input-xlarge" })
+        @Html.ValidationMessageFor(model => model.Name)
+    </div>
+</div>
+<div class="control-group">
+    @Html.LabelFor(model => model.Start, new { @class = "control-label" })
+    <div class="controls">
+        @Html.TextBoxFor(model => model.Start, new { rel = "popover", @class = "input-small", @data_datepicker = "datepicker" })
+        @Html.ValidationMessageFor(model => model.Start)
+    </div>
+</div>
+<div class="control-group">
+    @Html.LabelFor(model => model.Stop, new { @class = "control-label" })
+    <div class="controls">
+        @Html.TextBoxFor(model => model.Stop, new { rel = "popover", @class = "input-small", @data_datepicker = "datepicker" })
+        @Html.ValidationMessageFor(model => model.Stop)
+    </div>
+</div>
 
-@model Ru.GameSchool.DataLayer.Repository.Level
-
-
-            <div class="control-group">
-                @Html.LabelFor(model => model.Name, new { @class = "control-label" })
-            <div class="controls">
-                 @Html.TextBoxFor(model => model.Name, new { rel="popover", @class="input-xlarge" })
-                @Html.ValidationMessageFor(model => model.Name)
-            </div>
-            </div>
-
-            <div class="control-group">
-                @Html.LabelFor(model => model.Start, new { @class = "control-label" })
-            <div class="controls">
-                 @Html.TextBoxFor(model => model.Start, new { rel = "popover", @class = "input-small", @data_datepicker = "datepicker" })
-                @Html.ValidationMessageFor(model => model.Start)
-            </div>
-            </div>
-
-            <div class="control-group">
-                @Html.LabelFor(model => model.Stop, new { @class = "control-label" })
-            <div class="controls">
-                @Html.TextBoxFor(model => model.Stop, new { rel = "popover", @class = "input-small", @data_datepicker = "datepicker" })
-                @Html.ValidationMessageFor(model => model.Stop)
-            </div>
-            </div>
-
-<script>
+<script language="javascript">
  $('[jid="datepicker"]').attr({ "data-datepicker": "datepicker" })
-</script>
-
-<script>
     $(document).ready(function () {
 
         jQuery.validator.methods["date"] = function (value, element) {

@@ -48,7 +48,6 @@
                     <ul class="nav nav-list">
                         @if (User.IsInRole("Teacher"))
                         {
-                            <li>@Html.ActionLink("Ummæli", "Comments", "Course", new { id = @nesteditem.CourseId }, null)</li>
                             <li>@Html.ActionLink("Nýtt borð", "Create", "Level", new { id = @nesteditem.CourseId }, null)</li>
                             <li>@Html.ActionLink("Ný tilkynning", "Announcement", "Course", new { id = @nesteditem.CourseId }, null)</li>
                             <li>@Html.ActionLink("Nýtt verkefni", "Create", "Project", new { id = @nesteditem.CourseId }, null)</li>
