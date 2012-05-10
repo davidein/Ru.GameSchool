@@ -111,14 +111,14 @@
 						<abbr title='${CreateDateTime}'>${$item.formDate(CreateDateTime)}</abbr>
 						<a jid="sendLike" cid="${CommentId}" >Líkar þetta</a>  
                         <span id="l_${CommentId}">
-                        @*{{if CommentLikes.length > 0}}<img src='@Url.Content("~/Images/blank.gif") %>' title="{{each CommentLikes}}${Fullname} ,{{/each}} líkar þetta" alt="Líkar þetta" class="like_icon" />{{/if}}
+                        {{if CommentLikes.length > 0}}<img src='@Url.Content("~/Images/blank.gif") %>' title="{{each CommentLikes}}${Fullname} ,{{/each}} líkar þetta" alt="Líkar þetta" class="like_icon" />{{/if}}
                         
                         {{each CommentLikes}}
                         {{if $index <= 2}}${Fullname} ,{{/if}}
                         {{/each}}
                         
                         {{if CommentLikes.length > 3}} og ${CommentLikes.length - 3} öðrum{{/if}}
-                        {{if CommentLikes.length > 0}}líkar þetta.{{/if}}`*@
+                        {{if CommentLikes.length > 0}}líkar þetta.{{/if}}`
                         </span>
                         
 					</div>
@@ -191,7 +191,7 @@
 
     function sendLike(cid) {
 
-    alert(cid)
+    //alert(cid)
         var like = {
             "comment_id": cid
         };
