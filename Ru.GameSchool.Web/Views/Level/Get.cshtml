@@ -9,7 +9,8 @@
                 { <i class="icon-thumbs-up"></i> }
                 else if (l.levelCompleteness == Ru.GameSchool.BusinessLayer.Enums.LevelCompleteness.Failed)
                 { <i class="icon-thumbs-down"></i> }
-                @l.levelName
+                @l.levelName @if (l.levelId == Model.LevelId)
+                             { <text> - Lokar eftir: <span class="countdown" data-countdown="@Model.Stop.ToString("MM d, yyyy HH:mm:ss")"></span> </text> }
             </a>
         </li>
     } 
@@ -21,10 +22,6 @@
         <div class="pull-right">@Html.ActionLink("Breyta borði", "Edit", new { id = Model.LevelId }, new { @class="btn btn-small btn-success" })</div>
     }
     <h2>@Html.DisplayFor(model => model.Name)</h2>
-        @Html.DisplayNameFor(model => model.Start):
-        @Html.DisplayFor(model => model.Start) - 
-        @Html.DisplayNameFor(model => model.Stop):
-        @Html.DisplayFor(model => model.Stop)
 </div>
 
 <div class="row-fluid">  
