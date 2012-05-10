@@ -1,6 +1,5 @@
 ﻿@using Ru.GameSchool.DataLayer.Repository
 @model LevelProject
-
 @using (Html.BeginForm("ReturnProject", "Project", FormMethod.Post))
 { 
     
@@ -63,11 +62,11 @@
          </p></div>
     
 </article>
-             if (User.IsInRole("Student"))
+           
+             if (Model.LevelProjectResults.Count == 0)
              {
-                 if (Model.LevelProjectResults.Count == 0)
+                 if (!(Model.Stop > DateTime.Now))
                  {
-
     <div class="control-group">
         <label class="control-label">
         </label>
@@ -77,22 +76,11 @@
         </div>
     </div>   
                  }
+
              }
              else
              {
-                 if (User.IsInRole("Student"))
-                 {
     <strong>Búið að skila verkefni!</strong>  
-                 }
-                 else
-                 {
-    <div class="control-group">
-        <div class="controls">
-            @Html.ActionLink("Skoða nemendur sem eru búnir að skila þessu verkefni", "TeacherGet", new { id = Model.LevelProjectId })
-        </div>
-    </div>
-
-                 }
              }
 }
 <div class="control-group">

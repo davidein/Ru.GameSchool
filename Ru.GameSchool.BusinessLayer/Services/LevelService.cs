@@ -231,15 +231,28 @@ namespace Ru.GameSchool.BusinessLayer.Services
         /// 
         /// </summary>
         /// <param name="levelProject"></param>
-        public void UpdateLevelProjectFromResult(LevelProject levelProject)
+        public void UpdateLevelProjectFromResult(LevelProject levelProject, int userInfoId)
         {
             if (levelProject != null)
             {
-                var levelProjToUpdate = GetLevelProject(levelProject.LevelProjectId);
-                levelProjToUpdate.ContentID = levelProject.ContentID;
-                levelProjToUpdate.UserFeedback = levelProject.UserFeedback;
-                levelProjToUpdate.LevelProjectResults.Add(levelProject.LevelProjectResults.ElementAtOrDefault(0));
-                Save();
+                if (!(levelProject.Stop > DateTime.Now))
+                {
+                    var levelProjToUpdate = GetLevelProject(levelProject.LevelProjectId);
+                    levelProjToUpdate.ContentID = levelProject.ContentID;
+                    levelProjToUpdate.UserFeedback = levelProject.UserFeedback;
+                    levelProjToUpdate.LevelProjectResults.Add(levelProject.LevelProjectResults.ElementAtOrDefault(0));
+
+                    int points = 10;
+
+                    ExternalNotificationContainer.CreateNotification(string.Format("Þú hefur fengið {0} stig fyrir að skila verkefni \"{1}\"",
+                        points, levelProjToUpdate.Name), string.Format("/Project/Index/{0}", levelProjToUpdate.Level.CourseId), userInfoId);
+
+                    ExternalPointContainer.AddPointsToLevel(userInfoId, levelProjToUpdate.LevelId, points,
+                                                            string.Format("Þú hefur fengið {0} stig fyrir verkefnið \"{1}\".",
+                                                                          points, levelProjToUpdate.Name));
+
+                    Save();
+                }
             }
         }
 
@@ -331,7 +344,7 @@ namespace Ru.GameSchool.BusinessLayer.Services
             if (answer == null)
                 throw new GameSchoolException(string.Format(
                     "Answer does not exist. AnswerId = {0}", answerId));
- 
+
             var question =
                 GameSchoolEntities.LevelExamQuestions.Where(x => x.LevelExamQuestionId == answer.LevelExamQuestionId).Single();
 
@@ -375,7 +388,7 @@ namespace Ru.GameSchool.BusinessLayer.Services
 
         public LevelExamQuestion GetFirstQuestionByExamId(int levelExamId)
         {
-            var question = GameSchoolEntities.LevelExamQuestions.Where(x => x.LevelExamId == levelExamId).OrderBy(x=>x.LevelExamQuestionId);
+            var question = GameSchoolEntities.LevelExamQuestions.Where(x => x.LevelExamId == levelExamId).OrderBy(x => x.LevelExamQuestionId);
             if (question.Count() > 0)
                 return question.First();
 
@@ -397,18 +410,18 @@ namespace Ru.GameSchool.BusinessLayer.Services
                     x.LevelExamAnswers.Where(y => y.UserInfoes.Where(z => z.UserInfoId == userInfoId).Count() > 0).Where
                         (t => t.Correct).Count() > 0);
 
-                levelExamResult.Grade = (exam.LevelExamQuestions.Count()*correctAnswer.Count())/(10*1.0);
+                levelExamResult.Grade = (exam.LevelExamQuestions.Count() * correctAnswer.Count()) / (10 * 1.0);
 
                 GameSchoolEntities.LevelExamResults.AddObject(levelExamResult);
                 Save();
 
                 int points = 5;
 
-                ExternalNotificationContainer.CreateNotification(string.Format("Þú hefur fengið {0} fyrir prófið \"{1}\"", levelExamResult.Grade, exam.Name), string.Format("/Exam/Index/{0}",exam.Level.CourseId), userInfoId);
+                ExternalNotificationContainer.CreateNotification(string.Format("Þú hefur fengið {0} fyrir prófið \"{1}\"", levelExamResult.Grade, exam.Name), string.Format("/Exam/Index/{0}", exam.Level.CourseId), userInfoId);
                 ExternalPointContainer.AddPointsToLevel(userInfoId, exam.LevelId, points,
                                                         string.Format("Þú hefur fengið {0} stig fyrir prófið \"{1}\".",
                                                                       points, exam.Name));
-                    
+
                 return levelExamResult.Grade;
             }
             return 0;
@@ -422,7 +435,7 @@ namespace Ru.GameSchool.BusinessLayer.Services
 
             if (levelExam.Level.Course.UserInfoes.Where(u => u.UserInfoId == userInfoId).Count() > 0)
             {
-                if (levelExam.LevelExamResults.Where(x=>x.UserInfoId == userInfoId).Count() == 0)
+                if (levelExam.LevelExamResults.Where(x => x.UserInfoId == userInfoId).Count() == 0)
                     return true;
             }
 
@@ -438,7 +451,7 @@ namespace Ru.GameSchool.BusinessLayer.Services
                     "Question does not exist. QuestionId = {0}", levelExamQuestionId));
 
             bool next = false;
-            foreach (var item in question.LevelExam.LevelExamQuestions.OrderBy(x=>x.LevelExamQuestionId))
+            foreach (var item in question.LevelExam.LevelExamQuestions.OrderBy(x => x.LevelExamQuestionId))
             {
                 if (next)
                     return item;
@@ -761,6 +774,17 @@ namespace Ru.GameSchool.BusinessLayer.Services
                 levelProjectResultToUpdate.Grade = levelProjectResult.Grade;
                 levelProjectResultToUpdate.TeacherFeedback = levelProjectResult.TeacherFeedback;
                 levelProjectResultToUpdate.GradeDate = DateTime.Now;
+
+                var levelProject = GetLevelProject(levelProjectResult.LevelProjectId);
+                int points = 10;
+
+                ExternalNotificationContainer.CreateNotification(string.Format("Þú hefur fengið {0} fyrir verkefnið \"{1}\"",
+                    levelProjectResult.Grade, levelProject.Name), string.Format("/Project/Index/{0}", levelProject.Level.CourseId), levelProjectResult.UserInfoId);
+
+                ExternalPointContainer.AddPointsToLevel(levelProjectResult.UserInfoId, levelProject.LevelId, points,
+                                                        string.Format("Þú hefur fengið {0} stig fyrir verkefnið \"{1}\".",
+                                                                      points, levelProject.Name));
+
                 Save();
             }
         }

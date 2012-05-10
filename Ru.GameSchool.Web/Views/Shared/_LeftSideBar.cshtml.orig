@@ -1,33 +1,26 @@
 <<<<<<< HEAD
 ﻿@using Ru.GameSchool.BusinessLayer.Services
-
-
 <div class="well">
     <h2>
         Velkomin/n á GameSchool</h2>
-        @if (User.IsInRole("Student"))
-        {
-            <table class="table table-striped table-bordered table-condensed">
-                <caption>Þú ert nr # í leiknum</caption>
-                <thead>
-                    <tr>
-                    <th>#</th>
-                    <th>Stig</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1
-                            
-                        </td>
-                        <td>
-                            1
-                        </td>
-                    </tr>
-                </tbody>
-        </table>
-        }
 </div>
+@if (User.IsInRole("Student"))
+{
+    <div class="well">
+        <h2>
+            199 stig</h2>
+        <p>
+            Þú ert í <span class="label label-info">3</span> sæti í leiknum!</p>
+        <p>
+            og þarft aðeins <span class="label label-success">2</span> stig til þess að komast
+            einu sæti ofar!</p>
+        <p>
+            Næsti keppandi á eftir þér þarf aðeins <span class="label label-warning">16</span>
+            stig til þess að komast yfir þig!</p>
+        <button class="btn btn-small" data-toggle="modal" data-target="#leaderBoard">
+            Sjá topplistann</button>
+    </div>
+}
 <div id="accordion2" class="accordion">
     @foreach (var item in ViewBag.UserCourseList)
     {
@@ -102,7 +95,12 @@
 =======
 ﻿@using Ru.GameSchool.BusinessLayer.Services
 
-
+@if (User.IsInRole("Admin") && Request.Url.AbsoluteUri.Contains("Admin"))
+{
+    @Html.Partial("_AdminSideBar")
+}
+else
+{
 <div class="well">
     <h2>
         Velkomin/n á GameSchool</h2>
@@ -200,4 +198,5 @@
         <a href="#" id="close" class="btn" data-dismiss="modal">Loka</a>
     </div>
 </div>
->>>>>>> 2aa6d6c5f5aba96bba6a60829077459c4ba5c811
+}
+>>>>>>> 5f1500f7525396f2ca81062d9d61f05c2abd517e

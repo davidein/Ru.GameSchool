@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.IO;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -13,7 +14,7 @@ namespace Ru.GameSchool.Web.Controllers
 {
     public class ProjectController : BaseController
     {
-        [Authorize(Roles = "Teacher, Student")]
+        [Authorize(Roles = "Student")]
         [HttpGet]
         public ActionResult Get(int? id)
         {
@@ -46,7 +47,14 @@ namespace Ru.GameSchool.Web.Controllers
         [Authorize(Roles = "Teacher")]
         public ActionResult GradeProject(LevelProjectResult result)
         {
-            LevelService.UpdateLevelProjectResult(result);
+            var userInfoId = MembershipHelper.GetUser().UserInfoId;
+            if (result != null)
+            {
+                LevelService.UpdateLevelProjectResult(result);
+                ViewBag.SuccessMessage = "Verkefni hefur verið uppfært";
+                return View(result);
+            }
+            ViewBag.ErrorMessage = "Gat ekki uppfært kennslugagn! Lagfærðu villur og reyndur aftur.";
             return View();
         }
 
@@ -69,10 +77,11 @@ namespace Ru.GameSchool.Web.Controllers
             var user = MembershipHelper.GetUser().UserInfoId;
 
             levelProject.LevelProjectResults.Add(CreateLevelProjectResult(levelProject, user));
-            LevelService.UpdateLevelProjectFromResult(levelProject);
-            ViewBag.CourseName = levelProject.Level.Course.Name;
+            LevelService.UpdateLevelProjectFromResult(levelProject, user);
+            ViewBag.CourseName = levelProject.Level.Course.Name ?? string.Empty;
             ViewBag.CourseId = levelProject.Level.CourseId;
             ViewBag.Title = "Verkefni";
+            
 
             return RedirectToAction("Get");
         }
@@ -129,7 +138,6 @@ namespace Ru.GameSchool.Web.Controllers
 
             return View();
         }
-
 
         [HttpPost]
         [Authorize(Roles = "Teacher")]
@@ -195,8 +203,7 @@ namespace Ru.GameSchool.Web.Controllers
                             levelProject.ContentID = contentId.ToString();
                         }
                     }
-
-
+                    
                     ViewBag.CourseName = CourseService.GetCourse(courseId).Name;
                     ViewBag.Courseid = CourseService.GetCourse(courseId).CourseId;
                     ViewBag.LevelCount = GetLevelCounts(courseId);

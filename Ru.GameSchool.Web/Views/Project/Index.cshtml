@@ -43,7 +43,7 @@
                 {
                 <tr>
                     <td>
-                        @Html.ActionLink(@innerInnerItem.Name, "Get", new { id = @innerInnerItem.LevelProjectId })
+                        @Html.ActionLink(@innerInnerItem.Name, User.IsInRole("Teacher") ? "TeacherGet" : "Get", new { id = @innerInnerItem.LevelProjectId })
                     </td>
                     <td>
                         @innerInnerItem.Stop
@@ -58,27 +58,38 @@
                             @Html.ActionLink("Eyða", "Delete", new { id = innerInnerItem.LevelProjectId })
                         </td>
                     }
-                    else
+                    else if (User.IsInRole("Student"))
                     {
-                        foreach (var result in innerInnerItem.LevelProjectResults.Where(s => s.UserInfoId == ViewBag.UserInfoId))
+                        if (innerInnerItem.LevelProjectResults.Any(x => x.Grade == null))
                         {
                         <td>
-                            @if (result == null)
-                            { 
-                                <i>Ekki búið að skila</i>    
-                            }
-                            else
-                            { 
-                                <i>@result.Grade</i>
-                            }
+                            <i>Enginn einkunn kominn!</i>
                         </td>
                         <td>
-                            @if (result != null)
-                            {
-                                @result.TeacherFeedback
-                            }
                         </td>
                         }
+                        else if (innerInnerItem.LevelProjectResults.Count == 0)
+                        {
+                        <td>
+                            <i>Ekki búið að skila verkefni!</i>
+                        </td>
+                        <td>
+                        </td>
+                        }
+                        else
+                        {
+                            foreach (var result in innerInnerItem.LevelProjectResults.Where(s => s.UserInfoId == ViewBag.UserInfoId))
+                            {
+                        <td>
+                            <i>@result.Grade</i>
+                        </td>
+                        <td>
+                            @result.TeacherFeedback
+                        </td>
+                            }
+                        }
+
+
                     }
                 </tr>
 

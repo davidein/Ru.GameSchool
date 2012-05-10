@@ -1,10 +1,11 @@
-﻿@model Ru.GameSchool.DataLayer.Repository.LevelProjectResult
+﻿@using Ru.GameSchool.DataLayer.Repository
+@model LevelProjectResult
 
 @{
-    ViewBag.Title = "GradeProject";
+    ViewBag.Title = "Einkunnagjöf";
 }
 
-<h2>GradeProject</h2>
+
 
 <script src="@Url.Content("~/Scripts/jquery.validate.min.js")"></script>
 <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")"></script>
@@ -13,24 +14,27 @@
     @Html.ValidationSummary(true)
 
     <fieldset>
-        <legend>LevelProjectResult</legend>
+        <legend>Verkefni</legend>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.LevelProjectId)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.LevelProjectId)
-            @Html.ValidationMessageFor(model => model.LevelProjectId)
-        </div>
+     @Html.HiddenFor(model => model.LevelProjectId)
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.UserInfoId)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.UserInfoId)
-            @Html.ValidationMessageFor(model => model.UserInfoId)
-        </div>
-
+             @if (!string.IsNullOrWhiteSpace(ViewBag.SuccessMessage))
+        {
+            <div class="alert alert-success">
+                <button class="close" data-dismiss="alert">
+                    ×</button>
+                <strong>Tókst!</strong> @ViewBag.SuccessMessage
+            </div>
+        }
+        @if (!string.IsNullOrWhiteSpace(ViewBag.ErrorMessage))
+        {
+            <div class="alert alert-error">
+                <button class="close" data-dismiss="alert">
+                    ×</button>
+                <strong>Villa!</strong> @ViewBag.ErrorMessage
+            </div>
+        }
+        
         <div class="editor-label">
             @Html.LabelFor(model => model.Grade)
         </div>
@@ -39,54 +43,42 @@
             @Html.ValidationMessageFor(model => model.Grade)
         </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.CreateDateTime)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.CreateDateTime)
-            @Html.ValidationMessageFor(model => model.CreateDateTime)
+
+        <div class="control-group">
+            @Html.LabelFor(model => model.TeacherFeedback, new { @class = "control-label" })
+            <div class="controls">
+                @Html.EditorFor(model => model.TeacherFeedback, new { @class = "input-xlarge", rel = "popover", cols = "30", rows = "10" })
+                <span class="help-inline">@Html.ValidationMessageFor(model => model.TeacherFeedback)</span>
+            </div>
         </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.TeacherFeedback)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.TeacherFeedback)
-            @Html.ValidationMessageFor(model => model.TeacherFeedback)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.UserFeedback)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.UserFeedback)
-            @Html.ValidationMessageFor(model => model.UserFeedback)
+        <div class="control-group">
+            @Html.LabelFor(model => model.UserFeedback, new { @class = "control-label" })
+            <div class="controls">
+                @Html.EditorFor(model => model.UserFeedback, new { @class = "input-xlarge", rel = "popover", cols = "30", rows = "10" })
+                <span class="help-inline">@Html.ValidationMessageFor(model => model.UserFeedback)</span>
+            </div>
         </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.GradeDate)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.GradeDate)
-            @Html.ValidationMessageFor(model => model.GradeDate)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.ContentID)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.ContentID)
-            @Html.ValidationMessageFor(model => model.ContentID)
+        <div class="control-group">
+            @Html.LabelFor(model => model.ContentID, new { @class = "control-label" })
+            <div class="controls">
+                @Html.TextBoxFor(model => model.ContentID, new { type = "file", @class = "input-file", rel = "popover" })
+                <span class="help-inline">@Html.ValidationMessageFor(model => model.ContentID)</span>
+            </div>
         </div>
 
         @Html.HiddenFor(model => model.LevelProjectResultId)
 
-        <p>
-            <input type="submit" value="Save" />
-        </p>
+        <div class="control-group">
+            <div class="controls">
+                <button type="submit" class="btn btn-success">
+                    Vista einkunn nemanda</button>
+            </div>
+        </div>
     </fieldset>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Aftur á forsíðu verkefna", "Index")
 </div>

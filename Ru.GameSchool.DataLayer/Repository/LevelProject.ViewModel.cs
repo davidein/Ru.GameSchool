@@ -44,6 +44,7 @@ namespace Ru.GameSchool.DataLayer.Repository
         public int LevelId { get; set; }
 
         [Display(Name = "Athugasemd til kennara")]
+        [DataType(DataType.MultilineText)]
         public string UserFeedback { get; set; }
 
         [Display(Name = "Viðhengi")]
