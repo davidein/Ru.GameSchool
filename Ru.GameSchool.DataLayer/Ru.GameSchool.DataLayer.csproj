@@ -53,6 +53,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Repository\Announcement.cs">
+      <DependentUpon>GameSchool.tt</DependentUpon>
+    </Compile>
     <Compile Include="Repository\Comment.cs">
       <DependentUpon>GameSchool.tt</DependentUpon>
     </Compile>
