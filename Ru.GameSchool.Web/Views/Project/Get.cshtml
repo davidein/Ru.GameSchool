@@ -18,10 +18,10 @@
     </div>
    
     <div class="control-group">
-        <h3>  @Html.DisplayNameFor(model => model.LevelId)</h3>
+        <h3>  @Html.DisplayNameFor(model => model.Level.Name)</h3>
         <div class="container-fluid">
             <div class="controls">
-                @Html.DisplayFor(model => model.LevelId)
+                @Html.DisplayFor(model => model.Level.Name)
             </div>
         </div>
     </div>
@@ -36,23 +36,22 @@
         </div>
     </div>
 
-    <div class="control-group">
-        <h3>  @Html.DisplayNameFor(model => model.ContentID)</h3>
-        <div class="container-fluid">
+        <div class="control-group">
+            @Html.LabelFor(model => model.ContentID, new { @class = "control-label" })
             <div class="controls">
-                @Html.TextBoxFor(m => m.ContentID, new { type = "file", @class = "input-file", rel = "popover" })
+                @Html.TextBoxFor(model => model.ContentID, new { type = "file", @class = "file", rel = "popover" })
+                <span class="help-inline">@Html.ValidationMessageFor(model => model.ContentID)</span>
             </div>
         </div>
-    </div>
 
         <div class="control-group">
-        <h3>  @Html.DisplayNameFor(model => model.UserFeedback)</h3>
-        <div class="container-fluid">
+            @Html.LabelFor(model => model.UserFeedback, new { @class = "control-label" })
             <div class="controls">
-                @Html.TextBoxFor(model => model.UserFeedback, new { @class = "input-xlarge", rel = "popover", cols = "30", rows = "10" })
+                @Html.EditorFor(model => model.UserFeedback, new { @class = "input-xlarge", rel = "popover", cols = "30", rows = "10" })
+                <span class="help-inline">@Html.ValidationMessageFor(model => model.UserFeedback)</span>
             </div>
         </div>
-    </div>
+
 
     <div class="control-group"><p>Leyfilegar skrár:
              @foreach (var item in ViewBag.AllowedFileExtensions)
@@ -62,11 +61,14 @@
          </p></div>
     
 </article>
-           
-             if (Model.LevelProjectResults.Count == 0)
+    //if (innerInnerItem.LevelProjectResults.Where(u => u.UserInfoId == ViewBag.UserInfoId).Any(x => x.Grade == null))
+            
+             if (!(Model.Stop < DateTime.Now))
              {
-                 if (!(Model.Stop < DateTime.Now))
+                 if (Model.LevelProjectResults.Select(s => s.UserInfoId).FirstOrDefault() != ViewBag.UserInfoId &&
+                     !Model.LevelProjectResults.Any(x => x.Grade == null))
                  {
+
     <div class="control-group">
         <label class="control-label">
         </label>
@@ -78,17 +80,19 @@
                  }
                  else
                  {
-                        <strong>Skilafrestur búinn!</strong>  
+    <text>Búið að skila verkefni</text>
                  }
 
              }
              else
              {
-    <strong>Búið að skila verkefni!</strong>  
+    <strong>Skilafrestur búinn!</strong>  
              }
+
+
 }
 <div class="control-group">
     <div class="controls">
-        @Html.ActionLink("Aftur á forsíðu verkefna", "Index")
+        @Html.ActionLink("Aftur á forsíðu verkefna", "Index", new { id = ViewBag.CourseId }, new { @class = "btn btn-small" })
     </div>
 </div>

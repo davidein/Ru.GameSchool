@@ -9,10 +9,16 @@ namespace Ru.GameSchool.Web.Controllers
     public class CourseController : BaseController
     {
         [Authorize(Roles = "Student, Teacher")]
-        public ActionResult Index()
+        public ActionResult Index(int? id)
         {
-            
-            return View();
+            if (id.HasValue)
+            {
+                return RedirectToAction("Item", new {id = id.Value});
+            }
+            else
+            {
+                return RedirectToAction("NotFound","Home");
+            }
         }
 
         [Authorize(Roles = "Student, Teacher")]

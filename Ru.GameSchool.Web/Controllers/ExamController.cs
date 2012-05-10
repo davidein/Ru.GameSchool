@@ -35,7 +35,7 @@ namespace Ru.GameSchool.Web.Controllers
 
                 return View(exams);
             }
-            return View();
+            return RedirectToAction("NotFound", "Home");
         }
 
         #region Student
@@ -158,6 +158,9 @@ namespace Ru.GameSchool.Web.Controllers
                 ViewBag.Title = "Búa til nýtt próf";
 
                 LevelExam model = new LevelExam();
+
+                model.Start = DateTime.Now;
+                model.Stop = DateTime.Now.AddDays(2);
 
                 return View(model);
             }

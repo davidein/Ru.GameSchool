@@ -192,11 +192,6 @@ namespace Ru.GameSchool.BusinessLayer.Services
             return levelProject;
         }
 
-        public IEnumerable<LevelProject> GetUserLevelProject(int? userInfoId)
-        {
-            return (userInfoId.HasValue && userInfoId.Value > 0) ? GameSchoolEntities.GetAllUserLevelProjects(userInfoId.Value) : null;
-        }
-
         public IEnumerable<LevelProject> GetLevelProjects()
         {
             return GameSchoolEntities.LevelProjects;
@@ -269,7 +264,7 @@ namespace Ru.GameSchool.BusinessLayer.Services
                     levelProjToUpdate.ContentID = levelProject.ContentID;
                     levelProjToUpdate.UserFeedback = levelProject.UserFeedback;
                     levelProjToUpdate.LevelProjectResults.Add(levelProject.LevelProjectResults.ElementAtOrDefault(0));
-
+                    
                     int points = 10;
 
 
@@ -474,6 +469,8 @@ namespace Ru.GameSchool.BusinessLayer.Services
             return false;
         }
 
+        
+
         /// <summary>
         /// Gets the next question in a level exam.
         /// </summary>
@@ -619,23 +616,42 @@ namespace Ru.GameSchool.BusinessLayer.Services
 
 
 
-
+        /// <summary>
+        /// Gets level materials
+        /// </summary>
+        /// <returns>Levelmaterials</returns>
         public IEnumerable<LevelMaterial> GetLevelMaterials()
         {
             return GameSchoolEntities.LevelMaterials;
         }
+
+        /// <summary>
+        /// Get level materials for a specified level
+        /// </summary>
+        /// <param name="levelId">Id of level</param>
+        /// <returns>All level materials for specified level</returns>
         public IEnumerable<LevelMaterial> GetLevelMaterials(int levelId)
         {
             return GameSchoolEntities.LevelMaterials.Where(l => l.LevelId == levelId);
         }
 
+        /// <summary>
+        /// Get level materials of a certain contenttype for a specified level
+        /// </summary>
+        /// <param name="levelId">Id of level</param>
+        /// <param name="contentTypeId">Type of levelmaterial</param>
+        /// <returns>Levelmaterials of same type for level</returns>
         public IEnumerable<LevelMaterial> GetLevelMaterials(int levelId, int contentTypeId)
         {
             return GameSchoolEntities.LevelMaterials.Where(l => l.LevelId == levelId && l.ContentTypeId == contentTypeId);
         }
 
 
-
+        /// <summary>
+        /// Get single level material with specific id 
+        /// </summary>
+        /// <param name="levelMaterialId">Id of levelmaterial</param>
+        /// <returns>levelmaterial object</returns>
         public LevelMaterial GetLevelMaterial(int levelMaterialId)
         {
             if (0 > levelMaterialId)
@@ -654,15 +670,38 @@ namespace Ru.GameSchool.BusinessLayer.Services
             return levelMaterial;
         }
 
-        public void CreateLevelMaterial(LevelMaterial levelMaterial)
+        /// <summary>
+        /// Create level material item
+        /// </summary>
+        /// <param name="levelMaterial">levelmaterial object</param>
+        /// <param name="courseId">Id of course</param>
+        public void CreateLevelMaterial(LevelMaterial levelMaterial, int? courseId)
         {
-            if (levelMaterial != null)
+            if (levelMaterial != null && courseId > 0)
             {
                 GameSchoolEntities.LevelMaterials.AddObject(levelMaterial);
+                
+                var level = GameSchoolEntities.Levels.FirstOrDefault(l => l.LevelId == levelMaterial.LevelId && l.CourseId == courseId);
+
+                if (level != null)
+                {
+                    var allUsersInThisCourse =
+                        GameSchoolEntities.UserInfoes.SelectMany(s => s.Courses.Where(d => d.CourseId == courseId)).
+                            SelectMany(x => x.UserInfoes);
+                    foreach (var user in allUsersInThisCourse.Where(s => s.UserTypeId == 1).Distinct())
+                    {
+                        ExternalNotificationContainer.CreateNotification(string.Format("Nýtt kennslugagn er komið í áfangann {0} með nafninu \"{1}\"",
+                                                                                           levelMaterial.Level.Course.Name, levelMaterial.Title), string.Format("/Material/Index/{0}", levelMaterial.Level.CourseId), user.UserInfoId);
+                    }
+                }
                 Save();
             }
         }
 
+        /// <summary>
+        /// Update level material item
+        /// </summary>
+        /// <param name="levelMaterial">Levelmaterial object</param>
         public void UpdateLevelMaterial(LevelMaterial levelMaterial)
         {
             if (levelMaterial != null)
@@ -684,6 +723,10 @@ namespace Ru.GameSchool.BusinessLayer.Services
             }
         }
 
+        /// <summary>
+        /// Get level material content types
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<ContentType> GetContentTypes()
         {
             var contentTypes = from x in GameSchoolEntities.ContentTypes
@@ -971,7 +1014,7 @@ namespace Ru.GameSchool.BusinessLayer.Services
                     previousWasComplete = false;
                     if (levelHasEnded)
                     {
-                        currentLevelTab.enabled = false;
+                        currentLevelTab.enabled = true;
                         currentLevelTab.levelCompleteness = LevelCompleteness.Failed;
                     }
                     else

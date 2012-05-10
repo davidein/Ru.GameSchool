@@ -60,7 +60,7 @@
             </div>
         </div>
 
-        <div class="control-group">
+             <div class="control-group">
             @Html.LabelFor(model => model.ContentID, new { @class = "control-label" })
             <div class="controls">
                 @Html.TextBoxFor(model => model.ContentID, new { type = "file", @class = "input-file", rel = "popover" })
@@ -80,5 +80,5 @@
 }
 
 <div>
-    @Html.ActionLink("Aftur á forsíðu verkefna", "Index") | @Html.ActionLink("Aftur á forsíðu einkunnagjafa", "TeacherGet",new { id = Model.LevelProjectId})
+    @*@Html.ActionLink("Aftur á forsíðu verkefna", "Index", new { id = ViewBag.CourseId }, new { @class = "btn btn-small" }) |*@ @Html.ActionLink("Aftur á forsíðu einkunnagjafa", "TeacherGet",new { id = Model.LevelProjectId}, new {  @class = "btn btn-small" })
 </div>

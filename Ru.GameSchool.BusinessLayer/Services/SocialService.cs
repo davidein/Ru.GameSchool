@@ -22,13 +22,45 @@ namespace Ru.GameSchool.BusinessLayer.Services
             if (commentLike != null)
             {
                 if (GameSchoolEntities.Comments.Where(x=>x.CommentId == commentLike.CommentId).Count() != 1)
+                {
                     throw new GameSchoolException(string.Format("Comment does not exist. CommentId = {0}",commentLike.CommentId));
+                }
 
                 if (GameSchoolEntities.UserInfoes.Where(x => x.UserInfoId == commentLike.UserInfoId).Count() != 1)
+                {
                     throw new GameSchoolException(string.Format("User does not exist. UserInfoId = {0}", commentLike.UserInfoId));
+                }
 
-                GameSchoolEntities.CommentLikes.AddObject(commentLike);
-                Save();
+                if (GameSchoolEntities.CommentLikes.Where(x => x.CommentId == commentLike.CommentId && x.UserInfoId == commentLike.UserInfoId).Count() > 0)
+                {
+                    //throw new GameSchoolException(string.Format("Notandi hefur nú þegar líkað við þetta comment. UserInfoId = {0}", commentLike.UserInfoId));
+
+                }
+
+                else
+                {
+                    Comment likeComment = GameSchoolEntities.Comments.Where(x => x.CommentId == commentLike.CommentId).FirstOrDefault();
+                    UserInfo commentUser = GameSchoolEntities.UserInfoes.Where(x => x.UserInfoId == likeComment.UserInfoId).FirstOrDefault();
+                    UserInfo likeUser = GameSchoolEntities.UserInfoes.Where(x => x.UserInfoId == commentLike.UserInfoId).FirstOrDefault();
+                    LevelMaterial commentLevelMaterial = GameSchoolEntities.LevelMaterials.Where(x => x.LevelMaterialId == likeComment.LevelMaterialId).FirstOrDefault();
+
+                    GameSchoolEntities.CommentLikes.AddObject(commentLike);
+                    Save();
+
+
+
+                    if (likeUser.UserTypeId == (int)Enums.UserType.Teacher && commentUser.UserTypeId != (int)Enums.UserType.Teacher)
+                    {
+                        int userId = likeComment.UserInfoId;
+                        int levelId = commentLevelMaterial.LevelId;
+                        int points = 5;
+                        string pointtype = "Þú hefur fengið {0} stig fyrir ummælum um {1}";
+
+                        ExternalPointContainer.AddPointsToLevel(userId,levelId,points,pointtype);
+                        ExternalNotificationContainer.CreateNotification("Þú hefur fengið 5 stig fyrir að kennara hefur líkað við ummæli þin við: "+ commentLevelMaterial.Title,"/Material/Get/" + commentLevelMaterial.LevelMaterialId,userId);
+                    
+                    }
+                }
             }
         }
         /// <summary>

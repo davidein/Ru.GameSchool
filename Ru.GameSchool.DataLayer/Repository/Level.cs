@@ -122,38 +122,6 @@ namespace Ru.GameSchool.DataLayer.Repository
         }
         private ICollection<LevelMaterial> _levelMaterials;
     
-        public virtual ICollection<LevelProject> LevelProjects
-        {
-            get
-            {
-                if (_levelProjects == null)
-                {
-                    var newCollection = new FixupCollection<LevelProject>();
-                    newCollection.CollectionChanged += FixupLevelProjects;
-                    _levelProjects = newCollection;
-                }
-                return _levelProjects;
-            }
-            set
-            {
-                if (!ReferenceEquals(_levelProjects, value))
-                {
-                    var previousValue = _levelProjects as FixupCollection<LevelProject>;
-                    if (previousValue != null)
-                    {
-                        previousValue.CollectionChanged -= FixupLevelProjects;
-                    }
-                    _levelProjects = value;
-                    var newValue = value as FixupCollection<LevelProject>;
-                    if (newValue != null)
-                    {
-                        newValue.CollectionChanged += FixupLevelProjects;
-                    }
-                }
-            }
-        }
-        private ICollection<LevelProject> _levelProjects;
-    
         public virtual ICollection<Point> Points
         {
             get
@@ -249,6 +217,38 @@ namespace Ru.GameSchool.DataLayer.Repository
             }
         }
         private ICollection<Announcement> _announcements;
+    
+        public virtual ICollection<LevelProject> LevelProjects
+        {
+            get
+            {
+                if (_levelProjects == null)
+                {
+                    var newCollection = new FixupCollection<LevelProject>();
+                    newCollection.CollectionChanged += FixupLevelProjects;
+                    _levelProjects = newCollection;
+                }
+                return _levelProjects;
+            }
+            set
+            {
+                if (!ReferenceEquals(_levelProjects, value))
+                {
+                    var previousValue = _levelProjects as FixupCollection<LevelProject>;
+                    if (previousValue != null)
+                    {
+                        previousValue.CollectionChanged -= FixupLevelProjects;
+                    }
+                    _levelProjects = value;
+                    var newValue = value as FixupCollection<LevelProject>;
+                    if (newValue != null)
+                    {
+                        newValue.CollectionChanged += FixupLevelProjects;
+                    }
+                }
+            }
+        }
+        private ICollection<LevelProject> _levelProjects;
 
         #endregion
         #region Association Fixup
@@ -286,28 +286,6 @@ namespace Ru.GameSchool.DataLayer.Repository
             if (e.OldItems != null)
             {
                 foreach (LevelMaterial item in e.OldItems)
-                {
-                    if (ReferenceEquals(item.Level, this))
-                    {
-                        item.Level = null;
-                    }
-                }
-            }
-        }
-    
-        private void FixupLevelProjects(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            if (e.NewItems != null)
-            {
-                foreach (LevelProject item in e.NewItems)
-                {
-                    item.Level = this;
-                }
-            }
-    
-            if (e.OldItems != null)
-            {
-                foreach (LevelProject item in e.OldItems)
                 {
                     if (ReferenceEquals(item.Level, this))
                     {
@@ -374,6 +352,28 @@ namespace Ru.GameSchool.DataLayer.Repository
             if (e.OldItems != null)
             {
                 foreach (Announcement item in e.OldItems)
+                {
+                    if (ReferenceEquals(item.Level, this))
+                    {
+                        item.Level = null;
+                    }
+                }
+            }
+        }
+    
+        private void FixupLevelProjects(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            if (e.NewItems != null)
+            {
+                foreach (LevelProject item in e.NewItems)
+                {
+                    item.Level = this;
+                }
+            }
+    
+            if (e.OldItems != null)
+            {
+                foreach (LevelProject item in e.OldItems)
                 {
                     if (ReferenceEquals(item.Level, this))
                     {

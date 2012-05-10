@@ -18,13 +18,21 @@ namespace Ru.GameSchool.Web.Controllers
         [HttpGet]
         public ActionResult Get(int? id)
         {
+            var userInfoId = ViewBag.UserInfoId = MembershipHelper.GetUser().UserInfoId;
+
             ViewBag.AllowedFileExtensions = GetAllowedFileExtensions();
             if (id.HasValue && id.Value > 0)
             {
                 var levelProject = LevelService.GetLevelProject(id.Value);
-
+                var course = CourseService.GetCourse(levelProject.Level.CourseId);
+                var courseId = ViewBag.CourseId = course.CourseId;
                 ViewBag.Title = levelProject.Name;
+                var allowedUserLevel = ViewBag.AllowedLevelId = CourseService.GetCurrentUserLevel(userInfoId, courseId);
 
+                if (levelProject.LevelId > allowedUserLevel)
+                {
+                    return RedirectToAction("Index", new { id = courseId });
+                }
                 return View(levelProject);
             }
             return RedirectToAction("Index");
@@ -36,8 +44,8 @@ namespace Ru.GameSchool.Web.Controllers
         {
             if (id.HasValue && id.Value > 0)
             {
-                var projectResults =
-                    LevelService.GetlevelProjectResultsByLevelProjectId(id.Value).OrderByDescending(x => x.GradeDate);
+                ViewBag.CourseId = id.Value;
+                var projectResults = LevelService.GetlevelProjectResultsByLevelProjectId(id.Value).OrderByDescending(x => x.GradeDate);
                 return View(projectResults);
             }
             return RedirectToAction("Index", "Project");
@@ -48,7 +56,6 @@ namespace Ru.GameSchool.Web.Controllers
         [Authorize(Roles = "Teacher")]
         public ActionResult GradeProject(LevelProjectResult result)
         {
-            var userInfoId = MembershipHelper.GetUser().UserInfoId;
             if (result != null)
             {
                 LevelService.UpdateLevelProjectResult(result);
@@ -80,7 +87,7 @@ namespace Ru.GameSchool.Web.Controllers
             levelProject.LevelProjectResults.Add(CreateLevelProjectResult(levelProject, user));
             LevelService.UpdateLevelProjectFromResult(levelProject, user);
 
-            return RedirectToAction("Get");
+            return RedirectToAction("Get", new { id = levelProject.LevelProjectId });
         }
 
         private LevelProjectResult CreateLevelProjectResult(LevelProject levelProject, int id)
@@ -108,16 +115,21 @@ namespace Ru.GameSchool.Web.Controllers
             // Sækja spes course
             if (id.HasValue && id.Value > 0)
             {
+                ViewBag.AllowedLevelId = CourseService.GetCurrentUserLevel(userInfoId, id.Value);
+                var course = CourseService.GetCourse(id.Value);
+                ViewBag.CourseId = course.CourseId;
                 levelProjects =
                     CourseService.GetCoursesByUserInfoIdAndCourseId(userInfoId, id.Value).OrderByDescending(
                         x => x.CreateDateTime);
+
+                ViewBag.CourseId = id.Value;
             }
             else // Sækja alla courses sem þessi nemandi er í
             {
-                levelProjects = CourseService.GetCoursesByUserInfoId(userInfoId).OrderByDescending(x => x.CreateDateTime);
+                //levelProjects = CourseService.GetCoursesByUserInfoId(userInfoId).OrderByDescending(x => x.CreateDateTime);
+                return RedirectToAction("NotFound", "Home");
             }
-
-            return levelProjects == null ? View() : View(levelProjects.ToList());
+            return View(levelProjects.ToList());
         }
 
         [HttpGet]
@@ -146,6 +158,9 @@ namespace Ru.GameSchool.Web.Controllers
 
             if (id.HasValue && id.Value > 0)
             {
+                var course = CourseService.GetCourse(id.Value);
+                ViewBag.CourseId = course.CourseId;
+
                 if (levelproject.File != null)
                 {
                     foreach (var file in levelproject.File)
@@ -154,7 +169,7 @@ namespace Ru.GameSchool.Web.Controllers
                         var path = Server.MapPath("~/Upload") + contentId.ToString();
                         ViewBag.ContentId = contentId;
                         file.SaveAs(path);
-                        levelproject.ContentID = contentId.ToString();
+                        levelproject.ContentID = contentId;
                     }
                 }
                 ViewBag.LevelCount = GetLevelCounts(id.Value);
@@ -162,17 +177,20 @@ namespace Ru.GameSchool.Web.Controllers
                 ViewBag.GradePercentageValue = GetPercentageValue();
 
                 LevelService.AddLevelProjectToCourseAndLevel(levelproject, id.Value);
+                return RedirectToAction("Index", "Project", new { id = id.Value });
             }
             return RedirectToAction("Index");
         }
 
         [HttpGet]
         [Authorize(Roles = "Teacher")]
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(int? id, int? courseId)
         {
             ViewBag.GradePercentageValue = GetPercentageValue();
             if (id.HasValue && id.Value > 0)
             {
+                var course = CourseService.GetCourse(id.Value);
+                ViewBag.CourseId = courseId.HasValue ? courseId.Value : 0;
                 var levelProject = LevelService.GetLevelProject(id.Value);
                 ViewBag.LevelId = new SelectList(LevelService.GetLevels(), "LevelId", "Name", levelProject.LevelId);
                 return View(levelProject);
@@ -199,7 +217,7 @@ namespace Ru.GameSchool.Web.Controllers
                             var path = Server.MapPath("~/Upload") + contentId.ToString();
                             ViewBag.ContentId = contentId;
                             file.SaveAs(path);
-                            levelProject.ContentID = contentId.ToString();
+                            levelProject.ContentID = contentId;
                         }
                     }
 
@@ -229,10 +247,11 @@ namespace Ru.GameSchool.Web.Controllers
 
         [HttpGet]
         [Authorize(Roles = "Teacher")]
-        public ActionResult Delete(int? id)
+        public ActionResult Delete(int? id, int? courseId)
         {
             if (id.HasValue && id.Value > 0)
             {
+                ViewBag.CourseId = courseId.HasValue ? courseId.Value : 0;
                 var levelProject = LevelService.GetLevelProject(id.Value);
                 return View(levelProject);
             }
@@ -241,10 +260,11 @@ namespace Ru.GameSchool.Web.Controllers
 
         [HttpPost, ActionName("Delete")]
         [Authorize(Roles = "Teacher")]
-        public ActionResult DeleteConfirmed(int? id)
+        public ActionResult DeleteConfirmed(int? id, int? courseId)
         {
             if (id.HasValue && id.Value > 0)
             {
+                
                 try
                 {
                     LevelService.DeleteLevelProject(id.Value);
@@ -257,7 +277,7 @@ namespace Ru.GameSchool.Web.Controllers
                     return View(levelProject);
                 }
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("Index",new { id = courseId});
         }
 
         public IEnumerable<SelectListItem> GetPercentageValue()

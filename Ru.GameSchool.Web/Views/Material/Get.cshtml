@@ -70,13 +70,28 @@
 
 
 <div class="well">
-    <h2>@ViewBag.Title</h2>
-    <div class="videoWrapper">
-        <video id="gameSchoolVideo" class="video-js vjs-default-skin" controls width="700" height="394" poster="" preload="auto" data-setup="{}">
-            <source type="video/mp4" src="@ViewBag.File">
-        </video>
+    <div id="gameSchoolVideo">
+        <div class="videoWrapper">
+            <video class="video-js vjs-default-skin" controls width="700" height="394" poster="" preload="auto" data-setup="{}">
+                <source type="video/mp4" src="@ViewBag.File">
+            </video>
+        </div>
     </div>
+    <h2>@ViewBag.Name</h2>
     <p>@ViewBag.Description</p>
+    <div class="control-group">
+        <div class="controls">
+            <a name="button" class="btn btn-small" href="@Url.Action("Download", new { id = Model.LevelMaterialId })" >
+                <i class="icon-download-alt"></i> Sækja 
+            </a>
+            @if (User.IsInRole("Teacher"))
+            {
+                <a name="button" class="btn btn-small btn-success" href="@Url.Action("Edit", new {id = Model.LevelMaterialId})" >
+                    <i class="icon-edit icon-white"></i> Breyta kennslugagni
+                </a>
+            }
+        </div>
+    </div>
 </div>
 
 
@@ -111,14 +126,14 @@
 						<abbr title='${CreateDateTime}'>${$item.formDate(CreateDateTime)}</abbr>
 						<a jid="sendLike" cid="${CommentId}" >Líkar þetta</a>  
                         <span id="l_${CommentId}">
-                        @*{{if CommentLikes.length > 0}}<img src='@Url.Content("~/Images/blank.gif") %>' title="{{each CommentLikes}}${Fullname} ,{{/each}} líkar þetta" alt="Líkar þetta" class="like_icon" />{{/if}}
+                        {{if CommentLikes.length > 0}}<img src='@Url.Content("~/Images/blank.gif")' title="{{each CommentLikes}}${Fullname} ,{{/each}} líkar þetta" alt="Líkar þetta" class="like_icon" />{{/if}}
                         
                         {{each CommentLikes}}
                         {{if $index <= 2}}${Fullname} ,{{/if}}
                         {{/each}}
                         
                         {{if CommentLikes.length > 3}} og ${CommentLikes.length - 3} öðrum{{/if}}
-                        {{if CommentLikes.length > 0}}líkar þetta.{{/if}}`*@
+                        {{if CommentLikes.length > 0}}líkar þetta.{{/if}}`
                         </span>
                         
 					</div>
@@ -191,7 +206,7 @@
 
     function sendLike(cid) {
 
-    alert(cid)
+    //alert(cid)
         var like = {
             "comment_id": cid
         };
@@ -199,7 +214,7 @@
         $.post("/JSon/LikeComment/" + cid, like, function (data) {
 
             displayLikes('/JSon/getLikes/' + cid, 'l_' + cid);
-        }).error(function () { alert("Sendingin misfórst. Athugasemdin sem þú líkaðir finnst líklega ekki. Henni gæti hafa verið eytt."); });
+        }).error(function () { alert("Sendingin misfórst. Annaðhvort hefur þú nú þegar sagt að þér líki þetta eða að  athugasemdin sem þú líkaðir finnst ekki. Henni gæti hafa verið eytt."); });
 
     }
 
@@ -211,7 +226,7 @@
 
         AjaxProgressImg(target_div);
 
-        var markup = '{{if $item.count() <= 15 }} ${user_name},{{/if}}';
+        var markup = '{{if $item.count() <= 15 }} ${Fullname},{{/if}}';
         var markup2 = '${user_name} ,';
         $.template("likeTemplate", markup);
         $.template("likeTitleTemplate", markup2);
