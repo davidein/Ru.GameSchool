@@ -7,6 +7,7 @@ using System.Linq;
 using Ru.GameSchool.BusinessLayer.Exceptions;
 using Ru.GameSchool.DataLayer;
 using Ru.GameSchool.DataLayer.Repository;
+using Ru.GameSchool.BusinessLayer.Enums;
 
 namespace Ru.GameSchool.BusinessLayer.Services
 { // vantar, öll gert fyrir level
@@ -653,11 +654,25 @@ namespace Ru.GameSchool.BusinessLayer.Services
             return levelMaterial;
         }
 
-        public void CreateLevelMaterial(LevelMaterial levelMaterial)
+        public void CreateLevelMaterial(LevelMaterial levelMaterial, int? courseId)
         {
-            if (levelMaterial != null)
+            if (levelMaterial != null && courseId > 0)
             {
                 GameSchoolEntities.LevelMaterials.AddObject(levelMaterial);
+                
+                var level = GameSchoolEntities.Levels.FirstOrDefault(l => l.LevelId == levelMaterial.LevelId && l.CourseId == courseId);
+
+                if (level != null)
+                {
+                    var allUsersInThisCourse =
+                        GameSchoolEntities.UserInfoes.SelectMany(s => s.Courses.Where(d => d.CourseId == courseId)).
+                            SelectMany(x => x.UserInfoes);
+                    foreach (var user in allUsersInThisCourse.Where(s => s.UserTypeId == 1).Distinct())
+                    {
+                        ExternalNotificationContainer.CreateNotification(string.Format("Nýtt kennslugagn er komið í áfangann {0} með nafninu \"{1}\"",
+                                                                                           levelMaterial.Level.Course.Name, levelMaterial.Title), string.Format("/Material/Index/{0}", levelMaterial.Level.CourseId), user.UserInfoId);
+                    }
+                }
                 Save();
             }
         }
@@ -908,5 +923,93 @@ namespace Ru.GameSchool.BusinessLayer.Services
         {
             return levelId > 0 ? GameSchoolEntities.LevelProjects.Where(l => l.LevelId == levelId) : null;
         }
+
+        public IEnumerable<LevelTab> GetLevelTabsByCourseIdAndUserInfoId(int courseId, int userInfoId)
+        {
+            var levels = (from x in GameSchoolEntities.Levels
+                          where x.CourseId == courseId
+                          select x).OrderBy(y => y.LevelId);
+
+            var levelTabs = new List<LevelTab>();
+
+            bool previousWasComplete = false;
+
+            foreach (var level in levels)
+            {
+                var currentLevelTab = new LevelTab();
+                currentLevelTab.levelId = level.LevelId;
+                currentLevelTab.levelName = level.Name;
+
+                var levelexams = from x in level.LevelExams
+                                 select x;
+
+                var levelproject = from x in level.LevelProjects
+                                   select x;
+
+                var levelexamreturns = from x in level.LevelExams
+                                       where x.LevelExamResults.Where(y => y.UserInfoId == userInfoId).Count() > 0
+                                       select x;
+
+                var levelprojectreturns = from x in level.LevelProjects
+                                          where x.LevelProjectResults.Where(y => y.UserInfoId == userInfoId).Count() > 0
+                                          select x;
+
+                
+
+                if (level.Start <= DateTime.Now)
+                {
+                    currentLevelTab.enabled = true;
+                }
+                else if (previousWasComplete)
+                {
+                    currentLevelTab.enabled = true;
+                }
+                else
+                {
+                    currentLevelTab.enabled = false;
+                }
+
+                bool levelHasEnded = false;
+                if (level.Stop < DateTime.Now)
+                {
+                    levelHasEnded = true;
+                }
+
+                if (levelexams.Count() == levelexamreturns.Count() && levelproject.Count() == levelprojectreturns.Count())
+                {
+                    previousWasComplete = true;
+                    currentLevelTab.levelCompleteness = LevelCompleteness.Complete;
+                }
+                else
+                {
+                    previousWasComplete = false;
+                    if (levelHasEnded)
+                    {
+                        currentLevelTab.enabled = false;
+                        currentLevelTab.levelCompleteness = LevelCompleteness.Failed;
+                    }
+                    else
+                    {
+                        currentLevelTab.levelCompleteness = LevelCompleteness.Incomplete;
+                    }
+                    
+                }
+
+
+                levelTabs.Add(currentLevelTab);
+            }
+
+            return levelTabs;
+        }
     }
+
+    public class LevelTab
+    {
+        public int levelId {get; set;}
+        public string levelName {get; set; }
+        public bool enabled { get; set; }
+        public LevelCompleteness levelCompleteness { get; set; }
+    }
+
+
 }
