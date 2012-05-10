@@ -52,7 +52,7 @@ namespace Ru.GameSchool.BusinessLayer.Services
 
 
         ////Delete?
-
+        
         public IEnumerable<Level> GetLevels()
         {
             return GameSchoolEntities.Levels;
@@ -63,10 +63,11 @@ namespace Ru.GameSchool.BusinessLayer.Services
         /// Returns a collection of level instances
         /// </summary>
         /// <returns>IEnumerable of level instances.</returns>
-        public IEnumerable<Level> GetLevels(int CourseId)
+        public IEnumerable<Level> GetLevels(int courseId)
         {
-            return GameSchoolEntities.Levels.Where(x => x.CourseId == CourseId);
+            return GameSchoolEntities.Levels.Where(x => x.CourseId == courseId);
         }
+
         /// <summary>
         /// Update a level object with new changes and persist it to the datasource.
         /// </summary>
@@ -74,9 +75,7 @@ namespace Ru.GameSchool.BusinessLayer.Services
         public void UpdateLevel(Level level)
         {
             Save();
-            //throw new System.NotImplementedException();
         }
-
 
         /// <summary>
         /// Persist a levelexam instance object to the datasource.
@@ -93,6 +92,11 @@ namespace Ru.GameSchool.BusinessLayer.Services
             }
         }
 
+        /// <summary>
+        /// Get a level exam by LevelExamId.
+        /// </summary>
+        /// <param name="levelExamId"></param>
+        /// <returns></returns>
         public LevelExam GetLevelExam(int levelExamId)
         {
             if (levelExamId < 0)
@@ -112,6 +116,12 @@ namespace Ru.GameSchool.BusinessLayer.Services
             return levelExam;
         }
 
+        /// <summary>
+        /// Gets a level exam by CourseId and UserInfoId.
+        /// </summary>
+        /// <param name="courseId"></param>
+        /// <param name="userInfoId"></param>
+        /// <returns>IEnumerable of LevelExams</returns>
         public IEnumerable<LevelExam> GetLevelExamsByCourseId(int courseId, int userInfoId)
         {
             var list = GameSchoolEntities.LevelExams.Where(x => x.Level.CourseId == courseId);
@@ -120,6 +130,12 @@ namespace Ru.GameSchool.BusinessLayer.Services
             return exams;
         }
 
+        /// <summary>
+        /// Gets a level exam by LevelId and UserInfoId.
+        /// </summary>
+        /// <param name="levelId"></param>
+        /// <param name="userInfoId"></param>
+        /// <returns>IEnumerable of LevelExams</returns>
         public IEnumerable<LevelExam> GetLevelExamsByLevelId(int levelId, int userInfoId)
         {
             var list = GameSchoolEntities.LevelExams.Where(x => x.LevelId == levelId);
@@ -129,7 +145,7 @@ namespace Ru.GameSchool.BusinessLayer.Services
         }
         
         /// <summary>
-        /// 
+        /// Updates a levelexam.
         /// </summary>
         /// <param name="levelExam">Levelexam instance to update.</param>
         public void UpdateLevelExam(LevelExam levelExam)
@@ -426,6 +442,11 @@ namespace Ru.GameSchool.BusinessLayer.Services
             return false;
         }
 
+        /// <summary>
+        /// Gets the next question in a level exam.
+        /// </summary>
+        /// <param name="levelExamQuestionId">The current level exam question id.</param>
+        /// <returns></returns>
         public LevelExamQuestion GetNextLevelExamQuestion(int levelExamQuestionId)
         {
             var question = GameSchoolEntities.LevelExamQuestions.Where(x => x.LevelExamQuestionId == levelExamQuestionId).Single();
@@ -447,6 +468,11 @@ namespace Ru.GameSchool.BusinessLayer.Services
             return null;
         }
 
+        /// <summary>
+        /// Gets a level exam answer.
+        /// </summary>
+        /// <param name="levelExamAnswerId"></param>
+        /// <returns></returns>
         public LevelExamAnswer GetLevelExamAnswer(int levelExamAnswerId)
         {
             if (levelExamAnswerId > 0)
@@ -460,6 +486,10 @@ namespace Ru.GameSchool.BusinessLayer.Services
             return null;
         }
 
+        /// <summary>
+        /// Deletes a level exam question. Also deletes all children answers.
+        /// </summary>
+        /// <param name="levelExamQuestionId"></param>
         public void DeleteLevelExamQuestion(int levelExamQuestionId)
         {
             if (levelExamQuestionId > 0)
@@ -478,6 +508,10 @@ namespace Ru.GameSchool.BusinessLayer.Services
             }
         }
 
+        /// <summary>
+        /// Deletes a level exam answer.
+        /// </summary>
+        /// <param name="levelExamAnswerId"></param>
         public void DeleteLevelExamAnswer(int levelExamAnswerId)
         {
             if (levelExamAnswerId > 0)
@@ -490,26 +524,10 @@ namespace Ru.GameSchool.BusinessLayer.Services
         }
 
         /// <summary>
-        /// 
+        /// Gets a level exam question.
         /// </summary>
-        /// <param name="levelExamQuestion"></param>
-        public void UpdateLevelExamQuestion(LevelExamQuestion levelExamQuestion)
-        {
-            if (levelExamQuestion != null)
-            {
-
-            }
-        }
-
-        /// <summary>
-        /// Method that returns a collection of leveexamquestion objects.
-        /// </summary>
-        /// <returns>IEnumerable collection of levelexamquestions.</returns>
-        public IEnumerable<LevelExamQuestion> GetLevelExamQuestions(int levelExamId)
-        {
-            return GameSchoolEntities.LevelExamQuestions.Where(x => x.LevelExamId == levelExamId);
-        }
-
+        /// <param name="levelExamQuestionsId"></param>
+        /// <returns></returns>
         public LevelExamQuestion GetLevelExamQuestion(int levelExamQuestionsId)
         {
             if (levelExamQuestionsId < 0)
@@ -525,20 +543,6 @@ namespace Ru.GameSchool.BusinessLayer.Services
                 return null;
             }
             return levelExamQuestion;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="levelExamResult"></param>
-        /// <param name="user"></param>
-        public void CreateUserLevelExamResult(LevelExamResult levelExamResult, UserInfo user)
-        {
-            if (levelExamResult != null && user != null)
-            {
-                user.LevelExamResults.Add(levelExamResult);
-                Save();
-            }
         }
 
         /// <summary>
