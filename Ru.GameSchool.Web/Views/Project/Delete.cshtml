@@ -3,6 +3,14 @@
 @{
     ViewBag.Title = "Eyða verkefni";
 }
+        @if (!string.IsNullOrWhiteSpace(ViewBag.ErrorMessage))
+        {
+            <div class="alert alert-error">
+                <button class="close" data-dismiss="alert">
+                    ×</button>
+                <strong>Villa!</strong> @ViewBag.ErrorMessage
+            </div>
+        }
 <br />
 <h2>
     Ertu viss um að þú viljir eyða verkefni?</h2>

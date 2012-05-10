@@ -48,7 +48,7 @@ namespace Ru.GameSchool.DataLayer.Repository
             set;
         }
     
-        public virtual double GradePercentageValue
+        public virtual int GradePercentageValue
         {
             get;
             set;
@@ -61,6 +61,18 @@ namespace Ru.GameSchool.DataLayer.Repository
         }
     
         public virtual System.DateTime CreateDateTime
+        {
+            get;
+            set;
+        }
+    
+        public virtual System.DateTime Start
+        {
+            get;
+            set;
+        }
+    
+        public virtual System.DateTime Stop
         {
             get;
             set;

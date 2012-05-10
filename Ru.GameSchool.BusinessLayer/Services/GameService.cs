@@ -60,16 +60,114 @@ namespace Ru.GameSchool.BusinessLayer.Services
 
             return points;
         }
+        
+        public int GetPointsByUserInfoIdAndCourseId(int userInfoId, int courseId)
+        {
+            // If userinfoid or levelid is smaller then 0 then return 0
+            if (userInfoId <= 0 || courseId <= 0)
+            {
+                return 0;
+            }
+            // Get a point instance that has a given levelid and userinfoid
+            var query = GameSchoolEntities.Points.Where(p => p.CourseId == courseId &&
+                                                             p.UserInfoId == userInfoId);
+            int points = 0;
+
+            if (query.Count()>0)
+            points = query.Sum(x => x.Points);
+
+
+            return points;
+        }
+
+        public int GetTopPoints(int courseId)
+        {
+            if (courseId <= 0)
+            {
+                return 0;
+            }
+
+            var query = GameSchoolEntities.Points.Where(p => p.CourseId == courseId);
+
+            var points = query.Max(x => x.Points);
+
+            return points;
+        }
 
         /// <summary>
-        /// 
+        /// Fall sem skilar tuple af þínum stigum, þínu sæti, hvað þú þarft mörg stig til að komast sæti ofar og hvað keppandinn á eftir þér þarf mörg stig til að koamst yfir þig
         /// </summary>
         /// <param name="userInfoId"></param>
         /// <param name="courseId"></param>
         /// <returns></returns>
-        public int CalculatePoints(int userInfoId, int courseId)
+        public Tuple<int, int, int, int> GetScoreComparedToUsers(int userInfoId, int courseId)
         {
-            throw new System.NotImplementedException();
+            if (0 > userInfoId)
+            {
+                return null;
+            }
+
+            var userPoints = GetPointsByUserInfoIdAndCourseId(userInfoId, courseId);
+            var userPosition = GetUserPositionInGame(userInfoId, courseId);
+            
+            return Tuple.Create(userPoints, userPosition, 0, 0);
+        }
+
+
+
+        private int GetUserPositionInGame(int userInfoId, int courseId)
+        {
+            if (0 >= userInfoId | 0 >= courseId)
+            {
+                return 0;
+            }
+
+            var totalUsers = GameSchoolEntities.Points.Count(s => s.CourseId == courseId && s.UserInfoId != userInfoId);
+            var allUsersWithPointsInThisCourse = GetPointsByAndNotUserInfoIdCourseId(courseId, userInfoId);
+            int position = 0;
+
+            var userPoints =
+                GameSchoolEntities.Points.Where(p => p.UserInfoId == userInfoId && p.CourseId == courseId).Sum(x => x.Points);
+
+            for (int i = 0; i < totalUsers; i++)
+            {
+                if (userPoints > allUsersWithPointsInThisCourse.ElementAtOrDefault(i))
+                {
+                    position++;
+                }
+            }
+
+            return (totalUsers - position) + 1;
+        }
+
+        private List<int> GetPointsByAndNotUserInfoIdCourseId(int courseId, int userInfoId)
+        {
+            if (0>=courseId)
+            {
+                return null;
+            }
+            List<int> points = new List<int>();
+            var total = GameSchoolEntities.Points.Count(s => s.CourseId == courseId && s.UserInfoId != userInfoId);
+            var getPoints = GameSchoolEntities.Points.Where(s => s.CourseId == courseId && s.UserInfoId != userInfoId);
+            for (int i = 0; i < total; i++)
+            {
+                var point = getPoints.Sum(s => s.Points);
+                points.Add(point);
+            }
+            return points;
+        }
+
+        /// <summary>
+        /// Handles point calculations based on grade.
+        /// </summary>
+        /// <param name="grade"></param>
+        /// <param name="pointPerGrade"></param>
+        /// <returns></returns>
+        public int CalculatePointsByGrade(double grade, int pointPerGrade)
+        {
+            var result = grade * pointPerGrade;
+            
+            return (int)result;
         }
 
         /// <summary>

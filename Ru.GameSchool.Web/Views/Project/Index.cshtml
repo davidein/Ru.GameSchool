@@ -1,5 +1,6 @@
 ﻿@using Ru.GameSchool.DataLayer.Repository
 @model IEnumerable<Course>
+@Html.ActionLink("Sjá allt", "Index", new { id = "" })
 @foreach (var course in Model)
 {
     <table class="table table-striped table-bordered table-condensed">
@@ -17,10 +18,21 @@
                 <th>
                     Lýsing
                 </th>
+                <th>
+                    Borð
+                </th>
                 @if (User.IsInRole("Teacher"))
                 {
                     <th>
+                        Fjöldi búinn að skila
+                        
+                    </th>
+                    <th>
+                        Fjöldi óyfirfarna verkefna
+                    </th>
+                    <th>
                         Aðgerðir kennara
+                        
                     </th>
                 }
                 else
@@ -37,53 +49,93 @@
             {
                 foreach (var innerInnerItem in innerItem.LevelProjects)
                 {
+                    if (!(innerInnerItem.Start > DateTime.Now && User.IsInRole("Student"))) // Ekki sýna verkefni sem eru ekki byrjuð
+                    {     
                 <tr>
                     <td>
-                        @Html.ActionLink(@innerInnerItem.Name, "Get", new { id = @innerInnerItem.LevelProjectId })
+                        <!-- -->
+                        @if (innerInnerItem.Start < DateTime.Now && User.IsInRole("Student"))
+                        {
+                            @Html.ActionLink(@innerInnerItem.Name, "Get", new { id = @innerInnerItem.LevelProjectId })if (@innerInnerItem.Start.AddHours(23) >= DateTime.Now)
+                                                                                                                      {<span class="label label-important new-material">Nýtt</span>}
+                        }
+                        else if (User.IsInRole("Teacher"))
+                        {
+                            @Html.ActionLink(@innerInnerItem.Name, "TeacherGet", new { id = @innerInnerItem.LevelProjectId })if (@innerInnerItem.Start.AddHours(23) >= DateTime.Now)
+                                                                                                                             {<span class="label label-important new-material">Nýtt</span>}
+                        }
+                        else if (innerInnerItem.Stop < DateTime.Now)
+                        {
+                            <i>Skilafrestur búinn!</i>
+                        }
                     </td>
                     <td>
-                        @innerInnerItem.Stop
+                        @innerInnerItem.Stop.ToShortDateString()
                     </td>
                     <td>
                         @innerInnerItem.Description
                     </td>
+                                <td>
+                @Html.ActionLink(@innerInnerItem.Level.Name, "Get", "Level", new { id = innerInnerItem.LevelId }, null)
+            </td>
                     @if (User.IsInRole("Teacher"))
                     {
+
                         <td>
-                            @Html.ActionLink("Breyta", "Edit", new { id = innerInnerItem.LevelProjectId }) |
-                            @Html.ActionLink("Eyða", "Delete", new { id = innerInnerItem.LevelProjectId })
+                            @innerInnerItem.LevelProjectResults.Count
+                        </td>
+                        <td>
+                            @innerInnerItem.LevelProjectResults.Count(x => x.Grade == null)
+                        </td>
+                        <td>
+                            <a name="button" class="btn btn-mini" href="@Url.Action("Edit", new { id = innerInnerItem.LevelProjectId })" >
+                                <i class="icon-edit"></i>Breyta </a>| <a name="button" class="btn btn-mini" href="@Url.Action("Delete", new { id = innerInnerItem.LevelProjectId })" >
+                                    <i class="icon-edit"></i>Eyða </a>
                         </td>
                     }
-                    else
+                    else if (User.IsInRole("Student"))
                     {
-                        <td>
-                            @{
-                        if (innerInnerItem.LevelProjectResults.Count == 0)
+                        if (innerInnerItem.LevelProjectResults.Any(x => x.Grade == null))
                         {
-                                <i>Ekki búið að skila</i>
+                        <td>
+                            <i>Enginn einkunn kominn!</i>
+                        </td>
+                        <td>
+                        </td>
+                        }
+                        else if (innerInnerItem.LevelProjectResults.Count == 0)
+                        {
+                        <td>
+                            <i>Ekki búið að skila verkefni!</i>
+                        </td>
+                        <td>
+                        </td>
                         }
                         else
                         {
-                                <i>@innerInnerItem.LevelProjectResults.Select(x => x.Grade).FirstOrDefault()</i>
-                        }
-                            }
+                            foreach (var result in innerInnerItem.LevelProjectResults.Where(s => s.UserInfoId == ViewBag.UserInfoId))
+                            {
+                        <td>
+                            <i>@result.Grade</i>
                         </td>
                         <td>
-                            @innerInnerItem.LevelProjectResults.Select(x => x.TeacherFeedback).FirstOrDefault()
+                            @result.TeacherFeedback
                         </td>
+                            }
+                        }
                     }
                 </tr>
+                    }
                 }
             }
         </tbody>
     </table>
-            using (Html.BeginForm("Create", "Project", new {id=course.CourseId},FormMethod.Post))
+            using (Html.BeginForm("Create", "Project", new { id = course.CourseId }, FormMethod.Post))
             {
                 if (User.IsInRole("Teacher"))
                 {
     <p>
-        <button name="button" class="btn btn-success" value="Create" >
-            Búa til nýtt verkefni</button>
+        @Html.ActionLink("Búa til nýtt verkefni", "Create", new { id = course.CourseId }, new { @class = "btn btn-success" })
     </p>
                 }
             }

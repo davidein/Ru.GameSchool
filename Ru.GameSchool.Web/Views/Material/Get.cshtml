@@ -1,3 +1,4 @@
+﻿
 ﻿@*// Todo:MOVE TO HEADER *@
 <link href="http://vjs.zencdn.net/c/video-js.css" rel="stylesheet">
 <script src="http://vjs.zencdn.net/c/video.js"></script>
@@ -64,30 +65,219 @@
         max-height: 394px;
         max-width: 700px;
     }
-    .content-wrapper {
-        max-width: 700px;
-        max-height: 394px;
-    }
 </style>
-@model Ru.GameSchool.DataLayer.Repository.LevelMaterial
-@* TODO: FIX LOOK*@
-<div class="well">
-    <h3>@ViewBag.Name</h3>
-    <div class="content-wrapper">
-        <div class="videoWrapper">
-            <video id="gameSchoolVideo" class="video-js vjs-default-skin" controls width="700" height="394" poster="" preload="auto" data-setup="{}">
-                <source type="video/mp4" src="@ViewBag.File">
-            </video>
-        </div>
-    </div>
 
+
+
+<div class="well">
+    <h2>@ViewBag.Title</h2>
+    <div class="videoWrapper">
+        <video id="gameSchoolVideo" class="video-js vjs-default-skin" controls width="700" height="394" poster="" preload="auto" data-setup="{}">
+            <source type="video/mp4" src="@ViewBag.File">
+        </video>
+    </div>
     <p>@ViewBag.Description</p>
-    @if (User.IsInRole("Teacher"))
-    {
-        <div class="controls">
-            @Html.ActionLink("Uppfæra kennslugagn", "Edit", new {id = @Model.LevelMaterialId}, new {@class = "btn btn-success"})
-        
-        </div>
-    }
 </div>
+
+
+
+
+
+
+
+@*Comment hluti *@
+
+		<ul class="commentList" id="commentList">
+        <div id="jsonWrapper"></div>
+
+        			<li class="commentAdd">
+				<textarea id="CommentText" name="CommentText" rows="3" cols="20"></textarea>
+				<label>
+					<input type="button" id="saveBtn" value="Senda inn athugasemd" />
+				</label>
+				@Html.ValidationMessage( "CommentText" )
+			</li>
+        </ul>
+
+
+    <script id="comments" type="text/html">
+
+    			<li>
+				<a href="#"><img src='@Url.Content("~/Images/User.png")' alt="Notandi" /></a>
+				<div class="commentBody">
+					<a href="#">${Fullname}</a>
+					<span>${Comment1}</span>
+					<div>
+						<abbr title='${CreateDateTime}'>${$item.formDate(CreateDateTime)}</abbr>
+						<a jid="sendLike" cid="${CommentId}" >Líkar þetta</a>  
+                        <span id="l_${CommentId}">
+                        @*{{if CommentLikes.length > 0}}<img src='@Url.Content("~/Images/blank.gif") %>' title="{{each CommentLikes}}${Fullname} ,{{/each}} líkar þetta" alt="Líkar þetta" class="like_icon" />{{/if}}
+                        
+                        {{each CommentLikes}}
+                        {{if $index <= 2}}${Fullname} ,{{/if}}
+                        {{/each}}
+                        
+                        {{if CommentLikes.length > 3}} og ${CommentLikes.length - 3} öðrum{{/if}}
+                        {{if CommentLikes.length > 0}}líkar þetta.{{/if}}`*@
+                        </span>
+                        
+					</div>
+				</div>
+			</li>
+
+</script>
+
+<script type="text/javascript" language="javascript" >
+    $(document).ready(function () {
+
+ 
+        displayComments('/Json/GetComments/@ViewBag.LevelMaterialId', 'comments', 'jsonWrapper');
+
+        $("#saveBtn").click(function () {
+
+            var date = new Date();
+            var currdate = date.getDate();
+
+            var comment = {"Comment1": $("#CommentText").val() };
+
+            var jqxhr = $.post("/Json/CreateComment/@ViewBag.LevelMaterialId", comment, function (data) {
+                $("#CommentText").val('');
+                displayComments('/Json/GetComments/@ViewBag.LevelMaterialId', 'comments', 'jsonWrapper');
+            }).error(function () { alert("Sendingin misfórst. Var kannski enginn texti í athugasemdinni?"); })
+
+        });
+
+        
+
+    });
+
+    function displayComments(url, template, target) {
+        var target_div = "#results";
+        var template_id = "#jsonTemplate"
+        if (target) { target_div = "#" + target; }
+        if (template) { template_id = "#" + template; }
+
+        AjaxProgressImg(target_div);
+
+        $.ajax({
+            type: "GET",
+            contentType: "application/json; charset=utf-8",
+            data: "{}",
+            dataType: "json",
+            url: url,
+            cache: false,
+            success: function (data) {
+
+                $(target_div).empty();
+                $(template_id).tmpl(data,
+                {
+                    formDate: function (jdate) {
+                        var date = new Date(parseInt(jdate.substr(6)));
+                        return date.getDate() + '.' + getIceMonth(date.getMonth()) + ' ' + date.getHours() + ':' + date.getMinutes();
+                    }
+                }
+            ).appendTo(target_div);
+
+                $("a[jid='sendLike']").click(function () {
+                    sendLike($(this).attr("cid"));
+                });
+
+            }
+        });
+
+
+    }
+
+
+    function sendLike(cid) {
+
+    alert(cid)
+        var like = {
+            "comment_id": cid
+        };
+
+        $.post("/JSon/LikeComment/" + cid, like, function (data) {
+
+            displayLikes('/JSon/getLikes/' + cid, 'l_' + cid);
+        }).error(function () { alert("Sendingin misfórst. Athugasemdin sem þú líkaðir finnst líklega ekki. Henni gæti hafa verið eytt."); });
+
+    }
+
+
+    function displayLikes(url, target) {
+        var target_div = "#results";
+        if (target) { target_div = "#" + target; }
+        var ctr = 0;
+
+        AjaxProgressImg(target_div);
+
+        var markup = '{{if $item.count() <= 15 }} ${user_name},{{/if}}';
+        var markup2 = '${user_name} ,';
+        $.template("likeTemplate", markup);
+        $.template("likeTitleTemplate", markup2);
+        var rand = Math.floor(Math.random() * 10000);
+        var temprand = "temp" + rand;
+        var likeimgrand = "likeimg" + rand;
+
+
+
+        $.ajax({
+            global: false,
+            type: "GET",
+            contentType: "application/json; charset=utf-8",
+            data: "{}",
+            dataType: "json",
+            url: url,
+            cache: false,
+            success: function (data) {
+                var likeCount = data.length;
+
+                $(target_div).empty();
+                $('<img src="/Images/blank.gif" alt="Líkar þetta" class="like_icon" id="' + likeimgrand + '"/>').appendTo(target_div);
+                $('<span style="display:none" id="' + temprand + '"><span>').appendTo(target_div);
+
+
+                $.tmpl("likeTitleTemplate", data).appendTo("#" + temprand);
+                $("#" + likeimgrand).attr('title', $("#" + temprand).text() + ' líkar þetta');
+                $("#" + temprand).remove();
+
+
+                $.tmpl("likeTemplate", data, { count: function () { return ++ctr; } }).appendTo(target_div);
+                if (likeCount > 3) { $(target_div).append('og ' + (likeCount - 3) + ' öðrum'); }
+                $(target_div).append(' líkar þetta');
+
+
+            }
+        });
+
+
+    }
+
+    function AjaxProgressImg(target_div) {
+
+        $(target_div).append('<div class="ajaxindicator_div"><img src="/images/load.gif" ></div>');
+
+    }
+
+    function getIceMonth(monthid) {
+        var month = new Array(12)
+        month[0] = "jan";
+        month[1] = "feb";
+        month[2] = "mar";
+        month[3] = "apr";
+        month[4] = "maí";
+        month[5] = "jún";
+        month[6] = "júl";
+        month[7] = "águ";
+        month[8] = "sep";
+        month[9] = "okt";
+        month[10] = "nóv";
+        month[11] = "des";
+        return month[monthid]
+    }
+    
+
+</script>
+
+
 

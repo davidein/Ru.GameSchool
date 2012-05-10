@@ -53,7 +53,7 @@ namespace Ru.GameSchool.DataLayer.Repository
         }
         private int _userInfoId;
     
-        public virtual double Grade
+        public virtual Nullable<double> Grade
         {
             get;
             set;

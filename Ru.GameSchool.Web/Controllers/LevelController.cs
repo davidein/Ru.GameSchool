@@ -26,23 +26,19 @@ namespace Ru.GameSchool.Web.Controllers
                 if (model != null)
                 {
 
-                    int userId = ViewBag.User.UserInfoId;
+                    int userId = UserService.GetUser(User.Identity.Name).UserInfoId;
                     int courseId = model.CourseId;
 
                     ViewBag.Title = "Borð";
                     ViewBag.CourseId = courseId;
                     ViewBag.CourseName = model.Course.Name;
-
-                    /*var levels = LevelService.GetLevels(courseId);
-
-                    ViewBag.Levels = levels;*/
-                    ViewBag.LevelTabs = LevelService.GetLevelTabsByCourseIdAndUserInfoId(courseId, userId);
-                    ViewBag.Projects = LevelService.GetLevelProjects();
+                    ViewBag.Levels = LevelService.GetLevels(courseId);
+                    ViewBag.Projects = LevelService.GetLevelProjectsByLevelId(levelId);
                     ViewBag.MaterialsVideo = LevelService.GetLevelMaterials(levelId,1);
                     ViewBag.MaterialsSlides = LevelService.GetLevelMaterials(levelId,2);
                     ViewBag.MaterialsMessages = LevelService.GetLevelMaterials(levelId);
                     ViewBag.MaterialsDocs = LevelService.GetLevelMaterials(levelId,3);
-                    ViewBag.Exams = LevelService.GetLevelExams(levelId, userId);
+                    ViewBag.Exams = LevelService.GetLevelExamsByLevelId(levelId, userId);
 
                     return View(model);
                 }
@@ -54,18 +50,31 @@ namespace Ru.GameSchool.Web.Controllers
 
 
         [Authorize(Roles = "Teacher")]
-        public ActionResult Create()
+        public ActionResult Create(int? id)
         //public ActionResult Create(int CoureId)
         {
-            ViewBag.Title = "Búa til  borð";
-            ViewBag.CourseList = new SelectList(CourseService.GetCourses(), "CourseId", "Name"); 
-            return View();
+            if (id.HasValue)
+            {
+                ViewBag.Title = "Búa til  borð";
+                ViewBag.CourseId = id.Value;
+                ViewBag.CourseName = CourseService.GetCourse(id.Value).Name;
+                ViewBag.CourseList = new SelectList(CourseService.GetCourses(), "CourseId", "Name");
+
+                Level model = new Level();
+
+                model.CourseId = id.Value;
+                model.Start = DateTime.Now;
+                model.Stop = DateTime.Now.AddMonths(3);
+
+                return View(model);
+            }
+            return RedirectToAction("NotFound", "Home");
         }
 
 
         [HttpPost]
         [Authorize(Roles = "Teacher")]
-        public ActionResult Create(Level level)
+        public ActionResult Create(Level level, int? id)
         {
             if (ModelState.IsValid)
             {
@@ -73,10 +82,18 @@ namespace Ru.GameSchool.Web.Controllers
                 level.CreateDateTime = DateTime.Now;
 
                 LevelService.CreateLevel(level);
+                return RedirectToAction("Edit", new { Id = level.LevelId });
                 
             }
 
-            return RedirectToAction("Edit", new { Id = level.LevelId });
+            ViewBag.Title = "Búa til  borð";
+            ViewBag.CourseId = id.Value;
+            ViewBag.CourseName = CourseService.GetCourse(id.Value).Name;
+            ViewBag.CourseList = new SelectList(CourseService.GetCourses(), "CourseId", "Name");
+            level.CourseId = id.Value;
+
+            return View(level);
+            
         }
 
 
@@ -86,11 +103,16 @@ namespace Ru.GameSchool.Web.Controllers
         {
             if (id.HasValue)
             {
-                ViewBag.Title = "Breyta borði";
+
                 var model = LevelService.GetLevel(id.Value);
+
+                ViewBag.Title = "Breyta borði";
                 ViewBag.CourseId = model.CourseId;
+                ViewBag.CourseName = model.Course.Name;
+
                 return View(model);
             }
+
 
             return View();
         }
@@ -109,6 +131,10 @@ namespace Ru.GameSchool.Web.Controllers
                     LevelService.UpdateLevel(level);
                 }
             }
+
+            ViewBag.Title = "Breyta borði";
+            ViewBag.CourseId = model.CourseId;
+            ViewBag.CourseName = model.Course.Name;
 
             return View(model);
         }

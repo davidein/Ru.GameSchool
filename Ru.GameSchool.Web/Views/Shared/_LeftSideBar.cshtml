@@ -1,39 +1,36 @@
 ﻿@using Ru.GameSchool.BusinessLayer.Services
 
-@if (User.IsInRole("Admin") && Request.Url.AbsoluteUri.Contains("Admin"))
-{
-    @Html.Partial("_AdminSideBar")
-}
-else
-{
+
 <div class="well">
     <h2>
         Velkomin/n á GameSchool</h2>
-        @if (User.IsInRole("Student"))
-        {
-            <table class="table table-striped table-bordered table-condensed">
-                <caption>Þú ert nr # í leiknum</caption>
-                <thead>
-                    <tr>
-                    <th>#</th>
-                    <th>Stig</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1
-                            
-                        </td>
-                        <td>
-                            1
-                        </td>
-                    </tr>
-                </tbody>
-        </table>
-        }
 </div>
+@if (User.IsInRole("Student") && (Request.Url.AbsoluteUri.Contains("Course") | Request.Url.AbsoluteUri.Contains("Exam") | Request.Url.AbsoluteUri.Contains("Project") | Request.Url.AbsoluteUri.Contains("Level")))
+{
+    <div class="well">
+        <h2>
+            @{
+                var points = new GameService().GetScoreComparedToUsers(Ru.GameSchool.Web.Classes.Helper.MembershipHelper.GetUser().UserInfoId, 1); // hvernig á að sækja course?
+                var totalPoints = points.Item1;
+                var position = points.Item2;
+                var points1 = points.Item3;
+                var points2 = points.Item4;
+            }
+           @totalPoints stig</h2>
+        <p>
+            Þú ert í <span class="label label-info">@position</span> sæti í leiknum!</p>
+        <p>
+            og þarft aðeins <span class="label label-success">@points1</span> stig til þess að komast
+            einu sæti ofar!</p>
+        <p>
+            Næsti keppandi á eftir þér þarf aðeins <span class="label label-warning">@points2</span>
+            stig til þess að komast yfir þig!</p>
+        <button class="btn btn-small" data-toggle="modal" data-target="#myModal">
+            Sjá topplistann</button>
+    </div>
+}
 <div id="accordion2" class="accordion">
-    @foreach (var item in ViewBag.UserCourseList)
+    @foreach (var item in ViewBag.UserCourseList) 
     {
         foreach (var nesteditem in item)
         {
@@ -50,7 +47,7 @@ else
                             <li>@Html.ActionLink("Ummæli", "Comments", "Course", new { id = @nesteditem.CourseId }, null)</li>
                             <li>@Html.ActionLink("Nýtt borð", "Create", "Level", new { id = @nesteditem.CourseId }, null)</li>
                             <li>@Html.ActionLink("Ný tilkynning", "Announcement", "Course", new { id = @nesteditem.CourseId }, null)</li>
-                            <li>@Html.ActionLink("Nýtt verkefni", "Project", "Course", new { id = @nesteditem.CourseId }, null)</li>
+                            <li>@Html.ActionLink("Nýtt verkefni", "Create", "Project", new { id = @nesteditem.CourseId }, null)</li>
                             <li>@Html.ActionLink("Nýtt próf", "Create", "Exam", new { id = @nesteditem.CourseId }, null)</li>
                             <li>@Html.ActionLink("Nýtt kennslugagn", "Create", "Material", new { id = @nesteditem.CourseId }, null)</li>
                             <hr />
@@ -60,7 +57,7 @@ else
                         <li>@Html.ActionLink("Verkefni", "Index", "Project", new { id = @nesteditem.CourseId }, null)</li>
                         <li>@Html.ActionLink("Próf", "Index", "Exam", new { id = @nesteditem.CourseId }, null)</li>
                         <li>@Html.ActionLink("Kennsluefni", "Index", "Material", new { id = @nesteditem.CourseId }, null)</li>
-                        <li><a data-toggle="modal" href="#myModal">Top tíu listinn!</a></li>
+                        <li>@Html.ActionLink("Top tíu listinn", "", null, new { href = "#myModal", id = @nesteditem.CourseId, data_toggle = "modal" })</li>
                     </ul>
                 </div>
             </div>
@@ -81,20 +78,25 @@ else
                     <th>
                         Stig
                     </th>
-                    <th>
-                        Nafn
-                    </th>
+                    <th>Deild nemanda</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach (var item in new GameService().GetTopTenList(1))
+                @{
+                    var counter = 1;
+                }
+                @foreach (var item in new GameService().GetTopTenList(1)) 
                 {
                     <tr>
-                        <td>@item.Item2.Username
+                        <td>@counter
                         </td>
                         <td>@item.Item1
                         </td>
+                        <td>
+                            @item.Item2.Department.Name
+                        </td>
                     </tr>
+                    counter++;
                 }
             </tbody>
         </table>
@@ -103,4 +105,3 @@ else
         <a href="#" id="close" class="btn" data-dismiss="modal">Loka</a>
     </div>
 </div>
-}

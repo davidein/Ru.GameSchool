@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Data;
+using System.Linq;
 using Ru.GameSchool.BusinessLayer.Enums;
 using Ru.GameSchool.DataLayer;
 using System.Collections.Generic;
@@ -120,7 +121,9 @@ namespace Ru.GameSchool.BusinessLayer.Services
             Save();
 
             if (ExternalNotificationContainer != null)
+            { 
                 ExternalNotificationContainer.CreateNotification("Lykilorði þínu hefur verið breytt.", "", userInfoId);
+            }
         }
 
         /// <summary>
@@ -155,6 +158,7 @@ namespace Ru.GameSchool.BusinessLayer.Services
         public void UpdateUser(UserInfo userInfo)
         {
             GameSchoolEntities.AttachTo("UserInfo", userInfo);
+
             Save();
 
             /*            var items = GameSchoolEntities.UserInfoes.Where(u => u.UserInfoId == userInfo.UserInfoId);

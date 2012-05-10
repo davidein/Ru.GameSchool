@@ -51,21 +51,6 @@ namespace Ru.GameSchool.DataLayer.Repository
         #endregion
         #region Navigation Properties
     
-        public virtual LevelExam LevelExam
-        {
-            get { return _levelExam; }
-            set
-            {
-                if (!ReferenceEquals(_levelExam, value))
-                {
-                    var previousValue = _levelExam;
-                    _levelExam = value;
-                    FixupLevelExam(previousValue);
-                }
-            }
-        }
-        private LevelExam _levelExam;
-    
         public virtual ICollection<LevelExamAnswer> LevelExamAnswers
         {
             get
@@ -97,6 +82,21 @@ namespace Ru.GameSchool.DataLayer.Repository
             }
         }
         private ICollection<LevelExamAnswer> _levelExamAnswers;
+    
+        public virtual LevelExam LevelExam
+        {
+            get { return _levelExam; }
+            set
+            {
+                if (!ReferenceEquals(_levelExam, value))
+                {
+                    var previousValue = _levelExam;
+                    _levelExam = value;
+                    FixupLevelExam(previousValue);
+                }
+            }
+        }
+        private LevelExam _levelExam;
 
         #endregion
         #region Association Fixup

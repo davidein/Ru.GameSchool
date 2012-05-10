@@ -56,8 +56,13 @@
             <div class="row-fluid">
                 @if (Request.IsAuthenticated)
                 {
+                    
                     <div class="span3">
+                        @if (User.IsInRole("Admin") && Request.Url.AbsoluteUri.Contains("Admin")){
+                        @Html.Partial("_AdminSideBar")}
+                        else {
                         @Html.Partial("_LeftSideBar")
+                        }
                     </div><!--/span-->
                 }
                 <div class="span9">

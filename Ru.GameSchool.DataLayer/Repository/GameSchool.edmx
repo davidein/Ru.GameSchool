@@ -24,6 +24,7 @@
           <EntitySet Name="Notification" EntityType="GameSchoolModel.Store.Notification" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Points" EntityType="GameSchoolModel.Store.Points" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Status" EntityType="GameSchoolModel.Store.Status" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="sysdiagrams" EntityType="GameSchoolModel.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="UserCourse" EntityType="GameSchoolModel.Store.UserCourse" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="UserInfo" EntityType="GameSchoolModel.Store.UserInfo" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="UserLog" EntityType="GameSchoolModel.Store.UserLog" store:Type="Tables" Schema="dbo" />
@@ -165,7 +166,7 @@
           <Key>
             <PropertyRef Name="CommentLikeId" />
           </Key>
-          <Property Name="CommentLikeId" Type="int" Nullable="false" />
+          <Property Name="CommentLikeId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="CommentId" Type="int" Nullable="false" />
           <Property Name="UserInfoId" Type="int" Nullable="false" />
         </EntityType>
@@ -228,9 +229,11 @@
           <Property Name="LevelExamId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="LevelId" Type="int" Nullable="false" />
           <Property Name="Description" Type="nvarchar(max)" />
-          <Property Name="GradePercentageValue" Type="float" Nullable="false" />
+          <Property Name="GradePercentageValue" Type="int" Nullable="false" />
           <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="215" />
           <Property Name="CreateDateTime" Type="datetime" Nullable="false" />
+          <Property Name="Start" Type="datetime" Nullable="false" />
+          <Property Name="Stop" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="LevelExamAnswer">
           <Key>
@@ -338,6 +341,16 @@
           </Key>
           <Property Name="StatusId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="215" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="UserCourse">
           <Key>
@@ -752,7 +765,6 @@
           <EntitySet Name="CourseGrades" EntityType="GameSchoolModel.CourseGrade" />
           <EntitySet Name="Departments" EntityType="GameSchoolModel.Department" />
           <EntitySet Name="Levels" EntityType="GameSchoolModel.Level" />
-          <EntitySet Name="LevelExams" EntityType="GameSchoolModel.LevelExam" />
           <EntitySet Name="LevelExamAnswers" EntityType="GameSchoolModel.LevelExamAnswer" />
           <EntitySet Name="LevelExamQuestions" EntityType="GameSchoolModel.LevelExamQuestion" />
           <EntitySet Name="LevelExamResults" EntityType="GameSchoolModel.LevelExamResult" />
@@ -808,10 +820,6 @@
             <End Role="Department" EntitySet="Departments" />
             <End Role="UserInfo" EntitySet="UserInfoes" />
           </AssociationSet>
-          <AssociationSet Name="FK_LevelExam_Level" Association="GameSchoolModel.FK_LevelExam_Level">
-            <End Role="Level" EntitySet="Levels" />
-            <End Role="LevelExam" EntitySet="LevelExams" />
-          </AssociationSet>
           <AssociationSet Name="FK_LevelMaterial_Level" Association="GameSchoolModel.FK_LevelMaterial_Level">
             <End Role="Level" EntitySet="Levels" />
             <End Role="LevelMaterial" EntitySet="LevelMaterials" />
@@ -823,14 +831,6 @@
           <AssociationSet Name="FK_Points_Level" Association="GameSchoolModel.FK_Points_Level">
             <End Role="Level" EntitySet="Levels" />
             <End Role="Point" EntitySet="Points" />
-          </AssociationSet>
-          <AssociationSet Name="FK_LevelExamQuestion_LevelExam" Association="GameSchoolModel.FK_LevelExamQuestion_LevelExam">
-            <End Role="LevelExam" EntitySet="LevelExams" />
-            <End Role="LevelExamQuestion" EntitySet="LevelExamQuestions" />
-          </AssociationSet>
-          <AssociationSet Name="FK_LevelExamResult_LevelExam" Association="GameSchoolModel.FK_LevelExamResult_LevelExam">
-            <End Role="LevelExam" EntitySet="LevelExams" />
-            <End Role="LevelExamResult" EntitySet="LevelExamResults" />
           </AssociationSet>
           <AssociationSet Name="FK_LevelExamAnswer_LevelExamQuestion" Association="GameSchoolModel.FK_LevelExamAnswer_LevelExamQuestion">
             <End Role="LevelExamQuestion" EntitySet="LevelExamQuestions" />
@@ -879,6 +879,20 @@
           <AssociationSet Name="LevelExamUserAnswer" Association="GameSchoolModel.LevelExamUserAnswer">
             <End Role="LevelExamAnswer" EntitySet="LevelExamAnswers" />
             <End Role="UserInfo" EntitySet="UserInfoes" />
+          </AssociationSet>
+          <EntitySet Name="LevelExams" EntityType="GameSchoolModel.LevelExam" />
+ 
+          <AssociationSet Name="FK_LevelExam_Level" Association="GameSchoolModel.FK_LevelExam_Level">
+            <End Role="Level" EntitySet="Levels" />
+            <End Role="LevelExam" EntitySet="LevelExams" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LevelExamQuestion_LevelExam" Association="GameSchoolModel.FK_LevelExamQuestion_LevelExam">
+            <End Role="LevelExam" EntitySet="LevelExams" />
+            <End Role="LevelExamQuestion" EntitySet="LevelExamQuestions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LevelExamResult_LevelExam" Association="GameSchoolModel.FK_LevelExamResult_LevelExam">
+            <End Role="LevelExam" EntitySet="LevelExams" />
+            <End Role="LevelExamResult" EntitySet="LevelExamResults" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="Comment">
@@ -967,25 +981,11 @@
           <Property Type="DateTime" Name="Stop" Nullable="false" />
           <Property Type="DateTime" Name="CreateDateTime" Nullable="false" />
           <NavigationProperty Name="Course" Relationship="GameSchoolModel.FK_Level_Course" FromRole="Level" ToRole="Course" />
-          <NavigationProperty Name="LevelExams" Relationship="GameSchoolModel.FK_LevelExam_Level" FromRole="Level" ToRole="LevelExam" />
           <NavigationProperty Name="LevelMaterials" Relationship="GameSchoolModel.FK_LevelMaterial_Level" FromRole="Level" ToRole="LevelMaterial" />
           <NavigationProperty Name="LevelProjects" Relationship="GameSchoolModel.FK_LevelProject_Level" FromRole="Level" ToRole="LevelProject" />
           <NavigationProperty Name="Points" Relationship="GameSchoolModel.FK_Points_Level" FromRole="Level" ToRole="Point" />
           <Property Type="Int32" Name="OrderNum" Nullable="false" />
-        </EntityType>
-        <EntityType Name="LevelExam">
-          <Key>
-            <PropertyRef Name="LevelExamId" />
-          </Key>
-          <Property Type="Int32" Name="LevelExamId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="Int32" Name="LevelId" Nullable="false" />
-          <Property Type="String" Name="Description" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Type="Double" Name="GradePercentageValue" Nullable="false" />
-          <Property Type="String" Name="Name" Nullable="false" MaxLength="215" FixedLength="false" Unicode="true" />
-          <Property Type="DateTime" Name="CreateDateTime" Nullable="false" />
-          <NavigationProperty Name="Level" Relationship="GameSchoolModel.FK_LevelExam_Level" FromRole="LevelExam" ToRole="Level" />
-          <NavigationProperty Name="LevelExamQuestions" Relationship="GameSchoolModel.FK_LevelExamQuestion_LevelExam" FromRole="LevelExam" ToRole="LevelExamQuestion" />
-          <NavigationProperty Name="LevelExamResults" Relationship="GameSchoolModel.FK_LevelExamResult_LevelExam" FromRole="LevelExam" ToRole="LevelExamResult" />
+          <NavigationProperty Name="LevelExams" Relationship="GameSchoolModel.FK_LevelExam_Level" FromRole="Level" ToRole="LevelExam" />
         </EntityType>
         <EntityType Name="LevelExamAnswer">
           <Key>
@@ -1005,8 +1005,8 @@
           <Property Type="Int32" Name="LevelExamQuestionId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="Int32" Name="LevelExamId" Nullable="false" />
           <Property Type="String" Name="Question" Nullable="false" MaxLength="215" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="LevelExam" Relationship="GameSchoolModel.FK_LevelExamQuestion_LevelExam" FromRole="LevelExamQuestion" ToRole="LevelExam" />
           <NavigationProperty Name="LevelExamAnswers" Relationship="GameSchoolModel.FK_LevelExamAnswer_LevelExamQuestion" FromRole="LevelExamQuestion" ToRole="LevelExamAnswer" />
+          <NavigationProperty Name="LevelExam" Relationship="GameSchoolModel.FK_LevelExamQuestion_LevelExam" FromRole="LevelExamQuestion" ToRole="LevelExam" />
         </EntityType>
         <EntityType Name="LevelExamResult">
           <Key>
@@ -1016,8 +1016,8 @@
           <Property Type="Int32" Name="LevelExamId" Nullable="false" />
           <Property Type="Int32" Name="UserInfoId" Nullable="false" />
           <Property Type="Double" Name="Grade" Nullable="false" />
-          <NavigationProperty Name="LevelExam" Relationship="GameSchoolModel.FK_LevelExamResult_LevelExam" FromRole="LevelExamResult" ToRole="LevelExam" />
           <NavigationProperty Name="UserInfo" Relationship="GameSchoolModel.FK_LevelExamResult_UserInfo1" FromRole="LevelExamResult" ToRole="UserInfo" />
+          <NavigationProperty Name="LevelExam" Relationship="GameSchoolModel.FK_LevelExamResult_LevelExam" FromRole="LevelExamResult" ToRole="LevelExam" />
         </EntityType>
         <EntityType Name="LevelMaterial">
           <Key>
@@ -1060,7 +1060,7 @@
           </Key>
           <Property Type="Int32" Name="LevelProjectId" Nullable="false" annotation:StoreGeneratedPattern="None" />
           <Property Type="Int32" Name="UserInfoId" Nullable="false" />
-          <Property Type="Double" Name="Grade" Nullable="false" />
+          <Property Type="Double" Name="Grade" Nullable="true" />
           <Property Type="DateTime" Name="CreateDateTime" Nullable="false" />
           <NavigationProperty Name="LevelProject" Relationship="GameSchoolModel.FK_LevelProjectResult_LevelProject" FromRole="LevelProjectResult" ToRole="LevelProject" />
           <NavigationProperty Name="UserInfo" Relationship="GameSchoolModel.FK_LevelProjectResult_UserInfo1" FromRole="LevelProjectResult" ToRole="UserInfo" />
@@ -1271,18 +1271,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_LevelExam_Level">
-          <End Type="GameSchoolModel.Level" Role="Level" Multiplicity="1" />
-          <End Type="GameSchoolModel.LevelExam" Role="LevelExam" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Level">
-              <PropertyRef Name="LevelId" />
-            </Principal>
-            <Dependent Role="LevelExam">
-              <PropertyRef Name="LevelId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_LevelMaterial_Level">
           <End Type="GameSchoolModel.Level" Role="Level" Multiplicity="1" />
           <End Type="GameSchoolModel.LevelMaterial" Role="LevelMaterial" Multiplicity="*" />
@@ -1316,30 +1304,6 @@
             </Principal>
             <Dependent Role="Point">
               <PropertyRef Name="LevelId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_LevelExamQuestion_LevelExam">
-          <End Type="GameSchoolModel.LevelExam" Role="LevelExam" Multiplicity="1" />
-          <End Type="GameSchoolModel.LevelExamQuestion" Role="LevelExamQuestion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="LevelExam">
-              <PropertyRef Name="LevelExamId" />
-            </Principal>
-            <Dependent Role="LevelExamQuestion">
-              <PropertyRef Name="LevelExamId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_LevelExamResult_LevelExam">
-          <End Type="GameSchoolModel.LevelExam" Role="LevelExam" Multiplicity="1" />
-          <End Type="GameSchoolModel.LevelExamResult" Role="LevelExamResult" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="LevelExam">
-              <PropertyRef Name="LevelExamId" />
-            </Principal>
-            <Dependent Role="LevelExamResult">
-              <PropertyRef Name="LevelExamId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1469,6 +1433,58 @@
           <End Type="GameSchoolModel.LevelExamAnswer" Role="LevelExamAnswer" Multiplicity="*" />
           <End Type="GameSchoolModel.UserInfo" Role="UserInfo" Multiplicity="*" />
         </Association>
+        <EntityType Name="LevelExam">
+          <Key>
+            <PropertyRef Name="LevelExamId" />
+          </Key>
+          <Property Type="Int32" Name="LevelExamId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="LevelId" Nullable="false" />
+          <Property Type="String" Name="Description" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="GradePercentageValue" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="215" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="CreateDateTime" Nullable="false" />
+          <NavigationProperty Name="Level" Relationship="GameSchoolModel.FK_LevelExam_Level" FromRole="LevelExam" ToRole="Level" />
+          <NavigationProperty Name="LevelExamQuestions" Relationship="GameSchoolModel.FK_LevelExamQuestion_LevelExam" FromRole="LevelExam" ToRole="LevelExamQuestion" />
+          <NavigationProperty Name="LevelExamResults" Relationship="GameSchoolModel.FK_LevelExamResult_LevelExam" FromRole="LevelExam" ToRole="LevelExamResult" />
+          <Property Type="DateTime" Name="Start" Nullable="false" />
+          <Property Type="DateTime" Name="Stop" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_LevelExam_Level">
+          <End Type="GameSchoolModel.Level" Role="Level" Multiplicity="1" />
+          <End Type="GameSchoolModel.LevelExam" Role="LevelExam" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Level">
+              <PropertyRef Name="LevelId" />
+            </Principal>
+            <Dependent Role="LevelExam">
+              <PropertyRef Name="LevelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LevelExamQuestion_LevelExam">
+          <End Type="GameSchoolModel.LevelExam" Role="LevelExam" Multiplicity="1" />
+          <End Type="GameSchoolModel.LevelExamQuestion" Role="LevelExamQuestion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LevelExam">
+              <PropertyRef Name="LevelExamId" />
+            </Principal>
+            <Dependent Role="LevelExamQuestion">
+              <PropertyRef Name="LevelExamId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LevelExamResult_LevelExam">
+          <End Type="GameSchoolModel.LevelExam" Role="LevelExam" Multiplicity="1" />
+          <End Type="GameSchoolModel.LevelExamResult" Role="LevelExamResult" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LevelExam">
+              <PropertyRef Name="LevelExamId" />
+            </Principal>
+            <Dependent Role="LevelExamResult">
+              <PropertyRef Name="LevelExamId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1550,18 +1566,6 @@
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="CourseId" ColumnName="CourseId" />
                 <ScalarProperty Name="LevelId" ColumnName="LevelId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="LevelExams">
-            <EntityTypeMapping TypeName="GameSchoolModel.LevelExam">
-              <MappingFragment StoreEntitySet="LevelExam">
-                <ScalarProperty Name="CreateDateTime" ColumnName="CreateDateTime" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="GradePercentageValue" ColumnName="GradePercentageValue" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="LevelId" ColumnName="LevelId" />
-                <ScalarProperty Name="LevelExamId" ColumnName="LevelExamId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1720,6 +1724,20 @@
               <ScalarProperty Name="LevelExamAnswerId" ColumnName="LevelExamAnswerId" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="LevelExams">
+            <EntityTypeMapping TypeName="GameSchoolModel.LevelExam">
+              <MappingFragment StoreEntitySet="LevelExam">
+                <ScalarProperty Name="Stop" ColumnName="Stop" />
+                <ScalarProperty Name="Start" ColumnName="Start" />
+                <ScalarProperty Name="CreateDateTime" ColumnName="CreateDateTime" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="GradePercentageValue" ColumnName="GradePercentageValue" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="LevelId" ColumnName="LevelId" />
+                <ScalarProperty Name="LevelExamId" ColumnName="LevelExamId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -1749,7 +1767,6 @@
         <EntityTypeShape EntityType="GameSchoolModel.CourseGrade" Width="1.5" PointX="7.5" PointY="13" Height="2.3648893229166674" />
         <EntityTypeShape EntityType="GameSchoolModel.Department" Width="1.5" PointX="0.75" PointY="13.25" Height="1.9802864583333388" />
         <EntityTypeShape EntityType="GameSchoolModel.Level" Width="1.5" PointX="5.25" PointY="21.625" Height="3.1340950520833388" />
-        <EntityTypeShape EntityType="GameSchoolModel.LevelExam" Width="1.5" PointX="7.5" PointY="27.25" Height="2.7494921875000102" />
         <EntityTypeShape EntityType="GameSchoolModel.LevelExamAnswer" Width="1.5" PointX="12" PointY="30.375" Height="1.9802864583333246" />
         <EntityTypeShape EntityType="GameSchoolModel.LevelExamQuestion" Width="1.5" PointX="9.75" PointY="30.375" Height="1.9802864583333388" />
         <EntityTypeShape EntityType="GameSchoolModel.LevelExamResult" Width="1.5" PointX="9.75" PointY="19.875" Height="1.9802864583333388" />
@@ -1764,8 +1781,8 @@
         <AssociationConnector Association="GameSchoolModel.FK_Comment_LevelMaterial" >
           <ConnectorPoint PointX="9" PointY="21.75" />
           <ConnectorPoint PointX="9.375" PointY="21.375" />
-          <ConnectorPoint PointX="9.375" PointY="17.220896809895834" />
-          <ConnectorPoint PointX="9.75" PointY="17.220896809895834" />
+          <ConnectorPoint PointX="9.375" PointY="17.517773809895836" />
+          <ConnectorPoint PointX="9.75" PointY="17.517773809895836" />
         </AssociationConnector>
         <AssociationConnector Association="GameSchoolModel.FK_Comment_UserInfo1" >
           <ConnectorPoint PointX="6.75" PointY="16.401194661458334" />
@@ -1787,11 +1804,11 @@
         </AssociationConnector>
         <AssociationConnector Association="GameSchoolModel.FK_LevelMaterial_ContentType" >
           <ConnectorPoint PointX="6.75" PointY="19.970683593749996" />
-          <ConnectorPoint PointX="7.0660744349011217" PointY="20.286758028651118" />
-          <ConnectorPoint PointX="7.2464255650988791" PointY="20.467109158848874" />
+          <ConnectorPoint PointX="7.0035744349011217" PointY="20.224258028651118" />
+          <ConnectorPoint PointX="7.2151755650988791" PointY="20.435859158848874" />
           <ConnectorPoint PointX="7.25" PointY="20.470683593749996" />
-          <ConnectorPoint PointX="7.25" PointY="23.588623012369794" />
-          <ConnectorPoint PointX="7.5" PointY="23.588623012369794" />
+          <ConnectorPoint PointX="7.25" PointY="23.943283268399554" />
+          <ConnectorPoint PointX="7.5" PointY="23.943283268399554" />
         </AssociationConnector>
         <AssociationConnector Association="GameSchoolModel.FK_Course_Department" >
           <ConnectorPoint PointX="2.25" PointY="14.240143229166669" />
@@ -1817,15 +1834,15 @@
           <ConnectorPoint PointX="5.25" PointY="23.288198242187498" />
         </AssociationConnector>
         <AssociationConnector Association="GameSchoolModel.FK_Points_Course" >
-          <ConnectorPoint PointX="4.5" PointY="13.629167463701711" />
-          <ConnectorPoint PointX="5" PointY="13.629167463701711" />
-          <ConnectorPoint PointX="5" PointY="17.057109375000003" />
-          <ConnectorPoint PointX="6.7612893112980812" PointY="17.057109375000003" />
-          <ConnectorPoint PointX="6.9279559779647473" PointY="17.057109375000003" />
-          <ConnectorPoint PointX="6.979166666666667" PointY="17.057109375000003" />
-          <ConnectorPoint PointX="7.145833333333333" PointY="17.057109375000003" />
-          <ConnectorPoint PointX="7.25" PointY="17.057109375000003" />
-          <ConnectorPoint PointX="7.25" PointY="15.864889322916667" />
+          <ConnectorPoint PointX="4.5" PointY="13.600663453165012" />
+          <ConnectorPoint PointX="5" PointY="13.600663453165012" />
+          <ConnectorPoint PointX="5" PointY="17.249410807291667" />
+          <ConnectorPoint PointX="5.94849508974359" PointY="17.249410807291667" />
+          <ConnectorPoint PointX="6.1151617564102558" PointY="17.249410807291667" />
+          <ConnectorPoint PointX="6.9235907435897444" PointY="17.249410807291667" />
+          <ConnectorPoint PointX="7.09025741025641" PointY="17.249410807291667" />
+          <ConnectorPoint PointX="7.375" PointY="17.249410807291667" />
+          <ConnectorPoint PointX="7.375" PointY="15.864889322916667" />
           <ConnectorPoint PointX="8.2818284230769237" PointY="15.864889322916667" />
           <ConnectorPoint PointX="8.2818284230769237" PointY="16.875" />
         </AssociationConnector>
@@ -1842,72 +1859,57 @@
           <ConnectorPoint PointX="5.083333333333333" PointY="16.573955078125003" />
           <ConnectorPoint PointX="5.25" PointY="16.573955078125003" />
         </AssociationConnector>
-        <AssociationConnector Association="GameSchoolModel.FK_LevelExam_Level" >
-          <ConnectorPoint PointX="5.7539053125000006" PointY="24.951396484375" />
-          <ConnectorPoint PointX="5.7539053125000006" PointY="28.624746093750005" />
-          <ConnectorPoint PointX="6.1998718229166672" PointY="28.624746093750005" />
-          <ConnectorPoint PointX="6.3665384895833332" PointY="28.624746093750005" />
-          <ConnectorPoint PointX="7.5" PointY="28.624746093750005" />
-        </AssociationConnector>
         <AssociationConnector Association="GameSchoolModel.FK_LevelMaterial_Level" >
-          <ConnectorPoint PointX="6.75" PointY="22.664268725321453" />
-          <ConnectorPoint PointX="7.041666666666667" PointY="22.664268725321453" />
-          <ConnectorPoint PointX="7.239583333333333" PointY="22.664268725321453" />
-          <ConnectorPoint PointX="7.5" PointY="22.664268725321453" />
+          <ConnectorPoint PointX="6.75" PointY="22.784141634199777" />
+          <ConnectorPoint PointX="6.979166666666667" PointY="22.784141634199777" />
+          <ConnectorPoint PointX="7.145833333333333" PointY="22.784141634199777" />
+          <ConnectorPoint PointX="7.166666666666667" PointY="22.784141634199777" />
+          <ConnectorPoint PointX="7.333333333333333" PointY="22.784141634199777" />
+          <ConnectorPoint PointX="7.5" PointY="22.784141634199777" />
         </AssociationConnector>
         <AssociationConnector Association="GameSchoolModel.FK_LevelProject_Level" >
-          <ConnectorPoint PointX="6.28320515625" PointY="24.951396484375" />
-          <ConnectorPoint PointX="6.28320515625" PointY="32.220896809895834" />
-          <ConnectorPoint PointX="7.5" PointY="32.220896809895834" />
+          <ConnectorPoint PointX="6" PointY="24.951396484375" />
+          <ConnectorPoint PointX="6" PointY="32.317047526041669" />
+          <ConnectorPoint PointX="7.5" PointY="32.317047526041669" />
         </AssociationConnector>
         <AssociationConnector Association="GameSchoolModel.FK_Points_Level" >
-          <ConnectorPoint PointX="6.75" PointY="21.688460538461534" />
-          <ConnectorPoint PointX="7.0660744349011209" PointY="21.372386103560412" />
-          <ConnectorPoint PointX="7.1839255650988791" PointY="21.254534973362656" />
-          <ConnectorPoint PointX="7.1875" PointY="21.250960538461534" />
-          <ConnectorPoint PointX="7.1875" PointY="18.43695099739584" />
+          <ConnectorPoint PointX="6.75" PointY="21.626152846153843" />
+          <ConnectorPoint PointX="7.0035744349011209" PointY="21.372578411252722" />
+          <ConnectorPoint PointX="7.1214255650988791" PointY="21.254727281054965" />
+          <ConnectorPoint PointX="7.125" PointY="21.251152846153843" />
+          <ConnectorPoint PointX="7.125" PointY="18.43695099739584" />
           <ConnectorPoint PointX="7.5" PointY="18.43695099739584" />
-        </AssociationConnector>
-        <AssociationConnector Association="GameSchoolModel.FK_LevelExamQuestion_LevelExam" >
-          <ConnectorPoint PointX="9" PointY="28.624746093750005" />
-          <ConnectorPoint PointX="9.4166666666666661" PointY="28.624746093750005" />
-          <ConnectorPoint PointX="9.5833333333333339" PointY="28.624746093750005" />
-          <ConnectorPoint PointX="10.5" PointY="28.624746093750005" />
-          <ConnectorPoint PointX="10.5" PointY="30.375" />
-        </AssociationConnector>
-        <AssociationConnector Association="GameSchoolModel.FK_LevelExamResult_LevelExam" >
-          <ConnectorPoint PointX="9" PointY="27.31230669230769" />
-          <ConnectorPoint PointX="9.3160744349011217" PointY="26.996232257406565" />
-          <ConnectorPoint PointX="9.4339255650988783" PointY="26.878381127208808" />
-          <ConnectorPoint PointX="9.4375" PointY="26.874806692307686" />
-          <ConnectorPoint PointX="9.4375" PointY="21.128305036458336" />
-          <ConnectorPoint PointX="9.75" PointY="21.128305036458336" />
         </AssociationConnector>
         <AssociationConnector Association="GameSchoolModel.FK_LevelExamAnswer_LevelExamQuestion" >
           <ConnectorPoint PointX="11.25" PointY="31.365143229166669" />
           <ConnectorPoint PointX="12" PointY="31.365143229166669" />
         </AssociationConnector>
         <AssociationConnector Association="GameSchoolModel.FK_LevelExamResult_UserInfo1" >
-          <ConnectorPoint PointX="6.75" PointY="16.999410807291667" />
-          <ConnectorPoint PointX="7.265625" PointY="17.515035807291667" />
-          <ConnectorPoint PointX="7.265625" PointY="20.47040051822917" />
-          <ConnectorPoint PointX="9.2916666666666661" PointY="20.47040051822917" />
-          <ConnectorPoint PointX="9.4583333333333339" PointY="20.47040051822917" />
-          <ConnectorPoint PointX="9.75" PointY="20.47040051822917" />
+          <ConnectorPoint PointX="6.75" PointY="16.99248673036859" />
+          <ConnectorPoint PointX="7.15625" PointY="17.39873673036859" />
+          <ConnectorPoint PointX="7.15625" PointY="20.7812505" />
+          <ConnectorPoint PointX="7.166666666666667" PointY="20.7812505" />
+          <ConnectorPoint PointX="7.333333333333333" PointY="20.7812505" />
+          <ConnectorPoint PointX="9.2916666666666661" PointY="20.7812505" />
+          <ConnectorPoint PointX="9.4583333333333339" PointY="20.7812505" />
+          <ConnectorPoint PointX="9.75" PointY="20.7812505" />
         </AssociationConnector>
         <AssociationConnector Association="GameSchoolModel.FK_LevelProjectResult_LevelProject" >
           <ConnectorPoint PointX="9" PointY="30.75" />
           <ConnectorPoint PointX="9.375" PointY="30.375" />
-          <ConnectorPoint PointX="9.375" PointY="24.497778210736428" />
-          <ConnectorPoint PointX="9.75" PointY="24.497778210736428" />
+          <ConnectorPoint PointX="9.375" PointY="24.942047526041669" />
+          <ConnectorPoint PointX="9.75" PointY="24.942047526041669" />
         </AssociationConnector>
         <AssociationConnector Association="GameSchoolModel.FK_LevelProjectResult_UserInfo1" >
-          <ConnectorPoint PointX="6.7130769230769225" PointY="16.999410807291667" />
-          <ConnectorPoint PointX="7.15625" PointY="17.442583884214745" />
-          <ConnectorPoint PointX="7.15625" PointY="25.631693835937504" />
-          <ConnectorPoint PointX="9.2916666666666661" PointY="25.631693835937504" />
-          <ConnectorPoint PointX="9.5208333333333339" PointY="25.631693835937504" />
-          <ConnectorPoint PointX="9.75" PointY="25.631693835937504" />
+          <ConnectorPoint PointX="6.0318284230769228" PointY="16.999410807291667" />
+          <ConnectorPoint PointX="6.0318284230769228" PointY="18.125" />
+          <ConnectorPoint PointX="7.0625" PointY="18.125" />
+          <ConnectorPoint PointX="7.0625" PointY="25.326396484375003" />
+          <ConnectorPoint PointX="9.25" PointY="25.326396484375003" />
+          <ConnectorPoint PointX="9.25" PointY="24.127271763020843" />
+          <ConnectorPoint PointX="9.3541666666666661" PointY="24.127271763020843" />
+          <ConnectorPoint PointX="9.5208333333333339" PointY="24.127271763020843" />
+          <ConnectorPoint PointX="9.75" PointY="24.127271763020843" />
         </AssociationConnector>
         <AssociationConnector Association="GameSchoolModel.FK_Notification_UserInfo1" >
           <ConnectorPoint PointX="6" PointY="11.75" />
@@ -1915,11 +1917,11 @@
           <ConnectorPoint PointX="7.5" PointY="7.5574446614583337" />
         </AssociationConnector>
         <AssociationConnector Association="GameSchoolModel.FK_Points_UserInfo1" >
-          <ConnectorPoint PointX="6.75" PointY="16.962486730368589" />
-          <ConnectorPoint PointX="7.0625" PointY="17.274986730368589" />
+          <ConnectorPoint PointX="6.75" PointY="16.97402519190705" />
+          <ConnectorPoint PointX="7.0625" PointY="17.28652519190705" />
           <ConnectorPoint PointX="7.0625" PointY="16.436347153846153" />
-          <ConnectorPoint PointX="7.1910744349011217" PointY="16.564921588747275" />
-          <ConnectorPoint PointX="7.3089255650988791" PointY="16.682772718945031" />
+          <ConnectorPoint PointX="7.3160744349011217" PointY="16.689921588747275" />
+          <ConnectorPoint PointX="7.4339255650988791" PointY="16.807772718945031" />
           <ConnectorPoint PointX="7.5011528461538459" PointY="16.875" />
         </AssociationConnector>
         <AssociationConnector Association="GameSchoolModel.FK_User_Status" >
@@ -1956,6 +1958,29 @@
           <ConnectorPoint PointX="7.1875" PointY="12.700488279541023" />
           <ConnectorPoint PointX="6.75" PointY="12.700488279541023" />
         </AssociationConnector>
+        <EntityTypeShape EntityType="GameSchoolModel.LevelExam" Width="1.5" PointX="7.5" PointY="25.875" Height="2.7494921875000031" />
+        <AssociationConnector Association="GameSchoolModel.FK_LevelExam_Level" >
+          <ConnectorPoint PointX="6.4062525" PointY="24.951396484375" />
+          <ConnectorPoint PointX="6.4062525" PointY="27.24974609375" />
+          <ConnectorPoint PointX="7.5" PointY="27.24974609375" />
+        </AssociationConnector>
+        <AssociationConnector Association="GameSchoolModel.FK_LevelExamQuestion_LevelExam" >
+          <ConnectorPoint PointX="9" PointY="28.562183495192311" />
+          <ConnectorPoint PointX="9.3160744349011217" PointY="28.878257930093433" />
+          <ConnectorPoint PointX="9.4339255650988783" PointY="28.99610906029119" />
+          <ConnectorPoint PointX="9.5625" PointY="29.124683495192311" />
+          <ConnectorPoint PointX="9.5625" PointY="31.365143229166669" />
+          <ConnectorPoint PointX="9.75" PointY="31.365143229166669" />
+        </AssociationConnector>
+        <AssociationConnector Association="GameSchoolModel.FK_LevelExamResult_LevelExam" >
+          <ConnectorPoint PointX="9" PointY="25.93730669230769" />
+          <ConnectorPoint PointX="9.3160744349011217" PointY="25.621232257406565" />
+          <ConnectorPoint PointX="9.4339255650988783" PointY="25.503381127208808" />
+          <ConnectorPoint PointX="9.4375" PointY="25.499806692307686" />
+          <ConnectorPoint PointX="9.4375" PointY="21.349520479166671" />
+          <ConnectorPoint PointX="9.75" PointY="21.349520479166671" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="GameSchoolModel.sysdiagram" Width="1.5" PointX="0.75" PointY="0.75" Height="1.9802864583333388" />
       </Diagram>
     </Diagrams>
   </Designer>

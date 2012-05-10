@@ -18,13 +18,14 @@ namespace Ru.GameSchool.Web.Controllers
         public ActionResult Index()
         {
 
-
+            ViewBag.Title = "Forsíða umsjónarmanns";
             return View();
         }
 
         public ActionResult Users()
         {
             ViewBag.Users = UserService.GetUsers();
+            ViewBag.Title = "Listi yfir notendur";
 
             return View();
         }
@@ -34,6 +35,7 @@ namespace Ru.GameSchool.Web.Controllers
             ViewBag.Departments = CourseService.GetDepartments();
             ViewBag.UserStatus = UserService.GetUserStatuses();
             ViewBag.UserTypes = UserService.GetUserTypes();
+            ViewBag.Title = "Skráning notenda";
 
             if (id.HasValue)
             {
@@ -62,6 +64,8 @@ namespace Ru.GameSchool.Web.Controllers
             ViewBag.Departments = CourseService.GetDepartments();
             ViewBag.UserStatus = UserService.GetUserStatuses();
             ViewBag.UserTypes = UserService.GetUserTypes();
+            ViewBag.Title = "Skráning notenda";
+
 
             if (ModelState.IsValid)
             {
@@ -97,6 +101,7 @@ namespace Ru.GameSchool.Web.Controllers
         public ActionResult Courses()
         {
             ViewBag.Courses = CourseService.GetCourses();
+            ViewBag.Title = "Listi yfir námskeið";
 
 
             return View();
@@ -105,6 +110,8 @@ namespace Ru.GameSchool.Web.Controllers
         public ActionResult Course(int? id)
         {
             ViewBag.Departments = CourseService.GetDepartments();
+            ViewBag.Title = "Námskeið";
+
 
             if (id.HasValue)
             {
@@ -131,6 +138,7 @@ namespace Ru.GameSchool.Web.Controllers
         public ActionResult Course(Course model, int? id)
         {
             ViewBag.Departments = CourseService.GetDepartments();
+            ViewBag.Title = "Námskeið";
 
             if (ModelState.IsValid)
             {
@@ -169,6 +177,7 @@ namespace Ru.GameSchool.Web.Controllers
         {
             var list = UserService.GetUsers();
             ViewBag.Users = list.NestedList(6);
+            ViewBag.Title = "Skrá notenda í Námskeið";
 
             var courses = CourseService.GetCourses();
             ViewBag.Courses = courses.NestedList(4);

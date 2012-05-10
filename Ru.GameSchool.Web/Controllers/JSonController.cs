@@ -52,24 +52,103 @@ namespace Ru.GameSchool.Web.Controllers
             return Json(false, JsonRequestBehavior.AllowGet);
         }
 
-        [HttpPost]
-        public ActionResult LikeComment(int? id)
+        [HttpGet]
+        public ActionResult GetComments(int? id)
         {
             if (User.Identity.IsAuthenticated && id.HasValue)
             {
-                var user = Membership.GetUser() as GameSchoolMembershipUser;
+                var model = SocialService.GetComments(id.Value);
 
-                if (user != null)
-                {
-                    var commentLike = new CommentLike();
-                    commentLike.CommentLikeId = id.Value;
-                    commentLike.UserInfoId = user.UserInfoId;
 
-                    SocialService.CreateLike(commentLike);
+                var list = from x in model
+                           select new
+                           {
+                               x.CommentId,
+                               x.Comment1,
+                               //x.CommentLikes, change into a subarray
+                               CommentLikes = from y in x.CommentLikes
+                                              select new {
+                                                y.UserInfo.Fullname,
+                                                y.UserInfoId
+                                              },
+                               x.UserInfoId,
+                               x.LevelMaterialId,
+                               x.CreateDateTime,
+                               x.UserInfo.Fullname
+                           };
 
-                    return Json(true, JsonRequestBehavior.AllowGet);
-                }
+
+
+                //return View(model);
+                return Json(list, JsonRequestBehavior.AllowGet);
             }
+            return Json(false, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public ActionResult LikeComment(int? id)
+        {
+            if (id.HasValue)
+            {
+                var cUser = MembershipHelper.GetUser();
+                CommentLike c = new CommentLike();
+                c.UserInfoId = cUser.UserInfoId;
+                c.CommentId = id.Value;
+                SocialService.CreateLike(c);
+
+                return Json(true, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(false, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        [HttpPost]
+        public ActionResult CreateComment(Comment comment, int? id)
+        {
+
+            String strComment = comment.Comment1;
+            
+
+            if (!String.IsNullOrEmpty(strComment) && id.HasValue)
+            { 
+                Comment c = new Comment();
+                  var  cUser = MembershipHelper.GetUser();
+                  c.UserInfoId = cUser.UserInfoId;
+                  c.Comment1 = strComment;
+                  c.CreateDateTime = DateTime.Now;
+                  c.LevelMaterialId = id.Value;
+                  c.DeletedByUser = "";
+                  SocialService.CreateComment(c);
+                  return Json(true, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(false, JsonRequestBehavior.AllowGet);
+            }
+
+            
+        }
+
+
+        public ActionResult getLikes(int? id)
+        {
+            if (id.HasValue)
+            {
+                var model = SocialService.GetCommentLikes(id.Value);
+
+                var list = from x in model
+                           select new
+                           {
+                               x.CommentId,
+                               x.UserInfo.Fullname,
+                               x.CommentLikeId
+                           };
+
+                return Json(list, JsonRequestBehavior.AllowGet);
+            }
+
             return Json(false, JsonRequestBehavior.AllowGet);
         }
 

@@ -27,7 +27,7 @@ namespace Ru.GameSchool.Web.Controllers
 
                 var course = CourseService.GetCourse(id.Value);
 
-                var exams = LevelService.GetLevelExams(id.Value, user.UserInfoId);
+                var exams = LevelService.GetLevelExamsByCourseId(id.Value, user.UserInfoId);
 
                 ViewBag.Course = course;
                 ViewBag.CourseName = course.Name;
@@ -79,7 +79,9 @@ namespace Ru.GameSchool.Web.Controllers
                 var examQuestion = LevelService.GetLevelExamQuestion(id.Value);
 
                 if (!LevelService.HasAccessToExam(examQuestion.LevelExamId, user.UserInfoId))
-                    return RedirectToAction("NotFound", "Home");
+                    return RedirectToAction("Index", "Exam", new {id = examQuestion.LevelExam.Level.CourseId});
+
+                ViewBag.Placement = LevelService.GetLevelExamQuestionPlacement(id.Value);
 
                 var answer = LevelService.GetUserQuestionAnswer(examQuestion.LevelExamQuestionId,
                                                                 user.UserInfoId);
@@ -144,7 +146,7 @@ namespace Ru.GameSchool.Web.Controllers
         {
             if (id.HasValue)
             {
-                ViewBag.GradePercentageValues = GradePercentageValue();
+                ViewBag.GradePercentageValues = GetPercentageValue();
                 ViewBag.Levels = new SelectList(LevelService.GetLevels(id.Value), "LevelId", "Name");
                 ViewBag.CourseId = id.Value;
                 ViewBag.CourseName = CourseService.GetCourse(id.Value).Name;
@@ -178,6 +180,8 @@ namespace Ru.GameSchool.Web.Controllers
             if (id.HasValue)
             {
                 var exam = LevelService.GetLevelExam(id.Value);
+                ViewBag.CourseId = exam.Level.CourseId;
+                ViewBag.CourseName = exam.Level.Course.Name;
                 ViewBag.Exam = exam;
                 ViewBag.QuestionList = exam.LevelExamQuestions;
 
@@ -193,6 +197,8 @@ namespace Ru.GameSchool.Web.Controllers
             if (model != null)
             {
                 var exam = LevelService.GetLevelExam(model.LevelExamId);
+                ViewBag.CourseId = exam.Level.CourseId;
+                ViewBag.CourseName = exam.Level.Course.Name;
                 ViewBag.Exam = exam;
                 ViewBag.QuestionList = exam.LevelExamQuestions;
 
@@ -249,12 +255,13 @@ namespace Ru.GameSchool.Web.Controllers
         [HttpGet]
         public ActionResult Edit(int? id)
         {
-            ViewBag.GradePercentageValue = GetPercentageValue();
 
             if (id.HasValue)
             {
                 var exam = LevelService.GetLevelExam(id.Value);
                 ViewBag.Levels = new SelectList(LevelService.GetLevels(exam.Level.CourseId), "LevelId", "Name");
+                ViewBag.GradePercentageValue = GetPercentageValue();
+
                 ViewBag.CourseId = exam.Level.CourseId;
                 ViewBag.CourseName = exam.Level.Course.Name;
                 return View(exam);
@@ -266,6 +273,10 @@ namespace Ru.GameSchool.Web.Controllers
         [HttpPost]
         public ActionResult Edit(LevelExam model)
         {
+            var exam = LevelService.GetLevelExam(model.LevelExamId);
+            ViewBag.Levels = new SelectList(LevelService.GetLevels(exam.Level.CourseId), "LevelId", "Name");
+            ViewBag.GradePercentageValue = GetPercentageValue();
+
             if (ModelState.IsValid)
             {
                 var levelExam = LevelService.GetLevelExam(model.LevelExamId);
@@ -275,13 +286,8 @@ namespace Ru.GameSchool.Web.Controllers
                     ViewBag.SuccessMessage = "Upplýsingar um próf hafa verið uppfærðar";
                     return View(levelExam);
                 }
-                else
-                {
-                    ViewBag.ErrorMessage = "Náði ekki að skrá/uppfæra upplýsingar! Lagfærðu villur og reyndur aftur.";
-                }
             }
-            var exam = LevelService.GetLevelExam(model.LevelExamId);
-            ViewBag.Levels = new SelectList(LevelService.GetLevels(exam.Level.CourseId), "LevelId", "Name");
+            ViewBag.ErrorMessage = "Náði ekki að skrá/uppfæra upplýsingar! Lagfærðu villur og reyndur aftur.";
 
             return View(model);
         }
@@ -290,8 +296,19 @@ namespace Ru.GameSchool.Web.Controllers
 
 
         #region helper methods
-
+        /*
         public IEnumerable<SelectListItem> GradePercentageValue()
+        {
+            for (int j = 1; j <= 10; j++)
+            {
+                yield return new SelectListItem
+                {
+                    Text = string.Format("{0}%", j),
+                    Value = j.ToString()
+                };
+            }
+        }*/
+        public IEnumerable<SelectListItem> GetPercentageValue()
         {
             for (int j = 1; j <= 100; j++)
             {
@@ -302,23 +319,12 @@ namespace Ru.GameSchool.Web.Controllers
                 };
             }
         }
-        public IEnumerable<SelectListItem> GetPercentageValue()
-        {
-            for (int j = 1; j <= 100; j++)
-            {
-                yield return new SelectListItem
-                {
-                    Text = string.Format("{0} %", j),
-                    Value = j.ToString()
-                };
-            }
-        }
 
-        public IEnumerable<SelectListItem> GetLevelCounts(int CourseId)
+        public IEnumerable<SelectListItem> GetLevelCounts(int courseId)
         {
-            for (int j = 0; j <= LevelService.GetLevels(CourseId).Count(); j++)
+            for (int j = 0; j <= LevelService.GetLevels(courseId).Count(); j++)
             {
-                var elementAtOrDefault = LevelService.GetLevels(CourseId).ElementAtOrDefault(j);
+                var elementAtOrDefault = LevelService.GetLevels(courseId).ElementAtOrDefault(j);
                 if (elementAtOrDefault != null)
                     yield return new SelectListItem
                     {
@@ -328,7 +334,7 @@ namespace Ru.GameSchool.Web.Controllers
             }
         }
 
-
+        /*
         private LevelExam CreateLevelExam(FormCollection collection)
         {
             return new LevelExam
@@ -613,6 +619,7 @@ namespace Ru.GameSchool.Web.Controllers
                                      }
             };
         }
+        */
         #endregion
 
 

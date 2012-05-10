@@ -96,7 +96,7 @@ namespace Ru.GameSchool.BusinessLayer.Services
         {
             if (levelMaterialId > 0)
             {
-                var list = GameSchoolEntities.Comments.Where(x => x.LevelMaterialId == levelMaterialId);
+               var list = GameSchoolEntities.Comments.Where(x => x.LevelMaterialId == levelMaterialId);
 
                 list = list.OrderBy(x => x.CommentId);
 
