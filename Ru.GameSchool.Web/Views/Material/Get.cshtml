@@ -79,12 +79,19 @@
     </div>
     <h2>@ViewBag.Name</h2>
     <p>@ViewBag.Description</p>
-    @if (User.IsInRole("Teacher"))
-    {
-        <a name="button" class="btn" href="@Url.Action("Edit", new {id = Model.LevelMaterialId})" >
-            <i class="icon-edit"></i> Breyta
-        </a>
-    }
+    <div class="control-group">
+        <div class="controls">
+            <a name="button" class="btn btn-small" href="@Url.Action("Download", new { id = Model.LevelMaterialId })" >
+                <i class="icon-download-alt"></i> Sækja 
+            </a>
+            @if (User.IsInRole("Teacher"))
+            {
+                <a name="button" class="btn btn-small btn-success" href="@Url.Action("Edit", new {id = Model.LevelMaterialId})" >
+                    <i class="icon-edit icon-white"></i> Breyta kennslugagni
+                </a>
+            }
+        </div>
+    </div>
 </div>
 
 

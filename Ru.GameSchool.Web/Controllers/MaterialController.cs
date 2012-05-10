@@ -84,6 +84,20 @@ namespace Ru.GameSchool.Web.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Student, Teacher")]
+        public ActionResult Download(int? id)
+        {
+            if (id.HasValue)
+            {
+                var material = LevelService.GetLevelMaterial(id.Value);
+                var filepath = Settings.ProjectMaterialVirtualFolder + material.ContentId.ToString();
+             
+                return new DownloadResult {VirtualPath = filepath, FileDownloadName = material.Filename};
+            }
+            return RedirectToAction("NotFound", "Home");
+        }
+
+        [HttpGet]
         [Authorize(Roles = "Teacher")]
         public ActionResult Create(int? id)
         {
