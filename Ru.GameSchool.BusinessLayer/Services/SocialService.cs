@@ -22,13 +22,26 @@ namespace Ru.GameSchool.BusinessLayer.Services
             if (commentLike != null)
             {
                 if (GameSchoolEntities.Comments.Where(x=>x.CommentId == commentLike.CommentId).Count() != 1)
+                {
                     throw new GameSchoolException(string.Format("Comment does not exist. CommentId = {0}",commentLike.CommentId));
+                }
 
                 if (GameSchoolEntities.UserInfoes.Where(x => x.UserInfoId == commentLike.UserInfoId).Count() != 1)
+                {
                     throw new GameSchoolException(string.Format("User does not exist. UserInfoId = {0}", commentLike.UserInfoId));
+                }
 
-                GameSchoolEntities.CommentLikes.AddObject(commentLike);
-                Save();
+                if (GameSchoolEntities.CommentLikes.Where(x => x.CommentId == commentLike.CommentId && x.UserInfoId == commentLike.UserInfoId).Count() > 0)
+                {
+                    //throw new GameSchoolException(string.Format("Notandi hefur nú þegar líkað við þetta comment. UserInfoId = {0}", commentLike.UserInfoId));
+
+                }
+
+                else
+                {
+                    GameSchoolEntities.CommentLikes.AddObject(commentLike);
+                    Save();
+                }
             }
         }
         /// <summary>

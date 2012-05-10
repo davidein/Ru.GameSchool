@@ -111,7 +111,7 @@
 						<abbr title='${CreateDateTime}'>${$item.formDate(CreateDateTime)}</abbr>
 						<a jid="sendLike" cid="${CommentId}" >Líkar þetta</a>  
                         <span id="l_${CommentId}">
-                        {{if CommentLikes.length > 0}}<img src='@Url.Content("~/Images/blank.gif") %>' title="{{each CommentLikes}}${Fullname} ,{{/each}} líkar þetta" alt="Líkar þetta" class="like_icon" />{{/if}}
+                        {{if CommentLikes.length > 0}}<img src='@Url.Content("~/Images/blank.gif")' title="{{each CommentLikes}}${Fullname} ,{{/each}} líkar þetta" alt="Líkar þetta" class="like_icon" />{{/if}}
                         
                         {{each CommentLikes}}
                         {{if $index <= 2}}${Fullname} ,{{/if}}
@@ -199,7 +199,7 @@
         $.post("/JSon/LikeComment/" + cid, like, function (data) {
 
             displayLikes('/JSon/getLikes/' + cid, 'l_' + cid);
-        }).error(function () { alert("Sendingin misfórst. Athugasemdin sem þú líkaðir finnst líklega ekki. Henni gæti hafa verið eytt."); });
+        }).error(function () { alert("Sendingin misfórst. Annaðhvort hefur þú nú þegar sagt að þér líki þetta eða að  athugasemdin sem þú líkaðir finnst ekki. Henni gæti hafa verið eytt."); });
 
     }
 
@@ -211,7 +211,7 @@
 
         AjaxProgressImg(target_div);
 
-        var markup = '{{if $item.count() <= 15 }} ${user_name},{{/if}}';
+        var markup = '{{if $item.count() <= 15 }} ${Fullname},{{/if}}';
         var markup2 = '${user_name} ,';
         $.template("likeTemplate", markup);
         $.template("likeTitleTemplate", markup2);
