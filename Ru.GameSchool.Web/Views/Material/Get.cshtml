@@ -1,4 +1,4 @@
-
+﻿
 ﻿@*// Todo:MOVE TO HEADER *@
 <link href="http://vjs.zencdn.net/c/video-js.css" rel="stylesheet">
 <script src="http://vjs.zencdn.net/c/video.js"></script>
@@ -68,6 +68,7 @@
 </style>
 
 
+
 <div class="well">
     <h2>@ViewBag.Title</h2>
     <div class="videoWrapper">
@@ -102,22 +103,22 @@
     <script id="comments" type="text/html">
 
     			<li>
-				<a href="http://www.ru.is"><img src='@Url.Content("~/Images/User.png")' alt="Notandi" /></a>
+				<a href="#"><img src='@Url.Content("~/Images/User.png")' alt="Notandi" /></a>
 				<div class="commentBody">
-					<a href="http://www.ru.is">${UserName}</a>
-					<span>${CommentText}</span>
+					<a href="#">${Fullname}</a>
+					<span>${Comment1}</span>
 					<div>
-						<abbr title='${CommentDate}'>${$item.formDate(CommentDate)}</abbr>
-						<a jid="sendLike" cid="${ID}" >Líkar þetta</a>  
-                        <span id="l_${ID}">
-                        {{if CommentLikes.length > 0}}<img src='@Url.Content("~/Images/blank.gif") %>' title="{{each CommentLikes}}${user_name} ,{{/each}} líkar þetta" alt="Líkar þetta" class="like_icon" />{{/if}}
+						<abbr title='${CreateDateTime}'>${$item.formDate(CreateDateTime)}</abbr>
+						<a jid="sendLike" cid="${CommentId}" >Líkar þetta</a>  
+                        <span id="l_${CommentId}">
+                        @*{{if CommentLikes.length > 0}}<img src='@Url.Content("~/Images/blank.gif") %>' title="{{each CommentLikes}}${Fullname} ,{{/each}} líkar þetta" alt="Líkar þetta" class="like_icon" />{{/if}}
                         
                         {{each CommentLikes}}
-                        {{if $index <= 2}}${user_name} ,{{/if}}
+                        {{if $index <= 2}}${Fullname} ,{{/if}}
                         {{/each}}
                         
                         {{if CommentLikes.length > 3}} og ${CommentLikes.length - 3} öðrum{{/if}}
-                        {{if CommentLikes.length > 0}}líkar þetta.{{/if}}
+                        {{if CommentLikes.length > 0}}líkar þetta.{{/if}}`*@
                         </span>
                         
 					</div>
@@ -190,13 +191,14 @@
 
     function sendLike(cid) {
 
+    alert(cid)
         var like = {
             "comment_id": cid
         };
 
-        $.post("/Home/addLike", like, function (data) {
+        $.post("/JSon/LikeComment/" + cid, like, function (data) {
 
-            displayLikes('/Home/getLike/' + cid, 'l_' + cid);
+            displayLikes('/JSon/getLikes/' + cid, 'l_' + cid);
         }).error(function () { alert("Sendingin misfórst. Athugasemdin sem þú líkaðir finnst líklega ekki. Henni gæti hafa verið eytt."); });
 
     }
