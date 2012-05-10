@@ -26,13 +26,17 @@ namespace Ru.GameSchool.Web.Controllers
                 if (model != null)
                 {
 
-                    int userId = UserService.GetUser(User.Identity.Name).UserInfoId;
+                    int userId = ViewBag.User.UserInfoId;
                     int courseId = model.CourseId;
 
                     ViewBag.Title = "Borð";
                     ViewBag.CourseId = courseId;
                     ViewBag.CourseName = model.Course.Name;
-                    ViewBag.Levels = LevelService.GetLevels(courseId);
+
+                    /*var levels = LevelService.GetLevels(courseId);
+
+                    ViewBag.Levels = levels;*/
+                    ViewBag.LevelTabs = LevelService.GetLevelTabsByCourseIdAndUserInfoId(courseId, userId);
                     ViewBag.Projects = LevelService.GetLevelProjects();
                     ViewBag.MaterialsVideo = LevelService.GetLevelMaterials(levelId,1);
                     ViewBag.MaterialsSlides = LevelService.GetLevelMaterials(levelId,2);

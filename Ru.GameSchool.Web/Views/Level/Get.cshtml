@@ -4,7 +4,21 @@
 <ul class="nav nav-tabs">
             @foreach (var m in ViewBag.Levels)
             {
-                  <li @if (m.LevelId == Model.LevelId ) { <text>class="active"</text>}><a href="/Level/Get/@m.LevelId">@m.Name</a></li>
+                 
+            }
+
+            @foreach (var l in ViewBag.LevelTabs)
+            { 
+                 <li @if (l.levelId == Model.LevelId)
+                     { <text>class="active"</text>}>
+                     @if(l.enabled) {
+                         <a href="/Level/Get/@l.LevelId">
+                         }
+                        @l.levelName
+                     @if(l.enabled) {
+                         </a>
+                         }
+                 </li>
             }
 
     </ul>
