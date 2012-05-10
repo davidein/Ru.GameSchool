@@ -47,7 +47,7 @@
             {
                 foreach (var innerInnerItem in innerItem.LevelProjects)
                 {
-                    if (!(innerInnerItem.Start > DateTime.Now && User.IsInRole("Student"))) // Ekki sýna verkefni sem eru ekki byrjuð
+                    if (!(innerInnerItem.Start > DateTime.Now && User.IsInRole("Student")) && (ViewBag.AllowedLevelId > innerInnerItem.LevelId)) // Ekki sýna verkefni sem eru ekki byrjuð
                     {     
                 <tr>
                     <td>

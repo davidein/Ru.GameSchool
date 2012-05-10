@@ -18,15 +18,21 @@ namespace Ru.GameSchool.Web.Controllers
         [HttpGet]
         public ActionResult Get(int? id)
         {
-            ViewBag.UserInfoId = MembershipHelper.GetUser().UserInfoId;
+            var userInfoId = ViewBag.UserInfoId = MembershipHelper.GetUser().UserInfoId;
+
             ViewBag.AllowedFileExtensions = GetAllowedFileExtensions();
             if (id.HasValue && id.Value > 0)
             {
                 var levelProject = LevelService.GetLevelProject(id.Value);
                 var course = CourseService.GetCourse(levelProject.Level.CourseId);
-                ViewBag.CourseId = course.CourseId;
+                var courseId = ViewBag.CourseId = course.CourseId;
                 ViewBag.Title = levelProject.Name;
+                var allowedUserLevel = ViewBag.AllowedLevelId = CourseService.GetCurrentUserLevel(userInfoId, courseId);
 
+                if (levelProject.LevelId > allowedUserLevel)
+                {
+                    return RedirectToAction("Index");
+                }
                 return View(levelProject);
             }
             return RedirectToAction("Index");
@@ -108,6 +114,7 @@ namespace Ru.GameSchool.Web.Controllers
             // Sækja spes course
             if (id.HasValue && id.Value > 0)
             {
+                ViewBag.AllowedLevelId = CourseService.GetCurrentUserLevel(userInfoId, id.Value);
                 var course = CourseService.GetCourse(id.Value);
                 ViewBag.CourseId = course.CourseId;
                 levelProjects =

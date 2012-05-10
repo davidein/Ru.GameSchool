@@ -474,6 +474,8 @@ namespace Ru.GameSchool.BusinessLayer.Services
             return false;
         }
 
+        
+
         /// <summary>
         /// Gets the next question in a level exam.
         /// </summary>

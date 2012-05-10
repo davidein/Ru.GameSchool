@@ -99,14 +99,12 @@ namespace Ru.GameSchool.Web.Controllers
                 var list = CourseService.GetCoursesByUserInfoId(user.UserInfoId);
                 ViewBag.User = user;
                 ViewBag.UserCourseList = list.NestedList(3);
-                
-                
             }
         }
         protected override void OnActionExecuted(ActionExecutedContext filterContext)
         {
             base.OnActionExecuted(filterContext);
-
+            
             if (User.Identity.IsAuthenticated)
             {
                 var user = MembershipHelper.GetUser();
@@ -114,6 +112,7 @@ namespace Ru.GameSchool.Web.Controllers
                 {
                     ViewBag.CourseValue = CourseService.GetCourse(ViewBag.CourseId).Name;
                     ViewBag.GetScoreComparedToUsers = GameService.GetScoreComparedToUsers(user.UserInfoId, ViewBag.CourseId);
+                    ViewBag.TopTenList = GameService.GetTopTenList(ViewBag.CourseId);
                 }
             }
         }

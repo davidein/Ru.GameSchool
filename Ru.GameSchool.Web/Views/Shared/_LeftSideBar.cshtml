@@ -1,35 +1,33 @@
-﻿
-<div class="well">
+﻿<div class="well">
     <h2>
         Velkomin/n á GameSchool</h2>
 </div>
 @if (User.IsInRole("Student") && ViewBag.GetScoreComparedToUsers != null && (Request.Url.AbsoluteUri.Contains("Course") | Request.Url.AbsoluteUri.Contains("Exam") | Request.Url.AbsoluteUri.Contains("Project") | Request.Url.AbsoluteUri.Contains("Level")))
 {
     <div class="well">
-        
         <h2>@ViewBag.CourseValue</h2>
-            @{
+        @{
     var points = ViewBag.GetScoreComparedToUsers;
     var totalPoints = points.Item1;
     var position = points.Item2;
     var points1 = points.Item3;
     var points2 = points.Item4;
-            }
-        <h2>  @totalPoints stig</h2>
+        }
+        <h2>
+            @totalPoints stig</h2>
         <p>
             Þú ert í <span class="label label-info">@position</span> sæti í leiknum!</p>
-        
         @if (points1 != -1)
         {
             <p>
-            Keppandinn á undan þér er með <span class="label label-success">@points1</span> stig!</p>
+                Keppandinn á undan þér er með <span class="label label-success">@points1</span>
+                stig!</p>
         }
-
         @if (points2 != -1)
         {
             <p>
-            Næsti keppandi á eftir þér er með <span class="label label-warning">@points2</span>
-            stig!</p>
+                Næsti keppandi á eftir þér er með <span class="label label-warning">@points2</span>
+                stig!</p>
         }
         <button class="btn btn-small" data-toggle="modal" data-target="#myModal">
             Sjá topplistann</button>
@@ -87,14 +85,18 @@
                 </tr>
             </thead>
             <tbody>
-                @if (ViewBag.GetScoreComparedToUsers != null)
+                @if (ViewBag.TopTenList != null)
                 {
-                    for (int i = 0; i < 10; i++)
+                    var counter = 0;
+                    foreach (var value in @ViewBag.TopTenList)
                     {
-                      <tr>
-                        <td>@i
+                        {
+                            counter++;
+                        }
+                    <tr>
+                        <td>@counter
                         </td>
-                        <td>@ViewBag.GetScoreComparedToUsers.Item1
+                        <td>@value.Item1
                         </td>
                     </tr>
                     }
