@@ -28,8 +28,24 @@
 
         <div class="control-group">
             <div class="controls">
-                <button type="submit" class="btn btn-success" >Uppfæra kennslugagn</button>
+                <button type="submit" class="btn btn-success" >
+                    <i class="icon-edit icon-white"></i> Uppfæra kennslugagn
+                </button>
             </div>
         </div>
     </fieldset>
 }
+<div class="control-group">
+    <h3>Aðgerðir</h3>
+    <div class="controls">
+        <a name="button" class="btn btn-small" href="@Url.Action("Download", new { id = Model.LevelMaterialId })" >
+            <i class="icon-download-alt"></i> Sækja 
+        </a>
+        @if (Model.ContentTypeId == 1)
+        {
+            <a name="button" class="btn btn-small" href="@Url.Action("Get", new {id = Model.LevelMaterialId})" >
+                <i class="icon-play"></i> Spila 
+            </a>
+        }
+    </div>
+</div>

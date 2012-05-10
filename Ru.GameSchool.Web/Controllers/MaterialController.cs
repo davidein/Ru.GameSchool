@@ -64,7 +64,7 @@ namespace Ru.GameSchool.Web.Controllers
         
                 if (material.ContentType.ContentTypeId == 1)
                 {
-                    ViewBag.File = filepath + ".mp4";
+                    ViewBag.File = filepath;
                     ViewBag.CourseName = material.Level.Course.Name;
                     ViewBag.Courseid = material.Level.Course.CourseId;
                     ViewBag.Title = material.ContentType.Name;
@@ -81,6 +81,20 @@ namespace Ru.GameSchool.Web.Controllers
 
             }
             return View();
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "Student, Teacher")]
+        public ActionResult Download(int? id)
+        {
+            if (id.HasValue)
+            {
+                var material = LevelService.GetLevelMaterial(id.Value);
+                var filepath = Settings.ProjectMaterialVirtualFolder + material.ContentId.ToString();
+             
+                return new DownloadResult {VirtualPath = filepath, FileDownloadName = material.Filename};
+            }
+            return RedirectToAction("NotFound", "Home");
         }
 
         [HttpGet]
@@ -118,7 +132,7 @@ namespace Ru.GameSchool.Web.Controllers
                     }
                 }
                 levelMaterial.CreateDateTime = DateTime.Now;
-                LevelService.CreateLevelMaterial(levelMaterial);
+                LevelService.CreateLevelMaterial(levelMaterial, id.Value);
 
 
                 return RedirectToAction("Get", new { id = levelMaterial.LevelMaterialId });

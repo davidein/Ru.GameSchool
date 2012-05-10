@@ -3,51 +3,71 @@
     ViewBag.Title = "Búa til nýtt próf";
 }
 
-<h2>Búa til nýtt próf</h2>
+<script language="javascript">
+    $(document).ready(function () {
+        jQuery.validator.methods["date"] = function (value, element) {
+            return true;
+        };
+        $.datepicker.setDefaults({ validateDate: 'false' });
+        $.datepicker.regional['is-IS']
+        $('.Start').datepicker({ dateFormat: "d.m.yy 00:00:01" });
+        $('.Stop').datepicker({ dateFormat: "d.m.yy 23:59:59" });
+    });
+</script>
 
-@using (Html.BeginForm())
+
+@using (Html.BeginForm("Create", "Exam", FormMethod.Post, new { @class = "form-horizontal" }))
 {
     @Html.ValidationSummary(true)
 
     <fieldset>
-        <legend>Próf</legend>
-        <div class="editor-label">
-            @Html.LabelFor(m => m.Name)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(m => m.Name)
-            @Html.ValidationMessageFor(m => m.Name)
-        </div>
-        <div class="editor-label">
-            @Html.LabelFor(m => m.Description)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(m => m.Description)
-            @Html.ValidationMessageFor(m => m.Description)
+        <legend>Nýtt próf</legend>
+        <div class="control-group">
+            @Html.LabelFor(m => m.Name, new { @class = "control-label" })
+            <div class="controls">
+                @Html.EditorFor(m => m.Name)
+                <span class="help-inline">@Html.ValidationMessageFor(x => x.Name)</span>
+            </div>
         </div>
         <div class="control-group">
-            <label class="control-label">
-                Hlutfall</label>
+            @Html.LabelFor(m => m.Description, new { @class = "control-label" })
+            <div class="controls">
+                @Html.TextAreaFor(m => m.Description, new { @class = "input-xlarge" })
+            </div>
+        </div>
+        <div class="control-group">
+            @Html.LabelFor(m => m.GradePercentageValue, new { @class = "control-label" })
             <div class="controls">
                 @Html.DropDownListFor(m => m.GradePercentageValue, ViewBag.GradePercentageValues as IEnumerable<SelectListItem>, "Veldu prósentu")
             </div>
         </div>
         <div class="control-group">
-            <label class="control-label">
-                Borð númer</label>
+            @Html.LabelFor(m => m.LevelId, new { @class = "control-label" })
             <div class="controls">
                 @Html.DropDownListFor(m => m.LevelId, (IEnumerable<SelectListItem>)ViewBag.Levels, "Veldu borð")
             </div>
         </div>
         <div class="control-group">
+            @Html.LabelFor(x => x.Start, new { @class = "control-label" })
             <div class="controls">
-                <button type="submit" value="Save" class="btn btn-success">
-                    <i class="icon-ok icon-white"></i>Búa til próf
-                </button>
+                @Html.TextBoxFor(x => x.Start, new { @class = "input-xlarge", @data_datepicker = "datepicker" })
+                <span class="help-inline">@Html.ValidationMessageFor(x => x.Start)</span>
             </div>
+        </div>
+        <div class="control-group">
+            @Html.LabelFor(x => x.Stop, new { @class = "control-label" })
+            <div class="controls">
+                @Html.TextBoxFor(x => x.Stop, new { @class = "input-xlarge", @data_datepicker = "datepicker" })
+                <span class="help-inline">@Html.ValidationMessageFor(x => x.Stop)</span>
+            </div>
+        </div>
+        <div class="form-actions">
+                <button type="submit" value="Save" class="btn btn-primary">
+                     Búa til próf
+                </button>
+                @Html.ActionLink("Fara í lista yfir próf", "Index", new { id = ViewBag.CourseId }, new { @class = "btn" })
         </div>
     </fieldset>
 }
 <div>
-    @Html.ActionLink("Back to List", "Index", new { id = ViewBag.CourseId })
 </div>
