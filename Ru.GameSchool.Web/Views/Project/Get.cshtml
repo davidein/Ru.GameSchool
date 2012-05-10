@@ -27,11 +27,22 @@
     </div>
 
 
-    <div class="control-group">
-        <h3>  @Html.DisplayNameFor(model => model.Description)</h3>
+        <div class="control-group">
+            <h3>  @Html.DisplayNameFor(model => model.Description)</h3>
+            <div class="container-fluid">
+                <div class="controls">
+                    @Html.DisplayFor(model => model.Description)
+                </div>
+            </div>
+        </div>
+        
+        <div class="control-group">
+        <h3> Sækja skrá: @Html.DisplayNameFor(model => model.Filename)</h3>
         <div class="container-fluid">
             <div class="controls">
-                @Html.DisplayFor(model => model.Description)
+                <a name="button" class="btn btn-small" href="@Url.Action("Download", new { id = Model.LevelProjectId })" >
+                <i class="icon-download-alt"></i> Sækja 
+            </a>
             </div>
         </div>
     </div>
