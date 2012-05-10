@@ -5,7 +5,7 @@
     <h2>
         Velkomin/n á GameSchool</h2>
 </div>
-if (User.IsInRole("Student") && (Request.Url.AbsoluteUri.Contains("Course") | Request.Url.AbsoluteUri.Contains("Exam") | Request.Url.AbsoluteUri.Contains("Project") | Request.Url.AbsoluteUri.Contains("Level")))
+@if (User.IsInRole("Student") && (Request.Url.AbsoluteUri.Contains("Course") | Request.Url.AbsoluteUri.Contains("Exam") | Request.Url.AbsoluteUri.Contains("Project") | Request.Url.AbsoluteUri.Contains("Level")))
 {
     <div class="well">
         <h2>
