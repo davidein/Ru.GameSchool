@@ -70,13 +70,21 @@
 
 
 <div class="well">
-    <h2>@ViewBag.Title</h2>
-    <div class="videoWrapper">
-        <video id="gameSchoolVideo" class="video-js vjs-default-skin" controls width="700" height="394" poster="" preload="auto" data-setup="{}">
-            <source type="video/mp4" src="@ViewBag.File">
-        </video>
+    <div id="gameSchoolVideo">
+        <div class="videoWrapper">
+            <video class="video-js vjs-default-skin" controls width="700" height="394" poster="" preload="auto" data-setup="{}">
+                <source type="video/mp4" src="@ViewBag.File">
+            </video>
+        </div>
     </div>
+    <h2>@ViewBag.Name</h2>
     <p>@ViewBag.Description</p>
+    @if (User.IsInRole("Teacher"))
+    {
+        <a name="button" class="btn" href="@Url.Action("Edit", new {id = Model.LevelMaterialId})" >
+            <i class="icon-edit"></i> Breyta
+        </a>
+    }
 </div>
 
 

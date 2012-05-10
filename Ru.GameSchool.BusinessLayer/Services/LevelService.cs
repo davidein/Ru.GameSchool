@@ -653,11 +653,25 @@ namespace Ru.GameSchool.BusinessLayer.Services
             return levelMaterial;
         }
 
-        public void CreateLevelMaterial(LevelMaterial levelMaterial)
+        public void CreateLevelMaterial(LevelMaterial levelMaterial, int? courseId)
         {
-            if (levelMaterial != null)
+            if (levelMaterial != null && courseId > 0)
             {
                 GameSchoolEntities.LevelMaterials.AddObject(levelMaterial);
+                
+                var level = GameSchoolEntities.Levels.FirstOrDefault(l => l.LevelId == levelMaterial.LevelId && l.CourseId == courseId);
+
+                if (level != null)
+                {
+                    var allUsersInThisCourse =
+                        GameSchoolEntities.UserInfoes.SelectMany(s => s.Courses.Where(d => d.CourseId == courseId)).
+                            SelectMany(x => x.UserInfoes);
+                    foreach (var user in allUsersInThisCourse.Where(s => s.UserTypeId == 1).Distinct())
+                    {
+                        ExternalNotificationContainer.CreateNotification(string.Format("Nýtt kennslugagn er komið í áfangann {0} með nafninu \"{1}\"",
+                                                                                           levelMaterial.Level.Course.Name, levelMaterial.Title), string.Format("/Material/Index/{0}", levelMaterial.Level.CourseId), user.UserInfoId);
+                    }
+                }
                 Save();
             }
         }
