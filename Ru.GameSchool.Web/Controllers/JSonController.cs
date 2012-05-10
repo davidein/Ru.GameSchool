@@ -68,8 +68,7 @@ namespace Ru.GameSchool.Web.Controllers
                                //x.CommentLikes, change into a subarray
                                CommentLikes = from y in x.CommentLikes
                                               select new {
-                                                y.Comment,
-                                                y.CommentId,
+                                                y.UserInfo.Fullname,
                                                 y.UserInfoId
                                               },
                                x.UserInfoId,
