@@ -47,4 +47,15 @@
 
 $(document).ready(function () {
     $.fn.NotificationRunner();
+
+    $("#notify").click(function (i, v) {
+        $.ajax({
+            type: "POST",
+            url: "/Json/ClearNotifications/",
+            success: function (data) {
+                $('#notify .count').text("0");
+                $('#notify').removeClass('btn-danger');
+            }
+        });
+    });
 });
