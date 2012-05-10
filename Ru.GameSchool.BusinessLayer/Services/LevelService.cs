@@ -892,5 +892,10 @@ namespace Ru.GameSchool.BusinessLayer.Services
         {
             return courseId > 0 ? GameSchoolEntities.Levels.Where(c => c.CourseId == courseId) : null;
         }
+
+        public IEnumerable<LevelProject> GetLevelProjectsByLevelId(int levelId)
+        {
+            return levelId > 0 ? GameSchoolEntities.LevelProjects.Where(l => l.LevelId == levelId) : null;
+        }
     }
 }

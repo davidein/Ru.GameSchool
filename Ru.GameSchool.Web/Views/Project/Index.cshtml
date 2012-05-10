@@ -18,6 +18,9 @@
                 <th>
                     Lýsing
                 </th>
+                <th>
+                    Borð
+                </th>
                 @if (User.IsInRole("Teacher"))
                 {
                     <th>
@@ -72,6 +75,9 @@
                     <td>
                         @innerInnerItem.Description
                     </td>
+                                <td>
+                @Html.ActionLink(@innerInnerItem.Level.Name, "Get", "Level", new { id = innerInnerItem.LevelId }, null)
+            </td>
                     @if (User.IsInRole("Teacher"))
                     {
 
