@@ -158,14 +158,16 @@ namespace Ru.GameSchool.BusinessLayer.Services
         }
 
         /// <summary>
-        /// 
+        /// Handles point calculations based on grade.
         /// </summary>
-        /// <param name="userInfoId"></param>
-        /// <param name="courseId"></param>
+        /// <param name="grade"></param>
+        /// <param name="pointPerGrade"></param>
         /// <returns></returns>
-        public int CalculatePoints(int userInfoId, int courseId)
+        public int CalculatePointsByGrade(double grade, int pointPerGrade)
         {
-            throw new System.NotImplementedException();
+            var result = grade * pointPerGrade;
+            
+            return (int)result;
         }
 
         /// <summary>

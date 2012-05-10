@@ -409,15 +409,17 @@ namespace Ru.GameSchool.BusinessLayer.Services
                 GameSchoolEntities.LevelExamResults.AddObject(levelExamResult);
                 Save();
 
-                int points = 5;
-
                 if (ExternalNotificationContainer != null)
                     ExternalNotificationContainer.CreateNotification(string.Format("Þú hefur fengið {0} fyrir prófið \"{1}\"", levelExamResult.Grade, exam.Name), string.Format("/Exam/Index/{0}", exam.Level.CourseId), userInfoId);
                 if (ExternalPointContainer != null)
+                {
+                    const int totalPointsPerGradeUnit = 5;
+                    int points = ExternalPointContainer.CalculatePointsByGrade(levelExamResult.Grade, totalPointsPerGradeUnit);
                     ExternalPointContainer.AddPointsToLevel(userInfoId, exam.LevelId, points,
-                                                        string.Format("Þú hefur fengið {0} stig fyrir prófið \"{1}\".",
-                                                                      points, exam.Name));
-
+                                                            string.Format(
+                                                                "Þú hefur fengið {0} stig fyrir prófið \"{1}\".",
+                                                                points, exam.Name));
+                }
                 return levelExamResult.Grade;
             }
             return 0;

@@ -66,6 +66,12 @@ namespace Ru.GameSchool.Web.Controllers
                                x.CommentId,
                                x.Comment1,
                                //x.CommentLikes, change into a subarray
+                               CommentLikes = from y in x.CommentLikes
+                                              select new {
+                                                y.Comment,
+                                                y.CommentId,
+                                                y.UserInfoId
+                                              },
                                x.UserInfoId,
                                x.LevelMaterialId,
                                x.CreateDateTime,
