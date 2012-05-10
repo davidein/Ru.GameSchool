@@ -195,7 +195,10 @@ namespace Ru.GameSchool.Web.Controllers
             else
             {
                 ViewBag.ErrorMessage = "Gat ekki uppfært kennslugagn! Lagfærðu villur og reyndur aftur.";
-                if (id.Value != null) return View(LevelService.GetLevelMaterial(id.Value));
+                if (id.HasValue)
+                {
+                    return View(LevelService.GetLevelMaterial(id.Value));
+                }   
             }
             ViewBag.LevelCount = GetLevelCounts(levelMaterial.Level.CourseId);
             ViewBag.LevelMaterialId = levelMaterial.LevelMaterialId;

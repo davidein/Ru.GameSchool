@@ -33,7 +33,7 @@ namespace Ru.GameSchool.Web.Controllers
                     ViewBag.CourseId = courseId;
                     ViewBag.CourseName = model.Course.Name;
                     ViewBag.Levels = LevelService.GetLevels(courseId);
-                    ViewBag.Projects = LevelService.GetLevelProjects();
+                    ViewBag.Projects = LevelService.GetLevelProjectsByLevelId(levelId);
                     ViewBag.MaterialsVideo = LevelService.GetLevelMaterials(levelId,1);
                     ViewBag.MaterialsSlides = LevelService.GetLevelMaterials(levelId,2);
                     ViewBag.MaterialsMessages = LevelService.GetLevelMaterials(levelId);

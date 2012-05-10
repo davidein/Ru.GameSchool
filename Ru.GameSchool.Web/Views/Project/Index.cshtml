@@ -1,9 +1,6 @@
 ﻿@using Ru.GameSchool.DataLayer.Repository
 @model IEnumerable<Course>
-@if (User.IsInRole("Teacher"))
-{
-    @Html.ActionLink("Sjá allt", "Index", new { id = "" })
-}
+@Html.ActionLink("Sjá allt", "Index", new { id = "" })
 @foreach (var course in Model)
 {
     <table class="table table-striped table-bordered table-condensed">
@@ -21,10 +18,21 @@
                 <th>
                     Lýsing
                 </th>
+                <th>
+                    Borð
+                </th>
                 @if (User.IsInRole("Teacher"))
                 {
                     <th>
+                        Fjöldi búinn að skila
+                        
+                    </th>
+                    <th>
+                        Fjöldi óyfirfarna verkefna
+                    </th>
+                    <th>
                         Aðgerðir kennara
+                        
                     </th>
                 }
                 else
@@ -41,21 +49,48 @@
             {
                 foreach (var innerInnerItem in innerItem.LevelProjects)
                 {
+                    if (!(innerInnerItem.Start > DateTime.Now && User.IsInRole("Student"))) // Ekki sýna verkefni sem eru ekki byrjuð
+                    {     
                 <tr>
                     <td>
-                        @Html.ActionLink(@innerInnerItem.Name, User.IsInRole("Teacher") ? "TeacherGet" : "Get", new { id = @innerInnerItem.LevelProjectId })
+                        <!-- -->
+                        @if (innerInnerItem.Start < DateTime.Now && User.IsInRole("Student"))
+                        {
+                            @Html.ActionLink(@innerInnerItem.Name, "Get", new { id = @innerInnerItem.LevelProjectId })if (@innerInnerItem.Start.AddHours(23) >= DateTime.Now)
+                                                                                                                      {<span class="label label-important new-material">Nýtt</span>}
+                        }
+                        else if (User.IsInRole("Teacher"))
+                        {
+                            @Html.ActionLink(@innerInnerItem.Name, "TeacherGet", new { id = @innerInnerItem.LevelProjectId })if (@innerInnerItem.Start.AddHours(23) >= DateTime.Now)
+                                                                                                                             {<span class="label label-important new-material">Nýtt</span>}
+                        }
+                        else if (innerInnerItem.Stop < DateTime.Now)
+                        {
+                            <i>Skilafrestur búinn!</i>
+                        }
                     </td>
                     <td>
-                        @innerInnerItem.Stop
+                        @innerInnerItem.Stop.ToShortDateString()
                     </td>
                     <td>
                         @innerInnerItem.Description
                     </td>
+                                <td>
+                @Html.ActionLink(@innerInnerItem.Level.Name, "Get", "Level", new { id = innerInnerItem.LevelId }, null)
+            </td>
                     @if (User.IsInRole("Teacher"))
                     {
+
                         <td>
-                            @Html.ActionLink("Breyta", "Edit", new { id = innerInnerItem.LevelProjectId }) |
-                            @Html.ActionLink("Eyða", "Delete", new { id = innerInnerItem.LevelProjectId })
+                            @innerInnerItem.LevelProjectResults.Count
+                        </td>
+                        <td>
+                            @innerInnerItem.LevelProjectResults.Count(x => x.Grade == null)
+                        </td>
+                        <td>
+                            <a name="button" class="btn btn-mini" href="@Url.Action("Edit", new { id = innerInnerItem.LevelProjectId })" >
+                                <i class="icon-edit"></i>Breyta </a>| <a name="button" class="btn btn-mini" href="@Url.Action("Delete", new { id = innerInnerItem.LevelProjectId })" >
+                                    <i class="icon-edit"></i>Eyða </a>
                         </td>
                     }
                     else if (User.IsInRole("Student"))
@@ -88,11 +123,9 @@
                         </td>
                             }
                         }
-
-
                     }
                 </tr>
-
+                    }
                 }
             }
         </tbody>

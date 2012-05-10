@@ -65,6 +65,18 @@ namespace Ru.GameSchool.DataLayer.Repository
             get;
             set;
         }
+    
+        public virtual System.DateTime Start
+        {
+            get;
+            set;
+        }
+    
+        public virtual System.DateTime Stop
+        {
+            get;
+            set;
+        }
 
         #endregion
         #region Navigation Properties
