@@ -1,11 +1,6 @@
 ﻿@using Ru.GameSchool.BusinessLayer.Services
 
-@if (User.IsInRole("Admin") && Request.Url.AbsoluteUri.Contains("Admin"))
-{
-    @Html.Partial("_AdminSideBar")
-}
-else
-{
+
 <div class="well">
     <h2>
         Velkomin/n á GameSchool</h2>
@@ -105,4 +100,3 @@ if (User.IsInRole("Student") && (Request.Url.AbsoluteUri.Contains("Course") | Re
         <a href="#" id="close" class="btn" data-dismiss="modal">Loka</a>
     </div>
 </div>
-}

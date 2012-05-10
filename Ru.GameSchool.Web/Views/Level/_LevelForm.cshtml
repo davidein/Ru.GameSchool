@@ -15,7 +15,7 @@
             <div class="control-group">
                 @Html.LabelFor(model => model.Start, new { @class = "control-label" })
             <div class="controls">
-                 @Html.TextBoxFor(model => model.Start, new { rel = "popover", @class = "input-small", jid = "datepicker" })
+                 @Html.TextBoxFor(model => model.Start, new { rel = "popover", @class = "input-small", @data_datepicker = "datepicker" })
                 @Html.ValidationMessageFor(model => model.Start)
             </div>
             </div>
@@ -23,11 +23,27 @@
             <div class="control-group">
                 @Html.LabelFor(model => model.Stop, new { @class = "control-label" })
             <div class="controls">
-                @Html.TextBoxFor(model => model.Stop, new { rel="popover", @class="input-small", jid ="datepicker" })
+                @Html.TextBoxFor(model => model.Stop, new { rel = "popover", @class = "input-small", @data_datepicker = "datepicker" })
                 @Html.ValidationMessageFor(model => model.Stop)
             </div>
             </div>
 
 <script>
  $('[jid="datepicker"]').attr({ "data-datepicker": "datepicker" })
+</script>
+
+<script>
+    $(document).ready(function () {
+
+        jQuery.validator.methods["date"] = function (value, element) {
+            return true;
+        };
+
+        $.datepicker.setDefaults({ validateDate: 'false' });
+        $.datepicker.regional['is-IS']
+        $('.Start').datepicker({ dateFormat: "d.m.yy 00:00:01" });
+        $('.Stop').datepicker({ dateFormat: "d.m.yy 23:59:59" });
+
+
+    });
 </script>

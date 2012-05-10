@@ -112,15 +112,22 @@ namespace Ru.GameSchool.BusinessLayer.Services
             return levelExam;
         }
 
-        public IEnumerable<LevelExam> GetLevelExams(int courseId, int userInfoId)
+        public IEnumerable<LevelExam> GetLevelExamsByCourseId(int courseId, int userInfoId)
         {
             var list = GameSchoolEntities.LevelExams.Where(x => x.Level.CourseId == courseId);
             var exams = list.Where(x => x.Level.Course.UserInfoes.Where(y => y.UserInfoId == userInfoId).Count() > 0);
 
+            return exams;
+        }
 
+        public IEnumerable<LevelExam> GetLevelExamsByLevelId(int levelId, int userInfoId)
+        {
+            var list = GameSchoolEntities.LevelExams.Where(x => x.LevelId == levelId);
+            var exams = list.Where(x => x.Level.Course.UserInfoes.Where(y => y.UserInfoId == userInfoId).Count() > 0);
 
             return exams;
         }
+        
         /// <summary>
         /// 
         /// </summary>
@@ -129,7 +136,7 @@ namespace Ru.GameSchool.BusinessLayer.Services
         {
             if (levelExam != null)
             {
-
+                Save();
             }
         }
 
@@ -481,6 +488,13 @@ namespace Ru.GameSchool.BusinessLayer.Services
             if (levelExamQuestionId > 0)
             {
                 var item = GetLevelExamQuestion(levelExamQuestionId);
+
+                var children = item.LevelExamAnswers;
+
+                for (int i = 0; i <= children.Count(); i++)
+                {
+                    GameSchoolEntities.LevelExamAnswers.DeleteObject(children.ElementAt(i));
+                }
 
                 GameSchoolEntities.LevelExamQuestions.DeleteObject(item);
                 Save();

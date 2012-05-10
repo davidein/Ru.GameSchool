@@ -1,8 +1,8 @@
 
-
 <ul>
     @foreach(var item in ViewBag.Materials)
     {
         <li>@Html.ActionLink((@item.Title +" - "+@item.ContentType.Name) as string, User.IsInRole("Student") ? "Get" : "Edit", new { id = @item.LevelMaterialId })</li>
     }
+
 </ul>
