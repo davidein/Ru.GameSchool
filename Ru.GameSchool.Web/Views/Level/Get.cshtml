@@ -65,13 +65,13 @@
         <ul>
             @foreach (var item in ViewBag.Projects)
             {
-                <li>@Html.ActionLink(item.Name as string, User.IsInRole("Student") ? "Get" : "TeacherGet", "Project", new { id = item.LevelProjectId }, null) @if (item.IsReturned(ViewBag.User.UserInfoId))
+                <li>@Html.ActionLink(item.Name as string, User.IsInRole("Student") ? "Get" : "TeacherGet", "Project", new { id = item.LevelProjectId, courseId = ViewBag.CourseId }, null) @if (item.IsReturned(ViewBag.User.UserInfoId))
                                                                                                                                                               {<span class="label label-success new-material">Skilað</span>}
                                                                                                                                                               else if (item.IsNew())
                                                                                                                                                              {<span class="label label-important">Nýtt</span>}</li>
             }
         </ul>
-        @Html.ActionLink("Öll verkefni", "Index", "Project", new { id = ViewBag.CourseId }, new { @class = "btn" })
+        @Html.ActionLink("Öll verkefni", "Index", "Project", new { id = ViewBag.CourseId, courseId = ViewBag.CourseId }, new { @class = "btn" })
     </div>
     <div class="span4 well">
         <h2>Netpróf</h2>
