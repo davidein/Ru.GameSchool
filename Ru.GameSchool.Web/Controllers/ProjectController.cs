@@ -55,6 +55,20 @@ namespace Ru.GameSchool.Web.Controllers
 
         [HttpGet]
         [Authorize(Roles = "Teacher")]
+        public ActionResult GetReturn(int? id)
+        {
+            if (id.HasValue)
+            {
+                var projectFile = LevelService.GetlevelProjectResultByLevelProjectId(id.Value);
+                var filepath = Settings.ProjectMaterialVirtualFolder + projectFile.ContentID.ToString();
+
+                return new DownloadResult { VirtualPath = filepath, FileDownloadName = projectFile.Filename };
+            }
+            return RedirectToAction("NotFound", "Home");
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "Teacher")]
         public ActionResult TeacherGet(int? id, int? courseId)
         {
             if (id.HasValue && id.Value > 0)
