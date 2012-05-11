@@ -83,67 +83,6 @@ namespace Ru.GameSchool.Web.Controllers
         {
             ViewBag.CourseId = courseId.HasValue ? courseId.Value : 0;
             if (result != null)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             {
                 if (TryUpdateModel(result))
                 {
@@ -319,10 +258,11 @@ namespace Ru.GameSchool.Web.Controllers
                         foreach (var file in levelProject.File)
                         {
                             Guid contentId = Guid.NewGuid();
-                            var path = Server.MapPath("~/Upload") + contentId.ToString();
+                            var path = Path.Combine(Server.MapPath("~/Upload"), contentId.ToString());
                             ViewBag.ContentId = contentId;
                             file.SaveAs(path);
                             levelProject.ContentID = contentId;
+                            levelProject.Filename = file.FileName;
                         }
                     }
 
@@ -350,7 +290,7 @@ namespace Ru.GameSchool.Web.Controllers
                     }
                 }
             }
-            ViewBag.LevelCount = GetLevelCounts(levelProject.Level.CourseId);
+            ViewBag.LevelCount = GetLevelCounts(material.Level.CourseId);
             ViewBag.LevelProjectId = levelProject.LevelProjectId;
             ViewBag.ContentTypes = LevelService.GetContentTypes();
             return View();

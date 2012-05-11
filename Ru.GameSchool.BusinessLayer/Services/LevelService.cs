@@ -271,6 +271,7 @@ namespace Ru.GameSchool.BusinessLayer.Services
                 levelProjToUpdate.Start = levelProject.Start;
                 levelProjToUpdate.Stop = levelProject.Stop;
                 levelProjToUpdate.UserFeedback = levelProject.UserFeedback;
+                levelProjToUpdate.Filename = levelProject.Filename;
                 Save();
             }
         }

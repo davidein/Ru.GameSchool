@@ -1,6 +1,6 @@
 ﻿@using Ru.GameSchool.DataLayer.Repository
 @model LevelProject
-@using (Html.BeginForm("Edit", "Project", FormMethod.Post, new { @class = "form-horizontal" }))
+@using (Html.BeginForm("Edit", "Project", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal" }))
 {
     @Html.ValidationSummary(true)
 
