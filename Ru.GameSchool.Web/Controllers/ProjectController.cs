@@ -120,10 +120,13 @@ namespace Ru.GameSchool.Web.Controllers
             //{
                 foreach (var file in levelProject.File)
                 {
-                    var path = Path.Combine(Server.MapPath("~/Upload"), contentId.ToString());
-                    ViewBag.ContentId = contentId;
-                    file.SaveAs(path);
-                    ViewBag.Filename = file.FileName;
+                    if (file != null)
+                    {
+                        var path = Path.Combine(Server.MapPath("~/Upload"), contentId.ToString());
+                        ViewBag.ContentId = contentId;
+                        file.SaveAs(path);
+                        ViewBag.Filename = file.FileName;
+                    }
                 }
             //}
 
@@ -206,12 +209,15 @@ namespace Ru.GameSchool.Web.Controllers
 
                 foreach (var file in levelproject.File)
                 {
-                    Guid contentId = Guid.NewGuid();
-                    var path = Path.Combine(Server.MapPath("~/Upload"), contentId.ToString());
-                    ViewBag.ContentId = contentId;
-                    file.SaveAs(path);
-                    levelproject.ContentID = contentId;
-                    levelproject.Filename = file.FileName;
+                    if (file != null)
+                    {
+                        Guid contentId = Guid.NewGuid();
+                        var path = Path.Combine(Server.MapPath("~/Upload"), contentId.ToString());
+                        ViewBag.ContentId = contentId;
+                        file.SaveAs(path);
+                        levelproject.ContentID = contentId;
+                        levelproject.Filename = file.FileName;   
+                    }
                 }
 
                 ViewBag.LevelCount = GetLevelCounts(id.Value);
