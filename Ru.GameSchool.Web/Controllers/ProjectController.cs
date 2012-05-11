@@ -83,8 +83,9 @@ namespace Ru.GameSchool.Web.Controllers
 
         [HttpPost]
         [Authorize(Roles = "Teacher")]
-        public ActionResult GradeProject(LevelProjectResult result)
+        public ActionResult GradeProject(LevelProjectResult result, int? courseId)
         {
+            ViewBag.CourseId = courseId.HasValue ? courseId.Value : 0;
             if (result != null)
             {
                 if (TryUpdateModel(result))
@@ -270,6 +271,7 @@ namespace Ru.GameSchool.Web.Controllers
 
                     ViewBag.CourseName = CourseService.GetCourse(courseId).Name;
                     ViewBag.Courseid = CourseService.GetCourse(courseId).CourseId;
+                    ViewBag.CourseId = CourseService.GetCourse(courseId).CourseId;
                     ViewBag.LevelCount = GetLevelCounts(courseId);
                     ViewBag.SuccessMessage = "Verkefni hefur verið uppfært";
                     ViewBag.LevelId = new SelectList(LevelService.GetLevels(), "LevelId", "Name", levelProject.LevelId);
@@ -279,7 +281,12 @@ namespace Ru.GameSchool.Web.Controllers
                 }
                 else
                 {
+                    ViewBag.LevelId = new SelectList(LevelService.GetLevels(), "LevelId", "Name", levelProject.LevelId);
                     ViewBag.ErrorMessage = "Gat ekki uppfært kennslugagn! Lagfærðu villur og reyndur aftur.";
+                    ViewBag.LevelCount = GetLevelCounts(courseId);
+                    ViewBag.CourseName = CourseService.GetCourse(courseId).Name;
+                    ViewBag.Courseid = CourseService.GetCourse(courseId).CourseId;
+                    ViewBag.CourseId = CourseService.GetCourse(courseId).CourseId;
                     if (id.HasValue)
                     {
                         return View(LevelService.GetLevelProject(id.Value));
