@@ -1,15 +1,11 @@
 ﻿@using Ru.GameSchool.DataLayer.Repository
 @model LevelProject
-<h2>
-    Breyta verkefni</h2>
-<script src="@Url.Content("~/Scripts/jquery.validate.min.js")"></script>
-<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")"></script>
-@using (Html.BeginForm("Edit", "Project", FormMethod.Post))
+@using (Html.BeginForm("Edit", "Project", FormMethod.Post, new { @class = "form-horizontal" }))
 {
     @Html.ValidationSummary(true)
 
     <fieldset>
-        <legend>Upplýsingar</legend>
+        <legend>Upplýsingar um verkefni</legend>
         @Html.HiddenFor(model => model.LevelProjectId)
         @if (!string.IsNullOrWhiteSpace(ViewBag.SuccessMessage))
         {
@@ -35,14 +31,14 @@
             </div>
         </div>
         <div class="control-group">
-            @Html.LabelFor(model => model.LevelId, "Level")
+            @Html.LabelFor(model => model.LevelId, new { @class = "control-label" })
             <div class="controls">
                 @Html.DropDownList("LevelId", string.Empty)
                 <span class="help-inline">@Html.ValidationMessageFor(model => model.LevelId)</span>
             </div>
         </div>
         <div class="control-group">
-            @Html.LabelFor(model => model.GradePercentageValue)
+            @Html.LabelFor(model => model.GradePercentageValue, new { @class = "control-label" })
             <div class="controls">
                 @Html.DropDownListFor(m => m.GradePercentageValue, new SelectList(ViewBag.GradePercentageValue, "Value", "Text"))
             </div>
@@ -77,15 +73,13 @@
         </div>
         <div class="control-group">
             <div class="controls">
-                <button type="submit" id="submit" class="btn btn-success">
-                    Breyta verkefni</button>
+                <button type="submit" id="submit" class="btn btn-primary">Breyta verkefni</button>
+                @Html.ActionLink("Aftur á forsíðu verkefna", "Index", new { id = ViewBag.CourseId }, new { @class = "btn btn-small"})
             </div>
         </div>
     </fieldset>
 }
-<div>
-    @Html.ActionLink("Aftur á forsíðu verkefna", "Index", new { id = ViewBag.CourseId }, new { @class = "btn btn-small"})
-</div>
+
 <script>
     $(document).ready(function () {
 

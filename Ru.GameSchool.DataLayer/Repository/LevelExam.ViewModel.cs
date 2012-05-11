@@ -9,6 +9,15 @@ namespace Ru.GameSchool.DataLayer.Repository
     [MetadataType(typeof(LevelExamMetadata))]
     public partial class LevelExam
     {
+        public bool IsNew
+        {
+            get { return Start.AddHours(23) >= DateTime.Now; }
+        }
+
+        public bool IsReturned(int userInfoId)
+        {
+            return _levelExamResults.Where(x => x.UserInfoId == userInfoId).Count() > 0;
+        }
     }
     public class LevelExamMetadata
     {

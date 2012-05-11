@@ -66,13 +66,9 @@
         }
         </tbody>
 </table>
-@using (Html.BeginForm("Create", "Material", new { id = ViewBag.LevelId }, FormMethod.Post))
+@if (User.IsInRole("Teacher"))
 {
-    if (User.IsInRole("Teacher"))
-    {
-        <p>
-            <button name="button" class="btn btn-success" value="Create" >
-                Skrá nýtt kennslugagn</button>
-        </p>
-    }
+    <p>
+        @Html.ActionLink("Skrá nýtt kennslugagn", "Create", "Material", new { id = ViewBag.Courseid }, new { @class = "btn btn-primary" })
+    </p>
 }
