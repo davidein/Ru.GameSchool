@@ -10,7 +10,7 @@ using Ru.GameSchool.DataLayer.Repository;
 using Ru.GameSchool.BusinessLayer.Enums;
 
 namespace Ru.GameSchool.BusinessLayer.Services
-{ // vantar, öll gert fyrir level
+{
     /// <summary>
     /// Service class that abstracts the interraction around the level entity with the data layer.
     /// </summary> 
