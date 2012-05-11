@@ -200,8 +200,8 @@ namespace Ru.GameSchool.Web.Controllers
                 var course = CourseService.GetCourse(id.Value);
                 ViewBag.CourseId = course.CourseId;
 
-                //if (levelproject.File != null)
-                //{
+                if (levelproject.File != null)
+                {
                     foreach (var file in levelproject.File)
                     {
                         Guid contentId = Guid.NewGuid();
@@ -211,7 +211,7 @@ namespace Ru.GameSchool.Web.Controllers
                         levelproject.ContentID = contentId;
                         levelproject.Filename = file.FileName;
                     }
-                //}
+                }
                 ViewBag.LevelCount = GetLevelCounts(id.Value);
                 ViewBag.CourseId = id.Value;
                 ViewBag.GradePercentageValue = GetPercentageValue();
