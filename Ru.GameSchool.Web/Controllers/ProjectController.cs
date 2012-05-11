@@ -55,7 +55,7 @@ namespace Ru.GameSchool.Web.Controllers
         {
             if (id.HasValue)
             {
-                var projectFile = LevelService.GetlevelProjectResultByLevelProjectId(id.Value);
+                var projectFile = LevelService.GetlevelProjectResultsByLevelProjectResultId(id.Value);
                 var filepath = Settings.ProjectMaterialVirtualFolder + projectFile.ContentID.ToString();
 
                 return new DownloadResult { VirtualPath = filepath, FileDownloadName = projectFile.Filename };
@@ -116,8 +116,8 @@ namespace Ru.GameSchool.Web.Controllers
             var user = MembershipHelper.GetUser().UserInfoId;
 
             Guid contentId = Guid.NewGuid();
-            if (levelProject.ContentID != null)
-            {
+            //if (levelProject.ContentID != null)
+            //{
                 foreach (var file in levelProject.File)
                 {
                     var path = Path.Combine(Server.MapPath("~/Upload"), contentId.ToString());
@@ -125,7 +125,7 @@ namespace Ru.GameSchool.Web.Controllers
                     file.SaveAs(path);
                     ViewBag.Filename = file.FileName;
                 }
-            }
+            //}
 
             levelProject.LevelProjectResults.Add(CreateLevelProjectResult(levelProject, user, contentId, ViewBag.Filename));
             LevelService.UpdateLevelProjectFromResult(levelProject, user);
