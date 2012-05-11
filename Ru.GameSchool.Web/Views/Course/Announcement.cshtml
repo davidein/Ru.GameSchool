@@ -11,4 +11,8 @@
                 @ViewBag.Announcement.Article
             </p>
         </article>
+        @if (User.IsInRole("Teacher"))
+        {
+            @Html.ActionLink("Breyta", "EditAnnouncement", "Level", new { id = ViewBag.Announcement.AnnouncementId }, new { @class = "btn btn-success" })
+        }
 </div>

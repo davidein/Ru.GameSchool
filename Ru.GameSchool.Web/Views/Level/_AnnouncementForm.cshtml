@@ -1,0 +1,50 @@
+﻿@model Ru.GameSchool.DataLayer.Repository.Announcement
+
+<div class="control-group">
+    @Html.LabelFor(model => model.LevelId, new { @class = "control-label" })
+    <div class="controls">
+        @Html.DropDownListFor(model => model.LevelId, new SelectList(ViewBag.LevelList, "Value", "Text"))
+        <span class="help-inline">@Html.ValidationMessageFor(model => model.LevelId)</span>
+    </div>
+</div>
+
+<div class="control-group">
+    @Html.LabelFor(model => model.Title, new { @class = "control-label" })
+    <div class="controls">
+        @Html.TextBoxFor(model => model.Title, new { rel="popover", @class="input-xlarge" })
+        @Html.ValidationMessageFor(model => model.Title)
+    </div>
+</div>
+
+<div class="control-group">
+    @Html.LabelFor(model => model.Article, new { @class = "control-label" })
+    <div class="controls">
+        @Html.TextAreaFor(model => model.Article, new { rel = "popover", @class = "input-xlarge" })
+        @Html.ValidationMessageFor(model => model.Article)
+    </div>
+</div>
+
+<div class="control-group">
+    @Html.LabelFor(model => model.DisplayDateTime, new { @class = "control-label" })
+    <div class="controls">
+        @Html.TextBoxFor(model => model.DisplayDateTime, new { rel = "popover", @class = "input-large", @data_datepicker = "datepicker" })
+        @Html.ValidationMessageFor(model => model.DisplayDateTime)
+    </div>
+</div>
+
+<script language="javascript">
+    $(document).ready(function () {
+        $('[jid="datepicker"]').attr({ "data-datepicker": "datepicker" })
+
+        jQuery.validator.methods["date"] = function (value, element) {
+            return true;
+        };
+
+        $.datepicker.setDefaults({ validateDate: 'false' });
+        $.datepicker.regional['is-IS']
+        $('.Start').datepicker({ dateFormat: "d.m.yy 00:00:01" });
+        $('.Stop').datepicker({ dateFormat: "d.m.yy 23:59:59" });
+
+
+    });
+</script>

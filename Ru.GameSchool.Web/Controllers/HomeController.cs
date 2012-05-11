@@ -16,13 +16,13 @@ namespace Ru.GameSchool.Web.Controllers
         {
             if (User.IsInRole("Admin"))
             {
-               return RedirectToAction("Index", "Admin");
-            }
-            else
-            {
-            return View();
+                return RedirectToAction("Index", "Admin");
             }
 
+            var user = MembershipHelper.GetUser();
+            ViewBag.AnnouncementList = AnnouncementService.GetAnnouncementsByUserInfoId(user.UserInfoId).Take(3);
+
+            return View();
         }
 
         public ActionResult About()
