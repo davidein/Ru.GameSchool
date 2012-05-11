@@ -20,9 +20,7 @@ namespace Ru.GameSchool.Web.Controllers
 
         public ActionResult Index()
         {
-
-            ViewBag.Title = "Forsíða umsjónarmanns";
-            return View();
+            return View("Search");
         }
 
         public ActionResult Users()
@@ -206,6 +204,7 @@ namespace Ru.GameSchool.Web.Controllers
             if (id.HasValue)
             {
                 var course = CourseService.GetCourse((int)id);
+                ViewBag.Courses = course;
                 if (course != null)
                 {
                     ViewBag.Title = "Breyta námskeiði";
@@ -218,7 +217,7 @@ namespace Ru.GameSchool.Web.Controllers
                     model.Stop = course.Stop;
                     model.DepartmentId = course.DepartmentId;
 
-                    return View("Courses");
+                    return View(model);
                 }
             }
             ViewBag.Title = "Nýtt námskeið";
