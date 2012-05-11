@@ -133,6 +133,7 @@
     <Compile Include="Repository\Point.cs">
       <DependentUpon>GameSchool.tt</DependentUpon>
     </Compile>
+    <Compile Include="Repository\SearchViewModel.cs" />
     <Compile Include="Repository\Status.cs">
       <DependentUpon>GameSchool.tt</DependentUpon>
     </Compile>
