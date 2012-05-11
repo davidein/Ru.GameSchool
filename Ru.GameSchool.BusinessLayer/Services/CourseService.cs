@@ -319,7 +319,8 @@ namespace Ru.GameSchool.BusinessLayer.Services
                 from x in
                     GameSchoolEntities.LevelExams.Where(
                         l => l.Level.Course.UserInfoes.Where(u => u.UserInfoId == userInfoId).Count() > 0
-                        && l.Level.CourseId == courseId)
+                        && l.Level.CourseId == courseId
+                        && l.Start < DateTime.Now)
                         orderby x.Start descending 
                 select x;
 
@@ -329,7 +330,8 @@ namespace Ru.GameSchool.BusinessLayer.Services
                 from x in
                     GameSchoolEntities.LevelProjects.Where(
                         l => l.Level.Course.UserInfoes.Where(u => u.UserInfoId == userInfoId).Count() > 0
-                        && l.Level.CourseId == courseId)
+                        && l.Level.CourseId == courseId
+                        && l.Start < DateTime.Now)
                 orderby x.Start descending
                 select x;
 
@@ -339,7 +341,8 @@ namespace Ru.GameSchool.BusinessLayer.Services
                 from x in
                     GameSchoolEntities.LevelMaterials.Where(
                         l => l.Level.Course.UserInfoes.Where(u => u.UserInfoId == userInfoId).Count() > 0
-                        && l.Level.CourseId == courseId)
+                        && l.Level.CourseId == courseId
+                        && l.Level.Start < DateTime.Now)
                 orderby x.CreateDateTime descending
                 select x;
 
