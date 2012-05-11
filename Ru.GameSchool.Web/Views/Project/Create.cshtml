@@ -59,17 +59,13 @@
         </div>
         
 
-        <div class="control-group">
-            <div class="controls">
-                <button type="submit" id="submit" class="btn btn-success">
-                    Bæta við verkefni</button>
-            </div>
+        <div class="form-actions">
+            <button type="submit" id="submit" class="btn btn-primary">Bæta við verkefni</button>
+            @Html.ActionLink("Aftur á forsíðu verkefna", "Index", new { id = ViewBag.CourseId }, new { @class = "btn btn-small" })
         </div>
     </fieldset>
 }
-<div>
-    @Html.ActionLink("Aftur á forsíðu verkefna", "Index", new { id = ViewBag.CourseId }, new { @class = "btn btn-small" })
-</div>
+
 <script type="text/javascript">
     $(function () {
         jQuery.validator.methods["date"] = function (value, element) {

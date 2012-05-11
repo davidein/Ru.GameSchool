@@ -1,0 +1,14 @@
+﻿@{
+    ViewBag.Title = ViewBag.Announcement.Title;
+}
+
+<div class="hero-unit">
+    <h1>@ViewBag.Announcement.Title</h1>
+        <article>
+            <h3>
+                <span class="gray">@ViewBag.Announcement.DisplayDateTime.ToString("dd.MM.yyyy")</span></h3>
+            <p>
+                @ViewBag.Announcement.Article
+            </p>
+        </article>
+</div>

@@ -28,19 +28,19 @@ namespace Ru.GameSchool.DataLayer.Repository
         IObjectSet<LevelExamQuestion> LevelExamQuestions { get; }
         IObjectSet<LevelExamResult> LevelExamResults { get; }
         IObjectSet<LevelMaterial> LevelMaterials { get; }
-        IObjectSet<LevelProject> LevelProjects { get; }
-        IObjectSet<LevelProjectResult> LevelProjectResults { get; }
         IObjectSet<Notification> Notifications { get; }
         IObjectSet<Point> Points { get; }
         IObjectSet<Status> Status { get; }
         IObjectSet<UserInfo> UserInfoes { get; }
         IObjectSet<UserType> UserTypes { get; }
         IObjectSet<UserLog> UserLogs { get; }
-<<<<<<< HEAD
-        IObjectSet<sysdiagram> sysdiagrams { get; }
-=======
         IObjectSet<LevelExam> LevelExams { get; }
->>>>>>> 33b901828b9f5a5638662e14a796c18707472adf
+        IObjectSet<Announcement> Announcements { get; }
+<<<<<<< HEAD
+=======
+        IObjectSet<LevelProject> LevelProjects { get; }
+        IObjectSet<LevelProjectResult> LevelProjectResults { get; }
+>>>>>>> 87f1bfe948507717ee80f91facfcdf2cb7aaf6b4
 
         #endregion
         #region Function Imports

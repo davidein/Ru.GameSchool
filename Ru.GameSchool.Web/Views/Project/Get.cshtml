@@ -72,12 +72,14 @@
          </p></div>
     
 </article>
-           
+    //if (innerInnerItem.LevelProjectResults.Where(u => u.UserInfoId == ViewBag.UserInfoId).Any(x => x.Grade == null))
             
              if (!(Model.Stop < DateTime.Now))
              {
-                 if (Model.LevelProjectResults.Select(s => s.UserInfoId).FirstOrDefault() != ViewBag.UserInfoId)
+                 if (Model.LevelProjectResults.Select(s => s.UserInfoId).FirstOrDefault() != ViewBag.UserInfoId &&
+                     !Model.LevelProjectResults.Any(x => x.Grade == null))
                  {
+
     <div class="control-group">
         <label class="control-label">
         </label>

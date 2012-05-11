@@ -1,21 +1,20 @@
 ﻿@model Ru.GameSchool.DataLayer.Repository.Level
 
-@using (Html.BeginForm("Edit", "Exam", FormMethod.Post, new { @class = "form-horizontal" }))
+@using (Html.BeginForm("Edit", "Level", FormMethod.Post, new { @class = "form-horizontal" }))
 {
     @Html.ValidationSummary(true)
 
     <fieldset>
+        <legend>Breytingar á borði</legend>
         @Html.HiddenFor(model => model.CourseId)
         @Html.HiddenFor(model => model.LevelId)
 
         @Html.Partial("_LevelForm")
 
 
-            <div class="control-group">
-                <label class="control-label"></label>
-            <div class="controls">
-                <button type="submit" class="btn btn-success" >Vista breytingar á borði</button>
-            </div>
-            </div>
+        <div class="form-actions">
+            <button type="submit" class="btn btn-success" >Vista breytingar á borði</button>
+            @Html.ActionLink("Fara aftur í borð", "Get", "Level", new { id = Model.LevelId }, new { @class = "btn" })
+        </div>
     </fieldset>
 }

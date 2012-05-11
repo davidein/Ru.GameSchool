@@ -2,10 +2,9 @@
 @model IEnumerable<Course>
 @foreach (var course in Model)
 {
+    <h2>@course.Name</h2>
+    <i>@course.Identifier</i>
     <table class="table table-striped table-bordered table-condensed">
-        <caption>
-            <h1>@course.Name</h1>
-            <i>@course.Identifier</i></caption>
         <tbody>
             <tr>
                 <th>
@@ -87,8 +86,8 @@
                             @innerInnerItem.LevelProjectResults.Count(x => x.Grade == null)
                         </td>
                         <td>
-                            <a name="button" class="btn btn-mini" href="@Url.Action("Edit", new { id = innerInnerItem.LevelProjectId })" >
-                                <i class="icon-edit"></i>Breyta </a>| <a name="button" class="btn btn-mini" href="@Url.Action("Delete", new { id = innerInnerItem.LevelProjectId })" >
+                            <a name="button" class="btn btn-mini" href="@Url.Action("Edit", new { id = innerInnerItem.LevelProjectId, courseId = ViewBag.CourseId })" >
+                                <i class="icon-edit"></i>Breyta </a>  |  <a name="button" class="btn btn-mini" href="@Url.Action("Delete", new { id = innerInnerItem.LevelProjectId, courseId = ViewBag.CourseId })" >
                                     <i class="icon-edit"></i>Eyða </a>
                         </td>
                     }
@@ -129,13 +128,10 @@
             }
         </tbody>
     </table>
-            using (Html.BeginForm("Create", "Project", new { id = course.CourseId }, FormMethod.Post))
+            if (User.IsInRole("Teacher"))
             {
-                if (User.IsInRole("Teacher"))
-                {
-    <p>
-        @Html.ActionLink("Búa til nýtt verkefni", "Create", new { id = course.CourseId }, new { @class = "btn btn-success" })
-    </p>
-                }
-            }
+        <p>
+            @Html.ActionLink("Búa til nýtt verkefni", "Create", new { id = course.CourseId }, new { @class = "btn btn-primary" })
+        </p>
+    }
 }

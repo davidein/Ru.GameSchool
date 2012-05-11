@@ -1,4 +1,4 @@
-﻿@model Ru.GameSchool.DataLayer.Repository.Course;
+﻿@model Ru.GameSchool.DataLayer.Repository.Course
 
 
 
@@ -42,8 +42,6 @@
 @using (Html.BeginForm("Course", "Admin", FormMethod.Post))
 {
     <fieldset>
-
-        <legend>Námskeið</legend>
 
         <div class="control-group">
             @Html.LabelFor(x => x.Name, new { @class = "control-label" })

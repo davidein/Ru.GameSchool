@@ -210,13 +210,13 @@ namespace Ru.GameSchool.Web.Controllers
 
         [HttpGet]
         [Authorize(Roles = "Teacher")]
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(int? id, int? courseId)
         {
             ViewBag.GradePercentageValue = GetPercentageValue();
             if (id.HasValue && id.Value > 0)
             {
                 var course = CourseService.GetCourse(id.Value);
-                ViewBag.CourseId = course.CourseId;
+                ViewBag.CourseId = courseId.HasValue ? courseId.Value : 0;
                 var levelProject = LevelService.GetLevelProject(id.Value);
                 ViewBag.LevelId = new SelectList(LevelService.GetLevels(), "LevelId", "Name", levelProject.LevelId);
                 return View(levelProject);
@@ -273,10 +273,11 @@ namespace Ru.GameSchool.Web.Controllers
 
         [HttpGet]
         [Authorize(Roles = "Teacher")]
-        public ActionResult Delete(int? id)
+        public ActionResult Delete(int? id, int? courseId)
         {
             if (id.HasValue && id.Value > 0)
             {
+                ViewBag.CourseId = courseId.HasValue ? courseId.Value : 0;
                 var levelProject = LevelService.GetLevelProject(id.Value);
                 return View(levelProject);
             }
@@ -285,10 +286,11 @@ namespace Ru.GameSchool.Web.Controllers
 
         [HttpPost, ActionName("Delete")]
         [Authorize(Roles = "Teacher")]
-        public ActionResult DeleteConfirmed(int? id)
+        public ActionResult DeleteConfirmed(int? id, int? courseId)
         {
             if (id.HasValue && id.Value > 0)
             {
+                
                 try
                 {
                     LevelService.DeleteLevelProject(id.Value);
@@ -301,7 +303,7 @@ namespace Ru.GameSchool.Web.Controllers
                     return View(levelProject);
                 }
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("Index",new { id = courseId});
         }
 
         public IEnumerable<SelectListItem> GetPercentageValue()

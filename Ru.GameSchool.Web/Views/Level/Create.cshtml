@@ -1,26 +1,23 @@
 ﻿@model Ru.GameSchool.DataLayer.Repository.Level
 
-
-<script src="@Url.Content("~/Scripts/jquery.validate.min.js")"></script>
-<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")"></script>
-
-@using (Html.BeginForm(new { id = Model.CourseId }))
+@using (Html.BeginForm("Create", "Exam", new { id = Model.CourseId }, FormMethod.Post, new { @class = "form-horizontal" }))
 {
     @Html.ValidationSummary(true)
 
     <fieldset>
-
-
-        @Html.DropDownListFor(model => model.CourseId, (IEnumerable<SelectListItem>)ViewBag.CourseList, "Veldu námskeið")
-        @Html.ValidationMessageFor(model => model.CourseId)
-
+        <legend>Búa til nýtt borði</legend>
+        <div class="control-group">
+            @Html.LabelFor(model => model.CourseId, new { @class = "control-label" })
+            <div class="controls">
+                @Html.DropDownListFor(model => model.CourseId, (IEnumerable<SelectListItem>)ViewBag.CourseList, "Veldu námskeið")
+                @Html.ValidationMessageFor(model => model.CourseId)
+            </div>
+        </div>
         @Html.Partial("_LevelForm")
 
-        <div class="control-group">
-            <label class="control-label"></label>
-        <div class="controls">
-            <button type="submit" class="btn btn-success" >Búa til borð</button>
-        </div>
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary" >Búa til borð</button>
+            @Html.ActionLink("Fara aftur í borð", "Item", "Course", new { id = Model.CourseId }, new { @class = "btn" })
         </div>
     </fieldset>
 }
