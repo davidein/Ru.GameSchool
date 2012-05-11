@@ -53,7 +53,7 @@
 
 <div class="row-fluid course-box">
     
-    <h2>Þín námskeið</h2>
+    <h2>Þín námskeið eru hér</h2>
 @if (ViewBag.UserCourseList != null && ViewBag.UserCourseList.Count > 0)
 {
     foreach (var item in ViewBag.UserCourseList)
@@ -64,7 +64,7 @@
             {
             <div class="span4 well">
                 <h3>@nesteditem.Name</h3>
-                <ul>
+                <ul><li>@ViewBag.Course +nesteditem.CourseId<</li>
                     <li><a href="/Home/Material">MVC 4 </a><span class="label label-important">Nýtt</span></li>
                     <li><a href="/Home/Exam">Netpróf 2 </a><span class="label label-important">Nýtt</span></li>
                     <li><a href="/Home/Project">CSS</a></li>

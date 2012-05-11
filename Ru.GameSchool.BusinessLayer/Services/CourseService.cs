@@ -310,6 +310,34 @@ namespace Ru.GameSchool.BusinessLayer.Services
              return GameSchoolEntities.ContentTypes.Where(x => x.ContentTypeId == contentTypeId).FirstOrDefault().Name;
         }
 
+        public object GetCourseNewestItems(int courseId, int userInfoId)
+        {
+            int topLevelId = GetCurrentUserLevel(userInfoId, courseId);
+
+            var topItems = (from x in GameSchoolEntities.LevelMaterials
+                            join y in GameSchoolEntities.Levels on x.LevelId equals y.LevelId
+                            where y.CourseId == courseId && x.LevelId == topLevelId
+                            select new { itemId = x.LevelMaterialId, itemTitle = x.Title, orderTime = x.CreateDateTime })
+                            .Union
+                            (from a in GameSchoolEntities.LevelExams
+                             join b in GameSchoolEntities.Levels on a.LevelId equals b.LevelId
+                             where b.CourseId == courseId && a.LevelId == topLevelId
+                             select new { itemId = a.LevelExamId, itemTitle = a.Name, orderTime = a.Start })
+                            .Union
+                            (from t in GameSchoolEntities.LevelProjects
+                             join u in GameSchoolEntities.Levels on t.LevelId equals u.LevelId
+                             where u.CourseId == courseId && t.LevelId == topLevelId
+                             select new { itemId = t.LevelProjectId, itemTitle = t.Name, orderTime = t.Start });
+
+            topItems.OrderBy(x => x.orderTime).Take(5);
+
+
+
+
+
+            return topItems;
+        }
+
 
 
     }

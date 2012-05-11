@@ -20,6 +20,16 @@ namespace Ru.GameSchool.Web.Controllers
             }
             else
             {
+            var user = MembershipHelper.GetUser();
+            var courseList = CourseService.GetCoursesByUserInfoId(user.UserInfoId);
+
+            foreach (var item in courseList)
+            {   
+                var stuff = CourseService.GetCourseNewestItems(item.CourseId,user.UserInfoId);
+
+                ViewData.Add("Course" + item.CourseId, CourseService.GetCourseNewestItems(item.CourseId,user.UserInfoId));
+            }
+
             return View();
             }
 
