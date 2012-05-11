@@ -43,7 +43,7 @@
             </tr>
             @foreach (var innerItem in course.Levels)
             {
-                foreach (var innerInnerItem in innerItem.LevelProjects)
+                foreach (var innerInnerItem in innerItem.LevelProjects.OrderByDescending(x => x.Stop))
                 {
                     if (!(innerInnerItem.Start > DateTime.Now && User.IsInRole("Student")) && (ViewBag.AllowedLevelId > innerInnerItem.LevelId)) // Ekki sýna verkefni sem eru ekki byrjuð
                     {     
@@ -87,13 +87,19 @@
                         </td>
                         <td>
                             <a name="button" class="btn btn-mini" href="@Url.Action("Edit", new { id = innerInnerItem.LevelProjectId, courseId = ViewBag.CourseId })" >
-                                <i class="icon-edit"></i>Breyta </a>  |  <a name="button" class="btn btn-mini" href="@Url.Action("Delete", new { id = innerInnerItem.LevelProjectId, courseId = ViewBag.CourseId })" >
+                                <i class="icon-edit"></i>Breyta </a> | <a name="button" class="btn btn-mini" href="@Url.Action("Delete", new { id = innerInnerItem.LevelProjectId, courseId = ViewBag.CourseId })" >
                                     <i class="icon-edit"></i>Eyða </a>
                         </td>
                     }
                     else if (User.IsInRole("Student"))
                     {
-                        if (innerInnerItem.LevelProjectResults.Where(u => u.UserInfoId == ViewBag.UserInfoId).Any(x => x.Grade == null))
+                        if(innerInnerItem.Stop < DateTime.Now)
+                        {
+                            <td><i>Skilafrestur búinn!</i></td>
+                             <td>
+                        </td>
+                        }
+                        else if (innerInnerItem.LevelProjectResults.Where(u => u.UserInfoId == ViewBag.UserInfoId).Any(x => x.Grade == null))
                         {
                         <td>
                             <i>Enginn einkunn kominn!</i>

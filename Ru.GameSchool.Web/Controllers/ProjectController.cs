@@ -29,7 +29,7 @@ namespace Ru.GameSchool.Web.Controllers
                 //ViewBag.Filepath = Settings.ProjectMaterialVirtualFolder + levelProject.ContentID.ToString();
                 ViewBag.Title = levelProject.Name;
                 var allowedUserLevel = ViewBag.AllowedLevelId = CourseService.GetCurrentUserLevel(userInfoId, courseId);
-                
+
                 if (levelProject.LevelId > allowedUserLevel)
                 {
                     return RedirectToAction("Index", new { id = courseId });
@@ -87,7 +87,11 @@ namespace Ru.GameSchool.Web.Controllers
         {
             if (result != null)
             {
-                LevelService.UpdateLevelProjectResult(result);
+                if (TryUpdateModel(result))
+                {
+                    LevelService.UpdateLevelProjectResult(result);
+                }
+
                 ViewBag.SuccessMessage = "Verkefni hefur verið uppfært";
                 return View(result);
             }
@@ -97,10 +101,11 @@ namespace Ru.GameSchool.Web.Controllers
 
         [HttpGet]
         [Authorize(Roles = "Teacher")]
-        public ActionResult GradeProject(int? id)
+        public ActionResult GradeProject(int? id, int? courseId)
         {
             if (id.HasValue && id.Value > 0)
             {
+                ViewBag.CourseId = courseId.HasValue ? courseId.Value : 0;
                 var projectResults = LevelService.GetlevelProjectResultsByLevelProjectResultId(id.Value);
                 return View(projectResults);
             }
@@ -114,14 +119,17 @@ namespace Ru.GameSchool.Web.Controllers
             var user = MembershipHelper.GetUser().UserInfoId;
 
             Guid contentId = Guid.NewGuid();
-
-            foreach (var file in levelProject.File)
+            if (levelProject.ContentID != null)
             {
-                var path = Path.Combine(Server.MapPath("~/Upload"), contentId.ToString());
-                ViewBag.ContentId = contentId;
-                file.SaveAs(path);
-                ViewBag.Filename = file.FileName;
+                foreach (var file in levelProject.File)
+                {
+                    var path = Path.Combine(Server.MapPath("~/Upload"), contentId.ToString());
+                    ViewBag.ContentId = contentId;
+                    file.SaveAs(path);
+                    ViewBag.Filename = file.FileName;
+                }
             }
+
             levelProject.LevelProjectResults.Add(CreateLevelProjectResult(levelProject, user, contentId, ViewBag.Filename));
             LevelService.UpdateLevelProjectFromResult(levelProject, user);
 
@@ -158,8 +166,7 @@ namespace Ru.GameSchool.Web.Controllers
                 var course = CourseService.GetCourse(id.Value);
                 ViewBag.CourseId = course.CourseId;
                 levelProjects =
-                    CourseService.GetCoursesByUserInfoIdAndCourseId(userInfoId, id.Value).OrderByDescending(
-                        x => x.CreateDateTime);
+                    CourseService.GetCoursesByUserInfoIdAndCourseId(userInfoId, id.Value);
 
                 ViewBag.CourseId = id.Value;
             }
@@ -200,7 +207,7 @@ namespace Ru.GameSchool.Web.Controllers
                 var course = CourseService.GetCourse(id.Value);
                 ViewBag.CourseId = course.CourseId;
 
-                if (levelproject.File != null)
+                if (levelproject.ContentID != null)
                 {
                     foreach (var file in levelproject.File)
                     {

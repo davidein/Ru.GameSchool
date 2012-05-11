@@ -336,9 +336,6 @@
     <Content Include="Views\Home\Exams.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Admin\_AdminSearchForm.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\Course\Index.cshtml" />
     <None Include="Diagrams\Controller.cd" />
     <Content Include="Views\Shared\_NotificationDropDown.cshtml" />

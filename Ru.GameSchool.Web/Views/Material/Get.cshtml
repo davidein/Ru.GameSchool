@@ -25,19 +25,23 @@
 </div>
 
 @*Comment hluti *@
-
-		<ul class="commentList" id="commentList">
+<div class="row-fluid">
+    <ul class="span6 well commentList" id="commentList">
         <div id="jsonWrapper"></div>
 
-        			<li class="commentAdd">
-				<textarea id="CommentText" name="CommentText" rows="3" cols="20"></textarea>
-				<label>
-					<input type="button" id="saveBtn" value="Senda inn athugasemd" />
-				</label>
-				@Html.ValidationMessage( "CommentText" )
-			</li>
-        </ul>
-
+        <li class="commentAdd">
+            <textarea id="CommentText" name="CommentText" rows="3" cols="20"></textarea>
+            <div class="control-group">
+                <div class="controls">
+                    <button id="saveBtn" class="btn btn-info">
+                        <i class="icon-comment icon-white"></i> Senda inn athugasemd
+                    </button>
+                </div>
+            </div>
+            @Html.ValidationMessage( "CommentText" )
+        </li>
+    </ul>
+</div>
 
     <script id="comments" type="text/html">
 
@@ -48,7 +52,7 @@
 					<span>${Comment1}</span>
 					<div>
 						<abbr title='${CreateDateTime}'>${$item.formDate(CreateDateTime)}</abbr>
-						<a jid="sendLike" cid="${CommentId}" >Líkar þetta</a>  
+						<a jid="sendLike" cid="${CommentId}"><i class="icon-thumbs-up"></i> Líkar þetta</a>  
                         <span id="l_${CommentId}">
                         {{if CommentLikes.length > 0}}<img src='@Url.Content("~/Images/blank.gif")' title="{{each CommentLikes}}${Fullname} ,{{/each}} líkar þetta" alt="Líkar þetta" class="like_icon" />{{/if}}
                         
