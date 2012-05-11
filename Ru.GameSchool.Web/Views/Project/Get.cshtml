@@ -1,6 +1,6 @@
 ﻿@using Ru.GameSchool.DataLayer.Repository
 @model LevelProject
-@using (Html.BeginForm("ReturnProject", "Project", FormMethod.Post))
+@using (Html.BeginForm("ReturnProject", "Project", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal" }))
 { 
     
     @Html.HiddenFor(m => m.LevelProjectId)
@@ -37,7 +37,7 @@
         </div>
         
         <div class="control-group">
-        <h3> Sækja skrá: @Html.DisplayNameFor(model => model.Filename)</h3>
+        <h3> Sækja skrá: @Html.DisplayFor(model => model.Filename)</h3>
         <div class="container-fluid">
             <div class="controls">
                 <a name="button" class="btn btn-small" href="@Url.Action("Download", new { id = Model.LevelProjectId })" >
@@ -48,9 +48,9 @@
     </div>
 
         <div class="control-group">
-            @Html.LabelFor(model => model.ContentID, new { @class = "control-label" })
+            @Html.LabelFor(model => model.File, new { @class = "control-label" })
             <div class="controls">
-                @Html.TextBoxFor(model => model.ContentID, new { type = "file", @class = "file", rel = "popover" })
+                <input type="file" name="File" />
                 <span class="help-inline">@Html.ValidationMessageFor(model => model.ContentID)</span>
             </div>
         </div>
