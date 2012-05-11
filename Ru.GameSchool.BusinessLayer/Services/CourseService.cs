@@ -352,5 +352,19 @@ namespace Ru.GameSchool.BusinessLayer.Services
 
 
 
+
+        public IEnumerable<Course> Search(string search)
+        {
+            if (string.IsNullOrEmpty(search))
+            {
+                return null;
+            }
+            var query =
+                GameSchoolEntities.Courses.Where(
+                    s => s.Description.Contains(search) | s.Name.Contains(search) | s.Identifier.Contains(search))
+                    .OrderByDescending(x => x.Name);
+
+            return query;
+        }
     }
 }

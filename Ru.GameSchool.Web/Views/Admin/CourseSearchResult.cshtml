@@ -1,0 +1,73 @@
+﻿@model IEnumerable<Ru.GameSchool.DataLayer.Repository.Course>
+@{
+    ViewBag.Title = "Leitarniðurstöður";
+}
+<h2>
+    Deildir</h2>
+@if (Model != null)
+{
+    <table class="table table-striped table-bordered table-condensed">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Identifier)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Start)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Stop)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreditAmount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Department.Name)
+            </th>
+            <th>
+                Aðgerðir
+            </th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Identifier)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Start)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Stop)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreditAmount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Department.Name)
+                </td>
+                <td>
+                    <a name="button" class="btn btn-mini" href="@Url.Action("Course", new { id = item.CourseId })" >
+                                <i class="icon-edit"></i>Breyta </a>
+                </td>
+            </tr>
+        }
+    </table>
+}
+else
+{
+    <h3>
+        Engar niðurstöður</h3>
+    @Html.ActionLink("Aftur í leit", "Search")
+}

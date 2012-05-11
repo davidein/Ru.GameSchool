@@ -375,7 +375,10 @@
     <Content Include="Views\Exam\ReturnExam.cshtml" />
     <Content Include="Views\Exam\_ExamAnswer.cshtml" />
     <Content Include="Views\Course\Announcements.cshtml" />
-    <Content Include="Views\Admin\_Search.cshtml" />
+    <Content Include="Views\Admin\Search.cshtml" />
+    <Content Include="Views\Admin\UserSearchResult.cshtml" />
+    <Content Include="Views\Admin\CourseSearchResult.cshtml" />
+    <Content Include="Views\Admin\UserCreate.cshtml" />
     <None Include="Views\Course\Announcement.cshtml" />
     <Content Include="Views\Level\Announcements.cshtml" />
     <Content Include="Views\Level\CreateAnnouncement.cshtml" />
