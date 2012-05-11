@@ -28,12 +28,8 @@ namespace Ru.GameSchool.Web.Controllers
                 var courseId = ViewBag.CourseId = course.CourseId;
                 //ViewBag.Filepath = Settings.ProjectMaterialVirtualFolder + levelProject.ContentID.ToString();
                 ViewBag.Title = levelProject.Name;
-                var allowedUserLevel = ViewBag.AllowedLevelId = CourseService.GetCurrentUserLevel(userInfoId, courseId);
+                
 
-                if (levelProject.LevelId > allowedUserLevel)
-                {
-                    return RedirectToAction("Index", new { id = courseId });
-                }
                 return View(levelProject);
             }
             return RedirectToAction("Index");
@@ -87,6 +83,67 @@ namespace Ru.GameSchool.Web.Controllers
         {
             ViewBag.CourseId = courseId.HasValue ? courseId.Value : 0;
             if (result != null)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             {
                 if (TryUpdateModel(result))
                 {
