@@ -83,7 +83,9 @@ namespace Ru.GameSchool.Web.Controllers
         {
             return View();
         }
-        
+
+
+
         [HttpGet]
         public ActionResult UserEdit(int? id)
         {
@@ -118,7 +120,7 @@ namespace Ru.GameSchool.Web.Controllers
             ViewBag.Departments = CourseService.GetDepartments();
             ViewBag.UserStatus = UserService.GetUserStatuses();
             ViewBag.UserTypes = UserService.GetUserTypes();
-            ViewBag.Title = "Skráning notenda";
+            ViewBag.Title = "Breyta notenda";
             ModelState.Remove("Password");
 
 
@@ -140,9 +142,9 @@ namespace Ru.GameSchool.Web.Controllers
                 }
                 else //Insert new user
                 {
-
-                    UserService.CreateUser(model);
-                    ViewBag.SuccessMessage = "Nýr notandi hefur verið skráður í kerfið. Mundu að skrá notendann í námskeið.";
+                    return RedirectToAction("Index");
+                    //UserService.CreateUser(model);
+                    //ViewBag.SuccessMessage = "Nýr notandi hefur verið skráður í kerfið. Mundu að skrá notendann í námskeið.";
                 }
             }
             else
@@ -152,6 +154,42 @@ namespace Ru.GameSchool.Web.Controllers
 
             return View(model);
         }
+
+
+
+        [HttpGet]
+        public ActionResult UserCreate()
+        {
+            ViewBag.Departments = CourseService.GetDepartments();
+            ViewBag.UserStatus = UserService.GetUserStatuses();
+            ViewBag.UserTypes = UserService.GetUserTypes();
+            ViewBag.Title = "Skráning notenda";
+
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult UserCreate(UserInfo model, int? id)
+        {
+            ViewBag.Departments = CourseService.GetDepartments();
+            ViewBag.UserStatus = UserService.GetUserStatuses();
+            ViewBag.UserTypes = UserService.GetUserTypes();
+            ViewBag.Title = "Skrá notenda";
+
+            if (ModelState.IsValid)
+            {
+                UserService.CreateUser(model);
+                ViewBag.SuccessMessage = "Nýr notandi hefur verið skráður í kerfið. Mundu að skrá notendann í námskeið.";
+                return View("Index");
+            }
+            else
+            {
+                ViewBag.ErrorMessage = "Náði ekki að skrá upplýsingar! Lagfærðu villur og reyndur aftur.";
+            }
+
+            return View(model);
+        }
+
 
         public ActionResult Courses()
         {

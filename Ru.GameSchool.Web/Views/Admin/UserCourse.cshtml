@@ -79,7 +79,7 @@
                 @foreach (var u in item)
                 {
                 <div data-UserInfoId="@u.UserInfoId" class="draggable span2 well userbox" style="cursor: move;">
-                    <h6><a href="/Admin/User/@u.UserInfoId/">@u.Fullname</a></h6>
+                    <h6><a href="/Admin/UserEdit/@u.UserInfoId/">@u.Fullname</a></h6>
                     @u.UserType.Name
                     
                 </div><!--/span-->

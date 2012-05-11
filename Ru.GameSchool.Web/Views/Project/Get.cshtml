@@ -77,7 +77,7 @@
              if (!(Model.Stop < DateTime.Now))
              {
                  if (Model.LevelProjectResults.Select(s => s.UserInfoId).FirstOrDefault() != ViewBag.UserInfoId &&
-                     !Model.LevelProjectResults.Any(x => x.Grade == null))
+                     !Model.LevelProjectResults.Where(s => s.UserInfoId == ViewBag.UserInfoId).Any(x => x.Grade == null))
                  {
 
     <div class="control-group">
