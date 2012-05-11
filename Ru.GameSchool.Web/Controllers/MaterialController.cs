@@ -119,18 +119,22 @@ namespace Ru.GameSchool.Web.Controllers
 
             if (ModelState.IsValid)
             {
-                foreach (var file in levelMaterial.File)
+                if (levelMaterial.File.FirstOrDefault() != null)
                 {
-                    Guid contentId = Guid.NewGuid();
-                    if (file.ContentLength > 0)
+                    foreach (var file in levelMaterial.File)
                     {
-                        var path = Path.Combine(Server.MapPath("~/Upload"), contentId.ToString());
-                        ViewBag.ContentId = contentId;
-                        file.SaveAs(path);
-                        levelMaterial.ContentId = contentId;
-                        levelMaterial.Filename = file.FileName;
+                        Guid contentId = Guid.NewGuid();
+                        if (file.ContentLength > 0)
+                        {
+                            var path = Path.Combine(Server.MapPath("~/Upload"), contentId.ToString());
+                            ViewBag.ContentId = contentId;
+                            file.SaveAs(path);
+                            levelMaterial.ContentId = contentId;
+                            levelMaterial.Filename = file.FileName;
+                        }
                     }
                 }
+                
                 levelMaterial.CreateDateTime = DateTime.Now;
                 LevelService.CreateLevelMaterial(levelMaterial, id.Value);
 
@@ -157,8 +161,6 @@ namespace Ru.GameSchool.Web.Controllers
                 var courseId = material.Level.CourseId;
                 ViewBag.LevelCount = GetLevelCounts(courseId);
                 ViewBag.ContentTypes = LevelService.GetContentTypes();
-                //ViewBag.CourseId = material.Level.CourseId;
-
                 ViewBag.CourseName = CourseService.GetCourse(courseId).Name;
                 ViewBag.Courseid = CourseService.GetCourse(courseId).CourseId;
                 ViewBag.Title = "Breyta kennsluefni";
@@ -179,9 +181,9 @@ namespace Ru.GameSchool.Web.Controllers
                 var courseId = material.Level.CourseId;
                 if (TryUpdateModel(material))
                 {
-                    if (levelMaterial.File.FirstOrDefault() != null)
+                    if (material.File != null)
                     {
-                        foreach (var file in levelMaterial.File)
+                        foreach (var file in material.File)
                         {
                             Guid contentId = Guid.NewGuid();
                             if (file.ContentLength > 0)
@@ -189,7 +191,7 @@ namespace Ru.GameSchool.Web.Controllers
                                 var path = Path.Combine(Server.MapPath("~/Upload"), contentId.ToString()); //TODO: Add function to check for file extensions
                                 ViewBag.ContentId = contentId;
                                 file.SaveAs(path);
-                                levelMaterial.ContentId = contentId;
+                                material.ContentId = contentId;
                             }
                         }
                     }
