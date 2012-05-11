@@ -192,6 +192,7 @@ namespace Ru.GameSchool.Web.Controllers
                                 ViewBag.ContentId = contentId;
                                 file.SaveAs(path);
                                 material.ContentId = contentId;
+                                material.Filename = file.FileName;
                             }
                         }
                     }
