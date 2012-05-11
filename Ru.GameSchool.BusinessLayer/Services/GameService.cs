@@ -131,7 +131,7 @@ namespace Ru.GameSchool.BusinessLayer.Services
 
             if (usersAndTheirPoints.Count() > position)
             {
-                lowerPosition = usersAndTheirPoints.ElementAt(position - 1).Points;
+                lowerPosition = usersAndTheirPoints.ElementAt(position).Points;
             }
 
 

@@ -83,15 +83,16 @@ namespace Ru.GameSchool.Web.Controllers
 
         [HttpPost]
         [Authorize(Roles = "Teacher")]
-        public ActionResult GradeProject(LevelProjectResult result)
+        public ActionResult GradeProject(LevelProjectResult result, int? courseId)
         {
+            ViewBag.CourseId = courseId.HasValue ? courseId.Value : 0;
             if (result != null)
             {
                 if (TryUpdateModel(result))
                 {
                     LevelService.UpdateLevelProjectResult(result);
                 }
-                
+
                 ViewBag.SuccessMessage = "Verkefni hefur verið uppfært";
                 return View(result);
             }
@@ -101,10 +102,11 @@ namespace Ru.GameSchool.Web.Controllers
 
         [HttpGet]
         [Authorize(Roles = "Teacher")]
-        public ActionResult GradeProject(int? id)
+        public ActionResult GradeProject(int? id, int? courseId)
         {
             if (id.HasValue && id.Value > 0)
             {
+                ViewBag.CourseId = courseId.HasValue ? courseId.Value : 0;
                 var projectResults = LevelService.GetlevelProjectResultsByLevelProjectResultId(id.Value);
                 return View(projectResults);
             }
@@ -165,8 +167,7 @@ namespace Ru.GameSchool.Web.Controllers
                 var course = CourseService.GetCourse(id.Value);
                 ViewBag.CourseId = course.CourseId;
                 levelProjects =
-                    CourseService.GetCoursesByUserInfoIdAndCourseId(userInfoId, id.Value).OrderByDescending(
-                        x => x.Name);
+                    CourseService.GetCoursesByUserInfoIdAndCourseId(userInfoId, id.Value);
 
                 ViewBag.CourseId = id.Value;
             }
@@ -207,17 +208,17 @@ namespace Ru.GameSchool.Web.Controllers
                 var course = CourseService.GetCourse(id.Value);
                 ViewBag.CourseId = course.CourseId;
 
-                if (levelproject.File != null)
+                if (levelproject.ContentID != null)
                 {
-                foreach (var file in levelproject.File)
-                {
-                    Guid contentId = Guid.NewGuid();
-                    var path = Path.Combine(Server.MapPath("~/Upload"), contentId.ToString());
-                    ViewBag.ContentId = contentId;
-                    file.SaveAs(path);
-                    levelproject.ContentID = contentId;
-                    levelproject.Filename = file.FileName;
-                }
+                    foreach (var file in levelproject.File)
+                    {
+                        Guid contentId = Guid.NewGuid();
+                        var path = Path.Combine(Server.MapPath("~/Upload"), contentId.ToString());
+                        ViewBag.ContentId = contentId;
+                        file.SaveAs(path);
+                        levelproject.ContentID = contentId;
+                        levelproject.Filename = file.FileName;
+                    }
                 }
                 ViewBag.LevelCount = GetLevelCounts(id.Value);
                 ViewBag.CourseId = id.Value;
@@ -270,6 +271,7 @@ namespace Ru.GameSchool.Web.Controllers
 
                     ViewBag.CourseName = CourseService.GetCourse(courseId).Name;
                     ViewBag.Courseid = CourseService.GetCourse(courseId).CourseId;
+                    ViewBag.CourseId = CourseService.GetCourse(courseId).CourseId;
                     ViewBag.LevelCount = GetLevelCounts(courseId);
                     ViewBag.SuccessMessage = "Verkefni hefur verið uppfært";
                     ViewBag.LevelId = new SelectList(LevelService.GetLevels(), "LevelId", "Name", levelProject.LevelId);
@@ -279,7 +281,12 @@ namespace Ru.GameSchool.Web.Controllers
                 }
                 else
                 {
+                    ViewBag.LevelId = new SelectList(LevelService.GetLevels(), "LevelId", "Name", levelProject.LevelId);
                     ViewBag.ErrorMessage = "Gat ekki uppfært kennslugagn! Lagfærðu villur og reyndur aftur.";
+                    ViewBag.LevelCount = GetLevelCounts(courseId);
+                    ViewBag.CourseName = CourseService.GetCourse(courseId).Name;
+                    ViewBag.Courseid = CourseService.GetCourse(courseId).CourseId;
+                    ViewBag.CourseId = CourseService.GetCourse(courseId).CourseId;
                     if (id.HasValue)
                     {
                         return View(LevelService.GetLevelProject(id.Value));

@@ -72,54 +72,6 @@ namespace Ru.GameSchool.BusinessLayerTests
         ///A test for CreateLike
         ///</summary>
         [TestMethod()]
-        public void CreateLikeTest()
-        {
-            var commentData = new FakeObjectSet<Comment>();
-
-            var comment = new Comment();
-            comment.CreateDateTime = DateTime.Now;
-            comment.Deleted = false;
-            comment.CommentId = 1;
-            comment.DeletedByUser = null;
-            comment.LevelMaterialId = 0;
-            comment.UserInfoId = 1;
-
-            commentData.AddObject(comment);
-
-
-            var userData = new FakeObjectSet<UserInfo>();
-
-            UserInfo userInfo = new UserInfo();
-            userInfo.Fullname = "Davíð Einarsson";
-            userInfo.Email = "davide09@ru.is";
-            userInfo.StatusId = 1;
-            userInfo.Username = "davidein";
-            userInfo.UserInfoId = 1;
-            userInfo.Password = "Wtf";
-
-            userData.AddObject(userInfo);
-
-            var commentLikeData = new FakeObjectSet<CommentLike>();
-
-            _mockRepository.Expect(x => x.Comments).Return(commentData);
-            _mockRepository.Expect(x => x.UserInfoes).Return(userData);
-            _mockRepository.Expect(x => x.CommentLikes).Return(commentLikeData);
-            _mockRepository.Expect(x => x.SaveChanges()).Return(1);
-
-            var commentLike = new CommentLike();
-
-            commentLike.UserInfoId = 1;
-            commentLike.CommentId = 1;
-
-            _socialService.CreateLike(commentLike);
-
-            _mockRepository.VerifyAllExpectations();
-        }
-
-        /// <summary>
-        ///A test for CreateLike
-        ///</summary>
-        [TestMethod()]
         [ExpectedException(typeof(GameSchoolException))]
         public void CreateLike_CommentDoesNotExist_Test()
         {

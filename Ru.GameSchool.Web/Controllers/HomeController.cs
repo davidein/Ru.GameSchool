@@ -24,7 +24,9 @@ namespace Ru.GameSchool.Web.Controllers
         {
             if (User.IsInRole("Admin"))
             {
+
                 return RedirectToAction("Index", "Admin");
+
             }
             var user = MembershipHelper.GetUser();
             var courseList = from x in CourseService.GetCoursesByUserInfoId(user.UserInfoId)
@@ -34,16 +36,9 @@ namespace Ru.GameSchool.Web.Controllers
                                             Content = CourseService.GetCourseNewestItems(x.CourseId, user.UserInfoId)
                                         };
 
-/*            foreach (var item in courseList)
-            {
-                
-                var stuff = CourseService.GetCourseNewestItems(item.CourseId, user.UserInfoId);
-
-                ViewData.Add("Course" + item.CourseId,
-                             CourseService.GetCourseNewestItems(item.CourseId, user.UserInfoId));
-            }*/
 
             ViewBag.FrontCourseList = courseList.NestedList(3);
+
 
             ViewBag.AnnouncementList = AnnouncementService.GetAnnouncementsByUserInfoId(user.UserInfoId).Take(3);
 

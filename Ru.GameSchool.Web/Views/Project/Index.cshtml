@@ -43,7 +43,7 @@
             </tr>
             @foreach (var innerItem in course.Levels)
             {
-                foreach (var innerInnerItem in innerItem.LevelProjects)
+                foreach (var innerInnerItem in innerItem.LevelProjects.OrderByDescending(x => x.Stop))
                 {
                     if (!(innerInnerItem.Start > DateTime.Now && User.IsInRole("Student")) && (ViewBag.AllowedLevelId > innerInnerItem.LevelId)) // Ekki sýna verkefni sem eru ekki byrjuð
                     {     

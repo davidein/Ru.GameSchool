@@ -79,6 +79,16 @@ namespace Ru.GameSchool.BusinessLayerTests
             var courseService = new CourseService();
             courseService.SetDatasource(mockRepository);
 
+            var expectedCourse = new Course();
+            expectedCourse.CourseId = 1;
+            expectedCourse.CreateDateTime = DateTime.Now;
+            expectedCourse.CreditAmount = 3;
+            expectedCourse.DepartmentId = 1;
+            expectedCourse.Description = "Daniel teaches extreme pole fitness programming";
+            expectedCourse.Name = "Extreme pole fitness programming";
+            expectedCourse.Start = DateTime.Now.AddMonths(-1);
+            expectedCourse.Stop = DateTime.Now.AddMonths(2);
+
             //Fake user data
             var userData = new FakeObjectSet<UserInfo>();
 
@@ -91,21 +101,14 @@ namespace Ru.GameSchool.BusinessLayerTests
 
             userData.AddObject(expected);
 
-            //mockRepository.Expect(x => x.UserInfoes).Return(userData);
+            mockRepository.Expect(x => x.UserInfoes).Return(userData);
 
             //Fake course data
             var courseData = new FakeObjectSet<Course>();
 
-            var expectedCourse = new Course();
-            expectedCourse.CourseId = 1;
-            expectedCourse.CreateDateTime = DateTime.Now;
-            expectedCourse.CreditAmount = 3;
-            expectedCourse.DepartmentId = 1;
-            expectedCourse.Description = "Daniel teaches extreme pole fitness programming";
-            expectedCourse.Name = "Extreme pole fitness programming";
-            expectedCourse.Start = DateTime.Now.AddMonths(-1);
-            expectedCourse.Stop = DateTime.Now.AddMonths(2);
             expectedCourse.UserInfoes.Add(expected);
+
+            expected.Courses.Add(expectedCourse);
 
             courseData.AddObject(expectedCourse);
 
@@ -183,35 +186,5 @@ namespace Ru.GameSchool.BusinessLayerTests
             //mockRepository.VerifyAllExpectations();
         }
 
-        /// <summary>
-        ///A test for GetCourseGrades
-        ///</summary>
-        [TestMethod()]
-        public void GetCourseGradesTest()
-        {
-            CourseService target = new CourseService(); // TODO: Initialize to an appropriate value
-            int courseId = 0; // TODO: Initialize to an appropriate value
-            IEnumerable<CourseGrade> expected = null; // TODO: Initialize to an appropriate value
-            IEnumerable<CourseGrade> actual;
-            actual = target.GetCourseGrades(courseId);
-            Assert.AreEqual(expected, actual);
-            Assert.Inconclusive("Verify the correctness of this test method.");
-        }
-
-        /// <summary>
-        ///A test for GetCourseGradeByCourseIdAndUserInfoId
-        ///</summary>
-        [TestMethod()]
-        public void GetCourseGradeByCourseIdAndUserInfoIdTest()
-        {
-            CourseService target = new CourseService(); // TODO: Initialize to an appropriate value
-            int courseId = 0; // TODO: Initialize to an appropriate value
-            int userInfoId = 0; // TODO: Initialize to an appropriate value
-            CourseGrade expected = null; // TODO: Initialize to an appropriate value
-            CourseGrade actual;
-            actual = target.GetCourseGradeByCourseIdAndUserInfoId(courseId, userInfoId);
-            Assert.AreEqual(expected, actual);
-            Assert.Inconclusive("Verify the correctness of this test method.");
-        }
     }
 }

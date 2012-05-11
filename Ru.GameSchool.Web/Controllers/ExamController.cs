@@ -134,9 +134,9 @@ namespace Ru.GameSchool.Web.Controllers
                 {
                     LevelService.ReturnExam(id.Value, user.UserInfoId);
 
+                    var exam = LevelService.GetLevelExam(id.Value);
 
-
-                    return View();
+                    return RedirectToAction("Index", "Exam", new {id = exam.Level.CourseId});
                 }
             }
             return RedirectToAction("NotFound", "Home");
