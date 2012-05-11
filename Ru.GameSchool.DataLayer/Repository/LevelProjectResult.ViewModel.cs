@@ -18,7 +18,7 @@ namespace Ru.GameSchool.DataLayer.Repository
         public string TeacherFeedback { get; set; }
 
         [Display(Name = "Viðhengi")]
-        public string ContentID{ get; set; }
+        public Guid ContentID{ get; set; }
 
         [Display(Name = "Athugasemdir frá nemanda")]
         [DataType(DataType.MultilineText)]
