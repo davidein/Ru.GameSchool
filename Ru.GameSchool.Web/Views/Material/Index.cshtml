@@ -6,8 +6,10 @@
         </caption>
         <tbody>
         <tr>
-            <th>Dagsetning</th>
+            
             <th>Nafn</th>
+            <th>Dagsetning</th>
+            <th>Borð</th>
             <th>Lýsing</th>
             @if (User.IsInRole("Teacher"))
             {
@@ -22,8 +24,10 @@
         @foreach (var item in ViewBag.Materials)
         {
            <tr>
-                <td>@item.CreateDateTime.Date.ToString("dd/MM/yyyy")</td>
+                
                 <td>@Html.ActionLink((@item.Title) as string, "Get", new { id = @item.LevelMaterialId })@if (@item.CreateDateTime.AddHours(23) >= DateTime.Now){<span class="label label-important new-material">Nýtt</span>}</td>
+               <td>@item.CreateDateTime.Date.ToString("dd/MM/yyyy")</td>
+               <td>@item.Level.Name</td>
                 <td>@item.Description</td>
                 @if (User.IsInRole("Teacher"))
                 {
