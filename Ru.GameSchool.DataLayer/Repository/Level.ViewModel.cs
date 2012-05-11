@@ -14,8 +14,6 @@ namespace Ru.GameSchool.DataLayer.Repository
 
     public class LevelMetadata
     {
-
-
         [Required(ErrorMessage = @"Það verður að gefa borðinu nafn")]
         [Display(Name = "Heiti borðs")]
         public string Name;
@@ -31,6 +29,8 @@ namespace Ru.GameSchool.DataLayer.Repository
         [DataType(DataType.DateTime)]
         public DateTime Stop;
 
-    
+        [Required]
+        [Display(Name="Námskeið")]
+        public int CourseId;
     }
 }
