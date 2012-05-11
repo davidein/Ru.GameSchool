@@ -175,11 +175,9 @@
       <LastGenOutput>GameSchool.cs</LastGenOutput>
     </None>
     <Compile Include="Repository\UserInfo.ViewModel.cs" />
-    <None Include="SQL\schema.sql" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Release Notes - Microsoft.Web.Helpers.txt" />
-    <Content Include="SQL\basedata.sql" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
