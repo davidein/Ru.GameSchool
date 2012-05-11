@@ -375,6 +375,7 @@
     <Content Include="Views\Exam\ReturnExam.cshtml" />
     <Content Include="Views\Exam\_ExamAnswer.cshtml" />
     <Content Include="Views\Course\Announcements.cshtml" />
+    <Content Include="Views\Admin\_Search.cshtml" />
     <None Include="Views\Course\Announcement.cshtml" />
     <Content Include="Views\Level\Announcements.cshtml" />
   </ItemGroup>

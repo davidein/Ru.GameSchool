@@ -30,6 +30,18 @@ namespace Ru.GameSchool.Web.Controllers
             return View();
         }
 
+        [HttpGet]
+        [Authorize(Roles="Admin")]
+        public ActionResult Search(SearchViewModel model )
+        {
+            if (ModelState.IsValid)
+            {
+                
+            }
+            return null;
+        }
+
+        [HttpGet]
         public ActionResult UserEdit(int? id)
         {
             ViewBag.Departments = CourseService.GetDepartments();
@@ -42,9 +54,8 @@ namespace Ru.GameSchool.Web.Controllers
                 var user = UserService.GetUser((int)id);
                 if (user != null)
                 {
-                    var model = new Ru.GameSchool.DataLayer.Repository.UserInfo();
+                    var model = new UserInfo();
                     model.Username = user.Username;
-                    model.Password = "#######";
                     model.Email = user.Email;
                     model.Fullname = user.Fullname;
                     model.DepartmentId = user.DepartmentId;
@@ -65,23 +76,24 @@ namespace Ru.GameSchool.Web.Controllers
             ViewBag.UserStatus = UserService.GetUserStatuses();
             ViewBag.UserTypes = UserService.GetUserTypes();
             ViewBag.Title = "Skráning notenda";
-
-
+            ModelState.Remove("Password");
+            
+            
             if (ModelState.IsValid)
             {
                 //Update existing user
                 if (id.HasValue)
                 {
-                    var user = UserService.GetUser((int)id);
-                    user.Username = model.Username;
-                    user.Email = model.Email;
-                    user.Fullname = model.Fullname;
-                    user.DepartmentId = model.DepartmentId;
-                    user.StatusId = model.StatusId;
-                    user.UserTypeId = model.UserTypeId;
-
-                    UserService.UpdateUser(user);
-                    ViewBag.SuccessMessage = "Upplýsingar um notenda hafa verið uppfærðar";
+                    var user = UserService.GetUser(id.Value);
+                    if (TryUpdateModel(user))
+                    {
+                        UserService.UpdateUser(user);
+                        ViewBag.SuccessMessage = "Upplýsingar um notenda hafa verið uppfærðar";
+                    }
+                    else
+                    {
+                        ViewBag.ErrorMessage = "Náði ekki að skrá/uppfæra upplýsingar! Lagfærðu villur og reyndur aftur.";
+                    }
                 }
                 else //Insert new user
                 {

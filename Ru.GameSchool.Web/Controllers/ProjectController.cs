@@ -55,11 +55,11 @@ namespace Ru.GameSchool.Web.Controllers
 
         [HttpGet]
         [Authorize(Roles = "Teacher")]
-        public ActionResult TeacherGet(int? id)
+        public ActionResult TeacherGet(int? id, int? courseId)
         {
             if (id.HasValue && id.Value > 0)
             {
-                ViewBag.CourseId = id.Value;
+                ViewBag.CourseId = courseId.HasValue ? courseId.Value : 0;
                 var projectResults = LevelService.GetlevelProjectResultsByLevelProjectId(id.Value).OrderByDescending(x => x.GradeDate);
                 return View(projectResults);
             }
@@ -290,7 +290,7 @@ namespace Ru.GameSchool.Web.Controllers
         {
             if (id.HasValue && id.Value > 0)
             {
-                
+                ViewBag.CourseId = courseId.HasValue ? courseId.Value : 0;
                 try
                 {
                     LevelService.DeleteLevelProject(id.Value);
@@ -303,7 +303,7 @@ namespace Ru.GameSchool.Web.Controllers
                     return View(levelProject);
                 }
             }
-            return RedirectToAction("Index",new { id = courseId});
+            return RedirectToAction("Index", new { id = courseId });
         }
 
         public IEnumerable<SelectListItem> GetPercentageValue()
