@@ -204,24 +204,22 @@ namespace Ru.GameSchool.Web.Controllers
                 var course = CourseService.GetCourse(id.Value);
                 ViewBag.CourseId = course.CourseId;
 
-                if (levelproject.ContentID != null)
+                foreach (var file in levelproject.File)
                 {
-                    foreach (var file in levelproject.File)
-                    {
-                        Guid contentId = Guid.NewGuid();
-                        var path = Path.Combine(Server.MapPath("~/Upload"), contentId.ToString());
-                        ViewBag.ContentId = contentId;
-                        file.SaveAs(path);
-                        levelproject.ContentID = contentId;
-                        levelproject.Filename = file.FileName;
-                    }
+                    Guid contentId = Guid.NewGuid();
+                    var path = Path.Combine(Server.MapPath("~/Upload"), contentId.ToString());
+                    ViewBag.ContentId = contentId;
+                    file.SaveAs(path);
+                    levelproject.ContentID = contentId;
+                    levelproject.Filename = file.FileName;
                 }
+
                 ViewBag.LevelCount = GetLevelCounts(id.Value);
                 ViewBag.CourseId = id.Value;
                 ViewBag.GradePercentageValue = GetPercentageValue();
 
                 LevelService.AddLevelProjectToCourseAndLevel(levelproject, id.Value);
-                return RedirectToAction("Index", "Project", new { id = id.Value });
+                return RedirectToAction("Index", "Project", new {id = id.Value});
             }
             return RedirectToAction("Index");
         }
