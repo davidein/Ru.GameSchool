@@ -56,7 +56,7 @@
                             <hr />
                         }
                         <li>@Html.ActionLink("Borð", "Item", "Course", new { id = @nesteditem.CourseId }, null)</li>
-                        <li>@Html.ActionLink("Tilkynningar", "", "", new { id = @nesteditem.CourseId }, null)</li>
+                        <li>@Html.ActionLink("Tilkynningar", "Announcements", "Course", new { id = @nesteditem.CourseId }, null)</li>
                         <li>@Html.ActionLink("Verkefni", "Index", "Project", new { id = @nesteditem.CourseId }, null)</li>
                         <li>@Html.ActionLink("Próf", "Index", "Exam", new { id = @nesteditem.CourseId }, null)</li>
                         <li>@Html.ActionLink("Kennsluefni", "Index", "Material", new { id = @nesteditem.CourseId }, null)</li>

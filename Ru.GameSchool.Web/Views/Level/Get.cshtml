@@ -48,12 +48,12 @@
     <div class="span4 well">
         <h2>Tilkynningar</h2>
         <ul>
-            @foreach (var m in ViewBag.MaterialsMessages)
+            @foreach (var m in ViewBag.Announcements)
             {
-                <li><a href="/Material/Get/@m.LevelMaterialId">@m.Title</a></li>
+                <li><a href="/Course/Announcement/@m.AnnouncementId">@m.Title</a></li>
             }
         </ul>
-        @Html.ActionLink("Allar tilkynningar", "Index", "Anouncements", new { id = ViewBag.CourseId }, new { @class = "btn" })
+        @Html.ActionLink("Allar tilkynningar", "Announcements", "Course", new { id = ViewBag.CourseId }, new { @class = "btn" })
     </div>
 </div><!--/row-->
  
