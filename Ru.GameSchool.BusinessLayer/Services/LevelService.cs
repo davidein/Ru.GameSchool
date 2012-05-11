@@ -53,7 +53,7 @@ namespace Ru.GameSchool.BusinessLayer.Services
 
 
         ////Delete?
-        
+
         public IEnumerable<Level> GetLevels()
         {
             return GameSchoolEntities.Levels;
@@ -264,9 +264,9 @@ namespace Ru.GameSchool.BusinessLayer.Services
                     levelProjToUpdate.ContentID = levelProject.ContentID;
                     levelProjToUpdate.UserFeedback = levelProject.UserFeedback;
                     levelProjToUpdate.LevelProjectResults.Add(levelProject.LevelProjectResults.ElementAtOrDefault(0));
-                    
-                    int points = 10;
 
+
+                    int points = 25;
 
                     var query = GameSchoolEntities.UserInfoes.Where(s => s.UserInfoId == userInfoId).FirstOrDefault();
                     if (query != null) // sernda notification á kennara
@@ -296,6 +296,7 @@ namespace Ru.GameSchool.BusinessLayer.Services
                 }
             }
         }
+
 
         /// <summary>
         /// Creates a level exam question.
@@ -469,7 +470,7 @@ namespace Ru.GameSchool.BusinessLayer.Services
             return false;
         }
 
-        
+
 
         /// <summary>
         /// Gets the next question in a level exam.
@@ -585,12 +586,12 @@ namespace Ru.GameSchool.BusinessLayer.Services
                 GameSchoolEntities.LevelExamQuestions.Where(x => x.LevelExamQuestionId == levelExamQuestionId).
                     SingleOrDefault();
 
-            if (question==null)
-                throw new GameSchoolException(string.Format("Question not found. QuestionId = {0}",levelExamQuestionId));
+            if (question == null)
+                throw new GameSchoolException(string.Format("Question not found. QuestionId = {0}", levelExamQuestionId));
 
             int placement = 0;
 
-            foreach (var levelExamQuestion in question.LevelExam.LevelExamQuestions.OrderBy(x=>x.LevelExamQuestionId))
+            foreach (var levelExamQuestion in question.LevelExam.LevelExamQuestions.OrderBy(x => x.LevelExamQuestionId))
             {
                 placement++;
                 if (levelExamQuestion.LevelExamQuestionId == levelExamQuestionId)
@@ -680,7 +681,7 @@ namespace Ru.GameSchool.BusinessLayer.Services
             if (levelMaterial != null && courseId > 0)
             {
                 GameSchoolEntities.LevelMaterials.AddObject(levelMaterial);
-                
+
                 var level = GameSchoolEntities.Levels.FirstOrDefault(l => l.LevelId == levelMaterial.LevelId && l.CourseId == courseId);
 
                 if (level != null)
@@ -866,13 +867,14 @@ namespace Ru.GameSchool.BusinessLayer.Services
         {
             if (levelProjectResult != null)
             {
-                var levelProjectResultToUpdate = GetlevelProjectResultByLevelProjectId(levelProjectResult.LevelProjectId);
+                var levelProjectResultToUpdate = GetlevelProjectResultsByLevelProjectResultId(levelProjectResult.LevelProjectResultId);
+                
                 levelProjectResultToUpdate.Grade = levelProjectResult.Grade;
                 levelProjectResultToUpdate.TeacherFeedback = levelProjectResult.TeacherFeedback;
                 levelProjectResultToUpdate.GradeDate = DateTime.Now;
 
                 var levelProject = GetLevelProject(levelProjectResult.LevelProjectId);
-                int points = 10;
+                int points = 25;
 
                 ExternalNotificationContainer.CreateNotification(string.Format("Þú hefur fengið {0} fyrir verkefnið \"{1}\"",
                     levelProjectResult.Grade, levelProject.Name), string.Format("/Project/Index/{0}", levelProject.Level.CourseId), levelProjectResult.UserInfoId);
@@ -983,7 +985,7 @@ namespace Ru.GameSchool.BusinessLayer.Services
                                           where x.LevelProjectResults.Where(y => y.UserInfoId == userInfoId).Count() > 0
                                           select x;
 
-                
+
 
                 if (level.Start <= DateTime.Now)
                 {
@@ -1021,7 +1023,7 @@ namespace Ru.GameSchool.BusinessLayer.Services
                     {
                         currentLevelTab.levelCompleteness = LevelCompleteness.Incomplete;
                     }
-                    
+
                 }
 
 
@@ -1034,8 +1036,8 @@ namespace Ru.GameSchool.BusinessLayer.Services
 
     public class LevelTab
     {
-        public int levelId {get; set;}
-        public string levelName {get; set; }
+        public int levelId { get; set; }
+        public string levelName { get; set; }
         public bool enabled { get; set; }
         public LevelCompleteness levelCompleteness { get; set; }
     }

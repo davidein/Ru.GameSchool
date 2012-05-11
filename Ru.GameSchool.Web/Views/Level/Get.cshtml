@@ -28,9 +28,10 @@
     <div class="span4 well">
         <h2>Myndbönd</h2>
         <ul>
-            @foreach (var m in ViewBag.MaterialsVideo)
+            @foreach (var item in ViewBag.MaterialsVideo)
             {
-                <li><a href="/Material/Get/@m.LevelMaterialId">@m.Title</a></li>
+                <li><a href="/Material/Get/@item.LevelMaterialId">@item.Title</a> @if (item.IsNew())
+                                                                               {<span class="label label-important">Nýtt</span>}</li>
             }
         </ul>
         @Html.ActionLink("Öll myndbönd", "Index", "Material", new { id = ViewBag.CourseId }, new { @class = "btn" })
@@ -38,9 +39,10 @@
     <div class="span4 well">
         <h2>Glærur</h2>
         <ul>
-            @foreach (var m in ViewBag.MaterialsSlides)
+            @foreach (var item in ViewBag.MaterialsSlides)
             {
-                <li><a href="/Material/Get/@m.LevelMaterialId">@m.Title</a></li>
+                <li><a href="/Material/Get/@item.LevelMaterialId">@item.Title</a> @if (item.IsNew())
+                                                                               {<span class="label label-important">Nýtt</span>}</li>
             }
         </ul>
         @Html.ActionLink("Allar glærur", "Index", "Material", new { id = ViewBag.CourseId }, new { @class = "btn" })
@@ -61,9 +63,12 @@
     <div class="span4 well">
         <h2>Verkefni</h2>
         <ul>
-            @foreach (var m in ViewBag.Projects)
+            @foreach (var item in ViewBag.Projects)
             {
-                <li>@Html.ActionLink(m.Name as string, User.IsInRole("Student") ? "Get" : "TeacherGet", "Project", new { id = m.LevelProjectId }, null)</li>
+                <li>@Html.ActionLink(item.Name as string, User.IsInRole("Student") ? "Get" : "TeacherGet", "Project", new { id = item.LevelProjectId }, null) @if (item.IsReturned(ViewBag.User.UserInfoId))
+                                                                                                                                                              {<span class="label label-success new-material">Skilað</span>}
+                                                                                                                                                              else if (item.IsNew())
+                                                                                                                                                             {<span class="label label-important">Nýtt</span>}</li>
             }
         </ul>
         @Html.ActionLink("Öll verkefni", "Index", "Project", new { id = ViewBag.CourseId }, new { @class = "btn" })
@@ -71,9 +76,10 @@
     <div class="span4 well">
         <h2>Netpróf</h2>
         <ul>
-            @foreach (var exam in ViewBag.Exams)
+            @foreach (var item in ViewBag.Exams)
             {
-                <li>@Html.ActionLink(exam.Name as string, "Index", "Exam", new { id = ViewBag.CourseId }, null)</li>
+                <li>@Html.ActionLink(item.Name as string, "Index", "Exam", new { id = ViewBag.CourseId }, null) @if (item.IsNew())
+                                                                                                                {<span class="label label-important">Nýtt</span>}</li>
             }
         </ul>
         @Html.ActionLink("Öll próf", "Index", "Exam", new { id = ViewBag.CourseId }, new { @class = "btn" })
@@ -81,9 +87,10 @@
     <div class="span4 well">
         <h2>Skjöl</h2>
         <ul>
-            @foreach (var m in ViewBag.MaterialsDocs)
+            @foreach (var item in ViewBag.MaterialsDocs)
             {
-                <li><a href="/Material/Get/@m.LevelMaterialId">@m.Title</a></li>
+                <li><a href="/Material/Get/@item.LevelMaterialId">@item.Title</a> @if (item.IsNew())
+                                                                                  {<span class="label label-important">Nýtt</span>}</li>
             }
         </ul>
         @Html.ActionLink("Öll skjöl", "Index", "Material", new { id = ViewBag.CourseId }, new { @class = "btn" })

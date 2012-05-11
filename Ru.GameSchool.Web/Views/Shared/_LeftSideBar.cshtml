@@ -23,7 +23,7 @@
                 Keppandinn á undan þér er með <span class="label label-success">@points1</span>
                 stig!</p>
         }
-        @if (points2 != -1)
+        @if (points2 != -1 && totalPoints != points2)
         {
             <p>
                 Næsti keppandi á eftir þér er með <span class="label label-warning">@points2</span>
