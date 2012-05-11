@@ -68,7 +68,9 @@
                     @Html.DisplayFor(modelItem => item.UserFeedback)
                 </td>
                 <td>
-                    @Html.TextBoxFor(modelItem => item.ContentID, new { type = "file", @class = "input-file", rel = "popover" })
+                <a name="button" class="btn btn-small" href="@Url.Action("GetReturn", new { id = item.LevelProjectId })" >
+                    <i class="icon-download-alt"></i> Sækja skil
+                </a>                   
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.LevelProject.GradePercentageValue)%

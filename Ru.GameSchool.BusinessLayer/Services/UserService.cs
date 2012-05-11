@@ -157,7 +157,7 @@ namespace Ru.GameSchool.BusinessLayer.Services
 
         public void UpdateUser(UserInfo userInfo)
         {
-            GameSchoolEntities.AttachTo("UserInfo", userInfo);
+            
 
             Save();
 

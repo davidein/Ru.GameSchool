@@ -59,7 +59,7 @@
                         }
                         else if (User.IsInRole("Teacher"))
                         {
-                            @Html.ActionLink(@innerInnerItem.Name, "TeacherGet", new { id = @innerInnerItem.LevelProjectId })if (@innerInnerItem.Start.AddHours(23) >= DateTime.Now)
+                            @Html.ActionLink(@innerInnerItem.Name, "TeacherGet", new { id = @innerInnerItem.LevelProjectId, courseId = ViewBag.CourseId })if (@innerInnerItem.Start.AddHours(23) >= DateTime.Now)
                                                                                                                              {<span class="label label-important new-material">Nýtt</span>}
                         }
                         else if (innerInnerItem.Stop < DateTime.Now)
