@@ -3,6 +3,7 @@ using System.Linq;
 using Ru.GameSchool.BusinessLayer.Exceptions;
 using Ru.GameSchool.DataLayer;
 using System.Collections.Generic;
+using Ru.GameSchool.DataLayer.Interfaces;
 using Ru.GameSchool.DataLayer.Repository;
 using Ru.GameSchool.Utilities;
 using System;
@@ -214,7 +215,7 @@ namespace Ru.GameSchool.BusinessLayer.Services
 
             return userCourse;
         }
-
+        /*
         public IEnumerable<Course> GetCoursesByUserInfId(int userInfoId)
         {
             if (0 > userInfoId)
@@ -230,7 +231,7 @@ namespace Ru.GameSchool.BusinessLayer.Services
                              select x;
 
             return userCourse;
-        }
+        }*/
 
         /// <summary>
         /// Gets current level by UserInfoId and CourseId
@@ -310,7 +311,63 @@ namespace Ru.GameSchool.BusinessLayer.Services
              return GameSchoolEntities.ContentTypes.Where(x => x.ContentTypeId == contentTypeId).FirstOrDefault().Name;
         }
 
+        public IEnumerable<IListObject> GetCourseNewestItems(int courseId, int userInfoId)
+        {
+            var list = new List<IListObject>();
+
+            var exams =
+                from x in
+                    GameSchoolEntities.LevelExams.Where(
+                        l => l.Level.Course.UserInfoes.Where(u => u.UserInfoId == userInfoId).Count() > 0
+                        && l.Level.CourseId == courseId
+                        && l.Start < DateTime.Now)
+                        orderby x.Start descending 
+                select x;
+
+            list.AddRange(exams.Take(3));
+
+            var projects =
+                from x in
+                    GameSchoolEntities.LevelProjects.Where(
+                        l => l.Level.Course.UserInfoes.Where(u => u.UserInfoId == userInfoId).Count() > 0
+                        && l.Level.CourseId == courseId
+                        && l.Start < DateTime.Now)
+                orderby x.Start descending
+                select x;
+
+            list.AddRange(projects.Take(3));
+
+            var material =
+                from x in
+                    GameSchoolEntities.LevelMaterials.Where(
+                        l => l.Level.Course.UserInfoes.Where(u => u.UserInfoId == userInfoId).Count() > 0
+                        && l.Level.CourseId == courseId
+                        && l.Level.Start < DateTime.Now)
+                orderby x.CreateDateTime descending
+                select x;
+
+            list.AddRange(material.Take(3));
+
+            list = list.OrderByDescending(x => x.Date()).ToList();
+
+            return list.Take(4);
+        }
 
 
+
+
+        public IEnumerable<Course> Search(string search)
+        {
+            if (string.IsNullOrEmpty(search))
+            {
+                return null;
+            }
+            var query =
+                GameSchoolEntities.Courses.Where(
+                    s => s.Description.Contains(search) | s.Name.Contains(search) | s.Identifier.Contains(search))
+                    .OrderByDescending(x => x.Name);
+
+            return query;
+        }
     }
 }

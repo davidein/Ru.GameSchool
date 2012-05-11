@@ -1,7 +1,7 @@
 ﻿<fieldset>
     
     @{
-        Html.BeginForm("Search", "Admin", FormMethod.Get);
+        Html.BeginForm("Search", "Admin", FormMethod.Post);
     
 
     <legend>Leit</legend>
@@ -10,7 +10,7 @@
             Tegund leitar</label>
         <div class="controls">
             <select id="searchtype" name="searchtype">
-                <option selected="selected">Nemandi</option>
+                <option selected="selected">Notandi</option>
                 <option>Námskeið</option>
             </select>
         </div>
@@ -47,3 +47,10 @@
     </div>
     }
 </fieldset>
+
+<script type="text/javascript">
+    $(function () {
+        var userType = $("usertype");
+        $("#searchtype[option='nemandi']").
+    });
+</script>

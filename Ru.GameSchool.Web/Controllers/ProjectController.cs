@@ -17,8 +17,8 @@ namespace Ru.GameSchool.Web.Controllers
         [HttpGet]
         public ActionResult Get(int? id)
         {
-            var userInfoId = ViewBag.UserInfoId = MembershipHelper.GetUser().UserInfoId;
-            
+            var userInfoId = MembershipHelper.GetUser().UserInfoId;
+            ViewBag.UserInfoId = userInfoId;
 
             ViewBag.AllowedFileExtensions = GetAllowedFileExtensions();
             if (id.HasValue && id.Value > 0)
@@ -29,7 +29,7 @@ namespace Ru.GameSchool.Web.Controllers
                 //ViewBag.Filepath = Settings.ProjectMaterialVirtualFolder + levelProject.ContentID.ToString();
                 ViewBag.Title = levelProject.Name;
                 var allowedUserLevel = ViewBag.AllowedLevelId = CourseService.GetCurrentUserLevel(userInfoId, courseId);
-
+                
                 if (levelProject.LevelId > allowedUserLevel)
                 {
                     return RedirectToAction("Index", new { id = courseId });

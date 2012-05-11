@@ -83,6 +83,7 @@ namespace Ru.GameSchool.Web.Controllers
             ViewBag.Course = CourseService.GetCourse(id);
             var announcements = AnnouncementService.GetAnnouncementsByCourseId(id);
             ViewBag.Announcements = announcements;
+            ViewBag.CourseId = id; 
 
             return View();
         }
@@ -92,6 +93,8 @@ namespace Ru.GameSchool.Web.Controllers
         {
             var announcement = AnnouncementService.GetAnnouncementByAnnouncementId(id);
             ViewBag.Announcement = announcement;
+
+            ViewBag.CourseId = announcement.CourseId; 
 
             return View();
         }

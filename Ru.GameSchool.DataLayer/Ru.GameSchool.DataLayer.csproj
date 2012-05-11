@@ -53,9 +53,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interfaces\IListObject.cs" />
     <Compile Include="Repository\Announcement.cs">
       <DependentUpon>GameSchool.tt</DependentUpon>
     </Compile>
+    <Compile Include="Repository\Announcement.ViewModel.cs" />
     <Compile Include="Repository\Comment.cs">
       <DependentUpon>GameSchool.tt</DependentUpon>
     </Compile>
