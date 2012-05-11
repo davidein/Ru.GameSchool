@@ -1,0 +1,70 @@
+﻿@model IEnumerable<Ru.GameSchool.DataLayer.Repository.UserInfo>
+@{
+    ViewBag.Title = "UserSearchResult";
+}
+<h2>
+    Notendur</h2>
+@if (Model != null)
+{
+ 
+    <table class="table table-striped table-bordered table-condensed">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Username)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                Týpa af notanda
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Fullname)
+            </th>
+            <th>
+                Deild
+            </th>
+            <th>
+                Staða
+            </th>
+            <th>
+                Aðgerðir
+            </th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserType.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Fullname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Department.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status.Name)
+                    
+                </td>
+                <td>
+                                        <a name="button" class="btn btn-mini" href="@Url.Action("UserEdit", new { id = item.UserInfoId })" >
+                                <i class="icon-edit"></i>Breyta </a>
+                </td>
+            </tr>
+        }
+    </table>
+   @Html.ActionLink("Aftur í leit", "Search")
+}
+else
+{
+    <h3>
+        Engar niðurstöður</h3>
+    @Html.ActionLink("Aftur í leit", "Search")
+}

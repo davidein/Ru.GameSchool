@@ -39,7 +39,7 @@ namespace Ru.GameSchool.BusinessLayer.Services
                        where x.Username == username
                        select x;
 
-            return user.FirstOrDefault();            
+            return user.FirstOrDefault();
         }
 
         /// <summary>
@@ -98,7 +98,7 @@ namespace Ru.GameSchool.BusinessLayer.Services
                                       LoginTime = DateTime.Now,
                                       UserInfoId = userInfo.UserInfoId
                                   };
-            
+
             this.CreateUserLog(userLog);
 
             return userInfo;
@@ -121,7 +121,7 @@ namespace Ru.GameSchool.BusinessLayer.Services
             Save();
 
             if (ExternalNotificationContainer != null)
-            { 
+            {
                 ExternalNotificationContainer.CreateNotification("Lykilorði þínu hefur verið breytt.", "", userInfoId);
             }
         }
@@ -157,7 +157,7 @@ namespace Ru.GameSchool.BusinessLayer.Services
 
         public void UpdateUser(UserInfo userInfo)
         {
-            
+
 
             Save();
 
@@ -184,9 +184,22 @@ namespace Ru.GameSchool.BusinessLayer.Services
         public IEnumerable<Ru.GameSchool.DataLayer.Repository.UserType> GetUserTypes()
         {
             var userTypes = from x in GameSchoolEntities.UserTypes
-                             select x;
+                            select x;
 
             return userTypes;
+        }
+
+        public IEnumerable<UserInfo> Search(string search, Enums.UserType userT)
+        {
+            if (string.IsNullOrEmpty(search))
+            {
+                return null;
+            }
+            var query =
+                GameSchoolEntities.UserInfoes.Where(
+                    u => u.UserTypeId == (int)userT && (u.Username.Contains(search) || u.Email.Contains(search)
+                                                          || u.Fullname.Contains(search)));
+            return query;
         }
     }
 }

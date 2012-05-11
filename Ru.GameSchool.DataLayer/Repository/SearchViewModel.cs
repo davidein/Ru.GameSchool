@@ -7,9 +7,7 @@ namespace Ru.GameSchool.DataLayer.Repository
 {
     public class SearchViewModel
     {
-        public IEnumerable<UserInfo> UserSearch { get; set; }
-        public IEnumerable<Course> CourseSearch{ get; set; }
-        public string Search { get; set; }
-        public UserType UserType { get; set; }
+        public string Keyword { get; set; }
+        public IEnumerable<UserInfo> UserSearchResult { get; set; }
     }
 }

@@ -28,7 +28,7 @@ namespace Ru.GameSchool.Web.Controllers
                 var courseId = ViewBag.CourseId = course.CourseId;
                 ViewBag.Title = levelProject.Name;
                 var allowedUserLevel = ViewBag.AllowedLevelId = CourseService.GetCurrentUserLevel(userInfoId, courseId);
-
+                
                 if (levelProject.LevelId > allowedUserLevel)
                 {
                     return RedirectToAction("Index", new { id = courseId });
