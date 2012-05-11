@@ -16,7 +16,7 @@ namespace Ru.GameSchool.Web.Controllers
         {
             if (User.IsInRole("Admin"))
             {
-<<<<<<< HEAD
+
                return RedirectToAction("Index", "Admin");
             }
             else
@@ -32,9 +32,6 @@ namespace Ru.GameSchool.Web.Controllers
             }
 
             return View();
-=======
-                return RedirectToAction("Index", "Admin");
->>>>>>> 5e8c0203d81ba2cdc4ecf17236245ae8c9e9eb78
             }
 
             var user = MembershipHelper.GetUser();
