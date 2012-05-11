@@ -14,7 +14,7 @@ namespace Ru.GameSchool.BusinessLayer.Services
     public class GameService : BaseService, IExternalPointContainer
     {
         /// <summary>
-        /// 
+        /// Add x point to user on the level specified
         /// </summary>
         /// <param name="userInfoId"></param>
         /// <param name="levelId"></param>
@@ -66,6 +66,12 @@ namespace Ru.GameSchool.BusinessLayer.Services
             return points;
         }
 
+        /// <summary>
+        /// Get point from user and course id
+        /// </summary>
+        /// <param name="userInfoId"></param>
+        /// <param name="courseId"></param>
+        /// <returns></returns>
         public int GetPointsByUserInfoIdAndCourseId(int userInfoId, int courseId)
         {
             // If userinfoid or levelid is smaller then 0 then return 0
@@ -85,6 +91,11 @@ namespace Ru.GameSchool.BusinessLayer.Services
             return points;
         }
 
+        /// <summary>
+        /// get the highest number of points in course
+        /// </summary>
+        /// <param name="courseId"></param>
+        /// <returns></returns>
         public int GetTopPoints(int courseId)
         {
             if (courseId <= 0)
@@ -139,33 +150,6 @@ namespace Ru.GameSchool.BusinessLayer.Services
         }
 
 
-
-        //private int GetUserPositionInGame(int userInfoId, int courseId)
-        //{
-        //    if (0 >= userInfoId | 0 >= courseId)
-        //    {
-        //        return 0;
-        //    }
-
-        //    var totalUsers = GameSchoolEntities.Points.Count(s => s.CourseId == courseId && s.UserInfoId != userInfoId);
-        //    var allUsersWithPointsInThisCourse = GetPointsByAndNotUserInfoIdCourseId(courseId, userInfoId);
-        //    int position = 0;
-
-        //    var query = GameSchoolEntities.Points.Where(p => p.UserInfoId == userInfoId && p.CourseId == courseId);
-
-        //    var userPoints = query.Any() ? query.Sum(s => s.Points) : 0;
-
-        //    for (int i = 0; i < totalUsers; i++)
-        //    {
-        //        if (userPoints > allUsersWithPointsInThisCourse.ElementAtOrDefault(i))
-        //        {
-        //            position++;
-        //        }
-        //    }
-
-        //    return (totalUsers - position) + 1;
-        //}
-
         private IEnumerable<UserAndPoints> GetPointsByAndNotUserInfoIdCourseId(int courseId)
         {
             return from x in GameSchoolEntities.Points.Where(s => s.CourseId == courseId)
@@ -192,7 +176,7 @@ namespace Ru.GameSchool.BusinessLayer.Services
         }
 
         /// <summary>
-        /// 
+        /// Gets points compaired to other users
         /// </summary>
         /// <param name="userInfoId"></param>
         /// <param name="courseId"></param>
@@ -238,6 +222,10 @@ namespace Ru.GameSchool.BusinessLayer.Services
             return usersWithTopTen;
         }
 
+        /// <summary>
+        /// Returns the points of the top 10 users in the game
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<Tuple<int, UserInfo>> GetTopTenList()
         {
             // Selecta course

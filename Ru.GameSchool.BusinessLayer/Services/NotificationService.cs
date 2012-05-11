@@ -49,7 +49,6 @@ namespace Ru.GameSchool.BusinessLayer.Services
                 notificationToUpdate.Description = notification.Description;
                 notificationToUpdate.IsRead = notification.IsRead;
                 notificationToUpdate.Url = notification.Url;
-                // TODO: Confirm update function works
                 Save();
             }
         }
@@ -71,6 +70,10 @@ namespace Ru.GameSchool.BusinessLayer.Services
             return list.OrderByDescending(x=>x.NotificationId);
         }
 
+        /// <summary>
+        /// Clear notifications
+        /// </summary>
+        /// <param name="userInfoId"></param>
         public void ClearNotifications(int userInfoId)
         {
             if (userInfoId <= 0)

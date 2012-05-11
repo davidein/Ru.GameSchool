@@ -51,9 +51,6 @@ namespace Ru.GameSchool.BusinessLayer.Services
             return level;
         }
 
-
-        ////Delete?
-
         /// <summary>
         /// Returns a collection of levels
         /// </summary>
