@@ -51,9 +51,6 @@ namespace Ru.GameSchool.BusinessLayer.Services
             return level;
         }
 
-
-        ////Delete?
-
         public IEnumerable<Level> GetLevels()
         {
             return GameSchoolEntities.Levels;

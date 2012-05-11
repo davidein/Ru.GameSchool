@@ -64,55 +64,5 @@ namespace Ru.GameSchool.Web.Controllers
             ViewBag.Title = "Hluturinn fannst ekki";
             return View();
         }
-
-        // Temp - left in so as to view prototype
-        public ActionResult Level()
-        {
-            return View();
-        }
-
-        public ActionResult Message()
-        {
-            return View();
-        }
-
-        public ActionResult Messages()
-        {
-            return View();
-        }
-
-
-        public ActionResult Project()
-        {
-            return View();
-        }
-
-        public ActionResult Projects()
-        {
-            return View();
-        }
-
-        public ActionResult Exam()
-        {
-            return View();
-        }
-
-        public ActionResult Exams()
-        {
-            return View();
-        }
-
-        public ActionResult Material()
-        {
-            return View();
-        }
-
-        public ActionResult MaterialList()
-        {
-            return View();
-        }
-
-        //remove to here.
-
     }
 }
