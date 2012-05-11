@@ -143,6 +143,10 @@ namespace Ru.GameSchool.BusinessLayer.Services
             }
         }
 
+        /// <summary>
+        /// Creates user log
+        /// </summary>
+        /// <param name="userLog"></param>
         public void CreateUserLog(UserLog userLog)
         {
             if (userLog != null)
@@ -155,12 +159,20 @@ namespace Ru.GameSchool.BusinessLayer.Services
             }
         }
 
+        /// <summary>
+        /// Updates user info
+        /// </summary>
+        /// <param name="userInfo"></param>
         public void UpdateUser(UserInfo userInfo)
         {
             Save();
         }
 
 
+        /// <summary>
+        /// Gets users statuses
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<Status> GetUserStatuses()
         {
             var userStatus = from x in GameSchoolEntities.Status
@@ -169,6 +181,10 @@ namespace Ru.GameSchool.BusinessLayer.Services
             return userStatus;
         }
 
+        /// <summary>
+        /// Gets usertypes
+        /// </summary>
+        /// <returns>usertypes</returns>
         public IEnumerable<Ru.GameSchool.DataLayer.Repository.UserType> GetUserTypes()
         {
             var userTypes = from x in GameSchoolEntities.UserTypes
@@ -177,6 +193,12 @@ namespace Ru.GameSchool.BusinessLayer.Services
             return userTypes;
         }
 
+        /// <summary>
+        /// User search 
+        /// </summary>
+        /// <param name="search"></param>
+        /// <param name="userT"></param>
+        /// <returns></returns>
         public IEnumerable<UserInfo> Search(string search, Enums.UserType userT)
         {
             if (string.IsNullOrEmpty(search))

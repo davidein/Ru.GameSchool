@@ -137,17 +137,5 @@ namespace Ru.GameSchool.BusinessLayer.Services
 
             return null;
         }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="comment"></param>
-        public void AddCommentGivesPoints(Comment comment)
-        {
-            if (comment != null)
-            {
-                // TODO: Finish implementation and commenting.
-            }
-        }
     }
 }
