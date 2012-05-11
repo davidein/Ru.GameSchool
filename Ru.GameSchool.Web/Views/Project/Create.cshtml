@@ -52,10 +52,9 @@
         </div>
 
         <div class="control-group">
-            @Html.LabelFor(model => model.ContentID, new { @class = "control-label" })
+            @Html.LabelFor(model => model.File, new { @class = "control-label" })
             <div class="controls">
-                @Html.TextBoxFor(model => model.ContentID, new { type = "file", @class = "input-file", rel = "popover" })
-                <span class="help-inline">@Html.ValidationMessageFor(model => model.ContentID)</span>
+                <input type="file" name="File"/>
             </div>
         </div>
         

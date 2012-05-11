@@ -4,56 +4,21 @@
 
 <div class="hero-unit">
     <h1>GameSchool</h1>
-    <article>
-        <h3>
-            <span class="gray">18.04.2012 | </span><a data-toggle="modal" href="#myModal">Búið að opna borð 4</a></h3>
-        <p>
-            Lorizzle ipsum dolor fo shizzle mah nizzle fo rizzle, mah home g-dizzle amizzle, fizzle adipiscing elit...
-        </p>
-    </article>
-    <article>
-        <h3>
-            <span class="gray">14.04.2012 | </span><a data-toggle="modal" href="#myModal">Dæmatíminn í dag</a></h3>
-        <p>
-            Check it out brizzle dolor dapibus turpizzle tempizzle gangster. Izzle boom shackalack nibh et turpizzle...
-        </p>
-    </article>
-    <article>
-        <h3>
-            <span class="gray">01.04.2012 | </span><a data-toggle="modal" href="#myModal">Fyrirlestur fluttur vegna mikillar aðsóknar</a></h3>
-        <p>
-             Pot dapibizzle. Curabitur you son of a bizzle fo shizzle, pretizzle da bomb, mattis ac, eleifend vitae, nunc...
-        </p>
-    </article>
-    <p>
-        <a class="btn btn-primary" href="/Home/Messages">Meira... &raquo;</a></p>
+    @foreach (var item in ViewBag.AnnouncementList)
+    {
+        <article>
+            <h3><span class="gray">@item.DisplayDateTime.ToString("dd.MM.yyyy") | </span><a data-toggle="modal" href="/Course/Announcement/@item.AnnouncementId">@item.Title</a></h3>
+            <p>
+                @item.Article
+            </p>
+        </article>
+    }
 </div>
 
-<!-- Move to partial view for modal -->
-<div id="myModal" class="modal" style="display: none">
-    <div class="modal-header">
-        <button class="close" data-dismiss="modal">
-            ×</button>
-        <h3>
-            Tilkynning!</h3>
-    </div>
-    <div class="modal-body">
-        <h4>
-            Mögnuð modal tilkynning!</h4>
-        <p>
-            Kæru vinir,</p>
-        <p>
-            Þetta er dæmi um tilkynningu í modal glugga</p>
-    </div>
-    <div class="modal-footer">
-        <a href="#" class="btn" data-dismiss="modal">Loka</a>
-    </div>
-</div>
-<!-- end move -->
 
 <div class="row-fluid course-box">
     
-    <h2>Þín námskeið</h2>
+    <h2>Þín námskeið eru hér</h2>
 @if (ViewBag.UserCourseList != null && ViewBag.UserCourseList.Count > 0)
 {
     foreach (var item in ViewBag.UserCourseList)
@@ -64,7 +29,7 @@
             {
             <div class="span4 well">
                 <h3>@nesteditem.Name</h3>
-                <ul>
+                <ul><li>@ViewBag.Course +nesteditem.CourseId<</li>
                     <li><a href="/Home/Material">MVC 4 </a><span class="label label-important">Nýtt</span></li>
                     <li><a href="/Home/Exam">Netpróf 2 </a><span class="label label-important">Nýtt</span></li>
                     <li><a href="/Home/Project">CSS</a></li>

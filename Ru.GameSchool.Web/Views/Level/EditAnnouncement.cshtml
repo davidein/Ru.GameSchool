@@ -1,0 +1,28 @@
+﻿@{
+    ViewBag.Title = "Breyta tilkynningu";
+}
+
+@model Ru.GameSchool.DataLayer.Repository.Announcement
+
+@using (Html.BeginForm("EditAnnouncement", "Level", new { id = Model.CourseId }, FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Upplýsingar um tilkynning</legend>
+        <div class="control-group">
+            @Html.LabelFor(model => model.CourseId, new { @class = "control-label" })
+            <div class="controls">
+                @Html.DropDownListFor(model => model.CourseId, (IEnumerable<SelectListItem>)ViewBag.CourseList, "Veldu námskeið")
+                @Html.ValidationMessageFor(model => model.CourseId)
+            </div>
+        </div>
+
+        @Html.Partial("_AnnouncementForm")
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary" >Breyta tilkynningu</button>
+            @Html.ActionLink("Fara aftur í borð", "Item", "Course", new { id = Model.CourseId }, new { @class = "btn" })
+        </div>
+    </fieldset>
+}

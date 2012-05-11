@@ -146,16 +146,104 @@ namespace Ru.GameSchool.Web.Controllers
             return View();
         }*/
 
-
         [Authorize(Roles = "Student, Teacher")]
-        public ActionResult Announcements(int id)
+        public ActionResult Announcements(int? id)
         {
-            ViewBag.Course = CourseService.GetCourse(id);
-            var announcements = AnnouncementService.GetAnnouncementsByLevelId(id);
-            ViewBag.Announcements = announcements;
+            if (id.HasValue)
+            {
+                ViewBag.Course = CourseService.GetCourse(id.Value);
+                ViewBag.CourseId = id.Value; 
+                var announcements = AnnouncementService.GetAnnouncementsByLevelId(id.Value);
+                ViewBag.Announcements = announcements;
+            }
 
             return View();
         }
 
+        [Authorize(Roles = "Teacher")]
+        public ActionResult CreateAnnouncement(int? id)
+        {
+            var model = new Announcement();
+            if (id.HasValue)
+            {
+                var user = MembershipHelper.GetUser();
+                ViewBag.CourseId = id.Value;
+                model.CourseId = id.Value;
+                model.DisplayDateTime = DateTime.Now;
+                ViewBag.CourseList = new SelectList(CourseService.GetCoursesByUserInfoId(user.UserInfoId), "CourseId", "Name");
+                ViewBag.LevelList = new SelectList(LevelService.GetLevels(id.Value), "LevelId", "Name");
+            }
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Teacher")]
+        public ActionResult CreateAnnouncement(Announcement model, int? id)
+        {
+            var user = MembershipHelper.GetUser();
+            
+            if (ModelState.IsValid)
+            {
+                AnnouncementService.CreateAnnouncement(model, user.UserInfoId);
+
+                return RedirectToAction("Announcement", "Course", new {id = model.AnnouncementId});
+            }
+
+            if (id.HasValue)
+            {
+                ViewBag.CourseId = id.Value;
+                ViewBag.CourseList = new SelectList(CourseService.GetCoursesByUserInfoId(user.UserInfoId), "CourseId", "Name");
+                ViewBag.LevelList = new SelectList(LevelService.GetLevels(id.Value), "LevelId", "Name");
+            }
+
+            return View(model);
+        }
+
+        [Authorize(Roles = "Teacher")]
+        public ActionResult EditAnnouncement(int? id)
+        {
+            if (id.HasValue)
+            {
+                var model = AnnouncementService.GetAnnouncementByAnnouncementId(id.Value);
+
+                var user = MembershipHelper.GetUser();
+                ViewBag.CourseId = model.CourseId;
+                ViewBag.CourseList = new SelectList(CourseService.GetCoursesByUserInfoId(user.UserInfoId), "CourseId", "Name");
+                ViewBag.LevelList = new SelectList(LevelService.GetLevels(model.CourseId), "LevelId", "Name");
+
+                return View(model);
+            }
+
+            return RedirectToAction("Notfound", "Home");
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Teacher")]
+        public ActionResult EditAnnouncement(Announcement model, int? id)
+        {
+            if (id.HasValue)
+            {
+                var user = MembershipHelper.GetUser();
+                if (ModelState.IsValid)
+                {
+                    var announcement = AnnouncementService.GetAnnouncementByAnnouncementId(id.Value);
+
+                    if (TryUpdateModel(announcement))
+                    {
+                        AnnouncementService.UpdateAnnouncement(announcement, user.UserInfoId);
+                        return RedirectToAction("Announcement", "Course", new { id = announcement.AnnouncementId });
+                    }
+                }
+
+                ViewBag.CourseId = model.CourseId;
+                ViewBag.CourseList = new SelectList(CourseService.GetCoursesByUserInfoId(user.UserInfoId), "CourseId",
+                                                    "Name");
+                ViewBag.LevelList = new SelectList(LevelService.GetLevels(model.CourseId), "LevelId", "Name");
+                return View(model);
+            }
+
+            return RedirectToAction("Notfound", "Home");
+        }
     }
 }
