@@ -178,7 +178,7 @@ namespace Ru.GameSchool.Web.Controllers
             {
                 UserService.CreateUser(model);
                 ViewBag.SuccessMessage = "Nýr notandi hefur verið skráður í kerfið. Mundu að skrá notendann í námskeið.";
-                return View("Index");
+                return View("Search");
             }
             else
             {

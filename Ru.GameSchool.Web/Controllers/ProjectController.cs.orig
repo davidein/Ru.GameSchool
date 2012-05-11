@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -12,78 +13,102 @@ namespace Ru.GameSchool.Web.Controllers
 {
     public class ProjectController : BaseController
     {
-        [Authorize(Roles = "Teacher, Student")]
+        [Authorize(Roles = "Student")]
         [HttpGet]
         public ActionResult Get(int? id)
         {
-<<<<<<< HEAD
+            var userInfoId = MembershipHelper.GetUser().UserInfoId;
+            ViewBag.UserInfoId = userInfoId;
+
             ViewBag.AllowedFileExtensions = GetAllowedFileExtensions();
             if (id.HasValue && id.Value > 0)
             {
                 var levelProject = LevelService.GetLevelProject(id.Value);
+                var course = CourseService.GetCourse(levelProject.Level.CourseId);
+                var courseId = ViewBag.CourseId = course.CourseId;
+                //ViewBag.Filepath = Settings.ProjectMaterialVirtualFolder + levelProject.ContentID.ToString();
+                ViewBag.Title = levelProject.Name;
+                var allowedUserLevel = ViewBag.AllowedLevelId = CourseService.GetCurrentUserLevel(userInfoId, courseId);
+
+                if (levelProject.LevelId > allowedUserLevel)
+                {
+                    return RedirectToAction("Index", new { id = courseId });
+                }
                 return View(levelProject);
             }
             return RedirectToAction("Index");
-=======
-            var userInfoId = MembershipHelper.GetUser().UserInfoId;
+        }
 
-            var courses = id.HasValue
-                                  ? CourseService.GetCoursesByUserInfoIdAndCourseId(userInfoId, id.Value)
-                                  : CourseService.GetCoursesByUserInfoId(userInfoId);
+        [HttpGet]
+        [Authorize(Roles = "Student, Teacher")]
+        public ActionResult Download(int? id)
+        {
+            if (id.HasValue)
+            {
+                var projectFile = LevelService.GetLevelProject(id.Value);
+                var filepath = Settings.ProjectMaterialVirtualFolder + projectFile.ContentID.ToString();
 
-            ViewBag.Courses = courses;
-            ViewBag.UserInfoId = userInfoId;
-            var projects = id.HasValue
-                ? LevelService.GetLevelProjectsByCourseIdAndUserInfoId(userInfoId, id.Value)
-                : LevelService.GetLevelProjectsByUserId(userInfoId);
-
-            ViewBag.CourseName = CourseService.GetCourse(id.Value).Name;
-            ViewBag.CourseId = CourseService.GetCourse(id.Value).CourseId;
-            ViewBag.Title = "Listi yfir verkefni";
-
-            return View(projects);
->>>>>>> 89a73b72a3e9e68cc98cc620962401ec8d67cdf1
+                return new DownloadResult { VirtualPath = filepath, FileDownloadName = projectFile.Filename };
+            }
+            return RedirectToAction("NotFound", "Home");
         }
 
         [HttpGet]
         [Authorize(Roles = "Teacher")]
-        public ActionResult TeacherGet(int? id)
+        public ActionResult GetReturn(int? id)
+        {
+            if (id.HasValue)
+            {
+                var projectFile = LevelService.GetlevelProjectResultByLevelProjectId(id.Value);
+                var filepath = Settings.ProjectMaterialVirtualFolder + projectFile.ContentID.ToString();
+
+                return new DownloadResult { VirtualPath = filepath, FileDownloadName = projectFile.Filename };
+            }
+            return RedirectToAction("NotFound", "Home");
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "Teacher")]
+        public ActionResult TeacherGet(int? id, int? courseId)
         {
             if (id.HasValue && id.Value > 0)
             {
-                var projectResults = LevelService.GetlevelProjectResultsByLevelProjectId(id.Value);
+                ViewBag.CourseId = courseId.HasValue ? courseId.Value : 0;
+                var projectResults = LevelService.GetlevelProjectResultsByLevelProjectId(id.Value).OrderByDescending(x => x.GradeDate);
                 return View(projectResults);
             }
             return RedirectToAction("Index", "Project");
-        
+
         }
 
-<<<<<<< HEAD
         [HttpPost]
         [Authorize(Roles = "Teacher")]
         public ActionResult GradeProject(LevelProjectResult result)
         {
-            LevelService.UpdateLevelProjectResult(result);
+            if (result != null)
+            {
+                if (TryUpdateModel(result))
+                {
+                    LevelService.UpdateLevelProjectResult(result);
+                }
+                
+                ViewBag.SuccessMessage = "Verkefni hefur verið uppfært";
+                return View(result);
+            }
+            ViewBag.ErrorMessage = "Gat ekki uppfært kennslugagn! Lagfærðu villur og reyndur aftur.";
             return View();
         }
-=======
-                ViewBag.LevelProject = levelProject;
-                ViewBag.LevelProjectResult = levelProject.LevelProjectResults.Where(u => u.UserInfoId == user).ToList();
-                ViewBag.CourseName = levelProject.Level.Course.Name;
-                ViewBag.CourseId = levelProject.Level.CourseId;
-                ViewBag.Title = "Verkefni";
->>>>>>> 89a73b72a3e9e68cc98cc620962401ec8d67cdf1
 
         [HttpGet]
-        [Authorize(Roles="Teacher")]
+        [Authorize(Roles = "Teacher")]
         public ActionResult GradeProject(int? id)
         {
             if (id.HasValue && id.Value > 0)
             {
-                var project = LevelService.GetlevelProjectResultsByLevelProjectResultId(id.Value);
-                return View(project);
+                var projectResults = LevelService.GetlevelProjectResultsByLevelProjectResultId(id.Value);
+                return View(projectResults);
             }
-            return View();
+            return RedirectToAction("Index", "Project");
         }
 
         [Authorize(Roles = "Student")]
@@ -92,13 +117,25 @@ namespace Ru.GameSchool.Web.Controllers
         {
             var user = MembershipHelper.GetUser().UserInfoId;
 
-            levelProject.LevelProjectResults.Add(CreateLevelProjectResult(levelProject, user));
-            LevelService.UpdateLevelProjectFromResult(levelProject);
+            Guid contentId = Guid.NewGuid();
+            if (levelProject.ContentID != null)
+            {
+                foreach (var file in levelProject.File)
+                {
+                    var path = Path.Combine(Server.MapPath("~/Upload"), contentId.ToString());
+                    ViewBag.ContentId = contentId;
+                    file.SaveAs(path);
+                    ViewBag.Filename = file.FileName;
+                }
+            }
 
-            return RedirectToAction("Get");
+            levelProject.LevelProjectResults.Add(CreateLevelProjectResult(levelProject, user, contentId, ViewBag.Filename));
+            LevelService.UpdateLevelProjectFromResult(levelProject, user);
+
+            return RedirectToAction("Get", new { id = levelProject.LevelProjectId });
         }
 
-        private LevelProjectResult CreateLevelProjectResult(LevelProject levelProject, int id)
+        private LevelProjectResult CreateLevelProjectResult(LevelProject levelProject, int id, Guid contentId, string filename)
         {
             var result = new LevelProjectResult
                              {
@@ -106,7 +143,8 @@ namespace Ru.GameSchool.Web.Controllers
                                  LevelProjectId = levelProject.LevelProjectId,
                                  UserInfoId = id,
                                  UserFeedback = levelProject.UserFeedback,
-                                 ContentID = levelProject.ContentID,
+                                 ContentID = contentId,
+                                 Filename = filename,
                                  GradeDate = DateTime.Now // fæ annars datetime exception
                              };
             return result;
@@ -116,109 +154,105 @@ namespace Ru.GameSchool.Web.Controllers
         [HttpGet]
         public ActionResult Index(int? id)
         {
-<<<<<<< HEAD
             var userInfoId = MembershipHelper.GetUser().UserInfoId;
             IEnumerable<Course> levelProjects = null;
-=======
-            //ViewBag.LevelCount = GetLevelCounts(0);
-            //ViewBag.GradePercentageValue = GetPercentageValue();
->>>>>>> 89a73b72a3e9e68cc98cc620962401ec8d67cdf1
-
+            ViewBag.Title = "Verkefnin mín";
+            ViewBag.UserInfoId = userInfoId;
             // Sækja spes course
             if (id.HasValue && id.Value > 0)
             {
-                levelProjects = CourseService.GetCoursesByUserInfoIdAndCourseId(userInfoId, id.Value);
+                ViewBag.AllowedLevelId = CourseService.GetCurrentUserLevel(userInfoId, id.Value);
+                var course = CourseService.GetCourse(id.Value);
+                ViewBag.CourseId = course.CourseId;
+                levelProjects =
+                    CourseService.GetCoursesByUserInfoIdAndCourseId(userInfoId, id.Value).OrderByDescending(
+                        x => x.Name);
+
+                ViewBag.CourseId = id.Value;
             }
             else // Sækja alla courses sem þessi nemandi er í
             {
-                levelProjects = CourseService.GetCoursesByUserInfoId(userInfoId);
+                //levelProjects = CourseService.GetCoursesByUserInfoId(userInfoId).OrderByDescending(x => x.CreateDateTime);
+                return RedirectToAction("NotFound", "Home");
             }
-
-            return levelProjects == null ? View() : View(levelProjects.ToList());
+            return View(levelProjects.ToList());
         }
 
         [HttpGet]
-<<<<<<< HEAD
         [Authorize(Roles = "Teacher")]
-        public ActionResult Create()
-        {
-            ViewBag.GradePercentageValue = GetPercentageValue();
-            ViewBag.LevelId = new SelectList(LevelService.GetLevels(), "LevelId", "Name");
-       //     ViewBag.CourseId = new SelectList(CourseService.GetCourses(), "CourseId", "Name");
-            
-            return View();
-=======
         public ActionResult Create(int? id)
         {
+            ViewBag.Title = "Búa til verkefni";
+            ViewBag.GradePercentageValue = GetPercentageValue();
+
             if (id.HasValue)
             {
-                int courseId = id.Value;
-                ViewBag.LevelCount = GetLevelCounts(courseId);
-                ViewBag.GradePercentageValue = GetPercentageValue();
-                ViewBag.CourseName = CourseService.GetCourse(courseId).Name;
-                ViewBag.CourseId = CourseService.GetCourse(courseId).CourseId;
-                ViewBag.Title = "Búa til verkefni";
-                return View();
+                ViewBag.LevelCount = GetLevelCounts(id.Value);
+                ViewBag.CourseId = id.Value;
+                ViewBag.CourseName = CourseService.GetCourse(id.Value).Name;
+                ViewBag.LevelId = new SelectList(LevelService.GetLevelsByCourseId(id.Value), "LevelId", "Name");
             }
-            return RedirectToAction("NotFound","Home");
->>>>>>> 89a73b72a3e9e68cc98cc620962401ec8d67cdf1
+
+            return View();
         }
 
         [HttpPost]
         [Authorize(Roles = "Teacher")]
-<<<<<<< HEAD
-        public ActionResult Create(LevelProject levelproject)
+        public ActionResult Create(int? id, LevelProject levelproject)
         {
-            ViewBag.GradePercentageValue = GetPercentageValue();
-            ViewBag.LevelId = new SelectList(LevelService.GetLevels(), "LevelId", "Name", levelproject.LevelId);
-
-            if (ModelState.IsValid)
-            {
-                LevelService.CreateLevelProject(levelproject);
-                return RedirectToAction("Index");
-=======
-        [HttpGet]
-        public ActionResult Edit(int? id)
-        {
-
-
-            if (id.HasValue)
-            {
-                int levelProjectId = id.Value;
-                int courseId = LevelService.GetLevelProject(levelProjectId).Level.CourseId;
-
-                ViewBag.LevelCount = GetLevelCounts(courseId);
-                ViewBag.GradePercentageValue = GetPercentageValue();
-                var project = LevelService.GetLevelProject(levelProjectId);
-                project.Start = Convert.ToDateTime(project.Start.ToString("u"));
-                project.Stop = Convert.ToDateTime(project.Stop.ToString("u"));
-                ViewBag.NameOfProject = project.Name;
-                ViewBag.CourseName = LevelService.GetLevelProject(levelProjectId).Level.Course.Name;
-                ViewBag.CourseId = courseId;
-                ViewBag.Title = "Breyta verkefni";
-                return View(project);
->>>>>>> 89a73b72a3e9e68cc98cc620962401ec8d67cdf1
-            }
-
-            return View(levelproject);
-        }
-
-        [HttpGet]
-        [Authorize(Roles = "Teacher")]
-<<<<<<< HEAD
-        public ActionResult Edit(int? id)
-        {
-=======
-        [HttpPost]
-        public ActionResult Edit(int? levelProjectId, LevelProject levelProject)
-        {
-            int courseId = LevelService.GetLevelProject(levelProjectId.Value).Level.CourseId;
-            ViewBag.LevelCount = GetLevelCounts(courseId);
->>>>>>> 89a73b72a3e9e68cc98cc620962401ec8d67cdf1
-            ViewBag.GradePercentageValue = GetPercentageValue();
+            ViewBag.Title = "Búa til nýtt verkefni";
 
             if (id.HasValue && id.Value > 0)
             {
+                var course = CourseService.GetCourse(id.Value);
+                ViewBag.CourseId = course.CourseId;
+
+<<<<<<< HEAD
+                //if (levelproject.File != null)
+                //{
+                foreach (var file in levelproject.File)
+                {
+                    Guid contentId = Guid.NewGuid();
+                    var path = Path.Combine(Server.MapPath("~/Upload"), contentId.ToString());
+                    ViewBag.ContentId = contentId;
+                    file.SaveAs(path);
+                    levelproject.ContentID = contentId;
+                    levelproject.Filename = file.FileName;
+                }
+                //}
+=======
+                if (levelproject.File != null)
+                {
+                    foreach (var file in levelproject.File)
+                    {
+                        Guid contentId = Guid.NewGuid();
+                        var path = Path.Combine(Server.MapPath("~/Upload"), contentId.ToString());
+                        ViewBag.ContentId = contentId;
+                        file.SaveAs(path);
+                        levelproject.ContentID = contentId;
+                        levelproject.Filename = file.FileName;
+                    }
+                }
+>>>>>>> e897726827c00c860c503d41bac979ca60eef31b
+                ViewBag.LevelCount = GetLevelCounts(id.Value);
+                ViewBag.CourseId = id.Value;
+                ViewBag.GradePercentageValue = GetPercentageValue();
+
+                LevelService.AddLevelProjectToCourseAndLevel(levelproject, id.Value);
+                return RedirectToAction("Index", "Project", new { id = id.Value });
+            }
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "Teacher")]
+        public ActionResult Edit(int? id, int? courseId)
+        {
+            ViewBag.GradePercentageValue = GetPercentageValue();
+            if (id.HasValue && id.Value > 0)
+            {
+                var course = CourseService.GetCourse(id.Value);
+                ViewBag.CourseId = courseId.HasValue ? courseId.Value : 0;
                 var levelProject = LevelService.GetLevelProject(id.Value);
                 ViewBag.LevelId = new SelectList(LevelService.GetLevels(), "LevelId", "Name", levelProject.LevelId);
                 return View(levelProject);
@@ -228,26 +262,58 @@ namespace Ru.GameSchool.Web.Controllers
 
         [HttpPost]
         [Authorize(Roles = "Teacher")]
-        public ActionResult Edit(LevelProject levelProject)
+        public ActionResult Edit(LevelProject levelProject, int? id)
         {
             ViewBag.GradePercentageValue = GetPercentageValue();
+            var material = LevelService.GetLevelProject(levelProject.LevelProjectId);
+            var courseId = material.Level.CourseId;
             if (ModelState.IsValid)
             {
-                LevelService.UpdateLevelProject(levelProject);
-                ViewBag.LevelId = new SelectList(LevelService.GetLevels(), "LevelId", "Name", levelProject.LevelId);
-                return View(levelProject);
-            }
+                if (TryUpdateModel(levelProject))
+                {
+                    if (levelProject.File != null)
+                    {
+                        foreach (var file in levelProject.File)
+                        {
+                            Guid contentId = Guid.NewGuid();
+                            var path = Server.MapPath("~/Upload") + contentId.ToString();
+                            ViewBag.ContentId = contentId;
+                            file.SaveAs(path);
+                            levelProject.ContentID = contentId;
+                        }
+                    }
 
-            ViewBag.LevelId = new SelectList(LevelService.GetLevels(), "LevelId", "Name", levelProject.LevelId);
-            return View(levelProject);
+                    ViewBag.CourseName = CourseService.GetCourse(courseId).Name;
+                    ViewBag.Courseid = CourseService.GetCourse(courseId).CourseId;
+                    ViewBag.LevelCount = GetLevelCounts(courseId);
+                    ViewBag.SuccessMessage = "Verkefni hefur verið uppfært";
+                    ViewBag.LevelId = new SelectList(LevelService.GetLevels(), "LevelId", "Name", levelProject.LevelId);
+
+                    LevelService.UpdateLevelProject(levelProject);
+                    return View(levelProject);
+                }
+                else
+                {
+                    ViewBag.ErrorMessage = "Gat ekki uppfært kennslugagn! Lagfærðu villur og reyndur aftur.";
+                    if (id.HasValue)
+                    {
+                        return View(LevelService.GetLevelProject(id.Value));
+                    }
+                }
+            }
+            ViewBag.LevelCount = GetLevelCounts(levelProject.Level.CourseId);
+            ViewBag.LevelProjectId = levelProject.LevelProjectId;
+            ViewBag.ContentTypes = LevelService.GetContentTypes();
+            return View();
         }
 
         [HttpGet]
         [Authorize(Roles = "Teacher")]
-        public ActionResult Delete(int? id)
+        public ActionResult Delete(int? id, int? courseId)
         {
             if (id.HasValue && id.Value > 0)
             {
+                ViewBag.CourseId = courseId.HasValue ? courseId.Value : 0;
                 var levelProject = LevelService.GetLevelProject(id.Value);
                 return View(levelProject);
             }
@@ -256,29 +322,24 @@ namespace Ru.GameSchool.Web.Controllers
 
         [HttpPost, ActionName("Delete")]
         [Authorize(Roles = "Teacher")]
-        public ActionResult DeleteConfirmed(int? id)
+        public ActionResult DeleteConfirmed(int? id, int? courseId)
         {
             if (id.HasValue && id.Value > 0)
             {
-<<<<<<< HEAD
-                LevelService.DeleteLevelProject(id.Value);
-=======
-
-                ViewBag.CourseName = LevelService.GetLevelProject(levelProjectId.Value).Level.Course.Name;
-                ViewBag.CourseId = LevelService.GetLevelProject(levelProjectId.Value).Level.CourseId;
-                ViewBag.Title = "Eyða verkefni";
-
-                if (LevelService.DeleteLevelProject(levelProjectId.Value))
+                ViewBag.CourseId = courseId.HasValue ? courseId.Value : 0;
+                try
                 {
-                    ViewBag.DeleteSuccessMessage = "Virkaði að eyða færslu!";
+                    LevelService.DeleteLevelProject(id.Value);
                 }
-                else
+                catch (Exception ex)
                 {
-                    ViewBag.DeleteSuccessMessage = "Ekki virkaði að eyða færslu!";
+                    ViewBag.ErrorMessage = "Ekki er hægt að eyða verkefni, yfirleitt er það útaf því að nemandi er þegar búinn að fá einkunn fyrir þetta verkefni";
+                    Elmah.ErrorSignal.FromCurrentContext().Raise(ex);
+                    var levelProject = LevelService.GetLevelProject(id.Value);
+                    return View(levelProject);
                 }
->>>>>>> 89a73b72a3e9e68cc98cc620962401ec8d67cdf1
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { id = courseId });
         }
 
         public IEnumerable<SelectListItem> GetPercentageValue()
@@ -290,6 +351,20 @@ namespace Ru.GameSchool.Web.Controllers
                     Text = j.ToString() + " %",
                     Value = j.ToString()
                 };
+            }
+        }
+
+        public IEnumerable<SelectListItem> GetLevelCounts(int courseId)
+        {
+            for (int j = 0; j <= LevelService.GetLevels(courseId).Count(); j++)
+            {
+                var elementAtOrDefault = LevelService.GetLevels(courseId).ElementAtOrDefault(j);
+                if (elementAtOrDefault != null)
+                    yield return new SelectListItem
+                    {
+                        Text = (elementAtOrDefault.Name == null ? "None" : elementAtOrDefault.Name),
+                        Value = (elementAtOrDefault.LevelId.ToString() == "" ? "0" : elementAtOrDefault.LevelId.ToString())
+                    };
             }
         }
 
