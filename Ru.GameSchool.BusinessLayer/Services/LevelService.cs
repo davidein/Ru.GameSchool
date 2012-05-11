@@ -54,6 +54,10 @@ namespace Ru.GameSchool.BusinessLayer.Services
 
         ////Delete?
 
+        /// <summary>
+        /// Returns a collection of levels
+        /// </summary>
+        /// <returns>IEnumberable of levels</returns>
         public IEnumerable<Level> GetLevels()
         {
             return GameSchoolEntities.Levels;
@@ -162,9 +166,9 @@ namespace Ru.GameSchool.BusinessLayer.Services
         }
 
         /// <summary>
-        /// 
+        /// Creates a levelproject instance
         /// </summary>
-        /// <param name="levelProject"></param>
+        /// <param name="levelProject">LEvelproject object</param>
         public void CreateLevelProject(LevelProject levelProject)
         {
             if (levelProject != null)
@@ -174,6 +178,11 @@ namespace Ru.GameSchool.BusinessLayer.Services
             }
         }
 
+        /// <summary>
+        /// Return a instance of levelproject by levelproject id
+        /// </summary>
+        /// <param name="levelProjectId">Id of a levelproject</param>
+        /// <returns>A collection of a leveloroject</returns>
         public LevelProject GetLevelProject(int levelProjectId)
         {
             if (levelProjectId < 0)
@@ -192,11 +201,20 @@ namespace Ru.GameSchool.BusinessLayer.Services
             return levelProject;
         }
 
+        /// <summary>
+        /// Returns all instances of levelprojects
+        /// </summary>
+        /// <returns>IEnumerable of levelprojects</returns>
         public IEnumerable<LevelProject> GetLevelProjects()
         {
             return GameSchoolEntities.LevelProjects;
         }
 
+        /// <summary>
+        /// Gets all levelproject objects by course id
+        /// </summary>
+        /// <param name="courseId">Id of a course to find levelproject objects</param>
+        /// <returns>IEnumerable of levelproject</returns>
         public IEnumerable<LevelProject> GetLevelProjectsByCourseId(int courseId)
         {
             if (0 > courseId)
@@ -216,6 +234,13 @@ namespace Ru.GameSchool.BusinessLayer.Services
             return levelProjects;
         }
 
+
+        /// <summary>
+        /// CHecks if a user has acces to a particular level
+        /// </summary>
+        /// <param name="levelId">Integer value of level</param>
+        /// <param name="userInfoId">Integer value of userinfo</param>
+        /// <returns>Boolean value true if he has acces, false otherwiase</returns>
         public bool HasAccess(int levelId, int userInfoId)
         {
             if ((levelId = userInfoId) > 0)
@@ -223,15 +248,17 @@ namespace Ru.GameSchool.BusinessLayer.Services
                 var levelQuery = GameSchoolEntities.Levels.Where(l => l.LevelId == levelId).SingleOrDefault();
 
                 if (levelQuery.Course.UserInfoes.Where(x => x.UserInfoId == userInfoId).Count() > 0)
+                {
                     return true;
+                }
             }
             return false;
         }
 
         /// <summary>
-        /// 
+        /// Updates a levelproject instance
         /// </summary>
-        /// <param name="levelProject"></param>
+        /// <param name="levelProject">Levelproject object</param>
         public void UpdateLevelProject(LevelProject levelProject)
         {
             if (levelProject != null)
@@ -250,10 +277,11 @@ namespace Ru.GameSchool.BusinessLayer.Services
                 Save();
             }
         }
+
         /// <summary>
-        /// 
+        /// Updates a levelproject from levelrpojectresult
         /// </summary>
-        /// <param name="levelProject"></param>
+        /// <param name="levelProject">Integer value of levelproject</param>
         public void UpdateLevelProjectFromResult(LevelProject levelProject, int userInfoId)
         {
             if (levelProject != null)
@@ -284,10 +312,10 @@ namespace Ru.GameSchool.BusinessLayer.Services
                             teacher.UserInfoId);
                     }
 
-
+                    // create notification
                     ExternalNotificationContainer.CreateNotification(string.Format("Þú hefur fengið {0} stig fyrir að skila verkefni \"{1}\"",
                         points, levelProjToUpdate.Name), string.Format("/Project/Index/{0}", levelProjToUpdate.Level.CourseId), userInfoId);
-
+                    // Add points to user
                     ExternalPointContainer.AddPointsToLevel(userInfoId, levelProjToUpdate.LevelId, points,
                                                             string.Format("Þú hefur fengið {0} stig fyrir verkefnið \"{1}\".",
                                                                           points, levelProjToUpdate.Name));
@@ -301,7 +329,7 @@ namespace Ru.GameSchool.BusinessLayer.Services
         /// <summary>
         /// Creates a level exam question.
         /// </summary>
-        /// <param name="levelExamQuestion"></param>
+        /// <param name="levelExamQuestion">Levelexamquestion object</param>
         public void CreateLevelExamQuestion(LevelExamQuestion levelExamQuestion)
         {
             if (levelExamQuestion != null)
@@ -314,7 +342,7 @@ namespace Ru.GameSchool.BusinessLayer.Services
         /// <summary>
         /// Creates a LevelExamAnswer
         /// </summary>
-        /// <param name="levelExamAnswer"></param>
+        /// <param name="levelExamAnswer">Levelexamanswer instance</param>
         public void CreateLevelExamAnswer(LevelExamAnswer levelExamAnswer)
         {
             if (levelExamAnswer != null)
@@ -327,16 +355,17 @@ namespace Ru.GameSchool.BusinessLayer.Services
         /// <summary>
         /// Creates a user answer for a specific exam question.
         /// </summary>
-        /// <param name="answerId"></param>
-        /// <param name="userInfoId"></param>
+        /// <param name="answerId">Integer value of answer if</param>
+        /// <param name="userInfoId">Integer value of userinfoid</param>
         public void AnswerLevelExamQuestion(int answerId, int userInfoId)
         {
             var answer = GameSchoolEntities.LevelExamAnswers.Where(x => x.LevelExamAnswerId == answerId).SingleOrDefault();
 
             if (answer == null)
+            {
                 throw new GameSchoolException(string.Format(
                     "Answer does not exist. AnswerId = {0}", answerId));
-
+            }
             var question =
                 GameSchoolEntities.LevelExamQuestions.Where(x => x.LevelExamQuestionId == answer.LevelExamQuestionId).Single();
 
@@ -372,9 +401,10 @@ namespace Ru.GameSchool.BusinessLayer.Services
             var question = GameSchoolEntities.LevelExamQuestions.Where(x => x.LevelExamQuestionId == levelExamQuestionId).Single();
 
             if (question == null)
+            {
                 throw new GameSchoolException(string.Format(
                     "Question does not exist. QuestionId = {0}", levelExamQuestionId));
-
+            }
             var questionAnswered = question.LevelExamAnswers.Where(p => p.UserInfoes.Where(u => u.UserInfoId == userInfoId).Count() > 0);
 
             if (questionAnswered.Count() > 0)
@@ -397,17 +427,18 @@ namespace Ru.GameSchool.BusinessLayer.Services
         {
             var question = GameSchoolEntities.LevelExamQuestions.Where(x => x.LevelExamId == levelExamId).OrderBy(x => x.LevelExamQuestionId);
             if (question.Count() > 0)
+            {
                 return question.First();
-
+            }
             return null;
         }
 
         /// <summary>
         /// Closes an exam and gives the user a grade, points and notification.
         /// </summary>
-        /// <param name="levelExamId"></param>
-        /// <param name="userInfoId"></param>
-        /// <returns></returns>
+        /// <param name="levelExamId">id of a levelexam</param>
+        /// <param name="userInfoId">id of an userinfo</param>
+        /// <returns>Points of an exam</returns>
         public double ReturnExam(int levelExamId, int userInfoId)
         {
             if (HasAccessToExam(levelExamId, userInfoId))
@@ -429,7 +460,9 @@ namespace Ru.GameSchool.BusinessLayer.Services
                 Save();
 
                 if (ExternalNotificationContainer != null)
+                {
                     ExternalNotificationContainer.CreateNotification(string.Format("Þú hefur fengið {0} fyrir prófið \"{1}\"", levelExamResult.Grade, exam.Name), string.Format("/Exam/Index/{0}", exam.Level.CourseId), userInfoId);
+                }
                 if (ExternalPointContainer != null)
                 {
                     const int totalPointsPerGradeUnit = 5;
@@ -451,7 +484,7 @@ namespace Ru.GameSchool.BusinessLayer.Services
         /// <summary>
         /// Checks if the user has access to an exam.
         /// </summary>
-        /// <param name="levelExamId"></param>
+        /// <param name="levelExamId">Id of a levelexam</param>
         /// <param name="userInfoId"></param>
         /// <returns></returns>
         public bool HasAccessToExam(int levelExamId, int userInfoId)
@@ -459,12 +492,15 @@ namespace Ru.GameSchool.BusinessLayer.Services
             var levelExam = GameSchoolEntities.LevelExams.Where(x => x.LevelExamId == levelExamId).Single();
 
             if (levelExam.Stop <= DateTime.Now)
+            { 
                 return false;
-
+            }
             if (levelExam.Level.Course.UserInfoes.Where(u => u.UserInfoId == userInfoId).Count() > 0)
             {
                 if (levelExam.LevelExamResults.Where(x => x.UserInfoId == userInfoId).Count() == 0)
+                { 
                     return true;
+                }
             }
 
             return false;
@@ -482,17 +518,21 @@ namespace Ru.GameSchool.BusinessLayer.Services
             var question = GameSchoolEntities.LevelExamQuestions.Where(x => x.LevelExamQuestionId == levelExamQuestionId).Single();
 
             if (question == null)
+            { 
                 throw new GameSchoolException(string.Format(
                     "Question does not exist. QuestionId = {0}", levelExamQuestionId));
-
+            }
             bool next = false;
             foreach (var item in question.LevelExam.LevelExamQuestions.OrderBy(x => x.LevelExamQuestionId))
             {
                 if (next)
+                { 
                     return item;
-
+                 }
                 if (item.LevelExamQuestionId == levelExamQuestionId)
+                {
                     next = true;
+                }
             }
 
             return null;
@@ -587,8 +627,9 @@ namespace Ru.GameSchool.BusinessLayer.Services
                     SingleOrDefault();
 
             if (question == null)
+            { 
                 throw new GameSchoolException(string.Format("Question not found. QuestionId = {0}", levelExamQuestionId));
-
+            }
             int placement = 0;
 
             foreach (var levelExamQuestion in question.LevelExam.LevelExamQuestions.OrderBy(x => x.LevelExamQuestionId))
@@ -761,7 +802,12 @@ namespace Ru.GameSchool.BusinessLayer.Services
                 yield return levelProjectResult;
             }
         }
-
+        /// <summary>
+        /// returns a collection
+        /// </summary>
+        /// <param name="userInfoId"></param>
+        /// <param name="courseId"></param>
+        /// <returns></returns>
         public IEnumerable<LevelProject> GetLevelProjectsByCourseIdAndUserInfoId(int userInfoId, int courseId)
         {
             if (0 > userInfoId | 0 > courseId)
@@ -778,7 +824,11 @@ namespace Ru.GameSchool.BusinessLayer.Services
 
             return query;
         }
-
+        /// <summary>
+        /// returns a collection
+        /// </summary>
+        /// <param name="userInfoId"></param>
+        /// <returns></returns>
         public IEnumerable<LevelProject> GetLevelProjectsByUserId(int userInfoId)
         {
             if (0 > userInfoId)
@@ -792,7 +842,11 @@ namespace Ru.GameSchool.BusinessLayer.Services
 
             return levelProjectQuery;
         }
-
+        /// <summary>
+        /// checks if can delete
+        /// </summary>
+        /// <param name="levelProjectId"></param>
+        /// <returns></returns>
         public bool DeleteLevelProject(int levelProjectId)
         {
             if (levelProjectId < 0)
@@ -813,7 +867,10 @@ namespace Ru.GameSchool.BusinessLayer.Services
             return true;
         }
 
-
+        /// <summary>
+        /// checks if level
+        /// </summary>
+        /// <param name="levelProjectResult"></param>
         public void CreateLevelProjectResult(LevelProjectResult levelProjectResult)
         {
             if (levelProjectResult != null)
@@ -950,11 +1007,22 @@ namespace Ru.GameSchool.BusinessLayer.Services
             return courseId > 0 ? GameSchoolEntities.Levels.Where(c => c.CourseId == courseId) : null;
         }
 
+        /// <summary>
+        /// Returns a collection of levelproject by levelid 
+        /// </summary>
+        /// <param name="levelId">Integer vased value of levelid to find</param>
+        /// <returns>Collection of levelproject</returns>
         public IEnumerable<LevelProject> GetLevelProjectsByLevelId(int levelId)
         {
             return levelId > 0 ? GameSchoolEntities.LevelProjects.Where(l => l.LevelId == levelId) : null;
         }
 
+        /// <summary>
+        /// Get leveltabs by course id and user info id
+        /// </summary>
+        /// <param name="courseId">Id of a course to find</param>
+        /// <param name="userInfoId">Id of a userinfo to find</param>
+        /// <returns>returns a collections of leveltabs</returns>
         public IEnumerable<LevelTab> GetLevelTabsByCourseIdAndUserInfoId(int courseId, int userInfoId)
         {
             var levels = (from x in GameSchoolEntities.Levels
