@@ -63,7 +63,7 @@
                 {
                     if (x.UserInfoId == ViewBag.UserInfoId)
                     {
-                        if (Math.Abs(@x.Grade) > 0)
+                        if (Math.Abs(@x.Grade) >= 0)
                         {
                             @x.Grade
                         }
