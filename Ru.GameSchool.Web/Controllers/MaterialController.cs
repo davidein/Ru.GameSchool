@@ -186,9 +186,10 @@ namespace Ru.GameSchool.Web.Controllers
                         foreach (var file in material.File)
                         {
                             Guid contentId = Guid.NewGuid();
-                            if (file.ContentLength > 0)
+                            if (file != null && file.ContentLength > 0)
                             {
-                                var path = Path.Combine(Server.MapPath("~/Upload"), contentId.ToString()); //TODO: Add function to check for file extensions
+                                var path = Path.Combine(Server.MapPath("~/Upload"), contentId.ToString());
+                                    //TODO: Add function to check for file extensions
                                 ViewBag.ContentId = contentId;
                                 file.SaveAs(path);
                                 material.ContentId = contentId;
