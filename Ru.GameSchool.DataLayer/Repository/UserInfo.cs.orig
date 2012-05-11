@@ -252,38 +252,6 @@ namespace Ru.GameSchool.DataLayer.Repository
         }
         private ICollection<LevelExamResult> _levelExamResults;
     
-        public virtual ICollection<LevelProjectResult> LevelProjectResults
-        {
-            get
-            {
-                if (_levelProjectResults == null)
-                {
-                    var newCollection = new FixupCollection<LevelProjectResult>();
-                    newCollection.CollectionChanged += FixupLevelProjectResults;
-                    _levelProjectResults = newCollection;
-                }
-                return _levelProjectResults;
-            }
-            set
-            {
-                if (!ReferenceEquals(_levelProjectResults, value))
-                {
-                    var previousValue = _levelProjectResults as FixupCollection<LevelProjectResult>;
-                    if (previousValue != null)
-                    {
-                        previousValue.CollectionChanged -= FixupLevelProjectResults;
-                    }
-                    _levelProjectResults = value;
-                    var newValue = value as FixupCollection<LevelProjectResult>;
-                    if (newValue != null)
-                    {
-                        newValue.CollectionChanged += FixupLevelProjectResults;
-                    }
-                }
-            }
-        }
-        private ICollection<LevelProjectResult> _levelProjectResults;
-    
         public virtual ICollection<Notification> Notifications
         {
             get
@@ -442,7 +410,6 @@ namespace Ru.GameSchool.DataLayer.Repository
         }
         private ICollection<UserLog> _userLogs;
     
-<<<<<<< HEAD
         public virtual ICollection<LevelExamAnswer> LevelExamAnswers
         {
             get
@@ -469,43 +436,78 @@ namespace Ru.GameSchool.DataLayer.Repository
                     if (newValue != null)
                     {
                         newValue.CollectionChanged += FixupLevelExamAnswers;
-=======
-        public virtual ICollection<LevelExamUserAnswer> LevelExamUserAnswers
-        {
-            get
-            {
-                if (_levelExamUserAnswers == null)
-                {
-                    var newCollection = new FixupCollection<LevelExamUserAnswer>();
-                    newCollection.CollectionChanged += FixupLevelExamUserAnswers;
-                    _levelExamUserAnswers = newCollection;
-                }
-                return _levelExamUserAnswers;
-            }
-            set
-            {
-                if (!ReferenceEquals(_levelExamUserAnswers, value))
-                {
-                    var previousValue = _levelExamUserAnswers as FixupCollection<LevelExamUserAnswer>;
-                    if (previousValue != null)
-                    {
-                        previousValue.CollectionChanged -= FixupLevelExamUserAnswers;
-                    }
-                    _levelExamUserAnswers = value;
-                    var newValue = value as FixupCollection<LevelExamUserAnswer>;
-                    if (newValue != null)
-                    {
-                        newValue.CollectionChanged += FixupLevelExamUserAnswers;
->>>>>>> 48dc3d74e783c17e4a430046b225740c6008f947
                     }
                 }
             }
         }
-<<<<<<< HEAD
         private ICollection<LevelExamAnswer> _levelExamAnswers;
+    
+        public virtual ICollection<Announcement> Announcements
+        {
+            get
+            {
+                if (_announcements == null)
+                {
+                    var newCollection = new FixupCollection<Announcement>();
+                    newCollection.CollectionChanged += FixupAnnouncements;
+                    _announcements = newCollection;
+                }
+                return _announcements;
+            }
+            set
+            {
+                if (!ReferenceEquals(_announcements, value))
+                {
+                    var previousValue = _announcements as FixupCollection<Announcement>;
+                    if (previousValue != null)
+                    {
+                        previousValue.CollectionChanged -= FixupAnnouncements;
+                    }
+                    _announcements = value;
+                    var newValue = value as FixupCollection<Announcement>;
+                    if (newValue != null)
+                    {
+                        newValue.CollectionChanged += FixupAnnouncements;
+                    }
+                }
+            }
+        }
+        private ICollection<Announcement> _announcements;
+<<<<<<< HEAD
 =======
-        private ICollection<LevelExamUserAnswer> _levelExamUserAnswers;
->>>>>>> 48dc3d74e783c17e4a430046b225740c6008f947
+    
+        public virtual ICollection<LevelProjectResult> LevelProjectResults
+        {
+            get
+            {
+                if (_levelProjectResults == null)
+                {
+                    var newCollection = new FixupCollection<LevelProjectResult>();
+                    newCollection.CollectionChanged += FixupLevelProjectResults;
+                    _levelProjectResults = newCollection;
+                }
+                return _levelProjectResults;
+            }
+            set
+            {
+                if (!ReferenceEquals(_levelProjectResults, value))
+                {
+                    var previousValue = _levelProjectResults as FixupCollection<LevelProjectResult>;
+                    if (previousValue != null)
+                    {
+                        previousValue.CollectionChanged -= FixupLevelProjectResults;
+                    }
+                    _levelProjectResults = value;
+                    var newValue = value as FixupCollection<LevelProjectResult>;
+                    if (newValue != null)
+                    {
+                        newValue.CollectionChanged += FixupLevelProjectResults;
+                    }
+                }
+            }
+        }
+        private ICollection<LevelProjectResult> _levelProjectResults;
+>>>>>>> 87f1bfe948507717ee80f91facfcdf2cb7aaf6b4
 
         #endregion
         #region Association Fixup
@@ -658,28 +660,6 @@ namespace Ru.GameSchool.DataLayer.Repository
             }
         }
     
-        private void FixupLevelProjectResults(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            if (e.NewItems != null)
-            {
-                foreach (LevelProjectResult item in e.NewItems)
-                {
-                    item.UserInfo = this;
-                }
-            }
-    
-            if (e.OldItems != null)
-            {
-                foreach (LevelProjectResult item in e.OldItems)
-                {
-                    if (ReferenceEquals(item.UserInfo, this))
-                    {
-                        item.UserInfo = null;
-                    }
-                }
-            }
-        }
-    
         private void FixupNotifications(object sender, NotifyCollectionChangedEventArgs e)
         {
             if (e.NewItems != null)
@@ -771,7 +751,6 @@ namespace Ru.GameSchool.DataLayer.Repository
             }
         }
     
-<<<<<<< HEAD
         private void FixupLevelExamAnswers(object sender, NotifyCollectionChangedEventArgs e)
         {
             if (e.NewItems != null)
@@ -782,37 +761,67 @@ namespace Ru.GameSchool.DataLayer.Repository
                     {
                         item.UserInfoes.Add(this);
                     }
-=======
-        private void FixupLevelExamUserAnswers(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            if (e.NewItems != null)
-            {
-                foreach (LevelExamUserAnswer item in e.NewItems)
-                {
-                    item.UserInfo = this;
->>>>>>> 48dc3d74e783c17e4a430046b225740c6008f947
                 }
             }
     
             if (e.OldItems != null)
             {
-<<<<<<< HEAD
                 foreach (LevelExamAnswer item in e.OldItems)
                 {
                     if (item.UserInfoes.Contains(this))
                     {
                         item.UserInfoes.Remove(this);
-=======
-                foreach (LevelExamUserAnswer item in e.OldItems)
-                {
-                    if (ReferenceEquals(item.UserInfo, this))
-                    {
-                        item.UserInfo = null;
->>>>>>> 48dc3d74e783c17e4a430046b225740c6008f947
                     }
                 }
             }
         }
+    
+        private void FixupAnnouncements(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            if (e.NewItems != null)
+            {
+                foreach (Announcement item in e.NewItems)
+                {
+                    item.UserInfo = this;
+                }
+            }
+    
+            if (e.OldItems != null)
+            {
+                foreach (Announcement item in e.OldItems)
+                {
+                    if (ReferenceEquals(item.UserInfo, this))
+                    {
+                        item.UserInfo = null;
+                    }
+                }
+            }
+        }
+<<<<<<< HEAD
+=======
+    
+        private void FixupLevelProjectResults(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            if (e.NewItems != null)
+            {
+                foreach (LevelProjectResult item in e.NewItems)
+                {
+                    item.UserInfo = this;
+                }
+            }
+    
+            if (e.OldItems != null)
+            {
+                foreach (LevelProjectResult item in e.OldItems)
+                {
+                    if (ReferenceEquals(item.UserInfo, this))
+                    {
+                        item.UserInfo = null;
+                    }
+                }
+            }
+        }
+>>>>>>> 87f1bfe948507717ee80f91facfcdf2cb7aaf6b4
 
         #endregion
     }

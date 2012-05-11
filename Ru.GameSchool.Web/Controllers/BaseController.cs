@@ -19,6 +19,7 @@ namespace Ru.GameSchool.Web.Controllers
         private LevelService _levelService;
         private SocialService _socialService;
         private NotificationService _notificationService;
+        private AnnouncementService _announcementService;
         
 
         internal UserService UserService 
@@ -71,6 +72,14 @@ namespace Ru.GameSchool.Web.Controllers
             {
                 _notificationService = LoadService(_notificationService, HttpContext);
                 return _notificationService;
+            }
+        }
+        internal AnnouncementService AnnouncementService
+        {
+            get
+            {
+                _announcementService = LoadService(_announcementService, HttpContext);
+                return _announcementService;
             }
         }
 

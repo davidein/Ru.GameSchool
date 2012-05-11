@@ -37,7 +37,7 @@ namespace Ru.GameSchool.Web.Controllers
                     ViewBag.Projects = LevelService.GetLevelProjectsByLevelId(levelId);
                     ViewBag.MaterialsVideo = LevelService.GetLevelMaterials(levelId,1);
                     ViewBag.MaterialsSlides = LevelService.GetLevelMaterials(levelId,2);
-                    ViewBag.MaterialsMessages = LevelService.GetLevelMaterials(levelId);
+                    ViewBag.Announcements = AnnouncementService.GetAnnouncementsByLevelId(levelId);
                     ViewBag.MaterialsDocs = LevelService.GetLevelMaterials(levelId,3);
                     ViewBag.Exams = LevelService.GetLevelExamsByLevelId(levelId, userId);
 
@@ -145,6 +145,17 @@ namespace Ru.GameSchool.Web.Controllers
         {
             return View();
         }*/
+
+
+        [Authorize(Roles = "Student, Teacher")]
+        public ActionResult Announcements(int id)
+        {
+            ViewBag.Course = CourseService.GetCourse(id);
+            var announcements = AnnouncementService.GetAnnouncementsByLevelId(id);
+            ViewBag.Announcements = announcements;
+
+            return View();
+        }
 
     }
 }

@@ -76,5 +76,24 @@ namespace Ru.GameSchool.Web.Controllers
 
             return View();
         }
+
+        [Authorize(Roles = "Student, Teacher")]
+        public ActionResult Announcements(int id)
+        {
+            ViewBag.Course = CourseService.GetCourse(id);
+            var announcements = AnnouncementService.GetAnnouncementsByCourseId(id);
+            ViewBag.Announcements = announcements;
+
+            return View();
+        }
+
+        [Authorize(Roles = "Student, Teacher")]
+        public ActionResult Announcement(int id)
+        {
+            var announcement = AnnouncementService.GetAnnouncementByAnnouncementId(id);
+            ViewBag.Announcement = announcement;
+
+            return View();
+        }
     }
 }

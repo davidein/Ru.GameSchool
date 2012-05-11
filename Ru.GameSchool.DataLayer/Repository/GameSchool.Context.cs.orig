@@ -108,18 +108,6 @@ namespace Ru.GameSchool.DataLayer.Repository
         }
         private ObjectSet<LevelMaterial> _levelMaterials;
     
-        public IObjectSet<LevelProject> LevelProjects
-        {
-            get { return _levelProjects  ?? (_levelProjects = CreateObjectSet<LevelProject>("LevelProjects")); }
-        }
-        private ObjectSet<LevelProject> _levelProjects;
-    
-        public IObjectSet<LevelProjectResult> LevelProjectResults
-        {
-            get { return _levelProjectResults  ?? (_levelProjectResults = CreateObjectSet<LevelProjectResult>("LevelProjectResults")); }
-        }
-        private ObjectSet<LevelProjectResult> _levelProjectResults;
-    
         public IObjectSet<Notification> Notifications
         {
             get { return _notifications  ?? (_notifications = CreateObjectSet<Notification>("Notifications")); }
@@ -156,19 +144,32 @@ namespace Ru.GameSchool.DataLayer.Repository
         }
         private ObjectSet<UserLog> _userLogs;
     
-<<<<<<< HEAD
-        public IObjectSet<sysdiagram> sysdiagrams
-        {
-            get { return _sysdiagrams  ?? (_sysdiagrams = CreateObjectSet<sysdiagram>("sysdiagrams")); }
-        }
-        private ObjectSet<sysdiagram> _sysdiagrams;
-=======
         public IObjectSet<LevelExam> LevelExams
         {
             get { return _levelExams  ?? (_levelExams = CreateObjectSet<LevelExam>("LevelExams")); }
         }
         private ObjectSet<LevelExam> _levelExams;
->>>>>>> 33b901828b9f5a5638662e14a796c18707472adf
+    
+        public IObjectSet<Announcement> Announcements
+        {
+            get { return _announcements  ?? (_announcements = CreateObjectSet<Announcement>("Announcements")); }
+        }
+        private ObjectSet<Announcement> _announcements;
+<<<<<<< HEAD
+=======
+    
+        public IObjectSet<LevelProject> LevelProjects
+        {
+            get { return _levelProjects  ?? (_levelProjects = CreateObjectSet<LevelProject>("LevelProjects")); }
+        }
+        private ObjectSet<LevelProject> _levelProjects;
+    
+        public IObjectSet<LevelProjectResult> LevelProjectResults
+        {
+            get { return _levelProjectResults  ?? (_levelProjectResults = CreateObjectSet<LevelProjectResult>("LevelProjectResults")); }
+        }
+        private ObjectSet<LevelProjectResult> _levelProjectResults;
+>>>>>>> 87f1bfe948507717ee80f91facfcdf2cb7aaf6b4
 
         #endregion
         #region Function Imports
