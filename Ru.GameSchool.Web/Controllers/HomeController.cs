@@ -17,24 +17,22 @@ namespace Ru.GameSchool.Web.Controllers
             if (User.IsInRole("Admin"))
             {
 
-               return RedirectToAction("Index", "Admin");
+                return RedirectToAction("Index", "Admin");
+
             }
-            else
-            {
             var user = MembershipHelper.GetUser();
             var courseList = CourseService.GetCoursesByUserInfoId(user.UserInfoId);
 
             foreach (var item in courseList)
-            {   
-                var stuff = CourseService.GetCourseNewestItems(item.CourseId,user.UserInfoId);
+            {
+                var stuff = CourseService.GetCourseNewestItems(item.CourseId, user.UserInfoId);
 
-                ViewData.Add("Course" + item.CourseId, CourseService.GetCourseNewestItems(item.CourseId,user.UserInfoId));
+
+                ViewData.Add("Course" + item.CourseId,
+                             CourseService.GetCourseNewestItems(item.CourseId, user.UserInfoId));
+
             }
 
-            return View();
-            }
-
-            var user = MembershipHelper.GetUser();
             ViewBag.AnnouncementList = AnnouncementService.GetAnnouncementsByUserInfoId(user.UserInfoId).Take(3);
 
             return View();
