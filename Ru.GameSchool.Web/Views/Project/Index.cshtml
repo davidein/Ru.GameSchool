@@ -52,9 +52,9 @@
                         <!-- -->
                         @if (innerInnerItem.Start < DateTime.Now && User.IsInRole("Student"))
                         {
-                            @Html.ActionLink(@innerInnerItem.Name, "Get", new { id = @innerInnerItem.LevelProjectId })if (innerInnerItem.LevelProjectResults.Where(u => u.UserInfoId == ViewBag.UserInfoId).Count() > 0)
+                            @Html.ActionLink(@innerInnerItem.Name, "Get", new { id = @innerInnerItem.LevelProjectId })if (innerInnerItem.IsReturned(ViewBag.User.UserInfoId))
                                                                                                                       {<span class="label label-success new-material">Skilað</span>}
-                                                                                                                      else if (innerInnerItem.Start.AddHours(23) >= DateTime.Now)
+                                                                                                                      else if (innerInnerItem.IsNew())
                                                                                                                       {<span class="label label-important new-material">Nýtt</span>}
                         }
                         else if (User.IsInRole("Teacher"))
