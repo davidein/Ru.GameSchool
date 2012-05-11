@@ -34,12 +34,12 @@ namespace Ru.GameSchool.Web.Controllers
                     ViewBag.CourseName = model.Course.Name;
                     //ViewBag.Levels = LevelService.GetLevels(courseId);
                     ViewBag.LevelTabs = LevelService.GetLevelTabsByCourseIdAndUserInfoId(courseId, userId);
-                    ViewBag.Projects = LevelService.GetLevelProjectsByLevelId(levelId);
-                    ViewBag.MaterialsVideo = LevelService.GetLevelMaterials(levelId,1);
-                    ViewBag.MaterialsSlides = LevelService.GetLevelMaterials(levelId,2);
-                    ViewBag.Announcements = AnnouncementService.GetAnnouncementsByLevelId(levelId);
-                    ViewBag.MaterialsDocs = LevelService.GetLevelMaterials(levelId,3);
-                    ViewBag.Exams = LevelService.GetLevelExamsByLevelId(levelId, userId);
+                    ViewBag.Projects = LevelService.GetLevelProjectsByLevelId(levelId).OrderByDescending(m => m.Start);
+                    ViewBag.MaterialsVideo = LevelService.GetLevelMaterials(levelId,1).OrderByDescending(m=>m.CreateDateTime);
+                    ViewBag.MaterialsSlides = LevelService.GetLevelMaterials(levelId, 2).OrderByDescending(m => m.CreateDateTime);
+                    ViewBag.Announcements = AnnouncementService.GetAnnouncementsByLevelId(levelId).OrderByDescending(m => m.DisplayDateTime);
+                    ViewBag.MaterialsDocs = LevelService.GetLevelMaterials(levelId, 3).OrderByDescending(m => m.CreateDateTime);
+                    ViewBag.Exams = LevelService.GetLevelExamsByLevelId(levelId, userId).OrderByDescending(m => m.Start);
 
                     return View(model);
                 }

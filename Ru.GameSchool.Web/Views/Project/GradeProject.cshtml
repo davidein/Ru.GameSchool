@@ -61,10 +61,11 @@
         </div>
 
              <div class="control-group">
-            @Html.LabelFor(model => model.ContentID, new { @class = "control-label" })
+            
             <div class="controls">
-                @Html.TextBoxFor(model => model.ContentID, new { type = "file", @class = "input-file", rel = "popover" })
-                <span class="help-inline">@Html.ValidationMessageFor(model => model.ContentID)</span>
+                <a name="button" class="btn btn-small" href="@Url.Action("GetReturn", new { id = Model.LevelProjectId })" >
+                    <i class="icon-download-alt"></i> Sækja skil frá nemanda
+                </a>
             </div>
         </div>
 
