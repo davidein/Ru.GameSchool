@@ -81,5 +81,6 @@
 }
 
 <div>
-    @*@Html.ActionLink("Aftur á forsíðu verkefna", "Index", new { id = ViewBag.CourseId }, new { @class = "btn btn-small" }) |*@ @Html.ActionLink("Aftur á forsíðu einkunnagjafa", "TeacherGet",new { id = Model.LevelProjectId}, new {  @class = "btn btn-small" })
+    @*@Html.ActionLink("Aftur á forsíðu verkefna", "Index", new { id = ViewBag.CourseId }, new { @class = "btn btn-small" }) |*@ 
+    @Html.ActionLink("Aftur á forsíðu einkunnagjafa", "TeacherGet",new { id = Model.LevelProjectId, courseId = ViewBag.CourseId}, new {  @class = "btn btn-small" })
 </div>

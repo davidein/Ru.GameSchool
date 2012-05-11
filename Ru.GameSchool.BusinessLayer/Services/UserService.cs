@@ -157,19 +157,7 @@ namespace Ru.GameSchool.BusinessLayer.Services
 
         public void UpdateUser(UserInfo userInfo)
         {
-
-
             Save();
-
-            /*            var items = GameSchoolEntities.UserInfoes.Where(u => u.UserInfoId == userInfo.UserInfoId);
-
-                        var item = items.FirstOrDefault();
-
-                        if (item != null)
-                        {
-                            item. = userInfo;
-                            Save();
-                        }*/
         }
 
 
