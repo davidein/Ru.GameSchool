@@ -4,11 +4,19 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using Ru.GameSchool.DataLayer.Interfaces;
+using Ru.GameSchool.DataLayer.Repository;
 using Ru.GameSchool.Web.Classes;
 using Ru.GameSchool.Web.Classes.Helper;
 
 namespace Ru.GameSchool.Web.Controllers
 {
+    public class CourseJoin
+    {
+        public Course Course { get; set; }
+        public IEnumerable<IListObject> Content { get; set; }
+    }
+
     public class HomeController : BaseController
     {
         [Authorize]
@@ -19,15 +27,23 @@ namespace Ru.GameSchool.Web.Controllers
                 return RedirectToAction("Index", "Admin");
             }
             var user = MembershipHelper.GetUser();
-            var courseList = CourseService.GetCoursesByUserInfoId(user.UserInfoId);
+            var courseList = from x in CourseService.GetCoursesByUserInfoId(user.UserInfoId)
+                             select new CourseJoin()
+                                        {
+                                            Course = x,
+                                            Content = CourseService.GetCourseNewestItems(x.CourseId, user.UserInfoId)
+                                        };
 
-            foreach (var item in courseList)
+/*            foreach (var item in courseList)
             {
+                
                 var stuff = CourseService.GetCourseNewestItems(item.CourseId, user.UserInfoId);
 
                 ViewData.Add("Course" + item.CourseId,
                              CourseService.GetCourseNewestItems(item.CourseId, user.UserInfoId));
-            }
+            }*/
+
+            ViewBag.FrontCourseList = courseList.NestedList(3);
 
             ViewBag.AnnouncementList = AnnouncementService.GetAnnouncementsByUserInfoId(user.UserInfoId).Take(3);
 
