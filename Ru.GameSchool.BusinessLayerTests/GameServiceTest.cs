@@ -126,20 +126,6 @@ namespace Ru.GameSchool.BusinessLayerTests
         }
 
         /// <summary>
-        ///A test for GetPointsComparedToUsers
-        ///</summary>
-        [TestMethod()]
-        public void GetPointsComparedToUsersTest()
-        {
-
-            GameService target = new GameService(); // TODO: Initialize to an appropriate value
-            int userId = 0; // TODO: Initialize to an appropriate value
-            int courseId = 0; // TODO: Initialize to an appropriate value
-            target.GetPointsComparedToUsers(userId, courseId);
-            Assert.Inconclusive("A method that does not return a value cannot be verified.");
-        }
-
-        /// <summary>
         ///A test for GetTopTenList
         ///</summary>
         [TestMethod()]

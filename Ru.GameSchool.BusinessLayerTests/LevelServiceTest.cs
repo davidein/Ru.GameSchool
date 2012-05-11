@@ -398,6 +398,7 @@ namespace Ru.GameSchool.BusinessLayerTests
 
             var levelExam = new LevelExam();
             levelExam.LevelExamId = 1;
+            levelExam.Stop = DateTime.Now.AddDays(1);
             levelExam.LevelExamQuestions.Add(levelExamQuestion1);
             levelExam.LevelExamQuestions.Add(levelExamQuestion2);
             levelExam.LevelExamQuestions.Add(levelExamQuestion3);
@@ -448,6 +449,7 @@ namespace Ru.GameSchool.BusinessLayerTests
 
             var levelExam = new LevelExam();
             levelExam.LevelExamId = 1;
+            levelExam.Stop = DateTime.Now.AddDays(1);
 
             levelExamData.AddObject(levelExam);
 

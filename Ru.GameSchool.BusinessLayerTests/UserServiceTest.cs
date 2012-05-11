@@ -183,7 +183,6 @@ namespace Ru.GameSchool.BusinessLayerTests
             userInfo.UserInfoId = 1;
             userInfo.Password = "Wtf";
 
-            _mockRepository.Expect(x => x.AttachTo("UserInfo", userInfo));
             _mockRepository.Expect(x => x.SaveChanges()).Return(1);
                 
             _userService.UpdateUser(userInfo);
