@@ -16,15 +16,17 @@ namespace Ru.GameSchool.BusinessLayer.Services
                 return null;
             }
 
-            var courses = (from x in GameSchoolEntities.UserInfoes
+            /*var courses = (from x in GameSchoolEntities.UserInfoes
                            where x.UserInfoId == userInfoId
-                           select x).FirstOrDefault().Courses;
+                           select x).FirstOrDefault().Courses;*/
 
+            var announcements = from x in GameSchoolEntities.Announcements
+                                where x.Course.UserInfoes.Where(u => u.UserInfoId == userInfoId).Count() > 0
+                                select x;
 
+            announcements = announcements.OrderByDescending(d => d.DisplayDateTime);
 
-            throw new GameSchoolException("Not Implimented Exception");
-
-            //return announcements;
+            return announcements;
         }
 
         public IEnumerable<Announcement> GetAnnouncementsByCourseId(int courseId)
@@ -63,5 +65,33 @@ namespace Ru.GameSchool.BusinessLayer.Services
             return announcement;
         }
 
+        public void CreateAnnouncement(Announcement announcement, int userInfoId)
+        {
+            var user = GameSchoolEntities.UserInfoes.Where(u => u.UserInfoId == userInfoId).SingleOrDefault();
+
+            if (user == null)
+                throw new GameSchoolException(string.Format("User does not exist. UserInfoId = {0}", userInfoId));
+
+            announcement.CreateDateTime = DateTime.Now;
+            announcement.CreatedByUserInfoId = user.UserInfoId;
+            announcement.CreatedBy = user.Username;
+
+            GameSchoolEntities.Announcements.AddObject(announcement);
+
+            Save();
+        }
+
+        public void UpdateAnnouncement(Announcement announcement, int userInfoId)
+        {
+            var user = GameSchoolEntities.UserInfoes.Where(u => u.UserInfoId == userInfoId).SingleOrDefault();
+
+            if (user == null)
+                throw new GameSchoolException(string.Format("User does not exist. UserInfoId = {0}", userInfoId));
+
+            announcement.UpdateDateTime = DateTime.Now;
+            announcement.UpdatedBy = user.Username;
+
+            Save();
+        }
     }
 }

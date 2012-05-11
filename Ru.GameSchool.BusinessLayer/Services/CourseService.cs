@@ -214,7 +214,7 @@ namespace Ru.GameSchool.BusinessLayer.Services
 
             return userCourse;
         }
-
+        /*
         public IEnumerable<Course> GetCoursesByUserInfId(int userInfoId)
         {
             if (0 > userInfoId)
@@ -230,7 +230,7 @@ namespace Ru.GameSchool.BusinessLayer.Services
                              select x;
 
             return userCourse;
-        }
+        }*/
 
         /// <summary>
         /// Gets current level by UserInfoId and CourseId
