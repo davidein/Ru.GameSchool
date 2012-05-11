@@ -190,36 +190,15 @@ namespace Ru.GameSchool.BusinessLayer.Services
         /// </summary>
         /// <param name="courseId"></param>
         /// <returns>List of Tuple first item is the rank then the user object.</returns>
-        public IEnumerable<Tuple<int, UserInfo>> GetTopTenList(int courseId)
+        public IEnumerable<UserAndPoints> GetTopTenList(int courseId)
         {
             if (0 > courseId)
             {
                 return null;
             }
-            // Selecta course
-            var query = GameSchoolEntities.Courses.Where(c => c.CourseId == courseId)
-                                                  .AsEnumerable();
+            var usersAndTheirPoints = GetPointsByAndNotUserInfoIdCourseId(courseId).OrderByDescending(k => k.Points).Take(10);
 
-            // Fá collection af points miðað við courseid
-            var queryPoints = query.SelectMany(x => x.Points);
-
-            // Lista af groupby af ints og userinfo
-            var userQuery = queryPoints.GroupBy(x => x.UserInfo);
-
-            // Búa til lista sem er skilað
-            var list = new List<Tuple<int, UserInfo>>();
-
-            foreach (var item in userQuery)
-            {
-                var sum = item.Key.Points.Select(c => c.Points).Sum();
-
-                var tuple = new Tuple<int, UserInfo>(sum, item.Select(x => x.UserInfo).FirstOrDefault());
-                list.Add(tuple);
-            }
-
-            var usersWithTopTen = list.OrderByDescending(x => x.Item1).Take(10);
-
-            return usersWithTopTen;
+            return usersAndTheirPoints;
         }
 
         /// <summary>

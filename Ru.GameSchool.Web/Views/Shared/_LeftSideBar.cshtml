@@ -15,15 +15,18 @@
         }
         <h2>
             @totalPoints stig</h2>
+        @if (totalPoints != 0)
+        {
         <p>
             Þú ert í <span class="label label-info">@position</span> sæti í leiknum!</p>
-        @if (points1 != -1)
+        }
+        @if (points1 != -1 && totalPoints != 0)
         {
             <p>
                 Keppandinn á undan þér er með <span class="label label-success">@points1</span>
                 stig!</p>
         }
-        @if (points2 != -1 && totalPoints != points2)
+        @if (points2 != -1 && totalPoints != points2 && totalPoints != 0)
         {
             <p>
                 Næsti keppandi á eftir þér er með <span class="label label-warning">@points2</span>
@@ -95,7 +98,7 @@
                     <tr>
                         <td>@counter
                         </td>
-                        <td>@value.Item1
+                        <td>@value.Points
                         </td>
                     </tr>
                     }

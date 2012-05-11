@@ -255,12 +255,15 @@ namespace Ru.GameSchool.Web.Controllers
                     {
                         foreach (var file in levelProject.File)
                         {
-                            Guid contentId = Guid.NewGuid();
-                            var path = Path.Combine(Server.MapPath("~/Upload"), contentId.ToString());
-                            ViewBag.ContentId = contentId;
-                            file.SaveAs(path);
-                            levelProject.ContentID = contentId;
-                            levelProject.Filename = file.FileName;
+                            if (file != null)
+                            {
+                                Guid contentId = Guid.NewGuid();
+                                var path = Path.Combine(Server.MapPath("~/Upload"), contentId.ToString());
+                                ViewBag.ContentId = contentId;
+                                file.SaveAs(path);
+                                levelProject.ContentID = contentId;
+                                levelProject.Filename = file.FileName;
+                            }
                         }
                     }
 

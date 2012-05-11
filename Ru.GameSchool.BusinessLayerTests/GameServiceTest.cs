@@ -167,7 +167,7 @@ namespace Ru.GameSchool.BusinessLayerTests
 
             var topTen = _gameService.GetTopTenList(courseId);
 
-            var actualUser = topTen.Select(x => x.Item2).FirstOrDefault();
+            var actualUser = topTen.Select(x => x.UserInfo).FirstOrDefault();
 
             Assert.AreSame(actualUser, user);
             Assert.AreEqual(actualUser.Points, user.Points);
@@ -315,9 +315,9 @@ namespace Ru.GameSchool.BusinessLayerTests
 
             var topTen = _gameService.GetTopTenList(courseId);
 
-            var expectedUser1 = topTen.Select(x => x.Item2).Where(d => d.UserInfoId == userInfoId1).FirstOrDefault();
-            var expectedUser2 = topTen.Select(x => x.Item2).Where(d => d.UserInfoId == userInfoId2).FirstOrDefault();
-            var expectedUser3 = topTen.Select(x => x.Item2).Where(d => d.UserInfoId == userInfoId3).FirstOrDefault();
+            var expectedUser1 = topTen.Select(x => x.UserInfo).Where(d => d.UserInfoId == userInfoId1).FirstOrDefault();
+            var expectedUser2 = topTen.Select(x => x.UserInfo).Where(d => d.UserInfoId == userInfoId2).FirstOrDefault();
+            var expectedUser3 = topTen.Select(x => x.UserInfo).Where(d => d.UserInfoId == userInfoId3).FirstOrDefault();
 
             Assert.IsTrue(user1.Points.Select(x => x.Points).FirstOrDefault() > 0);
             Assert.IsTrue(user2.Points.Select(x => x.Points).FirstOrDefault() > 0);
