@@ -40,6 +40,7 @@ namespace Ru.GameSchool.DataLayer.Repository
         [Required(ErrorMessage = @"Vantar")]
         [Display(Name = "Staða")]
         public int StatusId;
+
     }
 
 }

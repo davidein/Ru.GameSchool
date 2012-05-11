@@ -40,7 +40,7 @@
                 }
                 else
                 {
-                    <text>@Html.ActionLink(string.Format("{0} - Skiladagur: {1}", item.Name, item.Stop.ToString("dd.MM.yyyy HH:mm")), "Question", new { id = item.LevelExamQuestions.FirstOrDefault().LevelExamQuestionId }) @if (item.IsNew) {<span class="label label-important">Nýtt</span>}</text> 
+                    <text>@Html.ActionLink(string.Format("{0} - Skiladagur: {1}", item.Name, item.Stop.ToString("dd.MM.yyyy HH:mm")), "Question", new { id = item.LevelExamQuestions.FirstOrDefault().LevelExamQuestionId }) @if (item.IsNew()) {<span class="label label-important">Nýtt</span>}</text> 
                 }
             </td>
             <td>
@@ -63,7 +63,7 @@
                 {
                     if (x.UserInfoId == ViewBag.UserInfoId)
                     {
-                        if (Math.Abs(@x.Grade) > 0)
+                        if (Math.Abs(@x.Grade) >= 0)
                         {
                             @x.Grade
                         }

@@ -3,15 +3,31 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.ComponentModel.DataAnnotations;
+using Ru.GameSchool.DataLayer.Interfaces;
 
 namespace Ru.GameSchool.DataLayer.Repository
 {
     [MetadataType(typeof(LevelExamMetadata))]
-    public partial class LevelExam
+    public partial class LevelExam : IListObject
     {
-        public bool IsNew
+        public bool IsNew()
         {
-            get { return Start.AddHours(23) >= DateTime.Now; }
+            return Start.AddHours(23) >= DateTime.Now;
+        }
+
+        public string ItemName()
+        {
+            return Name;
+        }
+
+        public DateTime Date()
+        {
+            return Start;
+        }
+
+        public string ItemUrl()
+        {
+            return string.Format("/Exam/Index/{0}", Level.CourseId);
         }
 
         public bool IsReturned(int userInfoId)

@@ -5,14 +5,41 @@ using System.Linq;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
+using Ru.GameSchool.DataLayer.Interfaces;
 
 namespace Ru.GameSchool.DataLayer.Repository
 {
     [MetadataType(typeof(LevelProjectMetadata))]
-    public partial class LevelProject
+    public partial class LevelProject : IListObject
     {
         [Display(Name = "Skrá")]
         public IEnumerable<HttpPostedFileBase> File { get; set; }
+
+        public bool IsNew()
+        {
+            return Start.AddHours(23) >= DateTime.Now;
+        }
+
+        public string ItemName()
+        {
+            return Name;
+        }
+
+        public DateTime Date()
+        {
+            return Start;
+        }
+
+        public string ItemUrl()
+        {
+            return string.Format("/Project/Index/{0}", Level.CourseId);
+        }
+
+        public bool IsReturned(int userInfoId)
+        {
+            return _levelProjectResults.Where(x => x.UserInfoId == userInfoId).Count() > 0;
+        }
+
     }
     public class LevelProjectMetadata
     {
