@@ -18,7 +18,7 @@ namespace Ru.GameSchool.BusinessLayerTests
     ///to contain all SocialServiceTest Unit Tests
     ///</summary>
     [TestClass()]
-    public class SocialServiceTest
+    public class SocialServiceTest 
     {
         private IGameSchoolEntities _mockRepository;
         private SocialService _socialService;
