@@ -1,0 +1,2 @@
+# Ru.GameSchool
+read
